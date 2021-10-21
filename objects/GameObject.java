@@ -2,13 +2,11 @@ package objects;
 
 public abstract class GameObject {
   private String label;
-  private int quantity;
   private String icon;
   private String color;
 
   GameObject() {
     label = "defaultLabel";
-    quantity = 1;
     icon = "defaultIcon.jpg";
     color = "#ffffff";
   }
@@ -19,14 +17,6 @@ public abstract class GameObject {
 
   public String getLabel() {
     return this.label;
-  }
-
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
-
-  public int getQuantity() {
-    return this.quantity;
   }
 
   public void setIcon(String icon) {
