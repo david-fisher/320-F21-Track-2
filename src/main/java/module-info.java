@@ -1,4 +1,8 @@
-module minjex {
+module org.scenebuilder.scenebuilder {
     requires javafx.controls;
-    exports minjex;
+    requires javafx.fxml;
+
+
+    opens org.scenebuilder.scenebuilder to javafx.fxml;
+    exports org.scenebuilder.scenebuilder;
 }
