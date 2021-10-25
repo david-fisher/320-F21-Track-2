@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="320-F21-Track-2" />
+        <module name="SceneBuilder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="320-F21-Track-2" target="11" />
+      <module name="SceneBuilder" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
