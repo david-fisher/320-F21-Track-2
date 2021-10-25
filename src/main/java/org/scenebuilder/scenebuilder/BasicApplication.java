@@ -24,11 +24,11 @@ public class BasicApplication extends Application {
         // and marked with @FXML annotation in controller
 
         // full screen dimensions
-        //Rectangle2D screenDimensions = Screen.getPrimary().getBounds();
-        //double width = screenDimensions.getWidth();
-        //double height = screenDimensions.getHeight();
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double width = screenDimensions.getWidth();
+        double height = screenDimensions.getHeight();
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
 
         //stage.setMaximized(true);
