@@ -8,7 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class BasicApplication extends Application {
 
@@ -34,6 +35,36 @@ public class BasicApplication extends Application {
         //stage.setMaximized(true);
 
         stage.show();
+    }
+
+    public static ArrayList<DummyGame> getNewGames() {
+
+        // get a list of games which the player can select to start a new game
+        ArrayList<DummyGame> newGames = new ArrayList<>();
+
+        // filler for now
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+
+        newGames.add(game1);
+        newGames.add(game2);
+
+        return newGames;
+    }
+
+    public static ArrayList<DummyGame> getSavedGames() {
+
+        // get a list of saved games which the player can continue
+        ArrayList<DummyGame> savedGames = new ArrayList<>();
+
+        // filler for now
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+
+        savedGames.add(game1);
+        savedGames.add(game2);
+
+        return savedGames;
     }
 
     public static void main(String[] args) {
