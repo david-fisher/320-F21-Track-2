@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
@@ -45,4 +46,19 @@ public class PlayFXMLController {
         stage.show();
     }
 
+    @FXML
+    public void switchPauseResume(ActionEvent event) {
+        Button curButton = (Button) event.getTarget();
+        String curText = curButton.getText();
+        if (curText.equals("Pause")) {
+            //do things to pause game
+            curButton.setText("Resume");
+            curButton.setStyle("-fx-font-size:13; -fx-background-color: #00FF00; -fx-border-color: #000000; -fx-background-insets: 0;");
+        }
+        if (curText.equals("Resume")) {
+            //do things to resume game
+            curButton.setText("Pause");
+            curButton.setStyle("-fx-font-size:15; -fx-background-color: #D3D3D3; -fx-border-color: #000000; -fx-background-insets: 0;");
+        }
+    }
 }
