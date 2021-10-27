@@ -23,7 +23,7 @@
                </HBox.margin>
             </Button>
             <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="selectionNewGame" mnemonicParsing="false" onAction="#newFromSelection" prefHeight="55.0" prefWidth="179.0" text="New Game">
+            <Button disable="true" fx:id="selectionNewGame" mnemonicParsing="false" onAction="#newFromSelection" prefHeight="55.0" prefWidth="179.0" text="New Game">
                <font>
                   <Font size="24.0" />
                </font>
@@ -34,7 +34,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="selectionLoadGame" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadFromSelection" prefHeight="55.0" prefWidth="182.0" text="Load Game">
+            <Button disable="true" fx:id="selectionLoadGame" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadFromSelection" prefHeight="55.0" prefWidth="182.0" text="Load Game">
                <font>
                   <Font size="24.0" />
                </font>
