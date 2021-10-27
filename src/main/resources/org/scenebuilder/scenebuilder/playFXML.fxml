@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="484.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+<BorderPane prefHeight="484.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
    <bottom>
       <ScrollPane prefHeight="100.0" prefWidth="387.0" style="-fx-border-color: #000000;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
