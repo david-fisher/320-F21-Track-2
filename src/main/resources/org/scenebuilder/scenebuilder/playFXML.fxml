@@ -1,11 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
-   <children>
-      <Button fx:id="playBack" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#backFromPlay" prefHeight="25.0" prefWidth="111.0" text="Back" />
-      <Button fx:id="playExit" layoutX="511.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitFromPlay" prefHeight="25.0" prefWidth="75.0" text="Exit" />
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="484.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+   <bottom>
+      <ScrollPane prefHeight="100.0" prefWidth="387.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="55.0" text="Deck 1">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="55.0" text="Deck 2">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </bottom>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="550.0" text="Game" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <right>
+      <VBox prefHeight="342.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="42.0" prefWidth="429.0">
+               <children>
+                  <Button fx:id="playPause" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" text="Pause" />
+                  <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="playExit" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitFromPlay" prefHeight="32.0" prefWidth="52.0" text="Exit">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
