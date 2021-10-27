@@ -5,16 +5,16 @@ public class DummyGame {
     // a "fake" game object
 
     // board attributes
-    String shape;
-    int width;
-    int height;
+    private String shape;
+    private int width;
+    private int height;
 
     String name;
 
     // game attributes
-    int minPlayers;
-    int maxPlayers;
-    boolean isTutorialMode;
+    private int minPlayers;
+    private int maxPlayers;
+    private boolean isTutorialMode;
 
     public DummyGame(String shape, int width, int height, String name, int minPlayers, int maxPlayers, boolean isTutorialMode) {
         this.shape = shape;
