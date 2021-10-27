@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PlayFXMLController {
+public class SetupFXMLController {
 
     private Stage stage;
 
@@ -21,15 +21,15 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void backFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "setupFXML.fxml");
+    public void backFromSetup(ActionEvent event) throws IOException {
+        switchScene(event, "selectionFXML.fxml");
     }
 
     @FXML
-    public void exitFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "mainFXML.fxml");
+    public void playFromSetup(ActionEvent event) throws IOException {
+        switchScene(event, "playFXML.fxml");
     }
-
+    
     @FXML
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
@@ -44,5 +44,4 @@ public class PlayFXMLController {
         stage.setScene(scene);
         stage.show();
     }
-
 }

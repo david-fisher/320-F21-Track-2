@@ -1,5 +1,6 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +8,21 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class PlayFXMLController {
+public class MainFXMLController {
+
 
     private Stage stage;
 
@@ -21,13 +31,18 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void backFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "setupFXML.fxml");
+    public void playFromMain(ActionEvent event) throws IOException {
+        switchScene(event, "selectionFXML.fxml");
     }
 
     @FXML
-    public void exitFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "mainFXML.fxml");
+    public void newFromMain(ActionEvent event) throws IOException {
+        System.out.println("New");
+    }
+
+    @FXML
+    public void editFromMain(ActionEvent event) throws IOException {
+        System.out.println("Edit");
     }
 
     @FXML
