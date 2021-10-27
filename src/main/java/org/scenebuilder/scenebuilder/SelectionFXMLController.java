@@ -1,5 +1,6 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -35,10 +37,20 @@ public class SelectionFXMLController {
     private Button selectionNewGame;
     @FXML
     private Button selectionLoadGame;
+    @FXML
+    private ScrollPane selectionNewScrollPane;
+    @FXML
+    private ScrollPane selectionSavedScrollPane;
 
     private Stage stage;
 
     public void initialize() {
+
+        // turn off scroll pane borders
+        //selectionNewScrollPane.setStyle("-fx-focus-color: transparent ; -fx-faint-focus-color: transparent;");
+        selectionNewScrollPane.setStyle("-fx-background-color: transparent;");
+        selectionSavedScrollPane.setStyle("-fx-background-color: transparent;");
+
         // populate scroll panes with options
         populateSelectionMenus();
     }
@@ -96,6 +108,19 @@ public class SelectionFXMLController {
 
                     // enable new game button
                     selectionNewGame.setDisable(false);
+
+                    // deselect all rectangles
+                    ObservableList<Node> children = newGamesHBox.getChildren();
+                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
+                    children = savedGamesHBox.getChildren();
+                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
+
+
+                    // select this rectangles
+                    ((Rectangle)n).setFill(Color.RED);
+
+                    // focus the node
+                    //n.requestFocus();
                 }
             });
             newGamesHBox.getChildren().add(n);
@@ -111,13 +136,23 @@ public class SelectionFXMLController {
 
                     // enable load game button
                     selectionLoadGame.setDisable(false);
+
+                    // deselect all rectangles
+                    ObservableList<Node> children = newGamesHBox.getChildren();
+                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
+                    children = savedGamesHBox.getChildren();
+                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
+
+                    // select this rectangles
+                    ((Rectangle)n).setFill(Color.RED);
+
+                    // focus the node
+                    //n.requestFocus();
                 }
             });
             savedGamesHBox.getChildren().add(n);
         });
 
-        System.out.println("Size: " + newGamesHBox.getChildren().size());
-        System.out.println("Size: " + savedGamesHBox.getChildren().size());
     }
 
     @FXML
@@ -139,9 +174,13 @@ public class SelectionFXMLController {
                     tempRect.setStrokeType(StrokeType.INSIDE);
                     tempRect.setWidth(dim);
 
-                    //HBox.setHgrow(tempRect, Priority.ALWAYS);
                     HBox.setMargin(tempRect, new Insets(5,5,5,5));
 
+                    // give node highlight on focus
+                    //tempRect.setStyle("-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;");
+                    //tempRect.setStyle("-fx-focus-color: transparent ; -fx-faint-focus-color: rgba(255,0,0,1);");
+
+                    // add node to list of nodes
                     nodes.add(tempRect);
                 }
         );
