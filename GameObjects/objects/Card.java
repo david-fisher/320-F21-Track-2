@@ -14,6 +14,13 @@ public class Card extends GameObject {
 	  this.setText("default text");
   }
   
+  /* Trait Types:
+   * 	label 	: 	String
+   * 	icon 	: 	String
+   * 	color 	:	Color
+   * 	text	:	String
+   */
+  
 //set trait to value. Overrides checking for default traits only
  public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 	  
@@ -39,5 +46,9 @@ public class Card extends GameObject {
 
   public String getText() {
 	  return (String)this.getTrait("text");
+  }
+  
+  public String toString() {
+	  return this.getLabel() ;
   }
 }

@@ -1,3 +1,5 @@
+package objects ;
+
 import java.util.*;
 /**
  * Write a description of class Tile here.
