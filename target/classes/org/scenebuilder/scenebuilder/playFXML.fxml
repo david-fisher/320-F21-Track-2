@@ -80,7 +80,7 @@
          <children>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="33" prefWidth="250.0" style="-fx-border-color: #000000;">
                <children>
-                  <Button fx:id="playPause" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchPauseResume" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-font-family: serif;" text="Pause" HBox.hgrow="ALWAYS">
+                  <Button fx:id="playPause" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchPauseResume" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-font-family: serif; -fx-skin: ButtonSkin;" text="Pause" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -88,7 +88,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
                   <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="playExit" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitFromPlay" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #FF0000; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-font-family: serif; -fx-skin: ButtonSkin;" text="Exit">
+                  <Button fx:id="playExit" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#displayPopup" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #FF0000; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-font-family: serif; -fx-skin: ButtonSkin;" text="Exit">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
