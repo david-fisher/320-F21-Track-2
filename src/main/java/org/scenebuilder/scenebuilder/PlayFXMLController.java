@@ -17,6 +17,7 @@ public class PlayFXMLController {
 
     private Stage stage;
 
+    @FXML
     public void initialize() {
 
     }
@@ -53,12 +54,12 @@ public class PlayFXMLController {
         if (curText.equals("Pause")) {
             //do things to pause game
             curButton.setText("Resume");
-            curButton.setStyle("-fx-font-size:13; -fx-background-color: #00FF00; -fx-border-color: #000000; -fx-background-insets: 0;");
+            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: #00FF00; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
         if (curText.equals("Resume")) {
             //do things to resume game
             curButton.setText("Pause");
-            curButton.setStyle("-fx-font-size:15; -fx-background-color: #D3D3D3; -fx-border-color: #000000; -fx-background-insets: 0;");
+            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: #D3D3D3; -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
     }
 }
