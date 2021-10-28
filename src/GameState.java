@@ -11,11 +11,12 @@ public class GameState {
     // NOTE: What is a timer?
     public List<Timer> timers;
 */
-
+/*
     public Map<String, GamObject> registers;
 
     public GameState() {
         registers = new Map<String, GameObject>();
         registers.put("currPlayer", null);
     }
+*/
 }
