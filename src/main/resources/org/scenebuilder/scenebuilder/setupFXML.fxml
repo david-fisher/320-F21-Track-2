@@ -36,7 +36,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <TextField id="numPlayers" fx:id="numPlayersField" alignment="CENTER" prefHeight="26.0" prefWidth="61.0" />
+                  <TextField id="numPlayers" fx:id="numPlayersField" alignment="CENTER" prefHeight="26.0" prefWidth="62.0" />
                   <Button id="plusButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPlayer" pickOnBounds="false" prefHeight="26.0" prefWidth="26.0" text="+">
                      <font>
                         <Font size="10.0" />
