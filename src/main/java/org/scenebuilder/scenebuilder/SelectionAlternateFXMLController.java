@@ -102,6 +102,13 @@ public class SelectionAlternateFXMLController {
                 if(selectionButtonHBox.getChildren().size() != 3) {
                     selectionButtonHBox.getChildren().add(selectionPlayButton);
                     selectionPlayButton.setText("Start New Game");
+                    selectionPlayButton.setOnAction(event -> {
+                        try {
+                            switchScene(event, "setupFXML.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 } else {
                     selectionPlayButton.setText("Start New Game");
                     selectionPlayButton.setOnAction(event -> {
@@ -136,6 +143,13 @@ public class SelectionAlternateFXMLController {
                 if(selectionButtonHBox.getChildren().size() != 3) {
                     selectionButtonHBox.getChildren().add(selectionPlayButton);
                     selectionPlayButton.setText("Load Saved Game");
+                    selectionPlayButton.setOnAction(event -> {
+                        try {
+                            switchScene(event, "playFXML.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 } else {
                     selectionPlayButton.setText("Load Saved Game");
                     selectionPlayButton.setOnAction(event -> {
