@@ -33,6 +33,7 @@ public class SetupFXMLController {
 
     // Stack to get the player info
     private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>();
+    private Stack<HBox> playerNodeStack = new Stack<>();
     private int num_players;
 
     // game selected in selection scene
@@ -65,10 +66,10 @@ public class SetupFXMLController {
             num_players += 1;
             numPlayersField.setText(Integer.toString(num_players));
             playerStack.add(player);
-        }
 
-        // add the player node to the scroll pane
-        addPlayerNode();
+            // add the player node to the scroll pane
+            addPlayerNode();
+        }
     }
 
     @FXML
@@ -78,7 +79,10 @@ public class SetupFXMLController {
         if (num_players > selectedGame.getMinPlayers()) {
             num_players -= 1;
             numPlayersField.setText(Integer.toString(num_players));
-            playerStack.pop();
+            String nameOfRemovedPlayer = playerStack.pop().getPlayerName();
+
+            // remove player
+            removePlayerNode(nameOfRemovedPlayer);
         }
         System.out.println("Num Players: "+ num_players);
         System.out.println(playerStack);
@@ -124,7 +128,12 @@ public class SetupFXMLController {
 
         // add hbox storing all the player label, divider, and player/human controls
         setupVBox.getChildren().add(playerHBox);
-        System.out.println(setupVBox.getChildren().size());
+        playerNodeStack.push(playerHBox);
+    }
+
+    @FXML
+    public void removePlayerNode(String nameOfRemovedPlayer) {
+        setupVBox.getChildren().remove(playerNodeStack.pop());
     }
 
     @FXML
