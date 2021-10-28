@@ -49,15 +49,6 @@ public class SelectionAlternateFXMLController {
         selectionNewScrollPane.setStyle("-fx-background-color: transparent;");
         selectionSavedScrollPane.setStyle("-fx-background-color: transparent;");
 
-        selectionPlayButton = new Button();
-        selectionPlayButton.setId("selectionPlayButton");
-        selectionPlayButton.setMnemonicParsing(false);
-        selectionPlayButton.setAlignment(Pos.CENTER);
-        selectionPlayButton.setPrefWidth(275);
-        selectionPlayButton.setPrefHeight(51);
-        selectionPlayButton.setFont(new Font(24));
-        HBox.setMargin(selectionPlayButton, new Insets(10, 10, 10, 10));
-
         // populate scroll panes with options
         populateSelectionMenus();
     }
@@ -98,34 +89,21 @@ public class SelectionAlternateFXMLController {
 
             n.setOnMouseClicked(mouseEvent -> {
 
-                // check if button exists
-                if(selectionButtonHBox.getChildren().size() != 3) {
-                    selectionButtonHBox.getChildren().add(selectionPlayButton);
-                    selectionPlayButton.setText("Start New Game");
-                    selectionPlayButton.setOnAction(event -> {
-                        try {
-                            switchScene(event, "setupFXML.fxml");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                } else {
-                    selectionPlayButton.setText("Start New Game");
-                    selectionPlayButton.setOnAction(event -> {
-                        try {
-                            switchScene(event, "setupFXML.fxml");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }
+                selectionPlayButton.setDisable(false);
+                selectionPlayButton.setText("Start New Game");
+                selectionPlayButton.setOnAction(event -> {
+                    try {
+                        switchScene(event, "setupFXML.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
                 children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
                 children = savedGamesHBox.getChildren();
                 children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
-
 
                 // select this rectangles
                 ((Rectangle)n).setFill(Color.RED);
@@ -135,31 +113,20 @@ public class SelectionAlternateFXMLController {
             });
             newGamesHBox.getChildren().add(n);
         });
+
         savedGameNodes.forEach((n) -> {
 
             n.setOnMouseClicked(mouseEvent -> {
 
-                // check if button exists
-                if(selectionButtonHBox.getChildren().size() != 3) {
-                    selectionButtonHBox.getChildren().add(selectionPlayButton);
-                    selectionPlayButton.setText("Load Saved Game");
-                    selectionPlayButton.setOnAction(event -> {
-                        try {
-                            switchScene(event, "playFXML.fxml");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                } else {
-                    selectionPlayButton.setText("Load Saved Game");
-                    selectionPlayButton.setOnAction(event -> {
-                        try {
-                            switchScene(event, "playFXML.fxml");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }
+                selectionPlayButton.setDisable(false);
+                selectionPlayButton.setText("Load Saved Game");
+                selectionPlayButton.setOnAction(event -> {
+                    try {
+                        switchScene(event, "playFXML.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
