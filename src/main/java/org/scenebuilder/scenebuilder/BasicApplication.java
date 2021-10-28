@@ -12,7 +12,51 @@ import java.util.ArrayList;
 
 public class BasicApplication extends Application {
 
-    private DummyGame game;
+    private static ArrayList<DummyGame> newGames = new ArrayList<>();
+    private static ArrayList<DummyGame> savedGames = new ArrayList<>();
+
+    public static DummyGame getSelectedGame() {
+        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+    }
+
+    public static void loadNewGames() {
+        // do stuff to get list of playable games (from start) from Persistent Data team
+
+        // filler for now
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+
+        newGames.add(game1);
+        newGames.add(game2);
+        newGames.add(game1);
+        newGames.add(game2);
+        newGames.add(game1);
+        newGames.add(game2);
+        newGames.add(game1);
+        newGames.add(game2);
+        newGames.add(game1);
+        newGames.add(game2);
+    }
+
+    public static void loadSavedGames() {
+        // do stuff to get list of saved games
+
+        // filler for now
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+
+        savedGames.add(game1);
+        savedGames.add(game2);
+    }
+
+    public static ArrayList<DummyGame> getNewGames() {
+        return newGames;
+    }
+
+    public static ArrayList<DummyGame> getSavedGames() {
+        return savedGames;
+    }
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,49 +81,8 @@ public class BasicApplication extends Application {
         stage.show();
     }
 
-    public static DummyGame getSelectedGame(){
-        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-    }
-
-    public static ArrayList<DummyGame> getNewGames() {
-
-        // get a list of games which the player can select to start a new game
-        ArrayList<DummyGame> newGames = new ArrayList<>();
-
-        // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
-
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-
-        return newGames;
-    }
-
-    public static ArrayList<DummyGame> getSavedGames() {
-
-        // get a list of saved games which the player can continue
-        ArrayList<DummyGame> savedGames = new ArrayList<>();
-
-        // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
-
-        savedGames.add(game1);
-        savedGames.add(game2);
-
-        return savedGames;
-    }
-
     public static void main(String[] args) {
         launch();
     }
+
 }

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class MainFXMLController {
 
-
     private Stage stage;
 
     public void initialize() {
@@ -32,6 +31,10 @@ public class MainFXMLController {
 
     @FXML
     public void playFromMain(ActionEvent event) throws IOException {
+        // update playable and saved games in selection panes
+        BasicApplication.loadNewGames();
+        BasicApplication.loadSavedGames();
+
         switchScene(event, "selectionFXML.fxml");
     }
 
@@ -47,6 +50,10 @@ public class MainFXMLController {
 
     @FXML
     public void playAlternateFromMain(ActionEvent event) throws IOException {
+        // update playable and saved games in selection panes
+        BasicApplication.loadNewGames();
+        BasicApplication.loadSavedGames();
+
         switchScene(event, "selectionAlternateFXML.fxml");
     }
 

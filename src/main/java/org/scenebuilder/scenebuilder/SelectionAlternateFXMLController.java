@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectionAlternateFXMLController {
+
     @FXML
     private HBox newGamesHBox;
     @FXML
