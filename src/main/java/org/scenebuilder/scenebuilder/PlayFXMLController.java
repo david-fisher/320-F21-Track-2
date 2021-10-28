@@ -24,20 +24,23 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void backFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "setupFXML.fxml");
+    public void backFromPlay(ActionEvent event, Stage baseStage) throws IOException {
+        switchScene(event, "setupFXML.fxml", baseStage);
     }
 
     @FXML
-    public void exitFromPlay(ActionEvent event) throws IOException {
-        switchScene(event, "mainFXML.fxml");
+    public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {
+        switchScene(event, "mainFXML.fxml", baseStage);
     }
 
     @FXML
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
+    public void switchScene(ActionEvent event, String nextScene, Stage baseStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
+        if (baseStage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        } else {
+            stage = baseStage;
+        }
         // full screen dimensions
         Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
         double width = screenDimensions.getWidth();
@@ -56,12 +59,12 @@ public class PlayFXMLController {
         if (curText.equals("Pause")) {
             //do things to pause game
             curButton.setText("Resume");
-            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #00FF00, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-skin: ButtonSkin;");
+            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #00FF00, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
         if (curText.equals("Resume")) {
             //do things to resume game
             curButton.setText("Pause");
-            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-skin: ButtonSkin;");
+            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
     }
 
@@ -76,9 +79,9 @@ public class PlayFXMLController {
             button.setMinHeight(button.getPrefHeight());
             button.setMaxHeight(button.getPrefHeight());
 
-            button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4; -fx-skin: ButtonSkin;");
+            button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
-        public void displayRestart(){
+        public void displayRestart(Stage baseStage){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
 
@@ -97,6 +100,7 @@ public class PlayFXMLController {
             Button no = new Button("No");
             setButtonSize(no, 70, 30, 15);
 
+            //Change these actions to actually handle restarting
             yes.setOnAction(e->popupWindow.close());
             no.setOnAction(e->popupWindow.close());
 
@@ -110,17 +114,17 @@ public class PlayFXMLController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExitWithoutSave(){
+        public void displayExitWithoutSave(Stage baseStage){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
 
-            Label restartMessage = new Label("Are you sure you want to exit? Your progress will be lost.");
-            restartMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
-            restartMessage.setWrapText(true);
-            restartMessage.setAlignment(Pos.CENTER);
+            Label exitMessage = new Label("Are you sure you want to exit? Your progress will be lost.");
+            exitMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
+            exitMessage.setWrapText(true);
+            exitMessage.setAlignment(Pos.CENTER);
 
-            borderPane.setAlignment(restartMessage, Pos.CENTER);
-            borderPane.setCenter(restartMessage);
+            borderPane.setAlignment(exitMessage, Pos.CENTER);
+            borderPane.setCenter(exitMessage);
 
             HBox buttons = new HBox(10);
 
@@ -129,7 +133,14 @@ public class PlayFXMLController {
             Button no = new Button("No");
             setButtonSize(no, 70, 30, 15);
 
-            yes.setOnAction(e->popupWindow.close());
+            yes.setOnAction(e-> {
+                popupWindow.close();
+                try {
+                    exitFromPlay(e, baseStage);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
             no.setOnAction(e->popupWindow.close());
 
             buttons.getChildren().addAll(yes);
@@ -142,7 +153,7 @@ public class PlayFXMLController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExit(){
+        public void displayExit(Stage baseStage) {
             Stage popupWindow = new Stage();
             popupWindow.initModality(Modality.APPLICATION_MODAL);
             Button saveButton = new Button("Save");
@@ -157,14 +168,19 @@ public class PlayFXMLController {
             });
             exitButton.setOnAction(e->{
                 if (!saved) {
-                    displayExitWithoutSave();
-                } else {
-                    System.out.println("Exit");
+                    displayExitWithoutSave(baseStage);
                     popupWindow.close();
+                } else {
+                    popupWindow.close();
+                    try {
+                        exitFromPlay(e, baseStage);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             });
             restartButton.setOnAction(e->{
-                displayRestart();
+                displayRestart(baseStage);
                 popupWindow.close();
             });
 
@@ -182,7 +198,8 @@ public class PlayFXMLController {
 
     @FXML
     public void displayPopup(ActionEvent event) {
+        Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
-        popup.displayExit();
+        popup.displayExit(curStage);
     }
 }
