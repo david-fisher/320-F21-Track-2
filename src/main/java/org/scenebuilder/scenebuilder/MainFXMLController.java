@@ -46,6 +46,11 @@ public class MainFXMLController {
     }
 
     @FXML
+    public void playAlternateFromMain(ActionEvent event) throws IOException {
+        switchScene(event, "selectionAlternateFXML.fxml");
+    }
+
+    @FXML
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
