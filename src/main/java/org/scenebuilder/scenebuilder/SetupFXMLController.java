@@ -3,11 +3,19 @@ package org.scenebuilder.scenebuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -18,11 +26,17 @@ public class SetupFXMLController {
 
     @FXML
     private TextField numPlayersField;
+    @FXML
+    private VBox setupVBox;
 
     private Stage stage;
-    private DummyGame selectedGame; // Currently selected game
+
+    // Stack to get the player info
+    private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>();
     private int num_players;
-    private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>(); // Stack to get the player info
+
+    // game selected in selection scene
+    private DummyGame selectedGame;
 
     public void initialize() {
 
@@ -36,6 +50,7 @@ public class SetupFXMLController {
         for(int i = 0; i< num_players; i++){
             DummyPlayer player = new DummyPlayer("Player " + (i+1), true, "Blue");
             playerStack.add(player);
+            addPlayerNode();
             System.out.println(player);
 
         }
@@ -43,7 +58,7 @@ public class SetupFXMLController {
 
     @FXML
     public void addPlayer(ActionEvent event) throws IOException {
-        System.out.println("Add player clicked");
+
         // Add player to the stack
         if (num_players < selectedGame.getMaxPlayers()) {
             DummyPlayer player = new DummyPlayer("Player " + (num_players + 1), true, "Blue");
@@ -51,8 +66,9 @@ public class SetupFXMLController {
             numPlayersField.setText(Integer.toString(num_players));
             playerStack.add(player);
         }
-        System.out.println("Num Players: "+ num_players);
-        System.out.println(playerStack);
+
+        // add the player node to the scroll pane
+        addPlayerNode();
     }
 
     @FXML
@@ -66,6 +82,49 @@ public class SetupFXMLController {
         }
         System.out.println("Num Players: "+ num_players);
         System.out.println(playerStack);
+    }
+
+    @FXML
+    public void addPlayerNode() {
+
+        HBox playerHBox = new HBox();
+        playerHBox.setAlignment(Pos.CENTER);
+
+        Label playerLabel = new Label();
+        playerLabel.setAlignment(Pos.CENTER);
+        playerLabel.setText(playerStack.peek().getPlayerName());
+        playerLabel.setFont(new Font(16));
+        playerLabel.setStyle("-fx-font-family: serif;");
+        playerLabel.setPrefWidth(114);
+
+        Separator playerSeparator = new Separator();
+        playerSeparator.setOrientation(Orientation.VERTICAL);
+        playerSeparator.setPrefHeight(27);
+        playerSeparator.setPrefWidth(84);
+
+        ToggleButton humanToggleButton = new ToggleButton();
+        humanToggleButton.setMnemonicParsing(false);
+        humanToggleButton.setFont(new Font(16));
+        humanToggleButton.setStyle("-fx-font-family: serif;");
+        humanToggleButton.setText("Human");
+        humanToggleButton.setPrefHeight(32);
+        humanToggleButton.setPrefWidth(72);
+
+        HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
+
+        ToggleButton aIToggleButton = new ToggleButton();
+        aIToggleButton.setMnemonicParsing(false);
+        aIToggleButton.setFont(new Font(16));
+        aIToggleButton.setStyle("-fx-font-family: serif;");
+        aIToggleButton.setText("AI");
+        aIToggleButton.setPrefHeight(32);
+        aIToggleButton.setPrefWidth(48);
+
+        playerHBox.getChildren().addAll(playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
+
+        // add hbox storing all the player label, divider, and player/human controls
+        setupVBox.getChildren().add(playerHBox);
+        System.out.println(setupVBox.getChildren().size());
     }
 
     @FXML
