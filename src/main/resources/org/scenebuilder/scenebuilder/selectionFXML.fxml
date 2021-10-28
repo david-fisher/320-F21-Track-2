@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SelectionAlternateFXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SelectionFXMLController">
    <bottom>
       <HBox fx:id="selectionButtonHBox" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
