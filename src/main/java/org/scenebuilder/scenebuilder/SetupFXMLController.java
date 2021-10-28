@@ -7,40 +7,48 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class SetupFXMLController {
 
+    @FXML
+    private TextField numPlayersField;
+
     private Stage stage;
-    private DummyGame selectedGame;
+    private DummyGame selectedGame; // Currently selected game
     private int num_players;
-    private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>();
+    private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>(); // Stack to get the player info
 
     public void initialize() {
 
         System.out.println("In setup screen");
         selectedGame = BasicApplication.getSelectedGame();
-        num_players = selectedGame.getMinPlayers();
+        num_players = selectedGame.getMinPlayers(); // Set the default num players to the min players
 
+        numPlayersField.setText(Integer.toString(num_players));
+
+        // For loop to create num_players player to the stack
         for(int i = 0; i< num_players; i++){
             DummyPlayer player = new DummyPlayer("Player " + (i+1), true, "Blue");
             playerStack.add(player);
             System.out.println(player);
-        }
 
+        }
     }
 
     @FXML
     public void addPlayer(ActionEvent event) throws IOException {
         System.out.println("Add player clicked");
+        // Add player to the stack
         if (num_players < selectedGame.getMaxPlayers()) {
             DummyPlayer player = new DummyPlayer("Player " + (num_players + 1), true, "Blue");
             num_players += 1;
+            numPlayersField.setText(Integer.toString(num_players));
             playerStack.add(player);
         }
         System.out.println("Num Players: "+ num_players);
@@ -50,8 +58,10 @@ public class SetupFXMLController {
     @FXML
     public void decPlayer(ActionEvent event) throws IOException {
         System.out.println("Dec player clicked");
+        // Delete last player in the stack
         if (num_players > selectedGame.getMinPlayers()) {
             num_players -= 1;
+            numPlayersField.setText(Integer.toString(num_players));
             playerStack.pop();
         }
         System.out.println("Num Players: "+ num_players);
@@ -67,7 +77,7 @@ public class SetupFXMLController {
     public void playFromSetup(ActionEvent event) throws IOException {
         switchScene(event, "playFXML.fxml");
     }
-    
+
     @FXML
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
