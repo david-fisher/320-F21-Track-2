@@ -113,6 +113,7 @@ public class SetupFXMLController {
         humanToggleButton.setText("Human");
         humanToggleButton.setPrefHeight(32);
         humanToggleButton.setPrefWidth(72);
+        humanToggleButton.setSelected(playerStack.peek().isHuman());
 
         HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
 
@@ -123,6 +124,7 @@ public class SetupFXMLController {
         aIToggleButton.setText("AI");
         aIToggleButton.setPrefHeight(32);
         aIToggleButton.setPrefWidth(48);
+        humanToggleButton.setSelected(!playerStack.peek().isHuman());
 
         playerHBox.getChildren().addAll(playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
 
