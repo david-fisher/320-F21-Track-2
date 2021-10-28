@@ -26,6 +26,7 @@ public class BasicApplication extends Application {
         DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
         DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
 
+        newGames.clear();
         newGames.add(game1);
         newGames.add(game2);
         newGames.add(game1);
@@ -45,6 +46,7 @@ public class BasicApplication extends Application {
         DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
         DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
 
+        savedGames.clear();
         savedGames.add(game1);
         savedGames.add(game2);
     }

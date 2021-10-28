@@ -41,7 +41,6 @@ public class SetupFXMLController {
 
     public void initialize() {
 
-        System.out.println("In setup screen");
         selectedGame = BasicApplication.getSelectedGame();
         num_players = selectedGame.getMinPlayers(); // Set the default num players to the min players
 
@@ -52,7 +51,6 @@ public class SetupFXMLController {
             DummyPlayer player = new DummyPlayer("Player " + (i+1), true, "Blue");
             playerStack.add(player);
             addPlayerNode();
-            System.out.println(player);
 
         }
     }
@@ -74,7 +72,7 @@ public class SetupFXMLController {
 
     @FXML
     public void decPlayer(ActionEvent event) throws IOException {
-        System.out.println("Dec player clicked");
+
         // Delete last player in the stack
         if (num_players > selectedGame.getMinPlayers()) {
             num_players -= 1;
@@ -84,8 +82,6 @@ public class SetupFXMLController {
             // remove player
             removePlayerNode(nameOfRemovedPlayer);
         }
-        System.out.println("Num Players: "+ num_players);
-        System.out.println(playerStack);
     }
 
     @FXML
