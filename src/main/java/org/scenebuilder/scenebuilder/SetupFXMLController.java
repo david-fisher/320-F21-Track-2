@@ -15,9 +15,30 @@ import java.io.IOException;
 public class SetupFXMLController {
 
     private Stage stage;
+    private DummyGame selectedGame;
+    private int num_players;
 
     public void initialize() {
 
+        System.out.println("In setup screen");
+        selectedGame = BasicApplication.getSelectedGame();
+        num_players = selectedGame.getMinPlayers();
+    }
+
+    @FXML
+    public void addPlayer(ActionEvent event) throws IOException {
+        System.out.println("Add player clicked");
+        num_players += 1;
+        System.out.println("Num Players: "+ num_players);
+    }
+
+    @FXML
+    public void decPlayer(ActionEvent event) throws IOException {
+        System.out.println("Dec player clicked");
+        if (num_players > selectedGame.getMinPlayers()) {
+            num_players -= 1;
+        }
+        System.out.println("Num Players: "+ num_players);
     }
 
     @FXML
@@ -42,6 +63,8 @@ public class SetupFXMLController {
 
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
+
     }
 }

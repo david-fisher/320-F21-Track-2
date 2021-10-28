@@ -62,6 +62,7 @@ public class MainFXMLController {
 
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class BasicApplication extends Application {
 
+    private DummyGame game;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -29,11 +30,15 @@ public class BasicApplication extends Application {
         double height = screenDimensions.getHeight();
 
         Scene scene = new Scene(root, width, height);
+        scene.getRoot().setStyle("-fx-font-family: 'Times New Roman'");
         stage.setScene(scene);
-
         //stage.setMaximized(true);
 
         stage.show();
+    }
+
+    public static DummyGame getSelectedGame(){
+        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
     }
 
     public static ArrayList<DummyGame> getNewGames() {
