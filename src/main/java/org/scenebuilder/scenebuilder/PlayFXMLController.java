@@ -45,7 +45,7 @@ public class PlayFXMLController {
 
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        scene.getRoot().setStyle("-fx-font-family: serif");
         stage.show();
     }
 
@@ -142,6 +142,7 @@ public class PlayFXMLController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
+
         public void displayExit(){
             Stage popupWindow = new Stage();
             popupWindow.initModality(Modality.APPLICATION_MODAL);
