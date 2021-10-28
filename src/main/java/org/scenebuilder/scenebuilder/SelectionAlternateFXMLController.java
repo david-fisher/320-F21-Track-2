@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,28 +18,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SelectionFXMLController {
-
+public class SelectionAlternateFXMLController {
     @FXML
     private HBox newGamesHBox;
     @FXML
     private HBox savedGamesHBox;
     @FXML
-    private Button selectionBack;
-    @FXML
-    private Button selectionNewGame;
-    @FXML
-    private Button selectionLoadGame;
-    @FXML
     private ScrollPane selectionNewScrollPane;
     @FXML
     private ScrollPane selectionSavedScrollPane;
+    @FXML
+    private HBox selectionButtonHBox;
+    @FXML
+    private Button selectionPlayButton;
 
     private Stage stage;
 
@@ -49,6 +48,15 @@ public class SelectionFXMLController {
         selectionNewScrollPane.setStyle("-fx-background-color: transparent;");
         selectionSavedScrollPane.setStyle("-fx-background-color: transparent;");
 
+        selectionPlayButton = new Button();
+        selectionPlayButton.setId("selectionPlayButton");
+        selectionPlayButton.setMnemonicParsing(false);
+        selectionPlayButton.setAlignment(Pos.CENTER);
+        selectionPlayButton.setPrefWidth(275);
+        selectionPlayButton.setPrefHeight(51);
+        selectionPlayButton.setFont(new Font(24));
+        HBox.setMargin(selectionPlayButton, new Insets(10, 10, 10, 10));
+
         // populate scroll panes with options
         populateSelectionMenus();
     }
@@ -56,16 +64,6 @@ public class SelectionFXMLController {
     @FXML
     public void backFromSelection(ActionEvent event) throws IOException {
         switchScene(event, "mainFXML.fxml");
-    }
-
-    @FXML
-    public void newFromSelection(ActionEvent event) throws IOException {
-        switchScene(event, "setupFXML.fxml");
-    }
-
-    @FXML
-    public void loadFromSelection(ActionEvent event) throws IOException {
-        switchScene(event, "playFXML.fxml");
     }
 
     @FXML
@@ -80,7 +78,6 @@ public class SelectionFXMLController {
 
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
 
@@ -98,56 +95,68 @@ public class SelectionFXMLController {
         // populate the menus
         newGameNodes.forEach((n) -> {
 
-            n.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            n.setOnMouseClicked(mouseEvent -> {
 
-                    // disable load game button
-                    selectionLoadGame.setDisable(true);
-
-                    // enable new game button
-                    selectionNewGame.setDisable(false);
-
-                    // deselect all rectangles
-                    ObservableList<Node> children = newGamesHBox.getChildren();
-                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
-                    children = savedGamesHBox.getChildren();
-                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
-
-
-                    // select this rectangles
-                    ((Rectangle)n).setFill(Color.RED);
-
-                    // focus the node
-                    //n.requestFocus();
+                // check if button exists
+                if(selectionButtonHBox.getChildren().size() != 3) {
+                    selectionButtonHBox.getChildren().add(selectionPlayButton);
+                    selectionPlayButton.setText("Start New Game");
+                } else {
+                    selectionPlayButton.setText("Start New Game");
+                    selectionPlayButton.setOnAction(event -> {
+                        try {
+                            switchScene(event, "setupFXML.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
+
+                // deselect all rectangles
+                ObservableList<Node> children = newGamesHBox.getChildren();
+                children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
+                children = savedGamesHBox.getChildren();
+                children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
+
+
+                // select this rectangles
+                ((Rectangle)n).setFill(Color.RED);
+
+                // focus the node
+                //n.requestFocus();
             });
             newGamesHBox.getChildren().add(n);
         });
         savedGameNodes.forEach((n) -> {
 
-            n.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            n.setOnMouseClicked(mouseEvent -> {
 
-                    // disable new game button
-                    selectionNewGame.setDisable(true);
-
-                    // enable load game button
-                    selectionLoadGame.setDisable(false);
-
-                    // deselect all rectangles
-                    ObservableList<Node> children = newGamesHBox.getChildren();
-                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
-                    children = savedGamesHBox.getChildren();
-                    children.forEach((n) -> ((Rectangle)n).setFill(Color.AQUAMARINE));
-
-                    // select this rectangles
-                    ((Rectangle)n).setFill(Color.RED);
-
-                    // focus the node
-                    //n.requestFocus();
+                // check if button exists
+                if(selectionButtonHBox.getChildren().size() != 3) {
+                    selectionButtonHBox.getChildren().add(selectionPlayButton);
+                    selectionPlayButton.setText("Load Saved Game");
+                } else {
+                    selectionPlayButton.setText("Load Saved Game");
+                    selectionPlayButton.setOnAction(event -> {
+                        try {
+                            switchScene(event, "playFXML.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
+
+                // deselect all rectangles
+                ObservableList<Node> children = newGamesHBox.getChildren();
+                children.forEach((n1) -> ((Rectangle) n1).setFill(Color.AQUAMARINE));
+                children = savedGamesHBox.getChildren();
+                children.forEach((n1) -> ((Rectangle) n1).setFill(Color.AQUAMARINE));
+
+                // select this rectangles
+                ((Rectangle)n).setFill(Color.RED);
+
+                // focus the node
+                //n.requestFocus();
             });
             savedGamesHBox.getChildren().add(n);
         });

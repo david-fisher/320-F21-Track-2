@@ -46,6 +46,11 @@ public class MainFXMLController {
     }
 
     @FXML
+    public void playAlternateFromMain(ActionEvent event) throws IOException {
+        switchScene(event, "selectionAlternateFXML.fxml");
+    }
+
+    @FXML
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -57,6 +62,7 @@ public class MainFXMLController {
 
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
 

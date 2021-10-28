@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SetupFXMLController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SetupFXMLController">
    <children>
       <Button fx:id="setupBack" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#backFromSetup" prefHeight="25.0" prefWidth="135.0" text="Back" />
       <Button fx:id="setupPlayGame" layoutX="450.0" layoutY="360.0" mnemonicParsing="false" onAction="#playFromSetup" prefHeight="25.0" prefWidth="135.0" text="Play Game" />
+      <Label layoutX="204.0" layoutY="42.0" text="Game Setup Screen">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="104.0" prefHeight="17.0" prefWidth="135.0" text="Number of Players" />
+      <Button layoutX="273.0" layoutY="100.0" mnemonicParsing="false" onAction="#decPlayer" text="-" />
+      <Button layoutX="397.0" layoutY="100.0" mnemonicParsing="false" onAction="#addPlayer" text="+" />
+      <TextField layoutX="310.0" layoutY="100.0" prefHeight="26.0" prefWidth="76.0" />
    </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>
