@@ -23,21 +23,21 @@
    <center>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="149.0" style="-fx-font-family: serif;" text="Number of Players:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Number of Players:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Separator halignment="LEFT" orientation="VERTICAL" prefHeight="31.0" prefWidth="46.0" />
-                  <Button id="minusButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decPlayer" pickOnBounds="false" prefHeight="26.0" prefWidth="26.0" text="-">
+                  <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
+                  <Button id="minusButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decPlayer" pickOnBounds="false" prefHeight="25.0" prefWidth="25.0" text="-">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <TextField id="numPlayers" fx:id="numPlayersField" alignment="CENTER" prefHeight="26.0" prefWidth="61.0" />
-                  <Button id="plusButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPlayer" pickOnBounds="false" prefHeight="26.0" prefWidth="26.0" text="+">
+                  <TextField id="numPlayers" fx:id="numPlayersField" prefHeight="18.0" prefWidth="46.0" />
+                  <Button id="plusButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPlayer" pickOnBounds="false" prefHeight="25.0" prefWidth="25.0" text="+">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -45,162 +45,95 @@
                </children>
             </HBox>
             <Separator prefHeight="16.0" prefWidth="600.0" />
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="53.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="53.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 1:" HBox.hgrow="ALWAYS">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 1:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p1" />
-                     </toggleGroup></ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p1" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player1" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 2:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 2:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p2" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p2">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player2" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="176.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 3:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 3:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p3" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p3">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player3" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="281.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="64.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 4:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 4:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p4" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p4">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player4" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="299.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="92.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 5:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 5:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p5" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p5">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player5" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="264.0" prefHeight="50.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="114.0" style="-fx-font-family: serif;" text="Player 6:">
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 6:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
-                  <ToggleButton id="player1" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-font-family: serif;" text="Human">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="1.0" top="1.0" />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="p6" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="32.0" prefWidth="48.0" style="-fx-font-family: serif;" text="AI" toggleGroup="$p6">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </ToggleButton>
+                  <ToggleButton id="player6" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 7:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
+                  <ToggleButton id="player7" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="236.0" style="-fx-font-family: serif;" text="Player 8:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="84.0" />
+                  <ToggleButton id="player8" mnemonicParsing="false" style="-fx-font-family: serif;" text="Human" />
+               </children>
+            </HBox>
+            <HBox prefHeight="44.0" prefWidth="600.0">
                <children>
                   <Button id="backButton" alignment="CENTER" mnemonicParsing="false" onAction="#backFromSetup" prefHeight="45.0" prefWidth="82.0" style="-fx-font-family: serif;" text="Back">
                      <HBox.margin>
