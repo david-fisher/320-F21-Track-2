@@ -12,9 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -103,12 +106,12 @@ public class SelectionFXMLController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n12) -> ((Rectangle) n12).setFill(Color.AQUAMARINE));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
 
                 // select this rectangles
-                ((Rectangle)n).setFill(Color.RED);
+                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
 
                 // focus the node
                 //n.requestFocus();
@@ -132,12 +135,12 @@ public class SelectionFXMLController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n1) -> ((Rectangle) n1).setFill(Color.AQUAMARINE));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n1) -> ((Rectangle) n1).setFill(Color.AQUAMARINE));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
 
                 // select this rectangles
-                ((Rectangle)n).setFill(Color.RED);
+                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
 
                 // focus the node
                 //n.requestFocus();
@@ -154,26 +157,31 @@ public class SelectionFXMLController {
 
         games.forEach(
                 (n) -> {
-                    Rectangle tempRect = new Rectangle();
 
                     double dim = 300;
 
-                    tempRect.setArcHeight(5);
-                    tempRect.setArcWidth(5);
-                    tempRect.setFill(Color.AQUAMARINE);
-                    tempRect.setHeight(dim);
-                    tempRect.setStroke(Color.BLACK);
-                    tempRect.setStrokeType(StrokeType.INSIDE);
-                    tempRect.setWidth(dim);
+                    VBox tempVBox = new VBox();
+                    tempVBox.setAlignment(Pos.CENTER);
+                    tempVBox.setPrefHeight(dim);
+                    tempVBox.setPrefWidth(dim);
+                    tempVBox.setStyle("-fx-border-color: red;-fx-border-style: dashed;");
 
-                    HBox.setMargin(tempRect, new Insets(5,5,5,5));
+                    ImageView tempImageView = new ImageView();
+                    tempImageView.setPreserveRatio(true);
+                    tempImageView.setFitHeight(150);
+                    tempImageView.setFitWidth(200);
+                    tempImageView.setImage(n.getIcon());
 
-                    // give node highlight on focus
-                    //tempRect.setStyle("-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;");
-                    //tempRect.setStyle("-fx-focus-color: transparent ; -fx-faint-focus-color: rgba(255,0,0,1);");
+                    Label tempLabel = new Label();
+                    tempLabel.setText(n.getName());
+                    tempLabel.setFont(new Font(16));
+
+                    tempVBox.getChildren().addAll(tempImageView, tempLabel);
+
+                    HBox.setMargin(tempVBox, new Insets(5,5,5,5));
 
                     // add node to list of nodes
-                    nodes.add(tempRect);
+                    nodes.add(tempVBox);
                 }
         );
 

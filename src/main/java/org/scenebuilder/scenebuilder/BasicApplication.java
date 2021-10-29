@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -24,8 +25,8 @@ public class BasicApplication extends Application {
         // do stuff to get list of playable games (from start) from Persistent Data team
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
 
         newGames.clear();
         newGames.add(game1);
@@ -36,8 +37,8 @@ public class BasicApplication extends Application {
         // do stuff to get list of saved games
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true);
+        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
+        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
 
         savedGames.clear();
         savedGames.add(game1);
@@ -63,7 +64,7 @@ public class BasicApplication extends Application {
     }
 
     public static DummyGame getSelectedGame() {
-        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
     }
 
     public static SetupData getSetupData() {
