@@ -9,15 +9,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class BasicApplication extends Application {
 
     private static ArrayList<DummyGame> newGames = new ArrayList<>();
     private static ArrayList<DummyGame> savedGames = new ArrayList<>();
 
-    public static DummyGame getSelectedGame() {
-        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
-    }
+    private static DummyGame selectedGame;
+    private static SetupData setupData;
+
 
     public static void loadNewGames() {
         // do stuff to get list of playable games (from start) from Persistent Data team
@@ -51,6 +52,16 @@ public class BasicApplication extends Application {
         savedGames.add(game2);
     }
 
+
+    public static void setSelectedGame(DummyGame game) {
+        selectedGame = game;
+    }
+
+    public static void setSetupData(SetupData data) {
+        setupData = data;
+    }
+
+
     public static ArrayList<DummyGame> getNewGames() {
         return newGames;
     }
@@ -59,6 +70,14 @@ public class BasicApplication extends Application {
         return savedGames;
     }
 
+    public static DummyGame getSelectedGame() {
+        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false);
+    }
+
+    public static SetupData getSetupData() {
+        return setupData;
+    }
+    
 
     @Override
     public void start(Stage stage) throws Exception {
