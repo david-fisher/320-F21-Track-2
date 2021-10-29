@@ -30,14 +30,6 @@ public class BasicApplication extends Application {
         newGames.clear();
         newGames.add(game1);
         newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
     }
 
     public static void loadSavedGames() {
@@ -77,7 +69,7 @@ public class BasicApplication extends Application {
     public static SetupData getSetupData() {
         return setupData;
     }
-    
+
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -41,6 +41,8 @@ public class SelectionFXMLController {
     private Button selectionPlayButton;
 
     private Stage stage;
+    private ArrayList<DummyGame> newGames = new ArrayList<>();
+    private ArrayList<DummyGame> savedGames = new ArrayList<>();
 
     public void initialize() {
 
@@ -49,8 +51,11 @@ public class SelectionFXMLController {
         selectionNewScrollPane.setStyle("-fx-background-color: transparent;");
         selectionSavedScrollPane.setStyle("-fx-background-color: transparent;");
 
+        newGames = BasicApplication.getNewGames();
+        savedGames = BasicApplication.getSavedGames();
+
         // populate scroll panes with options
-        populateSelectionMenus();
+        populateSelectionMenus(newGames, savedGames);
     }
 
     @FXML
@@ -73,12 +78,9 @@ public class SelectionFXMLController {
         stage.show();
     }
 
-    @FXML
-    public void populateSelectionMenus() {
 
-        // get the stuff we are going to populate the selection menus with
-        ArrayList<DummyGame> newGames = BasicApplication.getNewGames();
-        ArrayList<DummyGame> savedGames = BasicApplication.getSavedGames();
+    @FXML
+    public void populateSelectionMenus(ArrayList<DummyGame> newGames, ArrayList<DummyGame> savedGames) {
 
         // convert games to nodes
         ArrayList<Node> newGameNodes = gamesToNodes(newGames);
