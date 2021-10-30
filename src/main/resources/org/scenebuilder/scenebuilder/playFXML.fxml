@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="923.0" style="-fx-background-color: HoneyDew;" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: blue;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="881.0" style="-fx-border-color: black; -fx-background-color: DarkSeaGreen;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Inventory Space">
+            <Label text="Inventory Space" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
@@ -21,46 +21,56 @@
       </HBox>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="550.0" prefWidth="770.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="21.0" layoutY="14.0" prefHeight="63.0" prefWidth="136.0" text="Board Space">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="playLabel" layoutX="21.0" layoutY="90.0" prefHeight="467.0" prefWidth="725.0" text="Filler Label">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <AnchorPane fx:id="board" layoutX="14.0" layoutY="15.0" prefHeight="555.0" prefWidth="747.0" style="-fx-border-color: Black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="136.0" text="Board Space">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="playLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="77.0" prefHeight="457.0" prefWidth="714.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </AnchorPane>
    </center>
    <right>
-      <VBox alignment="TOP_CENTER" prefHeight="573.0" prefWidth="119.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="184.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="155.0" style="-fx-border-color: red;" text="Settings">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="209.0" prefWidth="119.0" style="-fx-border-color: red;" text="Decks">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="209.0" prefWidth="155.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="208.0" prefWidth="119.0" style="-fx-border-color: red;" text="RNG">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="217.0" prefWidth="157.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="RNG" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
          </children>
