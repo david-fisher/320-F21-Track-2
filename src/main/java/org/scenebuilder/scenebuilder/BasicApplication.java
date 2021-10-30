@@ -64,7 +64,7 @@ public class BasicApplication extends Application {
     }
 
     public static DummyGame getSelectedGame() {
-        return new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
+        return selectedGame;
     }
 
     public static SetupData getSetupData() {
