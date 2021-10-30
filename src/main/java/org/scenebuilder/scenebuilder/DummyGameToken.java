@@ -3,13 +3,13 @@ package org.scenebuilder.scenebuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
-public class GameTokenDummy {
+public class DummyGameToken {
 
     // dummy class, eventually to be replaced by actual game tokens
     private Color tokenColor;
-    private Shape tokenShape;
+    private String tokenShape;
 
-    public GameTokenDummy(Color tokenColor, Shape tokenShape) {
+    public DummyGameToken(Color tokenColor, String tokenShape) {
         this.tokenColor = tokenColor;
         this.tokenShape = tokenShape;
     }
@@ -28,7 +28,7 @@ public class GameTokenDummy {
         return tokenColor;
     }
 
-    public Shape getTokenShape() {
+    public String getTokenShape() {
         return tokenShape;
     }
 }

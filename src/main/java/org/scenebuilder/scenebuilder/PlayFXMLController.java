@@ -16,16 +16,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PlayFXMLController {
 
+    @FXML
+    private Label playLabel;
+
     private Stage stage;
+
+    private SetupData setupData;
+    private DummyGame activeGame;
 
     @FXML
     public void initialize() {
 
-    }
+        // load relevant data
+        setupData = BasicApplication.getSetupData();
+        activeGame = BasicApplication.getSelectedGame();
 
-    @FXML
-    public void backFromPlay(ActionEvent event, Stage baseStage) throws IOException {
-        switchScene(event, "setupFXML.fxml", baseStage);
+        playLabel.setText(activeGame.toString());
     }
 
     @FXML

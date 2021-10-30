@@ -6,12 +6,12 @@ public class SetupData {
 
     // object to store setup data
 
-    private ArrayList<Player> playerList = new ArrayList<>();
+    private ArrayList<DummyPlayer> playerList = new ArrayList<>();
 
     private boolean isTutorialMode;
 
-
-    public SetupData() {
-
+    public SetupData(ArrayList<DummyPlayer> playerList, boolean isTutorialMode) {
+        this.playerList = playerList;
+        this.isTutorialMode = isTutorialMode;
     }
 }

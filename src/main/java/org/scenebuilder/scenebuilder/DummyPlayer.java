@@ -2,49 +2,49 @@ package org.scenebuilder.scenebuilder;
 
 public class DummyPlayer {
 
-    // A temporary player class
-
-    // Temporary player
+    // object to store Player information
     private String playerName;
+    private DummyGameToken playerToken;
     private boolean isHuman;
-    private String color;
 
-    public DummyPlayer(String playerName, boolean isHuman, String color) {
+    public DummyPlayer(String playerName, DummyGameToken playerToken, boolean isHuman) {
         this.playerName = playerName;
+        this.playerToken = playerToken;
         this.isHuman = isHuman;
-        this.color = color;
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
-    public boolean isHuman() {
+    public void setPlayerToken(DummyGameToken playerToken) {
+        this.playerToken = playerToken;
+    }
+
+    public void setIsHuman(boolean isHuman) {
+        this.isHuman = isHuman;
+    }
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public DummyGameToken getPlayerToken() {
+        return playerToken;
+    }
+
+    public boolean getIsHuman() {
         return isHuman;
-    }
-
-    public void setHuman(boolean human) {
-        isHuman = human;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     @Override
     public String toString() {
         return "DummyPlayer{" +
                 "playerName='" + playerName + '\'' +
-                ", isHuman=" + isHuman +
-                ", color='" + color + '\'' +
+                ", playerToken='" + playerToken + '\'' +
+                ", isHuman=" + isHuman + '\'' +
                 '}';
     }
 }

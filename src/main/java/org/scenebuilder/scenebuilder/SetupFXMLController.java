@@ -14,25 +14,28 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class SetupFXMLController {
 
     @FXML
-    private TextField numPlayersField;
+    private TextField numPlayersTextField;
     @FXML
     private VBox setupVBox;
+    @FXML
+    private CheckBox setupIsTutorial;
 
     private Stage stage;
 
     // Stack to get the player info
-    private Stack<DummyPlayer> playerStack = new Stack<DummyPlayer>();
+    private Stack<DummyPlayer> playerStack = new Stack<>();
     private Stack<HBox> playerNodeStack = new Stack<>();
     private int num_players;
 
@@ -42,16 +45,18 @@ public class SetupFXMLController {
     public void initialize() {
 
         selectedGame = BasicApplication.getSelectedGame();
-        num_players = selectedGame.getMinPlayers(); // Set the default num players to the min players
 
-        numPlayersField.setText(Integer.toString(num_players));
+        // Set the default num players to the min players
+        num_players = selectedGame.getMinPlayers();
+        numPlayersTextField.setText(Integer.toString(num_players));
 
         // For loop to create num_players player to the stack
-        for(int i = 0; i< num_players; i++){
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), true, "Blue");
+        for(int i = 0; i< num_players; i++) {
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), new DummyGameToken(Color.RED, "Square"), true);
             playerStack.add(player);
-            addPlayerNode();
 
+            // add Player Node to VBox
+            addPlayerNode();
         }
     }
 
@@ -60,9 +65,12 @@ public class SetupFXMLController {
 
         // Add player to the stack
         if (num_players < selectedGame.getMaxPlayers()) {
-            DummyPlayer player = new DummyPlayer("Player " + (num_players + 1), true, "Blue");
+
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), new DummyGameToken(Color.RED, "Square"), true);
+
             num_players += 1;
-            numPlayersField.setText(Integer.toString(num_players));
+            numPlayersTextField.setText(Integer.toString(num_players));
+
             playerStack.add(player);
 
             // add the player node to the scroll pane
@@ -75,8 +83,10 @@ public class SetupFXMLController {
 
         // Delete last player in the stack
         if (num_players > selectedGame.getMinPlayers()) {
+
             num_players -= 1;
-            numPlayersField.setText(Integer.toString(num_players));
+            numPlayersTextField.setText(Integer.toString(num_players));
+
             String nameOfRemovedPlayer = playerStack.pop().getPlayerName();
 
             // remove player
@@ -109,7 +119,7 @@ public class SetupFXMLController {
         humanToggleButton.setText("Human");
         humanToggleButton.setPrefHeight(32);
         humanToggleButton.setPrefWidth(72);
-        humanToggleButton.setSelected(playerStack.peek().isHuman());
+        humanToggleButton.setSelected(playerStack.peek().getIsHuman());
 
         HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
 
@@ -120,7 +130,7 @@ public class SetupFXMLController {
         aIToggleButton.setText("AI");
         aIToggleButton.setPrefHeight(32);
         aIToggleButton.setPrefWidth(48);
-        humanToggleButton.setSelected(!playerStack.peek().isHuman());
+        humanToggleButton.setSelected(!playerStack.peek().getIsHuman());
 
         playerHBox.getChildren().addAll(playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
 
@@ -141,6 +151,7 @@ public class SetupFXMLController {
 
     @FXML
     public void playFromSetup(ActionEvent event) throws IOException {
+        BasicApplication.setSetupData(new SetupData(new ArrayList<>(playerStack), setupIsTutorial.isSelected()));
         switchScene(event, "playFXML.fxml");
     }
 
