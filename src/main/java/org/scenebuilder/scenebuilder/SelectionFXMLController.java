@@ -46,6 +46,7 @@ public class SelectionFXMLController {
     private Stage stage;
     private ArrayList<DummyGame> newGames = new ArrayList<>();
     private ArrayList<DummyGame> savedGames = new ArrayList<>();
+    private DummyGame selectedGame;
 
     public void initialize() {
 
@@ -60,6 +61,7 @@ public class SelectionFXMLController {
         // populate scroll panes with options
         populateSelectionMenus(newGames, savedGames);
     }
+
 
     @FXML
     public void backFromSelection(ActionEvent event) throws IOException {
@@ -97,6 +99,8 @@ public class SelectionFXMLController {
                 selectionPlayButton.setDisable(false);
                 selectionPlayButton.setText("Start New Game");
                 selectionPlayButton.setOnAction(event -> {
+                    setSelectedGame((VBox)n);
+                    BasicApplication.setSelectedGame(selectedGame);
                     try {
                         switchScene(event, "setupFXML.fxml");
                     } catch (IOException e) {
@@ -126,6 +130,8 @@ public class SelectionFXMLController {
                 selectionPlayButton.setDisable(false);
                 selectionPlayButton.setText("Load Saved Game");
                 selectionPlayButton.setOnAction(event -> {
+                    setSelectedGame((VBox)n);
+                    BasicApplication.setSelectedGame(selectedGame);
                     try {
                         switchScene(event, "playFXML.fxml");
                     } catch (IOException e) {
@@ -166,6 +172,9 @@ public class SelectionFXMLController {
                     tempVBox.setPrefWidth(dim);
                     tempVBox.setStyle("-fx-border-color: red;-fx-border-style: dashed;");
 
+                    // store the game in the selection VBox
+                    tempVBox.setUserData(n);
+
                     ImageView tempImageView = new ImageView();
                     tempImageView.setPreserveRatio(true);
                     tempImageView.setFitHeight(150);
@@ -188,4 +197,8 @@ public class SelectionFXMLController {
         return nodes;
     }
 
+    @FXML
+    public void setSelectedGame(VBox vbox) {
+        selectedGame = (DummyGame)vbox.getUserData();
+    }
 }
