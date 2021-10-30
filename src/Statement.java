@@ -1,7 +1,16 @@
 import java.util.ArrayList;
 
 public abstract class Statement implements OpTree {
+    protected String operator;
     public ArrayList<ArrayList<OpTree>> operands;
+
+    public Statement(String operator, ArrayList<ArrayList<OpTree>> operands) {
+        this.operator = operator;
+        this.operands = operands;
+    }
+
+    public String getOperator() { return operator; }
+    public void setOperator(String op) { operator = op; }
 
     public ArrayList<OpTree> getRuleGroup(int i) {
         if (operands.size() <= i) {

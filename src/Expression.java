@@ -8,7 +8,7 @@ public class Expression<T> implements OpTree {
     public T getValue() { return value; }
     public void setValue(T value) { this.value = value; }
 
-    public OpTree execute(GameState currState) {
+    public Expression execute(GameState currState) {
         return this;
     }
 }

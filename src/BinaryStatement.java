@@ -1,59 +1,66 @@
 import java.util.ArrayList;
 
 public class BinaryStatement extends Statement {
-    private String op;
 
     public BinaryStatement(String op, ArrayList<ArrayList<OpTree>> operands) {
-        super.operands = operands;
-        this.op = op;
+        super(op, operands);
     }
 
-    public String getOperator() { return op; }
-    public void setOperator(String op) { this.op = op; }
-
-    public OpTree execute(GameState currState) {
-        Object operand1 = ((Expression)super.getOperand(0).execute(currState)).getValue();
-        Object operand2 = ((Expression)super.getOperand(1).execute(currState)).getValue();
+    public Expression execute(GameState currState) {
+        Object operand1 = getOperand(0).execute(currState).getValue();
+        Object operand2 = getOperand(1).execute(currState).getValue();
 
         if (operand1 == null || operand2 == null) {
-            System.out.println("Error: Something went wrong processing binary operation " + op);
+            System.out.println("Error: Something went wrong processing binary operation " + operator);
             return null;
         }
 
-        if (!(operand1 instanceof Integer && operand2 instanceof Integer)) {
+        if (!(operand1 instanceof Double && operand2 instanceof Double)) {
             System.out.println("Error: Bad operand type for binary operation!");
             return null;
         }
 
-        Integer op1 = (Integer)operand1;
-        Integer op2 = (Integer)operand2;
-
-        switch (op) {
+        Double op1 = (Double)operand1;
+        Double op2 = (Double)operand2;
+        Expression<Double> result = new Expression<Double>(null);
+        switch (operator) {
             case "+":
-                return new Expression<Integer>(op1 + op2);
+                result.setValue(op1 + op2);
+                break;
             case "-":
-                return new Expression<Integer>(op1 - op2);
+                result.setValue(op1 - op2);
+                break;
             case "*":
-                return new Expression<Integer>(op1 * op2);
+                result.setValue(op1 * op2);
+                break;
             case "/":
-                return new Expression<Integer>(op1 / op2);
+                result.setValue(op1 / op2);
+                break;
             case "%":
-                return new Expression<Integer>(op1 % op2);
+                result.setValue(Double.valueOf(op1.intValue() % op2.intValue()));
+                break;
             case ">":
-                return (op1 > op2) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 > op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case "<":
-                return (op1 < op2) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 < op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case "==":
-                return (op1 == op2) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 - op2 < 0.001) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case "<=":
-                return (op1 <= op2) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 <= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case ">=":
-                return (op1 >= op2) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 >= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case "&&":
-                return (op1 == 1 && op2 == 1) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 > 0 && op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
             case "||":
-                return (op1 == 1 || op2 == 1) ? new Expression<Integer>(1) : new Expression<Integer>(0);
+                if (op1 > 0 || op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
+                break;
         }
-        return null;
+        return result;
     }
 }

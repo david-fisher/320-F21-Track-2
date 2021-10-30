@@ -1,3 +1,3 @@
 public interface OpTree {
-    public OpTree execute(GameState currState);
+    public Expression execute(GameState currState);
 }
