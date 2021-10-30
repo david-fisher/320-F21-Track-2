@@ -30,7 +30,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="playLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="77.0" prefHeight="457.0" prefWidth="714.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+                  <Label fx:id="playGameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="43.0" prefHeight="199.0" prefWidth="673.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="playSetupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="273.0" prefHeight="211.0" prefWidth="669.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <font>
                         <Font size="24.0" />
                      </font>

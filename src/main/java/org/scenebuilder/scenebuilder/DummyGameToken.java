@@ -31,4 +31,9 @@ public class DummyGameToken {
     public String getTokenShape() {
         return tokenShape;
     }
+
+    @Override
+    public String toString() {
+        return "{ tokenColor = " + tokenColor + ", tokenShape = " + tokenShape + " }";
+    }
 }

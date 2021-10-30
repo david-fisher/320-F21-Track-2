@@ -41,10 +41,10 @@ public class DummyPlayer {
 
     @Override
     public String toString() {
-        return "DummyPlayer{" +
-                "playerName='" + playerName + '\'' +
-                ", playerToken='" + playerToken + '\'' +
-                ", isHuman=" + isHuman + '\'' +
-                '}';
+        return "{ " +
+                "playerName = " + playerName +
+                ", playerToken = " + playerToken.toString() +
+                ", isHuman = " + isHuman +
+                " }";
     }
 }

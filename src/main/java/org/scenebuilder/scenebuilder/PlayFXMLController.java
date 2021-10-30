@@ -17,7 +17,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PlayFXMLController {
 
     @FXML
-    private Label playLabel;
+    private Label playGameLabel;
+    @FXML
+    private Label playSetupLabel;
 
     private Stage stage;
 
@@ -31,7 +33,8 @@ public class PlayFXMLController {
         setupData = BasicApplication.getSetupData();
         activeGame = BasicApplication.getSelectedGame();
 
-        playLabel.setText(activeGame.toString());
+        playGameLabel.setText(activeGame.toString());
+        playSetupLabel.setText(setupData.toString());
     }
 
     @FXML

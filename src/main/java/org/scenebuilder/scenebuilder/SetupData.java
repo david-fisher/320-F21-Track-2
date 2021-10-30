@@ -14,4 +14,21 @@ public class SetupData {
         this.playerList = playerList;
         this.isTutorialMode = isTutorialMode;
     }
+
+    @Override
+    public String toString() {
+
+        String setupDataString = "";
+
+        setupDataString += "Players: \n";
+        for(int i = 0; i < playerList.size(); ++i) {
+            DummyPlayer curPlayer = playerList.get(i);
+            setupDataString += curPlayer.toString() + '\n';
+
+        }
+
+        setupDataString += "\nTutorial Mode Active: " + isTutorialMode;
+
+        return setupDataString;
+    }
 }

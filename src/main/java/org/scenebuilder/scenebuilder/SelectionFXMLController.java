@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class SelectionFXMLController {
 
@@ -132,6 +133,7 @@ public class SelectionFXMLController {
                 selectionPlayButton.setOnAction(event -> {
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
+                    BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
                     try {
                         switchScene(event, "playFXML.fxml");
                     } catch (IOException e) {
