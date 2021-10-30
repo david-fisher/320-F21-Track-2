@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class BinaryStatement extends Statement {
 
+    public BinaryStatement(String op) {
+        ArrayList<ArrayList<OpTree>> temp = new ArrayList<ArrayList<OpTree>>();
+        temp.add(new ArrayList<OpTree>());
+        super(op, temp);
+    }
+
     public BinaryStatement(String op, ArrayList<ArrayList<OpTree>> operands) {
         super(op, operands);
     }
