@@ -3,9 +3,8 @@ import java.util.ArrayList;
 public class BinaryStatement extends Statement {
 
     public BinaryStatement(String op) {
-        ArrayList<ArrayList<OpTree>> temp = new ArrayList<ArrayList<OpTree>>();
-        temp.add(new ArrayList<OpTree>());
-        super(op, temp);
+        super(op, new ArrayList<ArrayList<OpTree>>());
+        operands.add(new ArrayList<OpTree>());
     }
 
     public BinaryStatement(String op, ArrayList<ArrayList<OpTree>> operands) {
@@ -13,8 +12,10 @@ public class BinaryStatement extends Statement {
     }
 
     public Expression execute(GameState currState) {
-        Object operand1 = getOperand(0).execute(currState).getValue();
-        Object operand2 = getOperand(1).execute(currState).getValue();
+// FIXME: Devise a way to cast the return type properly.
+/*
+        var operand1 = getOperand(0).execute(currState).getValue();
+        var operand2 = getOperand(1).execute(currState).getValue();
 
         if (operand1 == null || operand2 == null) {
             System.out.println("Error: Something went wrong processing binary operation " + operator);
@@ -29,10 +30,14 @@ public class BinaryStatement extends Statement {
         Double op1 = (Double)operand1;
         Double op2 = (Double)operand2;
         Expression<Double> result = new Expression<Double>(null);
+*/
+
+        var operand1 = Integer.valueOf(1);
+        var operand2 = Double.valueOf(5.0);
         switch (operator) {
             case "+":
-                result.setValue(op1 + op2);
-                break;
+                return BinaryOperation.add(operand1, operand2);
+/*
             case "-":
                 result.setValue(op1 - op2);
                 break;
@@ -66,7 +71,8 @@ public class BinaryStatement extends Statement {
             case "||":
                 if (op1 > 0 || op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
                 break;
+*/
         }
-        return result;
+        return null;
     }
 }
