@@ -8,14 +8,15 @@ import java.awt.event.ActionListener;
 public class GameTimer extends GameObject {
 	
   private Timer timer ; 
+  private static int count = 0 ;
 
 
   public GameTimer() {
 	  super() ; 
-	  this.setLabel("token");
+	  this.setLabel("gametimer" + String.format("%02d", ++count));
 	  this.setIcon("default_token_icon.jpg") ;
 	  this.setColor(Color.BLACK) ;
-	  this.setInitialTime(60.) ;
+	  this.setInitialTime(60.0) ;
 	  
 	  timer = new Timer(100, null) ;
   }  

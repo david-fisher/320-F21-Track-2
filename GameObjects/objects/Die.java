@@ -8,7 +8,7 @@ public class Die extends GameObject {
 
   public Die() {
 	super() ;  
-	this.setLabel("card" + String.format("%02d", ++count));
+	this.setLabel("die" + String.format("%02d", ++count));
 	this.setIcon("default_gamepiece_icon.jpg") ;
 	this.setColor(Color.WHITE) ;
 	this.setNumSides(6);

@@ -26,7 +26,7 @@ public class Spinner extends GameObject
     public Spinner()
     {
     	super() ;  
-    	this.setLabel("deck" + String.format("%02d", ++count));
+    	this.setLabel("spinner" + String.format("%02d", ++count));
     	this.setIcon("default_gamepiece_icon.jpg") ;
     	this.setColor(Color.BLACK) ;
     	this.setCategories(new ArrayList<Category>()) ;
