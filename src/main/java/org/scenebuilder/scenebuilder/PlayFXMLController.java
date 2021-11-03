@@ -45,6 +45,7 @@ public class PlayFXMLController {
     //A method to add all the decks to the deck slider
     private static void initializeDrawer(JFXDrawer drawer) {
 
+        drawer.setOpacity(0.0);
         drawer.toggle();
 
         drawer.setMinWidth(0.0);
@@ -92,10 +93,12 @@ public class PlayFXMLController {
     @FXML
     public void slideDrawer(MouseEvent event) {
 
-        drawer.toggle();
+
         if (drawer.isClosed()) {
+            drawer.open();
             drawer.setOpacity(0.0);
         } else {
+            drawer.close();
             drawer.setOpacity(1.0);
         }
     }
