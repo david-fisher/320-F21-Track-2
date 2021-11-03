@@ -24,7 +24,6 @@ public class DummyGameToken {
         int blue = rand.nextInt(255);
 
         this.tokenColor = Color.rgb(red, green, blue, .99);
-
     }
 
 

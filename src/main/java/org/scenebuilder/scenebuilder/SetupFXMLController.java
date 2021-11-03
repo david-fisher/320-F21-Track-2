@@ -3,6 +3,8 @@ package org.scenebuilder.scenebuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -107,9 +109,20 @@ public class SetupFXMLController {
 
         playerHBox.setAlignment(Pos.CENTER);
 
-        Button colorButton = new Button("Pick Color");
+        Color color = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenColor();
         String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
-        colorButton.setStyle("-fx-background-color: " + hex +  "; ");
+
+        ColorPicker colorPicker = new ColorPicker(color);
+        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; ");
+
+        // Add listener for Color Picker
+        colorPicker.setOnAction(new EventHandler() {
+            public void handle(Event t) {
+                playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().setTokenColor(colorPicker.getValue());
+                String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
+                colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; ");
+            }
+        });
 
         Label playerLabel = new Label();
         playerLabel.setAlignment(Pos.CENTER);
@@ -160,7 +173,7 @@ public class SetupFXMLController {
         humanToggleButton.setToggleGroup(group);
         aIToggleButton.setToggleGroup(group);
 
-        playerHBox.getChildren().addAll(colorButton, playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
+        playerHBox.getChildren().addAll(colorPicker, playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
 
         // add hbox storing all the player label, divider, and player/human controls
         setupVBox.getChildren().add(playerHBox);
