@@ -15,7 +15,7 @@ public class GameState {
     public Map<String, GamObject> registers;
 
     public GameState() {
-        registers = new Map<String, GameObject>();
+        registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
     }
 */
