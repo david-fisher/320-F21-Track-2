@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.lang.reflect.Field;
 
+// Arithmetic-Logic Node. Performs basic arithmetic and logic operations on two child nodes.
 public class ALNode extends OpNode {
 
     private String operator;

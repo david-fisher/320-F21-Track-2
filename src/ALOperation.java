@@ -1,6 +1,8 @@
+// A static class that provides the actual arithmetic-logic operations.
 public final class ALOperation {
     private ALOperation() {}
 
+    // TODO: Is there a way to work around this mess? Generic, inheritance, overloading, visitor... None of which seem to work.
     public static LiteralNode add(Object op1, Object op2) {
         if (op1 instanceof Integer && op2 instanceof Integer) {
             return new LiteralNode<Integer>((Integer)op1 + (Integer)op2);

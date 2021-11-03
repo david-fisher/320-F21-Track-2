@@ -4,6 +4,10 @@ import java.util.ArrayList;
 // operator: Dictates the kind of rule this is. Used primarily for identification in the editor.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
 public abstract class OpNode implements Node {
+
+    // TODO: Is it better to, instead of having a 2d list for all operation node,
+    // let each node have their own way of storing the children? May be doable with factory and visitors.
+    // A future topic to discuss perhaps.
     public ArrayList<ArrayList<Node>> operands;
 
     public OpNode(ArrayList<ArrayList<Node>> operands) {
@@ -15,9 +19,9 @@ public abstract class OpNode implements Node {
         operands.add(new ArrayList<Node>());
     }
 
-// TODO: Implement methods to add rule group/operands
+    // TODO: Implement methods to add rule group/operands
 
-    // Returns a "block" or rules. Mainly used by control statements (e.g. if)
+    // Returns a "block" or rules. Mainly used by control statements (e.g. if).
     public ArrayList<Node> getRuleGroup(int i) {
         if (operands.size() <= i) {
             System.out.println("Error: Attempting to access an out-of-bound rule group.");
