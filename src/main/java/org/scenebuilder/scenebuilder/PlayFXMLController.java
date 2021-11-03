@@ -7,14 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.*;
 import javafx.event.*;
+import com.jfoenix.controls.JFXDrawer;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PlayFXMLController {
 
@@ -22,21 +21,48 @@ public class PlayFXMLController {
     private Label playGameLabel;
     @FXML
     private Label playSetupLabel;
+    @FXML
+    private JFXDrawer drawer;
 
     private Stage stage;
 
     private SetupData setupData;
     private DummyGame activeGame;
 
+
     @FXML
     public void initialize() {
-
         // load relevant data
         setupData = BasicApplication.getSetupData();
         activeGame = BasicApplication.getSelectedGame();
 
         playGameLabel.setText(activeGame.toString());
         playSetupLabel.setText(setupData.toString());
+
+        initializeDrawer(drawer);
+    }
+
+    //A method to add all the decks to the deck slider
+    private static void initializeDrawer(JFXDrawer drawer) {
+
+        drawer.toggle();
+
+        drawer.setMinWidth(0.0);
+
+        ScrollPane decksPane = new ScrollPane();
+        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        decksPane.setPrefHeight(209.0);
+        decksPane.setPrefWidth(400.0);
+        decksPane.setMaxWidth(400.0);
+
+        HBox decks = new HBox();
+        Rectangle rect = new Rectangle();
+        rect.setStyle("-fx-fill: red;");
+        decks.getChildren().addAll(new Rectangle(), rect);
+        decksPane.setContent(decks);
+
+        drawer.setSidePane(decksPane);
     }
 
     @FXML
@@ -62,6 +88,26 @@ public class PlayFXMLController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
+
+    @FXML
+    public void slideDrawer(MouseEvent event) {
+
+        drawer.toggle();
+        if (drawer.isClosed()) {
+            drawer.setOpacity(0.0);
+        } else {
+            drawer.setOpacity(1.0);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     @FXML
     public void switchPauseResume(MouseEvent event) {
