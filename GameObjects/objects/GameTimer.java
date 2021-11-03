@@ -37,7 +37,7 @@ public class GameTimer extends GameObject {
 	  }
 	  
 	  // check and set initial time
-	  else if (trait.equals("initialTime") && value instanceof Double) {
+	  else if (trait.equals("initialTime") && value instanceof Integer) {
 		  timer.setDelay((Integer)value);
 	  }
 	  
@@ -55,36 +55,29 @@ public class GameTimer extends GameObject {
 	  timer.addActionListener(listener);
   }
  
-  public boolean start() {
-    // TODO
-    return true;
+  public void start() {
+    timer.start();
   }
 
-  public boolean reset() {
-    // TODO
-    return true;
+  public void reset() {
+    timer.restart();
+    timer.stop();
   }
 
-  public float pause() {
-    // TODO
-    return 1;
+  public int stop() {
+    timer.stop();
+    return this.getTime();
   }
 
-  public float stop() {
-    // TODO
-    return 1;
+  public int getTime() {
+    return timer.getDelay();
   }
 
-  public float getTime() {
-    // TODO
-    return 1;
-  }
-
-  public boolean setInitialTime(Double initialTime) {
+  public boolean setInitialTime(Integer initialTime) {
 	  return this.setTrait("initialTime", initialTime);
   }
 
-  public Double getInitialTime() {
-	  return (Double)this.getTrait("initialTime");
+  public Integer getInitialTime() {
+	  return (Integer)this.getTrait("initialTime");
   }
 }
