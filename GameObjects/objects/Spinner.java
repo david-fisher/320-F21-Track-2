@@ -13,11 +13,7 @@ public class Spinner extends GameObject
 
 	private static int count = 0;
 	  
-    // instance variables - replace the example below with your own
-//    private String label;
-//    private Object icon;
-//    private String color;
-//    private int numCategories;
+    // instance variables
     private ArrayList<Category> categories;
     private int numCategories;
 
@@ -34,14 +30,8 @@ public class Spinner extends GameObject
     	this.setLabel("deck" + String.format("%02d", ++count));
     	this.setIcon("default_gamepiece_icon.jpg") ;
     	this.setColor(Color.BLACK) ;
-//    	this.setCategories(categories) ;
         this.setTrait("categories", categories, true) ;
-        // initialise instance variables
-//        label = "";
-//        icon = null;
-//        color = "";
-//        numCategories = 0;
-//        categories = new HashMap<Integer,Category>();
+        this.setNumCategories(1) ;
     }
     
     /* Trait Types:
@@ -50,46 +40,8 @@ public class Spinner extends GameObject
      * 	color 	:	Color
      * 	categories: ArrayList
      */
-    
-  //set trait to value. Overrides checking for default traits only
-    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
-   	  
-   	  // run game object's set trait first
-   	  if (super.setTrait(trait, value, suppressTraitChecker)) {
-   		  return true ;
-   	  }
-   	  
-   	  // checks for other valid inputs
-//   	  else if (suppressTraitChecker ||	// if true don't check trait type
-//   			  (trait.equals("categories") && value instanceof ArrayList)) {	// check categories are ArrayList
-//   		  traits.put(trait, value) ;
-//   		  return true ;
-//   	  }
-   	  
-   	  // returns false if input is invalid
-   	  return false ;
-    }
-    
-    public void addCategory(Category c) {
-    	if (!this.getCategories().contains(c)) {
-        	this.getCategories().add(c) ;
-        	numCategories++;
-    	}
-      }
 
-      public void deleteCategory(Category c, int quantity) {
-    	if (this.getCategories().contains(c)) {
-    		this.getCategories().remove(c) ;
-        	numCategories--;
-    	}
-      }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     public boolean setNumCategories(int num)
     {
     	// number of categories must be greater than or equal to 1
@@ -118,7 +70,23 @@ public class Spinner extends GameObject
     }
     
     public int getNumCategories() {
-        return this.getCategories().size();
+        return numCategories;
+    }
+    
+    public boolean setCategoryWeights(List<Double> weights) {
+    	if (weights.size() != numCategories) return false ;
+
+    	double sum = 0 ;
+    	for (double w : weights) {
+    		sum += w ;
+    	}
+    	
+    	if (sum < 0.99 || sum > 1.01) return false ;
+    	
+    	for (int i = 0; i < numCategories; ++i) {
+    		if (!this.getCategory(i).setWeight(weights.get(i))) return false ;
+    	}
+    	return true ;
     }
     
     public Category spin() {
@@ -148,109 +116,20 @@ public class Spinner extends GameObject
         return null ;
     }
     
+    public Category getCategory(int i) {
+    	return categories.get(i) ;
+    }
+    
+    public Category getCategory(String label) {
+    	for (Category cat : categories) {
+    		if (cat.getLabel().equals(label)) return cat ;
+    	}
+    	return null ; 
+    }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    public double getCategoryTraitValueInt(int catNum, String trait) {
-//        Category cat = categories.get(catNum);
-//        if (trait != "weight") {
-//            return -1.0;
-//        }
-//        else {
-//            return cat.getCategoryWeight();
-//        }
-//    }
-//    
-//    public String getCategoryTraitValueString(int catNum, String trait) {
-//        Category cat = categories.get(catNum);
-//        if (trait != "label" || trait != "color") {
-//            return null;
-//        }
-//        else {
-//            if (trait == "label") {
-//                return cat.getLabel();
-//            }
-//            else {
-//                return cat.getColor().toString();
-//            }
-//        }
-//    }
-//    
-//    public void setCategoryTraitValue(int catNum, String trait, double val) {
-//        Category cat = categories.get(catNum);
-//        if (trait != "weight") {
-//            return;
-//        }
-//        else {
-//            cat.setCategoryWeight(val);
-//        }
-//    }
-//    
-//    public void setCategoryTraitValue(int catNum, String trait, String val) {
-//        Category cat = categories.get(catNum);
-//        if (trait != "label" || trait != "color") {
-//            return;
-//        }
-//        else {
-//            if (trait == "label") {
-//                cat.setLabel(val);
-//            }
-//            else {
-////                cat.setColor(val);
-//            }
-//        }
-//    }
-    
-
-//    public boolean setCategories(ArrayList<Category> categories) {
-//  	  return this.setTrait("categories", categories);
-//    }
-    
-    public ArrayList<Category> getCategories() {
-    	return (ArrayList<Category>)this.getTrait("categories");
+    public List<Category> getCategories() {
+    	return categories ;
     }
     
 }
