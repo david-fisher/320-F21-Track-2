@@ -54,7 +54,7 @@
    <right>
       <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="184.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#displayPopup" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
