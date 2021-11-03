@@ -1,5 +1,5 @@
-public final class BinaryOperation {
-    private BinaryOperation() {}
+public final class ALOperation {
+    private ALOperation() {}
 
     public static LiteralNode add(Object op1, Object op2) {
         if (op1 instanceof Integer && op2 instanceof Integer) {

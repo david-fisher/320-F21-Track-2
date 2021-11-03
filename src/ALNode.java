@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.lang.reflect.Field;
 
-public class BinaryNode extends OpNode {
+public class ALNode extends OpNode {
 
     private String operator;
     
-    public BinaryNode(String op) {
+    public ALNode(String op) {
         super();
         operator = op;
     }
 
-    public BinaryNode(String op, ArrayList<ArrayList<Node>> operands) {
+    public ALNode(String op, ArrayList<ArrayList<Node>> operands) {
         super(operands);
         operator = op;
     }
@@ -29,7 +29,7 @@ public class BinaryNode extends OpNode {
 
         switch (operator) {
             case "+":
-                return BinaryOperation.add(e1.getValue(), e2.getValue());
+                return ALOperation.add(e1.getValue(), e2.getValue());
 /*
             case "-":
                 result.setValue(op1 - op2);

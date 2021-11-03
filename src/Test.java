@@ -6,8 +6,8 @@ public class Test {
         GameState state = new GameState();
         LiteralNode exp1 = new LiteralNode<String>("cat");
         LiteralNode exp2 = new LiteralNode<String>("dog");
-        BinaryNode st1 = new BinaryNode("+");
-        BinaryNode st2 = new BinaryNode("+");
+        ALNode st1 = new ALNode("+");
+        ALNode st2 = new ALNode("+");
         st1.getRuleGroup(0).add(exp1);
         st1.getRuleGroup(0).add(exp2);
         st2.getRuleGroup(0).add(exp2);
