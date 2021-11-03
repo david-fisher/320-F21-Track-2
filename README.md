@@ -1,8 +1,9 @@
 # This branch is for Minjex!
 
-## Install Jfoenix
+### Install Jfoenix
 
 download the jar file for the latest version
+https://github.com/sshahine/JFoenix
 
 go to project structure -> modules -> 
 dependencies -> click the plus button -> New ->
