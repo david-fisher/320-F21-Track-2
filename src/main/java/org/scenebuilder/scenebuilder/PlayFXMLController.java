@@ -45,6 +45,9 @@ public class PlayFXMLController {
     //A method to add all the decks to the deck slider
     private static void initializeDrawer(JFXDrawer drawer) {
 
+        drawer.setOpacity(0.0);
+        drawer.toggle();
+
         drawer.setMinWidth(0.0);
 
         ScrollPane decksPane = new ScrollPane();
@@ -55,11 +58,12 @@ public class PlayFXMLController {
         decksPane.setMaxWidth(400.0);
 
         HBox decks = new HBox();
-        decks.getChildren().add(new Rectangle());
+        Rectangle rect = new Rectangle();
+        rect.setStyle("-fx-fill: red;");
+        decks.getChildren().addAll(new Rectangle(), rect);
         decksPane.setContent(decks);
 
         drawer.setSidePane(decksPane);
-        drawer.close();
     }
 
     @FXML
@@ -87,11 +91,15 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void slideDrawer() {
-        if (drawer.isOpened()) {
-            drawer.close();
-        } else {
+    public void slideDrawer(MouseEvent event) {
+
+
+        if (drawer.isClosed()) {
             drawer.open();
+            drawer.setOpacity(0.0);
+        } else {
+            drawer.close();
+            drawer.setOpacity(1.0);
         }
     }
 
