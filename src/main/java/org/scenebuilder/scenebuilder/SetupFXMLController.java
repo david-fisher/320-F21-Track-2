@@ -1,5 +1,7 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class SetupFXMLController {
@@ -35,25 +39,28 @@ public class SetupFXMLController {
     private Stage stage;
 
     // Stack to get the player info
-    private Stack<DummyPlayer> playerStack = new Stack<>();
     private Stack<HBox> playerNodeStack = new Stack<>();
     private int num_players;
 
     // game selected in selection scene
     private DummyGame selectedGame;
 
+    private HashMap<Integer, DummyPlayer> playerHashMap = new HashMap<Integer, DummyPlayer>();
+
     public void initialize() {
 
         selectedGame = BasicApplication.getSelectedGame();
 
         // Set the default num players to the min players
-        num_players = selectedGame.getMinPlayers();
+        int min_player = selectedGame.getMinPlayers();
         numPlayersTextField.setText(Integer.toString(num_players));
 
         // For loop to create num_players player to the stack
-        for(int i = 0; i< num_players; i++) {
+        for(int i = 0; i< min_player; i++) {
             DummyPlayer player = new DummyPlayer("Player " + (i+1), new DummyGameToken(Color.RED, "Square"), true);
-            playerStack.add(player);
+//            playerStack.add(player);
+            num_players+=1;
+            playerHashMap.put(num_players, player);
 
             // add Player Node to VBox
             addPlayerNode();
@@ -71,7 +78,7 @@ public class SetupFXMLController {
             num_players += 1;
             numPlayersTextField.setText(Integer.toString(num_players));
 
-            playerStack.add(player);
+            playerHashMap.put(num_players, player);
 
             // add the player node to the scroll pane
             addPlayerNode();
@@ -84,25 +91,25 @@ public class SetupFXMLController {
         // Delete last player in the stack
         if (num_players > selectedGame.getMinPlayers()) {
 
+            playerHashMap.remove(num_players);
             num_players -= 1;
             numPlayersTextField.setText(Integer.toString(num_players));
 
-            String nameOfRemovedPlayer = playerStack.pop().getPlayerName();
-
             // remove player
-            removePlayerNode(nameOfRemovedPlayer);
+            removePlayerNode();
         }
     }
 
     @FXML
     public void addPlayerNode() {
-
         HBox playerHBox = new HBox();
+        playerHBox.setId(Integer.toString(num_players));
+
         playerHBox.setAlignment(Pos.CENTER);
 
         Label playerLabel = new Label();
         playerLabel.setAlignment(Pos.CENTER);
-        playerLabel.setText(playerStack.peek().getPlayerName());
+        playerLabel.setText(playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerName());
         playerLabel.setFont(new Font(16));
         playerLabel.setStyle("-fx-font-family: serif;");
         playerLabel.setPrefWidth(114);
@@ -120,6 +127,8 @@ public class SetupFXMLController {
         humanToggleButton.setPrefHeight(32);
         humanToggleButton.setPrefWidth(72);
 
+        humanToggleButton.setSelected(playerHashMap.get(Integer.valueOf(playerHBox.getId())).getIsHuman());
+
         HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
 
         ToggleButton aIToggleButton = new ToggleButton();
@@ -130,10 +139,19 @@ public class SetupFXMLController {
         aIToggleButton.setPrefHeight(32);
         aIToggleButton.setPrefWidth(48);
 
-        humanToggleButton.setSelected(playerStack.peek().getIsHuman());
-        aIToggleButton.setSelected(!playerStack.peek().getIsHuman());
-
         ToggleGroup group = new ToggleGroup();
+
+        // Add listener for the toggle group to change the corresponding player's property
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle toggle, Toggle new_toggle) {
+                ToggleButton selectedToggleButton =
+                        (ToggleButton) group.getSelectedToggle();
+
+                String playerText = selectedToggleButton.getText();
+                playerHashMap.get(Integer.valueOf(playerHBox.getId())).setIsHuman(playerText.equals("Human"));
+            }
+        });
 
         humanToggleButton.setToggleGroup(group);
         aIToggleButton.setToggleGroup(group);
@@ -146,7 +164,7 @@ public class SetupFXMLController {
     }
 
     @FXML
-    public void removePlayerNode(String nameOfRemovedPlayer) {
+    public void removePlayerNode() {
         setupVBox.getChildren().remove(playerNodeStack.pop());
     }
 
@@ -157,7 +175,12 @@ public class SetupFXMLController {
 
     @FXML
     public void playFromSetup(ActionEvent event) throws IOException {
-        BasicApplication.setSetupData(new SetupData(new ArrayList<>(playerStack), setupIsTutorial.isSelected()));
+
+        // Move all the players from the hashmaps to an array list
+        Collection<DummyPlayer> values = playerHashMap.values();
+        ArrayList<DummyPlayer> dummyPlayerArrayList = new ArrayList<>(values);
+
+        BasicApplication.setSetupData(new SetupData(new ArrayList<>(dummyPlayerArrayList), setupIsTutorial.isSelected()));
         switchScene(event, "playFXML.fxml");
     }
 
