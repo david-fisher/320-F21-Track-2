@@ -1,14 +1,12 @@
-package objects;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import org.junit.platform.commons.annotation.Testable ;
 
-
-
-public class TestsV1 {
+public class JUnitTests {
 
   /*
+   * Tests for getters and setters and default constructors
+   */
+
   @Test
   public void DieGettersAndSetters() {
     Dice die = new Dice();
@@ -56,17 +54,16 @@ public class TestsV1 {
     assert (spin.getColor(3).equals("Yellow"));
     assert (spin.getWeight(4) == 0.05);
     assert (spin.getWeight(5) == 0.1);
-  } */
+  }
 
   @Test
   public void CardGettersAndSetters() {
     Card card = new Card();
-    assert (card.getText().equals("default text"));
+    assert (card.getText().equals("defaultText"));
     card.setText("new text");
     assert (card.getText().equals("new text"));
   }
 
-  /*
   @Test
   public void TimerGettersAndSetters() {
     Timer timer = new Timer();
@@ -87,7 +84,7 @@ public class TestsV1 {
     assert (game.getShape().equals("rectangle"));
     assert (game.getHeight() == 11);
     assert (game.getWidth() == 25);
-  } */
+  }
 
   @Test
   public void TokenGettersAndSetters() {
@@ -97,7 +94,6 @@ public class TestsV1 {
     assert (token.getValue() == 5);
   }
 
-  /*
   @Test
   public void TileGettersAndSetters() {
     Tile tile = new Tile();
@@ -115,6 +111,5 @@ public class TestsV1 {
     Tile tile = new Tile();
     game.setLocation(tile);
     assert (game.getLocation().equals(tile));
-  } */
-
+  }
 }

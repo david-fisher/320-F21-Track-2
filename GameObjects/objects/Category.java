@@ -10,10 +10,6 @@ import java.awt.Color;
  */
 public class Category extends GameObject
 {
-    // instance variables - replace the example below with your own
-    private String label;
-    private double weight;
-    private String color;
     
     private static int count = 0;
 
@@ -28,6 +24,14 @@ public class Category extends GameObject
     	this.setColor(Color.WHITE) ;
     	this.setWeight(0) ;
     }
+    
+//    public Category(Color color, Double weight) {
+//    	super() ;  
+//    	this.setLabel("category" + String.format("%02d", ++count));
+//    	this.setIcon("default_category_icon.jpg") ;
+//    	this.setColor(color) ;
+//    	this.setWeight(weight) ;
+//    }
     
     /* Trait Types:
      * 	label 	: 	String

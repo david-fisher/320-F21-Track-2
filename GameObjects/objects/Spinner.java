@@ -18,7 +18,8 @@ public class Spinner extends GameObject
 //    private Object icon;
 //    private String color;
 //    private int numCategories;
-//    private HashMap<Integer,Category> categories;
+    private ArrayList<Category> categories;
+    private int numCategories;
 
     /**
      * Constructor for objects of class Spinner
@@ -26,10 +27,15 @@ public class Spinner extends GameObject
     public Spinner()
     {
     	super() ;  
+    	
+    	categories = new ArrayList<Category>() ;
+    	numCategories = 0;
+    	
     	this.setLabel("deck" + String.format("%02d", ++count));
     	this.setIcon("default_gamepiece_icon.jpg") ;
     	this.setColor(Color.BLACK) ;
-    	this.setCategories(new ArrayList<Category>()) ;
+//    	this.setCategories(categories) ;
+        this.setTrait("categories", categories, true) ;
         // initialise instance variables
 //        label = "";
 //        icon = null;
@@ -54,11 +60,11 @@ public class Spinner extends GameObject
    	  }
    	  
    	  // checks for other valid inputs
-   	  else if (suppressTraitChecker ||	// if true don't check trait type
-   			  (trait.equals("categories") && value instanceof ArrayList)) {	// check categories are ArrayList
-   		  traits.put(trait, value) ;
-   		  return true ;
-   	  }
+//   	  else if (suppressTraitChecker ||	// if true don't check trait type
+//   			  (trait.equals("categories") && value instanceof ArrayList)) {	// check categories are ArrayList
+//   		  traits.put(trait, value) ;
+//   		  return true ;
+//   	  }
    	  
    	  // returns false if input is invalid
    	  return false ;
@@ -67,12 +73,14 @@ public class Spinner extends GameObject
     public void addCategory(Category c) {
     	if (!this.getCategories().contains(c)) {
         	this.getCategories().add(c) ;
+        	numCategories++;
     	}
       }
 
       public void deleteCategory(Category c, int quantity) {
     	if (this.getCategories().contains(c)) {
     		this.getCategories().remove(c) ;
+        	numCategories--;
     	}
       }
 
@@ -82,17 +90,32 @@ public class Spinner extends GameObject
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-//    public void setNumCategories(int num)
-//    {
-//        // put your code here
-//        categories = new HashMap<Integer,Category>();
-//        numCategories = num;
-//        int i = 0;
-//        while (i < num + 1) {
-//            categories.put(i, new Category("category" + String.valueOf(i), 0.0,"#00000F"));
-//            i++;
-//        }
-//    }
+    public boolean setNumCategories(int num)
+    {
+    	// number of categories must be greater than or equal to 1
+    	if (num < 1) {
+    		return false ;
+    	}
+        
+    	// if old spinner has less categories than new spinner, add categories
+    	while (numCategories < num) {
+        	categories.add(new Category());
+        	numCategories++ ; 
+        } 
+    	
+    	// if old spinner has more categories than new spinner, remove cats
+    	while (numCategories > num) {
+        	categories.remove(categories.size() - 1);
+        	numCategories-- ; 
+        } 
+        
+    	// regularize all categories
+        for (Category c : categories) {
+        	if (!c.setWeight(1.0 / num)) return false ;
+        }
+        
+        return true ;
+    }
     
     public int getNumCategories() {
         return this.getCategories().size();
@@ -124,6 +147,52 @@ public class Spinner extends GameObject
         
         return null ;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 //    public double getCategoryTraitValueInt(int catNum, String trait) {
 //        Category cat = categories.get(catNum);
@@ -176,9 +245,9 @@ public class Spinner extends GameObject
 //    }
     
 
-    public boolean setCategories(ArrayList<Category> categories) {
-  	  return this.setTrait("categories", categories);
-    }
+//    public boolean setCategories(ArrayList<Category> categories) {
+//  	  return this.setTrait("categories", categories);
+//    }
     
     public ArrayList<Category> getCategories() {
     	return (ArrayList<Category>)this.getTrait("categories");
