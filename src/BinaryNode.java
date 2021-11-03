@@ -3,13 +3,20 @@ import java.lang.reflect.Field;
 
 public class BinaryNode extends OpNode {
 
+    private String operator;
+    
     public BinaryNode(String op) {
-        super(op);
+        super();
+        operator = op;
     }
 
     public BinaryNode(String op, ArrayList<ArrayList<Node>> operands) {
-        super(op, operands);
+        super(operands);
+        operator = op;
     }
+
+    public String getOperator() { return operator; }
+    public void setOperator(String op) { operator = op; }
 
     public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
