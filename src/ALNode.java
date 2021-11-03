@@ -35,9 +35,10 @@ public class ALNode extends OpNode {
             case "-":
                 result.setValue(op1 - op2);
                 break;
+*/
             case "*":
-                result.setValue(op1 * op2);
-                break;
+                return ALOperation.multiply(e1.getValue(), e2.getValue());
+/*
             case "/":
                 result.setValue(op1 / op2);
                 break;
