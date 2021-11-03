@@ -4,11 +4,13 @@ import javafx.fxml.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.*;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void switchPauseResume(ActionEvent event) {
+    public void switchPauseResume(MouseEvent event) {
         Button curButton = (Button) event.getTarget();
         String curText = curButton.getText();
         if (curText.equals("Pause")) {
@@ -90,7 +92,7 @@ public class PlayFXMLController {
 
             button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
         }
-        public void displayRestart(Stage baseStage){
+        public void displayRestart(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
 
@@ -110,7 +112,10 @@ public class PlayFXMLController {
             setButtonSize(no, 70, 30, 15);
 
             //Change these actions to actually handle restarting
-            yes.setOnAction(e->popupWindow.close());
+            yes.setOnAction(e-> {
+                popupWindow.close();
+                parentPopup.close();
+            });
             no.setOnAction(e->popupWindow.close());
 
             buttons.getChildren().addAll(yes);
@@ -123,7 +128,7 @@ public class PlayFXMLController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExitWithoutSave(Stage baseStage){
+        public void displayExitWithoutSave(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
 
@@ -144,6 +149,7 @@ public class PlayFXMLController {
 
             yes.setOnAction(e-> {
                 popupWindow.close();
+                parentPopup.close();
                 try {
                     exitFromPlay(e, baseStage);
                 } catch (IOException ex) {
@@ -177,8 +183,7 @@ public class PlayFXMLController {
             });
             exitButton.setOnAction(e->{
                 if (!saved) {
-                    displayExitWithoutSave(baseStage);
-                    popupWindow.close();
+                    displayExitWithoutSave(baseStage, popupWindow);
                 } else {
                     popupWindow.close();
                     try {
@@ -189,8 +194,7 @@ public class PlayFXMLController {
                 }
             });
             restartButton.setOnAction(e->{
-                displayRestart(baseStage);
-                popupWindow.close();
+                displayRestart(baseStage, popupWindow);
             });
 
             VBox layout = new VBox(10);
@@ -206,9 +210,10 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void displayPopup(ActionEvent event) {
+    public void displayPopup(MouseEvent event) {
         Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
         popup.displayExit(curStage);
     }
 }
+

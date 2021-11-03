@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="923.0" style="-fx-background-color: HoneyDew;" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="923.0" style="-fx-background-color: HoneyDew;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="200.0" prefWidth="881.0" style="-fx-border-color: black; -fx-background-color: DarkSeaGreen;" BorderPane.alignment="CENTER">
          <children>
@@ -54,7 +54,7 @@
    <right>
       <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="184.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#displayPopup" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
