@@ -3,19 +3,25 @@ import java.util.ArrayList;
 // The base class for any rule statements.
 // operator: Dictates the kind of rule this is. Used primarily for identification in the editor.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
-public abstract class Statement implements OpTree {
+public abstract class OpNode implements Node {
     protected String operator;
-    public ArrayList<ArrayList<OpTree>> operands;
+    public ArrayList<ArrayList<Node>> operands;
 
-    public Statement(String operator, ArrayList<ArrayList<OpTree>> operands) {
+    public OpNode(String operator, ArrayList<ArrayList<Node>> operands) {
         this.operator = operator;
         this.operands = operands;
+    }
+
+    public OpNode(String operator) {
+        this.operator = operator;
+        operands = new ArrayList<ArrayList<Node>>();
+        operands.add(new ArrayList<Node>());
     }
 
     public String getOperator() { return operator; }
     public void setOperator(String op) { operator = op; }
 
-    public ArrayList<OpTree> getRuleGroup(int i) {
+    public ArrayList<Node> getRuleGroup(int i) {
         if (operands.size() <= i) {
             System.out.println("Error: Attempting to access an out-of-bound rule group.");
             return null;
@@ -23,7 +29,7 @@ public abstract class Statement implements OpTree {
         return operands.get(i);
     }
 
-    public OpTree getOperand(int i) {
+    public Node getOperand(int i) {
         if (operands.size() < 1) {
             System.out.println("Error: No operands in rule statement.");
             return null;

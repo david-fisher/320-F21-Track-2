@@ -1,28 +1,23 @@
 public final class BinaryOperation {
     private BinaryOperation() {}
 
-    public static Expression add(Integer op1, Integer op2) {
-        return new Expression<Integer>(op1 + op2);
-    }
-
-    public static Expression add(Integer op1, Double op2) {
-        return new Expression<Double>(Double.valueOf(op1) + op2);
-    }
-
-    public static Expression add(Double op1, Integer op2) {
-        return new Expression<Double>(op1 + Double.valueOf(op2));
-    }
-
-    public static Expression add(Double op1, Double op2) {
-        return new Expression<Double>(op1 + op2);
-    }
-
-    public static Expression add(String op1, String op2) {
-        return new Expression<String>(op1.concat(op2));
-    }
-
-    public static Expression add(Object op1, Object op2) {
-        System.out.println("Error: Unsupported operand for add operation.");
+    public static LiteralNode add(Object op1, Object op2) {
+        if (op1 instanceof Integer && op2 instanceof Integer) {
+            return new LiteralNode<Integer>((Integer)op1 + (Integer)op2);
+        }
+        if (op1 instanceof Double && op2 instanceof Integer) {
+            return new LiteralNode<Double>((Double)op1 + (Integer)op2);
+        }
+        if (op1 instanceof Integer && op2 instanceof Double) {
+            return new LiteralNode<Double>((Integer)op1 + (Double)op2);
+        }
+        if (op1 instanceof Double && op2 instanceof Double) {
+            return new LiteralNode<Double>((Double)op1 + (Double)op2);
+        }
+        if (op1 instanceof String && op2 instanceof String) {
+            return new LiteralNode<String>(((String)op1).concat((String)op2));
+        }
+        System.out.println("Error: Unsupported operand type.");
         return null;
     }
 }

@@ -4,12 +4,14 @@ public class Test {
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
         GameState state = new GameState();
-        Expression exp1 = new Expression<Double>(1.1);
-        Expression exp2 = new Expression<Integer>(5);
-        Statement add = new BinaryStatement("+", new ArrayList<ArrayList<OpTree>>());
-        add.operands.add(new ArrayList<OpTree>());
-        add.getRuleGroup(0).add(exp1);
-        add.getRuleGroup(0).add(exp2);
-        interpreter.interpretRule(add, state);
+        LiteralNode exp1 = new LiteralNode<String>("cat");
+        LiteralNode exp2 = new LiteralNode<String>("dog");
+        BinaryNode st1 = new BinaryNode("+");
+        BinaryNode st2 = new BinaryNode("+");
+        st1.getRuleGroup(0).add(exp1);
+        st1.getRuleGroup(0).add(exp2);
+        st2.getRuleGroup(0).add(exp2);
+        st2.getRuleGroup(0).add(st1);
+        interpreter.interpretRule(st2, state);
     }
 }

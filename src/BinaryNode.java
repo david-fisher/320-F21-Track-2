@@ -1,42 +1,28 @@
 import java.util.ArrayList;
+import java.lang.reflect.Field;
 
-public class BinaryStatement extends Statement {
+public class BinaryNode extends OpNode {
 
-    public BinaryStatement(String op) {
-        super(op, new ArrayList<ArrayList<OpTree>>());
-        operands.add(new ArrayList<OpTree>());
+    public BinaryNode(String op) {
+        super(op);
     }
 
-    public BinaryStatement(String op, ArrayList<ArrayList<OpTree>> operands) {
+    public BinaryNode(String op, ArrayList<ArrayList<Node>> operands) {
         super(op, operands);
     }
 
-    public Expression execute(GameState currState) {
-// FIXME: Devise a way to cast the return type properly.
-/*
-        var operand1 = getOperand(0).execute(currState).getValue();
-        var operand2 = getOperand(1).execute(currState).getValue();
+    public LiteralNode execute(GameState currState) {
+        LiteralNode e1 = getOperand(0).execute(currState);
+        LiteralNode e2 = getOperand(1).execute(currState);
 
-        if (operand1 == null || operand2 == null) {
+        if (e1 == null || e2 == null) {
             System.out.println("Error: Something went wrong processing binary operation " + operator);
             return null;
         }
 
-        if (!(operand1 instanceof Double && operand2 instanceof Double)) {
-            System.out.println("Error: Bad operand type for binary operation!");
-            return null;
-        }
-
-        Double op1 = (Double)operand1;
-        Double op2 = (Double)operand2;
-        Expression<Double> result = new Expression<Double>(null);
-*/
-
-        var operand1 = Integer.valueOf(1);
-        var operand2 = Double.valueOf(5.0);
         switch (operator) {
             case "+":
-                return BinaryOperation.add(operand1, operand2);
+                return BinaryOperation.add(e1.getValue(), e2.getValue());
 /*
             case "-":
                 result.setValue(op1 - op2);

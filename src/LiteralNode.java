@@ -1,9 +1,9 @@
 // A generic class for atomic expressions.
 // Potential expressipn types include Double, String, and GameObjects.
-public class Expression<T> implements OpTree {
+public class LiteralNode<T> implements Node {
     private T value;
 
-    public Expression(T value) {
+    public LiteralNode(T value) {
         this.value = value;
     }
 
@@ -12,7 +12,7 @@ public class Expression<T> implements OpTree {
 
     // In a sense, an atomic expression is a kind of rule.
     // When executed, it simply returns itself (base case).
-    public Expression execute(GameState currState) {
+    public LiteralNode execute(GameState currState) {
         return this;
     }
 }
