@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 // The base class for any rule statements.
-// operator: Dictates the kind of rule this is. Used primarily for identification in the editor.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
 public abstract class OpNode implements Node {
 
