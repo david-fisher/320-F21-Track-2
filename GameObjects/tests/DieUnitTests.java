@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
 
-import objects.*;
+import objects.Die;
 
 import org.junit.jupiter.api.Test;
 
