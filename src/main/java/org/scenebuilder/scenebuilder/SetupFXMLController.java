@@ -55,7 +55,7 @@ public class SetupFXMLController {
 
         // Set the default num players to the min players
         int min_player = selectedGame.getMinPlayers();
-        numPlayersTextField.setText(Integer.toString(num_players));
+        numPlayersTextField.setText(Integer.toString(min_player));
 
         // For loop to create num_players player to the stack
         for(int i = 0; i< min_player; i++) {
