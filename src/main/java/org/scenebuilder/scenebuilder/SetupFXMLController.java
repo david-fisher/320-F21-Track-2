@@ -113,14 +113,16 @@ public class SetupFXMLController {
         String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
 
         ColorPicker colorPicker = new ColorPicker(color);
-        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; ");
+        // Set bg color and disable text
+        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false ; ");
+
 
         // Add listener for Color Picker
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
                 playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().setTokenColor(colorPicker.getValue());
                 String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
-                colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; ");
+                colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
             }
         });
 
