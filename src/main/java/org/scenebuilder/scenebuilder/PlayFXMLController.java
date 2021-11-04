@@ -4,6 +4,8 @@ import javafx.fxml.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,9 +26,12 @@ public class PlayFXMLController {
     @FXML
     private Label playSetupLabel;
     @FXML
+    private ImageView playSettings;
+    @FXML
     private JFXDrawer deckDrawer;
     @FXML
     private JFXDrawer rngDrawer;
+
 
     private Stage stage;
 
@@ -44,6 +49,9 @@ public class PlayFXMLController {
 
         initializeDeckDrawer(deckDrawer);
         initializeRNGDrawer(rngDrawer);
+
+        playSettings.setImage(new Image("https://images-ext-1.discordapp.net/external/C1VkLgkVceGoEsJogTZ4Nfjo4W-cnZ2GF6FR-XFnIzk/https/cdn-icons-png.flaticon.com/512/61/61094.png?width=375&height=375",
+                40, 40, true, true));
     }
 
     //A method to add all the decks to the deck slider
@@ -103,6 +111,7 @@ public class PlayFXMLController {
         drawer.setMinWidth(0.0);
 
         ScrollPane decksPane = new ScrollPane();
+        decksPane.setMinWidth(0.0);
         decksPane.setPrefHeight(209.0);
         decksPane.setPrefWidth(800);
         decksPane.setMaxWidth(decksPane.getPrefWidth());
