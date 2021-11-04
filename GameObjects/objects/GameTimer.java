@@ -73,11 +73,11 @@ public class GameTimer extends GameObject {
     return timer.getDelay();
   }
 
-  public boolean setInitialTime(Integer initialTime) {
+  public boolean setInitialTime(double initialTime) {
 	  return this.setTrait("initialTime", initialTime);
   }
 
-  public Integer getInitialTime() {
-	  return (Integer)this.getTrait("initialTime");
+  public double getInitialTime() {
+	  return (double)this.getTrait("initialTime");
   }
 }

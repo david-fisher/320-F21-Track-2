@@ -1,4 +1,5 @@
-import objects;
+package tests;
+import objects.*;
 
 import java.awt.Color;
 
