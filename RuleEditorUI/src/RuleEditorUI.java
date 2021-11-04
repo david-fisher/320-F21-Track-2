@@ -14,7 +14,7 @@ public class RuleEditorUI extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("editor.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("../RuleEditor.fxml"));
     Scene scene = new Scene(root, 800, 600);
     primaryStage.setScene(scene);
     primaryStage.show();
