@@ -243,7 +243,7 @@ public class PlayFXMLController {
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
 
-            Label restartMessage = new Label("Are you sure you want to start a new game? Your progress in the current game will be lost.");
+            Label restartMessage = new Label("Are you sure you want to restart? Your progress in the current game will be lost.");
             restartMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
             restartMessage.setWrapText(true);
             restartMessage.setAlignment(Pos.CENTER);
@@ -322,7 +322,7 @@ public class PlayFXMLController {
             setButtonSize(saveButton, 170, 80, 40);
             Button exitButton = new Button("Exit");
             setButtonSize(exitButton, 170, 80, 40);
-            Button restartButton = new Button("New Game");
+            Button restartButton = new Button("Restart");
             setButtonSize(restartButton, 170, 80, 40);
             saveButton.setOnAction(e->{
                 saved = true;
