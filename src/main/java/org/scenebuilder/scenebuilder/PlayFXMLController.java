@@ -8,9 +8,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.*;
 import com.jfoenix.controls.JFXDrawer;
+
 
 
 import java.io.IOException;
@@ -22,13 +24,14 @@ public class PlayFXMLController {
     @FXML
     private Label playSetupLabel;
     @FXML
-    private JFXDrawer drawer;
+    private JFXDrawer deckDrawer;
+    @FXML
+    private JFXDrawer rngDrawer;
 
     private Stage stage;
 
     private SetupData setupData;
     private DummyGame activeGame;
-
 
     @FXML
     public void initialize() {
@@ -39,33 +42,91 @@ public class PlayFXMLController {
         playGameLabel.setText(activeGame.toString());
         playSetupLabel.setText(setupData.toString());
 
-        initializeDrawer(drawer);
+        initializeDeckDrawer(deckDrawer);
+        initializeRNGDrawer(rngDrawer);
     }
 
     //A method to add all the decks to the deck slider
-    private static void initializeDrawer(JFXDrawer drawer) {
-
-        drawer.setOpacity(0.0);
+    private static void initializeDeckDrawer(JFXDrawer drawer) {
+        drawer.open();
+        //drawer.setOpacity(0.0);
         drawer.toggle();
 
         drawer.setMinWidth(0.0);
 
         ScrollPane decksPane = new ScrollPane();
+        decksPane.setPrefHeight(209.0);
+        decksPane.setPrefWidth(800);
+        decksPane.setMaxWidth(decksPane.getPrefWidth());
         decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        decksPane.setPrefHeight(209.0);
-        decksPane.setPrefWidth(400.0);
-        decksPane.setMaxWidth(400.0);
 
         HBox decks = new HBox();
-        Rectangle rect = new Rectangle();
-        rect.setStyle("-fx-fill: red;");
-        decks.getChildren().addAll(new Rectangle(), rect);
+        decks.setSpacing(5);
+        StackPane stack1 = new StackPane();
+        StackPane stack2 = new StackPane();
+        StackPane stack3 = new StackPane();
+        StackPane stack4 = new StackPane();
+
+        Rectangle rect1 = new Rectangle(100, 200);
+        Rectangle rect2 = new Rectangle(100, 200);
+        Rectangle rect3 = new Rectangle(100, 200);
+        Rectangle rect4 = new Rectangle(100, 200);
+
+        rect1.setStyle("-fx-fill: red;");
+        rect2.setStyle("-fx-fill: blue");
+        rect3.setStyle("-fx-fill: green");
+        rect4.setStyle("-fx-fill: yellow");
+
+        Text text1 = new Text("Deck 1");
+        Text text2 = new Text("Deck 2");
+        Text text3 = new Text("Deck 3");
+        Text text4 = new Text("Deck 4");
+
+        stack1.getChildren().addAll(rect1, text1);
+        stack2.getChildren().addAll(rect2, text2);
+        stack3.getChildren().addAll(rect3, text3);
+        stack4.getChildren().addAll(rect4, text4);
+
+        decks.getChildren().addAll(stack1, stack2, stack3, stack4);
+
         decksPane.setContent(decks);
 
         drawer.setSidePane(decksPane);
     }
 
+    public static void initializeRNGDrawer(JFXDrawer drawer) {
+        drawer.open();
+        //drawer.setOpacity(0.0);
+        drawer.toggle();
+
+        drawer.setMinWidth(0.0);
+
+        ScrollPane decksPane = new ScrollPane();
+        decksPane.setPrefHeight(209.0);
+        decksPane.setPrefWidth(800);
+        decksPane.setMaxWidth(decksPane.getPrefWidth());
+        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        HBox RNGs = new HBox();
+        RNGs.setSpacing(20);
+        StackPane stack1 = new StackPane();
+
+        Rectangle rect1 = new Rectangle(100, 100);
+
+        rect1.setStyle("-fx-fill: white;");
+
+        Text text1 = new Text("Dice");
+        text1.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        stack1.getChildren().addAll(rect1, text1);
+        stack1.setAlignment(Pos.CENTER);
+        RNGs.getChildren().addAll(stack1);
+        RNGs.setAlignment(Pos.CENTER);
+        decksPane.setContent(RNGs);
+
+        drawer.setSidePane(decksPane);
+    }
     @FXML
     public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {
         switchScene(event, "mainFXML.fxml", baseStage);
@@ -91,15 +152,43 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void slideDrawer(MouseEvent event) {
-
-
-        if (drawer.isClosed()) {
-            drawer.open();
-            drawer.setOpacity(0.0);
+    public void slideDeckDrawer(MouseEvent event) {
+        Label label = (Label) event.getSource();
+        if (deckDrawer.isClosed()) {
+            label.setText("");
+            deckDrawer.open();
+            //drawer.setOpacity(0.0);
         } else {
-            drawer.close();
-            drawer.setOpacity(1.0);
+            //Automate this in some way, maybe some object that stores id and text and then have this
+            //for all objects so that you can get original text back
+            if (label.getId().equals("buttonDecks")) {
+                label.setText("Decks");
+            }
+            if (label.getId().equals("buttonRNG")) {
+                label.setText("RNG");
+            }
+            deckDrawer.close();
+            //drawer.setOpacity(1.0);
+        }
+    }
+    @FXML
+    public void slideRNGDrawer(MouseEvent event) {
+        Label label = (Label) event.getSource();
+        if (rngDrawer.isClosed()) {
+            label.setText("");
+            rngDrawer.open();
+            //drawer.setOpacity(0.0);
+        } else {
+            //Automate this in some way, maybe some object that stores id and text and then have this
+            //for all objects so that you can get original text back
+            if (label.getId().equals("buttonDecks")) {
+                label.setText("Decks");
+            }
+            if (label.getId().equals("buttonRNG")) {
+                label.setText("RNG");
+            }
+            rngDrawer.close();
+            //drawer.setOpacity(1.0);
         }
     }
 
