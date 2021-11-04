@@ -109,8 +109,10 @@ public class SetupFXMLController {
 
         playerHBox.setAlignment(Pos.CENTER);
 
-        Color color = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenColor();
-        String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
+        DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+
+        Color color = hboxPlayer.getPlayerToken().getTokenColor();
+        String hex = hboxPlayer.getPlayerToken().getTokenHex();
 
         ColorPicker colorPicker = new ColorPicker(color);
         // Set bg color and disable text
@@ -120,18 +122,24 @@ public class SetupFXMLController {
         // Add listener for Color Picker
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
-                playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().setTokenColor(colorPicker.getValue());
-                String hex = playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerToken().getTokenHex();
+                hboxPlayer.getPlayerToken().setTokenColor(colorPicker.getValue());
+                String hex = hboxPlayer.getPlayerToken().getTokenHex();
                 colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
             }
         });
 
-        Label playerLabel = new Label();
-        playerLabel.setAlignment(Pos.CENTER);
-        playerLabel.setText(playerHashMap.get(Integer.valueOf(playerHBox.getId())).getPlayerName());
-        playerLabel.setFont(new Font(16));
-        playerLabel.setStyle("-fx-font-family: serif;");
-        playerLabel.setPrefWidth(114);
+
+        Separator playerSeparator1 = new Separator();
+        playerSeparator1.setOrientation(Orientation.VERTICAL);
+        playerSeparator1.setPrefHeight(27);
+        playerSeparator1.setPrefWidth(84);
+
+        TextField playerField = new TextField();
+        playerField.setAlignment(Pos.CENTER);
+        playerField.setText(hboxPlayer.getPlayerName());
+        playerField.setFont(new Font(16));
+        playerField.setStyle("-fx-font-family: serif;");
+        playerField.setPrefWidth(114);
 
         Separator playerSeparator = new Separator();
         playerSeparator.setOrientation(Orientation.VERTICAL);
@@ -146,7 +154,7 @@ public class SetupFXMLController {
         humanToggleButton.setPrefHeight(32);
         humanToggleButton.setPrefWidth(72);
 
-        humanToggleButton.setSelected(playerHashMap.get(Integer.valueOf(playerHBox.getId())).getIsHuman());
+        humanToggleButton.setSelected(hboxPlayer.getIsHuman());
 
         HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
 
@@ -168,14 +176,14 @@ public class SetupFXMLController {
                         (ToggleButton) group.getSelectedToggle();
 
                 String playerText = selectedToggleButton.getText();
-                playerHashMap.get(Integer.valueOf(playerHBox.getId())).setIsHuman(playerText.equals("Human"));
+                hboxPlayer.setIsHuman(playerText.equals("Human"));
             }
         });
 
         humanToggleButton.setToggleGroup(group);
         aIToggleButton.setToggleGroup(group);
 
-        playerHBox.getChildren().addAll(colorPicker, playerLabel, playerSeparator, humanToggleButton, aIToggleButton);
+        playerHBox.getChildren().addAll(colorPicker, playerSeparator1, playerField, playerSeparator, humanToggleButton, aIToggleButton);
 
         // add hbox storing all the player label, divider, and player/human controls
         setupVBox.getChildren().add(playerHBox);
@@ -194,6 +202,14 @@ public class SetupFXMLController {
 
     @FXML
     public void playFromSetup(ActionEvent event) throws IOException {
+
+        // Get modified name
+        for ( Node h: setupVBox.getChildren()) {
+            for (Node t: ((HBox) h).getChildren()) {
+                DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
+                if(t instanceof TextField)
+                    hboxPlayer.setPlayerName(((TextField) t).getText());}
+        }
 
         // Move all the players from the hashmaps to an array list
         Collection<DummyPlayer> values = playerHashMap.values();
