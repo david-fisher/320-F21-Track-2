@@ -11,14 +11,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			
 			Parent root = FXMLLoader.load(getClass().getResource("GameCreator.fxml"));
 			Scene scene = new Scene(root,900,600);
 			
 			primaryStage.sizeToScene();
 			primaryStage.setTitle("Game Creator");
 			primaryStage.setScene(scene);
-			primaryStage.setWidth(900);
-			primaryStage.setHeight(600);
+			//primaryStage.setWidth(900);
+			//primaryStage.setHeight(600);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
