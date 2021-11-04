@@ -19,6 +19,13 @@ public abstract class OpNode implements Node {
     }
 
     // TODO: Implement methods to add rule group/operands
+    public boolean addOperand(Node operand) {
+        if (operands.get(0) != null) {
+            operands.get(0).add(operand);
+            return true;
+        }
+        return false;
+    }
 
     // Returns a "block" or rules. Mainly used by control statements (e.g. if).
     public ArrayList<Node> getRuleGroup(int i) {
