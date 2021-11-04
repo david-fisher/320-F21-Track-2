@@ -1,10 +1,13 @@
+package RuleEditorUI;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import RuleEditorUI.controllers.RuleEditorUIController;
 
-public class Main extends Application {
+public class RuleEditorUI extends Application {
   public static void main(String[] args) {
     launch(args);
   }

@@ -1,3 +1,5 @@
+package RuleEditorUI.controllers;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-public class EditorController implements Initializable {
+public class RuleEditorUIController implements Initializable {
   
   @FXML
   private Button addSqrBtn;
