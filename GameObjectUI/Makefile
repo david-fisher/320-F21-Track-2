@@ -10,3 +10,5 @@ controllers: src/controllers/*.java
 
 archive: controllers fxml
 	jar cfm GameObjectEditor.jar manifest.txt GameObjectUI/
+
+cmd: controllers fxml

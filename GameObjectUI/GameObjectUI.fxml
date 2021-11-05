@@ -11,26 +11,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameObjectUI.controllers.MyController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameObjectUI.controllers.GameObjectUIController">
   <tabs>
     <Tab text="Card">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField layoutX="215.0" layoutY="108.0" promptText="MyName" />
+                  <TextField fx:id="cardName" layoutX="215.0" layoutY="108.0" promptText="MyName" />
                   <Text layoutX="215.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
-                  <ColorPicker layoutX="215.0" layoutY="214.0" />
+                  <ColorPicker fx:id="cardColor" layoutX="215.0" layoutY="214.0" />
                   <Text layoutX="215.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
                   <Text layoutX="215.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Texture" />
-                  <TextField layoutX="215.0" layoutY="160.0" promptText="Filename" />
-                  <MenuButton layoutX="215.0" layoutY="278.0" mnemonicParsing="false" text="Action 1">
+                  <TextField fx:id="textureFilename" layoutX="215.0" layoutY="160.0" promptText="Filename" />
+                  <MenuButton fx:id="action" layoutX="215.0" layoutY="278.0" mnemonicParsing="false" text="Action 1">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
                   <Text layoutX="215.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action" />
-                  <Button fx:id="doneButton" layoutX="468.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="62.0" text="Done" />
+                  <Button fx:id="doneButton" layoutX="468.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveCard" prefWidth="62.0" text="Done" />
                   <Button fx:id="cancelButton" layoutX="468.0" layoutY="300.0" mnemonicParsing="false" text="Cancel" />
                </children></AnchorPane>
       </content>

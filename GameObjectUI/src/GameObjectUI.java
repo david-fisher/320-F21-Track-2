@@ -7,15 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.net.URL;
 import java.util.ResourceBundle;
-import GameObjectUI.controllers.MyController;
+import GameObjectUI.controllers.GameObjectUIController;
 
-public class FXML extends Application {
+public class GameObjectUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        URL location = getClass().getResource("../game_object_ui.fxml");
+        URL location = getClass().getResource("../GameObjectUI.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent root = (Parent)fxmlLoader.load();
-        MyController controller = (MyController)fxmlLoader.getController();
+        GameObjectUIController controller = (GameObjectUIController)fxmlLoader.getController();
 
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("FXML");

@@ -9,11 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.collections.ObservableList;
 
-/*
-fx:controller="GameObjectUI.MyController" xmlns:fx="http://javafx.com/fxml"
-*/
 public class GameObjectUIController {
+    // Card tab
     @FXML private Button doneButton;
     @FXML private Button cancelButton;
     @FXML private TextField cardName;
@@ -23,11 +22,9 @@ public class GameObjectUIController {
 
     @FXML
     private void saveCard(ActionEvent event) {
-        String cardNameString = cardName.getCharacters();
-        String textureFilenameString = textureFilename.getCharacters();
+        String cardNameString = cardName.getCharacters().toString();
+        String textureFilenameString = textureFilename.getCharacters().toString();
         Color color = cardColor.getValue();
         ObservableList<MenuItem> list = action.getItems();
-        System.out.println(list);
-
     }
 }
