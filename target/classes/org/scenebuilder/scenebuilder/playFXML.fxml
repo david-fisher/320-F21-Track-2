@@ -61,7 +61,7 @@
                <children>
                   <ImageView fx:id="playSettings" onMouseClicked="#displayPopup">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="110.0" right="20.0" top="20.0" />
+                        <Insets bottom="10.0" left="115.0" right="15.0" top="15.0" />
                      </VBox.margin>
                   </ImageView>
                   <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#slideDeckDrawer" prefHeight="209.0" prefWidth="155.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE">
