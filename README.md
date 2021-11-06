@@ -1,3 +1,3 @@
 # 320-F21-Track-2
 
-Branch for Team Odyssey
+Team UMass Dining will be working on object modeling functionality. 
