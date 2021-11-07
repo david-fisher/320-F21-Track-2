@@ -9,6 +9,8 @@ public final class NodeMaker {
                 return new ALNode("*");
             case "rset":
                 return new RSetNode();
+            case "if":
+                return new IfNode();
         }
 
         System.out.println("Unknown rule type");
