@@ -56,11 +56,6 @@ public class PlayFXMLController {
 
     //A method to add all the decks to the deck slider
     private static void initializeDeckDrawer(JFXDrawer drawer) {
-        drawer.open();
-        //drawer.setOpacity(0.0);
-        drawer.toggle();
-
-        drawer.setMinWidth(0.0);
 
         ScrollPane decksPane = new ScrollPane();
         decksPane.setPrefHeight(209.0);

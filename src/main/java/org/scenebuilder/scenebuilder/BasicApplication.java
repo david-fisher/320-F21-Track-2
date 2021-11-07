@@ -88,7 +88,7 @@ public class BasicApplication extends Application {
         double height = screenDimensions.getHeight();
 
         Scene scene = new Scene(root, width, height);
-        scene.getRoot().setStyle("-fx-font-family: 'Times New Roman'");
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.setScene(scene);
         //stage.setMaximized(true);
 
