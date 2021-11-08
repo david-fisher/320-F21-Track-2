@@ -1,4 +1,6 @@
+/*
 package org.objects;
+
 
 import java.util.*;
 import java.awt.Desktop;  
@@ -29,3 +31,4 @@ public abstract class Savable {
 	}
 	
 }
+*/

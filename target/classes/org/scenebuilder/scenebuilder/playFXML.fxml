@@ -28,6 +28,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="781.3333333333334" layoutY="3.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Pane layoutX="908.3333129882812" layoutY="15.0" onMouseClicked="#displayPopup" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
