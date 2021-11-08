@@ -22,7 +22,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="save" layoutX="33.0" layoutY="4.0" mnemonicParsing="false" onAction="#chooseSaveType" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Save" textAlignment="CENTER">
+                  <Button layoutX="33.0" layoutY="4.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Save" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

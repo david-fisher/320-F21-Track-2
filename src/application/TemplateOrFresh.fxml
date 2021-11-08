@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TempOrFreshController">
    <children>
       <Pane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #A9A9A9;">
          <children>
@@ -17,17 +17,17 @@
                   <Font name="Wingdings" size="48.0" />
                </font>
             </Text>
-            <Button layoutX="154.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Back  ">
+            <Button fx:id="back" layoutX="154.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Back  ">
                <font>
                   <Font name="Wingdings" size="24.0" />
                </font>
             </Button>
-            <Button layoutX="620.0" layoutY="404.0" mnemonicParsing="false" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="   New    ">
+            <Button fx:id="newGame" layoutX="620.0" layoutY="404.0" mnemonicParsing="false" onAction="#switchNewEditor" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="   New    ">
                <font>
                   <Font name="Wingdings" size="24.0" />
                </font>
             </Button>
-            <Button layoutX="385.0" layoutY="407.0" mnemonicParsing="false" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Template">
+            <Button fx:id="template" layoutX="385.0" layoutY="407.0" mnemonicParsing="false" onAction="#switchToTemplateSelect" style="-fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Template">
                <font>
                   <Font name="Wingdings" size="24.0" />
                </font>

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -28,28 +29,18 @@ public class Controller {
     private Button exitButton;
     
     
-    //Morgan Created These
-    @FXML
-    private Button save;
-    
-    @FXML
-    private Button newBoard;
+    //Morgan Created These    
     
     @FXML
     private Button newSave;
     
     @FXML
-    public void switchNewEditor(ActionEvent event) throws IOException {
-		Parent editor = FXMLLoader.load(getClass().getResource("GameCreator.fxml"));
-		Scene editorScene = new Scene(editor);
-		
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(editorScene);
-		window.show();
-    }
+    private Button save;
+    
     
     @FXML
-    public void chooseSaveType(ActionEvent event) throws IOException {
+    //refers to the save button
+    public void chooseSaveType(ActionEvent event) throws IOException {//this currently switches the scene, we want to create a new one
     	Parent editor = FXMLLoader.load(getClass().getResource("SaveAsOrSave.fxml"));
     	Scene saveScene = new Scene(editor);
     	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -60,9 +51,12 @@ public class Controller {
     //End of Morgan Section
 
     @FXML
-    void exitProgram(ActionEvent event) {//This currently quits out of the system. We want it to quit the editor.
-    	Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+    void exitProgram(ActionEvent event) throws IOException {//This currently quits out of the system. We want it to quit the editor.
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ConfirmExit.fxtml"));
+        Parent root = (Parent) fxmlloader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     Draggable draggable = new Draggable();
