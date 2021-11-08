@@ -1,4 +1,4 @@
-package objects;
+package org.objects;
 
 public class GameBoard extends GameObject {
   private String shape;

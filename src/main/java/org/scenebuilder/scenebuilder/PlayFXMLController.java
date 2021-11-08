@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.*;
 import com.jfoenix.controls.JFXDrawer;
-
+import org.json.*;
 
 
 import java.io.IOException;
@@ -195,15 +195,6 @@ public class PlayFXMLController {
             //drawer.setOpacity(1.0);
         }
     }
-
-
-
-
-
-
-
-
-
 
     @FXML
     public void switchPauseResume(MouseEvent event) {

@@ -112,16 +112,43 @@ public class PlayFXMLController2 {
         HBox RNGs = new HBox();
         RNGs.setSpacing(20);
         StackPane stack1 = new StackPane();
+        StackPane stack2 = new StackPane();
+        StackPane stack3 = new StackPane();
+        StackPane stack4 = new StackPane();
+        StackPane stack5 = new StackPane();
 
         Rectangle rect1 = new Rectangle(100, 100);
+        Rectangle rect2 = new Rectangle(100, 100);
+        Rectangle rect3 = new Rectangle(100, 100);
+        Rectangle rect4 = new Rectangle(100, 100);
+        Rectangle rect5 = new Rectangle(100, 100);
 
         rect1.setStyle("-fx-fill: white;");
 
         Text text1 = new Text("Dice");
+        Text text2 = new Text("Dice");
+        Text text3 = new Text("Dice");
+        Text text4 = new Text("Dice");
+        Text text5 = new Text("Dice");
+
         text1.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text2.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text3.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text4.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text5.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+
         stack1.getChildren().addAll(rect1, text1);
         stack1.setAlignment(Pos.CENTER);
-        RNGs.getChildren().addAll(stack1);
+        stack2.getChildren().addAll(rect2, text2);
+        stack2.setAlignment(Pos.CENTER);
+        stack3.getChildren().addAll(rect3, text3);
+        stack3.setAlignment(Pos.CENTER);
+        stack4.getChildren().addAll(rect4, text4);
+        stack4.setAlignment(Pos.CENTER);
+        stack5.getChildren().addAll(rect5, text5);
+        stack5.setAlignment(Pos.CENTER);
+
+        RNGs.getChildren().addAll(stack1, stack2, stack3, stack4, stack5);
         RNGs.setAlignment(Pos.CENTER);
         rngPane.setContent(RNGs);
     }
@@ -162,22 +189,22 @@ public class PlayFXMLController2 {
         TranslateTransition tt = new TranslateTransition(Duration.millis(1000), tab);
         tt.setOnFinished(e -> {
             if (tt.getToX() == -495f) {
-                System.out.println(tab.getLayoutX());
+                //System.out.println(tab.getLayoutX());
                 tab.setLayoutX(1240.8);
-                System.out.println("Moved to -1235.8");
-                System.out.println(tab.getLayoutX());
+                //System.out.println("Moved to -1235.8");
+                //System.out.println(tab.getLayoutX());
             } else {
                 tab.setTranslateX(0);
                 tab.setLayoutX(1535.8);
-                System.out.println("Broke shit");
+                //System.out.println("Broke shit");
             }
         });
         if (tab.getTranslateX() == 0.0) {
             tt.setToX(-495f);
-            System.out.println("Translate X After: " + tab.getTranslateX());
+            //System.out.println("Translate X After: " + tab.getTranslateX());
         } else {
             tt.setToX(495f);
-            System.out.println("Move to the right");
+            //System.out.println("Move to the right");
         }
         tt.play();
     }
