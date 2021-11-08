@@ -1,3 +1,3 @@
-public class BooleanOperation {
+public final class BooleanOperation {
     private BooleanOperation() {}
 }

@@ -1,3 +1,3 @@
-public class StringOperation {
+public final class StringOperation {
     private StringOperation() {}
 }

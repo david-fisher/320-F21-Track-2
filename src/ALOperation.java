@@ -16,9 +16,6 @@ public final class ALOperation {
         if (op1 instanceof Double && op2 instanceof Double) {
             return new LiteralNode<Double>((Double)op1 + (Double)op2);
         }
-        if (op1 instanceof String && op2 instanceof String) {
-            return new LiteralNode<String>(((String)op1).concat((String)op2));
-        }
         System.out.println("Error: Unsupported operand type.");
         return null;
     }
