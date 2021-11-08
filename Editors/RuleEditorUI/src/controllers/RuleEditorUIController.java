@@ -1,4 +1,4 @@
-package RuleEditorUI.controllers;
+package editors.rule_editor_ui.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;

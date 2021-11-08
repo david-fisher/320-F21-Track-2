@@ -1,4 +1,4 @@
-package GameObjectUI;
+package editors.game_object_ui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.net.URL;
 import java.util.ResourceBundle;
-import GameObjectUI.controllers.GameObjectUIController;
+import editors.game_object_ui.controllers.GameObjectUIController;
 
 public class GameObjectUI extends Application {
     @Override
