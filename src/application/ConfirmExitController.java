@@ -17,20 +17,30 @@ public class ConfirmExitController {
     private Button exit;
     
     @FXML
+    private Button save;
+    
+    @FXML
     private Button cancel;
     
     @FXML
-    public void returnToMenu(ActionEvent event) /*throws IOException*/ {
-    	//close this scene, change it back to the menu
+    public void returnToMenu(ActionEvent event) throws IOException {
+		Parent editor = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
+		Scene editorScene = new Scene(editor);
+		
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(editorScene);
+		window.show();
+    }
+    
+    @FXML
+    public void saveButton(ActionEvent event) {
+    	//open the save scene
     }
     
     @FXML
     public void returnToEditor(ActionEvent event) throws IOException {
-    	Parent editor = FXMLLoader.load(getClass().getResource("GameCreator.fxml"));
-    	Scene saveScene = new Scene(editor);
-    	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	window.setScene(saveScene);
-    	window.show();
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
     
 }

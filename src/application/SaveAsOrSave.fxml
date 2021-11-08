@@ -6,8 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="application.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SaveAsOrSaveController">
    <children>
       <Pane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #A9A9A9;">
          <children>
@@ -20,8 +19,8 @@
                   </Text>
                </children>
             </Pane>
-            <Button fx:id="newValue" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="New Save" />
-            <Button layoutX="192.0" layoutY="121.0" mnemonicParsing="false" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
+            <Button fx:id="saveAs" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" onAction="#saveAsButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="New Save" />
+            <Button fx:id="save" layoutX="192.0" layoutY="121.0" mnemonicParsing="false" onAction="#saveButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
          </children>
       </Pane>
    </children>

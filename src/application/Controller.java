@@ -32,30 +32,47 @@ public class Controller {
     //Morgan Created These    
     
     @FXML
-    private Button newSave;
+    private Button saveButton;
     
     @FXML
-    private Button save;
+    private Button testButton;
+    
+    @FXML
+    private Button objectEditor;
     
     
     @FXML
     //refers to the save button
     public void chooseSaveType(ActionEvent event) throws IOException {//this currently switches the scene, we want to create a new one
-    	Parent editor = FXMLLoader.load(getClass().getResource("SaveAsOrSave.fxml"));
-    	Scene saveScene = new Scene(editor);
-    	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	window.setScene(saveScene);
-    	window.show();
+        FXMLLoader root = new FXMLLoader();
+        root.setLocation(getClass().getResource("SaveAsOrSave.fxml"));
+        Scene scene = new Scene(root.load(), 300, 200);
+        Stage stage = new Stage();
+        stage.setTitle("Confirm Save");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    //for the test button
+    public void testGame(ActionEvent event) {
+    	//this needs to open the gameplayer with the current rules/tiles/etc.
+    }
+    
+    //for the object editor button
+    public void objectEdit(ActionEvent event) {
+    	//this needs to tie in with the objecteditor UI team
     }
     
     //End of Morgan Section
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {//This currently quits out of the system. We want it to quit the editor.
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ConfirmExit.fxtml"));
-        Parent root = (Parent) fxmlloader.load();
+        FXMLLoader root = new FXMLLoader();
+        root.setLocation(getClass().getResource("ConfirmExit.fxml"));
+        Scene scene = new Scene(root.load(), 300, 200);
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
+        stage.setTitle("Confirm Exit");
+        stage.setScene(scene);
         stage.show();
     }
 
