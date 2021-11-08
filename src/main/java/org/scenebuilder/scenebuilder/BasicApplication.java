@@ -90,7 +90,7 @@ public class BasicApplication extends Application {
         Scene scene = new Scene(root, width, height);
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.setScene(scene);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
 
         stage.show();
     }
