@@ -8,8 +8,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Spinner extends GameObject
-{
+public class Spinner extends GameObject {
 
 	private static int count = 0;
 

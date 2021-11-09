@@ -19,7 +19,6 @@ public abstract class GameObject {
 	traits = new HashMap<String, Object>(10) ;
   }
 
-
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String

@@ -8,8 +8,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Tile extends GameObject
-{
+public class Tile extends GameObject {
     // instance variables - replace the example below with your own
 	private ArrayList<Tile> connections;
     private static int count = 0;

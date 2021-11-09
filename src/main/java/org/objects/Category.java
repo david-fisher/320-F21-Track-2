@@ -8,8 +8,7 @@ import java.awt.Color;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Category extends GameObject
-{
+public class Category extends GameObject {
 
     private static int count = 0;
 
