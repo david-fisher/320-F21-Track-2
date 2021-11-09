@@ -181,10 +181,10 @@ public class SelectionFXMLController {
                     tempImageView.setPreserveRatio(true);
                     tempImageView.setFitHeight(150);
                     tempImageView.setFitWidth(200);
-                    tempImageView.setImage(n.getIcon());
+                    //tempImageView.setImage(n.getIcon());
 
                     Label tempLabel = new Label();
-                    tempLabel.setText(n.getName());
+                    tempLabel.setText("tempGameName");
                     tempLabel.setFont(new Font(16));
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);

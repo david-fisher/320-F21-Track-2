@@ -54,7 +54,7 @@ public class SetupFXMLController {
         selectedGame = BasicApplication.getSelectedGame();
 
         // Set the default num players to the min players
-        int min_player = selectedGame.getMinPlayers();
+        int min_player = 2; // todo, read value from game settings
         numPlayersTextField.setText(Integer.toString(min_player));
 
         // For loop to create num_players player to the stack
@@ -73,7 +73,7 @@ public class SetupFXMLController {
     public void addPlayer(ActionEvent event) throws IOException {
 
         // Add player to the stack
-        if (num_players < selectedGame.getMaxPlayers()) {
+        if (num_players < 8) { // todo read value from game settings
 
             DummyPlayer player = new DummyPlayer("Player " + (num_players+1), new DummyGameToken( "Square"), true);
 
@@ -91,7 +91,7 @@ public class SetupFXMLController {
     public void decPlayer(ActionEvent event) throws IOException {
 
         // Delete last player in the stack
-        if (num_players > selectedGame.getMinPlayers()) {
+        if (num_players > 2) { // todo read min value from game settings
 
             playerHashMap.remove(num_players);
             num_players -= 1;
