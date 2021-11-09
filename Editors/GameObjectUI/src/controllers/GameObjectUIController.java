@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 import objects.*;
 
@@ -20,6 +21,9 @@ public class GameObjectUIController {
     @FXML private ListView deckDeckList;
     @FXML private ListView deckCardList;
 
+    public GameObjectUIController() {
+        deckCards = FXCollections.observableArrayList();
+    }
 
     @FXML private void saveCard(ActionEvent event) {
         Card card = new Card();
@@ -27,7 +31,6 @@ public class GameObjectUIController {
         String textureFilenameString = textureFilename.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = cardColor.getValue();
         java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(), (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
-        ObservableList<MenuItem> list = action.getItems();
         boolean labelRes = card.setTrait("label", cardNameString, false);
         boolean iconRes = card.setTrait("icon", textureFilenameString, false);
         boolean colorRes = card.setTrait("color", awtColor, false);
@@ -43,8 +46,12 @@ public class GameObjectUIController {
         }
     }
 
+    @FXML private void populateCardList(ActionEvent event) {
+        System.out.println("Populating");
+        deckCardList.setItems(deckCards);
+    }
+
     @FXML private void saveDeck(ActionEvent event) {
         Deck deck = new Deck();
-        
     }
 }
