@@ -48,8 +48,8 @@ public class RuleEditorUIController implements Initializable {
     GridPane grid = new GridPane();
     //Padding of top, right, & bottom to 10px; padding of left 0px
     grid.setPadding(new Insets(10, 0, 10, 0));
-    grid.setMinSize(170, 140);
-    grid.setPrefSize(170, 140);
+    grid.setMinSize(170, 150);
+    grid.setPrefSize(170, 150);
     //Vertical gap between columns 10px; horizontal gap 5px
     grid.setVgap(10);
     grid.setHgap(5);
@@ -97,7 +97,7 @@ public class RuleEditorUIController implements Initializable {
     //Pane on which we stack the base Rectangle and grid GridPane
     StackPane stackPane = new StackPane();
     //Base visual of the stackpane
-    Rectangle base = new Rectangle(170, 140, GREY);
+    Rectangle base = new Rectangle(170, 150, GREY);
 
     //Defining row 0 of grid
     Text name = new Text("pset");
