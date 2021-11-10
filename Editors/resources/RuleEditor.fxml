@@ -10,13 +10,12 @@
    <items>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="addSqrBtn" layoutX="21.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddSqrBtn" text="Add Square" />
             <Label layoutX="35.0" layoutY="6.0" text="Controls">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="addCrclBtn" layoutX="21.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleAddCrclBtn" prefHeight="25.0" prefWidth="78.0" text="Add Circle" />
+            <Button fx:id="addPsetBtn" layoutX="20.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add pset" />
          </children></AnchorPane>
       <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
    </items>
