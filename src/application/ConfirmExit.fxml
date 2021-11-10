@@ -20,7 +20,7 @@
                </children>
             </Pane>
             <Button fx:id="exit" layoutX="50.0" layoutY="134.0" mnemonicParsing="false" onAction="#returnToMenu" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Exit  " />
-            <Button layoutX="121.0" layoutY="134.0" mnemonicParsing="false" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
+            <Button fx:id="save" layoutX="121.0" layoutY="134.0" mnemonicParsing="false" onAction="#saveButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
             <Button fx:id="cancel" layoutX="194.0" layoutY="134.0" mnemonicParsing="false" onAction="#returnToEditor" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Cancel" />
          </children>
       </Pane>

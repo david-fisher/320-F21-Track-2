@@ -44,7 +44,12 @@ public class Controller {
     @FXML
     //refers to the save button
     public void chooseSaveType(ActionEvent event) throws IOException {//this currently switches the scene, we want to create a new one
-        FXMLLoader root = new FXMLLoader();
+    	//first check that a save exists. If it doesn't, have the FXML load in to
+    	//the saveAs.fxml file first. 
+    	FXMLLoader root = new FXMLLoader();
+    	if (true) {
+    		
+    	}
         root.setLocation(getClass().getResource("SaveAsOrSave.fxml"));
         Scene scene = new Scene(root.load(), 300, 200);
         Stage stage = new Stage();

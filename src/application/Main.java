@@ -19,8 +19,6 @@ public class Main extends Application {
 			primaryStage.sizeToScene();
 			primaryStage.setTitle("Game Creator");
 			primaryStage.setScene(scene);
-			//primaryStage.setWidth(900);
-			//primaryStage.setHeight(600);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

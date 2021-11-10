@@ -33,8 +33,13 @@ public class ConfirmExitController {
     }
     
     @FXML
-    public void saveButton(ActionEvent event) {
-    	//open the save scene
+    public void saveButton(ActionEvent event) throws IOException {
+		Parent editor = FXMLLoader.load(getClass().getResource("SaveAsOrSave.fxml"));
+		Scene editorScene = new Scene(editor);
+		
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(editorScene);
+		window.show();
     }
     
     @FXML
