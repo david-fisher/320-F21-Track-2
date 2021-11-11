@@ -1,12 +1,12 @@
 fxmodules = javafx.controls,javafx.fxml
 
-rule: RuleEditorUI/src/*.java RuleEditorUI/src/controllers/*.java RuleEditor/src/blocks/*.java
+rule: RuleEditorUI/src/*.java RuleEditorUI/src/controllers/*.java RuleEditorUI/src/blocks/*.java
 	javac -d . --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
 gameobj: GameObjectUI/src/*.java GameObjectUI/src/controllers/*.java
 	javac -d . --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
-menu: MainMenu/src/*.java MainMenu/src/controllers/*.java
+menu: MainMenu/*.java MainMenu/controllers/*.java
 	javac -d . --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
 objects: ../GameObjects/objects/*.java
