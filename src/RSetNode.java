@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Map;
 
+// Usage: Operand 0 - target (register name)
+//        Operand 1 - source name (register or gameobject)
 public class RSetNode extends OpNode {
     public RSetNode() { super(); }
     public RSetNode(ArrayList<Node> operands) {
