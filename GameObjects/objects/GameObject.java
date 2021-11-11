@@ -73,7 +73,7 @@ public abstract class GameObject extends Savable {
   }
   
   // this is a dangerous method to use. Careful if you don't know what you're doing...
-  public boolean setAllTrait(HashMap<String, Object> traits) {
+  public boolean setAllTraits(HashMap<String, Object> traits) {
 	  this.traits = traits ;
 	  return true ;
   }

@@ -1,5 +1,6 @@
 package objects ;
 
+import java.awt.Color;
 import java.util.*;
 /**
  * Write a description of class Tile here.
@@ -7,37 +8,46 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Tile
+public class Tile extends GameObject
 {
     // instance variables - replace the example below with your own
-    private ArrayList<Tile> connections;
+	private ArrayList<Tile> connections;
+    private static int count = 0;
 
     /**
      * Constructor for objects of class Tile
      */
     public Tile()
     {
-        // initialise instance variables
-        connections = new ArrayList<Tile>();
+    	super() ;  
+
+        connections = new ArrayList<Tile>() ;
+    	
+    	this.setLabel("tile" + String.format("%02d", ++count));
+        this.setIcon("default_tile_icon.jpg") ;
+        this.setColor(Color.BLACK) ;
+        this.setTrait("connections", connections, true) ;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public ArrayList<Tile> getConnect()
+    public List<Tile> getConnect()
     {
-        // put your code here
         return connections;
     }
     
-    public void addConnect(Tile tile) {
-        connections.add(tile);
+    public boolean addConnect(Tile tile) {
+        return connections.add(tile);
     }
     
-    public void deleteConnect(Tile tile) {
-        connections.remove(tile);
+    public boolean deleteConnect(Tile tile) {
+    	return connections.remove(tile);
+    }
+    
+    public List<Gamepiece> getGamePieces() {
+    	// TODO
+    	return new ArrayList<Gamepiece>() ;
+    }
+    
+    public String toString() {
+    	return this.getLabel();
     }
 }

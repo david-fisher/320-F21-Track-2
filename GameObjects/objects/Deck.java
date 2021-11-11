@@ -2,17 +2,22 @@ package objects;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Deck extends GameObject {
 
   private static int count = 0;
+  private ArrayList<Card> deck;
 
   public Deck() {
     super() ;  
+    
+    deck = new ArrayList<Card>() ;
+    
 	this.setLabel("deck" + String.format("%02d", ++count));
 	this.setIcon("default_gamepiece_icon.jpg") ;
 	this.setColor(Color.BLACK) ;
-	this.setCards(new ArrayList<Card>()) ;
+    this.setTrait("cards", deck, true) ;
   }
   
 //set trait to value. Overrides checking for default traits only
@@ -23,12 +28,12 @@ public class Deck extends GameObject {
 		  return true ;
 	  }
 	  
-	  // checks for other valid inputs
-	  else if (suppressTraitChecker ||	// if true don't check trait type
-			  (trait.equals("cards") && value instanceof ArrayList)) {	// check value is String
-		  traits.put(trait, value) ;
-		  return true ;
-	  }
+//	  // checks for other valid inputs
+//	  else if (suppressTraitChecker ||	// if true don't check trait type
+//			  (trait.equals("cards") && value instanceof ArrayList)) {	// check value is String
+//		  traits.put(trait, value) ;
+//		  return true ;
+//	  }
 	  
 	  // returns false if input is invalid
 	  return false ;
@@ -36,70 +41,75 @@ public class Deck extends GameObject {
 
   public void addCard(Card c, int quantity) {
 	for (int i = 0; i < quantity; ++i) {
-	    this.getCards().add(c) ;
+	    deck.add(c) ;
 	}
   }
 
   public void deleteCard(Card c, int quantity) {
 	for (int i = 0; i < quantity; ++i) {
-		if (this.getCards().contains(c)) {
-			this.getCards().remove(c) ;
+		if (deck.contains(c)) {
+			deck.remove(c) ;
 		}
 	}
   }
   
   public int getSize() {
-	  return this.getCards().size() ;
+	  return deck.size() ;
+  }
+  
+  public boolean isEmpty() {
+	  return deck.isEmpty() ;
   }
 
   public Card drawTop() {
-    return this.getCards().remove(0);
+	if (this.isEmpty()) return null ;
+    return deck.remove(0);
   }
 
   public Card drawRandom() {
+	if (this.isEmpty()) return null ;
     int rand = (int)(Math.random() * this.getSize()) ;
-    return this.getCards().remove(rand);
+    return deck.remove(rand);
   }
 
   public Card drawBottom() {
-	if (this.getSize() <= 0) {
-		return null ;
-	}
-    return this.getCards().remove(this.getSize() - 1);
+	if (this.isEmpty()) return null ;
+    return deck.remove(this.getSize() - 1);
   }
 
   public void replaceTop(Card card) {
-    this.getCards().add(0, card);
+    deck.add(0, card);
   }
 
   public void replaceBottom(Card card) {
-	this.getCards().add(this.getSize(), card);
+	deck.add(this.getSize(), card);
   }
 
   public void replaceRandom(Card card) {
 	int rand = (int)(Math.random() * this.getSize()) ;
-	this.getCards().add(rand, card);
+	deck.add(rand, card);
   }
 
   public void shuffle() {
-    java.util.Collections.shuffle(this.getCards());
+    java.util.Collections.shuffle(deck);
   }
 
-  public ArrayList<Card> deal(int num) {
+  public List<Card> deal(int num) {
 	ArrayList<Card> hand = new ArrayList<Card>(num) ;
 	
 	for (int i = 0; i < num; ++i) {
-		hand.add(this.drawTop()) ;
+		Card card = this.drawTop() ;
+		if (card != null) hand.add(card) ;
 	}
 	
     return hand;
   }
   
-  public boolean setCards(ArrayList<Card> cards) {
-	  return this.setTrait("cards", cards);
-  }
+//  public boolean setCards(ArrayList<Card> cards) {
+//	  return this.setTrait("cards", cards);
+//  }
 
-  public ArrayList<Card> getCards() {
-	  return (ArrayList<Card>) this.getTrait("cards");
+  public List<Card> getCards() {
+	  return deck;
   }
 }
