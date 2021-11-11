@@ -16,6 +16,7 @@
                </font>
             </Label>
             <Button fx:id="addPsetBtn" layoutX="20.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add pset" />
+            <Button fx:id="addRsetBtn" layoutX="20.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add rset" />
          </children></AnchorPane>
       <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
    </items>
