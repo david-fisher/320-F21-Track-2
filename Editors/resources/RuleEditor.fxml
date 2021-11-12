@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editors.rule_editor_ui.controllers.RuleEditorUIController">
+   <items>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="35.0" layoutY="6.0" text="Controls">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="addPsetBtn" layoutX="20.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add pset" />
+            <Button fx:id="addRsetBtn" layoutX="20.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add rset" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
+   </items>
+</SplitPane>
