@@ -15,27 +15,30 @@ public class Block {
   final Color WHITE = Color.rgb(255,255,255);
   final int HEADER_SIZE = 15;
 
+  //Initialize block as a stackpane and make it draggable
+  public Block() {
+    this.block = new StackPane();
+    this.block.setOnMousePressed(e -> {
+      //calculate offset
+      startX = e.getSceneX() - this.block.getTranslateX();
+      startY = e.getSceneY() - this.block.getTranslateY();
+    });
+
+    this.block.setOnMouseDragged(e -> {
+      //set new position
+      this.block.setTranslateX(e.getSceneX() - startX);
+      this.block.setTranslateY(e.getSceneY() - startY);
+    });
+  }
+
+  //Return the current instance of the block
   public StackPane getBlock() {
     return this.block;
   }
 
+  //Position the block in the top left portion of the given pane
   public void setTopLeft(AnchorPane pane) {
-    //Set the stackpane's position to the top left of the pane
     this.block.setTranslateX(pane.getWidth() / 16);
     this.block.setTranslateY(pane.getHeight() / 16);
-  }
-
-  protected void makeDraggable(StackPane stackPane) {
-    stackPane.setOnMousePressed(e -> {
-      //calculate offset
-      startX = e.getSceneX() - stackPane.getTranslateX();
-      startY = e.getSceneY() - stackPane.getTranslateY();
-    });
-
-    stackPane.setOnMouseDragged(e -> {
-      //set new position
-      stackPane.setTranslateX(e.getSceneX() - startX);
-      stackPane.setTranslateY(e.getSceneY() - startY);
-    });
   }
 }

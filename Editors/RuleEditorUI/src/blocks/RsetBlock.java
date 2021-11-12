@@ -56,22 +56,17 @@ public class RsetBlock extends Block {
     grid.add(from, 1, 2);
     grid.add(fromField, 2, 2);
 
-    //Pane on which we stack the base Rectangle and grid GridPane
-    StackPane stackPane = new StackPane();
-    //Base visual of the stackpane
-    Rectangle base = new Rectangle(170, 110, GREY);
-
     //Defining row 0 of grid
     Text name = new Text("rset");
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
-    stackPane.setAlignment(name, Pos.TOP_CENTER);
+
+    //Base visual of the stackpane
+    Rectangle base = new Rectangle(170, 110, GREY);
 
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
-    stackPane.getChildren().addAll(base, grid, name);
-    
-    this.block = stackPane;
-    //Make the block draggable
-    makeDraggable(this.block);
+    this.block.getChildren().addAll(base, grid, name);
+    //Position the name of the block at the top of the stackpane
+    this.block.setAlignment(name, Pos.TOP_CENTER);
   }
 }

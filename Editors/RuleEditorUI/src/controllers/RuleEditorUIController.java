@@ -25,13 +25,9 @@ import javafx.scene.text.Text;
 
 import editors.rule_editor_ui.blocks.RsetBlock;
 import editors.rule_editor_ui.blocks.PsetBlock;
+import editors.rule_editor_ui.blocks.GetBlock;
 
 public class RuleEditorUIController implements Initializable {
-  
-  @FXML
-  private Button addPsetBtn;
-  @FXML
-  private Button addRsetBtn;
   @FXML
   private AnchorPane editorPane;
 
@@ -63,5 +59,15 @@ public class RuleEditorUIController implements Initializable {
     rset.setTopLeft(editorPane);
     //Add the stackpane to the editor pane
     editorPane.getChildren().addAll(rset.getBlock());
+  }
+
+  @FXML
+  private void handleAddGetBtn(ActionEvent event) {
+    GetBlock get = new GetBlock();
+
+    //Place block in the top left of the screen
+    get.setTopLeft(editorPane);
+    //Add the stackpane to the editor pane
+    editorPane.getChildren().addAll(get.getBlock());
   }
 }

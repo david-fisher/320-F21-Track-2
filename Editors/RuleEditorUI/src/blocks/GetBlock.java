@@ -1,5 +1,6 @@
 package editors.rule_editor_ui.blocks;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,14 +18,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class PsetBlock extends Block {
-  public PsetBlock() {
+
+public class GetBlock extends Block {
+  public GetBlock() {
     //Pane for placing the controls and text for the block
     GridPane grid = new GridPane();
     //Padding of top, right, & bottom to 10px; padding of left 0px
     grid.setPadding(new Insets(10, 0, 10, 0));
-    grid.setMinSize(170, 150);
-    grid.setPrefSize(170, 150);
+    grid.setMinSize(170, 140);
+    grid.setPrefSize(170, 140);
     //Vertical gap between columns 10px; horizontal gap 5px
     grid.setVgap(10);
     grid.setHgap(5);
@@ -40,14 +42,12 @@ public class PsetBlock extends Block {
     grid.getRowConstraints().add(new RowConstraints(5));
 
     //Defining row 1 of grid
-    Text prop = new Text("Prop.:");
-    prop.setFill(WHITE);
-    Rectangle propConnect = new Rectangle(19, 30, SILVER);
-    TextField propField = new TextField();
-    propField.setPrefColumnCount(10);
-    grid.add(prop, 1, 1);
-    grid.add(propConnect, 0, 1);
-    grid.add(propField, 2, 1);
+    Text reg = new Text("Prop.:");
+    reg.setFill(WHITE);
+    TextField regField = new TextField();
+    regField.setPrefColumnCount(10);
+    grid.add(reg, 1, 1);
+    grid.add(regField, 2, 1);
     
     //Defining row 2 of grid
     Text from = new Text("From:");
@@ -58,22 +58,20 @@ public class PsetBlock extends Block {
     grid.add(fromField, 2, 2);
 
     //Defining row 3 of grid
-    Text value = new Text("Value:");
-    value.setFill(WHITE);
-    TextField valueField = new TextField();
-    valueField.setPrefColumnCount(10);
-    Rectangle valConnect = new Rectangle(19, 30, SILVER);
-    grid.add(value, 1, 3);
-    grid.add(valueField, 2, 3);
-    grid.add(valConnect, 0, 3);
+    Rectangle toConnect = new Rectangle(19, 30, SILVER);
+    Text result = new Text("Result:");
+    result.setFill(WHITE);
+    grid.add(toConnect, 3, 3);
+    grid.add(result, 2, 3);
+    grid.setHalignment(result, HPos.RIGHT);
 
     //Defining row 0 of grid
-    Text name = new Text("pset");
+    Text name = new Text("get");
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
 
     //Base visual of the stackpane
-    Rectangle base = new Rectangle(170, 150, GREY);
+    Rectangle base = new Rectangle(170, 140, GREY);
 
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
     this.block.getChildren().addAll(base, grid, name);

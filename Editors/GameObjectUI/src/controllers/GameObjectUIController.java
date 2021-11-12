@@ -44,7 +44,7 @@ public class GameObjectUIController {
     @FXML private TextField timerName;
     @FXML private ColorPicker timerColor;
     @FXML private TextField initialTime;
-    @FXML private TextField tokenFilename;
+    @FXML private TextField timerFilename;
 
     // Category tab
     @FXML private TextField categoryName;
