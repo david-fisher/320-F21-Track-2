@@ -29,6 +29,34 @@ public class GameObjectUIController {
     @FXML private ColorPicker dieColor;
     @FXML private ColorPicker diePipColor;
 
+    // Spinner tab
+    @FXML private TextField spinnerName;
+    @FXML private ColorPicker spinnerColor;
+    @FXML private TextField spinnerValue;
+
+    // Token tab
+    @FXML private TextField tokenName;
+    @FXML private ColorPicker tokenColor;
+    @FXML private TextField tokenValue;
+    @FXML private TextField tokenFilename;
+
+    // Timer tab
+    @FXML private TextField timerName;
+    @FXML private ColorPicker timerColor;
+    @FXML private TextField initialTime;
+    @FXML private TextField tokenFilename;
+
+    // Category tab
+    @FXML private TextField categoryName;
+    @FXML private ColorPicker categoryColor;
+    @FXML private TextField categoryWeight;
+    @FXML private TextField categoryFilename;
+
+    // GamePiece tab
+    @FXML private TextField gamepieceName;
+    @FXML private ColorPicker gamepieceColor;
+    @FXML private TextField gamepieceWeight;
+    @FXML private TextField gamepieceFilename;
 
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList(new Card(), new Card());
