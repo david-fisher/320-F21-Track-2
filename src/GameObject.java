@@ -7,20 +7,4 @@ public class GameObject {
     public GameObject(String label) {
         this.label = label;
     }
-
-    public String getLabel(){
-        return this.label;
-    }
-    public void setLabel(string newLabel){
-        this.label = newLabel;
-        return;
-    }
-    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
-        this.traits.put(trait, value);
-        return true;
-
-    }
-    public object getTrait(String trait){
-        return this.traits.get(trait);
-    }
 }

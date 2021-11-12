@@ -22,13 +22,6 @@ public class BooleanNode extends OpNode {
         }
 
         switch (operator) {
-            case "||":  return BooleanOperation.or(e1.getValue(), e2.getValue());
-            
-            case "&&":  return BooleanOperation.and(e1.getValue(), e2.getValue());
-
-            case "!": return BooleanOperation.not(e1.getValue(), e2.getValue());
-
-            case "^":  return BooleanOperation.xor(e1.getValue(), e2.getValue());
         }
         return null;
     }
