@@ -41,8 +41,8 @@ public class ALNode extends OpNode {
                 return ALOperation.multiply(e1.getValue(), e2.getValue());
 
             case "/":
-                return ALOperation.divide(e1.getValue(), e2.getValue());
-
+                result.setValue(op1 / op2);
+                break;
             case "%":
                 return ALOperation.modulo(e1.getValue(), e2.getValue());
 
