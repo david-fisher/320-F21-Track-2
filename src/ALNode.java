@@ -28,6 +28,8 @@ public class ALNode extends OpNode {
             return null;
         }
 
+        LiteralNode compare = null; // placeholder for boolean comparison
+
         switch (operator) {
             case "+":
                 return ALOperation.add(e1.getValue(), e2.getValue());
@@ -44,23 +46,25 @@ public class ALNode extends OpNode {
             case "%":
                 return ALOperation.modulo(e1.getValue(), e2.getValue());
 
-            // case ">":
-            //     if (op1 > op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-            //     break;
-            // case "<":
-            //     if (op1 < op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-            //     break;
+            case ">":
+                compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+                return compare.getValue() > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 
-            // TODO: what are we trying to return here? A LiteralNode or a BooleanNode?
-            // case "==":
-            //     LiteralNode compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+            case "<":
+                compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+                return compare.getValue() > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+
+            case "==":
+                compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+                return compare.getValue() == 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
             
-            // case "<=":
-            //     if (op1 <= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-            //     break;
-            // case ">=":
-            //     if (op1 >= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-            //     break;
+            case "<=":
+                compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+                return compare.getValue() <= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+
+            case ">=":
+                compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+                return compare.getValue() >= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 /*
             case "&&":
                 if (op1 > 0 && op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
