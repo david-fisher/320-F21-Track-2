@@ -31,35 +31,37 @@ public class ALNode extends OpNode {
         switch (operator) {
             case "+":
                 return ALOperation.add(e1.getValue(), e2.getValue());
-/*
+
             case "-":
-                result.setValue(op1 - op2);
-                break;
-*/
+                return ALOperation.subtract(e1.getValue(), e2.getValue());
+
             case "*":
                 return ALOperation.multiply(e1.getValue(), e2.getValue());
-/*
+
             case "/":
-                result.setValue(op1 / op2);
-                break;
+                return ALOperation.divide(e1.getValue(), e2.getValue());
+
             case "%":
-                result.setValue(Double.valueOf(op1.intValue() % op2.intValue()));
-                break;
-            case ">":
-                if (op1 > op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-                break;
-            case "<":
-                if (op1 < op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-                break;
-            case "==":
-                if (op1 - op2 < 0.001) { result.setValue(1.0); } else { result.setValue(-1.0); }
-                break;
-            case "<=":
-                if (op1 <= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-                break;
-            case ">=":
-                if (op1 >= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
-                break;
+                return ALOperation.modulo(e1.getValue(), e2.getValue());
+
+            // case ">":
+            //     if (op1 > op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+            //     break;
+            // case "<":
+            //     if (op1 < op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+            //     break;
+
+            // TODO: what are we trying to return here? A LiteralNode or a BooleanNode?
+            // case "==":
+            //     LiteralNode compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
+            
+            // case "<=":
+            //     if (op1 <= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+            //     break;
+            // case ">=":
+            //     if (op1 >= op2) { result.setValue(1.0); } else { result.setValue(-1.0); }
+            //     break;
+/*
             case "&&":
                 if (op1 > 0 && op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
                 break;
