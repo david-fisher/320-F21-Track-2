@@ -71,5 +71,7 @@ public class RsetBlock extends Block {
     stackPane.getChildren().addAll(base, grid, name);
     
     this.block = stackPane;
+    //Make the block draggable
+    makeDraggable(this.block);
   }
 }

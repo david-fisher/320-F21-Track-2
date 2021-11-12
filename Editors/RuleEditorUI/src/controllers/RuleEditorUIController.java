@@ -45,31 +45,10 @@ public class RuleEditorUIController implements Initializable {
     //Implement
   }
 
-  //This stuff should probably not be in this class
-
-  private double startX;
-  private double startY;
-
-  private void makeDraggable(Node node) {
-    node.setOnMousePressed(e -> {
-      //calculate offset
-      startX = e.getSceneX() - node.getTranslateX();
-      startY = e.getSceneY() - node.getTranslateY();
-    });
-
-    node.setOnMouseDragged(e -> {
-      //set new position
-      node.setTranslateX(e.getSceneX() - startX);
-      node.setTranslateY(e.getSceneY() - startY);
-    });
-  }
-
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
     PsetBlock pset = new PsetBlock();
 
-    //Make the block draggable
-    makeDraggable(pset.getBlock());
     //Place the block in top left of the screen
     pset.setTopLeft(editorPane);
     //Add the stackpane to the editor pane
@@ -80,8 +59,6 @@ public class RuleEditorUIController implements Initializable {
   private void handleAddRsetBtn(ActionEvent event) {
     RsetBlock rset = new RsetBlock();
 
-    //Make the block draggable
-    makeDraggable(rset.getBlock());
     //Place the block in top left of the screen
     rset.setTopLeft(editorPane);
     //Add the stackpane to the editor pane

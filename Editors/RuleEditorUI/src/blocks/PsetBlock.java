@@ -82,7 +82,9 @@ public class PsetBlock extends Block {
 
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
     stackPane.getChildren().addAll(base, grid, name);
-    
+  
     this.block = stackPane;
+    //Make the block draggable
+    makeDraggable(this.block);
   }
 }
