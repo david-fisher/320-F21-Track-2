@@ -41,11 +41,16 @@ public class ALNode extends OpNode {
                 return ALOperation.multiply(e1.getValue(), e2.getValue());
 
             case "/":
-                result.setValue(op1 / op2);
-                break;
+                return ALOperation.divide(e1.getValue(), e2.getValue());
+            
             case "%":
                 return ALOperation.modulo(e1.getValue(), e2.getValue());
 
+            // factorial is a unary operator, but here's the code to compute it. might want to change the 
+            //    operator though to something unique that isn't the logical-not operator
+            // case "!":
+            //     return ALOperation.factorial(e1.getValue());
+            
             case ">":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
                 return compare.getValue() > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
