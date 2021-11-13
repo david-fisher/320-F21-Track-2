@@ -14,7 +14,7 @@ public class GetNode extends OpNode {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);
 
-        if (e1 == null || e2 == null || e3 == null) {
+        if (e1 == null || e2 == null) {
             System.out.println("Error: Something went wrong processing rset operation");
             return null;
         }

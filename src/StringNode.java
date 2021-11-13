@@ -24,7 +24,7 @@ public class StringNode extends OpNode {
         switch (operator) {
             case "concat":  return StringOperation.concat(e1.getValue(), e2.getValue());
             
-            case "length":  return StringOperation.and(e1.getValue(), e2.getValue());
+            case "length":  return StringOperation.length(e1.getValue());
 
             case "makeUpperCase": return StringOperation.makeUpperCase(e1.getValue());
 
@@ -33,8 +33,6 @@ public class StringNode extends OpNode {
             case "makeLowerCase":  return StringOperation.makeLowerCase(e1.getValue());
 
             case "isLowerCase":  return StringOperation.isLowerCase(e1.getValue());
-
-        }
         }
         return null;
     }
