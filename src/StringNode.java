@@ -33,8 +33,6 @@ public class StringNode extends OpNode {
             case "makeLowerCase":  return StringOperation.makeLowerCase(e1.getValue());
 
             case "isLowerCase":  return StringOperation.isLowerCase(e1.getValue());
-
-        }
         }
         return null;
     }

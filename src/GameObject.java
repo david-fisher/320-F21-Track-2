@@ -11,7 +11,7 @@ public class GameObject {
     public String getLabel(){
         return this.label;
     }
-    public void setLabel(string newLabel){
+    public void setLabel(String newLabel){
         this.label = newLabel;
         return;
     }
@@ -20,7 +20,7 @@ public class GameObject {
         return true;
 
     }
-    public object getTrait(String trait){
+    public Object getTrait(String trait){
         return this.traits.get(trait);
     }
 }

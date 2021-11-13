@@ -29,7 +29,7 @@ public class GameState {
     }
 
     public GameObject getRegistry(String key) {
-        return register.get(key);
+        return registers.get(key);
     }
 
     public GameObject findObject(String label) {
