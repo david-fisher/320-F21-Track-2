@@ -34,7 +34,7 @@ public class StringNode extends OpNode {
 
             case "isLowerCase":  return StringOperation.isLowerCase(e1.getValue());
 
-            // case "equivalence":  return StringOperation.equivalence(e1.getValue(), e2.getValue());
+            case "equivalence":  return StringOperation.equivalence(e1.getValue(), e2.getValue());
         }
         return null;
     }
