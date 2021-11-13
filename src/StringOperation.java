@@ -72,6 +72,7 @@ public final class StringOperation {
         return null;
     }
 
+    /*
     public static Boolean equivalence(Object op1, Object op2) {
         if (op1 instanceof String && op2 instanceof String) {
             String str1 = (String)op1;
@@ -81,5 +82,6 @@ public final class StringOperation {
         System.out.println("Error: Unsupported operand type.");
         return null;
     }
+    */
 
 }
