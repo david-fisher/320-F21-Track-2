@@ -1,17 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="923.0" style="-fx-background-color: HoneyDew;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="881.0" style="-fx-border-color: black; -fx-background-color: DarkSeaGreen;" BorderPane.alignment="CENTER">
+<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController2">
+   <children>
+      <AnchorPane fx:id="board" prefHeight="555.0" prefWidth="747.0" style="-fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="136.0" text="Board Space" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="playGameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="43.0" prefHeight="199.0" prefWidth="673.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="playSetupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="273.0" prefHeight="211.0" prefWidth="669.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="170.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="781.3333333333334" layoutY="3.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="908.3333129882812" layoutY="15.0" onMouseClicked="#displayPopup" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <ImageView fx:id="playSettings" />
+         </children>
+      </Pane>
+      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="75.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <ScrollPane fx:id="decksPane" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-355.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ScrollPane>
+      <Label fx:id="buttonRNG" alignment="CENTER" contentDisplay="CENTER" layoutY="325.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="RNG" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="rngPane" layoutY="325.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-355.0" />
+      <HBox alignment="CENTER" prefHeight="168.0" prefWidth="923.0" style="-fx-border-color: black; -fx-background-color: DarkSeaGreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Label text="Inventory Space" textFill="WHITE">
                <font>
@@ -20,69 +68,5 @@
             </Label>
          </children>
       </HBox>
-   </bottom>
-   <center>
-      <AnchorPane prefHeight="550.0" prefWidth="770.0" BorderPane.alignment="CENTER">
-         <children>
-            <AnchorPane fx:id="board" layoutX="14.0" layoutY="15.0" prefHeight="555.0" prefWidth="747.0" style="-fx-border-color: Black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="136.0" text="Board Space">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="playGameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="43.0" prefHeight="199.0" prefWidth="673.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="playSetupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="273.0" prefHeight="211.0" prefWidth="669.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </AnchorPane>
-   </center>
-   <right>
-      <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="184.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#displayPopup" prefHeight="63.0" prefWidth="152.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: black;" text="Settings" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="209.0" prefWidth="155.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" onMouseClicked="#slideDrawer">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <graphic>
-                  <JFXDrawer fx:id="drawer" prefHeight="209.0" prefWidth="155.0" />
-               </graphic>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="217.0" prefWidth="157.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="RNG" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-   </right>
-</BorderPane>
+   </children>
+</AnchorPane>

@@ -1,8 +1,12 @@
 package org.scenebuilder.scenebuilder;
+import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 import javafx.fxml.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,11 +18,12 @@ import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.*;
 import com.jfoenix.controls.JFXDrawer;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
 
-public class PlayFXMLController {
+public class PlayFXMLController2 {
 
     @FXML
     private Label playGameLabel;
@@ -30,10 +35,15 @@ public class PlayFXMLController {
     private JFXDrawer deckDrawer;
     @FXML
     private JFXDrawer rngDrawer;
+    @FXML
+    private AnchorPane playParent;
+    @FXML
+    private ScrollPane decksPane;
+    @FXML
+    private ScrollPane rngPane;
 
 
     private Stage stage;
-
     private SetupData setupData;
     private DummyGame activeGame;
 
@@ -46,22 +56,24 @@ public class PlayFXMLController {
         playGameLabel.setText(activeGame.toString());
         playSetupLabel.setText(setupData.toString());
 
-        initializeDeckDrawer(deckDrawer);
-        initializeRNGDrawer(rngDrawer);
+        initializeDeckDrawer(deckDrawer, decksPane);
+        initializeRNGDrawer(rngDrawer, rngPane);
 
         playSettings.setImage(new Image("https://images-ext-1.discordapp.net/external/C1VkLgkVceGoEsJogTZ4Nfjo4W-cnZ2GF6FR-XFnIzk/https/cdn-icons-png.flaticon.com/512/61/61094.png?width=375&height=375",
                 40, 40, true, true));
+
     }
 
     //A method to add all the decks to the deck slider
-    private static void initializeDeckDrawer(JFXDrawer drawer) {
+    private static void initializeDeckDrawer(JFXDrawer drawer, ScrollPane decksPane) {
 
-        ScrollPane decksPane = new ScrollPane();
-        decksPane.setPrefHeight(209.0);
-        decksPane.setPrefWidth(800);
-        decksPane.setMaxWidth(decksPane.getPrefWidth());
-        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        Label decksHead = new Label();
+//        decksHead.setStyle("-fx-background-color: DarkSeaGreen; -fx-border-color: Black;");
+//        decksHead.setText("Decks");
+//        decksHead.setTextFill(Color.WHITE);
+//        decksHead.setPrefWidth(155);
+//        decksHead.setPrefHeight(209);
+//        decksHead.setLayoutX();
 
         HBox decks = new HBox();
         decks.setSpacing(5);
@@ -93,43 +105,54 @@ public class PlayFXMLController {
         decks.getChildren().addAll(stack1, stack2, stack3, stack4);
 
         decksPane.setContent(decks);
-
-        drawer.setSidePane(decksPane);
     }
 
-    public static void initializeRNGDrawer(JFXDrawer drawer) {
-        drawer.open();
-        //drawer.setOpacity(0.0);
-        drawer.toggle();
-
-        drawer.setMinWidth(0.0);
-
-        ScrollPane decksPane = new ScrollPane();
-        decksPane.setMinWidth(0.0);
-        decksPane.setPrefHeight(209.0);
-        decksPane.setPrefWidth(800);
-        decksPane.setMaxWidth(decksPane.getPrefWidth());
-        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    public static void initializeRNGDrawer(JFXDrawer drawer, ScrollPane rngPane) {
 
         HBox RNGs = new HBox();
         RNGs.setSpacing(20);
         StackPane stack1 = new StackPane();
+        StackPane stack2 = new StackPane();
+        StackPane stack3 = new StackPane();
+        StackPane stack4 = new StackPane();
+        StackPane stack5 = new StackPane();
 
         Rectangle rect1 = new Rectangle(100, 100);
+        Rectangle rect2 = new Rectangle(100, 100);
+        Rectangle rect3 = new Rectangle(100, 100);
+        Rectangle rect4 = new Rectangle(100, 100);
+        Rectangle rect5 = new Rectangle(100, 100);
 
         rect1.setStyle("-fx-fill: white;");
 
         Text text1 = new Text("Dice");
+        Text text2 = new Text("Dice");
+        Text text3 = new Text("Dice");
+        Text text4 = new Text("Dice");
+        Text text5 = new Text("Dice");
+
         text1.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text2.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text3.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text4.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+        text5.setStyle("-fx-font-size: 25; -fx-border-color: black;");
+
         stack1.getChildren().addAll(rect1, text1);
         stack1.setAlignment(Pos.CENTER);
-        RNGs.getChildren().addAll(stack1);
-        RNGs.setAlignment(Pos.CENTER);
-        decksPane.setContent(RNGs);
+        stack2.getChildren().addAll(rect2, text2);
+        stack2.setAlignment(Pos.CENTER);
+        stack3.getChildren().addAll(rect3, text3);
+        stack3.setAlignment(Pos.CENTER);
+        stack4.getChildren().addAll(rect4, text4);
+        stack4.setAlignment(Pos.CENTER);
+        stack5.getChildren().addAll(rect5, text5);
+        stack5.setAlignment(Pos.CENTER);
 
-        drawer.setSidePane(decksPane);
+        RNGs.getChildren().addAll(stack1, stack2, stack3, stack4, stack5);
+        RNGs.setAlignment(Pos.CENTER);
+        rngPane.setContent(RNGs);
     }
+
     @FXML
     public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {
         switchScene(event, "mainFXML.fxml", baseStage);
@@ -155,45 +178,45 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void slideDeckDrawer(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        if (deckDrawer.isClosed()) {
-            label.setText("");
-            deckDrawer.open();
-            //drawer.setOpacity(0.0);
+    public void slideOut(MouseEvent event) {
+        Label parent = (Label) event.getSource();
+        ScrollPane tab;
+        if (parent.getId().equals("buttonDecks")) {
+            tab = decksPane;
         } else {
-            //Automate this in some way, maybe some object that stores id and text and then have this
-            //for all objects so that you can get original text back
-            if (label.getId().equals("buttonDecks")) {
-                label.setText("Decks");
-            }
-            if (label.getId().equals("buttonRNG")) {
-                label.setText("RNG");
-            }
-            deckDrawer.close();
-            //drawer.setOpacity(1.0);
+            tab = rngPane;
         }
-    }
-    @FXML
-    public void slideRNGDrawer(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        if (rngDrawer.isClosed()) {
-            label.setText("");
-            rngDrawer.open();
-            //drawer.setOpacity(0.0);
+        TranslateTransition tt = new TranslateTransition(Duration.millis(1000), tab);
+        tt.setOnFinished(e -> {
+            if (tt.getToX() == -495f) {
+                //System.out.println(tab.getLayoutX());
+                tab.setLayoutX(1240.8);
+                //System.out.println("Moved to -1235.8");
+                //System.out.println(tab.getLayoutX());
+            } else {
+                tab.setTranslateX(0);
+                tab.setLayoutX(1535.8);
+                //System.out.println("Broke shit");
+            }
+        });
+        if (tab.getTranslateX() == 0.0) {
+            tt.setToX(-495f);
+            //System.out.println("Translate X After: " + tab.getTranslateX());
         } else {
-            //Automate this in some way, maybe some object that stores id and text and then have this
-            //for all objects so that you can get original text back
-            if (label.getId().equals("buttonDecks")) {
-                label.setText("Decks");
-            }
-            if (label.getId().equals("buttonRNG")) {
-                label.setText("RNG");
-            }
-            rngDrawer.close();
-            //drawer.setOpacity(1.0);
+            tt.setToX(495f);
+            //System.out.println("Move to the right");
         }
+        tt.play();
     }
+
+
+
+
+
+
+
+
+
 
     @FXML
     public void switchPauseResume(MouseEvent event) {

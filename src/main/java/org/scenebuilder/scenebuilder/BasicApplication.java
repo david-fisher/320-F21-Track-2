@@ -22,11 +22,11 @@ public class BasicApplication extends Application {
 
 
     public static void loadNewGames() {
-        // do stuff to get list of playable games (from start) from Persistent Data team
+        // do stuff to get list of playable games (on start) from Persistent Data team
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
+        DummyGame game1 = new DummyGame("square", 150.0, 100.0);
+        DummyGame game2 = new DummyGame("triangle", 300.0, 100.0);
 
         newGames.clear();
         newGames.add(game1);
@@ -37,8 +37,8 @@ public class BasicApplication extends Application {
         // do stuff to get list of saved games
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150, 100, "Game 1", 2, 8, false, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
-        DummyGame game2 = new DummyGame("triangle", 200, 150, "Game 2", 1, 4, true, new Image("http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG"));
+        DummyGame game1 = new DummyGame("square", 150.0, 100.0);
+        DummyGame game2 = new DummyGame("triangle", 300.0, 100.0);
 
         savedGames.clear();
         savedGames.add(game1);
@@ -88,9 +88,9 @@ public class BasicApplication extends Application {
         double height = screenDimensions.getHeight();
 
         Scene scene = new Scene(root, width, height);
-        scene.getRoot().setStyle("-fx-font-family: 'Times New Roman'");
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.setScene(scene);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
 
         stage.show();
     }

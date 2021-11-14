@@ -3,15 +3,27 @@ package org.scenebuilder.scenebuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
+import java.util.Random;
+
 public class DummyGameToken {
 
     // dummy class, eventually to be replaced by actual game tokens
     private Color tokenColor;
     private String tokenShape;
 
-    public DummyGameToken(Color tokenColor, String tokenShape) {
-        this.tokenColor = tokenColor;
+    public DummyGameToken(String tokenShape) {
         this.tokenShape = tokenShape;
+        setRandomTokenColor();
+    }
+
+    public void setRandomTokenColor(){
+        Random rand = new Random(System.currentTimeMillis());
+
+        int red = rand.nextInt(255);
+        int green = rand.nextInt(255);
+        int blue = rand.nextInt(255);
+
+        this.tokenColor = Color.rgb(red, green, blue, .99);
     }
 
 
