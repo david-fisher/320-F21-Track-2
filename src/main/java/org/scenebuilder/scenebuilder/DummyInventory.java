@@ -4,6 +4,11 @@ public class DummyInventory {
 
     private String inventoryID;
 
+    // cards?
+    // money?
+    // points?
+    // pieces?
+
     public DummyInventory(String inventoryID) {
         this.inventoryID = inventoryID;
     }

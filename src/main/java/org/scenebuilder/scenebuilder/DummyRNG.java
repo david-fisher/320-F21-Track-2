@@ -2,6 +2,7 @@ package org.scenebuilder.scenebuilder;
 
 public class DummyRNG {
 
+    // super class of separate dice and spinner classes?
     private String rngID;
 
     public DummyRNG(String rngID) {
