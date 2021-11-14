@@ -79,7 +79,7 @@ public class SetupFXMLController {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory(), true);
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1)), true);
 
             num_players += 1;
             numPlayersTextField.setText(Integer.toString(num_players));
@@ -115,8 +115,8 @@ public class SetupFXMLController {
 
         DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
 
-        Color color = hboxPlayer.getPlayerToken().getTokenColor();
-        String hex = hboxPlayer.getPlayerToken().getTokenHex();
+        Color color = hboxPlayer.getGameTokens().get(0).getTokenColor(); // todo get game piece by reference
+        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
 
         ColorPicker colorPicker = new ColorPicker(color);
         // Set bg color and disable text
@@ -126,8 +126,8 @@ public class SetupFXMLController {
         // Add listener for Color Picker
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
-                hboxPlayer.getPlayerToken().setTokenColor(colorPicker.getValue());
-                String hex = hboxPlayer.getPlayerToken().getTokenHex();
+                hboxPlayer.getGameTokens().get(0).setTokenColor(colorPicker.getValue()); // todo get game piece by reference
+                String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
                 colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
             }
         });

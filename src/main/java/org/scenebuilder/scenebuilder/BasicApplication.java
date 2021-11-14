@@ -112,6 +112,10 @@ public class BasicApplication extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
 
+        System.out.println("My Screen Dimensions:");
+        System.out.println(width);
+        System.out.println(height);
+
         stage.show();
     }
 

@@ -152,7 +152,7 @@ public class PlayFXMLController {
     private void initPlayers(ArrayList<DummyPlayer> players) {
 
         players.forEach(p -> {
-           initGamePiece(p.getPlayerToken());
+           initGamePiece(p.getGameTokens().get(0)); // todo, get specific game piece by reference
            //fill inventory
         });
 
