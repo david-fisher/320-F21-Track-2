@@ -81,6 +81,23 @@ public class GameObjectUIController {
 
     @FXML private void saveDie(ActionEvent event) {
         Die die = new Die();
+        String dieNameString = dieName.getCharacters().toString();
+        Integer numSides = Integer.valueOf(dieNumSides.getCharacters().toString());
+        javafx.scene.paint.Color dieSideColor = dieColor.getValue();
+        javafx.scene.paint.Color pipColor = diePipColor.getValue();
+        java.awt.Color colorOne = new java.awt.Color((float)dieSideColor.getRed(),
+                (float)dieSideColor.getGreen(), (float)dieSideColor.getBlue());
+        java.awt.Color colorTwo = new java.awt.Color((float)pipColor.getRed(),
+                (float)pipColor.getGreen(), (float)pipColor.getBlue());
+        boolean nameRes = die.setTrait("label", dieNameString, false);
+        boolean numRes = die.setTrait("numSides", numSides, false);
+        boolean colorRes = die.setTrait("color", colorOne, false);
+        boolean pipRes = die.setTrait("dotColor", colorTwo, false);
+        if (!(nameRes && numRes && colorRes && pipRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new die: " + dieNameString);
+        }
     }
 
     @FXML private void populateCardList(Event event) {
