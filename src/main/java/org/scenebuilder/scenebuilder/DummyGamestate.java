@@ -28,5 +28,5 @@ public class DummyGamestate {
     public ArrayList<DummyTile> getTiles() { return this.tiles; }
     public ArrayList<DummyDeck> getDecks() { return this.decks; }
     public ArrayList<DummyRNG> getRNG() { return this.rng; }
-    
+
 }
