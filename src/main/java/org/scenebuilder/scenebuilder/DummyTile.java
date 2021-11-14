@@ -1,6 +1,5 @@
 package org.scenebuilder.scenebuilder;
 
-public class DummyGamestate {
-
+public class DummyTile {
 
 }
