@@ -17,6 +17,8 @@ import com.jfoenix.controls.JFXDrawer;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class PlayFXMLController {
 
@@ -113,23 +115,30 @@ public class PlayFXMLController {
         decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        HBox RNGs = new HBox();
-        RNGs.setSpacing(20);
-        StackPane stack1 = new StackPane();
+        HBox container = new HBox();
+        container.setSpacing(20);
+        container.setAlignment(Pos.CENTER);
 
-        Rectangle rect1 = new Rectangle(100, 100);
+        dice.forEach(d -> {
+            Rectangle die = new Rectangle(100, 100);
+            die.setUserData(d);
+            die.setFill(new ImagePattern(new Image(d.getIcon())));
+            die.setOnMouseClicked(e -> {
+                // roll this die if you can
+            });
+            container.getChildren().addAll(die);
+        });
 
-        rect1.setStyle("-fx-fill: white;");
-
-        Text text1 = new Text("Dice");
-        text1.setStyle("-fx-font-size: 25; -fx-border-color: black;");
-        stack1.getChildren().addAll(rect1, text1);
-        stack1.setAlignment(Pos.CENTER);
-        RNGs.getChildren().addAll(stack1);
-        RNGs.setAlignment(Pos.CENTER);
-        decksPane.setContent(RNGs);
-
-        drawer.setSidePane(decksPane);
+        spinners.forEach(d -> {
+            Circle spinner = new Circle(100);
+            spinner.setUserData(d);
+            spinner.setFill(new ImagePattern(new Image(d.getIcon())));
+            spinner.setOnMouseClicked(e -> {
+                // spin this spinner if you can
+            });
+            container.getChildren().addAll(spinner);
+        });
+        rngPane.setContent(container);
     }
     @FXML
     public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -9,32 +15,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController2">
+<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
    <children>
-      <AnchorPane fx:id="board" prefHeight="555.0" prefWidth="747.0" style="-fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="136.0" text="Board Space" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="playGameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="43.0" prefHeight="199.0" prefWidth="673.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="15.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="playSetupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="273.0" prefHeight="211.0" prefWidth="669.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="781.3333333333334" layoutY="3.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="2.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
       <Pane layoutX="908.3333129882812" layoutY="15.0" onMouseClicked="#displayPopup" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <ImageView fx:id="playSettings" />
