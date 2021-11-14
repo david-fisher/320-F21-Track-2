@@ -182,8 +182,10 @@ public class PlayFXMLController2 {
         Label parent = (Label) event.getSource();
         ScrollPane tab;
         if (parent.getId().equals("buttonDecks")) {
+            parent.toFront();
             tab = decksPane;
         } else {
+            parent.toFront();
             tab = rngPane;
         }
         TranslateTransition tt = new TranslateTransition(Duration.millis(1000), tab);
