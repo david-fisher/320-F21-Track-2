@@ -25,8 +25,18 @@ public class BasicApplication extends Application {
         // do stuff to get list of playable games (on start) from Persistent Data team
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150.0, 100.0);
-        DummyGame game2 = new DummyGame("triangle", 300.0, 100.0);
+        ArrayList<DummyTile> tiles = new ArrayList<>();
+        ArrayList<DummyDeck> decks = new ArrayList<>();
+        ArrayList<DummyPlayer> players = new ArrayList<>();
+        ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
+        ArrayList<DummyRNG> rng = new ArrayList<>();
+        DummyGameBoard gameBoard1 = new DummyGameBoard("Game 1", "square", 400, 400, 10, 10, tiles);
+        DummyGameBoard gameBoard2 = new DummyGameBoard("Game 2", "square", 400, 400, 10, 10, tiles);
+        DummyGameRules gameRules = new DummyGameRules();
+        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
+
+        DummyGame game1 = new DummyGame(gameBoard1, gameRules, gamestate);
+        DummyGame game2 = new DummyGame(gameBoard2, gameRules, gamestate);
 
         newGames.clear();
         newGames.add(game1);
@@ -37,12 +47,22 @@ public class BasicApplication extends Application {
         // do stuff to get list of saved games
 
         // filler for now
-        DummyGame game1 = new DummyGame("square", 150.0, 100.0);
-        DummyGame game2 = new DummyGame("triangle", 300.0, 100.0);
+        ArrayList<DummyTile> tiles = new ArrayList<>();
+        ArrayList<DummyDeck> decks = new ArrayList<>();
+        ArrayList<DummyPlayer> players = new ArrayList<>();
+        ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
+        ArrayList<DummyRNG> rng = new ArrayList<>();
+        DummyGameBoard gameBoard1 = new DummyGameBoard("Game 1", "Rectangle", 400, 400, 10, 10, tiles);
+        DummyGameBoard gameBoard2 = new DummyGameBoard("Game 2", "Rectangle", 400, 400, 10, 10, tiles);
+        DummyGameRules gameRules = new DummyGameRules();
+        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
 
-        savedGames.clear();
-        savedGames.add(game1);
-        savedGames.add(game2);
+        DummyGame game1 = new DummyGame(gameBoard1, gameRules, gamestate);
+        DummyGame game2 = new DummyGame(gameBoard2, gameRules, gamestate);
+
+        newGames.clear();
+        newGames.add(game1);
+        newGames.add(game2);
     }
 
 
