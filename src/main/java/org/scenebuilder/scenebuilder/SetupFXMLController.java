@@ -59,7 +59,7 @@ public class SetupFXMLController {
 
         // For loop to create num_players player to the stack
         for(int i = 0; i< min_player; i++) {
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), new DummyGameToken("Square"), true);
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), new DummyGameToken("Token " + (i+1), "Square"), true);
 //            playerStack.add(player);
             num_players+=1;
             playerHashMap.put(num_players, player);
@@ -75,7 +75,7 @@ public class SetupFXMLController {
         // Add player to the stack
         if (num_players < 8) { // todo read value from game settings
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), new DummyGameToken( "Square"), true);
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), new DummyGameToken("Token " + (num_players+1), "Square"), true);
 
             num_players += 1;
             numPlayersTextField.setText(Integer.toString(num_players));
