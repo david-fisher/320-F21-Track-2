@@ -60,9 +60,9 @@ public class BasicApplication extends Application {
         DummyGame game1 = new DummyGame(gameBoard1, gameRules, gamestate);
         DummyGame game2 = new DummyGame(gameBoard2, gameRules, gamestate);
 
-        newGames.clear();
-        newGames.add(game1);
-        newGames.add(game2);
+        savedGames.clear();
+        savedGames.add(game1);
+        savedGames.add(game2);
     }
 
 

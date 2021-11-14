@@ -1,8 +1,16 @@
 package org.scenebuilder.scenebuilder;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
+import org.objects.*;
+import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 import javafx.fxml.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,8 +21,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.*;
-import com.jfoenix.controls.JFXDrawer;
-
+import javafx.util.Duration;
+import org.objects.Spinner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,13 +37,14 @@ public class PlayFXMLController {
     @FXML
     private ImageView playSettings;
     @FXML
-    private JFXDrawer deckDrawer;
+    private AnchorPane playParent;
     @FXML
-    private JFXDrawer rngDrawer;
+    private ScrollPane decksPane;
+    @FXML
+    private ScrollPane rngPane;
 
 
     private Stage stage;
-
     private SetupData setupData;
     private DummyGame activeGame;
 
@@ -45,75 +54,146 @@ public class PlayFXMLController {
         setupData = BasicApplication.getSetupData();
         activeGame = BasicApplication.getSelectedGame();
 
-        playGameLabel.setText(activeGame.toString());
-        playSetupLabel.setText(setupData.toString());
-
-
-        initializeDeckDrawer(deckDrawer);
-        initializeRNGDrawer(rngDrawer);
+        initGame(activeGame);
 
         playSettings.setImage(new Image("https://images-ext-1.discordapp.net/external/C1VkLgkVceGoEsJogTZ4Nfjo4W-cnZ2GF6FR-XFnIzk/https/cdn-icons-png.flaticon.com/512/61/61094.png?width=375&height=375",
                 40, 40, true, true));
     }
 
-    //A method to add all the decks to the deck slider
-    private static void initializeDeckDrawer(JFXDrawer drawer) {
+    private void initGame(DummyGame game) {
+        DummyGameBoard gameBoard = game.getGameBoard();
+        DummyGamestate gameState = game.getInitialGamestate();
 
-        ScrollPane decksPane = new ScrollPane();
-        decksPane.setPrefHeight(209.0);
-        decksPane.setPrefWidth(800);
-        decksPane.setMaxWidth(decksPane.getPrefWidth());
-        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        AnchorPane boardPane = new AnchorPane();
+        boardPane.setPrefHeight(gameBoard.getHeight());
+        boardPane.setPrefWidth(gameBoard.getWidth());
+        playParent.getChildren().add(boardPane);
 
-        HBox decks = new HBox();
-        decks.setSpacing(5);
-        StackPane stack1 = new StackPane();
-        StackPane stack2 = new StackPane();
-        StackPane stack3 = new StackPane();
-        StackPane stack4 = new StackPane();
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double playWidth = screenDimensions.getWidth();
+        double playHeight = screenDimensions.getHeight();
 
-        Rectangle rect1 = new Rectangle(100, 200);
-        Rectangle rect2 = new Rectangle(100, 200);
-        Rectangle rect3 = new Rectangle(100, 200);
-        Rectangle rect4 = new Rectangle(100, 200);
+        playParent.setLeftAnchor(boardPane, (playWidth - gameBoard.getWidth() - 140)/2);
+        playParent.setTopAnchor(boardPane, (playHeight - gameBoard.getHeight() - 168)/2);
 
-        rect1.setStyle("-fx-fill: red;");
-        rect2.setStyle("-fx-fill: blue");
-        rect3.setStyle("-fx-fill: green");
-        rect4.setStyle("-fx-fill: yellow");
+        initBoard(gameBoard, boardPane);
+        initTiles(gameBoard.getTiles(), boardPane);
+        initDecks(gameState.getDecks());
 
-        Text text1 = new Text("Deck 1");
-        Text text2 = new Text("Deck 2");
-        Text text3 = new Text("Deck 3");
-        Text text4 = new Text("Deck 4");
+        //initRNG(gameState.getRNG());
 
-        stack1.getChildren().addAll(rect1, text1);
-        stack2.getChildren().addAll(rect2, text2);
-        stack3.getChildren().addAll(rect3, text3);
-        stack4.getChildren().addAll(rect4, text4);
+        initPlayers(gameState.getPlayers());
 
-        decks.getChildren().addAll(stack1, stack2, stack3, stack4);
-
-        decksPane.setContent(decks);
-
-        drawer.setSidePane(decksPane);
     }
 
-    public static void initializeRNGDrawer(JFXDrawer drawer) {
-        drawer.open();
-        //drawer.setOpacity(0.0);
-        drawer.toggle();
+    private void initBoard(DummyGameBoard gameBoard, AnchorPane boardPane) {
+        Shape board;
+        double width = gameBoard.getWidth();
+        double height = gameBoard.getHeight();
 
-        drawer.setMinWidth(0.0);
+        if (gameBoard.getShape().equals("Rectangle")) {
+            board = new Rectangle(width, height);
+        } else {
+            board = new Circle(height / 2);
+        }
+        board.setFill(Color.AQUAMARINE);
+        boardPane.getChildren().add(board);
 
-        ScrollPane decksPane = new ScrollPane();
-        decksPane.setMinWidth(0.0);
-        decksPane.setPrefHeight(209.0);
-        decksPane.setPrefWidth(800);
-        decksPane.setMaxWidth(decksPane.getPrefWidth());
-        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        boardPane.setLeftAnchor(board, 0.0);
+        boardPane.setTopAnchor(board, 0.0);
+        boardPane.setRightAnchor(board, 0.0);
+        boardPane.setBottomAnchor(board, 0.0);
+
+        // create board anchorPane
+        // set anchorPane values
+    }
+
+    private void initTiles(ArrayList<DummyTile> tiles, AnchorPane boardPane) {
+
+        tiles.forEach(t -> {
+            Shape tile;
+            double width = t.getWidth();
+            double height = t.getHeight();
+
+            if (t.getShape().equals("Rectangle")) {
+                tile = new Rectangle(width, height);
+            } else {
+                tile = new Circle(width / 2);
+            }
+            tile.setUserData(t);
+            tile.setLayoutX(t.getXPos());
+            tile.setLayoutY(t.getYPos());
+            boardPane.getChildren().addAll(tile);
+        });
+        // for each tile
+        // create tile
+        // set tile values
+        // add tile to anchorPane
+    }
+
+    private void initDecks(ArrayList<DummyDeck> decks) {
+        initializeDeckDrawer(decks, decksPane);
+
+        // for each deck
+        // create deck node
+        // set deck node values
+        // add deck node to drawer
+    }
+
+    private void initRNG(ArrayList<Die> dice, ArrayList<Spinner> spinners) {
+        initializeRNGDrawer(dice, spinners, rngPane);
+
+        // for each RNG
+        // create RNG node
+        // set RNG node values
+        // add RNG node to drawer
+    }
+
+    private void initPlayers(ArrayList<DummyPlayer> players) {
+
+        players.forEach(p -> {
+           initGamePiece(p.getPlayerToken());
+           //fill inventory
+        });
+
+        // for each player
+        // set player info
+        // add player stuff to inventory (later)
+    }
+
+    private void initGamePiece(DummyGameToken gamePiece) {
+        // for each player
+        // for each piece
+        // get piece
+        // draw piece at its location
+        // set other info..?
+    }
+
+
+
+    //A method to add all the decks to the deck slider
+    private static void initializeDeckDrawer(ArrayList<DummyDeck> decks, ScrollPane decksPane) {
+
+        HBox container = new HBox();
+        container.setSpacing(20);
+        container.setAlignment(Pos.CENTER);
+
+        decks.forEach(d -> {
+            double width = d.getWidth();
+            double height = d.getHeight();
+            Rectangle deck = new Rectangle(width, height);
+            deck.setUserData(d);
+            deck.setFill(new ImagePattern(new Image(d.getIcon())));
+            deck.setOnMouseClicked(e -> {
+                //Open this deck if you can
+            });
+            container.getChildren().addAll(deck);
+
+        });
+        decksPane.setContent(container);
+    }
+
+    public static void initializeRNGDrawer(ArrayList<Die> dice, ArrayList<Spinner> spinners, ScrollPane rngPane) {
 
         HBox container = new HBox();
         container.setSpacing(20);
@@ -140,6 +220,7 @@ public class PlayFXMLController {
         });
         rngPane.setContent(container);
     }
+
     @FXML
     public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {
         switchScene(event, "mainFXML.fxml", baseStage);
@@ -165,60 +246,30 @@ public class PlayFXMLController {
     }
 
     @FXML
-    public void slideDeckDrawer(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        if (deckDrawer.isClosed()) {
-            label.setText("");
-            deckDrawer.open();
-            //drawer.setOpacity(0.0);
+    public void slideOut(MouseEvent event) {
+        Label parent = (Label) event.getSource();
+        parent.toFront();
+        ScrollPane tab;
+        if (parent.getId().equals("buttonDecks")) {
+            tab = decksPane;
         } else {
-            //Automate this in some way, maybe some object that stores id and text and then have this
-            //for all objects so that you can get original text back
-            if (label.getId().equals("buttonDecks")) {
-                label.setText("Decks");
-            }
-            if (label.getId().equals("buttonRNG")) {
-                label.setText("RNG");
-            }
-            deckDrawer.close();
-            //drawer.setOpacity(1.0);
+            tab = rngPane;
         }
-    }
-    @FXML
-    public void slideRNGDrawer(MouseEvent event) {
-        Label label = (Label) event.getSource();
-        if (rngDrawer.isClosed()) {
-            label.setText("");
-            rngDrawer.open();
-            //drawer.setOpacity(0.0);
+        TranslateTransition tt = new TranslateTransition(Duration.millis(700), tab);
+        tt.setOnFinished(e -> {
+            if (tt.getToX() == -355f) {
+                tab.setLayoutX(1100.8);
+            } else {
+                tab.setTranslateX(0);
+                tab.setLayoutX(1495.8);
+            }
+        });
+        if (tab.getTranslateX() == 0.0) {
+            tt.setToX(-355f);
         } else {
-            //Automate this in some way, maybe some object that stores id and text and then have this
-            //for all objects so that you can get original text back
-            if (label.getId().equals("buttonDecks")) {
-                label.setText("Decks");
-            }
-            if (label.getId().equals("buttonRNG")) {
-                label.setText("RNG");
-            }
-            rngDrawer.close();
-            //drawer.setOpacity(1.0);
+            tt.setToX(355f);
         }
-    }
-
-    @FXML
-    public void switchPauseResume(MouseEvent event) {
-        Button curButton = (Button) event.getTarget();
-        String curText = curButton.getText();
-        if (curText.equals("Pause")) {
-            //do things to pause game
-            curButton.setText("Resume");
-            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #00FF00, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
-        }
-        if (curText.equals("Resume")) {
-            //do things to resume game
-            curButton.setText("Pause");
-            curButton.setStyle("-fx-font-size: 16; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
-        }
+        tt.play();
     }
 
     public class Popup {
