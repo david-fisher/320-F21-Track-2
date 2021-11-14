@@ -1,43 +1,47 @@
 package org.scenebuilder.scenebuilder;
 
-import javafx.scene.image.Image;
-
 public class DummyGame {
 
     // a "fake" game object
-    // real gameboard object extends game object, gaining certain other attributes
 
-    private String shape;
-    private double height;
-    private double width;
+    private DummyGameBoard gameBoard;
+    private DummyGameRules gameRules;
+    private DummyGamestate initialGamestate;
 
-    public DummyGame(String shape, double height, double width) {
-        this.shape = shape;
-        this.height = height;
-        this.width = width;
+    public DummyGame(DummyGameBoard gameBoard, DummyGameRules gameRules, DummyGamestate initialGameState) {
+        this.gameBoard = gameBoard;
+        this.gameRules = gameRules;
+        this.initialGamestate = initialGameState;
     }
 
-    public void setShape(String shape) {
-        this.shape = shape;
+    // copy constructor
+    public DummyGame(DummyGame dummyGame) {
+        this.gameBoard = dummyGame.getGameBoard();
+        this.gameRules = dummyGame.getGameRules();
+        this.initialGamestate = dummyGame.getInitialGamestate();
     }
 
-    public String getShape() {
-        return this.shape;
+    // setters
+    public void setGameBoard(DummyGameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+    public void setGameRules(DummyGameRules gameRules) {
+        this.gameRules = gameRules;
+    }
+    public void setInitialGameState(DummyGamestate gamestate) {
+        this.initialGamestate = gamestate;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    // getters
+    public DummyGameBoard getGameBoard() {
+        return this.gameBoard;
+    }
+    public DummyGameRules getGameRules() {
+        return this.gameRules;
+    }
+    public DummyGamestate getInitialGamestate() {
+        return this.initialGamestate;
     }
 
-    public double getHeight() {
-        return this.height;
-    }
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getWidth() {
-        return this.width;
-    }
 }
