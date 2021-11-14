@@ -2,10 +2,13 @@ package objects;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Project extends Savable {
 	private String projectName;
 	private String projectPath;
+	private Path projectPathObj;
 
 	Project() {
 		this.projectName = "";
@@ -17,6 +20,7 @@ public class Project extends Savable {
 		directory.replace("\\", File.separator);
 		directory.replace("/", File.separator);
 		this.projectPath = directory + File.separator + name;
+//		this.projectPathObj = Paths.get(this.projectPath);
 		File file = new File(this.projectPath);
 		file.mkdirs();
 	}

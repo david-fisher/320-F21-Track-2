@@ -71,7 +71,6 @@ public abstract class Savable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static void saveConstructors() {
@@ -84,11 +83,9 @@ public abstract class Savable {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static boolean saveProjects() {
-
 		try {
 			global = true;
 			File file = getFile("ProjectConstruct");
@@ -108,7 +105,6 @@ public abstract class Savable {
 		}
 
 		return true;
-
 	}
 
 	private static boolean loadProjects() {
@@ -134,7 +130,6 @@ public abstract class Savable {
 		}
 
 		return true;
-
 	}
 
 	public static void setProject(Project x) {
@@ -169,7 +164,6 @@ public abstract class Savable {
 
 		Yaml yaml;
 		InputStream reader;
-
 		try {
 			for (String s : constructorMap.keySet()) {
 				File file = getFile(s);
