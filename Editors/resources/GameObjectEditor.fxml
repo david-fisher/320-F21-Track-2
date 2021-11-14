@@ -32,7 +32,7 @@
                   </MenuButton>
                   <Button fx:id="doneButton" layoutX="468.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveCard" prefHeight="25.0" prefWidth="63.0" text="Done" />
                   <Button fx:id="cancelButton" layoutX="468.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Cancel" />
-                  <Button fx:id="backButton" layoutX="468.0" layoutY="332.0" mnemonicParsing="false" onAction="#changeToMainMenuScreen" prefHeight="25.0" prefWidth="63.0" text="Back" />
+                  <Button fx:id="backButton" layoutX="468.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Back" />
                </children></AnchorPane>
       </content>
     </Tab>
