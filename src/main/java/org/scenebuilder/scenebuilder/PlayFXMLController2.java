@@ -180,33 +180,26 @@ public class PlayFXMLController2 {
     @FXML
     public void slideOut(MouseEvent event) {
         Label parent = (Label) event.getSource();
+        parent.toFront();
         ScrollPane tab;
         if (parent.getId().equals("buttonDecks")) {
-            parent.toFront();
             tab = decksPane;
         } else {
-            parent.toFront();
             tab = rngPane;
         }
-        TranslateTransition tt = new TranslateTransition(Duration.millis(1000), tab);
+        TranslateTransition tt = new TranslateTransition(Duration.millis(700), tab);
         tt.setOnFinished(e -> {
-            if (tt.getToX() == -495f) {
-                //System.out.println(tab.getLayoutX());
-                tab.setLayoutX(1240.8);
-                //System.out.println("Moved to -1235.8");
-                //System.out.println(tab.getLayoutX());
+            if (tt.getToX() == -355f) {
+                tab.setLayoutX(1100.8);
             } else {
                 tab.setTranslateX(0);
-                tab.setLayoutX(1535.8);
-                //System.out.println("Broke shit");
+                tab.setLayoutX(1495.8);
             }
         });
         if (tab.getTranslateX() == 0.0) {
-            tt.setToX(-495f);
-            //System.out.println("Translate X After: " + tab.getTranslateX());
+            tt.setToX(-355f);
         } else {
-            tt.setToX(495f);
-            //System.out.println("Move to the right");
+            tt.setToX(355f);
         }
         tt.play();
     }

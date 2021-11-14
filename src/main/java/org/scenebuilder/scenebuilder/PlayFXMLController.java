@@ -46,6 +46,7 @@ public class PlayFXMLController {
         playGameLabel.setText(activeGame.toString());
         playSetupLabel.setText(setupData.toString());
 
+
         initializeDeckDrawer(deckDrawer);
         initializeRNGDrawer(rngDrawer);
 

@@ -40,6 +40,11 @@
             <ImageView fx:id="playSettings" />
          </children>
       </Pane>
+      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ScrollPane>
       <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="75.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="24.0" />
@@ -48,17 +53,12 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ScrollPane fx:id="decksPane" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-355.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ScrollPane>
+      <ScrollPane fx:id="rngPane" layoutX="783.0" layoutY="325.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0" />
       <Label fx:id="buttonRNG" alignment="CENTER" contentDisplay="CENTER" layoutY="325.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="RNG" textFill="WHITE" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="rngPane" layoutY="325.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-355.0" />
       <HBox alignment="CENTER" prefHeight="168.0" prefWidth="923.0" style="-fx-border-color: black; -fx-background-color: DarkSeaGreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Label text="Inventory Space" textFill="WHITE">
