@@ -28,6 +28,8 @@ import editors.rule_editor_ui.blocks.PsetBlock;
 import editors.rule_editor_ui.blocks.GetBlock;
 import editors.rule_editor_ui.blocks.NotBlock;
 import editors.rule_editor_ui.blocks.BinOpBlock;
+import editors.rule_editor_ui.blocks.TileIndexBlock;
+import editors.rule_editor_ui.blocks.GetTileConnBlock;
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -87,5 +89,21 @@ public class RuleEditorUIController implements Initializable {
 
     op.setTopLeft(editorPane);
     editorPane.getChildren().addAll(op.getBlock());
+  }
+
+  @FXML
+  private void handleAddGetTileIndexBtn(ActionEvent event) {
+    TileIndexBlock tileIndex = new TileIndexBlock();
+
+    tileIndex.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(tileIndex.getBlock());
+  }
+
+  @FXML
+  private void handleAddGetTileConnBtn(ActionEvent event) {
+    GetTileConnBlock conn = new GetTileConnBlock();
+
+    conn.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(conn.getBlock());
   }
 }

@@ -8,18 +8,20 @@
 
 <SplitPane dividerPositions="0.2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editors.rule_editor_ui.controllers.RuleEditorUIController">
    <items>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="398.0" prefWidth="160.0">
          <children>
             <Label layoutX="35.0" layoutY="6.0" text="Controls">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="addPsetBtn" layoutX="20.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add pset" />
-            <Button fx:id="addRsetBtn" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add rset" />
-            <Button fx:id="addGetBtn" layoutX="20.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="78.0" text="Add get" />
-            <Button fx:id="addNotBtn" layoutX="20.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="78.0" text="Add not" />
-            <Button fx:id="addBinOpBtn" layoutX="20.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="78.0" text="Add bin op" />
+            <Button fx:id="addPsetBtn" layoutX="13.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add pset" />
+            <Button fx:id="addRsetBtn" layoutX="13.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add rset" />
+            <Button fx:id="addGetBtn" layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
+            <Button fx:id="addNotBtn" layoutX="13.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="92.0" text="Add not" />
+            <Button fx:id="addBinOpBtn" layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
+            <Button fx:id="addGetTileIndexBtn" layoutX="13.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
+            <Button fx:id="addGetTileConnBtn" layoutX="13.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
          </children></AnchorPane>
       <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
    </items>
