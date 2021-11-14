@@ -30,7 +30,7 @@ public class BasicApplication extends Application {
         ArrayList<DummyPlayer> players = new ArrayList<>();
         ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
         ArrayList<DummyRNG> rng = new ArrayList<>();
-        DummyGameBoard gameBoard1 = new DummyGameBoard("Game 1", "Circle", 1200, 800, 10, 10, tiles);
+        DummyGameBoard gameBoard1 = new DummyGameBoard("Game 1", "Circle", 800, 800, 10, 10, tiles);
         DummyGameBoard gameBoard2 = new DummyGameBoard("Game 2", "Rectangle", 1200, 800, 10, 10, tiles);
         DummyGameRules gameRules = new DummyGameRules();
         DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
