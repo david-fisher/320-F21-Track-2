@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import java.util.ArrayList;
 
 import objects.*;
 
@@ -28,6 +29,34 @@ public class GameObjectUIController {
     @FXML private ColorPicker dieColor;
     @FXML private ColorPicker diePipColor;
 
+    // Spinner tab
+    @FXML private TextField spinnerName;
+    @FXML private ColorPicker spinnerColor;
+    @FXML private TextField spinnerValue;
+
+    // Token tab
+    @FXML private TextField tokenName;
+    @FXML private ColorPicker tokenColor;
+    @FXML private TextField tokenValue;
+    @FXML private TextField tokenFilename;
+
+    // Timer tab
+    @FXML private TextField timerName;
+    @FXML private ColorPicker timerColor;
+    @FXML private TextField initialTime;
+    @FXML private TextField timerFilename;
+
+    // Category tab
+    @FXML private TextField categoryName;
+    @FXML private ColorPicker categoryColor;
+    @FXML private TextField categoryWeight;
+    @FXML private TextField categoryFilename;
+
+    // GamePiece tab
+    @FXML private TextField gamepieceName;
+    @FXML private ColorPicker gamepieceColor;
+    @FXML private TextField gamepieceWeight;
+    @FXML private TextField gamepieceFilename;
 
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList(new Card(), new Card());
@@ -45,29 +74,82 @@ public class GameObjectUIController {
         if (!(labelRes && iconRes && colorRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully populated card object!");
-            // For affirming the values have been set correctly
-            System.out.println(card.getColor().toString());
-            System.out.println(card.getLabel().toString());
-            System.out.println(card.getIcon().toString());
-            deckCards.addAll(card);
+            System.out.println("Successfully created new card: " + card.toString());
+            deckCards.add(card);
         }
     }
 
     @FXML private void saveDie(ActionEvent event) {
         Die die = new Die();
+        String dieNameString = dieName.getCharacters().toString();
+        int dieNumSides = Integer.ParseInt(dieNumSides.getCharacters().toString())
+        javafx.scene.paint.Color dieSideColor = dieColor.getValue();
+        javafx.scene.paint.Color diePipColor = pipColor.getValue();
+        java.awt.Color sideColor = new java.awt.Color((float)dieSideColor.getRed(),
+                (float)dieSideColor.getGreen(), (float)dieSideColor.getBlue());
+        java.awt.Color pipColor = new java.awt.Color((float)ddiePipColor.getRed(),
+                (float)diePipColor.getGreen(), (float)diePipColor.getBlue());
+        boolean nameRes = die.setTrait("name", dieNameString, false);
+        boolean numRes = die.setTrait("numSides", dieNumSides, false);
+        boolean colorRes = die.setTrait("sideColor", sideColor, false);
+        boolean pipRes = die.setTrait("pipColor", pipColor, false);
+        if (!(nameRes && numRes && colorRes && pipRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new die: " + die.toString());
+        }
     }
 
     @FXML private void populateCardList(Event event) {
-        System.out.println("Populating");
         deckCardList.setItems(deckCards);
         deckCardList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        deckDeckList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML private void addHighlighted(ActionEvent event) {
+        ObservableList<Integer> selectedCardIndices = deckCardList.getSelectionModel().getSelectedIndices();
+        ObservableList<Card> cards = deckCardList.getItems();
+        ObservableList<Card> deck = deckDeckList.getItems();
+        ArrayList<Card> removedCards = new ArrayList();
+
+        // For every card selected, add it to the deck list
+        for (Integer i: selectedCardIndices) {
+            Card c = cards.get(i);
+            deck.add(c);
+            removedCards.add(c);
+        }
+
+        // Then remove all the cards that are selected from the card list
+        for (int i = 0; i < removedCards.size(); i += 1) {
+            cards.remove(removedCards.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        deckCardList.setItems(cards);
+        deckDeckList.setItems(deck);
     }
 
     @FXML private void removeHighlighted(ActionEvent event) {
+        ObservableList<Integer> selectedCardIndices = deckDeckList.getSelectionModel().getSelectedIndices();
+        ObservableList<Card> cards = deckCardList.getItems();
+        ObservableList<Card> deck = deckDeckList.getItems();
+        ArrayList<Card> removedCards = new ArrayList();
+
+        // For every card selected, add it to the deck list
+        for (Integer i: selectedCardIndices) {
+            Card c = deck.get(i);
+            cards.add(c);
+            removedCards.add(c);
+        }
+
+        // Then remove all the cards that are selected from the card list
+        for (int i = 0; i < removedCards.size(); i += 1) {
+            deck.remove(removedCards.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        deckCardList.setItems(cards);
+        deckDeckList.setItems(deck);
     }
 
     @FXML private void saveDeck(ActionEvent event) {

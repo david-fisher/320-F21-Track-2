@@ -19,7 +19,6 @@ public class MainMenu extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         URL location = getClass().getResource("../../resources/MainMenuScreen.fxml");
-        System.out.println(location.toString());
         Parent root = (Parent)FXMLLoader.load(location);
         stage.setScene(new Scene(root));
         MainMenu.stage.show();

@@ -13,7 +13,6 @@ import editors.main_menu.MainMenu;
 public class MainMenuController {
     private void changeScene(String fxmlFilename) {
         URL location = getClass().getResource(fxmlFilename);
-        System.out.println(location.toString());
         try {
             Parent root = (Parent)FXMLLoader.load(location);
             MainMenu.stage.getScene().setRoot(root);
