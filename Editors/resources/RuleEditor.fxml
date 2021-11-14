@@ -18,6 +18,7 @@
             <Button fx:id="addPsetBtn" layoutX="20.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add pset" />
             <Button fx:id="addRsetBtn" layoutX="20.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="78.0" text="Add rset" />
             <Button fx:id="addGetBtn" layoutX="20.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="78.0" text="Add get" />
+            <Button fx:id="addNotBtn" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="78.0" text="Add not" />
          </children></AnchorPane>
       <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
    </items>

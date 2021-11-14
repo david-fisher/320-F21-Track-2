@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import editors.rule_editor_ui.blocks.RsetBlock;
 import editors.rule_editor_ui.blocks.PsetBlock;
 import editors.rule_editor_ui.blocks.GetBlock;
+import editors.rule_editor_ui.blocks.NotBlock;
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -69,5 +70,13 @@ public class RuleEditorUIController implements Initializable {
     get.setTopLeft(editorPane);
     //Add the stackpane to the editor pane
     editorPane.getChildren().addAll(get.getBlock());
+  }
+
+  @FXML
+  private void handleAddNotBtn(ActionEvent event) {
+    NotBlock not = new NotBlock();
+
+    not.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(not.getBlock());
   }
 }

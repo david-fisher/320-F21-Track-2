@@ -13,6 +13,7 @@ public class Block {
   final Color SILVER = Color.rgb(200,200,200);
   final Color GREY = Color.rgb(55,55,55);
   final Color WHITE = Color.rgb(255,255,255);
+  final Color BLUE = Color.rgb(0,180,255);
   final int HEADER_SIZE = 15;
 
   //Initialize block as a stackpane and make it draggable

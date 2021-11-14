@@ -54,6 +54,8 @@ public class PsetBlock extends Block {
     from.setFill(WHITE);
     TextField fromField = new TextField();
     fromField.setPrefColumnCount(10);
+    Rectangle ifIn = new Rectangle(19, 30, BLUE);
+    grid.add(ifIn, 0, 2);
     grid.add(from, 1, 2);
     grid.add(fromField, 2, 2);
 
