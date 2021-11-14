@@ -1,50 +1,66 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 public class DummyPlayer {
 
-    // object to store Player information
-    private String playerName;
-    private DummyGameToken playerToken;
+    private String playerID;
+
+    private Color color;
+    private ArrayList<DummyGameToken> gameTokens;
+    private DummyInventory inventory;
+
     private boolean isHuman;
 
-    public DummyPlayer(String playerName, DummyGameToken playerToken, boolean isHuman) {
-        this.playerName = playerName;
-        this.playerToken = playerToken;
+    public DummyPlayer(String playerID, Color color, ArrayList<DummyGameToken> gameTokens, DummyInventory inventory, boolean isHuman) {
+        this.playerID = playerID;
+        this.color = color;
+        this.gameTokens = gameTokens;
+        this.inventory = inventory;
         this.isHuman = isHuman;
     }
 
+    public DummyPlayer(String playerID, ArrayList<DummyGameToken> gameTokens, DummyInventory inventory, boolean isHuman) {
+        this.playerID = playerID;
+        this.gameTokens = gameTokens;
+        this.inventory = inventory;
+        this.isHuman = isHuman;
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+        this.color = getRandomColor();
     }
 
-    public void setPlayerToken(DummyGameToken playerToken) {
-        this.playerToken = playerToken;
+    // setters
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
-
+    public void setColor(Color color) { this.color = color; }
+    public void setGameTokens(ArrayList<DummyGameToken> gameTokens) { this.gameTokens = gameTokens; }
+    public void setInventory(DummyInventory inventory) { this.inventory = inventory; }
     public void setIsHuman(boolean isHuman) {
         this.isHuman = isHuman;
     }
 
+    // getters
+    public String getPlayerID() {
+        return this.playerID;
+    }
+    public Color getColor() { return this.color; }
+    public ArrayList<DummyGameToken> getGameTokens() { return this.gameTokens; }
+    public DummyInventory getInventory() { return this.inventory; }
+    public boolean getIsHuman() { return this.isHuman; }
 
-    public String getPlayerName() {
-        return playerName;
+    // modifiers
+    public Color getRandomColor(){
+        Random rand = new Random(System.currentTimeMillis());
+
+        int red = rand.nextInt(255);
+        int green = rand.nextInt(255);
+        int blue = rand.nextInt(255);
+
+        return Color.rgb(red, green, blue, .99);
     }
 
-    public DummyGameToken getPlayerToken() {
-        return playerToken;
-    }
-
-    public boolean getIsHuman() {
-        return isHuman;
-    }
-
-    @Override
-    public String toString() {
-        return "{ " +
-                "playerName = " + playerName +
-                ", playerToken = " + playerToken.toString() +
-                ", isHuman = " + isHuman +
-                " }";
-    }
 }

@@ -23,7 +23,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -59,7 +58,9 @@ public class SetupFXMLController {
 
         // For loop to create num_players player to the stack
         for(int i = 0; i< min_player; i++) {
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), new DummyGameToken("Token " + (i+1), "Square"), true);
+            ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
+            gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1)), true);
 //            playerStack.add(player);
             num_players+=1;
             playerHashMap.put(num_players, player);
@@ -75,7 +76,10 @@ public class SetupFXMLController {
         // Add player to the stack
         if (num_players < 8) { // todo read value from game settings
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), new DummyGameToken("Token " + (num_players+1), "Square"), true);
+            ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
+            gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
+
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory(), true);
 
             num_players += 1;
             numPlayersTextField.setText(Integer.toString(num_players));
@@ -136,7 +140,7 @@ public class SetupFXMLController {
 
         TextField playerField = new TextField();
         playerField.setAlignment(Pos.CENTER);
-        playerField.setText(hboxPlayer.getPlayerName());
+        playerField.setText(hboxPlayer.getPlayerID());
         playerField.setFont(new Font(16));
         playerField.setStyle("-fx-font-family: serif;");
         playerField.setPrefWidth(114);
@@ -208,7 +212,7 @@ public class SetupFXMLController {
             for (Node t: ((HBox) h).getChildren()) {
                 DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
                 if(t instanceof TextField)
-                    hboxPlayer.setPlayerName(((TextField) t).getText());}
+                    hboxPlayer.setPlayerID(((TextField) t).getText());}
         }
 
         // Move all the players from the hashmaps to an array list
