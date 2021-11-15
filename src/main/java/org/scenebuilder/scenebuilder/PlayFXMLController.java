@@ -53,6 +53,8 @@ public class PlayFXMLController {
 
     @FXML
     public void initialize() {
+
+
         // load relevant data
         setupData = BasicApplication.getSetupData();
         activeGame = BasicApplication.getSelectedGame();
@@ -171,8 +173,6 @@ public class PlayFXMLController {
         // draw piece at its location
         // set other info..?
     }
-
-
 
     //A method to add all the decks to the deck slider
     private static void initializeDeckDrawer(ArrayList<DummyDeck> decks, ScrollPane decksPane) {
