@@ -5,6 +5,14 @@
 package application;
 
 import java.awt.Color;
+
+/**
+ * description of class Tile here.
+ *
+ * @author William Ton
+ * @version 11/15/21 - 3pm
+ */
+
 import java.util.*;
 
 public class Tile extends GameObject 
