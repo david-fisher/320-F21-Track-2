@@ -55,7 +55,7 @@ public class GameObjectUIController {
     // GamePiece tab
     @FXML private TextField gamepieceName;
     @FXML private ColorPicker gamepieceColor;
-    @FXML private TextField gamepieceWeight;
+    @FXML private TextField gamepieceLocation;
     @FXML private TextField gamepieceFilename;
 
     public GameObjectUIController() {
@@ -97,6 +97,33 @@ public class GameObjectUIController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new die: " + dieNameString);
+        }
+    }
+
+    @FXML private void saveSpinner(ActionEvent event) {
+        // Spinner is ambiguous, is it worth changing the name of the class?
+        objects.Spinner spinner = new objects.Spinner();
+    }
+
+    @FXML private void saveGamepiece(ActionEvent event) {
+        Gamepiece piece = new Gamepiece();
+        String pieceNameString = gamepieceName.getCharacters().toString();
+        String textureFilenameString = textureFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = gamepieceColor.getValue();
+
+        // TODO: Should I get the Tile itself, and if so, how?
+        String locationString = gamepieceLocation.getCharacters().toString();
+
+        java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(),
+                (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
+        boolean labelRes = piece.setTrait("label", pieceNameString, false);
+        boolean iconRes = piece.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = piece.setTrait("color", awtColor, false);
+        boolean locRes = piece.setTrait("location", locationString, false);
+        if (!(labelRes && iconRes && colorRes && locRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Gamepiece: " + piece.toString());
         }
     }
 
