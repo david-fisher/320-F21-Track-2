@@ -14,7 +14,7 @@ public class Spinner extends GameObject
 	private static int count = 0;
 	  
     // instance variables
-    private ArrayList<Category> categories;
+    private List<Category> categories;
     private int numCategories;
 
     /**

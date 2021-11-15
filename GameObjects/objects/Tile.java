@@ -11,7 +11,7 @@ import java.util.*;
 public class Tile extends GameObject
 {
     // instance variables - replace the example below with your own
-	private ArrayList<Tile> connections;
+	private List<Tile> connections;
     private static int count = 0;
 
     /**

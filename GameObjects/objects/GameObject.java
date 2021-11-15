@@ -3,13 +3,13 @@ package objects;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public abstract class GameObject extends Savable {
   
   protected HashMap<String, Object> traits;
   
-  private static ArrayList<String> labels = new ArrayList<String>(256);
+  private static List<String> labels = new ArrayList<String>(256);
 
   // default constructor
   public GameObject() {
