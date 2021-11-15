@@ -44,7 +44,6 @@ public class Controller {
     @FXML
     private Button objectEditor;
     
-    
     @FXML
     //refers to the save button
     public void chooseSaveType(ActionEvent event) throws IOException {//this currently switches the scene, we want to create a new one
@@ -61,6 +60,11 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
+    
+//	  TODO: need to make a Rule Edit button:
+//    we are simply display the rules, we would need to have a button
+//    linked to the rule editor so the user can edit the rules there
+    
     
     //for the test button
     public void testGame(ActionEvent event) {
