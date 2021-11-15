@@ -1,3 +1,7 @@
+//2nd way to implement Tile class. For now it's the safer way
+//because it's compatible with Odyssey/Game Object team's design flow
+//Currently modifying some attributing to be work with drag-and-drop
+
 package application;
 
 import java.awt.Color;
