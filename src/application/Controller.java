@@ -9,7 +9,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -80,13 +83,19 @@ public class Controller {
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {//This currently quits out of the system. We want it to quit the editor.
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("ConfirmExit.fxml"));
-        Scene scene = new Scene(root.load(), 300, 200);
-        Stage stage = new Stage();
-        stage.setTitle("Confirm Exit");
-        stage.setScene(scene);
-        stage.show();
+    	Alert exit = new Alert(AlertType.CONFIRMATION);
+    	exit.setTitle("Exit?");
+    	exit.setHeaderText("Are you sure you want to exit? Make sure any unsaved changes are saved!");
+    	if(exit.showAndWait().get() == ButtonType.OK)
+    	{
+ 
+    		Parent editor = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
+    		Scene editorScene = new Scene(editor);
+    		
+    		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    		window.setScene(editorScene);
+    		window.show();
+    	}
     }
 
     Draggable draggable = new Draggable();
