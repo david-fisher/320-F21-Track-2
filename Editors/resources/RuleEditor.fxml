@@ -22,6 +22,7 @@
             <Button fx:id="addBinOpBtn" layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
             <Button fx:id="addGetTileIndexBtn" layoutX="13.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
             <Button fx:id="addGetTileConnBtn" layoutX="13.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
+            <Button fx:id="addCondition" layoutX="13.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
          </children></AnchorPane>
       <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
    </items>

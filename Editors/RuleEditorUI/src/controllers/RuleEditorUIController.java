@@ -30,6 +30,8 @@ import editors.rule_editor_ui.blocks.NotBlock;
 import editors.rule_editor_ui.blocks.BinOpBlock;
 import editors.rule_editor_ui.blocks.TileIndexBlock;
 import editors.rule_editor_ui.blocks.GetTileConnBlock;
+import editors.rule_editor_ui.blocks.ConditionBlock;
+
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -105,5 +107,13 @@ public class RuleEditorUIController implements Initializable {
 
     conn.setTopLeft(editorPane);
     editorPane.getChildren().addAll(conn.getBlock());
+  }
+
+  @FXML
+  private void handleAddCondition(ActionEvent event) {
+    ConditionBlock condtBlock = new ConditionBlock();
+
+    condtBlock.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(condtBlock.getBlock());
   }
 }
