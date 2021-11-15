@@ -1,4 +1,5 @@
 package org.scenebuilder.scenebuilder;
+import javafx.geometry.Insets;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -17,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.*;
@@ -175,14 +178,14 @@ public class PlayFXMLController {
     private static void initializeDeckDrawer(ArrayList<DummyDeck> decks, ScrollPane decksPane) {
 
         HBox container = new HBox();
-        container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
-
+        container.setSpacing(-10);
         decks.forEach(d -> {
             double width = d.getWidth() == 0 ? 100 : d.getWidth();
-            double height = d.getHeight() == 0 ? 200 : d.getHeight();
+            double height = d.getHeight() == 0 ? 170 : d.getHeight();
             Rectangle deck = new Rectangle(width, height);
             deck.setUserData(d);
+
             if(d.getIcon() != null) {
                 deck.setFill(new ImagePattern(new Image(d.getIcon())));
             } else {
@@ -192,7 +195,7 @@ public class PlayFXMLController {
                 //Open this deck if you can // todo
             });
             container.getChildren().addAll(deck);
-
+            container.setMargin(deck, new Insets(10, 10, 20, 10));
         });
         decksPane.setContent(container);
         decksPane.setStyle("-fx-border-color: black");

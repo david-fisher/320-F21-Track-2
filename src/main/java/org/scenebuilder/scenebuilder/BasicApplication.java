@@ -61,8 +61,14 @@ public class BasicApplication extends Application {
         for(int i = 0; i < 52; ++i) {
             cards.add(new DummyCard("Card " + i));
         }
-        DummyDeck deck = new DummyDeck("Deck 1", cards);
-        decks.add(deck);
+        DummyDeck deck1 = new DummyDeck("Deck 1", cards);
+        DummyDeck deck2 = new DummyDeck("Deck 2", cards);
+        DummyDeck deck3 = new DummyDeck("Deck 3", cards);
+        DummyDeck deck4 = new DummyDeck("Deck 4", cards);
+        decks.add(deck1);
+        decks.add(deck2);
+        decks.add(deck3);
+        decks.add(deck4);
 
         ArrayList<DummyRNG> rng = new ArrayList<>();
 
