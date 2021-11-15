@@ -31,6 +31,7 @@ import editors.rule_editor_ui.blocks.BinOpBlock;
 import editors.rule_editor_ui.blocks.TileIndexBlock;
 import editors.rule_editor_ui.blocks.GetTileConnBlock;
 import editors.rule_editor_ui.blocks.ConditionBlock;
+import editors.rule_editor_ui.blocks.TileMoveBlock;
 
 
 public class RuleEditorUIController implements Initializable {
@@ -115,5 +116,13 @@ public class RuleEditorUIController implements Initializable {
 
     condtBlock.setTopLeft(editorPane);
     editorPane.getChildren().addAll(condtBlock.getBlock());
+  }
+
+  @FXML
+  private void handleAddTileMoveBtn(ActionEvent event) {
+    TileMoveBlock tileMove = new TileMoveBlock();
+
+    tileMove.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(tileMove.getBlock());
   }
 }

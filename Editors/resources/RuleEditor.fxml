@@ -15,15 +15,16 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="addPsetBtn" layoutX="13.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add pset" />
-            <Button fx:id="addRsetBtn" layoutX="13.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add rset" />
-            <Button fx:id="addGetBtn" layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
-            <Button fx:id="addNotBtn" layoutX="13.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="92.0" text="Add not" />
-            <Button fx:id="addBinOpBtn" layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
-            <Button fx:id="addGetTileIndexBtn" layoutX="13.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
-            <Button fx:id="addGetTileConnBtn" layoutX="13.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
-            <Button fx:id="addCondition" layoutX="13.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
+            <Button fx:id="addPsetBtn" layoutX="12.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add pset" />
+            <Button fx:id="addRsetBtn" layoutX="12.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="92.0" text="Add rset" />
+            <Button fx:id="addGetBtn" layoutX="12.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
+            <Button fx:id="addNotBtn" layoutX="12.0" layoutY="157.0" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="92.0" text="Add not" />
+            <Button fx:id="addBinOpBtn" layoutX="12.0" layoutY="199.0" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
+            <Button fx:id="addGetTileIndexBtn" layoutX="12.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
+            <Button fx:id="addGetTileConnBtn" layoutX="12.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
+            <Button fx:id="addCondition" layoutX="12.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
+            <Button fx:id="addTileMoveBtn" layoutX="12.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleAddTileMoveBtn" prefHeight="25.0" prefWidth="92.0" text="Add tile move" />
          </children></AnchorPane>
-      <AnchorPane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="editorPane" prefHeight="600.0" prefWidth="800.0" />
    </items>
 </SplitPane>
