@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
+	<classpathentry kind="src" path="GameObjects"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/bhavs/Downloads/snakeyaml-1.29.jar"/>
-	<classpathentry kind="output" path=""/>
+	<classpathentry kind="lib" path="J:/Cs 320/320-F21-Track-2/lib/snakeyaml-1.29.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
