@@ -53,6 +53,11 @@ public class DummyPlayer {
     public boolean getIsHuman() { return this.isHuman; }
 
     // modifiers
+    public void addToken(DummyGameToken token) { this.gameTokens.add(token); }
+    public void removeToken(DummyGameToken token) { this.gameTokens.remove(token); }
+    public void removeToken(int tokenIndex) { this.gameTokens.remove(tokenIndex); }
+    public void setToken(int tokenIndex, DummyGameToken token) { this.gameTokens.set(tokenIndex, token); }
+
     public Color getRandomColor(){
         Random rand = new Random(System.currentTimeMillis());
 

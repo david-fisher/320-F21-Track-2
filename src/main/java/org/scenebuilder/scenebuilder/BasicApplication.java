@@ -6,6 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -22,27 +23,17 @@ public class BasicApplication extends Application {
 
 
     public static void loadNewGames() {
+
         // do stuff to get list of playable games (on start) from Persistent Data team
+        // todo
 
-        // filler for now
-        ArrayList<DummyTile> tiles = new ArrayList<>();
-        ArrayList<DummyDeck> decks = new ArrayList<>();
-        ArrayList<DummyPlayer> players = new ArrayList<>();
-        ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
-        ArrayList<DummyRNG> rng = new ArrayList<>();
-        DummyGameBoard gameBoard1 = new DummyGameBoard("Game 1", "Circle", 800, 800, 10, 10, tiles);
-        DummyGameBoard gameBoard2 = new DummyGameBoard("Game 2", "Rectangle", 1200, 800, 10, 10, tiles);
-        DummyGameRules gameRules = new DummyGameRules();
-        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
-
-        DummyGame game1 = new DummyGame(gameBoard1, gameRules, gamestate);
-        DummyGame game2 = new DummyGame(gameBoard2, gameRules, gamestate);
+        DummyGame game1 = createDummyGame("Game 1", "Rectangle");
+        DummyGame game2 = createDummyGame("Game 2", "Circle");
 
         newGames.clear();
         newGames.add(game1);
         newGames.add(game2);
     }
-
     public static void loadSavedGames() {
         // do stuff to get list of saved games
 
@@ -64,33 +55,45 @@ public class BasicApplication extends Application {
         savedGames.add(game1);
         savedGames.add(game2);
     }
+    private static DummyGame createDummyGame(String gameName, String gameShape) {
 
+        ArrayList<DummyPlayer> players = new ArrayList<>();
+        DummyPlayer player1 = new DummyPlayer("Player 1", Color.AQUAMARINE, new ArrayList<DummyGameToken>(), new DummyInventory("Inventory 1"), true);
 
+        ArrayList<DummyTile> tiles = new ArrayList<>();
+        ArrayList<DummyDeck> decks = new ArrayList<>();
+        ArrayList<DummyRNG> rng = new ArrayList<>();
+        ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
+        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
+
+        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 800, 10, 10, tiles);
+
+        DummyGameRules gameRules = new DummyGameRules();
+
+        return new DummyGame(gameBoard, gameRules, gamestate);
+    }
+
+    // setters
     public static void setSelectedGame(DummyGame game) {
         selectedGame = game;
     }
-
     public static void setSetupData(SetupData data) {
         setupData = data;
     }
 
-
+    // getters
     public static ArrayList<DummyGame> getNewGames() {
         return newGames;
     }
-
     public static ArrayList<DummyGame> getSavedGames() {
         return savedGames;
     }
-
     public static DummyGame getSelectedGame() {
         return selectedGame;
     }
-
     public static SetupData getSetupData() {
         return setupData;
     }
-
 
     @Override
     public void start(Stage stage) throws Exception {
