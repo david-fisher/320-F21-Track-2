@@ -16,6 +16,15 @@ public class DummyDeck {
     private int xPos;
     private int yPos;
 
+    public DummyDeck(String deckID, ArrayList<DummyCard> cards) {
+        this.deckID = deckID;
+        this.cards = cards;
+    }
+    public DummyDeck(String deckID, String icon, ArrayList<DummyCard> cards) {
+        this.deckID = deckID;
+        this.icon = icon;
+        this.cards = cards;
+    }
     public DummyDeck(String deckID, String icon, ArrayList<DummyCard> cards, int width, int height, int xPos, int yPos) {
         this.deckID = deckID;
         this.icon = icon;

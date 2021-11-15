@@ -179,18 +179,24 @@ public class PlayFXMLController {
         container.setAlignment(Pos.CENTER);
 
         decks.forEach(d -> {
-            double width = d.getWidth();
-            double height = d.getHeight();
+            double width = d.getWidth() == 0 ? 100 : d.getWidth();
+            double height = d.getHeight() == 0 ? 200 : d.getHeight();
             Rectangle deck = new Rectangle(width, height);
             deck.setUserData(d);
-            deck.setFill(new ImagePattern(new Image(d.getIcon())));
+            if(d.getIcon() != null) {
+                deck.setFill(new ImagePattern(new Image(d.getIcon())));
+            } else {
+                deck.setFill(Color.RED);
+            }
             deck.setOnMouseClicked(e -> {
-                //Open this deck if you can
+                //Open this deck if you can // todo
             });
             container.getChildren().addAll(deck);
 
         });
         decksPane.setContent(container);
+        decksPane.setStyle("-fx-border-color: black");
+        //decksPane.toFront();
     }
 
     public static void initializeRNGDrawer(ArrayList<Die> dice, ArrayList<Spinner> spinners, ScrollPane rngPane) {
@@ -248,7 +254,7 @@ public class PlayFXMLController {
     @FXML
     public void slideOut(MouseEvent event) {
         Label parent = (Label) event.getSource();
-        parent.toFront();
+        //parent.toFront();
         ScrollPane tab;
         if (parent.getId().equals("buttonDecks")) {
             tab = decksPane;

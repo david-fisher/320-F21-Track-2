@@ -1,11 +1,14 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 public class DummyTile {
 
     private String tileID;
     private String shape;
+    private Color color;
 
     private double width;
     private double height;
@@ -15,9 +18,10 @@ public class DummyTile {
 
     private ArrayList<DummyTile> connectionsTo;
 
-    public DummyTile(String tileID, String shape, double width, double height, double xPos, double yPos, ArrayList<DummyTile> connectionsTo) {
+    public DummyTile(String tileID, String shape, Color color, double width, double height, double xPos, double yPos, ArrayList<DummyTile> connectionsTo) {
         this.tileID = tileID;
         this.shape = shape;
+        this.color = color;
         this.width = width;
         this.height = height;
         this.xPos = xPos;
@@ -32,6 +36,7 @@ public class DummyTile {
     public void setShape(String shape) {
         this.shape = shape;
     }
+    public void setColor(Color color) { this.color = color; }
     public void setWidth(double width) {
         this.width = width;
     }
@@ -45,6 +50,7 @@ public class DummyTile {
     // getters
     public String getTileID() { return this.tileID; }
     public String getShape() { return this.shape; }
+    public Color getColor() { return this.color; }
     public double getWidth() { return this.width; }
     public double getHeight() { return this.height; }
     public double getXPos() { return this.xPos; }
