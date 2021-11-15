@@ -11,6 +11,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.objects.Tile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class BasicApplication extends Application {
 
     private static DummyGame selectedGame;
     private static SetupData setupData;
-    
+
     public static void loadNewGames() {
 
         // do stuff to get list of playable games (on start) from Persistent Data team
@@ -104,28 +105,44 @@ public class BasicApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        // load fxml file (which specifies the controller)
-        Parent root = FXMLLoader.load(getClass().getResource("mainFXML.fxml"));
+        if(true) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("gridPanePlayFXML.fxml"));
+                Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+                double width = screenDimensions.getWidth();
+                double height = screenDimensions.getHeight();
 
-        // create new instance of the controller class
-        // inject all fx:id tagged objects from fxml file
-        // and marked with @FXML annotation in controller
+                Scene scene = new Scene(root, width, height);
+                stage.setScene(scene);
+                scene.getRoot().setStyle("-fx-font-family: 'serif'");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // load fxml file (which specifies the controller)
+            Parent root = FXMLLoader.load(getClass().getResource("mainFXML.fxml"));
 
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
+            // create new instance of the controller class
+            // inject all fx:id tagged objects from fxml file
+            // and marked with @FXML annotation in controller
 
-        Scene scene = new Scene(root, width, height);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
-        stage.setScene(scene);
-        stage.setMaximized(true);
+            // full screen dimensions
+            Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+            double width = screenDimensions.getWidth();
+            double height = screenDimensions.getHeight();
 
-        System.out.println("My Screen Dimensions:");
-        System.out.println(width);
-        System.out.println(height);
+            Scene scene = new Scene(root, width, height);
+            scene.getRoot().setStyle("-fx-font-family: 'serif'");
+            stage.setScene(scene);
+            stage.setMaximized(true);
 
-        stage.show();
+            System.out.println("My Screen Dimensions:");
+            System.out.println(width);
+            System.out.println(height);
+
+            stage.show();
+        }
     }
 
     public static void main(String[] args) {
