@@ -69,17 +69,24 @@ public class PlayFXMLController {
         DummyGameBoard gameBoard = game.getGameBoard();
         DummyGamestate gameState = game.getInitialGamestate();
 
-        AnchorPane boardPane = new AnchorPane();
-        boardPane.setPrefHeight(gameBoard.getHeight());
-        boardPane.setPrefWidth(gameBoard.getWidth());
-        playParent.getChildren().add(boardPane);
-
         Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
         double playWidth = screenDimensions.getWidth();
         double playHeight = screenDimensions.getHeight();
 
-        playParent.setLeftAnchor(boardPane, (playWidth - gameBoard.getWidth() - 140)/2);
-        playParent.setTopAnchor(boardPane, (playHeight - gameBoard.getHeight() - 168)/2);
+        AnchorPane boardPane = new AnchorPane();
+
+        double boardWidth = (playWidth - 140) > gameBoard.getWidth() ? gameBoard.getWidth() : (playWidth - 140);
+        double boardHeight = (playHeight - 188) > gameBoard.getHeight() ? gameBoard.getHeight() : (playHeight - 188);
+        //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
+        boardPane.setPrefHeight(boardHeight);
+        boardPane.setPrefWidth(boardWidth);
+//        boardPane.setMaxHeight(playHeight - 188);
+//        boardPane.setMaxWidth(playWidth - 160);
+
+        playParent.getChildren().add(boardPane);
+
+        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth)/2);
+        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 168)/2);
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane);
@@ -93,8 +100,8 @@ public class PlayFXMLController {
 
     private void initBoard(DummyGameBoard gameBoard, AnchorPane boardPane) {
         Shape board;
-        double width = gameBoard.getWidth();
-        double height = gameBoard.getHeight();
+        double width = boardPane.getPrefWidth();
+        double height = boardPane.getPrefHeight();
 
         if (gameBoard.getShape().equals("Rectangle")) {
             board = new Rectangle(width, height);
@@ -126,9 +133,9 @@ public class PlayFXMLController {
                 tile = new Circle(width / 2);
             }
             tile.setUserData(t);
+            boardPane.getChildren().addAll(tile);
             tile.setLayoutX(t.getXPos());
             tile.setLayoutY(t.getYPos());
-            boardPane.getChildren().addAll(tile);
         });
         // for each tile
         // create tile

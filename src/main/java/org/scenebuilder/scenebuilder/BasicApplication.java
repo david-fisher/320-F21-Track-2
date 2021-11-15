@@ -111,7 +111,7 @@ public class BasicApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        if(true) {
+        if(false) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("gridPanePlayFXML.fxml"));
                 Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
