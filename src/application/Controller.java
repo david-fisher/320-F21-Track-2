@@ -5,14 +5,13 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebEngine;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -25,6 +24,9 @@ public class Controller {
 
     @FXML
     private Button exitButton;
+    
+    @FXML
+    private Button helpButton;
     
     @FXML
     private AnchorPane shapeCanvas;
@@ -83,19 +85,25 @@ public class Controller {
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {//This currently quits out of the system. We want it to quit the editor.
-    	Alert exit = new Alert(AlertType.CONFIRMATION);
-    	exit.setTitle("Exit?");
-    	exit.setHeaderText("Are you sure you want to exit? Make sure any unsaved changes are saved!");
-    	if(exit.showAndWait().get() == ButtonType.OK)
-    	{
- 
-    		Parent editor = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
-    		Scene editorScene = new Scene(editor);
-    		
-    		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    		window.setScene(editorScene);
-    		window.show();
-    	}
+        FXMLLoader root = new FXMLLoader();
+        root.setLocation(getClass().getResource("ConfirmExit.fxml"));
+        Scene scene = new Scene(root.load(), 300, 200);
+        Stage stage = new Stage();
+        stage.setTitle("Confirm Exit");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    void openHelp(ActionEvent event) {
+    	WebView webView = new WebView();
+    	WebEngine webEngine = webView.getEngine();
+    	webEngine.load( getClass().getResource("helpdoc.html").toString());
+    	Scene scene = new Scene(webView,600,600);
+    	Stage stage = new Stage();
+    	stage.setTitle("Help Document");
+        stage.setScene(scene);
+        stage.show();
     }
 
     Draggable draggable = new Draggable();
