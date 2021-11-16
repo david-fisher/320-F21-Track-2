@@ -112,4 +112,8 @@ public abstract class GameObject extends Savable {
 	   return (Color)this.getTrait("color");
  }
  
+ public String toString() {
+	 return getLabel() ;
+ }
+ 
 }
