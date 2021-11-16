@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,6 +49,10 @@ public class Controller {
     
     @FXML
     private Button objectEditor;
+    
+    //group root to store all the children shapes/tiles
+    @FXML
+    private Group root = new Group();
     
     @FXML
     //refers to the save button
@@ -111,6 +116,12 @@ public class Controller {
     @FXML
     public void initialize() {
     	exitButton.setCursor(Cursor.HAND);
+    }
+    
+    //TODO Placeholder for adding shape to group root
+    @FXML
+    public void allTiles() {
+    	root.getChildren().add(genCircleButton);
     }
     
     @FXML
