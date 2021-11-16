@@ -122,13 +122,12 @@ public class PlayFXMLController {
     }
 
     private void initTiles(ArrayList<DummyTile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {
-        double widthScale = Math.pow(0.999, gameBoard.getWidth() - boardPane.getPrefWidth());
-        double heightScale = Math.pow(0.999, gameBoard.getHeight() - boardPane.getPrefHeight());
-        double scale = widthScale > heightScale ? heightScale : widthScale;
+        double widthScale = gameBoard.getWidth() / boardPane.getPrefWidth();
+        double heightScale = gameBoard.getHeight() / boardPane.getPrefHeight();
         tiles.forEach(t -> {
             Shape tile;
-            double width = t.getWidth() * scale;
-            double height = t.getHeight() * scale;
+            double width = t.getWidth() * widthScale;
+            double height = t.getHeight() * heightScale;
 
             if (t.getShape().equals("Rectangle")) {
                 tile = new Rectangle(width, height);
