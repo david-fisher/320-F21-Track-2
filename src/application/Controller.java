@@ -117,6 +117,11 @@ public class Controller {
     @FXML
     public void initialize() {
     	exitButton.setCursor(Cursor.HAND);
+    	helpButton.setCursor(Cursor.HAND);
+    	genCircleButton.setCursor(Cursor.HAND);
+    	genSquareButton.setCursor(Cursor.HAND);
+    	saveButton.setCursor(Cursor.HAND);
+    	testButton.setCursor(Cursor.HAND);
     }
     
     //TODO Placeholder for adding shape to group root
