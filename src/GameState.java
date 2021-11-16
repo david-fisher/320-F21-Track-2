@@ -22,6 +22,8 @@ public class GameState {
 
     public Map<String, GameObject> registers;
 
+    public ArrayList<GameObject> buttons;
+
     public GameState() {
         gameObjects = new ArrayList<GameObject>();
         registers = new HashMap<String, GameObject>();
