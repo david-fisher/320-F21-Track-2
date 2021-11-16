@@ -37,7 +37,9 @@ public class GameObjectUIController {
     // Spinner tab
     @FXML private TextField spinnerName;
     @FXML private ColorPicker spinnerColor;
-    @FXML private TextField spinnerValue;
+    @FXML private TextField spinnerFilename;
+    @FXML private TextField spinnerNumCategories;
+    private ObservableList<Category> spinnerCategories;
 
     // Token tab
     @FXML private TextField tokenName;
@@ -116,9 +118,11 @@ public class GameObjectUIController {
         }
     }
 
+
     @FXML private void saveSpinner(ActionEvent event) {
         // Spinner is ambiguous, is it worth changing the name of the class?
         objects.Spinner spinner = new objects.Spinner();
+        
     }
 
     @FXML private void saveGamepiece(ActionEvent event) {
@@ -127,19 +131,20 @@ public class GameObjectUIController {
         String textureFilenameString = textureFilename.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = gamepieceColor.getValue();
 
-        // TODO: Should I get the Tile itself, and if so, how?
-        String locationString = gamepieceLocation.getCharacters().toString();
+        // TODO: This is just a dummy tile as of now
+        Tile tile = new Tile();
+        Tile location = tile;
 
         java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(),
                 (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
         boolean labelRes = piece.setTrait("label", pieceNameString, false);
         boolean iconRes = piece.setTrait("icon", textureFilenameString, false);
         boolean colorRes = piece.setTrait("color", awtColor, false);
-        boolean locRes = piece.setTrait("location", locationString, false);
+        boolean locRes = piece.setTrait("location", tile, false);
         if (!(labelRes && iconRes && colorRes && locRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new Gamepiece: " + piece.toString());
+            System.out.println("Successfully created new Gamepiece: " + pieceNameString);
         }
     }
 
