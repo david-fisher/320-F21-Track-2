@@ -112,6 +112,7 @@ public class Controller {
     }
 
     Draggable draggable = new Draggable();
+    Rightclickable rightclickable = new Rightclickable();
     
     @FXML
     public void initialize() {
@@ -130,6 +131,7 @@ public class Controller {
     	c = new Circle(312, 300, 30, Color.BLACK);
     	shapeCanvas.getChildren().add(c);
     	draggable.makeDraggable(c);
+    	rightclickable.makeRightClickable(c, shapeCanvas);
     }
     
     @FXML
@@ -140,6 +142,7 @@ public class Controller {
     	r.setY(300);
     	shapeCanvas.getChildren().add(r);
     	draggable.makeDraggable(r);
+    	rightclickable.makeRightClickable(r, shapeCanvas);
 
     }
     
