@@ -30,8 +30,8 @@
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
-                  <Button fx:id="doneButton" layoutX="468.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveCard" prefHeight="25.0" prefWidth="63.0" text="Done" />
-                  <Button fx:id="cancelButton" layoutX="468.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Cancel" />
+                  <Button fx:id="doneButton" layoutX="468.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveCard" prefWidth="62.0" text="Done" />
+                  <Button fx:id="cancelButton" layoutX="468.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -43,33 +43,15 @@
                   <Text layoutX="324.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of sides" />
                   <Text layoutX="116.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
                   <Text layoutX="333.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pip color" />
-                  <TextField layoutX="98.0" layoutY="102.0" promptText="MyName" />
-                  <TextField layoutX="324.0" layoutY="102.0" promptText="6" />
-                  <ColorPicker layoutX="111.0" layoutY="210.0" />
-                  <ColorPicker editable="true" layoutX="333.0" layoutY="210.0" promptText="Color of pips" />
-                  <Button layoutX="487.0" layoutY="261.0" mnemonicParsing="false" onAction="#saveDie" prefWidth="62.0" text="Done" />
-                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" text="Cancel" />
+                  <TextField fx:id="dieName" layoutX="98.0" layoutY="102.0" promptText="MyName" />
+                  <TextField fx:id="dieNumSides" layoutX="324.0" layoutY="102.0" promptText="6" />
+                  <ColorPicker fx:id="dieColor" layoutX="111.0" layoutY="210.0" />
+                  <ColorPicker fx:id="diePipColor" editable="true" layoutX="333.0" layoutY="210.0" promptText="Color of pips" />
+                  <Button fx:id="dieDoneButton" layoutX="487.0" layoutY="261.0" mnemonicParsing="false" onAction="#saveDie" prefWidth="62.0" text="Done" />
+                  <Button fx:id="dieCancelButton" layoutX="487.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab text="Spinner">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Text layoutX="91.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                  <Text layoutX="91.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
-                  <Text layoutX="94.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value" />
-                  <Text layoutX="374.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spinner elements" />
-                  <TextField layoutX="91.0" layoutY="106.0" promptText="MyName" />
-                  <ColorPicker layoutX="91.0" layoutY="181.0" />
-                  <TextField layoutX="91.0" layoutY="259.0" promptText="10" />
-                  <ListView layoutX="331.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Button layoutX="343.0" layoutY="306.0" mnemonicParsing="false" prefWidth="62.0" text="Done" />
-                  <Button layoutX="457.0" layoutY="306.0" mnemonicParsing="false" text="Cancel" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
       <Tab fx:id="deckTab" onSelectionChanged="#populateCardList" text="Deck">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -81,7 +63,7 @@
                   <Button fx:id="deckAddButton" layoutX="400.0" layoutY="301.0" mnemonicParsing="false" onAction="#addHighlighted" text="+" />
                   <Button fx:id="deckRemoveButton" layoutX="164.0" layoutY="301.0" mnemonicParsing="false" onAction="#removeHighlighted" prefWidth="28.8" text="-" />
                   <Button layoutX="483.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveDeck" prefWidth="62.0" text="Done" />
-                  <Button layoutX="48.0" layoutY="313.0" mnemonicParsing="false" text="Cancel" />
+                  <Button layoutX="48.0" layoutY="313.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                </children>
             </AnchorPane>
          </content>
@@ -98,7 +80,7 @@
                   <TextField layoutX="324.0" layoutY="102.0" promptText="0" />
                   <ColorPicker layoutX="95.0" layoutY="210.0" />
                   <Button layoutX="487.0" layoutY="261.0" mnemonicParsing="false" prefWidth="62.0" text="Done" />
-                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" text="Cancel" />
+                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                   <TextField fx:id="textureFilename1" layoutX="324.0" layoutY="210.0" promptText="Filename" />
                </children>
             </AnchorPane>
@@ -112,11 +94,11 @@
                   <Text layoutX="324.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Time" />
                   <Text layoutX="95.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
                   <Text layoutX="324.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                  <TextField layoutX="95.0" layoutY="102.0" promptText="MyName" AnchorPane.rightAnchor="345.5" />
+                  <TextField layoutX="95.0" layoutY="102.0" promptText="MyName" />
                   <TextField layoutX="324.0" layoutY="102.0" promptText="MM:SS" />
                   <ColorPicker layoutX="95.0" layoutY="210.0" />
                   <Button layoutX="487.0" layoutY="261.0" mnemonicParsing="false" prefWidth="62.0" text="Done" />
-                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" text="Cancel" />
+                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                   <TextField fx:id="textureFilename11" layoutX="324.0" layoutY="210.0" promptText="Filename" />
                </children>
             </AnchorPane>
@@ -134,7 +116,7 @@
                   <TextField layoutX="324.0" layoutY="102.0" promptText="0.0" />
                   <ColorPicker layoutX="95.0" layoutY="210.0" />
                   <Button layoutX="487.0" layoutY="261.0" mnemonicParsing="false" prefWidth="62.0" text="Done" />
-                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" text="Cancel" />
+                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
                   <TextField fx:id="textureFilename111" layoutX="324.0" layoutY="210.0" promptText="Filename" />
                </children>
             </AnchorPane>
@@ -148,12 +130,34 @@
                   <Text layoutX="324.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
                   <Text layoutX="95.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
                   <Text layoutX="324.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                  <TextField layoutX="95.0" layoutY="102.0" promptText="MyName" />
-                  <TextField layoutX="324.0" layoutY="102.0" promptText="Enter Coordinates" />
-                  <ColorPicker layoutX="95.0" layoutY="210.0" />
-                  <Button layoutX="487.0" layoutY="261.0" mnemonicParsing="false" prefWidth="62.0" text="Done" />
-                  <Button layoutX="487.0" layoutY="299.0" mnemonicParsing="false" text="Cancel" />
-                  <TextField fx:id="textureFilename1111" layoutX="324.0" layoutY="210.0" promptText="Filename" />
+                  <TextField fx:id="gamepieceName" layoutX="95.0" layoutY="102.0" promptText="MyName" />
+                  <TextField fx:id="gamepieceLocation" layoutX="324.0" layoutY="102.0" promptText="Enter Coordinates" />
+                  <ColorPicker fx:id="gamepieceColor" layoutX="95.0" layoutY="210.0" />
+                  <Button fx:id="pieceDoneButton" layoutX="487.0" layoutY="261.0" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
+                  <Button fx:id="pieceCancelButton" layoutX="487.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                  <TextField fx:id="gamepieceFilename" layoutX="324.0" layoutY="210.0" promptText="Filename" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="deckTab1" onSelectionChanged="#populateCardList" text="Spinner">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="deckCardList1" layoutX="407.0" layoutY="64.0" prefHeight="190.0" prefWidth="150.0" />
+                  <ListView fx:id="deckDeckList1" layoutX="229.0" layoutY="64.0" prefHeight="190.0" prefWidth="150.0" />
+                  <Text layoutX="257.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spinner Elements" />
+                  <Text layoutX="452.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
+                  <Button fx:id="deckAddButton1" layoutX="471.0" layoutY="262.0" mnemonicParsing="false" onAction="#addHighlighted" text="+" />
+                  <Button fx:id="deckRemoveButton1" layoutX="290.0" layoutY="262.0" mnemonicParsing="false" onAction="#removeHighlighted" prefWidth="28.8" text="-" />
+                  <Button layoutX="421.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveDeck" prefWidth="62.0" text="Done" />
+                  <Button layoutX="351.0" layoutY="313.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                  <TextField fx:id="gamepieceName1" layoutX="23.0" layoutY="101.0" promptText="MyName" />
+                  <Text layoutX="22.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+                  <Text layoutX="22.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                  <TextField fx:id="gamepieceFilename1" layoutX="23.0" layoutY="168.0" promptText="Filename" />
+                  <Text layoutX="24.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                  <ColorPicker fx:id="gamepieceColor1" layoutX="23.0" layoutY="228.0" />
                </children>
             </AnchorPane>
          </content>

@@ -18,8 +18,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
-public class RsetBlock extends Block {
-  public RsetBlock() {
+public class TileMoveBlock extends Block {
+  public TileMoveBlock() {
     //Pane for placing the controls and text for the block
     GridPane grid = new GridPane();
     //Padding of top, right, & bottom to 10px; padding of left 0px
@@ -41,25 +41,27 @@ public class RsetBlock extends Block {
     grid.getRowConstraints().add(new RowConstraints(5));
 
     //Defining row 1 of grid
-    Text reg = new Text("Reg.:");
-    reg.setFill(WHITE);
-    TextField regField = new TextField();
-    regField.setPrefColumnCount(10);
+    Text obj = new Text("Obj.:");
+    obj.setFill(WHITE);
+    TextField objField = new TextField();
+    objField.setPrefColumnCount(10);
     Rectangle ifIn = new Rectangle(19, 30, BLUE);
     grid.add(ifIn, 0, 1);
-    grid.add(reg, 1, 1);
-    grid.add(regField, 2, 1);
+    grid.add(obj, 1, 1);
+    grid.add(objField, 2, 1);
     
     //Defining row 2 of grid
-    Text from = new Text("From:");
-    from.setFill(WHITE);
-    TextField fromField = new TextField();
-    fromField.setPrefColumnCount(10);
-    grid.add(from, 1, 2);
-    grid.add(fromField, 2, 2);
+    Text tile = new Text("Tile:");
+    tile.setFill(WHITE);
+    TextField tileField = new TextField();
+    tileField.setPrefColumnCount(10);
+    Rectangle tileIn = new Rectangle(19, 30, SILVER);
+    grid.add(tileIn, 0, 2);
+    grid.add(tile, 1, 2);
+    grid.add(tileField, 2, 2);
 
     //Defining row 0 of grid
-    Text name = new Text("rset");
+    Text name = new Text("tile move");
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
 

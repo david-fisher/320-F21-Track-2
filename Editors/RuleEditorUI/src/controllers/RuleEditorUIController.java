@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -28,49 +29,75 @@ import editors.rule_editor_ui.blocks.PsetBlock;
 import editors.rule_editor_ui.blocks.GetBlock;
 import editors.rule_editor_ui.blocks.NotBlock;
 import editors.rule_editor_ui.blocks.BinOpBlock;
+import editors.rule_editor_ui.blocks.TileIndexBlock;
+import editors.rule_editor_ui.blocks.GetTileConnBlock;
+import editors.rule_editor_ui.blocks.ConditionBlock;
+import editors.rule_editor_ui.blocks.TileMoveBlock;
+
+import editors.main_menu.MainMenu;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import java.io.IOException;
 
 public class RuleEditorUIController implements Initializable {
   @FXML
   private AnchorPane editorPane;
+  double WIDTH = 400.00;
+  double HEIGHT = 475.00;
 
-  final Color SILVER = Color.rgb(200,200,200);
-  final Color GREY = Color.rgb(55,55,55);
-  final Color WHITE = Color.rgb(255,255,255);
+  final Color SILVER = Color.rgb(200, 200, 200);
+  final Color GREY = Color.rgb(55, 55, 55);
+  final Color WHITE = Color.rgb(255, 255, 255);
   final int HEADER_SIZE = 15;
-  
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    //Implement
+    // Implement
+  }
+
+  /**
+   * This method to increase the size of the editorPane. It is used when we add
+   * more blocks to editor pane.
+   */
+  private void resizeAnchorPane() {
+    WIDTH = WIDTH + 30;
+    HEIGHT = HEIGHT + 30;
+    editorPane.setPrefSize(WIDTH, HEIGHT);
   }
 
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
     PsetBlock pset = new PsetBlock();
 
-    //Place the block in top left of the screen
+    // Place the block in top left of the screen
     pset.setTopLeft(editorPane);
-    //Add the stackpane to the editor pane
+    // Add the stackpane to the editor pane
     editorPane.getChildren().addAll(pset.getBlock());
+    resizeAnchorPane();
   }
 
   @FXML
   private void handleAddRsetBtn(ActionEvent event) {
     RsetBlock rset = new RsetBlock();
 
-    //Place the block in top left of the screen
+    // Place the block in top left of the screen
     rset.setTopLeft(editorPane);
-    //Add the stackpane to the editor pane
+    // Add the stackpane to the editor pane
     editorPane.getChildren().addAll(rset.getBlock());
+    resizeAnchorPane();
   }
 
   @FXML
   private void handleAddGetBtn(ActionEvent event) {
     GetBlock get = new GetBlock();
 
-    //Place block in the top left of the screen
+    // Place block in the top left of the screen
     get.setTopLeft(editorPane);
-    //Add the stackpane to the editor pane
+    // Add the stackpane to the editor pane
     editorPane.getChildren().addAll(get.getBlock());
+    resizeAnchorPane();
   }
 
   @FXML
@@ -79,6 +106,7 @@ public class RuleEditorUIController implements Initializable {
 
     not.setTopLeft(editorPane);
     editorPane.getChildren().addAll(not.getBlock());
+    resizeAnchorPane();
   }
 
   @FXML
@@ -87,5 +115,54 @@ public class RuleEditorUIController implements Initializable {
 
     op.setTopLeft(editorPane);
     editorPane.getChildren().addAll(op.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddGetTileIndexBtn(ActionEvent event) {
+    TileIndexBlock tileIndex = new TileIndexBlock();
+
+    tileIndex.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(tileIndex.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddGetTileConnBtn(ActionEvent event) {
+    GetTileConnBlock conn = new GetTileConnBlock();
+
+    conn.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(conn.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddCondition(ActionEvent event) {
+    ConditionBlock condtBlock = new ConditionBlock();
+
+    condtBlock.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(condtBlock.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddTileMoveBtn(ActionEvent event) {
+    TileMoveBlock tileMove = new TileMoveBlock();
+
+    tileMove.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(tileMove.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleBackButton(ActionEvent event) {
+    URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");
+    try {
+      Parent root = (Parent) FXMLLoader.load(location);
+      MainMenu.stage.getScene().setRoot(root);
+      MainMenu.stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
