@@ -1,0 +1,5 @@
+!!org.yaml.snakeyaml.constructor.Constructor
+allowDuplicateKeys: true
+enumCaseSensitive: false
+propertyUtils: {allowReadOnlyProperties: false, skipMissingProperties: false}
+wrappedToRootException: false

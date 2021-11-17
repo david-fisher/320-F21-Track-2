@@ -11,6 +11,7 @@ public class Demo {
 		
 		createObjects();
 		
+		Savable.closeDB();
 	}
 	
 	//Things determined
@@ -79,7 +80,6 @@ public class Demo {
 		GameTimer gtimer = new GameTimer();
 		
 		Tile testTile = new Tile();
-		
 	}
 
 }
