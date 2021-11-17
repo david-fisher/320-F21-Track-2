@@ -124,7 +124,7 @@ public class BasicApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        if(false) {
+        if(true) {
 
             SelectionController controller = new SelectionController();
             controller.initialize(stage);

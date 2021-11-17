@@ -90,6 +90,7 @@ public class SelectionController {
         HBox.setMargin(newGamesScrollPane, new Insets(10, 10, 10, 10));
 
         newGamesHBox = new HBox();
+        newGamesHBox.setAlignment(Pos.CENTER);
         newGamesHBox.prefWidthProperty().bind(Bindings.subtract(newGamesScrollPane.widthProperty(), 2));
         newGamesHBox.prefHeightProperty().bind(Bindings.subtract(newGamesScrollPane.heightProperty(), 2));
         //newGamesHBox.setStyle("-fx-background-color: #" + secondaryColor.toString().substring(2));
@@ -134,6 +135,7 @@ public class SelectionController {
         HBox.setMargin(savedGamesScrollPane, HBox.getMargin(newGamesScrollPane));
 
         savedGamesHBox = new HBox();
+        savedGamesHBox.setAlignment(newGamesHBox.getAlignment());
         savedGamesHBox.prefWidthProperty().bind(newGamesHBox.widthProperty());
         savedGamesHBox.prefHeightProperty().bind(newGamesHBox.heightProperty());
         savedGamesHBox.setStyle(newGamesHBox.getStyle());
@@ -328,12 +330,14 @@ public class SelectionController {
         games.forEach(
                 (n) -> {
 
-                    double dim = 300;
-
                     VBox tempVBox = new VBox();
                     tempVBox.setAlignment(Pos.CENTER);
-                    tempVBox.setMinHeight(dim);
-                    tempVBox.setMinWidth(dim);
+
+                    tempVBox.prefHeightProperty().bind(Bindings.subtract(newGamesScrollPane.heightProperty(), 20));
+                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
+                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
+                    tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());
+                    tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
                     tempVBox.setStyle("-fx-border-color: red;-fx-border-style: dashed;");
 
                     // store the game in the selection VBox
