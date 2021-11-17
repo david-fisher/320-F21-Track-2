@@ -117,32 +117,37 @@ public class Controller {
     @FXML
     public void initialize() {
     	exitButton.setCursor(Cursor.HAND);
+    	helpButton.setCursor(Cursor.HAND);
+    	genCircleButton.setCursor(Cursor.HAND);
+    	genSquareButton.setCursor(Cursor.HAND);
+    	saveButton.setCursor(Cursor.HAND);
+    	testButton.setCursor(Cursor.HAND);
     }
     
     //TODO Placeholder for adding shape to group root
     @FXML
     public void allTiles() {
-    	root.getChildren().add(genCircleButton);
+    	root.getChildren();
     }
     
     @FXML
     void genCircle(ActionEvent event) {
-    	Circle c;
-    	c = new Circle(312, 300, 30, Color.BLACK);
-    	shapeCanvas.getChildren().add(c);
-    	draggable.makeDraggable(c);
-    	rightclickable.makeRightClickable(c, shapeCanvas);
+    	Tile c = new Tile();
+    	c.tileShape = new Circle(312, 300, 30, Color.BLACK);
+    	shapeCanvas.getChildren().add(c.tileShape);
+    	draggable.makeDraggable(c.tileShape);
+    	rightclickable.makeRightClickable(c.tileShape, shapeCanvas);
     }
     
     @FXML
     void genSquare(ActionEvent event) {
-    	Rectangle r;
-    	r = new Rectangle(60,60,Color.BLACK);
-    	r.setX(312);
-    	r.setY(300);
-    	shapeCanvas.getChildren().add(r);
-    	draggable.makeDraggable(r);
-    	rightclickable.makeRightClickable(r, shapeCanvas);
+    	Tile r = new Tile();
+    	r.tileShape = new Rectangle(60,60,Color.BLACK);
+    	((Rectangle) r.tileShape).setX(312);
+    	((Rectangle) r.tileShape).setY(300);
+    	shapeCanvas.getChildren().add(r.tileShape);
+    	draggable.makeDraggable(r.tileShape);
+    	rightclickable.makeRightClickable(r.tileShape, shapeCanvas);
 
     }
     

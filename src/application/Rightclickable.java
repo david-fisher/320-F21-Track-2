@@ -14,6 +14,7 @@ public class Rightclickable {
 	public void makeRightClickable(Node shape, AnchorPane canvas) {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem deleteButton = new MenuItem(null, new Label("Delete"));
+		MenuItem shapeEditor = new MenuItem(null, new Label("Shape Editor"));
 		
 		deleteButton.setOnAction(new EventHandler<ActionEvent>(){
 	        @Override
@@ -32,6 +33,7 @@ public class Rightclickable {
 		
 		
 		contextMenu.getItems().add(deleteButton);
+		contextMenu.getItems().add(shapeEditor);
 		
 		
 	}
