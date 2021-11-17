@@ -49,6 +49,11 @@ public class MainFXMLController {
     }
 
     @FXML
+    public void exitFromMain(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
