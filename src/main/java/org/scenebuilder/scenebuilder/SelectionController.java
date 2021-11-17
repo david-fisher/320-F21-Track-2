@@ -90,7 +90,7 @@ public class SelectionController {
         HBox.setMargin(newGamesScrollPane, new Insets(10, 10, 10, 10));
 
         newGamesHBox = new HBox();
-        newGamesHBox.setAlignment(Pos.CENTER);
+        newGamesHBox.setAlignment(Pos.CENTER_LEFT);
         newGamesHBox.prefWidthProperty().bind(Bindings.subtract(newGamesScrollPane.widthProperty(), 2));
         newGamesHBox.prefHeightProperty().bind(Bindings.subtract(newGamesScrollPane.heightProperty(), 2));
         //newGamesHBox.setStyle("-fx-background-color: #" + secondaryColor.toString().substring(2));
@@ -136,8 +136,8 @@ public class SelectionController {
 
         savedGamesHBox = new HBox();
         savedGamesHBox.setAlignment(newGamesHBox.getAlignment());
-        savedGamesHBox.prefWidthProperty().bind(newGamesHBox.widthProperty());
-        savedGamesHBox.prefHeightProperty().bind(newGamesHBox.heightProperty());
+        savedGamesHBox.prefWidthProperty().bind(Bindings.subtract(savedGamesScrollPane.widthProperty(), 2));
+        savedGamesHBox.prefHeightProperty().bind(Bindings.subtract(savedGamesScrollPane.heightProperty(), 2));
         savedGamesHBox.setStyle(newGamesHBox.getStyle());
 
         savedGamesScrollPane.setContent(savedGamesHBox);

@@ -35,15 +35,6 @@ public class BasicApplication extends Application {
         newGames.add(game1);
         newGames.add(game2);
         newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
-        newGames.add(game1);
-        newGames.add(game2);
     }
     public static void loadSavedGames() {
 
