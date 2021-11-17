@@ -68,7 +68,7 @@ public final class ALOperation {
         System.out.println("Error: Unsupported operand type.");
         return null;
     }
-
+/*
     public static LiteralNode factorial(Object op1) {
         if (op1 instanceof Integer) {
             return new LiteralNode<Integer>(Math.factorial((Integer)op1));
@@ -76,13 +76,13 @@ public final class ALOperation {
         System.out.println("Error: Unsupported operand type.");
         return null;
     }
-
-    public static LiteralNode arithmetic_compare(Object op1, Object op2) {
+*/
+    public static double arithmetic_compare(Object op1, Object op2) {
         // returns op1 - op2 (this will equal 0 if they are equivalent, be < 0 if op1<op2, be >0 if op1>op2)
         if ((op1 instanceof Integer || op1 instanceof Double) && (op2 instanceof Integer || op2 instanceof Double)) {
-            return new LiteralNode<Double>((Double) op1 - (Double) op2);
+            return (Double)op1 - (Double)op2;
         }
         System.out.println("Error: Unsupported operand type.");
-        return null;
+        return 0;
     }
 }

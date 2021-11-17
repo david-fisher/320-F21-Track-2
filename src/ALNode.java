@@ -28,7 +28,7 @@ public class ALNode extends OpNode {
             return null;
         }
 
-        LiteralNode compare = null; // placeholder for boolean comparison
+        double compare; // placeholder for boolean comparison
 
         switch (operator) {
             case "+":
@@ -53,23 +53,23 @@ public class ALNode extends OpNode {
             
             case ">":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
-                return compare.getValue() > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+                return compare > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 
             case "<":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
-                return compare.getValue() > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+                return compare > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 
             case "==":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
-                return compare.getValue() == 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+                return compare == 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
             
             case "<=":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
-                return compare.getValue() <= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+                return compare <= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 
             case ">=":
                 compare = ALOperation.arithmetic_compare(e1.getValue(), e2.getValue());
-                return compare.getValue() >= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
+                return compare >= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
 /*
             case "&&":
                 if (op1 > 0 && op2 > 0) { result.setValue(1.0); } else { result.setValue(-1.0); }
