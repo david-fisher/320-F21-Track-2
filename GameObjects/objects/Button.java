@@ -1,4 +1,5 @@
 package objects;
+import java.awt.Color;
 
 public class Button extends GameObject {
     private static int count = 0;
@@ -14,15 +15,15 @@ public class Button extends GameObject {
 		this.setIcon("default_gamepiece_icon.jpg");
 		this.setColor(Color.WHITE);
 		setTrait("text", "text");
-		setTrait("enabled", new Boolean(true));
-		setTrait("pressed", new Boolean(false));
+		setTrait("enabled", true);
+		setTrait("pressed", false);
 	}
 
 	//set trait to value. Overrides checking for default traits only.
 	public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 		if (super.setTrait(trait, value, suppressTraitChecker)) {
 			return true;
-		} else if (suppressTraitChecker || traits.getTrait(trait).getClass().equals(value.getClass())) {
+		} else if (suppressTraitChecker || this.getTrait(trait).getClass().equals(value.getClass())) {
 			traits.put(trait, value);
 			return true ;
 		}
