@@ -7,7 +7,7 @@ import java.util.List;
 public class Deck extends GameObject {
 
   private static int count = 0;
-  private ArrayList<Card> deck;
+  private List<Card> deck;
 
   public Deck() {
     super() ;  
@@ -95,7 +95,7 @@ public class Deck extends GameObject {
   }
 
   public List<Card> deal(int num) {
-	ArrayList<Card> hand = new ArrayList<Card>(num) ;
+	List<Card> hand = new ArrayList<Card>(num) ;
 	
 	for (int i = 0; i < num; ++i) {
 		Card card = this.drawTop() ;
