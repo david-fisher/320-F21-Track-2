@@ -8,13 +8,15 @@ import java.awt.Color;
 
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 /**
  * description of class Tile here.
  *
  * @author William Ton
- * @version 11/16/21 - 1pm
+ * @version 11/17/21 - 1pm
  */
 
 import java.util.*;
@@ -27,6 +29,7 @@ public class Tile extends GameObject
     private static int count = 0;
     static final AtomicLong NEXT_ID = new AtomicLong(0);
     final long id = NEXT_ID.getAndIncrement();
+    public Shape tileShape;
     
     /**
      * Constructor for objects of class Tile
@@ -54,15 +57,16 @@ public class Tile extends GameObject
     
     public boolean addConnect(Tile tile) {
     	Line line = new Line();
-    	setStartX(this.x);
-    	setStartY(this.y);
-    	setEndX(tile.x);
-    	setEndY(tile.y);
+    	Bounds localCoor = this.tileShape.localToScene(this.tileShape.getBoundsInLocal());
+    	Bounds outCoor = tile.tileShape.localToScene(tile.tileShape.getBoundsInLocal());
+    	line.setStartX((localCoor.getMaxX()+localCoor.getMinX())/2);
+    	line.setStartY((localCoor.getMaxY()+localCoor.getMinY())/2);
+    	line.setEndX((outCoor.getMaxX()+outCoor.getMinX())/2);
+    	line.setEndY((outCoor.getMaxY()+outCoor.getMinY())/2);
         return connections.add(tile);
     }
     
     public boolean deleteConnect(Tile tile) {
-    	this.pane.getChildren().remove(line);
     	return connections.remove(tile);
     }
     
