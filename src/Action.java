@@ -1,7 +1,7 @@
 // Any Game Input / Decision
 // Placeholder for GameButton object
 
-package GameObjects.objects;
+package objects;
 
 public class Action extends GameObject {
     public Action() {

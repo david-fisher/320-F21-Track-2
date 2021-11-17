@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 public class GameState {
 /*
@@ -41,5 +42,18 @@ public class GameState {
             }
         }
         return null;
+    }
+
+    public String toString() {
+        String repr = "";
+        TreeSet sortedKeys = new TreeSet(this.registers.keySet());
+        for (String key: sortedKeys){
+            repr = repr + key + '=' + this.registers.get(key).toString() + '\n';
+        }
+        return repr;
+    }
+
+    public boolean equals(GameState g0) {
+        this.toString().hashCode() == g0.toString().hashCode();
     }
 }
