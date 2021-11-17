@@ -1,3 +1,5 @@
+package objects;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public abstract class Savable {
+
 	private static String filePath = File.separator + "res" + File.separator;
 	private static Project project;
 	private static String globalPath = new File(".").getAbsolutePath();
@@ -188,6 +191,5 @@ public abstract class Savable {
 		}
 		return x;
 	}
-
 }
 
