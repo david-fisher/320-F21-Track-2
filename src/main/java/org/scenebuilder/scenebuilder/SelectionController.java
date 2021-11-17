@@ -24,35 +24,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SelectionController {
-
-    private static Color textColor;
-    private static Color primaryColor;
-    private static Color secondaryColor;
-    private static Color accentColor;
-
-    AnchorPane anchorPane;
-    VBox screenVBox;
-    private void initAnchorPane() {
-
-        anchorPane = new AnchorPane();
-        anchorPane.setStyle("-fx-border-color: black; -fx-background-color: #" + secondaryColor.toString().substring(2));
-
-        screenVBox = new VBox();
-        AnchorPane.setTopAnchor(screenVBox, 3.0);
-        AnchorPane.setBottomAnchor(screenVBox, 3.0);
-        AnchorPane.setLeftAnchor(screenVBox, 3.0);
-        AnchorPane.setRightAnchor(screenVBox, 3.0);
-        screenVBox.setStyle("-fx-border-color: black; -fx-background-color: #" + primaryColor.toString().substring(2));
-
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();   // screen - task bar
-        //Rectangle2D fullScreenDimensions = Screen.getPrimary().getBounds();     // full screen
-
-        anchorPane.setPrefWidth(screenDimensions.getWidth());
-        anchorPane.setPrefHeight(screenDimensions.getHeight());
-
-        anchorPane.getChildren().add(screenVBox);
-    }
+public class SelectionController extends ScreenController {
 
     HBox newGamesLabelHBox;
     Label newGamesLabel;
@@ -65,7 +37,6 @@ public class SelectionController {
 
         newGamesLabel = new Label("New Games");
         newGamesLabel.setFont(new Font(36));
-        newGamesLabel.setTextFill(textColor);
         HBox.setMargin(newGamesLabel, new Insets(10, 10, 10, 10));
 
         newGamesLabelHBox.getChildren().add(newGamesLabel);
@@ -110,7 +81,6 @@ public class SelectionController {
 
         savedGamesLabel = new Label("Saved Games");
         savedGamesLabel.setFont(newGamesLabel.getFont());
-        savedGamesLabel.setTextFill(textColor);
         HBox.setMargin(savedGamesLabel, HBox.getMargin(newGamesLabel));
 
         savedGamesLabelHBox.getChildren().add(savedGamesLabel);
@@ -189,24 +159,10 @@ public class SelectionController {
         screenVBox.getChildren().add(buttonsHBox);
     }
 
-    private Stage stage;
-
-    private void initColors() {
-
-        textColor = Color.BLACK;
-        primaryColor = Color.WHITE;
-        secondaryColor = Color.WHITE;
-        accentColor = Color.WHITE;
-    }
-
     public void initialize(Stage stage) {
 
-        this.stage = stage;
-        stage.initStyle(StageStyle.UNDECORATED); // remove title bar
+        super.initialize(stage);
 
-        initColors();
-
-        initAnchorPane();
         initNewGamesLabel();
         initNewGamesScrollPane();
         initSavedGamesLabel();
@@ -220,11 +176,6 @@ public class SelectionController {
         savedGames = BasicApplication.getSavedGames();
         populateSelectionMenus(newGames, savedGames);
 
-        // set stage parameters
-        Scene newScene = new Scene(anchorPane);
-        stage.setScene(newScene);
-        stage.setResizable(true);
-        stage.show();
     }
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
