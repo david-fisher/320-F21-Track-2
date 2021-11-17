@@ -11,7 +11,13 @@ public class GameBoard extends GameObject {
     this.width = width;
   }
 
-  public void setShape(String shape) {
+  public GameBoard() {
+	  this.shape = "";
+	  this.height = 0;
+	  this.width = 0;
+}
+
+public void setShape(String shape) {
     this.shape = shape;
   }
 
