@@ -86,7 +86,7 @@ public class PlayFXMLController {
 
         playParent.getChildren().add(boardPane);
 
-        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth)/2);
+        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);
         playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 168)/2);
 
         initBoard(gameBoard, boardPane);
@@ -130,9 +130,9 @@ public class PlayFXMLController {
             double height = t.getHeight() * heightScale;
 
             if (t.getShape().equals("Rectangle")) {
-                tile = new Rectangle(width, height);
+                tile = new Rectangle(width, height, t.getColor());
             } else {
-                tile = new Circle(width / 2);
+                tile = new Circle(width / 2, t.getColor());
             }
             tile.setUserData(t);
             boardPane.getChildren().addAll(tile);
