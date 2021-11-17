@@ -84,15 +84,16 @@ public class PlayFXMLController {
         double boardWidth = scale * gameBoard.getWidth();
         double boardHeight = scale * gameBoard.getHeight();
         //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
-        boardPane.setPrefHeight(boardHeight);
         boardPane.setPrefWidth(boardWidth);
+        boardPane.setPrefHeight(boardHeight);
+
 //        boardPane.setMaxHeight(playHeight - 188);
 //        boardPane.setMaxWidth(playWidth - 160);
 
         playParent.getChildren().add(boardPane);
 
-        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth)/2);
-        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 168)/2);
+        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);
+        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 20)/2);
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
@@ -130,8 +131,8 @@ public class PlayFXMLController {
         double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
-            double width = t.getWidth() * widthScale;
-            double height = t.getHeight() * heightScale;
+            double width = t.getWidth() * scale;
+            double height = t.getHeight() * scale;
 
             if (t.getShape().equals("Rectangle")) {
                 tile = new Rectangle(width, height);
