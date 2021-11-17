@@ -45,6 +45,8 @@ public class PlayFXMLController {
     private ScrollPane decksPane;
     @FXML
     private ScrollPane rngPane;
+    @FXML
+    private ScrollPane inventoryPane;
 
 
     private Stage stage;
@@ -75,19 +77,23 @@ public class PlayFXMLController {
 
         AnchorPane boardPane = new AnchorPane();
 
-        double boardWidth = (playWidth - 140) > gameBoard.getWidth() ? gameBoard.getWidth() : (playWidth - 140);
-        double boardHeight = (playHeight - 188) > gameBoard.getHeight() ? gameBoard.getHeight() : (playHeight - 188);
+        double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
+        double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
+        double scale = scaleHeight >= scaleWidth ? scaleWidth : scaleHeight;
 
+        double boardWidth = scale * gameBoard.getWidth();
+        double boardHeight = scale * gameBoard.getHeight();
         //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
-        boardPane.setPrefHeight(boardHeight);
         boardPane.setPrefWidth(boardWidth);
+        boardPane.setPrefHeight(boardHeight);
+
 //        boardPane.setMaxHeight(playHeight - 188);
 //        boardPane.setMaxWidth(playWidth - 160);
 
         playParent.getChildren().add(boardPane);
 
         playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);
-        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 168)/2);
+        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 20)/2);
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
@@ -122,19 +128,19 @@ public class PlayFXMLController {
     }
 
     private void initTiles(ArrayList<DummyTile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {
-        double widthScale = gameBoard.getWidth() / boardPane.getPrefWidth();
-        double heightScale = gameBoard.getHeight() / boardPane.getPrefHeight();
+        double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
-            double width = t.getWidth() * widthScale;
-            double height = t.getHeight() * heightScale;
+            double width = t.getWidth() * scale;
+            double height = t.getHeight() * scale;
 
             if (t.getShape().equals("Rectangle")) {
-                tile = new Rectangle(width, height, t.getColor());
+                tile = new Rectangle(width, height);
             } else {
-                tile = new Circle(width / 2, t.getColor());
+                tile = new Circle(width / 2);
             }
             tile.setUserData(t);
+            tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
             tile.setLayoutX(t.getXPos());
             tile.setLayoutY(t.getYPos());
@@ -270,9 +276,13 @@ public class PlayFXMLController {
         ScrollPane tab;
         if (parent.getId().equals("buttonDecks")) {
             tab = decksPane;
-        } else {
+        } else if (parent.getId().equals("buttonRNG")){
             tab = rngPane;
+        } else {
+            tab = inventoryPane;
         }
+        tab.toFront();
+        parent.toFront();
         TranslateTransition tt = new TranslateTransition(Duration.millis(700), tab);
         tt.setOnFinished(e -> {
             if (tt.getToX() == -355f) {
