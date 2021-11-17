@@ -111,20 +111,11 @@ public class BasicApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        if(false) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("gridPanePlayFXML.fxml"));
-                Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-                double width = screenDimensions.getWidth();
-                double height = screenDimensions.getHeight();
+        if(true) {
 
-                Scene scene = new Scene(root, width, height);
-                stage.setScene(scene);
-                scene.getRoot().setStyle("-fx-font-family: 'serif'");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            SelectionController controller = new SelectionController();
+            controller.initialize(stage);
+
         } else {
             // load fxml file (which specifies the controller)
             Parent root = FXMLLoader.load(getClass().getResource("mainFXML.fxml"));
