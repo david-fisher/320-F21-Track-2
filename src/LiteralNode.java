@@ -1,6 +1,6 @@
 // A generic class for atomic expressions.
 // Potential expressipn types include Double, String, and GameObjects.
-public class LiteralNode<T> implements Node {
+public class LiteralNode<T> extends Node {
     private T value;
 
     public LiteralNode(T value) {

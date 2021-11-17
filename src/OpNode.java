@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 // The base class for any rule statements.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
-public abstract class OpNode implements Node {
+public abstract class OpNode extends Node {
 
     // TODO: Is it better to, instead of having a 2d list for all operation node,
     // let each node have their own way of storing the children? May be doable with factory and visitors.
