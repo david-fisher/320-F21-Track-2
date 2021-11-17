@@ -52,41 +52,8 @@ public class Tile extends GameObject
   		  return true ;
   	  }
   	  
-  	  // checks for other valid inputs
-  	  else if (suppressTraitChecker ||	// if true don't check trait type
-  			  (trait.equals("shape") && value instanceof String) ||
-  			  (trait.equals("xPos") && value instanceof Integer) ||
-  			  (trait.equals("yPos") && value instanceof Integer)) {	// check value is String
-  		  traits.put(trait, value) ;
-  		  return true ;
-  	  }
-  	  
   	  // returns false if input is invalid
   	  return false ;
-    }
-
-    public boolean setShape(String shape) {
-    	return setTrait("shape", shape) ;
-    }
-
-    public String getShape() {
-    	return (String)getTrait("shape") ;
-    }
-
-    public boolean setXPos(Integer xPos) {
-    	return setTrait("xPos", xPos) ;
-    }
-
-    public int getXPos() {
-    	return (int)getTrait("xPos") ;
-    }
-
-    public boolean setYPos(Integer yPos) {
-    	return setTrait("yPos", yPos) ;
-    }
-
-    public int getYPos() {
-    	return (int)getTrait("yPos") ;
     }
     
     public List<Tile> getConnect()
@@ -129,7 +96,6 @@ public class Tile extends GameObject
     }
     
     public List<Gamepiece> getGamepieces() {
-    	// TODO
     	return this.pieces ;
     }
 }
