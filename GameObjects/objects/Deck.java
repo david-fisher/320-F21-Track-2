@@ -112,4 +112,8 @@ public class Deck extends GameObject {
   public List<Card> getCards() {
 	  return deck;
   }
+
+  public String repr(boolean hasLabel) {
+    return "Deck\n" + super.repr(hasLabel);
+  }
 }

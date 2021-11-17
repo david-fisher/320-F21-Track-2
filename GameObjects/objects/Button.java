@@ -76,4 +76,8 @@ public class Button extends GameObject {
 	public boolean getPressed() {
 		return (boolean)this.getTrait("pressed");
 	}
+
+	public String repr(boolean hasLabel) {
+		return "Button\n" + super.repr(hasLabel);
+	}
 }

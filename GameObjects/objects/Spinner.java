@@ -131,5 +131,8 @@ public class Spinner extends GameObject
     public List<Category> getCategories() {
     	return categories ;
     }
-    
+  
+    public String repr(boolean hasLabel) {
+        return "Spinner\n" + super.repr(hasLabel);
+    }  
 }

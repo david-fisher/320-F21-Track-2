@@ -49,4 +49,8 @@ public class Token extends GameObject{
   public int getValue() {
 	  return (Integer)this.getTrait("value");
   }
+
+  public String repr(boolean hasLabel) {
+    return "Token\n" + super.repr(hasLabel);
+  }
 }

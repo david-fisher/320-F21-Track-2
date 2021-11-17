@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public abstract class GameObject extends Savable {
   
@@ -171,4 +172,15 @@ public abstract class GameObject extends Savable {
 	 return getLabel() ;
  }
  
+ // GKNEW Integration Function
+ public String repr(boolean hasLabel) {
+	String s = "";
+	TreeSet<String> sortedKeys = new TreeSet<String>(this.traits.keySet());
+	for (String key: sortedKeys) {
+		if (hasLabel || !key.equals("label")) {
+			s = s + key + '=' + this.traits.get(key).toString() + "\n";
+		}
+	} 
+	return s;
+ }
 }
