@@ -80,4 +80,8 @@ public class GameTimer extends GameObject {
   public double getInitialTime() {
 	  return (double)this.getTrait("initialTime");
   }
+
+  public String repr(boolean hasLabel) {
+    return "GameTimer\n" + super.repr(hasLabel);
+  }
 }

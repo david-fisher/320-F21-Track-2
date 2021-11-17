@@ -62,4 +62,8 @@ public class Die extends GameObject {
   public Color getDotColor() {
 	  return (Color)this.getTrait("dotColor");
   }
+
+  public String repr(boolean hasLabel) {
+    return "Die\n" + super.repr(hasLabel);
+  }
 }

@@ -81,4 +81,7 @@ public class Category extends GameObject
     	return this.getLabel() ;
     }
 
+    public String repr(boolean hasLabel) {
+        return "Category\n" + super.repr(hasLabel);
+    }
 }

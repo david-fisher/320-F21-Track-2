@@ -51,4 +51,8 @@ public class Card extends GameObject {
   public String toString() {
 	  return this.getLabel() ;
   }
+  
+  public String repr(boolean hasLabel) {
+	return "Card\n" + super.repr(hasLabel);
+  }
 }

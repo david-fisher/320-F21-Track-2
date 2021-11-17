@@ -61,4 +61,8 @@ public class Gamepiece extends GameObject{
   public Tile getLocation() {
 	  return (Tile)this.getTrait("location");
   }
+
+  public String repr(boolean hasLabel) {
+    return "Gamepiece\n" + super.repr(hasLabel);
+  }
 }

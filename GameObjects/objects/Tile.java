@@ -98,4 +98,8 @@ public class Tile extends GameObject
     public List<Gamepiece> getGamepieces() {
     	return this.pieces ;
     }
+    
+    public String repr(boolean hasLabel) {
+        return "Tile\n" + super.repr(hasLabel);
+    }
 }
