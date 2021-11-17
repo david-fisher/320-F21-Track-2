@@ -1,4 +1,4 @@
-package objects;
+package org.objects;
 
 import java.io.File;
 import java.io.FileInputStream;

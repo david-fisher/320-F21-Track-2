@@ -94,6 +94,7 @@ public class PlayFXMLController {
 
         playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);
         playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 20)/2);
+        playParent.setBottomAnchor(boardPane, (playHeight - boardHeight - 20)/2);
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);

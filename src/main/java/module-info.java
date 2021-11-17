@@ -3,6 +3,7 @@ module org.scenebuilder.scenebuilder {
     requires javafx.fxml;
     requires com.jfoenix;
     requires java.desktop;
+    requires org.yaml.snakeyaml;
 
 
     opens org.scenebuilder.scenebuilder to javafx.fxml;
