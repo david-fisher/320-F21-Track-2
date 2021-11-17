@@ -1,19 +1,28 @@
 package org.scenebuilder.scenebuilder;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SelectionController {
 
@@ -77,13 +86,12 @@ public class SelectionController {
         newGamesScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         newGamesScrollPane.prefWidthProperty().bind(Bindings.subtract(screenVBox.widthProperty(), 20));
         newGamesScrollPane.prefHeightProperty().bind(Bindings.multiply(screenVBox.heightProperty(), 0.35));
-        newGamesScrollPane.setStyle("-fx-background-color: transparent");
+        newGamesScrollPane.setStyle("-fx-background-color: transparent; -fx-border-color: black");
         HBox.setMargin(newGamesScrollPane, new Insets(10, 10, 10, 10));
 
         newGamesHBox = new HBox();
         newGamesHBox.prefWidthProperty().bind(Bindings.subtract(newGamesScrollPane.widthProperty(), 2));
         newGamesHBox.prefHeightProperty().bind(Bindings.subtract(newGamesScrollPane.heightProperty(), 2));
-        newGamesHBox.setStyle("-fx-border-color: black");
         //newGamesHBox.setStyle("-fx-background-color: #" + secondaryColor.toString().substring(2));
 
         newGamesScrollPane.setContent(newGamesHBox);
@@ -155,6 +163,14 @@ public class SelectionController {
         //backButton.setStyle("-fx-background-color: #" + accentColor.toString().substring(2));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
+        backButton.setOnAction(event -> {
+            try {
+                backFromSelection(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         fillerPane = new Pane();
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
@@ -164,6 +180,7 @@ public class SelectionController {
         selectGameButton.setFont(backButton.getFont());
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setStyle(backButton.getStyle());
+        selectGameButton.setDisable(true);
         HBox.setMargin(selectGameButton, HBox.getMargin(backButton));
 
         buttonsHBox.getChildren().addAll(backButton, fillerPane, selectGameButton);
@@ -194,10 +211,157 @@ public class SelectionController {
         initSavedGamesScrollPane();
         initButtons();
 
+        // todo, artifacts from original implementation
+        BasicApplication.loadNewGames();
+        BasicApplication.loadSavedGames();
+        newGames = BasicApplication.getNewGames();
+        savedGames = BasicApplication.getSavedGames();
+        populateSelectionMenus(newGames, savedGames);
+
         // set stage parameters
         Scene newScene = new Scene(anchorPane);
         stage.setScene(newScene);
         stage.setResizable(true);
         stage.show();
+    }
+
+    // ----------------------- imported stuff from the original write (ugly) -------------------------------------
+
+    private ArrayList<DummyGame> newGames = new ArrayList<>();
+    private ArrayList<DummyGame> savedGames = new ArrayList<>();
+    private DummyGame selectedGame;
+
+    public void switchScene(ActionEvent event, String nextScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        // full screen dimensions
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double width = screenDimensions.getWidth();
+        double height = screenDimensions.getHeight();
+
+        Scene scene = new Scene(root, width, height);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void backFromSelection(ActionEvent event) throws IOException {
+        switchScene(event, "mainFXML.fxml");
+    }
+
+    public void populateSelectionMenus(ArrayList<DummyGame> newGames, ArrayList<DummyGame> savedGames) {
+
+        // convert games to nodes
+        ArrayList<Node> newGameNodes = gamesToNodes(newGames);
+        ArrayList<Node> savedGameNodes = gamesToNodes(savedGames);
+
+        // populate the menus
+        newGameNodes.forEach((n) -> {
+
+            n.setOnMouseClicked(mouseEvent -> {
+
+                selectGameButton.setDisable(false);
+                selectGameButton.setText("Start New Game");
+                selectGameButton.setOnAction(event -> {
+                    setSelectedGame((VBox)n);
+                    BasicApplication.setSelectedGame(selectedGame);
+                    try {
+                        switchScene(event, "setupFXML.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                // deselect all rectangles
+                ObservableList<Node> children = newGamesHBox.getChildren();
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children = savedGamesHBox.getChildren();
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+
+                // select this rectangles
+                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
+
+                // focus the node
+                //n.requestFocus();
+            });
+            newGamesHBox.getChildren().add(n);
+        });
+
+        savedGameNodes.forEach((n) -> {
+
+            n.setOnMouseClicked(mouseEvent -> {
+
+                selectGameButton.setDisable(false);
+                selectGameButton.setText("Load Saved Game");
+                selectGameButton.setOnAction(event -> {
+                    setSelectedGame((VBox)n);
+                    BasicApplication.setSelectedGame(selectedGame);
+                    BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
+                    try {
+                        switchScene(event, "playFXML.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                // deselect all rectangles
+                ObservableList<Node> children = newGamesHBox.getChildren();
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children = savedGamesHBox.getChildren();
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+
+                // select this rectangles
+                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
+
+                // focus the node
+                //n.requestFocus();
+            });
+            savedGamesHBox.getChildren().add(n);
+        });
+
+    }
+
+    public ArrayList<Node> gamesToNodes(ArrayList<DummyGame> games) {
+
+        ArrayList<Node> nodes = new ArrayList<>();
+
+        games.forEach(
+                (n) -> {
+
+                    double dim = 300;
+
+                    VBox tempVBox = new VBox();
+                    tempVBox.setAlignment(Pos.CENTER);
+                    tempVBox.setMinHeight(dim);
+                    tempVBox.setMinWidth(dim);
+                    tempVBox.setStyle("-fx-border-color: red;-fx-border-style: dashed;");
+
+                    // store the game in the selection VBox
+                    tempVBox.setUserData(n);
+
+                    ImageView tempImageView = new ImageView();
+                    tempImageView.setPreserveRatio(true);
+                    tempImageView.setFitHeight(150);
+                    tempImageView.setFitWidth(200);
+                    //tempImageView.setImage(n.getIcon());
+
+                    Label tempLabel = new Label();
+                    tempLabel.setText("tempGameName");
+                    tempLabel.setFont(new Font(16));
+
+                    tempVBox.getChildren().addAll(tempImageView, tempLabel);
+
+                    HBox.setMargin(tempVBox, new Insets(5,5,5,5));
+
+                    // add node to list of nodes
+                    nodes.add(tempVBox);
+                }
+        );
+
+        return nodes;
+    }
+
+    public void setSelectedGame(VBox vbox) {
+        selectedGame = (DummyGame)vbox.getUserData();
     }
 }
