@@ -1,4 +1,4 @@
-package testsEngine;
+package tests;
 import java.util.ArrayList;
 import nodes.*;
 import engine.*;
