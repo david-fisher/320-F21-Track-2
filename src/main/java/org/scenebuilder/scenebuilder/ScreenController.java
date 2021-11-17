@@ -1,5 +1,6 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -18,10 +19,12 @@ public class ScreenController {
         //anchorPane.setStyle("-fx-border-color: black; -fx-background-color: #" + secondaryColor.toString().substring(2));
 
         screenVBox = new VBox();
+        screenVBox.setAlignment(Pos.CENTER);
         AnchorPane.setTopAnchor(screenVBox, 3.0);
         AnchorPane.setBottomAnchor(screenVBox, 3.0);
         AnchorPane.setLeftAnchor(screenVBox, 3.0);
         AnchorPane.setRightAnchor(screenVBox, 3.0);
+        screenVBox.setStyle("-fx-border-color: black;");
         //screenVBox.setStyle("-fx-border-color: black; -fx-background-color: #" + primaryColor.toString().substring(2));
 
         Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();   // screen - task bar
@@ -38,7 +41,6 @@ public class ScreenController {
     public void initialize(Stage stage) {
 
         this.stage = stage;
-        stage.initStyle(StageStyle.UNDECORATED); // remove title bar
 
         initAnchorPane();
 

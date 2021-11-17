@@ -136,11 +136,9 @@ public class SelectionController extends ScreenController {
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
         backButton.setOnAction(event -> {
-            try {
-                backFromSelection(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            MainController controller = new MainController();
+            controller.initialize(stage);
         });
 
         fillerPane = new Pane();
@@ -196,10 +194,6 @@ public class SelectionController extends ScreenController {
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void backFromSelection(ActionEvent event) throws IOException {
-        switchScene(event, "mainFXML.fxml");
     }
 
     public void populateSelectionMenus(ArrayList<DummyGame> newGames, ArrayList<DummyGame> savedGames) {

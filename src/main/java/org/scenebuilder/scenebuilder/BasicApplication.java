@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.objects.Tile;
 
 import java.io.IOException;
@@ -117,7 +118,9 @@ public class BasicApplication extends Application {
 
         if(true) {
 
-            SelectionController controller = new SelectionController();
+            //SelectionController controller = new SelectionController();
+            MainController controller = new MainController();
+            stage.initStyle(StageStyle.UNDECORATED); // remove title bar
             controller.initialize(stage);
 
         } else {
