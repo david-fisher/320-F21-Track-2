@@ -1,6 +1,9 @@
 package oracles;
+import java.util.Set;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import engine.*; 
+import nodes.*;
 
 // WIP
 public class Cache {
@@ -13,7 +16,7 @@ public class Cache {
     }
 
     public boolean get(int key) { 
-
+        return false;
     }
 
     public void put(int key) {

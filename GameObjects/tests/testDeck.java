@@ -4,7 +4,7 @@ import objects.*;
 import java.awt.Color;
 
 public class testDeck {
-	
+/*	
 	//Whitebox testing
 	
 	private boolean cardAndDeckNotStatic() {
@@ -197,4 +197,5 @@ public class testDeck {
 		testDeal();
 		testDeckGettersAndSetters();
 	}
+*/
 }

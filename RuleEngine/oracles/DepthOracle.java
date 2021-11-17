@@ -1,8 +1,11 @@
 package oracles;
 import java.util.ArrayList;
 import java.util.Deque;
+import engine.*; 
+import nodes.*;
 
 public class DepthOracle implements Oracle {
+    public ArrayList<GameObject> buttons;
     public DepthOracle(GameState g) {
         this.buttons = g.buttons;
     }
@@ -15,6 +18,6 @@ public class DepthOracle implements Oracle {
     }
 
     public Action decideMove() {
-        return this.buttons.get(this.buttons.length*(Math.random()));
+        return null;
     }
 }
