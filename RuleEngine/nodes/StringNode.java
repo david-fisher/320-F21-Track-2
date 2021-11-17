@@ -1,4 +1,6 @@
+package nodes;
 import java.util.ArrayList;
+import engine.GameState;
 
 public class StringNode extends OpNode {
     private String operator;

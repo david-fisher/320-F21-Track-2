@@ -1,12 +1,13 @@
+package oracles;
 import java.util.ArrayList;
 import java.util.Deque;
 
-public class PruningOracle implements Oracle {
-    public PruningOracle(GameState g) {
+public class HeuristicOracle implements Oracle {
+    public HeuristicOracle(GameState g) {
         this.buttons = g.buttons;
     }
 
-    public PruningOracle(Oracle o) {
+    public HeuristicOracle(Oracle o) {
 
     }
 

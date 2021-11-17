@@ -1,3 +1,4 @@
+package engine;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -46,14 +47,14 @@ public class GameState {
 
     public String toString() {
         String repr = "";
-        TreeSet sortedKeys = new TreeSet(this.registers.keySet());
+        TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
-            repr = repr + key + '=' + this.registers.get(key).toString() + '\n';
+            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }
 
     public boolean equals(GameState g0) {
-        this.toString().hashCode() == g0.toString().hashCode();
+        return this.toString().hashCode() == g0.toString().hashCode();
     }
 }

@@ -1,3 +1,4 @@
+package nodes;
 public final class StringOperation {
     private StringOperation() {}
 
@@ -49,6 +50,7 @@ public final class StringOperation {
 
         return null;
     */
+        return null;
     }
 
     public static LiteralNode makeLowerCase(Object op1) {
@@ -80,6 +82,7 @@ public final class StringOperation {
 
         return null;
     */
+        return null;
     }
 
 

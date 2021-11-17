@@ -1,3 +1,5 @@
+package nodes;
+import engine.GameState;
 // A generic class for atomic expressions.
 // Potential expressipn types include Double, String, and GameObjects.
 public class LiteralNode<T> extends Node {

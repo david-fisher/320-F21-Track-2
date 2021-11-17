@@ -1,3 +1,4 @@
+package oracles;
 /* The interface for the AI and its decision making.
    We shall have the following implementations:
        - RandomOracle       -   Random (for any games)

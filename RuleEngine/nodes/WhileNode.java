@@ -1,4 +1,6 @@
+package nodes;
 import java.util.ArrayList;
+import engine.GameState;
 
 // Rule Groups based on IfNode class
 // Requires similar testing
@@ -24,10 +26,6 @@ public class WhileNode extends OpNode {
         while (result) {
             if (hasValidRuleGroup(1)) {
                 for (Node node : getRuleGroup(1)) {
-                    node.execute(currState);
-                }
-            } else if (hasValidRuleGroup(2)){
-                for (Node node : getRuleGroup(2)) {
                     node.execute(currState);
                 }
             } else {

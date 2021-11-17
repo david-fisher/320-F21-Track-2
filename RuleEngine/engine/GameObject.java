@@ -1,3 +1,4 @@
+package engine;
 import java.util.Map;
 
 // Placeholder for GameObject
@@ -23,4 +24,7 @@ public class GameObject {
     public Object getTrait(String trait){
         return this.traits.get(trait);
     }
+    public String repr(boolean hasLabel){
+        return "";
+    } 
 }

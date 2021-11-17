@@ -1,3 +1,5 @@
+package nodes;
+import engine.GameState;
 //import objects;
 
 // The interface for both atomic expressions and rule statements.

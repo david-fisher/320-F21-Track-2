@@ -1,3 +1,4 @@
+package nodes;
 public final class BooleanOperation {
     private BooleanOperation() {}
 
