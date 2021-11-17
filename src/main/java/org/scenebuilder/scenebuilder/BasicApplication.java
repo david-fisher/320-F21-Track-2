@@ -64,8 +64,11 @@ public class BasicApplication extends Application {
         player1.addToken(new DummyGameToken("Token 1", "Square"));
 
         ArrayList<DummyTile> tiles = new ArrayList<>();
-        tiles.add(new DummyTile("Tile 1", "Square", Color.RED, 100, 100, 50, 50, new ArrayList<DummyTile>()));
-        tiles.add(new DummyTile("Tile 2", "Rectangle", Color.OLDLACE, 150, 100, 200, 100, new ArrayList<DummyTile>()));
+        tiles.add(new DummyTile("Tile 1", "Rectangle", Color.RED, 120, 90, 0, 0, new ArrayList<DummyTile>()));
+        tiles.add(new DummyTile("Tile 2", "Rectangle", Color.RED, 120, 90, 680, 0, new ArrayList<DummyTile>()));
+        tiles.add(new DummyTile("Tile 3", "Rectangle", Color.RED, 120, 80, 0, 503, new ArrayList<DummyTile>()));
+        tiles.add(new DummyTile("Tile 4", "Rectangle", Color.RED, 120, 80, 680, 503, new ArrayList<DummyTile>()));
+        //tiles.add(new DummyTile("Tile 2", "Rectangle", Color.OLDLACE, 150, 100, 200, 100, new ArrayList<DummyTile>()));
 
         ArrayList<DummyDeck> decks = new ArrayList<>();
         ArrayList<DummyCard> cards = new ArrayList<>();
@@ -89,7 +92,7 @@ public class BasicApplication extends Application {
 
         DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
 
-        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 800, 10, 10, tiles);
+        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 600, 10, 10, tiles);
 
         DummyGameRules gameRules = new DummyGameRules();
 
@@ -121,7 +124,7 @@ public class BasicApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        if(true) {
+        if(false) {
 
             SelectionController controller = new SelectionController();
             controller.initialize(stage);
