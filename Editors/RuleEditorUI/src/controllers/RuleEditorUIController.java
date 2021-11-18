@@ -29,10 +29,12 @@ import editors.rule_editor_ui.blocks.PsetBlock;
 import editors.rule_editor_ui.blocks.GetBlock;
 import editors.rule_editor_ui.blocks.NotBlock;
 import editors.rule_editor_ui.blocks.BinOpBlock;
-import editors.rule_editor_ui.blocks.TileIndexBlock;
+import editors.rule_editor_ui.blocks.GetTileIndexBlock;
 import editors.rule_editor_ui.blocks.GetTileConnBlock;
 import editors.rule_editor_ui.blocks.ConditionBlock;
-import editors.rule_editor_ui.blocks.TileMoveBlock;
+import editors.rule_editor_ui.blocks.MoveToTileIndexBlock;
+import editors.rule_editor_ui.blocks.MoveByStepsBlock;
+import editors.rule_editor_ui.blocks.MoveToPosBlock;
 
 import editors.main_menu.MainMenu;
 import javafx.fxml.FXML;
@@ -120,7 +122,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
-    TileIndexBlock tileIndex = new TileIndexBlock();
+    GetTileIndexBlock tileIndex = new GetTileIndexBlock();
 
     tileIndex.setTopLeft(editorPane);
     editorPane.getChildren().addAll(tileIndex.getBlock());
@@ -146,11 +148,29 @@ public class RuleEditorUIController implements Initializable {
   }
 
   @FXML
-  private void handleAddTileMoveBtn(ActionEvent event) {
-    TileMoveBlock tileMove = new TileMoveBlock();
+  private void handleAddMoveToTileIndexBtn(ActionEvent event) {
+    MoveToTileIndexBlock tileMove = new MoveToTileIndexBlock();
 
     tileMove.setTopLeft(editorPane);
     editorPane.getChildren().addAll(tileMove.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddMoveByStepsBtn(ActionEvent event) {
+    MoveByStepsBlock steps = new MoveByStepsBlock();
+
+    steps.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(steps.getBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddMoveToPosBtn(ActionEvent event) {
+    MoveToPosBlock pos = new MoveToPosBlock();
+
+    pos.setTopLeft(editorPane);
+    editorPane.getChildren().addAll(pos.getBlock());
     resizeAnchorPane();
   }
 
