@@ -1,4 +1,3 @@
-
 package org.objects;
 
 import java.awt.Color;

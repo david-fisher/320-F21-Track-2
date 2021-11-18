@@ -1,6 +1,6 @@
 package org.scenebuilder.scenebuilder;
 
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -408,6 +408,12 @@ public class PlayController extends ScreenController {
             }
             deck.setOnMouseClicked(e -> {
                 //Open this deck if you can // todo
+                Card topCard = d.drawTop();
+                ArrayList<GameObject> tempInventory = new ArrayList<GameObject>();
+                tempInventory.add(topCard);
+
+                //initializeInventoryDrawer();
+
             });
             container.getChildren().addAll(deck);
             container.setMargin(deck, new Insets(10, 10, 20, 10));
