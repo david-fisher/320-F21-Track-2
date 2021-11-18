@@ -21,9 +21,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.objects.GameObject;
 
 import java.io.IOException;
 import java.util.*;
@@ -196,7 +196,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < min_player; i++) {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1)), true);
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -217,7 +217,7 @@ public class SetupController extends ScreenController {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1)), true);
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
 
             num_players += 1;
             playerCountTextField.setText(Integer.toString(num_players));
@@ -465,18 +465,6 @@ public class SetupController extends ScreenController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
 
-    }
-
-    public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
-        button.setPrefWidth(prefWidth);
-        button.setPrefHeight(prefHeight);
-
-        button.setMinWidth(button.getPrefWidth());
-        button.setMaxWidth(button.getPrefWidth());
-        button.setMinHeight(button.getPrefHeight());
-        button.setMaxHeight(button.getPrefHeight());
-
-        button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
     }
 
 }

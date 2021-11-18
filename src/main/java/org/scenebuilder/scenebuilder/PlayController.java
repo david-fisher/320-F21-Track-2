@@ -61,6 +61,8 @@ public class PlayController extends ScreenController {
     private Label inventoryLabel;
     @FXML
     private Pane settingsPane;
+    @FXML
+    private HBox inventoryContainer;
 
     private Stage stage;
     private SetupData setupData;
@@ -122,6 +124,7 @@ public class PlayController extends ScreenController {
         initDecks(gameState.getDecks());
         //initRNG(gameState.getRNG());
         initPlayers(gameState.getPlayers());
+        initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
 
     }
 
@@ -430,6 +433,7 @@ public class PlayController extends ScreenController {
 
                 //Only in some cases but added for now
                 //inventoryPane.getChildren().add(card);
+                addToInventory(card);
             });
             container.getChildren().addAll(deck);
             container.setMargin(deck, new Insets(10, 10, 20, 10));
@@ -469,31 +473,35 @@ public class PlayController extends ScreenController {
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 
+    private void addToInventory(GameObject object) {
+        double width = object.getWidth() == 0 ? 100 : object.getWidth();
+        double height = object.getHeight() == 0 ? 170 : object.getHeight();
+
+        Rectangle inventoryObject = new Rectangle(width, height);
+        inventoryObject.setUserData(object);
+
+        if(object.getIcon() != null) {
+            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));
+        } else {
+            inventoryObject.setFill(Color.RED);
+        }
+        inventoryObject.setOnMouseClicked(e -> {
+            //Open this deck if you can // todo
+        });
+        inventoryContainer.getChildren().addAll(inventoryObject);
+        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
+    }
+
     private void fillInventoryDrawer(DummyInventory inventory) {
-        HBox container = new HBox();
-//        inventoryPane = new ScrollPane();
-//        container.setAlignment(Pos.CENTER);
-//        container.setSpacing(-10);
-//        inventory.forEach(d -> {
-//            double width = d.getWidth() == 0 ? 100 : d.getWidth();
-//            double height = d.getHeight() == 0 ? 170 : d.getHeight();
-//            Rectangle deck = new Rectangle(width, height);
-//            deck.setUserData(d);
-//
-//            if(d.getIcon() != null) {
-//                deck.setFill(new ImagePattern(new Image(d.getIcon())));
-//            } else {
-//                deck.setFill(Color.RED);
-//            }
-//            deck.setOnMouseClicked(e -> {
-//                //Open this deck if you can // todo
-//            });
-//            container.getChildren().addAll(deck);
-//            container.setMargin(deck, new Insets(10, 10, 20, 10));
-//        });
-//        decksPane.setContent(container);
-//        decksPane.setStyle("-fx-border-color: black");
-//        //decksPane.toFront();
+        inventoryContainer = new HBox();
+        inventoryContainer.setAlignment(Pos.CENTER);
+        inventoryContainer.setSpacing(-10);
+        inventory.getInventory().forEach(d -> {
+            addToInventory(d);
+        });
+        inventoryPane.setContent(inventoryContainer);
+        inventoryPane.setStyle("-fx-border-color: black");
+        //decksPane.toFront();
     }
 
     public void initializePlayScreen() {
