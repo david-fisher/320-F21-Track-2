@@ -291,14 +291,11 @@ public class SetupController extends ScreenController {
                 for(Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
                     if (p.getValue().getPlayerID().equals(t1) && p.getKey() != Integer.valueOf(playerHBox.getId())) {
                         System.out.println("True tho");
-                        Stage popupWindow = new Stage();
-                        popupWindow.initModality(Modality.APPLICATION_MODAL);
-                        Label nameCheckError = new Label("Duplicate name detected! Pick a different name!");
-                        Button exitButton = new Button("Exit");
-                        setButtonSize(exitButton, 170, 80, 40);
-                        exitButton.setOnAction(e->{
-                            popupWindow.close();
-                        });
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error!");
+                        alert.setHeaderText("Duplicate Name Detected!");
+                        alert.setContentText("Players cannot have the same names, please change it.");
+                        alert.showAndWait();
                     }
                 }
             }
