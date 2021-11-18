@@ -10,11 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.objects.*;
+import org.objects.Tile;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class BasicApplication extends Application {
@@ -53,7 +52,7 @@ public class BasicApplication extends Application {
     private static DummyGame createDummyGame(String gameName, String gameShape) {
 
         ArrayList<DummyPlayer> players = new ArrayList<>();
-        DummyPlayer player1 = new DummyPlayer("Player 1", Color.AQUAMARINE, new ArrayList<DummyGameToken>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
+        DummyPlayer player1 = new DummyPlayer("Player 1", Color.AQUAMARINE, new ArrayList<DummyGameToken>(), new DummyInventory("Inventory 1"), true);
         player1.addToken(new DummyGameToken("Token 1", "Square"));
 
         ArrayList<DummyTile> tiles = new ArrayList<>();
@@ -85,42 +84,26 @@ public class BasicApplication extends Application {
 
         ArrayList<Deck> decks = new ArrayList<>();
         ArrayList<DummyCard> cards = new ArrayList<>();
-        Deck deck1 = new Deck();
-        Deck deck2 = new Deck();
-        Deck deck3 = new Deck();
-        Deck deck4 = new Deck();
-        deck1.addCard(new Card(), 52);
-        deck2.addCard(new Card(), 52);
-        deck3.addCard(new Card(), 52);
-        deck4.addCard(new Card(), 52);
+        for(int i = 0; i < 52; ++i) {
+            cards.add(new DummyCard("Card " + i));
+        }
+        
+        DummyDeck deck1 = new DummyDeck("Deck 1", cards);
+        DummyDeck deck2 = new DummyDeck("Deck 2", cards);
+        DummyDeck deck3 = new DummyDeck("Deck 3", cards);
+        DummyDeck deck4 = new DummyDeck("Deck 4", cards);
         decks.add(deck1);
         decks.add(deck2);
         decks.add(deck3);
         decks.add(deck4);
 
-
-        ArrayList<Die> dice = new ArrayList<Die>();
-        ArrayList<Spinner> spinners = new ArrayList();
-
-        Die die1 = new Die();
-        die1.setNumSides(6);
-        dice.add(die1);
-
-        Spinner spinner1 = new Spinner();
-        spinner1.setNumCategories(5);
-        List<Double> spinnerWeight = new ArrayList();
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinners.add(spinner1);
+        ArrayList<DummyRNG> rng = new ArrayList<>();
 
         ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
         DummyGameToken gameToken = new DummyGameToken("Token 1", "Square");
         gameTokens.add(gameToken);
 
-        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, dice, spinners, gameTokens);
+        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
 
         DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
 

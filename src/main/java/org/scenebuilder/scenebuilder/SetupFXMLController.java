@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.objects.GameObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class SetupFXMLController {
         for(int i = 0; i< min_player; i++) {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1)), true);
 //            playerStack.add(player);
             num_players+=1;
             playerHashMap.put(num_players, player);
@@ -80,7 +79,7 @@ public class SetupFXMLController {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1)), true);
 
             num_players += 1;
             numPlayersTextField.setText(Integer.toString(num_players));
