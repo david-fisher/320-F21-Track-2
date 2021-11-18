@@ -52,6 +52,15 @@ public class Controller {
 
 	@FXML
 	private Button objectEditor;
+	
+	@FXML
+    private TextField colorTf;
+	
+	@FXML
+    private TextField imageTf;
+
+    @FXML
+    private TextField nameTf;
 
 	// group root to store all the children shapes/tiles
 	@FXML
@@ -157,6 +166,7 @@ public class Controller {
 		rightclickable.makeRightClickable(r.tileShape, shapeCanvas);
 	}
 	
+	
 	@FXML
 	public void start(Stage primaryStage) {
 
@@ -181,4 +191,6 @@ public class Controller {
 
 		primaryStage.show();
 	}
+	
+	
 }

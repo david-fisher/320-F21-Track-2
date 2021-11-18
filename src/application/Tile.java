@@ -78,4 +78,8 @@ public class Tile extends GameObject
     public String toString() {
     	return this.getLabel();
     }
+    
+    private getName() {
+		return this.nameTf;
+	}
 }
