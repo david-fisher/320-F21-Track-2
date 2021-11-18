@@ -426,7 +426,8 @@ public class SetupController extends ScreenController {
         ArrayList<DummyPlayer> dummyPlayerArrayList = new ArrayList<>(values);
 
         BasicApplication.setSetupData(new SetupData(new ArrayList<>(dummyPlayerArrayList), tutorialModeCheckBox.isSelected()));
-        switchScene(event, "playFXML.fxml");
+        PlayController controller = new PlayController();
+        controller.initialize(stage);
     }
 
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
