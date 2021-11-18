@@ -35,8 +35,6 @@ public class GetNode extends OpNode {
         } else {
             go = currState.registers.get(str2);
         }
-//        TODO: activate and test after UMass Dining pushes new GameObject definition.
-//        return new LiteralNode<Object>(go.getTrait(str1));
-        return null;
+        return new LiteralNode<Object>(go.getTrait(str1));
     }
 }

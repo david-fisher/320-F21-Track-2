@@ -16,10 +16,13 @@ public class GameObject {
         this.label = newLabel;
         return;
     }
+    public boolean setTrait(String trait, Object value) {
+        this.traits.put(trait, value);
+        return true;
+    }
     public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
         this.traits.put(trait, value);
         return true;
-
     }
     public Object getTrait(String trait){
         return this.traits.get(trait);
