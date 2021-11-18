@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import engine.*;
 import nodes.*;
 // WIP
+/* 0 1 2
+ * 3 4 5
+ * 6 7 8
+ */
+
 public class TicTacToe {
     public static void main(String args[]) {
         Interpreter interpreter = new Interpreter();
