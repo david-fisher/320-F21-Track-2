@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -262,9 +263,36 @@ public class SetupController extends ScreenController {
         // Add listener for Color Picker
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
-                hboxPlayer.getGameTokens().get(0).setTokenColor(colorPicker.getValue()); // todo get game piece by reference
-                String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
-                colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+                DummyPlayer player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+                Color initColor = player.getColor();
+                Integer ID = Integer.valueOf(playerHBox.getId());
+                for(Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
+                    if (p.getValue().getColor().equals(colorPicker.getValue())) {
+                        if(p.getKey() == ID){
+                            continue;
+                        }
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error!");
+                        alert.setHeaderText("Duplicate Color Detected!");
+                        alert.setContentText("Players cannot have the same colors, please change it.");
+                        player.setColor(initColor);
+                        Rectangle rec = (Rectangle) colorPicker.lookup("Rectangle");
+                        rec.setFill(initColor);
+                        hboxPlayer.getGameTokens().get(0).setTokenColor(initColor); // todo get game piece by reference
+                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+                        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+                        alert.showAndWait();
+                        break;
+                    }
+                    else{
+                        hboxPlayer.getGameTokens().get(0).setTokenColor(colorPicker.getValue()); // todo get game piece by reference
+                        player.setColor(colorPicker.getValue());
+                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+                        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+                    }
+                }
+                System.out.println(playerHashMap);
+                System.out.println(initColor);
             }
         });
 
@@ -280,22 +308,30 @@ public class SetupController extends ScreenController {
         playerField.setFont(new Font(16));
         playerField.setStyle("-fx-font-family: serif;");
         playerField.setPrefWidth(114);
+        playerField.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
-        playerField.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 DummyPlayer player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
-                player.setPlayerID(t1);
-                System.out.println("Changed called, s = " + s + " and t1 = " + t1);
-                System.out.println(playerHashMap.toString());
-                for(Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
-                    if (p.getValue().getPlayerID().equals(t1) && p.getKey() != Integer.valueOf(playerHBox.getId())) {
-                        System.out.println("True tho");
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Error!");
-                        alert.setHeaderText("Duplicate Name Detected!");
-                        alert.setContentText("Players cannot have the same names, please change it.");
-                        alert.showAndWait();
+                Integer ID = Integer.valueOf(playerHBox.getId());
+                if(!t1) {
+                    player.setPlayerID(playerField.getText());
+                    System.out.println("Player: " + player + " and t1: " + t1);
+                    for (Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
+                        if (p.getKey() == ID) {
+                            continue;
+                        }
+                        if (p.getValue().getPlayerID().equals(player.getPlayerID())) {
+
+//                          OPTIONAL: Alert box below.
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Error!");
+                            alert.setHeaderText("Duplicate Name Detected!");
+                            alert.setContentText("Players cannot have the same names, please change it.");
+                            alert.showAndWait();
+                            playerField.requestFocus();
+                        }
                     }
                 }
             }
