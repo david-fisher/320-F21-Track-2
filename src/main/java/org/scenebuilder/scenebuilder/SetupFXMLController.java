@@ -145,6 +145,23 @@ public class SetupFXMLController {
         playerField.setStyle("-fx-font-family: serif;");
         playerField.setPrefWidth(114);
 
+        // playerField.textProperty().addListener(new ChangeListener<String>() {
+        //     TODO: Actually make this work... (Nic)
+        //     @Override
+        //     public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+        //         if (playerHashMap.containsValue(s)) {
+        //             Stage popupWindow = new Stage();
+        //             popupWindow.initModality(Modality.APPLICATION_MODAL);
+        //             Label nameCheckError = new Label("Duplicate name detected! Pick a different name!");
+        //             Button exitButton = new Button("Exit");
+        //             setButtonSize(exitButton, 170, 80, 40);
+        //             exitButton.setOnAction(e->{
+        //                 popupWindow.close();
+        //             });
+        //         }
+        //     }
+        // });
+
         Separator playerSeparator = new Separator();
         playerSeparator.setOrientation(Orientation.VERTICAL);
         playerSeparator.setPrefHeight(27);
