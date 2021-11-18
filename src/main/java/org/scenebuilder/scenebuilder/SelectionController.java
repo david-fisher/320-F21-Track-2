@@ -242,11 +242,8 @@ public class SelectionController extends ScreenController {
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
                     BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
-                    try {
-                        switchScene(event, "playFXML.fxml");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    PlayController controller = new PlayController();
+                    controller.initialize(stage);
                 });
 
                 // deselect all rectangles

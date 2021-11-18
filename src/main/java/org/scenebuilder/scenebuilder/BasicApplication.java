@@ -56,17 +56,38 @@ public class BasicApplication extends Application {
         player1.addToken(new DummyGameToken("Token 1", "Square"));
 
         ArrayList<DummyTile> tiles = new ArrayList<>();
-        tiles.add(new DummyTile("Tile 1", "Rectangle", Color.RED, 120, 90, 0, 0, new ArrayList<DummyTile>()));
-        tiles.add(new DummyTile("Tile 2", "Rectangle", Color.RED, 120, 90, 680, 0, new ArrayList<DummyTile>()));
-        tiles.add(new DummyTile("Tile 3", "Rectangle", Color.RED, 120, 80, 0, 503, new ArrayList<DummyTile>()));
-        tiles.add(new DummyTile("Tile 4", "Rectangle", Color.RED, 120, 80, 680, 503, new ArrayList<DummyTile>()));
-        //tiles.add(new DummyTile("Tile 2", "Rectangle", Color.OLDLACE, 150, 100, 200, 100, new ArrayList<DummyTile>()));
+
+        double tileWidth = 100;
+        double tileHeight = 100;
+
+        double tileX = 0;
+        double tileY = 0;
+
+        boolean red = true;
+        for (int i = 1; i < 57; i++) {
+
+            if (red) {
+                tiles.add(new DummyTile("Tile 1", "Rectangle", Color.RED, tileWidth, tileHeight, tileX, tileY, new ArrayList<DummyTile>()));
+                red = false;
+            } else {
+                tiles.add(new DummyTile("Tile 1", "Rectangle", Color.BLACK, tileWidth, tileHeight, tileX, tileY, new ArrayList<DummyTile>()));
+                red = true;
+            }
+            if (i%8 == 0) {
+                red = !red;
+                tileY += 100;
+                tileX = 0;
+            } else {
+                tileX += 100;
+            }
+        }
 
         ArrayList<DummyDeck> decks = new ArrayList<>();
         ArrayList<DummyCard> cards = new ArrayList<>();
         for(int i = 0; i < 52; ++i) {
             cards.add(new DummyCard("Card " + i));
         }
+        
         DummyDeck deck1 = new DummyDeck("Deck 1", cards);
         DummyDeck deck2 = new DummyDeck("Deck 2", cards);
         DummyDeck deck3 = new DummyDeck("Deck 3", cards);
@@ -84,7 +105,7 @@ public class BasicApplication extends Application {
 
         DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, rng, gameTokens);
 
-        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 600, 10, 10, tiles);
+        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
 
         DummyGameRules gameRules = new DummyGameRules();
 
@@ -118,10 +139,9 @@ public class BasicApplication extends Application {
 
         if(true) {
 
-            MainController controller = new MainController();
             //SelectionController controller = new SelectionController();
-            //SetupController controller = new SetupController();
-
+            MainController controller = new MainController();
+            //PlayController controller = new PlayController();
             stage.initStyle(StageStyle.UNDECORATED); // remove title bar
             controller.initialize(stage);
 
