@@ -21,6 +21,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -280,6 +281,29 @@ public class SetupController extends ScreenController {
         playerField.setStyle("-fx-font-family: serif;");
         playerField.setPrefWidth(114);
 
+        playerField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                DummyPlayer player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+                player.setPlayerID(t1);
+                System.out.println("Changed called, s = " + s + " and t1 = " + t1);
+                System.out.println(playerHashMap.toString());
+                for(Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
+                    if (p.getValue().getPlayerID().equals(t1) && p.getKey() != Integer.valueOf(playerHBox.getId())) {
+                        System.out.println("True tho");
+                        Stage popupWindow = new Stage();
+                        popupWindow.initModality(Modality.APPLICATION_MODAL);
+                        Label nameCheckError = new Label("Duplicate name detected! Pick a different name!");
+                        Button exitButton = new Button("Exit");
+                        setButtonSize(exitButton, 170, 80, 40);
+                        exitButton.setOnAction(e->{
+                            popupWindow.close();
+                        });
+                    }
+                }
+            }
+        });
+
         Separator playerSeparator = new Separator();
         playerSeparator.setOrientation(Orientation.VERTICAL);
         playerSeparator.setPrefHeight(27);
@@ -444,6 +468,18 @@ public class SetupController extends ScreenController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
 
+    }
+
+    public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
+        button.setPrefWidth(prefWidth);
+        button.setPrefHeight(prefHeight);
+
+        button.setMinWidth(button.getPrefWidth());
+        button.setMaxWidth(button.getPrefWidth());
+        button.setMinHeight(button.getPrefHeight());
+        button.setMaxHeight(button.getPrefHeight());
+
+        button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
     }
 
 }
