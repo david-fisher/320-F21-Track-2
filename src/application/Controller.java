@@ -129,6 +129,7 @@ public class Controller {
 
 	Draggable draggable = new Draggable();
 	Rightclickable rightclickable = new Rightclickable();
+	Leftclickable leftclickable = new Leftclickable();
 
 	@FXML
 	public void initialize() {
@@ -153,6 +154,7 @@ public class Controller {
 		shapeCanvas.getChildren().add(c.tileShape);
 		draggable.makeDraggable(c.tileShape);
 		rightclickable.makeRightClickable(c.tileShape, shapeCanvas);
+		leftclickable.makeLeftclickable(c, nameTf, imageTf, colorTf);
 	}
 
 	@FXML
@@ -164,6 +166,7 @@ public class Controller {
 		shapeCanvas.getChildren().add(r.tileShape);
 		draggable.makeDraggable(r.tileShape);
 		rightclickable.makeRightClickable(r.tileShape, shapeCanvas);
+		leftclickable.makeLeftclickable(r, nameTf, imageTf, colorTf);
 	}
 	
 	

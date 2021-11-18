@@ -79,7 +79,4 @@ public class Tile extends GameObject
     	return this.getLabel();
     }
     
-    private getName() {
-		return this.nameTf;
-	}
 }
