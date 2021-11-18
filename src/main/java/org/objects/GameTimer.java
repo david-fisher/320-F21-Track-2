@@ -1,7 +1,6 @@
 package org.objects;
 
 import java.awt.Color;
-import javafx.scene.paint.*;
 import javax.swing.Timer ;
 import java.awt.event.ActionListener;
 

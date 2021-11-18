@@ -10,7 +10,7 @@ public class Card extends GameObject {
   public Card() {
 	  super() ;
 	  this.setLabel("card" + String.format("%02d", ++count));
-	  this.setIcon("https://render.fineartamerica.com/images/rendered/default/greeting-card/images/artworkimages/medium/1/chance-card-vintage-monopoly-get-out-of-jail-free-design-turnpike.jpg?&targetx=0&targety=0&imagewidth=700&imageheight=500&modelwidth=700&modelheight=500&backgroundcolor=48160C&orientation=0") ;
+	  this.setIcon("default_gamepiece_icon.jpg") ;
 	  this.setColor(Color.BLACK) ;
 	  this.setText("default text");
   }
