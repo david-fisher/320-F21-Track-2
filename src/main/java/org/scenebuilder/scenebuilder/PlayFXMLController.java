@@ -152,7 +152,7 @@ public class PlayFXMLController {
         // add tile to anchorPane
     }
 
-    private void initDecks(ArrayList<DummyDeck> decks) {
+    private void initDecks(ArrayList<Deck> decks) {
         initializeDeckDrawer(decks, decksPane);
 
         // for each deck
@@ -191,7 +191,7 @@ public class PlayFXMLController {
     }
 
     //A method to add all the decks to the deck slider
-    private static void initializeDeckDrawer(ArrayList<DummyDeck> decks, ScrollPane decksPane) {
+    private static void initializeDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {
 
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);

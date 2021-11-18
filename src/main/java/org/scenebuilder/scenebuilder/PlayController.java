@@ -1,5 +1,7 @@
 package org.scenebuilder.scenebuilder;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -209,7 +211,7 @@ public class PlayController extends ScreenController {
     }
 
     private void initInventory(DummyInventory inventory) {
-        fillInventoryDrawer(inventory, inventoryPane);
+        fillInventoryDrawer(inventory);
     }
 
     private void initSettingsAndPlayerIndicatorHBox() {
@@ -391,23 +393,44 @@ public class PlayController extends ScreenController {
 
     //A method to add all the decks to the deck slider
     private void fillDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double playWidth = screenDimensions.getWidth();
+        double playHeight = screenDimensions.getHeight();
+
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
         container.setSpacing(-10);
         decks.forEach(d -> {
             double width = d.getWidth() == 0 ? 100 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
-            ImageView deck = new ImageView(new Image(d.getIcon(), 100, 170, true, true));
+            Rectangle deck = new Rectangle(width, height);
             deck.setUserData(d);
 
             if(d.getIcon() != null) {
-                System.out.println(d.getIcon());
-                //deck.setFill(new ImagePattern(new Image(d.getIcon())));
+                deck.setFill(new ImagePattern(new Image(d.getIcon())));
             } else {
-                //deck.setFill(Color.RED);
+                deck.setFill(Color.RED);
             }
             deck.setOnMouseClicked(e -> {
                 //Open this deck if you can // todo
+                Card card = d.drawTop();
+                ImageView cardImage = new ImageView(card.getIcon());
+
+                cardImage.setFitWidth(200);
+                cardImage.setFitHeight(340);
+                System.out.println(cardImage.getFitHeight() + " " + cardImage.getFitWidth());
+                playParent.getChildren().add(cardImage);
+                cardImage.setX(playWidth / 2 - 100);
+                cardImage.setY(playHeight / 2 - 170);
+                final Timeline timeline = new Timeline();
+                timeline.setCycleCount(2);
+                timeline.setAutoReverse(true);
+                timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
+                        k -> playParent.getChildren().remove(cardImage)));
+                timeline.play();
+
+                //Only in some cases but added for now
+                //inventoryPane.getChildren().add(card);
             });
             container.getChildren().addAll(deck);
             container.setMargin(deck, new Insets(10, 10, 20, 10));
@@ -447,9 +470,8 @@ public class PlayController extends ScreenController {
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 
-    private void fillInventoryDrawer(DummyInventory inventory, ScrollPane inventoryPane) {
+    private void fillInventoryDrawer(DummyInventory inventory) {
         HBox container = new HBox();
-        inventoryPane = new ScrollPane();
         container.setAlignment(Pos.CENTER);
         container.setSpacing(-10);
         inventory.getInventory().forEach(i -> {

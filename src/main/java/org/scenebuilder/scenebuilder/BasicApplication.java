@@ -83,7 +83,7 @@ public class BasicApplication extends Application {
             }
         }
 
-        ArrayList<DummyDeck> decks = new ArrayList<>();
+        ArrayList<Deck> decks = new ArrayList<>();
         ArrayList<DummyCard> cards = new ArrayList<>();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
