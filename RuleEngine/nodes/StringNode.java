@@ -14,6 +14,10 @@ public class StringNode extends OpNode {
         super(operands);
         operator = op;
     }
+    
+    public String getOperator() { return operator; }
+    public void setOperator(String op) { operator = op; }
+    
     public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);

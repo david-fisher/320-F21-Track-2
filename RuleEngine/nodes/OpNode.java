@@ -8,7 +8,7 @@ public abstract class OpNode extends Node {
     // TODO: Is it better to, instead of having a 2d list for all operation node,
     // let each node have their own way of storing the children? May be doable with factory and visitors.
     // A future topic to discuss perhaps.
-    public ArrayList<ArrayList<Node>> operands;
+    protected ArrayList<ArrayList<Node>> operands;
 
     public OpNode(ArrayList<ArrayList<Node>> operands) {
         this.operands = operands;
@@ -92,4 +92,8 @@ public abstract class OpNode extends Node {
         }
         return operands.get(0).get(i);
     }
+    
+    // Required for object persistence
+    public ArrayList<ArrayList<Node>> getAllOperands() { return operands; }
+    public void setAllOperands(ArrayList<ArrayList<Node>> operands) { this.operands = operands; }
 }
