@@ -8,7 +8,7 @@ public class DummyGameToken implements Comparable<DummyGameToken> {
 
     private String tokenID;
 
-    private Color tokenColor;
+    private Color tokenColor = Color.WHITE;
     private String tokenShape;
 
     public DummyGameToken(String tokenID, Color tokenColor, String tokenShape) {
@@ -65,13 +65,8 @@ public class DummyGameToken implements Comparable<DummyGameToken> {
     }
 
     @Override
-    public String toString() {
-        return tokenShape;
-    }
+    public String toString() {return tokenShape;}
 
     @Override
-    public int compareTo(DummyGameToken o) {
-        return this.getTokenShape().compareTo(o.getTokenShape());
-
-    }
+    public int compareTo(DummyGameToken o) {return this.getTokenShape().compareTo(o.getTokenShape());}
 }

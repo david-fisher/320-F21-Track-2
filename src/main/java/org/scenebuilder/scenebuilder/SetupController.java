@@ -196,7 +196,6 @@ public class SetupController extends ScreenController {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
             DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1)), true);
-//            playerStack.add(player);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -396,13 +395,30 @@ public class SetupController extends ScreenController {
     }
 
     public void playFromSetup(ActionEvent event) throws IOException {
-
+    
         // Get modified name
         for ( Node h: playersVBox.getChildren()) {
             for (Node t: ((HBox) h).getChildren()) {
                 DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
-                if(t instanceof TextField)
-                    hboxPlayer.setPlayerID(((TextField) t).getText());}
+                // This is setting the player name
+                if (t instanceof TextField)
+                    hboxPlayer.setPlayerID(((TextField) t).getText());
+
+                // This is setting the player's GameToken
+                if (t instanceof ComboBox) {
+                    // Set the color to the Token
+                    DummyGameToken token = (DummyGameToken) ((ComboBox) t).getSelectionModel().getSelectedItem();
+                    Color c = hboxPlayer.getGameTokens().get(0).getTokenColor();
+                    token.setTokenColor(c);
+                    System.out.println(token);
+
+                    // Assign the token to the player
+                    if(hboxPlayer.getGameTokens().size() == 1)
+                        hboxPlayer.setToken(0, token);
+                    else
+                        hboxPlayer.addToken(token);
+                }
+            }
         }
 
         // Move all the players from the hashmaps to an array list

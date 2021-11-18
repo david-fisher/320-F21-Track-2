@@ -122,7 +122,7 @@ public class BasicApplication extends Application {
             //SelectionController controller = new SelectionController();
             //SetupController controller = new SetupController();
 
-            stage.initStyle(StageStyle.UNDECORATED); // remove title bar
+//            stage.initStyle(StageStyle.UNDECORATED); // remove title bar
             controller.initialize(stage);
 
         } else {
