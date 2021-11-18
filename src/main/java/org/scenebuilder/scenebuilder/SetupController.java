@@ -25,10 +25,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class SetupController extends ScreenController {
 
@@ -183,6 +180,8 @@ public class SetupController extends ScreenController {
     private DummyGame selectedGame;
 
     private HashMap<Integer, DummyPlayer> playerHashMap = new HashMap<Integer, DummyPlayer>();
+    int max_player = 8; // todo, read value from game settings
+    private HashMap<DummyGameToken, Boolean> dummyTokenMap = generateNGameTokens(max_player);
 
     private void initStuff() {
 
@@ -204,6 +203,10 @@ public class SetupController extends ScreenController {
             // add Player Node to VBox
             addPlayerNode();
         }
+
+
+        int max_player = 8;// todo, read value from game settings
+        System.out.println(dummyTokenMap);
     }
 
     public void addPlayer(ActionEvent event) throws IOException {
@@ -320,7 +323,41 @@ public class SetupController extends ScreenController {
         humanToggleButton.setToggleGroup(group);
         aIToggleButton.setToggleGroup(group);
 
-        playerHBox.getChildren().addAll(colorPicker, playerSeparator1, playerField, playerSeparator, humanToggleButton, aIToggleButton);
+        Separator playerSeparator2 = new Separator();
+        playerSeparator2.setOrientation(Orientation.VERTICAL);
+        playerSeparator2.setPrefHeight(27);
+        playerSeparator2.setPrefWidth(84);
+
+        // --- Combo Box Code ---
+        final ComboBox comboBox = new ComboBox();
+        comboBox.setStyle("-fx-font-family: serif;");
+        // Adds all available token here
+        comboBox.getItems().addAll(getAvailableToken());
+
+        // Selects the top one for default and make it unavailable
+        comboBox.getSelectionModel().select(0);
+        Object selectedItem = comboBox.getSelectionModel().getSelectedItem();
+        dummyTokenMap.put((DummyGameToken) selectedItem, !dummyTokenMap.get(selectedItem));
+
+        // On mouse click the combo box, we have to refresh the options
+        comboBox.setOnMousePressed((e) -> {
+            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
+            if (inSelectedItem != null)
+                dummyTokenMap.put((DummyGameToken) inSelectedItem, true);
+            comboBox.getItems().clear();
+            comboBox.getItems().addAll(getAvailableToken());
+        });
+
+        // On mouse clicked the items IN the combo box, we have to make that item unavailable
+        comboBox.setOnAction((event) -> {
+            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
+            if (inSelectedItem != null)
+                dummyTokenMap.put((DummyGameToken) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
+        });
+        // --- Combo Box Code End ---
+
+        playerHBox.getChildren().addAll(colorPicker, playerSeparator1, playerField, playerSeparator,
+                humanToggleButton, aIToggleButton, playerSeparator2, comboBox);
 
         // add hbox storing all the player label, divider, and player/human controls
         playersVBox.getChildren().add(playerHBox);
@@ -334,6 +371,28 @@ public class SetupController extends ScreenController {
     public void backFromSetup() {
         SelectionController controller = new SelectionController();
         controller.initialize(stage);
+    }
+
+    // Generate N (dummy) tokens for the players
+    // This is a shit method, only for DEMO purposes. If this makes the final product then LOL
+    private HashMap<DummyGameToken, Boolean> generateNGameTokens(int n){
+        HashMap<DummyGameToken, Boolean> dummyTokenMap = new HashMap<>();
+
+        for(int i = 0; i < n; i++){
+            DummyGameToken gt = new DummyGameToken("Token " + (i+1), (Color) null, "Shape " + (i+1));
+            dummyTokenMap.put(gt, true);
+        }
+        return dummyTokenMap;
+    }
+
+    private ArrayList<DummyGameToken> getAvailableToken(){
+        Set<DummyGameToken> set = dummyTokenMap.keySet();
+        ArrayList<DummyGameToken> availToken = new ArrayList<>();
+        for (DummyGameToken gt : set){
+            if(dummyTokenMap.get(gt)){availToken.add(gt);}
+        }
+        Collections.sort(availToken);
+        return availToken;
     }
 
     public void playFromSetup(ActionEvent event) throws IOException {

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
-public class DummyGameToken {
+public class DummyGameToken implements Comparable<DummyGameToken> {
 
     private String tokenID;
 
@@ -64,5 +64,14 @@ public class DummyGameToken {
         return Color.rgb(red, green, blue, .99);
     }
 
+    @Override
+    public String toString() {
+        return tokenShape;
+    }
 
+    @Override
+    public int compareTo(DummyGameToken o) {
+        return this.getTokenShape().compareTo(o.getTokenShape());
+
+    }
 }
