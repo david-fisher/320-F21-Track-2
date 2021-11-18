@@ -31,7 +31,10 @@ public class WhileNode extends OpNode {
             } else {
                 return null;
             }
+            
+            result = (Boolean)condition.getValue();
         }
+        
         return null; 
     }
 }
