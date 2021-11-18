@@ -10,6 +10,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
@@ -21,7 +23,8 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.objects.Die;
+
+import org.objects.*;
 import org.objects.Spinner;
 
 import java.io.IOException;
@@ -65,6 +68,7 @@ public class PlayController extends ScreenController {
     public void initialize(Stage stage) {
 
         super.initialize(stage);
+        this.stage = stage;
 
 
         // load relevant data
@@ -114,9 +118,8 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initDecks(gameState.getDecks());
-
         //initRNG(gameState.getRNG());
-
+        initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
         initPlayers(gameState.getPlayers());
 
     }
@@ -167,7 +170,7 @@ public class PlayController extends ScreenController {
         // add tile to anchorPane
     }
 
-    private void initDecks(ArrayList<DummyDeck> decks) {
+    private void initDecks(ArrayList<Deck> decks) {
         fillDeckDrawer(decks, decksPane);
 
         // for each deck
@@ -203,6 +206,10 @@ public class PlayController extends ScreenController {
         // get piece
         // draw piece at its location
         // set other info..?
+    }
+
+    private void initInventory(DummyInventory inventory) {
+        fillInventoryDrawer(inventory, inventoryPane);
     }
 
     private void initSettingsAndPlayerIndicatorHBox() {
@@ -383,20 +390,21 @@ public class PlayController extends ScreenController {
     }
 
     //A method to add all the decks to the deck slider
-    private void fillDeckDrawer(ArrayList<DummyDeck> decks, ScrollPane decksPane) {
+    private void fillDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
         container.setSpacing(-10);
         decks.forEach(d -> {
             double width = d.getWidth() == 0 ? 100 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
-            Rectangle deck = new Rectangle(width, height);
+            ImageView deck = new ImageView(new Image(d.getIcon(), 100, 170, true, true));
             deck.setUserData(d);
 
             if(d.getIcon() != null) {
-                deck.setFill(new ImagePattern(new Image(d.getIcon())));
+                System.out.println(d.getIcon());
+                //deck.setFill(new ImagePattern(new Image(d.getIcon())));
             } else {
-                deck.setFill(Color.RED);
+                //deck.setFill(Color.RED);
             }
             deck.setOnMouseClicked(e -> {
                 //Open this deck if you can // todo
@@ -411,15 +419,15 @@ public class PlayController extends ScreenController {
         //tabsVBox.getChildren().addAll(decksPane);
     }
 
-    public static void fillRNGDrawer(ArrayList<Die> dice, ArrayList<Spinner> spinners, ScrollPane rngPane) {
+    public void fillRNGDrawer(ArrayList<Die> dice, ArrayList<Spinner> spinners, ScrollPane rngPane) {
         HBox container = new HBox();
         container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
 
         dice.forEach(d -> {
-            Rectangle die = new Rectangle(100, 100);
+            ImageView die = new ImageView(new Image(d.getIcon(), d.getWidth(), d.getHeight(), true, true));
             die.setUserData(d);
-            die.setFill(new ImagePattern(new Image(d.getIcon())));
+            //die.setFill(new ImagePattern(new Image(d.getIcon())));
             die.setOnMouseClicked(e -> {
                 // roll this die if you can
             });
@@ -427,9 +435,9 @@ public class PlayController extends ScreenController {
         });
 
         spinners.forEach(d -> {
-            Circle spinner = new Circle(100);
+            ImageView spinner = new ImageView(new Image(d.getIcon(), d.getWidth(), d.getHeight(), true, true));
             spinner.setUserData(d);
-            spinner.setFill(new ImagePattern(new Image(d.getIcon())));
+            //spinner.setFill(new ImagePattern(new Image(d.getIcon())));
             spinner.setOnMouseClicked(e -> {
                 // spin this spinner if you can
             });
@@ -439,31 +447,23 @@ public class PlayController extends ScreenController {
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 
-    private static void fillInventoryDrawer(ArrayList<DummyInventory> inventory, ScrollPane inventoryPane) {
-//        HBox container = new HBox();
-//        inventoryPane = new ScrollPane();
-//        container.setAlignment(Pos.CENTER);
-//        container.setSpacing(-10);
-//        inventory.forEach(d -> {
-//            double width = d.getWidth() == 0 ? 100 : d.getWidth();
-//            double height = d.getHeight() == 0 ? 170 : d.getHeight();
-//            Rectangle deck = new Rectangle(width, height);
-//            deck.setUserData(d);
-//
-//            if(d.getIcon() != null) {
-//                deck.setFill(new ImagePattern(new Image(d.getIcon())));
-//            } else {
-//                deck.setFill(Color.RED);
-//            }
-//            deck.setOnMouseClicked(e -> {
-//                //Open this deck if you can // todo
-//            });
-//            container.getChildren().addAll(deck);
-//            container.setMargin(deck, new Insets(10, 10, 20, 10));
-//        });
-//        decksPane.setContent(container);
-//        decksPane.setStyle("-fx-border-color: black");
-//        //decksPane.toFront();
+    private void fillInventoryDrawer(DummyInventory inventory, ScrollPane inventoryPane) {
+        HBox container = new HBox();
+        inventoryPane = new ScrollPane();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(-10);
+        inventory.getInventory().forEach(i -> {
+            ImageView inventoryItem = new ImageView(new Image(i.getIcon(), i.getWidth(), i.getHeight(), true, true));
+            inventoryItem.setUserData(i);
+            //inventoryItem.setFill(new ImagePattern(new Image(i.getIcon())));
+            inventoryItem.setOnMouseClicked(e -> {
+
+            });
+            container.getChildren().addAll(inventoryItem);
+        });
+        inventoryPane.setContent(container);
+        inventoryPane.setStyle("-fx-border-color: black");
+        //decksPane.toFront();
     }
 
     public void initializePlayScreen() {
@@ -486,8 +486,9 @@ public class PlayController extends ScreenController {
         initInventoryLabel();
     }
     @FXML
-    public void exitFromPlay(ActionEvent event, Stage baseStage) throws IOException {
-        switchScene(event, "mainFXML.fxml", baseStage);
+    public void exitFromPlay() {
+        MainController controller = new MainController();
+        controller.initialize(stage);
     }
 
     @FXML
@@ -614,11 +615,7 @@ public class PlayController extends ScreenController {
             yes.setOnAction(e-> {
                 popupWindow.close();
                 parentPopup.close();
-                try {
-                    exitFromPlay(e, baseStage);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                exitFromPlay();
             });
             no.setOnAction(e->popupWindow.close());
 
@@ -650,11 +647,7 @@ public class PlayController extends ScreenController {
                     displayExitWithoutSave(baseStage, popupWindow);
                 } else {
                     popupWindow.close();
-                    try {
-                        exitFromPlay(e, baseStage);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    exitFromPlay();
                 }
             });
             restartButton.setOnAction(e->{

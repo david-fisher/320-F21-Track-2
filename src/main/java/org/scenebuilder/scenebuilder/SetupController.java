@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.objects.GameObject;
 
 import java.io.IOException;
 import java.util.*;
@@ -195,7 +196,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < min_player; i++) {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1)), true);
+            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -216,7 +217,7 @@ public class SetupController extends ScreenController {
             ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
             gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1)), true);
+            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
 
             num_players += 1;
             playerCountTextField.setText(Integer.toString(num_players));

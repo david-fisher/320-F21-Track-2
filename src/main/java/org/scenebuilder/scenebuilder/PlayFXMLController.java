@@ -98,7 +98,7 @@ public class PlayFXMLController {
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
-        initDecks(gameState.getDecks());
+        //initDecks(gameState.getDecks());
 
         //initRNG(gameState.getRNG());
 

@@ -1,6 +1,7 @@
 package org.objects;
 
 import java.awt.Color;
+import javafx.scene.paint.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Deck extends GameObject {
     deck = new ArrayList<Card>() ;
     
 	this.setLabel("deck" + String.format("%02d", ++count));
-	this.setIcon("default_gamepiece_icon.jpg") ;
+	this.setIcon("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/chance-vintage-monopoly-board-game-theme-card-design-turnpike.jpg") ;
 	this.setColor(Color.BLACK) ;
     this.setTrait("cards", deck, true) ;
   }
