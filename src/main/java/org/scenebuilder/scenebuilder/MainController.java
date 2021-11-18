@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -80,6 +81,7 @@ public class MainController extends ScreenController {
 
         super.initialize(stage);
 
+        screenVBox.setAlignment(Pos.CENTER);
         initButtons();
     }
 

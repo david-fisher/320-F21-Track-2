@@ -13,13 +13,12 @@ public class ScreenController {
 
     AnchorPane anchorPane;
     VBox screenVBox;
-    protected void initAnchorPane() {
+    private void initAnchorPane() {
 
         anchorPane = new AnchorPane();
         //anchorPane.setStyle("-fx-border-color: black; -fx-background-color: #" + secondaryColor.toString().substring(2));
 
         screenVBox = new VBox();
-        screenVBox.setAlignment(Pos.CENTER);
         AnchorPane.setTopAnchor(screenVBox, 3.0);
         AnchorPane.setBottomAnchor(screenVBox, 3.0);
         AnchorPane.setLeftAnchor(screenVBox, 3.0);

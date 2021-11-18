@@ -129,10 +129,8 @@ public class SelectionController extends ScreenController {
 
         backButton = new Button();
         backButton.setText("Back");
-        //backButton.setTextFill(Color.WHITE);
         backButton.setFont(new Font(24));
         backButton.setPadding(new Insets(5, 20, 5, 20));
-        //backButton.setStyle("-fx-background-color: #" + accentColor.toString().substring(2));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
         backButton.setOnAction(event -> {
@@ -210,13 +208,13 @@ public class SelectionController extends ScreenController {
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
                 selectGameButton.setOnAction(event -> {
+
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
-                    try {
-                        switchScene(event, "setupFXML.fxml");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
+                    SetupController controller = new SetupController();
+                    controller.initialize(stage);
+
                 });
 
                 // deselect all rectangles

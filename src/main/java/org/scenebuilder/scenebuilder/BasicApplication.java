@@ -118,8 +118,10 @@ public class BasicApplication extends Application {
 
         if(true) {
 
-            //SelectionController controller = new SelectionController();
             MainController controller = new MainController();
+            //SelectionController controller = new SelectionController();
+            //SetupController controller = new SetupController();
+
             stage.initStyle(StageStyle.UNDECORATED); // remove title bar
             controller.initialize(stage);
 
