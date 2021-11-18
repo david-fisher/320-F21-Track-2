@@ -23,6 +23,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 public class Controller {
 
@@ -55,6 +56,9 @@ public class Controller {
 	// group root to store all the children shapes/tiles
 	@FXML
 	private Group root = new Group();
+	
+	@FXML
+	private TextField inputField;
 
 	@FXML
 	// refers to the save button
@@ -152,7 +156,8 @@ public class Controller {
 		draggable.makeDraggable(r.tileShape);
 		rightclickable.makeRightClickable(r.tileShape, shapeCanvas);
 	}
-
+	
+	@FXML
 	public void start(Stage primaryStage) {
 
 		primaryStage.setTitle("Customer Information");
@@ -176,5 +181,4 @@ public class Controller {
 
 		primaryStage.show();
 	}
-
 }
