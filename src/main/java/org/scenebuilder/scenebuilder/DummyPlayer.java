@@ -68,4 +68,14 @@ public class DummyPlayer {
         return Color.rgb(red, green, blue, .99);
     }
 
+    @Override
+    public String toString() {
+        return "DummyPlayer{" +
+                "playerID='" + playerID + '\'' +
+                ", color=" + color +
+                ", gameTokens=" + gameTokens +
+                ", inventory=" + inventory +
+                ", isHuman=" + isHuman +
+                '}';
+    }
 }
