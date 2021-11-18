@@ -167,6 +167,25 @@ public class GameObjectUIController {
         }
     }
 
+    @FXML private void saveToken(ActionEvent event) {
+        Token token = new Token();
+        String tokenNameString = tokenName.getCharacters().toString();
+        String textureFilenameString = tokenFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+        Integer value = Integer.valueOf(tokenValue.getCharacters().toString());
+        java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(),
+                (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
+        boolean labelRes = token.setTrait("label", tokenNameString, false);
+        boolean iconRes = token.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = token.setTrait("color", awtColor, false);
+        boolean valRes = token.setTrait("value", value, false);
+        if (!(labelRes && iconRes && colorRes && valRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Token: " + tokenNameString);
+        }
+    }
+
     @FXML private void populateCardList(Event event) {
         deckCardList.setItems(deckCards);
         deckCardList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
