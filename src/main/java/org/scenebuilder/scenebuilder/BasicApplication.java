@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.objects.Card;
+import org.objects.Deck;
 import org.objects.Tile;
 
 import java.io.IOException;
@@ -83,15 +85,20 @@ public class BasicApplication extends Application {
         }
 
         ArrayList<Deck> decks = new ArrayList<>();
-        ArrayList<DummyCard> cards = new ArrayList<>();
-        for(int i = 0; i < 52; ++i) {
-            cards.add(new DummyCard("Card " + i));
-        }
-        
-        DummyDeck deck1 = new DummyDeck("Deck 1", cards);
-        DummyDeck deck2 = new DummyDeck("Deck 2", cards);
-        DummyDeck deck3 = new DummyDeck("Deck 3", cards);
-        DummyDeck deck4 = new DummyDeck("Deck 4", cards);
+        ArrayList<Card> cards = new ArrayList<>();
+
+
+
+        Deck deck1 = new Deck();
+        Deck deck2 = new Deck();
+        Deck deck3 = new Deck();
+        Deck deck4 = new Deck();
+
+        deck1.addCard(new Card(), 52);
+        deck2.addCard(new Card(), 52);
+        deck3.addCard(new Card(), 52);
+        deck4.addCard(new Card(), 52);
+
         decks.add(deck1);
         decks.add(deck2);
         decks.add(deck3);

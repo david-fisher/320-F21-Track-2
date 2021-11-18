@@ -121,7 +121,6 @@ public class PlayController extends ScreenController {
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initDecks(gameState.getDecks());
         //initRNG(gameState.getRNG());
-        initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
         initPlayers(gameState.getPlayers());
 
     }
@@ -472,20 +471,29 @@ public class PlayController extends ScreenController {
 
     private void fillInventoryDrawer(DummyInventory inventory) {
         HBox container = new HBox();
-        container.setAlignment(Pos.CENTER);
-        container.setSpacing(-10);
-        inventory.getInventory().forEach(i -> {
-            ImageView inventoryItem = new ImageView(new Image(i.getIcon(), i.getWidth(), i.getHeight(), true, true));
-            inventoryItem.setUserData(i);
-            //inventoryItem.setFill(new ImagePattern(new Image(i.getIcon())));
-            inventoryItem.setOnMouseClicked(e -> {
-
-            });
-            container.getChildren().addAll(inventoryItem);
-        });
-        inventoryPane.setContent(container);
-        inventoryPane.setStyle("-fx-border-color: black");
-        //decksPane.toFront();
+//        inventoryPane = new ScrollPane();
+//        container.setAlignment(Pos.CENTER);
+//        container.setSpacing(-10);
+//        inventory.forEach(d -> {
+//            double width = d.getWidth() == 0 ? 100 : d.getWidth();
+//            double height = d.getHeight() == 0 ? 170 : d.getHeight();
+//            Rectangle deck = new Rectangle(width, height);
+//            deck.setUserData(d);
+//
+//            if(d.getIcon() != null) {
+//                deck.setFill(new ImagePattern(new Image(d.getIcon())));
+//            } else {
+//                deck.setFill(Color.RED);
+//            }
+//            deck.setOnMouseClicked(e -> {
+//                //Open this deck if you can // todo
+//            });
+//            container.getChildren().addAll(deck);
+//            container.setMargin(deck, new Insets(10, 10, 20, 10));
+//        });
+//        decksPane.setContent(container);
+//        decksPane.setStyle("-fx-border-color: black");
+//        //decksPane.toFront();
     }
 
     public void initializePlayScreen() {
