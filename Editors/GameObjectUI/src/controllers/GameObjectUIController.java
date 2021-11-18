@@ -125,6 +125,25 @@ public class GameObjectUIController {
         
     }
 
+    @FXML private void saveCategory(ActionEvent event) {
+        Category category = new Category();
+        String categoryNameString = categoryName.getCharacters().toString();
+        Double categoryWeight = Double.valueOf(dieNumSides.getCharacters().toString());
+        String categoryFilenameString = categoryFilename.getCharacters().toString();
+        javafx.scene.paint.Color catColor = categoryColor.getValue();
+        java.awt.Color colorOne = new java.awt.Color((float)catColor.getRed(),
+                (float)catColor.getGreen(), (float)catColor.getBlue());
+        boolean nameRes = category.setTrait("category", categoryNameString, false);
+        boolean weightRes = category.setWeight("weight", categoryWeight, false);
+        boolean colorRes = category.setTrait("color", colorOne, false);
+        boolean fileRes = category.setTrait("icon", categoryFilenameString, false);
+        if (!(nameRes && weightRes && colorRes && fileRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new category: " + categoryNameString);
+        }
+    }
+
     @FXML private void saveGamepiece(ActionEvent event) {
         Gamepiece piece = new Gamepiece();
         String pieceNameString = gamepieceName.getCharacters().toString();
