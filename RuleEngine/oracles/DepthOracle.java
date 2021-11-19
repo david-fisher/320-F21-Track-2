@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.Deque;
 import engine.*; 
 import nodes.*;
+import objects.*;
 
 public class DepthOracle implements Oracle {
-    public ArrayList<GameObject> buttons;
+    public ArrayList<Button> buttons;
     public DepthOracle(GameState g) {
         this.buttons = g.buttons;
     }

@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.Deque;
 import engine.*; 
 import nodes.*;
+import objects.*;
 
 public class HeuristicOracle implements Oracle {
-    public ArrayList<GameObject> buttons;
+    public ArrayList<Button> buttons;
     public HeuristicOracle(GameState g) {
         this.buttons = g.buttons;
     }

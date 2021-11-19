@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.Deque;
 import engine.*; 
 import nodes.*;
+import objects.*;
 
 public class PruningOracle implements Oracle {
-    public ArrayList<GameObject> buttons;
+    public ArrayList<Button> buttons;
     public PruningOracle(GameState g) {
         this.buttons = g.buttons;
     }
