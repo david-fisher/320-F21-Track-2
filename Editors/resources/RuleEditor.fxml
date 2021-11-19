@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="458.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editors.rule_editor_ui.controllers.RuleEditorUIController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -39,6 +38,9 @@
             <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
             <Button fx:id="addGetTileConnBtn" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
             <Button fx:id="addCondition" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
+            <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add move to tile[i]" />
+            <Button fx:id="addMoveByStepsBtn" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddMoveByStepsBtn" prefHeight="25.0" prefWidth="92.0" text="Add move by steps" />
+            <Button fx:id="addMoveToPosBtn" layoutX="34.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleAddMoveToPosBtn" prefHeight="25.0" prefWidth="92.0" text="Add move to pos" />
          </children>
          <cursor>
             <Cursor fx:constant="SW_RESIZE" />
