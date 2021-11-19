@@ -312,24 +312,28 @@ public class SetupController extends ScreenController {
 
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                DummyPlayer player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
                 Integer ID = Integer.valueOf(playerHBox.getId());
+                DummyPlayer player = playerHashMap.get(ID);
+                String text = playerField.getText();
                 if(!t1) {
-                    player.setPlayerID(playerField.getText());
-                    System.out.println("Player: " + player + " and t1: " + t1);
+                    player.setPlayerID(text);
                     for (Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
                         if (p.getKey() == ID) {
                             continue;
                         }
-                        if (p.getValue().getPlayerID().equals(player.getPlayerID())) {
+                        if (p.getValue().getPlayerID().equals(text)) {
 
 //                          OPTIONAL: Alert box below.
+                            System.out.println("Old State: " + playerHashMap.entrySet());
 
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Error!");
                             alert.setHeaderText("Duplicate Name Detected!");
                             alert.setContentText("Players cannot have the same names, please change it.");
                             alert.showAndWait();
+                            playerField.setText((text.substring(0, text.length() - 1)));
+                            player.setPlayerID(playerField.getText());
+                            System.out.println("New State: " + playerHashMap.entrySet());
                             playerField.requestFocus();
                         }
                     }
