@@ -1,8 +1,8 @@
 package objects;
 
-import java.awt.Color;
-import javax.swing.Timer ;
 import java.awt.event.ActionListener;
+
+import javax.swing.Timer ;
 
 
 public class GameTimer extends GameObject {
@@ -15,7 +15,7 @@ public class GameTimer extends GameObject {
 	  super() ; 
 	  this.setLabel("gametimer" + String.format("%02d", ++count));
 	  this.setIcon("default_token_icon.jpg") ;
-	  this.setColor(Color.BLACK) ;
+	  this.setColor("Black") ;
 	  this.setInitialTime(60.0) ;
 	  
 	  timer = new Timer(100, null) ;

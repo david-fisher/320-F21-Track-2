@@ -1,6 +1,5 @@
 package objects;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -53,7 +52,7 @@ public abstract class GameObject extends Savable {
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("icon") && value instanceof String) ||	// check icon is String
-			  (trait.equals("color") && value instanceof Color)) {	// check color is Color
+			  (trait.equals("color") && value instanceof String)) {	// check color is Color
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
@@ -103,12 +102,12 @@ public abstract class GameObject extends Savable {
 	   return (String)this.getTrait("icon");
  }
 
- public boolean setColor(Color color) {
+ public boolean setColor(String color) {
 	 return this.setTrait("color", color);
  }
 
- public Color getColor() {
-	   return (Color)this.getTrait("color");
+ public String getColor() {
+	   return (String)this.getTrait("color");
  }
  
 }

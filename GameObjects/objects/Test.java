@@ -1,8 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
-
 public class Test {
 	
 	public static void main(String[] args ) {
@@ -20,7 +17,7 @@ public class Test {
 		System.out.println("\nNow we can set its specific traits") ;
 		car.setLabel("Baby Berk") ;
 		car.setIcon("berk.jpg") ;
-		car.setColor(Color.YELLOW) ;
+		car.setColor("Yellow") ;
 		System.out.println(car.getAllTraits()) ;
 		
 

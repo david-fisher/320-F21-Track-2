@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Die extends GameObject {
 	
   private static int count = 0;
@@ -10,9 +8,9 @@ public class Die extends GameObject {
 	super() ;  
 	this.setLabel("die" + String.format("%02d", ++count));
 	this.setIcon("default_gamepiece_icon.jpg") ;
-	this.setColor(Color.WHITE) ;
+	this.setColor("White") ;
 	this.setNumSides(6);
-    this.setDotColor(Color.BLACK);
+    this.setDotColor("Black");
   }
   
   /* Trait Types:
@@ -33,7 +31,7 @@ public class Die extends GameObject {
 	  
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
-			  (trait.equals("dotColor") && value instanceof Color) || // check dotColor is Color
+			  (trait.equals("dotColor") && value instanceof String) || // check dotColor is Color
 			  (trait.equals("numSides") && value instanceof Integer)) {	
 		  traits.put(trait, value) ;
 		  return true ;
@@ -55,11 +53,11 @@ public class Die extends GameObject {
 	  return (Integer)this.getTrait("numSides");
   }
 
-  public boolean setDotColor(Color color) {
+  public boolean setDotColor(String color) {
 	  return this.setTrait("dotColor", color);
   }
 
-  public Color getDotColor() {
-	  return (Color)this.getTrait("dotColor");
+  public String getDotColor() {
+	  return (String)this.getTrait("dotColor");
   }
 }

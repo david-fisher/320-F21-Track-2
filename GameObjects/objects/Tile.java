@@ -1,7 +1,7 @@
 package objects ;
 
-import java.awt.Color;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Write a description of class Tile here.
  *
@@ -25,7 +25,7 @@ public class Tile extends GameObject
     	
     	this.setLabel("tile" + String.format("%02d", ++count));
         this.setIcon("default_tile_icon.jpg") ;
-        this.setColor(Color.BLACK) ;
+        this.setColor("Black") ;
         this.setTrait("connections", connections, true) ;
     }
 

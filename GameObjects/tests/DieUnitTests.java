@@ -64,8 +64,8 @@ class DieUnitTests {
   @Test
   public void ModifiedDieProducesRRD() {
     die = new Die();
-    die.setColor(Color.GREEN);
-    die.setDotColor(Color.WHITE);
+    die.setColor("Green");
+    die.setDotColor("White");
     count = new int[die.getNumSides()];
     for (int i = 0; i < 1000; ++i) {
       count[die.roll() - 1]++;
@@ -78,8 +78,8 @@ class DieUnitTests {
   @Test
   public void DieWithMoreSidesProducesRRD() {
     die = new Die();
-    die.setColor(Color.RED);
-    die.setDotColor(Color.BLUE);
+    die.setColor("Red");
+    die.setDotColor("Blue");
     die.setNumSides(15);
     count = new int[die.getNumSides()];
     for (int i = 0; i < 1000; ++i) {
@@ -88,8 +88,8 @@ class DieUnitTests {
     for (int i = 0; i < die.getNumSides(); ++i) {
       assert (count[i] > 20);
     }
-    die.setColor(Color.YELLOW);
-    die.setDotColor(Color.cyan);
+    die.setColor("Yellow");
+    die.setDotColor("Cyan");
     die.setNumSides(150);
     count = new int[die.getNumSides()];
     for (int i = 0; i < 10000; ++i) {
@@ -111,8 +111,8 @@ class DieUnitTests {
   @Test
   public void DieWithFewerSidesProducesRRD() {
     die = new Die();
-    die.setColor(Color.lightGray);
-    die.setDotColor(Color.MAGENTA);
+    die.setColor("LightGray");
+    die.setDotColor("Magenta");
     die.setNumSides(5);
     count = new int[die.getNumSides()];
     for (int i = 0; i < 1000; ++i) {
@@ -121,8 +121,8 @@ class DieUnitTests {
     for (int i = 0; i < die.getNumSides(); ++i) {
       assert (count[i] > 60);
     }
-    die.setColor(Color.orange);
-    die.setDotColor(Color.orange);
+    die.setColor("Orange");
+    die.setDotColor("Orange");
     die.setNumSides(3);
     count = new int[die.getNumSides()];
     for (int i = 0; i < 1000; ++i) {
@@ -131,8 +131,8 @@ class DieUnitTests {
     for (int i = 0; i < die.getNumSides(); ++i) {
       assert (count[i] > 100);
     }
-    die.setColor(Color.orange);
-    die.setDotColor(Color.orange);
+    die.setColor("Orange");
+    die.setDotColor("Orange");
     die.setNumSides(2);
     count = new int[die.getNumSides()];
     for (int i = 0; i < 1000; ++i) {

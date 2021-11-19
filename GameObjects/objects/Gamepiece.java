@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Gamepiece extends GameObject{
 	
   private static int count = 0;
@@ -10,7 +8,7 @@ public class Gamepiece extends GameObject{
 	  super() ;  
 	  this.setLabel("gamepiece" + String.format("%02d", ++count));
 	  this.setIcon("default_gamepiece_icon.jpg") ;
-	  this.setColor(Color.BLACK) ;
+	  this.setColor("Black") ;
 	  this.setLocation(null);
   }
   

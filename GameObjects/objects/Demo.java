@@ -1,18 +1,38 @@
 package objects;
 
-import java.awt.Color;
-
 public class Demo {
 
 	public static void main(String[] args) {
-		Project proj = new Project("testproj", "C:\\users\\bhavs\\Desktop");
-		Savable.setProject(proj);
+//		createObjects();
+//		loadProject();
+		deleteThenSave();
+	}
+	
+	
+	private static void loadProject() {
+		Project monopoly = Savable.getProjects().get(0);
+		Savable.setProject(monopoly);
 		Savable.initDB();
 		
-		createObjects();
+		for(Object obj:Savable.get(Die.class)) {
+			System.out.println(Die.class.cast(obj).getLabel());
+			System.out.println(Die.class.cast(obj).getNumSides());
+			System.out.println(Die.class.cast(obj).getColor());
+		}
 		
 		Savable.closeDB();
 	}
+	
+	private static void deleteThenSave() {
+		Project monopoly = Savable.getProjects().get(0);
+		Savable.setProject(monopoly);
+		Savable.initDB();
+		
+		Savable.objectMap.get("Die").clear();
+		
+		Savable.closeDB();
+	}
+	
 	
 	//Things determined
 	/**
@@ -22,17 +42,16 @@ public class Demo {
 	 * Documentation obtained from the creators of snakeyaml
 	 */
 	
-	public static void createObjects() {
-		//TODO
-		/**
-		 * Figure out how to save color.awt
-		 */
+	private static void createObjects() {
+		Project proj = new Project("testproj", "C:\\users\\bhavs\\Desktop");
+		Savable.setProject(proj);
+		Savable.initDB();
 		
 		Gamepiece car = new Gamepiece();
 
 		car.setLabel("Baby Berk");
 		car.setIcon("berk.jpg");
-		car.setColor(Color.YELLOW);
+		car.setColor("Yellow");
 
 		car.setTrait("wheels", 4, true);
 
@@ -58,6 +77,8 @@ public class Demo {
 		deck.addCard(jack, 2);
 
 		Die die = new Die();
+		die.setColor("Pink");
+		die.setNumSides(57);
 		
 		Category hamp = new Category();
 		hamp.setLabel("hamp");
@@ -80,6 +101,8 @@ public class Demo {
 		GameTimer gtimer = new GameTimer();
 		
 		Tile testTile = new Tile();
+		
+		Savable.closeDB();
 	}
 
 }

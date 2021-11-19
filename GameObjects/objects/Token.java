@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Token extends GameObject{
 
   private static int count = 0;
@@ -11,7 +9,7 @@ public class Token extends GameObject{
 	super() ;  
 	this.setLabel("token" + String.format("%02d", ++count));
     this.setIcon("default_token_icon.jpg") ;
-    this.setColor(Color.BLACK) ;
+    this.setColor("Black") ;
     this.setValue(1) ;
   }
   

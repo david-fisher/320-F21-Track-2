@@ -1,7 +1,7 @@
 package objects ;
 
-import java.awt.Color;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Write a description of class Spinner here.
  *
@@ -29,7 +29,7 @@ public class Spinner extends GameObject
     	
     	this.setLabel("deck" + String.format("%02d", ++count));
     	this.setIcon("default_gamepiece_icon.jpg") ;
-    	this.setColor(Color.BLACK) ;
+    	this.setColor("Black") ;
         this.setTrait("categories", categories, true) ;
         this.setNumCategories(1) ;
     }
