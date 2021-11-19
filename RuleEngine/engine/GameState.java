@@ -2,8 +2,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
-
 import objects.*;
+import nodes.*;
 
 public class GameState {
 
@@ -22,6 +22,7 @@ public class GameState {
     public ArrayList<GameObject> gameObjects;
 
     public HashMap<String, GameObject> registers;
+    public static HashMap<String, ArrayList<Node>> events;
 
     public GameState() {
         gameObjects = new ArrayList<GameObject>();
@@ -79,5 +80,6 @@ public class GameState {
     
     public HashMap<String, GameObject> getAllRegisters() { return registers; }
     public void setAllRegisters(HashMap<String, GameObject> registers) { this.registers = registers; }
-
+    public static HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
+    public static void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
 }
