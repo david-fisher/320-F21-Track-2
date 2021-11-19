@@ -18,7 +18,7 @@ archive: objects gameobj rule menu
 run:
 	java --module-path $(PATH_TO_FX) --add-modules $(fxmodules) editors.main_menu.MainMenu
 
-# cmd: objects gameobj rule menu
-# debug: objects gameobj rule menu run
-cmd: gameobj rule menu
-debug: gameobj rule menu run
+cmd: objects menu gameobj rule
+debug: objects menu gameobj rule run
+#cmd: gameobj rule menu
+#debug: gameobj rule menu run
