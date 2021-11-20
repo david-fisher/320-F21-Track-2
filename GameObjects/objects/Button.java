@@ -1,5 +1,4 @@
 package objects;
-
 import java.awt.Color;
 
 public class Button extends GameObject {
@@ -31,10 +30,12 @@ public class Button extends GameObject {
 	public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 		if (super.setTrait(trait, value, suppressTraitChecker)) {
 			return true;
+
 		} else if (suppressTraitChecker || 
 				(trait.equals("text") && value instanceof String) || // check text is String
 				(trait.equals("pressed") && value instanceof Boolean) ||
 				(trait.equals("enabled") && value instanceof Boolean)) { 
+
 			traits.put(trait, value);
 			return true ;
 		}
@@ -42,6 +43,7 @@ public class Button extends GameObject {
 		// returns false if input is invalid
 		return false ;
 	}
+
 	  
 	public boolean toggleEnabled() {
 		setEnabled(!getEnabled());

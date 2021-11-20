@@ -126,7 +126,6 @@ public abstract class GameObject extends Savable {
  public Color getColor() {
 	   return (Color)this.getTrait("color");
  }
-
  public boolean setShape(String shape) {
  	return setTrait("shape", shape) ;
  }
@@ -169,6 +168,5 @@ public abstract class GameObject extends Savable {
  
  public String toString() {
 	 return getLabel() ;
- }
- 
+ } 
 }
