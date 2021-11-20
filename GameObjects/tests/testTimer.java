@@ -4,7 +4,7 @@ import objects.*;
 import java.awt.Color;
 
 public class testTimer {
-	/*
+
 	private void testStartStop(){
 		GameTimer timer = new GameTimer();
 		var startTime = timer.getTime();
@@ -99,5 +99,4 @@ public class testTimer {
 		timerCanStop();
 		timerCanReset();
 	}
-	*/
 }

@@ -42,7 +42,20 @@ public class Gamepiece extends GameObject{
   }
 
   public boolean setLocation(Tile tile) {
-	  return this.setTrait("location", tile);
+	  
+	  // first clear current location
+	  if (this.getLocation() != null) {
+		  this.getLocation().removeGamepiece(this) ;
+	  }
+	  
+	  // set location
+	  if (this.setTrait("location", tile)) {
+		  if (!tile.hasGamepiece(this)) {
+			  return tile.addGamepiece(this) ;
+		  }
+		  return true ;
+	  }
+	  return false ;
   }
 
   public Tile getLocation() {

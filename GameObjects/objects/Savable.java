@@ -13,7 +13,6 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public abstract class Savable {
-
 	private static String filePath = File.separator + "res" + File.separator;
 	private static Project project;
 	private static String globalPath = new File(".").getAbsolutePath();
