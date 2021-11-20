@@ -33,6 +33,26 @@ public class GameState {
     public GameObject getRegistry(String key) {
         return registers.get(key);
     }
+    
+    public void addRegistry(String key, GameObject obj) {
+    		registers.put(key, obj);
+    }
+    
+    public boolean removeRegistry(String key) {
+    	return registers.remove(key) != null;
+    }
+    
+    public ArrayList<Node> getEvent(String key) {
+      return events.get(key);
+	  }
+	  
+	  public void addEvent(String key, ArrayList<Node> obj) {
+	  		events.put(key, obj);
+	  }
+	  
+	  public boolean removeEvent(String key) {
+	  	return events.remove(key) != null;
+	  }
 
     public GameObject findObject(String label) {
         for(GameObject go : gameObjects) {
