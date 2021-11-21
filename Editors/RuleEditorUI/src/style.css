@@ -6,3 +6,10 @@
     -fx-text-fill: "white";
     -fx-background-radius: 15;
 }
+.bottom{
+    -fx-background-color: #807979
+}
+.back{
+    -fx-background-radius: 15;
+    -fx-text-fill: #807979;
+}
