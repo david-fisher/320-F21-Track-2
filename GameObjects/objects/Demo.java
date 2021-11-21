@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Demo {
 	
 	public static void main(String[] args ) {
@@ -20,7 +18,7 @@ public class Demo {
 		
 		car.setLabel("Baby Berk") ;
 		car.setIcon("berk.jpg") ;
-		car.setColor(Color.YELLOW) ;
+		car.setColorString("#FFFF4F") ;
 		
 		System.out.println(car.getAllTraits()) ;
 		
@@ -146,10 +144,10 @@ public class Demo {
 		berk.setLabel("berk");
 		berk.setWeight(0.4);
 		Spinner spinner = new Spinner() ;
-		spinner.addCategory(hamp);
-		spinner.addCategory(woo);
-		spinner.addCategory(frank);
-		spinner.addCategory(berk);
+//		spinner.addCategory(hamp);
+//		spinner.addCategory(woo);
+//		spinner.addCategory(frank);
+//		spinner.addCategory(berk);
 		System.out.println(spinner.getAllTraits()) ;
 		
 		System.out.println("\nHere we have explicitly defined the following weights:") ;

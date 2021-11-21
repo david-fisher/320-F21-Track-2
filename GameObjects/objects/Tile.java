@@ -27,7 +27,7 @@ public class Tile extends GameObject
     	
     	this.setLabel("tile" + String.format("%02d", ++count));
         this.setIcon("default_tile_icon.jpg") ;
-        this.setColor(Color.BLACK) ;
+        this.setColorString("#000000") ;
         this.setShape("square") ;
         this.setXPos(0) ;
         this.setYPos(0) ;
@@ -38,7 +38,7 @@ public class Tile extends GameObject
     /* Trait Types:
      * 	label 	: 	String
      * 	icon 	: 	String
-     * 	color 	:	Color
+     * 	color 	:	String (Can be obtained as JAVAFX Color object)
      *  shape   :   String (one of "square", 
      *  xPos    :   Integer
      *  yPos    :   Integer

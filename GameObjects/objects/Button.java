@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Button extends GameObject {
     private static int count = 0;
 
@@ -9,7 +7,7 @@ public class Button extends GameObject {
 		super() ;  
 		this.setLabel("button" + String.format("%02d", ++count));
 		this.setIcon("default_gamepiece_icon.jpg");
-		this.setColor(Color.WHITE);
+		this.setColorString("#FFFFFF");
 		this.setText("type text here");
 		this.setEnabled(true);
 		this.setPressed(false);
@@ -18,7 +16,7 @@ public class Button extends GameObject {
 	/* Trait Types:
      * 	label 	: 	String
      * 	icon 	: 	String
-     * 	color 	:	Color
+     * 	color 	:	String (Can be obtained as JAVAFX Color object)
      *  shape   :   String (one of "square", 
      *  xPos    :   Integer
      *  yPos    :   Integer
