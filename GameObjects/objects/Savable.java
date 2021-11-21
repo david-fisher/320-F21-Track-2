@@ -30,7 +30,6 @@ public abstract class Savable {
 		}
 	}
 	
-	private static Project currentProject;
 	private static Projects projects;
 	
 	private static File getGlobalFile() {
@@ -50,19 +49,6 @@ public abstract class Savable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static GameState loadGameState(File f) {
-		Yaml yaml = new Yaml();
-		yaml.setBeanAccess(BeanAccess.FIELD);
-		GameState gs = null;
-		try {
-			gs = yaml.loadAs(new FileInputStream(f), GameState.class);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return gs;
 	}
 
 	private static Projects loadProjects(File f) {
@@ -93,41 +79,14 @@ public abstract class Savable {
 		return true;
 	}
 
-	public static Project createProject(String name, String path) {
-		Project p = new Project(name,path);
+	public static Project createProject(String name) {
+		Project p = new Project(name);
 		projects.getProjects().add(p);
 		return p;
-	}
-
-	public static void setProject(Project x) {
-		currentProject = x;
 	}
 	
 	public static ArrayList<Project> getProjects() {
 		return projects.getProjects();
-	}
-	
-	public static boolean saveGameState(GameState s) {
-		return saveGameState(s,false);
-	}
-	
-	public static boolean saveGameState(GameState s, boolean init) {
-		if(currentProject == null) {
-			return false;
-		}
-		dump(s,currentProject.getResourceFile(init));
-		return true;
-	}
-	
-	public static GameState getGameState(boolean init) {
-		if(currentProject == null) {
-			return null;
-		}
-		GameState g = loadGameState(currentProject.getResourceFile(init));
-		if (g == null) {
-			g = new GameState();
-		}
-		return g;
 	}
 	
 	public static boolean closeDB() {
