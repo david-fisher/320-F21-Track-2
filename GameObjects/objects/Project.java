@@ -1,14 +1,10 @@
 package objects;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class Project extends Savable {
+class Project{
 	private String projectName;
 	private String projectPath;
-	private Path projectPathObj;
 
 	Project() {
 		this.projectName = "";
@@ -17,12 +13,18 @@ public class Project extends Savable {
 
 	Project(String name, String directory) {
 		this.projectName = name;
-		directory.replace("\\", File.separator);
-		directory.replace("/", File.separator);
 		this.projectPath = directory + File.separator + name;
-//		this.projectPathObj = Paths.get(this.projectPath);
-		File file = new File(this.projectPath);
-		file.mkdirs();
+		new File(this.projectPath).mkdirs();
+	}
+	
+	public File getResourceFile(boolean init) {
+		String path = this.projectPath + File.separator+ "res" + File.separator;
+		new File(this.projectPath).mkdirs();
+		if(!init) {
+			path += "savedGames" + File.separator;
+			new File(this.projectPath).mkdirs();
+		}
+		return new File(path);
 	}
 
 	public String getProjectName() {
@@ -37,8 +39,8 @@ public class Project extends Savable {
 		this.projectName = name;
 	}
 
-	public void setProjectPath(String path) {
-		this.projectPath = path;
+	public void setProjectPath(String f) {
+		this.projectPath = f;
 	}
 
 }

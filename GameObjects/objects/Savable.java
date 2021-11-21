@@ -3,192 +3,138 @@ package objects;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.introspector.BeanAccess;
+
+import engine.GameState;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public abstract class Savable {
-	private static String filePath = File.separator + "res" + File.separator;
-	private static Project project;
-	private static String globalPath = new File(".").getAbsolutePath();
-	private static boolean global = false;
 
-	static HashMap<String, Constructor> constructorMap = new HashMap<String, Constructor>();
-	static Constructor projectConstruct;
+	static class Projects{
+		private ArrayList<Project> projects;
+		
+		Projects(){
+			projects = new ArrayList<Project>();
+		}
 
-	public static HashMap<String, ArrayList<Savable>> objectMap = new HashMap<String, ArrayList<Savable>>();
+		public ArrayList<Project> getProjects() {
+			return projects;
+		}
 
-	public Savable() {
-		String className = this.getClass().getSimpleName();
-
-		if (objectMap.containsKey(className)) {
-			objectMap.get(className).add(this);
-		} else {
-			ArrayList<Savable> tempArray = new ArrayList<>();
-			tempArray.add(this);
-			objectMap.put(className, tempArray);
-			if (!className.equals("Project")) {
-				constructorMap.put(className, new Constructor(this.getClass()));
-			} else {
-				projectConstruct = new Constructor(this.getClass());
-			}
+		public void setProjects(ArrayList<Project> projects) {
+			this.projects = projects;
 		}
 	}
-
-	private static File getFile(String className) {
-		String pre = "";
-		if (global) {
-			pre = globalPath;
-		} else {
-			pre = project.getProjectPath();
-		}
-		File file = new File(pre + filePath + className + ".yml");
-		file.getParentFile().mkdirs();
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
+	
+	private static Project currentProject;
+	private static Projects projects;
+	
+	private static File getGlobalFile() {
+		String path = Paths.get("").toAbsolutePath().toString();
+		File f =  new File(path + File.separator + "res" + File.separator);
+		f.mkdirs();
+		return f;
 	}
-
-	private static void loadConstructors() {
-		constructorMap.clear();
-		InputStream inputStream;
-		try {
-			File file = getFile("StartupData");
-			inputStream = new FileInputStream(file);
-			Yaml yaml = new Yaml();
-			HashMap<String, Constructor> x = yaml.load(inputStream);
-			if (x != null) {
-				Savable.constructorMap = x;
-			}
+	
+	private static void dump(Object obj, File f) {
+		Yaml yaml = new Yaml();
+		yaml.setBeanAccess(BeanAccess.FIELD);
+	    String output = yaml.dumpAsMap(obj);
+	    try {
+			Files.write(Paths.get(f.getAbsolutePath()), output.getBytes());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	private static void saveConstructors() {
-		File file = getFile("StartupData");
-		PrintWriter writer;
+	
+	public static GameState loadGameState(File f) {
+		Yaml yaml = new Yaml();
+		yaml.setBeanAccess(BeanAccess.FIELD);
+		GameState gs = null;
 		try {
-			writer = new PrintWriter(file);
-			Yaml yaml = new Yaml();
-			yaml.dump(constructorMap, writer);
+			gs = yaml.loadAs(new FileInputStream(f), GameState.class);
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return gs;
 	}
 
-	private static boolean saveProjects() {
+	private static Projects loadProjects(File f) {
+		Yaml yaml = new Yaml();
+		yaml.setBeanAccess(BeanAccess.FIELD);
+		Projects pro = null;
 		try {
-			global = true;
-			File file = getFile("ProjectConstruct");
-			Yaml yaml = new Yaml();
-			PrintWriter writer;
-			writer = new PrintWriter(new FileWriter(file, false));
-			yaml.dump(projectConstruct, writer);
-
-			file = getFile("Project");
-			yaml = new Yaml();
-			writer = new PrintWriter(new FileWriter(file, false));
-			yaml.dumpAll(objectMap.get("Project").iterator(), writer);
-			global = false;
+			pro = yaml.loadAs(new FileInputStream(f),Projects.class);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pro;
+	}
+	
+	public static boolean intitDB() {
+		File f = new File(getGlobalFile().getPath() + File.separator+ "projects.yml");
+		try {
+			f.createNewFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		projects = loadProjects(f);
+		if (projects == null ) {
+			projects = new Projects();
+		}
 		return true;
 	}
 
-	private static boolean loadProjects() {
-
-		try {
-			global = true;
-			File file = getFile("ProjectConstruct");
-			Yaml yaml = new Yaml();
-			projectConstruct = yaml.load(new FileInputStream(file));
-
-			file = getFile("Project");
-			yaml = new Yaml(projectConstruct);
-			for (Object object : yaml.loadAll(new FileInputStream(file))) {
-				/*
-				 * Create a Saveable object which calls the constructor to add it to the object
-				 * map
-				 */
-			}
-			global = false;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return true;
+	public static Project createProject(String name, String path) {
+		Project p = new Project(name,path);
+		projects.getProjects().add(p);
+		return p;
 	}
 
 	public static void setProject(Project x) {
-		project = x;
+		currentProject = x;
 	}
-
-	public static boolean closeDB() {
-		saveProjects();
-		Savable.saveConstructors();
-		Yaml yaml;
-
-		try {
-			for (String s : constructorMap.keySet()) {
-				File file = getFile(s);
-				yaml = new Yaml();
-				PrintWriter writer = new PrintWriter(new FileWriter(file, false));
-				yaml.dumpAll(objectMap.get(s).iterator(), writer);
-			}
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public static ArrayList<Savable> get(Class x) {
-		return Savable.objectMap.get(x.getSimpleName());
-	}
-
-	public static boolean initDB() {
-		Savable.loadConstructors();
-
-		Yaml yaml;
-		InputStream reader;
-		try {
-			for (String s : constructorMap.keySet()) {
-				File file = getFile(s);
-				reader = new FileInputStream(file);
-				yaml = new Yaml(constructorMap.get(s));
-				for (Object object : yaml.loadAll(reader)) {
-					/*
-					 * Create a Saveable object which calls the constructor to add it to the object
-					 * map
-					 */
-				}
-			}
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
-	}
-
+	
 	public static ArrayList<Project> getProjects() {
-		loadProjects();
-		ArrayList<Project> x = new ArrayList<Project>();
-		for (Savable s : objectMap.get("Project")) {
-			x.add(Project.class.cast(s));
+		return projects.getProjects();
+	}
+	
+	public static boolean saveGameState(GameState s) {
+		return saveGameState(s,false);
+	}
+	
+	public static boolean saveGameState(GameState s, boolean init) {
+		if(currentProject == null) {
+			return false;
 		}
-		return x;
+		dump(s,currentProject.getResourceFile(init));
+		return true;
+	}
+	
+	public static GameState getGameState(boolean init) {
+		if(currentProject == null) {
+			return null;
+		}
+		GameState g = loadGameState(currentProject.getResourceFile(init));
+		if (g == null) {
+			g = new GameState();
+		}
+		return g;
+	}
+	
+	public static boolean closeDB() {
+		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
+		return true;
 	}
 }
+
+
 
