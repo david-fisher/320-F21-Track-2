@@ -16,6 +16,10 @@ public class RuleEditorUI extends Application {
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("../RuleEditor.fxml"));
     Scene scene = new Scene(root, 800, 600);
+    
+    String css = this.getClass().getResource("style.css").toExternalForm();
+    scene.getStylesheets().add(css);
+
     primaryStage.setScene(scene);
     primaryStage.show();
   }
