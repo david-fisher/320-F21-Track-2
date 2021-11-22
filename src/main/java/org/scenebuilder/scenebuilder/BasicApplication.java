@@ -103,7 +103,6 @@ public class BasicApplication extends Application {
         ArrayList<Spinner> spinners = new ArrayList();
 
         Die die1 = new Die();
-        die1.setNumSides(6);
         dice.add(die1);
 
         Spinner spinner1 = new Spinner();

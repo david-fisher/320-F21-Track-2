@@ -30,6 +30,7 @@ import org.objects.Spinner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javafx.scene.image.ImageView;
 
 public class PlayFXMLController {
 
@@ -100,7 +101,7 @@ public class PlayFXMLController {
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         //initDecks(gameState.getDecks());
 
-        //initRNG(gameState.getRNG());
+        initRNG(gameState.getDice(), gameState.getSpinners());
 
         initPlayers(gameState.getPlayers());
 
@@ -225,15 +226,39 @@ public class PlayFXMLController {
         container.setAlignment(Pos.CENTER);
 
         dice.forEach(d -> {
-            Rectangle die = new Rectangle(100, 100);
-            die.setUserData(d);
-            die.setFill(new ImagePattern(new Image(d.getIcon())));
-            die.setOnMouseClicked(e -> {
-                // roll this die if you can
-            });
-            container.getChildren().addAll(die);
-        });
+                    Rectangle die = new Rectangle(100, 100);
+                    die.setUserData(d);
+                    die.setFill(new ImagePattern(new Image(d.getIcon())));
+                    die.setOnMouseClicked(e -> {
+                        // roll this die if you can
+                        int output = d.roll();
+                        ImageView imageView = new ImageView();
+                        imageView.setPreserveRatio(true);
+                        imageView.setFitWidth(300);
+                        imageView.setFitHeight(300);
+                        Image pic1 = new Image("file:images/1Die.bmp");
+                        Image pic2 = new Image("file:images/2Die.bmp");
+                        Image pic3 = new Image("file:images/3Die.bmp");
+                        Image pic4 = new Image("file:images/4Die.bmp");
+                        Image pic5 = new Image("file:images/5Die.bmp");
+                        Image pic6 = new Image("file:images/6Die.bmp");
 
+                        if (output == 1) {
+                            imageView.setImage(pic1);
+                        } else if (output == 2) {
+                            imageView.setImage(pic2);
+                        } else if (output == 3) {
+                            imageView.setImage(pic3);
+                        } else if (output == 4) {
+                            imageView.setImage(pic4);
+                        } else if (output == 5) {
+                            imageView.setImage(pic5);
+                        } else if (output == 6) {
+                            imageView.setImage(pic6);
+                        }
+                    });
+                        container.getChildren().addAll(die);
+                });
         spinners.forEach(d -> {
             Circle spinner = new Circle(100);
             spinner.setUserData(d);
