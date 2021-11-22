@@ -3,6 +3,7 @@ package org.scenebuilder.scenebuilder;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
@@ -122,7 +121,7 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initDecks(gameState.getDecks());
-        //initRNG(gameState.getRNG());
+        initRNG(gameState.getDice(), gameState.getSpinners());
         initPlayers(gameState.getPlayers());
         initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
 
@@ -451,23 +450,29 @@ public class PlayController extends ScreenController {
         container.setAlignment(Pos.CENTER);
 
         dice.forEach(d -> {
-            ImageView die = new ImageView(new Image(d.getIcon(), d.getWidth(), d.getHeight(), true, true));
+            double width = d.getWidth() == 0 ? 100 : d.getWidth();
+            double height = d.getHeight() == 0 ? 100 : d.getHeight();
+            ImageView die = new ImageView(new Image(d.getIcon(), width, height, true, true));
             die.setUserData(d);
             //die.setFill(new ImagePattern(new Image(d.getIcon())));
             die.setOnMouseClicked(e -> {
                 // roll this die if you can
             });
             container.getChildren().addAll(die);
+            container.setMargin(die, new Insets(10, 0, 20, 20));
         });
 
         spinners.forEach(d -> {
-            ImageView spinner = new ImageView(new Image(d.getIcon(), d.getWidth(), d.getHeight(), true, true));
+            double width = d.getWidth() == 0 ? 170 : d.getWidth();
+            double height = d.getHeight() == 0 ? 170 : d.getHeight();
+            ImageView spinner = new ImageView(new Image(d.getIcon(), width, width, true, true));
             spinner.setUserData(d);
             //spinner.setFill(new ImagePattern(new Image(d.getIcon())));
             spinner.setOnMouseClicked(e -> {
                 // spin this spinner if you can
             });
             container.getChildren().addAll(spinner);
+            container.setMargin(spinner, new Insets(10, 10, 20, 10));
         });
         rngPane.setContent(container);
         rngPane.setStyle("-fx-border-color: BLACK;");
@@ -524,9 +529,10 @@ public class PlayController extends ScreenController {
         initInventoryLabel();
     }
     @FXML
-    public void exitFromPlay() {
-        MainController controller = new MainController();
-        controller.initialize(stage);
+    public void exitFromPlay(ActionEvent e) {
+//        MainController controller = new MainController();
+//        controller.initialize(stage);
+        Platform.exit();
     }
 
     @FXML
@@ -653,7 +659,7 @@ public class PlayController extends ScreenController {
             yes.setOnAction(e-> {
                 popupWindow.close();
                 parentPopup.close();
-                exitFromPlay();
+                exitFromPlay(e);
             });
             no.setOnAction(e->popupWindow.close());
 
@@ -685,7 +691,7 @@ public class PlayController extends ScreenController {
                     displayExitWithoutSave(baseStage, popupWindow);
                 } else {
                     popupWindow.close();
-                    exitFromPlay();
+                    exitFromPlay(e);
                 }
             });
             restartButton.setOnAction(e->{
