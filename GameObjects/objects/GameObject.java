@@ -1,9 +1,11 @@
 package objects;
 
-import java.awt.Color;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
+
+import javafx.scene.paint.Color;
 
 public abstract class GameObject extends Savable {
   
@@ -26,7 +28,7 @@ public abstract class GameObject extends Savable {
    * 	label 	: 	String
    * 	icon 	: 	String
    *    shape   :   String
-   * 	color 	:	Color
+   * 	color 	:	String (Can be obtained as JAVAFX Color object)
    *    xPos    :   Integer
    *    yPos    :   Integer
    *    width   :   Double
@@ -63,7 +65,7 @@ public abstract class GameObject extends Savable {
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("icon") && value instanceof String) ||	// check icon is String
-			  (trait.equals("color") && value instanceof Color) ||  // check color is Color
+			  (trait.equals("color") && value instanceof String) ||  // check color is Color
 			  (trait.equals("shape") && value instanceof String) || // check shape is String
   			  (trait.equals("xPos") && value instanceof Integer) || // check xPos is Integer
   			  (trait.equals("yPos") && value instanceof Integer) || // check yPos is Integer
@@ -120,12 +122,31 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setColor(Color color) {
+	 return setColorString(toHexCode(color));
+ }
+ 
+ protected String formatColor(double val) {
+	 String in = Integer.toHexString((int) Math.round(val * 255));
+	    return in.length() == 1 ? "0" + in : in;
+ }
+ 
+ protected String toHexCode(Color color) {
+	 return "#" + (formatColor(color.getRed()) + formatColor(color.getGreen()) + formatColor(color.getBlue()) + formatColor(color.getOpacity()))
+	            .toUpperCase();
+ }
+ 
+ public boolean setColorString(String color) {
 	 return this.setTrait("color", color);
  }
 
- public Color getColor() {
-	   return (Color)this.getTrait("color");
+ public String getColorString() {
+	   return (String)this.getTrait("color");
  }
+ 
+ public Color getColor() {
+	 return Color.web(getColorString());
+ }
+
  public boolean setShape(String shape) {
  	return setTrait("shape", shape) ;
  }
@@ -168,5 +189,17 @@ public abstract class GameObject extends Savable {
  
  public String toString() {
 	 return getLabel() ;
- } 
+ }
+ 
+ // GKNEW Integration Function
+ public String repr(boolean hasLabel) {
+	String s = "";
+	TreeSet<String> sortedKeys = new TreeSet<String>(this.traits.keySet());
+	for (String key: sortedKeys) {
+		if (hasLabel || !key.equals("label")) {
+			s = s + key + '=' + this.traits.get(key).toString() + "\n";
+		}
+	} 
+	return s;
+ }
 }

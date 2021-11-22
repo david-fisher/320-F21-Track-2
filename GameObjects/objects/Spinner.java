@@ -1,6 +1,5 @@
 package objects ;
 
-import java.awt.Color;
 import java.util.*;
 /**
  * Write a description of class Spinner here.
@@ -29,7 +28,7 @@ public class Spinner extends GameObject
     	
     	this.setLabel("deck" + String.format("%02d", ++count));
     	this.setIcon("default_gamepiece_icon.jpg") ;
-    	this.setColor(Color.BLACK) ;
+    	this.setColorString("#000000") ;
         this.setTrait("categories", categories, true) ;
         this.setNumCategories(1) ;
     }
@@ -37,7 +36,7 @@ public class Spinner extends GameObject
     /* Trait Types:
      * 	label 	: 	String
      * 	icon 	: 	String
-     * 	color 	:	Color
+     * 	color 	:	String (Can be obtained as JAVAFX Color object)
      * 	categories: ArrayList
      */
 
@@ -131,5 +130,8 @@ public class Spinner extends GameObject
     public List<Category> getCategories() {
     	return categories ;
     }
-    
+  
+    public String repr(boolean hasLabel) {
+        return "Spinner\n" + super.repr(hasLabel);
+    }  
 }

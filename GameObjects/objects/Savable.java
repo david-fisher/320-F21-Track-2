@@ -16,7 +16,7 @@ public abstract class Savable {
 
 	static class Projects{
 		private ArrayList<Project> projects;
-		
+
 		Projects(){
 			projects = new ArrayList<Project>();
 		}
@@ -29,16 +29,16 @@ public abstract class Savable {
 			this.projects = projects;
 		}
 	}
-	
+
 	private static Projects projects;
-	
+
 	private static File getGlobalFile() {
 		String path = Paths.get("").toAbsolutePath().toString();
 		File f =  new File(path + File.separator + "res" + File.separator);
 		f.mkdirs();
 		return f;
 	}
-	
+
 	private static void dump(Object obj, File f) {
 		Yaml yaml = new Yaml();
 		yaml.setBeanAccess(BeanAccess.FIELD);
@@ -63,7 +63,7 @@ public abstract class Savable {
 		}
 		return pro;
 	}
-	
+
 	public static boolean intitDB() {
 		File f = new File(getGlobalFile().getPath() + File.separator+ "projects.yml");
 		try {
@@ -84,11 +84,11 @@ public abstract class Savable {
 		projects.getProjects().add(p);
 		return p;
 	}
-	
+
 	public static ArrayList<Project> getProjects() {
 		return projects.getProjects();
 	}
-	
+
 	public static boolean closeDB() {
 		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
 		return true;
@@ -97,3 +97,4 @@ public abstract class Savable {
 
 
 
+}

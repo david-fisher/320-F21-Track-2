@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Color;
-
 public class Token extends GameObject{
 
   private static int count = 0;
@@ -11,7 +9,7 @@ public class Token extends GameObject{
 	super() ;  
 	this.setLabel("token" + String.format("%02d", ++count));
     this.setIcon("default_token_icon.jpg") ;
-    this.setColor(Color.BLACK) ;
+    this.setColorString("#000000") ;
     this.setValue(1) ;
   }
   
@@ -19,7 +17,7 @@ public class Token extends GameObject{
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
-   * 	color 	:	Color
+   * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	value	:	Integer
    */
 
@@ -48,5 +46,9 @@ public class Token extends GameObject{
 
   public int getValue() {
 	  return (Integer)this.getTrait("value");
+  }
+
+  public String repr(boolean hasLabel) {
+    return "Token\n" + super.repr(hasLabel);
   }
 }
