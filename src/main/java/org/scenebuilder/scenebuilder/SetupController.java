@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -25,6 +24,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.objects.GameObject;
+import org.scenebuilder.scenebuilder.dummy.DummyGame;
+import org.scenebuilder.scenebuilder.dummy.DummyGameToken;
+import org.scenebuilder.scenebuilder.dummy.DummyInventory;
+import org.scenebuilder.scenebuilder.dummy.DummyPlayer;
 
 import java.io.IOException;
 import java.util.*;

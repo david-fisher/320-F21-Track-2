@@ -1,5 +1,7 @@
 package org.scenebuilder.scenebuilder;
 
+import org.scenebuilder.scenebuilder.dummy.DummyPlayer;
+
 import java.util.ArrayList;
 
 public class SetupData {
