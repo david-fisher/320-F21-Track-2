@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -34,6 +33,10 @@ public class MainController extends ScreenController {
         settingsButton = new Button();
         settingsButton.setText("Settings");
         settingsButton.setFont(new Font(36));
+
+        settingsButton.setOnAction(event -> {
+            settingsFromMain();
+        });
 
         settingsButtonHBox.getChildren().add(settingsButton);
         screenVBox.getChildren().add(settingsButtonHBox);
@@ -87,7 +90,7 @@ public class MainController extends ScreenController {
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
         exitButton.setOnAction(event -> {
-            exitFromMain(event);
+            exitFromMain();
         });
 
         fillHBox = new HBox();
@@ -109,7 +112,11 @@ public class MainController extends ScreenController {
         initButtons();
     }
 
-    public void exitFromMain(ActionEvent event) {
+    // event handlers
+    public void settingsFromMain() {
+
+    }
+    public void exitFromMain() {
         System.exit(0);
     }
 
