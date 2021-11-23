@@ -1,4 +1,4 @@
-package engine;
+package org.engine;
 import java.util.Map;
 
 // Placeholder for GameObject

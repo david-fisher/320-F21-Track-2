@@ -1,4 +1,4 @@
-package objects;
+package org.objects;
 import java.awt.Color;
 
 public class Button extends GameObject {

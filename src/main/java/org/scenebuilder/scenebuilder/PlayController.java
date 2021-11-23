@@ -529,7 +529,7 @@ public class PlayController extends ScreenController {
         initInventoryLabel();
     }
     @FXML
-    public void exitFromPlay(ActionEvent e) {
+    public void exitFromPlay() {
 //        MainController controller = new MainController();
 //        controller.initialize(stage);
         Platform.exit();
@@ -588,17 +588,17 @@ public class PlayController extends ScreenController {
 
     public class Popup {
         public boolean saved = false;
-        public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
-            button.setPrefWidth(prefWidth);
-            button.setPrefHeight(prefHeight);
-
-            button.setMinWidth(button.getPrefWidth());
-            button.setMaxWidth(button.getPrefWidth());
-            button.setMinHeight(button.getPrefHeight());
-            button.setMaxHeight(button.getPrefHeight());
-
-            button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
-        }
+//        public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
+//            button.setPrefWidth(prefWidth);
+//            button.setPrefHeight(prefHeight);
+//
+//            button.setMinWidth(button.getPrefWidth());
+//            button.setMaxWidth(button.getPrefWidth());
+//            button.setMinHeight(button.getPrefHeight());
+//            button.setMaxHeight(button.getPrefHeight());
+//
+//            button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
+//        }
         public void displayRestart(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
@@ -614,20 +614,26 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            Button yes = new Button("Yes");
-            setButtonSize(yes, 70, 30, 15);
-            Button no = new Button("No");
-            setButtonSize(no, 70, 30, 15);
+            Label yes = new Label("Yes");
+            yes.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            yes.setAlignment(Pos.CENTER);
+            yes.setPrefWidth(70);
+
+            Label no = new Label("No");
+            no.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            no.setAlignment(Pos.CENTER);
+            no.setPrefWidth(70);
 
             //Change these actions to actually handle restarting
-            yes.setOnAction(e-> {
+            yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
             });
-            no.setOnAction(e->popupWindow.close());
+            no.setOnMouseClicked(e->popupWindow.close());
 
-            buttons.getChildren().addAll(yes);
-            buttons.getChildren().addAll(no);
+            buttons.getChildren().addAll(yes, no);
+            buttons.setMargin(yes, new Insets(0, 0, 10, 0));
+            buttons.setMargin(no, new Insets(0, 0, 10, 0));
 
             buttons.setAlignment(Pos.CENTER);
             borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
@@ -651,20 +657,26 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            Button yes = new Button("Yes");
-            setButtonSize(yes, 70, 30, 15);
-            Button no = new Button("No");
-            setButtonSize(no, 70, 30, 15);
+            Label yes = new Label("Yes");
+            yes.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            yes.setAlignment(Pos.CENTER);
+            yes.setPrefWidth(70);
 
-            yes.setOnAction(e-> {
+            Label no = new Label("No");
+            no.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            no.setAlignment(Pos.CENTER);
+            no.setPrefWidth(70);
+
+            yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
-                exitFromPlay(e);
+                exitFromPlay();
             });
-            no.setOnAction(e->popupWindow.close());
+            no.setOnMouseClicked(e->popupWindow.close());
 
-            buttons.getChildren().addAll(yes);
-            buttons.getChildren().addAll(no);
+            buttons.getChildren().addAll(yes, no);
+            buttons.setMargin(yes, new Insets(0, 0, 10, 0));
+            buttons.setMargin(no, new Insets(0, 0, 10, 0));
 
             buttons.setAlignment(Pos.CENTER);
             borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
@@ -676,25 +688,41 @@ public class PlayController extends ScreenController {
         public void displayExit(Stage baseStage) {
             Stage popupWindow = new Stage();
             popupWindow.initModality(Modality.APPLICATION_MODAL);
-            Button saveButton = new Button("Save");
-            setButtonSize(saveButton, 170, 80, 40);
-            Button exitButton = new Button("Exit");
-            setButtonSize(exitButton, 170, 80, 40);
-            Button restartButton = new Button("Restart");
-            setButtonSize(restartButton, 170, 80, 40);
-            saveButton.setOnAction(e->{
+
+            Label saveButton = new Label("Save");
+            saveButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Green; -fx-border-color: BLACK;");
+            saveButton.setTextFill(Color.BLACK);
+            saveButton.setAlignment(Pos.CENTER);
+            saveButton.setPrefWidth(170);
+            saveButton.setPrefHeight(80);
+
+            Label exitButton = new Label("Exit");
+            exitButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Red; -fx-border-color: BLACK;");
+            exitButton.setTextFill(Color.BLACK);
+            exitButton.setAlignment(Pos.CENTER);
+            exitButton.setPrefWidth(170);
+            exitButton.setPrefHeight(80);
+
+            Label restartButton = new Label("Restart");
+            restartButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Gray; -fx-border-color: BLACK;");
+            restartButton.setTextFill(Color.BLACK);
+            restartButton.setAlignment(Pos.CENTER);
+            restartButton.setPrefWidth(170);
+            restartButton.setPrefHeight(80);
+
+            saveButton.setOnMouseClicked(e->{
                 saved = true;
                 System.out.println("Save");
             });
-            exitButton.setOnAction(e->{
+            exitButton.setOnMouseClicked(e->{
                 if (!saved) {
                     displayExitWithoutSave(baseStage, popupWindow);
                 } else {
                     popupWindow.close();
-                    exitFromPlay(e);
+                    exitFromPlay();
                 }
             });
-            restartButton.setOnAction(e->{
+            restartButton.setOnMouseClicked(e->{
                 displayRestart(baseStage, popupWindow);
             });
 

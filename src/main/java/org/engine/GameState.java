@@ -1,9 +1,9 @@
-package engine;
+package org.engine;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
-import objects.*;
-import nodes.*;
+import org.objects.*;
+import org.nodes.*;
 
 public class GameState {
 

@@ -1,6 +1,6 @@
-package engine;
+package org.engine;
 import java.util.ArrayList;
-import nodes.*;
+import org.nodes.*;
 
 public class Interpreter {
     public void interpretRule(Node rule, GameState currState) {
