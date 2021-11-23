@@ -19,7 +19,6 @@
 Maven__*
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear

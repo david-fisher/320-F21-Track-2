@@ -101,7 +101,6 @@ class DeckUnitTests {
     deck.replaceBottom(c);
     assert (!deck.getCards().get(95).getLabel().equals("card99"));
   } 
-  
   // to be continued
   
   /*
