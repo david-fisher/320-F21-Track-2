@@ -1,7 +1,4 @@
-package org.scenebuilder.scenebuilder;
-
-import javafx.scene.Node;
-import javafx.scene.control.Label;
+package org.scenebuilder.scenebuilder.dummy;
 
 import java.util.ArrayList;
 

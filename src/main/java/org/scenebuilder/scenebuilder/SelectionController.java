@@ -15,11 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import org.scenebuilder.scenebuilder.dummy.DummyGame;
 
 import java.io.IOException;
 import java.util.ArrayList;

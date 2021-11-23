@@ -1,4 +1,4 @@
-package org.scenebuilder.scenebuilder;
+package org.scenebuilder.scenebuilder.dummy;
 
 public class DummyRNG {
 

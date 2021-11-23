@@ -1,9 +1,6 @@
-package org.scenebuilder.scenebuilder;
-
-import org.objects.Card;
+package org.scenebuilder.scenebuilder.dummy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DummyDeck {
 
