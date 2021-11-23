@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -20,10 +22,28 @@ import java.io.IOException;
 
 public class MainController extends ScreenController {
 
+    HBox settingsButtonHBox;
+    Button settingsButton;
+    private void initSettings() {
+
+        settingsButtonHBox = new HBox();
+        settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
+        VBox.setMargin(settingsButtonHBox, new Insets(10, 10, 10, 10));
+        VBox.setVgrow(settingsButtonHBox, Priority.ALWAYS);
+
+        settingsButton = new Button();
+        settingsButton.setText("Settings");
+        settingsButton.setFont(new Font(36));
+
+        settingsButtonHBox.getChildren().add(settingsButton);
+        screenVBox.getChildren().add(settingsButtonHBox);
+    }
+
     Button playButton;
     Button newButton;
     Button editButton;
     Button exitButton;
+    HBox fillHBox;
     private void initButtons() {
 
         playButton = new Button();
@@ -70,11 +90,14 @@ public class MainController extends ScreenController {
             exitFromMain(event);
         });
 
+        fillHBox = new HBox();
+        VBox.setVgrow(fillHBox, Priority.ALWAYS);
+
         playButton.prefWidthProperty().bind(exitButton.widthProperty());
         newButton.prefWidthProperty().bind(exitButton.widthProperty());
         editButton.prefWidthProperty().bind(exitButton.widthProperty());
 
-        screenVBox.getChildren().addAll(playButton, newButton, editButton, exitButton);
+        screenVBox.getChildren().addAll(playButton, newButton, editButton, exitButton, fillHBox);
     }
 
     public void initialize(Stage stage) {
@@ -82,7 +105,12 @@ public class MainController extends ScreenController {
         super.initialize(stage);
 
         screenVBox.setAlignment(Pos.CENTER);
+        initSettings();
         initButtons();
+    }
+
+    public void exitFromMain(ActionEvent event) {
+        System.exit(0);
     }
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
@@ -97,18 +125,18 @@ public class MainController extends ScreenController {
         controller.initialize(stage);
     }
 
+    // todo implement new button
     public void newFromMain(ActionEvent event) throws IOException {
         System.out.println("New");
     }
 
+    // todo implement edit button
     public void editFromMain(ActionEvent event) throws IOException {
         System.out.println("Edit");
     }
 
-    public void exitFromMain(ActionEvent event) {
-        System.exit(0);
-    }
 
+    // todo do we need this still?
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
