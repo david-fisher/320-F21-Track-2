@@ -114,7 +114,8 @@ public class MainController extends ScreenController {
 
     // event handlers
     public void settingsFromMain() {
-
+        SettingsController controller = new SettingsController();
+        controller.initialize(stage);
     }
     public void exitFromMain() {
         System.exit(0);
