@@ -154,41 +154,65 @@ public class BasicApplication extends Application {
     }
     public static SettingsObject getSettingsObject() { return settingsObject; }
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public static int[] calculateScreenDimensions() {
 
-        if(true) {
+        int[] screenDimensions = new int[2];
 
-            //SelectionController controller = new SelectionController();
-            MainController controller = new MainController();
-            //PlayController controller = new PlayController();
+        Rectangle2D dims = Screen.getPrimary().getBounds();
+        screenDimensions[0] = (int)dims.getWidth();
+        screenDimensions[1] = (int)dims.getHeight();
+
+        return screenDimensions;
+    }
+    public static void initScreenStyle(Stage stage) {
+
+        if(settingsObject.getIsFullScreen() == true) {
             stage.initStyle(StageStyle.UNDECORATED); // remove title bar
-            controller.initialize(stage);
-
         } else {
-            // load fxml file (which specifies the controller)
-            Parent root = FXMLLoader.load(getClass().getResource("mainFXML.fxml"));
-
-            // create new instance of the controller class
-            // inject all fx:id tagged objects from fxml file
-            // and marked with @FXML annotation in controller
-
-            // full screen dimensions
-            Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-            double width = screenDimensions.getWidth();
-            double height = screenDimensions.getHeight();
-
-            Scene scene = new Scene(root, width, height);
-            scene.getRoot().setStyle("-fx-font-family: 'serif'");
-            stage.setScene(scene);
-            stage.setMaximized(true);
-
-            System.out.println("My Screen Dimensions:");
-            System.out.println(width);
-            System.out.println(height);
-
-            stage.show();
+            stage.initStyle(StageStyle.DECORATED); // title bar intact
         }
+    }
+    public static void initScreenDimensions(Stage stage) {
+
+        stage.setResizable(false);
+
+        if(settingsObject.getIsFullScreen() == true) {
+            stage.setMaximized(true);
+            int[] screenDimensions = calculateScreenDimensions();
+            settingsObject.setWindowSize(screenDimensions);
+        } else {
+            stage.initStyle(StageStyle.DECORATED);
+
+            int[] screenDimensions = settingsObject.getWindowSize();
+            stage.setWidth(screenDimensions[0]);
+            stage.setHeight(screenDimensions[1]);
+        }
+    }
+
+    public static Stage updateStage(Stage stage) {
+
+        stage.close();
+
+        Stage newStage = new Stage();
+
+        initScreenStyle(newStage);
+        initScreenDimensions(newStage);
+
+        return newStage;
+    }
+
+    @Override
+    public void start(Stage stage) {
+
+        // calculate default screen dimensions
+        //int[] screenDimensions = calculateScreenDimensions();
+        //System.out.println("Your Screen Dimensions: " + screenDimensions[0] + " x " + screenDimensions[1]);
+
+        stage = updateStage(stage);
+
+        // initialize controller and set initial scene
+        MainController controller = new MainController();
+        controller.initialize(stage);
     }
 
     public static void main(String[] args) {

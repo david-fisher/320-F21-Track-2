@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SettingsController extends ScreenController {
@@ -72,7 +71,7 @@ public class SettingsController extends ScreenController {
         windowSizeComboBox = new ComboBox();
         windowSizeComboBox.setStyle("-fx-font-size: 24pt");
 
-        windowSizeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.RESOLUTION_TABLE)));
+        windowSizeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.RESOLUTION_STRING_TABLE)));
         windowSizeComboBox.prefHeightProperty().bind(windowSizeLabel.heightProperty());
         HBox.setMargin(windowSizeComboBox, new Insets(0, 0, 0, 0));
 
@@ -99,7 +98,7 @@ public class SettingsController extends ScreenController {
         themeComboBox = new ComboBox();
         themeComboBox.setStyle("-fx-font-size: 24pt");
 
-        themeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.THEME_TABLE)));
+        themeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.THEME_STRING_TABLE)));
         themeComboBox.prefHeightProperty().bind(windowSizeLabel.heightProperty());
         HBox.setMargin(themeComboBox, new Insets(0, 0, 0, 0));
 
@@ -147,7 +146,7 @@ public class SettingsController extends ScreenController {
         fullScreenCheckBox.setSelected(BasicApplication.getSettingsObject().getIsFullScreen());
 
         // window size
-        windowSizeComboBox.getSelectionModel().select(BasicApplication.getSettingsObject().getWindowSize());
+        windowSizeComboBox.setValue(BasicApplication.getSettingsObject().getWindowSizeString());
 
         // theme
         themeComboBox.getSelectionModel().select(BasicApplication.getSettingsObject().getTheme());
@@ -179,6 +178,8 @@ public class SettingsController extends ScreenController {
 
         SettingsObject newSettingsObject = new SettingsObject(isFullscreen, windowSize, theme);
         BasicApplication.setSettingsObject(newSettingsObject);
+
+        stage = BasicApplication.updateStage(stage);
 
         MainController controller = new MainController();
         controller.initialize(stage);
