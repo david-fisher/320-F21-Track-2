@@ -99,10 +99,7 @@ public class SettingsController extends ScreenController {
         themeComboBox = new ComboBox();
         themeComboBox.setStyle("-fx-font-size: 24pt");
 
-        ArrayList<String> themeOptions = new ArrayList<>();
-        themeOptions.add("Default");
-        themeOptions.add("Dark");
-        themeComboBox.setItems(FXCollections.observableList(themeOptions));
+        themeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.THEME_TABLE)));
         themeComboBox.prefHeightProperty().bind(windowSizeLabel.heightProperty());
         HBox.setMargin(themeComboBox, new Insets(0, 0, 0, 0));
 
