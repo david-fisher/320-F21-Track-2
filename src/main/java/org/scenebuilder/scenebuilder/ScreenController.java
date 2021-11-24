@@ -46,7 +46,6 @@ public class ScreenController {
         // set stage parameters
         Scene newScene = new Scene(anchorPane);
         stage.setScene(newScene);
-        stage.setResizable(true);
         stage.show();
     }
 }
