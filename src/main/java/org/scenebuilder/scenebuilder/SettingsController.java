@@ -141,6 +141,18 @@ public class SettingsController extends ScreenController {
         screenVBox.getChildren().add(buttonsHBox);
     }
 
+    private void initValues() {
+
+        // full screen
+        fullScreenCheckBox.setSelected(BasicApplication.getSettingsObject().getIsFullScreen());
+
+        // window size
+        windowSizeComboBox.getSelectionModel().select(BasicApplication.getSettingsObject().getWindowSize());
+
+        // theme
+        themeComboBox.getSelectionModel().select(BasicApplication.getSettingsObject().getTheme());
+    }
+
     public void initialize(Stage stage) {
         super.initialize(stage);
 
@@ -149,6 +161,8 @@ public class SettingsController extends ScreenController {
         initWindowSize();
         initTheme();
         initButtons();
+
+        initValues();
     }
 
     // action event handlers
@@ -157,7 +171,15 @@ public class SettingsController extends ScreenController {
         controller.initialize(stage);
     }
     private void saveFromSettings() {
-        // todo save changes
+
+        // save changes
+        boolean isFullscreen = fullScreenCheckBox.isSelected();
+        String windowSize = (String)windowSizeComboBox.getValue();
+        String theme = (String)themeComboBox.getValue();
+
+        SettingsObject newSettingsObject = new SettingsObject(isFullscreen, windowSize, theme);
+        BasicApplication.setSettingsObject(newSettingsObject);
+
         MainController controller = new MainController();
         controller.initialize(stage);
     }

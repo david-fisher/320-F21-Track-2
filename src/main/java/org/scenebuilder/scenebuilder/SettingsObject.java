@@ -38,6 +38,6 @@ public class SettingsObject {
 
     public void calculateScreenDimensions() {
 
-        
+
     }
 }

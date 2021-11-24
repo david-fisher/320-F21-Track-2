@@ -17,6 +17,8 @@ import java.util.List;
 
 public class BasicApplication extends Application {
 
+    private static SettingsObject settingsObject = new SettingsObject();
+
     private static ArrayList<DummyGame> newGames = new ArrayList<>();
     private static ArrayList<DummyGame> savedGames = new ArrayList<>();
 
@@ -135,6 +137,7 @@ public class BasicApplication extends Application {
     public static void setSetupData(SetupData data) {
         setupData = data;
     }
+    public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }
 
     // getters
     public static ArrayList<DummyGame> getNewGames() {
@@ -149,6 +152,7 @@ public class BasicApplication extends Application {
     public static SetupData getSetupData() {
         return setupData;
     }
+    public static SettingsObject getSettingsObject() { return settingsObject; }
 
     @Override
     public void start(Stage stage) throws Exception {
