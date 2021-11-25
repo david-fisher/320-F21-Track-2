@@ -4,8 +4,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+import nodes.OpNode;
+import nodes.NodeMaker;
+
 public class Block {
   protected StackPane block;
+  protected OpNode node;
 
   private double startX;
   private double startY;
@@ -41,5 +45,9 @@ public class Block {
   public void setTopLeft(AnchorPane pane) {
     this.block.setTranslateX(pane.getWidth() / 16);
     this.block.setTranslateY(pane.getHeight() / 16);
+  }
+
+  protected void createNode(String nodeType) {
+    this.node = NodeMaker.makeNode(nodeType);
   }
 }

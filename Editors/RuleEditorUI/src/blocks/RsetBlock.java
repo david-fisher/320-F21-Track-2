@@ -70,5 +70,7 @@ public class RsetBlock extends Block {
     this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
+    //Create the actual Node object for this block
+    this.createNode("rset");
   }
 }
