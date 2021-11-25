@@ -318,7 +318,7 @@ public class PlayController extends ScreenController {
             slideOut(e);
         });
 
-        playParent.getChildren().addAll(rngLabel);
+        playParent.getChildren().add(rngLabel);
 
         playParent.setRightAnchor(rngLabel, 0.0);
         playParent.setTopAnchor(rngLabel, 293.0);
@@ -378,7 +378,7 @@ public class PlayController extends ScreenController {
         playParent.setTopAnchor(rngPane, 293.0);
         rngPane.setPrefWidth(355);
         rngPane.setPrefHeight(209);
-        playParent.getChildren().addAll(rngPane);
+        playParent.getChildren().add(rngPane);
     }
 
     private void initializeInventoryDrawer() {
@@ -390,7 +390,7 @@ public class PlayController extends ScreenController {
         playParent.setTopAnchor(inventoryPane, 512.0);
         inventoryPane.setPrefWidth(355);
         inventoryPane.setPrefHeight(209);
-        playParent.getChildren().addAll(inventoryPane);
+        playParent.getChildren().add(inventoryPane);
     }
 
     //A method to add all the decks to the deck slider
@@ -450,19 +450,37 @@ public class PlayController extends ScreenController {
         container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
 
-        dice.forEach(d -> {
-            double width = d.getWidth() == 0 ? 100 : d.getWidth();
-            double height = d.getHeight() == 0 ? 100 : d.getHeight();
-            ImageView die = new ImageView(new Image(d.getIcon(), width, height, true, true));
-            die.setUserData(d);
+        rngPane.setContent(container);
+        AnchorPane diceView = new AnchorPane();
+        container.getChildren().add(diceView);
+        container.setMargin(diceView, new Insets(10, 0, 20, 20));
+        double rowMax = Math.ceil(Math.sqrt(dice.size()));
+        double diceSize = 180 / rowMax;
+        double currX = 0.0;
+        double currY = 0.0;
+        int diceCount = 0;
+
+        for (int i = 0; i < dice.size(); i++) {
+            ImageView die = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
+            die.setUserData(dice.get(i));
             //die.setFill(new ImagePattern(new Image(d.getIcon())));
             die.setOnMouseClicked(e -> {
                 // roll this die if you can
             });
-            container.getChildren().addAll(die);
-            container.setMargin(die, new Insets(10, 0, 20, 20));
-        });
+            diceView.getChildren().add(die);
+            die.setX(currX);
+            die.setY(currY);
+            currX = (currX + diceSize) % 180;
 
+            diceCount++;
+            if (diceCount % rowMax == 0) {
+                currY += diceSize;
+            }
+//            container.getChildren().addAll(die);
+//            container.setMargin(die, new Insets(10, 0, 20, 20));
+
+        }
+//        container.getChildren().add(diceView);
         spinners.forEach(d -> {
             double width = d.getWidth() == 0 ? 170 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
@@ -475,7 +493,7 @@ public class PlayController extends ScreenController {
             container.getChildren().addAll(spinner);
             container.setMargin(spinner, new Insets(10, 10, 20, 10));
         });
-        rngPane.setContent(container);
+        //rngPane.setContent(container);
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 

@@ -104,8 +104,16 @@ public class BasicApplication extends Application {
 
         Die die1 = new Die();
         Die die2 = new Die();
+        Die die3 = new Die();
+        Die die4 = new Die();
+        Die die5 = new Die();
+        Die die6 = new Die();
         dice.add(die1);
         dice.add(die2);
+        dice.add(die3);
+        dice.add(die4);
+        dice.add(die5);
+        dice.add(die6);
 
         Spinner spinner1 = new Spinner();
         spinner1.setNumCategories(5);
