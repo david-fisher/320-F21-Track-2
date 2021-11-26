@@ -1,8 +1,20 @@
 package editors.rule_editor_ui.blocks;
 
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.shape.Rectangle;
+
 import javafx.scene.paint.Color;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import nodes.OpNode;
 import nodes.NodeMaker;
@@ -11,18 +23,43 @@ public class Block {
   protected StackPane block;
   protected OpNode node;
 
+  //Variables for dragging
   private double startX;
   private double startY;
 
+  //Color styling
   final Color SILVER = Color.rgb(200,200,200);
   final Color GREY = Color.rgb(55,55,55);
   final Color WHITE = Color.rgb(255,255,255);
   final Color BLUE = Color.rgb(0,180,255);
+
+  //Sizing and spacing
   final int HEADER_SIZE = 15;
+  final int VGAP = 10;
+  final int HGAP = 5;
+  final int BLOCK_WIDTH = 155;
+  final int RESULT_WIDTH = 19;
+  final int RESULT_HEIGHT = 30;
+  //Total height of block is 20 + 50 + 50 + 20 + 3*5 = 155px
+  //The 3*5 term comes from the fact that each column has 5px spacing from HGAP
+  final int COL0_WIDTH = 20;
+  final int COL1_WIDTH = 50;
+  final int COL2_WIDTH = 50;
+  final int COL3_WIDTH = 20;
+  
+  //Default height of 20
+  private int blockHeight = 20;
+  //Resize factor for when adding row
+  final int RESIZE_FACTOR = 40;
 
   //Initialize block as a stackpane and make it draggable
-  public Block() {
+  public Block(String blockName, int numRows) {
     this.block = new StackPane();
+
+    //Size block to appropriate number of rows
+    this.blockHeight = this.blockHeight + (RESIZE_FACTOR * numRows);
+
+    //Make the block draggable
     this.block.setOnMousePressed(e -> {
       //calculate offset
       startX = e.getSceneX() - this.block.getTranslateX();
@@ -34,6 +71,44 @@ public class Block {
       this.block.setTranslateX(e.getSceneX() - startX);
       this.block.setTranslateY(e.getSceneY() - startY);
     });
+
+    //Pane for placing the controls and text for the block
+    GridPane grid = new GridPane();
+    //Padding of top, right, & bottom to 10px; padding of left 0px
+    grid.setPadding(new Insets(10, 0, 10, 0));
+    grid.setMinSize(BLOCK_WIDTH, blockHeight);
+    grid.setPrefSize(BLOCK_WIDTH, blockHeight);
+    //Vertical gap between columns 10px; horizontal gap 5px
+    grid.setVgap(VGAP);
+    grid.setHgap(HGAP);
+
+    //Set width of column 0
+    grid.getColumnConstraints().add(new ColumnConstraints(COL0_WIDTH));
+    //Set width of column 1
+    grid.getColumnConstraints().add(new ColumnConstraints(COL1_WIDTH));
+    //Set width of column 2
+    grid.getColumnConstraints().add(new ColumnConstraints(COL2_WIDTH));
+    //Set width of column 3
+    grid.getColumnConstraints().add(new ColumnConstraints(COL3_WIDTH));
+
+    //Create text that will be displayed on top of block
+    Text name = new Text(blockName);
+    name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
+    name.setFill(WHITE);
+
+    //Create result connection for block and attach it to first row of grid if row 1 exists
+    Rectangle result = new Rectangle(RESULT_WIDTH, RESULT_HEIGHT, BLUE);
+    if (numRows >= 1) {
+      grid.add(result, 0, 1);
+    }
+
+    //Base visual of the stackpane
+    Rectangle base = new Rectangle(BLOCK_WIDTH, blockHeight, GREY);
+
+    //Stack the base Rectangle, grid GridPane, and name of the block on the pane
+    this.block.getChildren().addAll(base, grid, name);
+    //Position the name of the block at the top of the stackpane
+    this.block.setAlignment(name, Pos.TOP_CENTER);
   }
 
   //Return the current instance of the block
