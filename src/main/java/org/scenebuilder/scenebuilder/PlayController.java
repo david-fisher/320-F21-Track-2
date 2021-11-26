@@ -420,13 +420,11 @@ public class PlayController extends ScreenController {
 
                 cardImage.setFitWidth(200);
                 cardImage.setFitHeight(340);
-                System.out.println(cardImage.getFitHeight() + " " + cardImage.getFitWidth());
                 playParent.getChildren().add(cardImage);
                 cardImage.setX(playWidth / 2 - 100);
                 cardImage.setY(playHeight / 2 - 170);
+
                 final Timeline timeline = new Timeline();
-                timeline.setCycleCount(2);
-                timeline.setAutoReverse(true);
                 timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
                         k -> playParent.getChildren().remove(cardImage)));
                 timeline.play();
@@ -452,6 +450,8 @@ public class PlayController extends ScreenController {
 
         rngPane.setContent(container);
         AnchorPane diceView = new AnchorPane();
+        AnchorPane diceDisplay = new AnchorPane();
+        diceDisplay.setPrefSize(180, 180);
         container.getChildren().add(diceView);
         container.setMargin(diceView, new Insets(10, 0, 20, 20));
         double rowMax = Math.ceil(Math.sqrt(dice.size()));
@@ -461,25 +461,29 @@ public class PlayController extends ScreenController {
         int diceCount = 0;
 
         for (int i = 0; i < dice.size(); i++) {
-            ImageView die = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
-            die.setUserData(dice.get(i));
-            //die.setFill(new ImagePattern(new Image(d.getIcon())));
-            die.setOnMouseClicked(e -> {
-                // roll this die if you can
-            });
-            diceView.getChildren().add(die);
-            die.setX(currX);
-            die.setY(currY);
+            ImageView die1 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
+            ImageView die2 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
+            die1.setUserData(dice.get(i));
+
+            die2.setUserData(dice.get(i));
+            die2.setFitWidth(diceSize);
+            die2.setFitHeight(diceSize);
+
+            diceView.getChildren().add(die1);
+            diceDisplay.getChildren().add(die2);
+            die1.setX(currX);
+            die1.setY(currY);
+            die2.setX(currX);
+            die2.setY(currY);
             currX = (currX + diceSize) % 180;
 
             diceCount++;
             if (diceCount % rowMax == 0) {
                 currY += diceSize;
             }
-//            container.getChildren().addAll(die);
-//            container.setMargin(die, new Insets(10, 0, 20, 20));
-
         }
+
+        diceView.setOnMouseClicked(e -> {rollDice(e, dice, diceDisplay);});
 //        container.getChildren().add(diceView);
         spinners.forEach(d -> {
             double width = d.getWidth() == 0 ? 170 : d.getWidth();
@@ -495,6 +499,49 @@ public class PlayController extends ScreenController {
         });
         //rngPane.setContent(container);
         rngPane.setStyle("-fx-border-color: BLACK;");
+    }
+
+    private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double playWidth = screenDimensions.getWidth();
+        double playHeight = screenDimensions.getHeight();
+
+        for (Node d: diceDisplay.getChildren()) {
+            ImageView dieImage = (ImageView) d;
+            Die die = (Die) dieImage.getUserData();
+            int roll = die.roll();
+            switch (roll) {
+                case 1:
+                    dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+                case 2:
+                    dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+                case 3:
+                    dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+                case 4:
+                    dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+                case 5:
+                    dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+                case 6:
+                    dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
+                    break;
+            }
+        }
+
+        playParent.getChildren().add(diceDisplay);
+        diceDisplay.setLayoutX(playWidth / 2 - 100);
+        diceDisplay.setLayoutY(playHeight / 2 - 90);
+
+        final Timeline timeline = new Timeline();
+        timeline.setAutoReverse(true);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
+                k -> playParent.getChildren().remove(diceDisplay)));
+        timeline.play();
+
     }
 
     private void addToInventory(GameObject object) {
