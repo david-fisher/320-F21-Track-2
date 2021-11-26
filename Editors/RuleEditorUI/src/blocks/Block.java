@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
 import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
@@ -15,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.geometry.HPos;
 
 import nodes.OpNode;
 import nodes.NodeMaker;
@@ -37,15 +39,14 @@ public class Block {
   final int HEADER_SIZE = 15;
   final int VGAP = 10;
   final int HGAP = 5;
-  final int BLOCK_WIDTH = 155;
-  final int RESULT_WIDTH = 19;
-  final int RESULT_HEIGHT = 30;
-  //Total height of block is 20 + 50 + 50 + 20 + 3*5 = 155px
+  final int BLOCK_WIDTH = 150;
+  final int CONNECTION_WIDTH = 19;
+  final int CONNECTION_HEIGHT = 30;
+  //Total height of block is 70 + 50 + 20 + 2*5 = 150px
   //The 3*5 term comes from the fact that each column has 5px spacing from HGAP
-  final int COL0_WIDTH = 20;
+  final int COL0_WIDTH = 70;
   final int COL1_WIDTH = 50;
-  final int COL2_WIDTH = 50;
-  final int COL3_WIDTH = 20;
+  final int COL2_WIDTH = 20;
   
   //Default height of 20
   private int blockHeight = 20;
@@ -53,11 +54,12 @@ public class Block {
   final int RESIZE_FACTOR = 40;
 
   //Initialize block as a stackpane and make it draggable
-  public Block(String blockName, int numRows) {
+  public Block(String blockName, String[] valueNames) {
     this.block = new StackPane();
 
-    //Size block to appropriate number of rows
-    this.blockHeight = this.blockHeight + (RESIZE_FACTOR * numRows);
+    //Size block to fit the number of values that it will be passing in.
+    //We will have 1 row in the gridpane for each value.
+    this.blockHeight = this.blockHeight + (RESIZE_FACTOR * valueNames.length);
 
     //Make the block draggable
     this.block.setOnMousePressed(e -> {
@@ -78,7 +80,7 @@ public class Block {
     grid.setPadding(new Insets(10, 0, 10, 0));
     grid.setMinSize(BLOCK_WIDTH, blockHeight);
     grid.setPrefSize(BLOCK_WIDTH, blockHeight);
-    //Vertical gap between columns 10px; horizontal gap 5px
+    //Set vertical gap between columns and horizontal gap
     grid.setVgap(VGAP);
     grid.setHgap(HGAP);
 
@@ -88,19 +90,24 @@ public class Block {
     grid.getColumnConstraints().add(new ColumnConstraints(COL1_WIDTH));
     //Set width of column 2
     grid.getColumnConstraints().add(new ColumnConstraints(COL2_WIDTH));
-    //Set width of column 3
-    grid.getColumnConstraints().add(new ColumnConstraints(COL3_WIDTH));
 
     //Create text that will be displayed on top of block
     Text name = new Text(blockName);
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
 
-    //Create result connection for block and attach it to first row of grid if row 1 exists
-    Rectangle result = new Rectangle(RESULT_WIDTH, RESULT_HEIGHT, BLUE);
-    if (numRows >= 1) {
-      grid.add(result, 0, 1);
+    //Create the names and connections for each value being passed to block
+    for(int i = 0; i < valueNames.length; i++) {
+      Text newValName = new Text(valueNames[i]);
+      newValName.setFill(WHITE);
+      grid.add(newValName, 1, i+1);
+      //Right-justify the text
+      grid.setHalignment(newValName, HPos.RIGHT); 
+      grid.add(new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER), 2, i+1);
     }
+
+    //Create result connection for block
+    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
 
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, blockHeight, GREY);
@@ -109,6 +116,11 @@ public class Block {
     this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
+    //Attach result connection if there is >= 1 rows in the block
+    if (valueNames.length >= 1) {
+      this.block.getChildren().addAll(result);
+      this.block.setAlignment(result, Pos.CENTER_LEFT);
+    }
   }
 
   //Return the current instance of the block

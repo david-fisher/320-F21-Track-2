@@ -89,8 +89,8 @@ public class RuleEditorUIController implements Initializable {
     // rset.setTopLeft(editorPane);
     // Add the stackpane to the editor pane
     // editorPane.getChildren().addAll(rset.getBlock());
-
-    Block block = new Block("rset", 2);
+    String[] vals = {"Val:", "Reg:"};
+    Block block = new Block("rset", vals);
     block.setTopLeft(editorPane);
     editorPane.getChildren().addAll(block.getBlock());
     resizeAnchorPane();
