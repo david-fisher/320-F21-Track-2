@@ -5,6 +5,7 @@ import engine.*;
 
 public class Test {
     public static void main(String[] args) {
+/*
         Interpreter interpreter = new Interpreter();
         GameState state = new GameState();
         GameObject go1 = new GameObject("player1");
@@ -29,5 +30,6 @@ public class Test {
         interpreter.interpretRule(ifSt, state);
         System.out.println("Content of register: " + state.registers.toString());
         System.out.println("Label of the object in register \"currPlayer\": " + state.registers.get("currPlayer").label);
+*/
     }
 }

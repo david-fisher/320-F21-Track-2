@@ -2,6 +2,7 @@ package nodes;
 import java.util.ArrayList;
 import java.util.Map;
 import engine.*;
+import objects.*;
 
 // Usage: Operand 0 - property name
 //        Operand 1 - source(register or gameobject)
@@ -38,11 +39,11 @@ public class PSetNode extends OpNode {
             go = currState.registers.get(str2);
         }
 
-/*      TODO: activate and test after UMass Dining pushes new GameObject definition.
-        if (!go.setTrait(str1, e3.getValue()) {
+        //TODO: activate and test after UMass Dining pushes new GameObject definition.
+        if (!go.setTrait(str1, e3.getValue())) {
             System.out.println("Error: Something went wrong when setting " + str1 + " property of " + str2 + " to " + e3.getValue().toString());
         }
-*/
+
         return null;
     }
 }

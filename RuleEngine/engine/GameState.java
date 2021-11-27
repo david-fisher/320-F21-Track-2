@@ -30,36 +30,26 @@ public class GameState {
         registers.put("currPlayer", null);
     }
 
-    public GameObject getRegistry(String key) {
-        return registers.get(key);
-    }
+    public GameObject getRegistry(String key) { return registers.get(key); }
     
-    public void addRegistry(String key, GameObject obj) {
-    		registers.put(key, obj);
-    }
+    public void addRegistry(String key, GameObject obj) { registers.put(key, obj); }
     
-    public boolean removeRegistry(String key) {
-    	return registers.remove(key) != null;
-    }
+    public boolean removeRegistry(String key) { return registers.remove(key) != null; }
     
-    public ArrayList<Node> getEvent(String key) {
-      return events.get(key);
-	  }
+    public ArrayList<Node> getEvent(String key) { return events.get(key); }
 	  
-	  public void addEvent(String key, ArrayList<Node> obj) {
-	  		events.put(key, obj);
-	  }
-	  
-	  public boolean removeEvent(String key) {
-	  	return events.remove(key) != null;
-	  }
+	public void addEvent(String key, ArrayList<Node> obj) { events.put(key, obj); }
+	
+	public boolean removeEvent(String key) { return events.remove(key) != null; }
 
     public GameObject findObject(String label) {
+    	/*
         for(GameObject go : gameObjects) {
             if (go.label.equals(label)) {
                 return go;
             }
         }
+      */
         return null;
     }
 
@@ -67,7 +57,8 @@ public class GameState {
         String repr = "";
         TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
-            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
+        	
+            // repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }
