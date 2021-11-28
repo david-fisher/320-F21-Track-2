@@ -24,11 +24,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-// import editors.rule_editor_ui.blocks.RsetBlock;
-// import editors.rule_editor_ui.blocks.PsetBlock;
-// import editors.rule_editor_ui.blocks.GetBlock;
-// import editors.rule_editor_ui.blocks.NotBlock;
-// import editors.rule_editor_ui.blocks.BinOpBlock;
+import editors.rule_editor_ui.blocks.RSetBlock;
+import editors.rule_editor_ui.blocks.PSetBlock;
+import editors.rule_editor_ui.blocks.GetBlock;
+import editors.rule_editor_ui.blocks.NotBlock;
+import editors.rule_editor_ui.blocks.BinOpBlock;
+import editors.rule_editor_ui.blocks.LengthBlock;
 // import editors.rule_editor_ui.blocks.GetTileIndexBlock;
 // import editors.rule_editor_ui.blocks.GetTileConnBlock;
 // import editors.rule_editor_ui.blocks.ConditionBlock;
@@ -70,59 +71,48 @@ public class RuleEditorUIController implements Initializable {
     editorPane.setPrefSize(WIDTH, HEIGHT);
   }
 
+  //Helper to place blocks in the editorpane
+  private void placeBlock(Block block) {
+    //Place the block in top left of the screen
+    block.setTopLeft(editorPane);
+    //Add the stackpane of the block to the editor pane
+    editorPane.getChildren().addAll(block.getBlock());
+  }
+
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    // PsetBlock pset = new PsetBlock();
-
-    // // Place the block in top left of the screen
-    // pset.setTopLeft(editorPane);
-    // // Add the stackpane to the editor pane
-    // editorPane.getChildren().addAll(pset.getBlock());
-    // resizeAnchorPane();
+    placeBlock(new PSetBlock());
+    resizeAnchorPane();
   }
 
   @FXML
   private void handleAddRsetBtn(ActionEvent event) {
-    // RsetBlock rset = new RsetBlock();
-
-    // // Place the block in top left of the screen
-    // rset.setTopLeft(editorPane);
-    // Add the stackpane to the editor pane
-    // editorPane.getChildren().addAll(rset.getBlock());
-    String[] vals = {"Val:", "Reg:"};
-    Block block = new Block("rset", vals);
-    block.setTopLeft(editorPane);
-    editorPane.getChildren().addAll(block.getBlock());
+    placeBlock(new RSetBlock());
     resizeAnchorPane();
   }
 
   @FXML
   private void handleAddGetBtn(ActionEvent event) {
-    // GetBlock get = new GetBlock();
-
-    // // Place block in the top left of the screen
-    // get.setTopLeft(editorPane);
-    // // Add the stackpane to the editor pane
-    // editorPane.getChildren().addAll(get.getBlock());
-    // resizeAnchorPane();
-  }
-
-  @FXML
-  private void handleAddNotBtn(ActionEvent event) {
-    // NotBlock not = new NotBlock();
-
-    // not.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(not.getBlock());
-    // resizeAnchorPane();
+    placeBlock(new GetBlock());
+    resizeAnchorPane();
   }
 
   @FXML
   private void handleAddBinOpBtn(ActionEvent event) {
-    // BinOpBlock op = new BinOpBlock();
+    placeBlock(new BinOpBlock());
+    resizeAnchorPane();
+  }
 
-    // op.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(op.getBlock());
-    // resizeAnchorPane();
+  @FXML
+  private void handleAddNotBtn(ActionEvent event) {
+    placeBlock(new NotBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddLengthBtn(ActionEvent event) {
+    placeBlock(new LengthBlock());
+    resizeAnchorPane();
   }
 
   @FXML

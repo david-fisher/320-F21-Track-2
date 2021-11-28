@@ -53,8 +53,7 @@ public class Block {
   //Resize factor for when adding row
   final int RESIZE_FACTOR = 40;
 
-  //Initialize block as a stackpane and make it draggable
-  public Block(String blockName, String[] valueNames) {
+  protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
 
     //Size block to fit the number of values that it will be passing in.
@@ -126,6 +125,10 @@ public class Block {
   //Return the current instance of the block
   public StackPane getBlock() {
     return this.block;
+  }
+
+  public OpNode getNode() {
+    return this.node;
   }
 
   //Position the block in the top left portion of the given pane
