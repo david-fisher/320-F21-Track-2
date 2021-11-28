@@ -38,12 +38,17 @@
                   <Button fx:id="addBinOpBtn" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
                   <Button fx:id="addGetTileIndexBtn" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
                   <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
-                  <Button fx:id="addGetTileConnBtn" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" text="Add get connection" />
                   <Button fx:id="addCondition" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
                   <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add move to tile[i]" />
                   <Button fx:id="addMoveByStepsBtn" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddMoveByStepsBtn" prefHeight="25.0" prefWidth="92.0" text="Add move by steps" />
-                  <Button fx:id="addMoveToPosBtn" layoutX="34.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleAddMoveToPosBtn" prefHeight="25.0" prefWidth="92.0" text="Add move to pos" />
                   <Button fx:id="addLengthBtn" layoutX="34.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddLengthBtn" prefHeight="25.0" prefWidth="92.0" text="Add length" />
+                  <Button fx:id="addGetPlayerByIndexBtn" layoutX="34.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleAddGetPlayerByIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get player[i]" />
+                  <Button fx:id="addGetNextPlayerBtn" layoutX="34.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddGetNextPlayerBtn" prefHeight="25.0" prefWidth="92.0" text="Add get next player" />
+                  <Button fx:id="addInvokeBtn" layoutX="34.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleAddInvokeBtn" prefHeight="25.0" prefWidth="92.0" text="Add invoke" />
+                  <Button fx:id="addDeckDrawBtn" layoutX="34.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleAddDeckDrawBtn" prefHeight="25.0" prefWidth="92.0" text="Add deck draw" />
+                  <Button fx:id="addDeckPutBtn" layoutX="34.0" layoutY="492.0" mnemonicParsing="false" onAction="#handleAddDeckPutBtn" prefHeight="25.0" prefWidth="92.0" text="Add deck put" />
+                  <Button fx:id="addDeckShuffleBtn" layoutX="34.0" layoutY="527.0" mnemonicParsing="false" onAction="#handleAddDeckShuffleBtn" prefHeight="25.0" prefWidth="92.0" text="Add deck shuffle" />
+                  <Button fx:id="addUseDieSpinnerBtn" layoutX="34.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleAddUseDieSpinnerBtn" prefHeight="25.0" prefWidth="92.0" text="Add use die/spinner" />
                </children>
                <cursor>
                   <Cursor fx:constant="SW_RESIZE" />

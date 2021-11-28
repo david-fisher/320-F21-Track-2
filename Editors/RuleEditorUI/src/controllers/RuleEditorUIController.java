@@ -24,19 +24,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import editors.rule_editor_ui.blocks.Block;
 import editors.rule_editor_ui.blocks.RSetBlock;
 import editors.rule_editor_ui.blocks.PSetBlock;
 import editors.rule_editor_ui.blocks.GetBlock;
 import editors.rule_editor_ui.blocks.NotBlock;
 import editors.rule_editor_ui.blocks.BinOpBlock;
 import editors.rule_editor_ui.blocks.LengthBlock;
-// import editors.rule_editor_ui.blocks.GetTileIndexBlock;
-// import editors.rule_editor_ui.blocks.GetTileConnBlock;
-// import editors.rule_editor_ui.blocks.ConditionBlock;
-// import editors.rule_editor_ui.blocks.MoveToTileIndexBlock;
-// import editors.rule_editor_ui.blocks.MoveByStepsBlock;
-// import editors.rule_editor_ui.blocks.MoveToPosBlock;
-import editors.rule_editor_ui.blocks.Block;
+import editors.rule_editor_ui.blocks.GetTileIndexBlock;
+import editors.rule_editor_ui.blocks.MoveToTileIndexBlock;
+import editors.rule_editor_ui.blocks.MoveByStepsBlock;
+import editors.rule_editor_ui.blocks.GetPlayerByIndexBlock;
+import editors.rule_editor_ui.blocks.GetNextPlayerBlock;
+import editors.rule_editor_ui.blocks.InvokeBlock;
+import editors.rule_editor_ui.blocks.DeckDrawBlock;
+import editors.rule_editor_ui.blocks.DeckPutBlock;
+import editors.rule_editor_ui.blocks.DeckShuffleBlock;
+import editors.rule_editor_ui.blocks.UseDieSpinnerBlock;
 
 import editors.main_menu.MainMenu;
 import javafx.fxml.FXML;
@@ -117,20 +121,8 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
-    // GetTileIndexBlock tileIndex = new GetTileIndexBlock();
-
-    // tileIndex.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(tileIndex.getBlock());
-    // resizeAnchorPane();
-  }
-
-  @FXML
-  private void handleAddGetTileConnBtn(ActionEvent event) {
-    // GetTileConnBlock conn = new GetTileConnBlock();
-
-    // conn.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(conn.getBlock());
-    // resizeAnchorPane();
+    placeBlock(new GetTileIndexBlock());
+    resizeAnchorPane();
   }
 
   @FXML
@@ -144,29 +136,56 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddMoveToTileIndexBtn(ActionEvent event) {
-    // MoveToTileIndexBlock tileMove = new MoveToTileIndexBlock();
-
-    // tileMove.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(tileMove.getBlock());
-    // resizeAnchorPane();
+    placeBlock(new MoveToTileIndexBlock());
+    resizeAnchorPane();
   }
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
-    // MoveByStepsBlock steps = new MoveByStepsBlock();
-
-    // steps.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(steps.getBlock());
-    // resizeAnchorPane();
+    placeBlock(new MoveByStepsBlock());
+    resizeAnchorPane();
   }
 
   @FXML
-  private void handleAddMoveToPosBtn(ActionEvent event) {
-    // MoveToPosBlock pos = new MoveToPosBlock();
+  private void handleAddGetPlayerByIndexBtn(ActionEvent event) {
+    placeBlock(new GetPlayerByIndexBlock());
+    resizeAnchorPane();
+  }
 
-    // pos.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(pos.getBlock());
-    // resizeAnchorPane();
+  @FXML
+  private void handleAddGetNextPlayerBtn(ActionEvent event) {
+    placeBlock(new GetNextPlayerBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddInvokeBtn(ActionEvent event) {
+    placeBlock(new InvokeBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddDeckDrawBtn(ActionEvent event) {
+    placeBlock(new DeckDrawBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddDeckPutBtn(ActionEvent event) {
+    placeBlock(new DeckPutBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddDeckShuffleBtn(ActionEvent event) {
+    placeBlock(new DeckShuffleBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML
+  private void handleAddUseDieSpinnerBtn(ActionEvent event) {
+    placeBlock(new UseDieSpinnerBlock());
+    resizeAnchorPane();
   }
 
   @FXML

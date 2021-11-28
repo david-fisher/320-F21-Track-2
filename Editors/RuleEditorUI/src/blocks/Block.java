@@ -48,8 +48,8 @@ public class Block {
   final int COL1_WIDTH = 50;
   final int COL2_WIDTH = 20;
   
-  //Default height of 20
-  private int blockHeight = 20;
+  //Default height of 35
+  private int blockHeight = 35;
   //Resize factor for when adding row
   final int RESIZE_FACTOR = 40;
 
@@ -58,7 +58,9 @@ public class Block {
 
     //Size block to fit the number of values that it will be passing in.
     //We will have 1 row in the gridpane for each value.
-    this.blockHeight = this.blockHeight + (RESIZE_FACTOR * valueNames.length);
+    //If there are no arguments, still give it the size of as if it has 1 argument.
+    int resize = RESIZE_FACTOR * (valueNames.length == 0 ? 1 : valueNames.length);
+    this.blockHeight = this.blockHeight + resize;
 
     //Make the block draggable
     this.block.setOnMousePressed(e -> {
@@ -115,11 +117,10 @@ public class Block {
     this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
-    //Attach result connection if there is >= 1 rows in the block
-    if (valueNames.length >= 1) {
-      this.block.getChildren().addAll(result);
-      this.block.setAlignment(result, Pos.CENTER_LEFT);
-    }
+    
+    //Attach result connection
+    this.block.getChildren().addAll(result);
+    this.block.setAlignment(result, Pos.CENTER_LEFT);
   }
 
   //Return the current instance of the block
