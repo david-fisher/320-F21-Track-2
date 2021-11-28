@@ -49,7 +49,34 @@ public class GameState {
                 return go;
             }
         }
-      */
+    	*/
+        for(Button go : buttons) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Card go : cards) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Deck go : decks) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Die go : dice) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Gamepiece go : gamepieces) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(GameTimer go : timers) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Spinner go : spinners) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Tile go : tiles) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Token go : tokens) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
         return null;
     }
 
