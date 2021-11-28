@@ -26,32 +26,32 @@ public class Block {
   protected OpNode node;
 
   //Variables for dragging
-  private double startX;
-  private double startY;
+  protected double startX;
+  protected double startY;
 
   //Color styling
-  final Color SILVER = Color.rgb(200,200,200);
-  final Color GREY = Color.rgb(55,55,55);
-  final Color WHITE = Color.rgb(255,255,255);
-  final Color BLUE = Color.rgb(0,180,255);
+  protected final Color SILVER = Color.rgb(200,200,200);
+  protected final Color GREY = Color.rgb(55,55,55);
+  protected final Color WHITE = Color.rgb(255,255,255);
+  protected final Color BLUE = Color.rgb(0,180,255);
 
   //Sizing and spacing
-  final int HEADER_SIZE = 15;
-  final int VGAP = 10;
-  final int HGAP = 5;
-  final int BLOCK_WIDTH = 150;
-  final int CONNECTION_WIDTH = 19;
-  final int CONNECTION_HEIGHT = 30;
+  protected final int HEADER_SIZE = 15;
+  protected final int VGAP = 10;
+  protected final int HGAP = 5;
+  protected final int BLOCK_WIDTH = 150;
+  protected final int CONNECTION_WIDTH = 19;
+  protected final int CONNECTION_HEIGHT = 30;
   //Total height of block is 70 + 50 + 20 + 2*5 = 150px
   //The 3*5 term comes from the fact that each column has 5px spacing from HGAP
-  final int COL0_WIDTH = 70;
-  final int COL1_WIDTH = 50;
-  final int COL2_WIDTH = 20;
+  protected final int COL0_WIDTH = 70;
+  protected final int COL1_WIDTH = 50;
+  protected final int COL2_WIDTH = 20;
   
   //Default height of 35
-  private int blockHeight = 35;
+  protected int blockHeight = 35;
   //Resize factor for when adding row
-  final int RESIZE_FACTOR = 40;
+  protected final int RESIZE_FACTOR = 40;
 
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();

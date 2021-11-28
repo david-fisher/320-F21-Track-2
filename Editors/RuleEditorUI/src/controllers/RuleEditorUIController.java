@@ -41,6 +41,7 @@ import editors.rule_editor_ui.blocks.DeckDrawBlock;
 import editors.rule_editor_ui.blocks.DeckPutBlock;
 import editors.rule_editor_ui.blocks.DeckShuffleBlock;
 import editors.rule_editor_ui.blocks.UseDieSpinnerBlock;
+import editors.rule_editor_ui.blocks.TextBlock;
 
 import editors.main_menu.MainMenu;
 import javafx.fxml.FXML;
@@ -185,6 +186,12 @@ public class RuleEditorUIController implements Initializable {
   @FXML
   private void handleAddUseDieSpinnerBtn(ActionEvent event) {
     placeBlock(new UseDieSpinnerBlock());
+    resizeAnchorPane();
+  }
+
+  @FXML 
+  private void handleAddTextNodeBtn(ActionEvent event) {
+    placeBlock(new TextBlock());
     resizeAnchorPane();
   }
 
