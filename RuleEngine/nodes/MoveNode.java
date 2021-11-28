@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import engine.GameState;
 import objects.*;
 
-// Usage: Operand 0 - game piece name (or, more generally, any gameobject with a location trait of type Tile).
+// Usage: Operand 0 - game piece name.
 //				Operand 1 - distance (LiteralNode<Integer>)
 public class MoveNode extends OpNode {
     public MoveNode() { super(); }
@@ -33,17 +33,17 @@ public class MoveNode extends OpNode {
         Integer dis = (Integer)e2.getValue();
         GameObject go = (name.charAt(0) == '_') ? go = currState.findObject(name) : currState.getRegistry(name);
     
-        if (go == null) {
-            System.out.println("Error: Cannot find object of label " + name);
-            return null;
-        }
-        if (go.getTrait("location") == null || !(go.getTrait("location") instanceof Tile)) {
-            System.out.println("Error: Object " + name + " to be moved does not have an appropriate location trait.");
+        if (go == null || !(go instanceof Gamepiece)) {
+            System.out.println("Error: Cannot find GAMEPIECE of label " + name);
             return null;
         }
         
+        // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
+        // The engine then promptly set the location of the gamepiece.
+        // TODO: How could this possibly affect the AI?
         Tile playerChoice = Mystery(findTargetTiles((Tile)go.getTrait("location"), dis));
-        if (!go.setTrait("location", playerChoice)) {
+        Gamepiece gp = (Gamepiece) go;
+        if (!gp.setLocation(playerChoice)) {
             System.out.println("Error: Failed to move object " + name);
         }
         return null;
@@ -52,6 +52,9 @@ public class MoveNode extends OpNode {
 	// TODO: This method will be implemented by Minjex. 
 	private Tile Mystery(ArrayList<Tile> tiles) { return null; }
 	
+	// This method returns a list of reachable tiles at distance tDis from the tile t.
+	// Only tiles at the exact distance is included. If possible path is shorter than tDis, the end of that path
+	// is not included.
 	private ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {
 	    LinkedList<Tile> tiles = new LinkedList<Tile>();
 	    LinkedList<Integer> distances = new LinkedList<Integer>();
