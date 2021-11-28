@@ -10,9 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,19 +25,21 @@ import java.io.IOException;
 public class MainController extends ScreenController {
 
     HBox settingsButtonHBox;
-    Button settingsButton;
     private void initSettings() {
+
+        Label settingsButton = new Label("Settings");
+        settingsButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: DarkGrey; -fx-border-color: BLACK;");
+        settingsButton.setTextFill(Color.BLACK);
+        settingsButton.setAlignment(Pos.CENTER);
+        settingsButton.setPrefHeight(70);
+        settingsButton.setPrefWidth(175);
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
         VBox.setMargin(settingsButtonHBox, new Insets(10, 10, 10, 10));
         VBox.setVgrow(settingsButtonHBox, Priority.ALWAYS);
 
-        settingsButton = new Button();
-        settingsButton.setText("Settings");
-        settingsButton.setFont(new Font(36));
-
-        settingsButton.setOnAction(event -> {
+        settingsButton.setOnMouseClicked(event -> {
             settingsFromMain();
         });
 
@@ -42,28 +47,31 @@ public class MainController extends ScreenController {
         screenVBox.getChildren().add(settingsButtonHBox);
     }
 
-    Button playButton;
-    Button newButton;
-    Button editButton;
-    Button exitButton;
+
     HBox fillHBox;
     private void initButtons() {
 
-        playButton = new Button();
-        playButton.setText("Play Game");
-        playButton.setFont(new Font(36));
-        VBox.setMargin(playButton, new Insets(10, 10, 10, 10));
+        Label playButton = new Label("Play Game");
+        playButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: LimeGreen; -fx-border-color: BLACK;");
+        playButton.setTextFill(Color.BLACK);
+        playButton.setAlignment(Pos.CENTER);
+        playButton.setPrefHeight(80);
+        playButton.setFont(playButton.getFont());
+        VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
-        playButton.setOnAction(event -> {
+        playButton.setOnMouseClicked(event -> {
             playFromMain();
         });
 
-        newButton = new Button();
-        newButton.setText("New Game");
+        Label newButton = new Label("Create Game");
+        newButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: RoyalBlue; -fx-border-color: BLACK;");
+        newButton.setTextFill(Color.BLACK);
+        newButton.setAlignment(Pos.CENTER);
+        newButton.setPrefHeight(80);
         newButton.setFont(playButton.getFont());
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
-        newButton.setOnAction(event -> {
+        newButton.setOnMouseClicked(event -> {
             try {
                 newFromMain(event);
             } catch (IOException e) {
@@ -71,12 +79,15 @@ public class MainController extends ScreenController {
             }
         });
 
-        editButton = new Button();
-        editButton.setText("Edit Game");
+        Label editButton = new Label("Edit Game");
+        editButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: DarkMagenta; -fx-border-color: BLACK;");
+        editButton.setTextFill(Color.BLACK);
+        editButton.setAlignment(Pos.CENTER);
+        editButton.setPrefHeight(80);
         editButton.setFont(playButton.getFont());
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
-        editButton.setOnAction(event -> {
+        editButton.setOnMouseClicked(event -> {
             try {
                 editFromMain(event);
             } catch (IOException e) {
@@ -84,12 +95,17 @@ public class MainController extends ScreenController {
             }
         });
 
-        exitButton = new Button();
-        exitButton.setText("Exit To Desktop");
+
+        Label exitButton = new Label("Exit");
+        exitButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: Red; -fx-border-color: BLACK;");
+        exitButton.setTextFill(Color.BLACK);
+        exitButton.setAlignment(Pos.CENTER);
+        exitButton.setPrefHeight(80);
+        exitButton.setPrefWidth(275);
         exitButton.setFont(playButton.getFont());
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
-        exitButton.setOnAction(event -> {
+        exitButton.setOnMouseClicked(event -> {
             exitFromMain();
         });
 
@@ -134,12 +150,12 @@ public class MainController extends ScreenController {
     }
 
     // todo implement new button
-    public void newFromMain(ActionEvent event) throws IOException {
+    public void newFromMain(MouseEvent event) throws IOException {
         System.out.println("New");
     }
 
     // todo implement edit button
-    public void editFromMain(ActionEvent event) throws IOException {
+    public void editFromMain(MouseEvent event) throws IOException {
         System.out.println("Edit");
     }
 
