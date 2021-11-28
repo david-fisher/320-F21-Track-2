@@ -4,17 +4,23 @@ public final class NodeMaker {
 
     public static OpNode makeNode(String type) {
         switch (type) {
-            case "addition":
+            case "AL":
                 return new ALNode("+");
-            case "multiplication":
-                return new ALNode("*");
             case "rset":
                 return new RSetNode();
+            case "pset":
+                return new PSetNode();
+            case "get":
+                return new GetNode();
             case "if":
                 return new IfNode();
+            case "while":
+                return new WhileNode();
+            case "move":
+                return new MoveNode();
+            default:
+                System.out.println("Unknown rule type: " + type);
+                return null;
         }
-
-        System.out.println("Unknown rule type");
-        return null;
     }
 }
