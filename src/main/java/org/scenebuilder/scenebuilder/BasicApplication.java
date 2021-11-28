@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.engine.GameState;
 import org.objects.*;
 import org.scenebuilder.scenebuilder.dummy.*;
 
@@ -30,48 +31,64 @@ public class BasicApplication extends Application {
         // do stuff to get list of playable games (on start) from Persistent Data team
         // todo
 
-        DummyGame game1 = createDummyGame("Game 1", "Rectangle");
-        DummyGame game2 = createDummyGame("Game 2", "Circle");
+        DummyGame game1 = createDummyGame("All Drawers", "Rectangle", true, true, true);
+        DummyGame game2 = createDummyGame("RNG and Inventory", "Rectangle", false, true, true);
+        DummyGame game3 = createDummyGame("Inventory Only", "Circle", false, false, true);
 
         newGames.clear();
         newGames.add(game1);
         newGames.add(game2);
-        newGames.add(game1);
+        newGames.add(game3);
     }
     public static void loadSavedGames() {
 
         // do stuff to get list of saved games
         // todo
 
-        DummyGame game1 = createDummyGame("Game 1", "Rectangle");
-        DummyGame game2 = createDummyGame("Game 2", "Circle");
+        DummyGame game1 = createDummyGame("All Drawers", "Rectangle", true, true, true);
+        DummyGame game2 = createDummyGame("RNG and Inventory", "Rectangle", false, true, true);
+        DummyGame game3 = createDummyGame("Inventory Only", "Circle", false, false, true);
 
         savedGames.clear();
         savedGames.add(game1);
         savedGames.add(game2);
+        savedGames.add(game3);
     }
-    private static DummyGame createDummyGame(String gameName, String gameShape) {
+    private static DummyGame createDummyGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
 
-        ArrayList<DummyPlayer> players = new ArrayList<>();
-        DummyPlayer player1 = new DummyPlayer("Player 1", Color.AQUAMARINE, new ArrayList<DummyGameToken>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
-        player1.addToken(new DummyGameToken("Token 1", "Square"));
+        ArrayList<Player> players = new ArrayList<>();
+        Player player1 = new Player("Player 1", Color.AQUAMARINE, new ArrayList<Token>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
+        player1.addToken(new Token());
 
-        ArrayList<DummyTile> tiles = new ArrayList<>();
+        ArrayList<Tile> tiles = new ArrayList<>();
 
         double tileWidth = 100;
         double tileHeight = 100;
 
-        double tileX = 0;
-        double tileY = 0;
+        int tileX = 0;
+        int tileY = 0;
 
         boolean red = true;
         for (int i = 1; i < 57; i++) {
 
+            Tile tile = new Tile();
+            tile.setHeight(tileHeight);
+            tile.setWidth(tileWidth);
             if (red) {
-                tiles.add(new DummyTile("Tile 1", "Rectangle", Color.RED, tileWidth, tileHeight, tileX, tileY, new ArrayList<DummyTile>()));
+                tile.setColor(Color.RED);
+                tile.setLabel("Tile 1");
+                tile.setShape("Rectangle");
+                tile.setXPos(tileX);
+                tile.setYPos(tileY);
+                tiles.add(tile);
                 red = false;
             } else {
-                tiles.add(new DummyTile("Tile 1", "Rectangle", Color.BLACK, tileWidth, tileHeight, tileX, tileY, new ArrayList<DummyTile>()));
+                tile.setColor(Color.BLACK);
+                tile.setLabel("Tile 1");
+                tile.setShape("Rectangle");
+                tile.setXPos(tileX);
+                tile.setYPos(tileY);
+                tiles.add(tile);
                 red = true;
             }
             if (i%8 == 0) {
@@ -84,7 +101,6 @@ public class BasicApplication extends Application {
         }
 
         ArrayList<Deck> decks = new ArrayList<>();
-        ArrayList<DummyCard> cards = new ArrayList<>();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
         Deck deck3 = new Deck();
@@ -127,17 +143,28 @@ public class BasicApplication extends Application {
         spinnerWeight.add(0.2);
         spinners.add(spinner1);
 
-        ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
-        DummyGameToken gameToken = new DummyGameToken("Token 1", "Square");
+        ArrayList<Token> gameTokens = new ArrayList<>();
+        Token gameToken = new Token();
+        gameToken.setLabel("Token 1");
+        gameToken.setShape("Rectangle");
         gameTokens.add(gameToken);
 
-        DummyGamestate gamestate = new DummyGamestate(players, tiles, decks, dice, spinners, gameTokens);
-
+        GameState gameState = new GameState(); //players, tiles, decks, dice, spinners, gameTokens
+        gameState.setAllTiles(tiles);
+        if (decksOn) {
+            gameState.setAllDecks(decks);
+        }
+        if (rngOn) {
+            gameState.setAllDice(dice);
+            gameState.setAllSpinners(spinners);
+        }
+        gameState.setAllPlayers(players);
+        gameState.setAllTokens(gameTokens);
         DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
 
         DummyGameRules gameRules = new DummyGameRules();
 
-        return new DummyGame(gameBoard, gameRules, gamestate);
+        return new DummyGame(gameName, gameBoard, gameRules, gameState);
     }
 
     // setters

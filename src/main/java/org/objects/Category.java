@@ -1,6 +1,6 @@
 package org.objects;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * Write a description of class Category here.
@@ -20,7 +20,7 @@ public class Category extends GameObject {
     	super() ;
     	this.setLabel("category" + String.format("%02d", ++count));
     	this.setIcon("default_category_icon.jpg") ;
-    	this.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random())) ;
+//    	this.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random())) ;
     	this.setWeight(0) ;
     }
 

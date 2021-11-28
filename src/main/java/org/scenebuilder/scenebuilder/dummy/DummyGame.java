@@ -1,14 +1,18 @@
 package org.scenebuilder.scenebuilder.dummy;
 
+import org.engine.GameState;
+
 public class DummyGame {
 
     // a "fake" game object
 
     private DummyGameBoard gameBoard;
     private DummyGameRules gameRules;
-    private DummyGamestate initialGamestate;
+    private GameState initialGamestate;
+    private String name;
 
-    public DummyGame(DummyGameBoard gameBoard, DummyGameRules gameRules, DummyGamestate initialGameState) {
+    public DummyGame(String name, DummyGameBoard gameBoard, DummyGameRules gameRules, GameState initialGameState) {
+        this.name = name;
         this.gameBoard = gameBoard;
         this.gameRules = gameRules;
         this.initialGamestate = initialGameState;
@@ -22,24 +26,26 @@ public class DummyGame {
     }
 
     // setters
+    public void setGameName(String name) { this.name = name; }
     public void setGameBoard(DummyGameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
     public void setGameRules(DummyGameRules gameRules) {
         this.gameRules = gameRules;
     }
-    public void setInitialGameState(DummyGamestate gamestate) {
+    public void setInitialGameState(GameState gamestate) {
         this.initialGamestate = gamestate;
     }
 
     // getters
+    public String getGameName() {return this.name; }
     public DummyGameBoard getGameBoard() {
         return this.gameBoard;
     }
     public DummyGameRules getGameRules() {
         return this.gameRules;
     }
-    public DummyGamestate getInitialGamestate() {
+    public GameState getInitialGamestate() {
         return this.initialGamestate;
     }
 

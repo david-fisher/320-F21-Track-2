@@ -1,6 +1,6 @@
 package org.objects;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 public class Gamepiece extends GameObject{
 

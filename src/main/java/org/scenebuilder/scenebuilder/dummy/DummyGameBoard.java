@@ -1,5 +1,7 @@
 package org.scenebuilder.scenebuilder.dummy;
 
+import org.objects.Tile;
+
 import java.util.ArrayList;
 
 public class DummyGameBoard {
@@ -13,9 +15,9 @@ public class DummyGameBoard {
     private double xPos;
     private double yPos;
 
-    private ArrayList<DummyTile> tiles;
+    private ArrayList<Tile> tiles;
 
-    public DummyGameBoard(String boardID, String shape, double width, double height, double xPos, double yPos, ArrayList<DummyTile> tiles) {
+    public DummyGameBoard(String boardID, String shape, double width, double height, double xPos, double yPos, ArrayList<Tile> tiles) {
         this.boardID = boardID;
         this.shape = shape;
         this.width = width;
@@ -40,7 +42,7 @@ public class DummyGameBoard {
     }
     public void setXPos(double xPos) { this.xPos = xPos; }
     public void setYPos(double yPos) { this.yPos = yPos; }
-    public void setTiles(ArrayList<DummyTile> tiles) { this.tiles = new ArrayList<>(tiles); }
+    public void setTiles(ArrayList<Tile> tiles) { this.tiles = new ArrayList<>(tiles); }
 
     // getters
     public String getBoardID() { return this.boardID; }
@@ -49,6 +51,6 @@ public class DummyGameBoard {
     public double getHeight() { return this.height; }
     public double getXPos() { return this.xPos; }
     public double getYPos() { return this.yPos; }
-    public ArrayList<DummyTile> getTiles() { return this.tiles; }
+    public ArrayList<Tile> getTiles() { return this.tiles; }
 
 }

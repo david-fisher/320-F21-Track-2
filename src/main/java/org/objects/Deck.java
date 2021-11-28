@@ -1,6 +1,6 @@
 package org.objects;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.*;
 import java.util.ArrayList;
 import java.util.List;

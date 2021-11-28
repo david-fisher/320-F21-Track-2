@@ -289,7 +289,7 @@ public class SelectionController extends ScreenController {
                     //tempImageView.setImage(n.getIcon());
 
                     Label tempLabel = new Label();
-                    tempLabel.setText("tempGameName");
+                    tempLabel.setText(n.getGameName());
                     tempLabel.setFont(new Font(16));
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);

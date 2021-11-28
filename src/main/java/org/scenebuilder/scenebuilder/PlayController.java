@@ -25,12 +25,14 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.engine.GameState;
 import org.objects.*;
 import org.objects.Spinner;
 import org.scenebuilder.scenebuilder.dummy.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PlayController extends ScreenController {
 
@@ -50,8 +52,6 @@ public class PlayController extends ScreenController {
     private ScrollPane inventoryPane;
 
     @FXML
-    private HBox sptiHBox;
-    @FXML
     private Label playerTurnIndicator;
     @FXML
     private Label decksLabel;
@@ -68,12 +68,15 @@ public class PlayController extends ScreenController {
     private SetupData setupData;
     private DummyGame activeGame;
 
+    Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+    double playWidth = screenDimensions.getWidth();
+    double playHeight = screenDimensions.getHeight();
+
     @FXML
     public void initialize(Stage stage) {
 
         super.initialize(stage);
         this.stage = stage;
-
 
         // load relevant data
         setupData = BasicApplication.getSetupData();
@@ -86,17 +89,11 @@ public class PlayController extends ScreenController {
         stage.setScene(newScene);
         stage.setResizable(true);
         stage.show();
-
-
     }
 
     private void initGame(DummyGame game) {
         DummyGameBoard gameBoard = game.getGameBoard();
-        DummyGamestate gameState = game.getInitialGamestate();
-
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double playWidth = screenDimensions.getWidth();
-        double playHeight = screenDimensions.getHeight();
+        GameState gameState = game.getInitialGamestate();
 
         AnchorPane boardPane = new AnchorPane();
 
@@ -121,10 +118,53 @@ public class PlayController extends ScreenController {
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
-        initDecks(gameState.getDecks());
-        initRNG(gameState.getDice(), gameState.getSpinners());
-        initPlayers(gameState.getPlayers());
-        initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
+
+        ArrayList<Deck> decks = gameState.getAllDecks();
+        ArrayList<Die> dice = gameState.getAllDice();
+        ArrayList<Spinner> spinners = gameState.getAllSpinners();
+        ArrayList<Player> players = gameState.getAllPlayers();
+
+        int numDrawers = 0;
+        boolean decksNeeded = Objects.nonNull(decks);
+        boolean diceNeeded = Objects.nonNull(dice);
+        boolean spinnersNeeded = Objects.nonNull(spinners);
+        boolean inventoryNeeded = true; //no indicator yet
+
+        numDrawers = decksNeeded ? numDrawers + 1 : numDrawers;
+        numDrawers = diceNeeded || spinnersNeeded ? numDrawers + 1 : numDrawers;
+        numDrawers = inventoryNeeded ? numDrawers + 1 : numDrawers;
+
+        if (Objects.nonNull(decks)) {
+            initializeDeckDrawer(numDrawers);
+            initDeckLabel(numDrawers);
+            fillDeckDrawer(decks, decksPane);
+        }
+
+        HBox container = new HBox();
+        container.setSpacing(20);
+        container.setAlignment(Pos.CENTER);
+
+        if (diceNeeded || spinnersNeeded) {
+            initializeRNGDrawer(numDrawers);
+            initRNGLabel(numDrawers);
+        }
+        if (diceNeeded) {
+            placeDice(dice, rngPane, container);
+        }
+        if (spinnersNeeded) {
+            placeSpinners(spinners, rngPane, container);
+        }
+
+        if (Objects.nonNull(players)) {
+            initPlayers(gameState.getAllPlayers());
+        }
+
+        //Have some indicator for whether inventory is needed
+        if (inventoryNeeded) {
+            initializeInventoryDrawer(numDrawers);
+            initInventoryLabel(numDrawers);
+            initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
+        }
 
     }
 
@@ -150,7 +190,7 @@ public class PlayController extends ScreenController {
         // set anchorPane values
     }
 
-    private void initTiles(ArrayList<DummyTile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {
+    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {
         double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
@@ -174,25 +214,7 @@ public class PlayController extends ScreenController {
         // add tile to anchorPane
     }
 
-    private void initDecks(ArrayList<Deck> decks) {
-        fillDeckDrawer(decks, decksPane);
-
-        // for each deck
-        // create deck node
-        // set deck node values
-        // add deck node to drawer
-    }
-
-    private void initRNG(ArrayList<Die> dice, ArrayList<Spinner> spinners) {
-        fillRNGDrawer(dice, spinners, rngPane);
-
-        // for each RNG
-        // create RNG node
-        // set RNG node values
-        // add RNG node to drawer
-    }
-
-    private void initPlayers(ArrayList<DummyPlayer> players) {
+    private void initPlayers(ArrayList<Player> players) {
 
         players.forEach(p -> {
             initGamePiece(p.getGameTokens().get(0)); // todo, get specific game piece by reference
@@ -204,7 +226,7 @@ public class PlayController extends ScreenController {
         // add player stuff to inventory (later)
     }
 
-    private void initGamePiece(DummyGameToken gamePiece) {
+    private void initGamePiece(Token gamePiece) {
         // for each player
         // for each piece
         // get piece
@@ -269,7 +291,7 @@ public class PlayController extends ScreenController {
 //        sptiHBox.setMargin(playerTurnIndicator, new Insets(10, 0, 10, 0));
     }
 
-    private void initDeckLabel() {
+    private void initDeckLabel(int numDrawers) {
         decksLabel = new Label();
         decksLabel.setText("Decks");
         decksLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
@@ -293,11 +315,11 @@ public class PlayController extends ScreenController {
         playParent.getChildren().addAll(decksLabel);
 
         playParent.setRightAnchor(decksLabel, 0.0);
-        playParent.setTopAnchor(decksLabel, 75.0);
+        playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
         //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
-    private void initRNGLabel() {
+    private void initRNGLabel(int numDrawers) {
         rngLabel = new Label();
         rngLabel.setText("RNG");
         rngLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
@@ -321,13 +343,13 @@ public class PlayController extends ScreenController {
         playParent.getChildren().add(rngLabel);
 
         playParent.setRightAnchor(rngLabel, 0.0);
-        playParent.setTopAnchor(rngLabel, 293.0);
+        playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
 
         //tabsVBox.getChildren().addAll(rngLabel);
         //tabsVBox.setMargin(rngLabel, new Insets(2, 0, 10, 0));
     }
 
-    private void initInventoryLabel() {
+    private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
         inventoryLabel.setText("Inventory");
         inventoryLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
@@ -351,12 +373,12 @@ public class PlayController extends ScreenController {
         playParent.getChildren().addAll(inventoryLabel);
 
         playParent.setRightAnchor(inventoryLabel, 0.0);
-        playParent.setTopAnchor(inventoryLabel, 512.0);
+        playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
         //tabsVBox.getChildren().addAll(inventoryLabel);
         //tabsVBox.setMargin(inventoryLabel, new Insets(2, 0, 10, 0));
     }
 
-    private void initializeDeckDrawer() {
+    private void initializeDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
         decksPane.setStyle("-fx-background-color: GREY;");
         decksPane.setId("decksDrawer");
@@ -365,29 +387,29 @@ public class PlayController extends ScreenController {
         decksPane.setPrefWidth(355);
         decksPane.setPrefHeight(209);
         playParent.setRightAnchor(decksPane, -215.0);
-        playParent.setTopAnchor(decksPane, 75.0);
+        playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
         playParent.getChildren().addAll(decksPane);
     }
 
-    private void initializeRNGDrawer() {
+    private void initializeRNGDrawer(int numDrawers) {
         rngPane = new ScrollPane();
         rngPane.setStyle("-fx-background-color: GREY;");
         rngPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         rngPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         playParent.setRightAnchor(rngPane, -215.0);
-        playParent.setTopAnchor(rngPane, 293.0);
+        playParent.setTopAnchor(rngPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
         rngPane.setPrefWidth(355);
         rngPane.setPrefHeight(209);
         playParent.getChildren().add(rngPane);
     }
 
-    private void initializeInventoryDrawer() {
+    private void initializeInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
         inventoryPane.setStyle("-fx-background-color: GREY;");
         inventoryPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         inventoryPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         playParent.setRightAnchor(inventoryPane, -215.0);
-        playParent.setTopAnchor(inventoryPane, 512.0);
+        playParent.setTopAnchor(inventoryPane, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
         inventoryPane.setPrefWidth(355);
         inventoryPane.setPrefHeight(209);
         playParent.getChildren().add(inventoryPane);
@@ -395,9 +417,6 @@ public class PlayController extends ScreenController {
 
     //A method to add all the decks to the deck slider
     private void fillDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double playWidth = screenDimensions.getWidth();
-        double playHeight = screenDimensions.getHeight();
 
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
@@ -443,10 +462,7 @@ public class PlayController extends ScreenController {
         //tabsVBox.getChildren().addAll(decksPane);
     }
 
-    public void fillRNGDrawer(ArrayList<Die> dice, ArrayList<Spinner> spinners, ScrollPane rngPane) {
-        HBox container = new HBox();
-        container.setSpacing(20);
-        container.setAlignment(Pos.CENTER);
+    public void placeDice(ArrayList<Die> dice, ScrollPane rngPane, HBox container) {
 
         rngPane.setContent(container);
         AnchorPane diceView = new AnchorPane();
@@ -483,8 +499,13 @@ public class PlayController extends ScreenController {
             }
         }
 
-        diceView.setOnMouseClicked(e -> {rollDice(e, dice, diceDisplay);});
+        diceView.setOnMouseClicked(e -> {
+            rollDice(e, dice, diceDisplay);
+        });
 //        container.getChildren().add(diceView);
+    }
+
+    public void placeSpinners(ArrayList<Spinner> spinners, ScrollPane rngPane, HBox container) {
         spinners.forEach(d -> {
             double width = d.getWidth() == 0 ? 170 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
@@ -502,9 +523,6 @@ public class PlayController extends ScreenController {
     }
 
     private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double playWidth = screenDimensions.getWidth();
-        double playHeight = screenDimensions.getHeight();
 
         for (Node d: diceDisplay.getChildren()) {
             ImageView dieImage = (ImageView) d;
@@ -576,10 +594,6 @@ public class PlayController extends ScreenController {
     }
 
     public void initializePlayScreen() {
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double playWidth = screenDimensions.getWidth();
-        double playHeight = screenDimensions.getHeight();
-
         playParent = new AnchorPane();
         playParent.setPrefWidth(playWidth);
         playParent.setPrefHeight(playHeight);
@@ -587,12 +601,6 @@ public class PlayController extends ScreenController {
         //initSettingsAndPlayerIndicatorHBox();
         initPlayerTurnIndicator();
         initSettings();
-        initializeDeckDrawer();
-        initDeckLabel();
-        initializeRNGDrawer();
-        initRNGLabel();
-        initializeInventoryDrawer();
-        initInventoryLabel();
     }
     @FXML
     public void exitFromPlay() {
@@ -609,12 +617,7 @@ public class PlayController extends ScreenController {
         } else {
             stage = baseStage;
         }
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
+        Scene scene = new Scene(root, playWidth, playHeight);
         stage.setScene(scene);
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
