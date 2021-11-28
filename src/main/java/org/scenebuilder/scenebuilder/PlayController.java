@@ -91,6 +91,19 @@ public class PlayController extends ScreenController {
         stage.show();
     }
 
+    private void playerTurnCycle(Player curPlayer) {
+        Label switchTurn = new Label();
+        switchTurn.setText("End Turn");
+        switchTurn.setPrefWidth(100);
+        switchTurn.setPrefHeight(50);
+        switchTurn.setOnMouseClicked(e -> {
+            playerTurnIndicator.setText(curPlayer.getPlayerID() + "'s Turn");
+            // set current player
+            fillInventoryDrawer(curPlayer.getInventory());
+        });
+        playParent.getChildren().addAll(switchTurn);
+        switchTurn.setAlignment(Pos.CENTER);
+    }
     private void initGame(DummyGame game) {
         DummyGameBoard gameBoard = game.getGameBoard();
         GameState gameState = game.getInitialGamestate();
@@ -238,14 +251,6 @@ public class PlayController extends ScreenController {
         fillInventoryDrawer(inventory);
     }
 
-    private void initSettingsAndPlayerIndicatorHBox() {
-        sptiHBox = new HBox();
-        sptiHBox.setStyle("-fx-background-color: transparent; -fx-border-color: BLACK; ");
-        playParent.getChildren().addAll(sptiHBox);
-        playParent.setRightAnchor(sptiHBox, 0.0);
-        playParent.setTopAnchor(sptiHBox, 0.0);
-    }
-
     public void initSettings() {
         playSettings = new ImageView();
         settingsPane = new Pane();
@@ -285,10 +290,7 @@ public class PlayController extends ScreenController {
 
         playParent.getChildren().addAll(playerTurnIndicator);
         playParent.setRightAnchor(playerTurnIndicator, 70.0);
-        playParent.setTopAnchor(playerTurnIndicator, 2.0);
-
-//        sptiHBox.getChildren().addAll(playerTurnIndicator);
-//        sptiHBox.setMargin(playerTurnIndicator, new Insets(10, 0, 10, 0));
+        playParent.setTopAnchor(playerTurnIndicator, 10.0);
     }
 
     private void initDeckLabel(int numDrawers) {

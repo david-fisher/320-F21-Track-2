@@ -17,6 +17,7 @@ public class GameState {
     public ArrayList<Spinner> spinners;
     public ArrayList<Tile> tiles;
     public ArrayList<Token> tokens;
+    public ArrayList<Player> players;
 
     // Temporary GameObject list.
     public ArrayList<GameObject> gameObjects;
