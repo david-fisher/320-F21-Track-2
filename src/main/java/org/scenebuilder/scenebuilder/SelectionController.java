@@ -13,7 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -139,6 +141,8 @@ public class SelectionController extends ScreenController {
             controller.initialize(stage);
         });
 
+        initDarken(backButton);
+
         fillerPane = new Pane();
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
@@ -155,6 +159,9 @@ public class SelectionController extends ScreenController {
         selectGameButton.setPrefHeight(70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
+
+        initDarken(selectGameButton);
+
         HBox.setMargin(selectGameButton, HBox.getMargin(backButton));
 
         buttonsHBox.getChildren().addAll(backButton, fillerPane, selectGameButton);
@@ -256,7 +263,7 @@ public class SelectionController extends ScreenController {
                         "-fx-background-radius: 10 10 10 10; " +
                         "-fx-font-family: Serif; " +
                         "-fx-font-size: 40; " +
-                        "-fx-background-color: RoyalBlue; " +
+                        "-fx-background-color: Blue; " +
                         "-fx-border-color: BLACK;");
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -327,5 +334,22 @@ public class SelectionController extends ScreenController {
 
     public void setSelectedGame(VBox vbox) {
         selectedGame = (DummyGame)vbox.getUserData();
+    }
+
+    public void darken(MouseEvent e) {
+        Label label = (Label) e.getSource();
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(-0.2);
+        label.setEffect(colorAdjust);
+    }
+
+    public void initDarken(Label label) {
+        label.setOnMouseEntered(e -> {
+            darken(e);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.setEffect(null);
+        });
     }
 }

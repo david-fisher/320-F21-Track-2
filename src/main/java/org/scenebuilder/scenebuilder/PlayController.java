@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -287,7 +288,7 @@ public class PlayController extends ScreenController {
 
         playParent.getChildren().addAll(settingsPane);
         playParent.setRightAnchor(settingsPane, 15.0);
-        playParent.setTopAnchor(settingsPane, 15.0);
+        playParent.setTopAnchor(settingsPane, 25.0);
 //        sptiHBox.getChildren().addAll(settingsPane);
 //        sptiHBox.setMargin(settingsPane, new Insets(25, 10, 10, 20));
     }
@@ -336,6 +337,7 @@ public class PlayController extends ScreenController {
         });
 
         playParent.getChildren().addAll(decksLabel);
+        initDarken(decksLabel);
 
         playParent.setRightAnchor(decksLabel, 0.0);
         playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
@@ -364,6 +366,7 @@ public class PlayController extends ScreenController {
         });
 
         playParent.getChildren().add(rngLabel);
+        initDarken(rngLabel);
 
         playParent.setRightAnchor(rngLabel, 0.0);
         playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
@@ -392,6 +395,7 @@ public class PlayController extends ScreenController {
         inventoryLabel.setOnMouseClicked(e -> {
             slideOut(e);
         });
+        initDarken(inventoryLabel);
 
         playParent.getChildren().addAll(inventoryLabel);
 
@@ -662,7 +666,6 @@ public class PlayController extends ScreenController {
     @FXML
     public void slideOut(MouseEvent event) {
         Label parent = (Label) event.getSource();
-        //parent.toFront();
         ScrollPane tab;
         if (parent.getId().equals("decksLabel")) {
             tab = decksPane;
@@ -692,6 +695,8 @@ public class PlayController extends ScreenController {
     }
 
     public class Popup {
+        Label yes;
+        Label no;
         public boolean saved = false;
 //        public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
 //            button.setPrefWidth(prefWidth);
@@ -719,26 +724,15 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            Label yes = new Label("Yes");
-            yes.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            yes.setAlignment(Pos.CENTER);
-            yes.setPrefWidth(70);
-
-            Label no = new Label("No");
-            no.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            no.setAlignment(Pos.CENTER);
-            no.setPrefWidth(70);
-
             //Change these actions to actually handle restarting
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
             });
-            no.setOnMouseClicked(e->popupWindow.close());
 
             buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 0, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 0));
+            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
+            buttons.setMargin(no, new Insets(0, 0, 10, 5));
 
             buttons.setAlignment(Pos.CENTER);
             borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
@@ -762,26 +756,15 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            Label yes = new Label("Yes");
-            yes.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            yes.setAlignment(Pos.CENTER);
-            yes.setPrefWidth(70);
-
-            Label no = new Label("No");
-            no.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            no.setAlignment(Pos.CENTER);
-            no.setPrefWidth(70);
-
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
                 exitFromPlay();
             });
-            no.setOnMouseClicked(e->popupWindow.close());
 
             buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 0, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 0));
+            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
+            buttons.setMargin(no, new Insets(0, 0, 10, 5));
 
             buttons.setAlignment(Pos.CENTER);
             borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
@@ -805,26 +788,15 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            Label yes = new Label("Yes");
-            yes.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            yes.setAlignment(Pos.CENTER);
-            yes.setPrefWidth(70);
-
-            Label no = new Label("No");
-            no.setStyle("-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            no.setAlignment(Pos.CENTER);
-            no.setPrefWidth(70);
-
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
                 mainMenuFromPlay();
             });
-            no.setOnMouseClicked(e->popupWindow.close());
 
             buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 0, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 0));
+            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
+            buttons.setMargin(no, new Insets(0, 0, 10, 5));
 
             buttons.setAlignment(Pos.CENTER);
             borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
@@ -835,10 +807,32 @@ public class PlayController extends ScreenController {
         }
         public void displayExit(Stage baseStage) {
             Stage popupWindow = new Stage();
+
+            yes = new Label("Yes");
+            yes.setStyle("-fx-border-radius: 5 5 5 5; " +
+                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            yes.setAlignment(Pos.CENTER);
+            yes.setPrefWidth(70);
+
+            no = new Label("No");
+            no.setStyle(yes.getStyle());
+            no.setAlignment(Pos.CENTER);
+            no.setPrefWidth(yes.getPrefWidth());
+
+            no.setOnMouseClicked(e->popupWindow.close());
+            outlineYesNo(yes);
+            outlineYesNo(no);
+
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
             Label saveButton = new Label("Save");
-            saveButton.setStyle("-fx-font-family: Serif; -fx-font-size: 30; -fx-background-color: Green; -fx-border-color: BLACK;");
+            saveButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 30; " +
+                    "-fx-background-color: LimeGreen; " +
+                    "-fx-border-color: BLACK;");
             saveButton.setTextFill(Color.BLACK);
             saveButton.setAlignment(Pos.CENTER);
             saveButton.setTextAlignment(TextAlignment.CENTER);
@@ -846,8 +840,13 @@ public class PlayController extends ScreenController {
             saveButton.setPrefWidth(170);
             saveButton.setPrefHeight(80);
 
-            Label exitButton = new Label("Exit to Desktop");
-            exitButton.setStyle("-fx-font-family: Serif; -fx-font-size: 30; -fx-background-color: Red; -fx-border-color: BLACK;");
+            Label exitButton = new Label("Exit");
+            exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 30; " +
+                    "-fx-background-color: Red; " +
+                    "-fx-border-color: BLACK;");
             exitButton.setTextFill(Color.BLACK);
             exitButton.setAlignment(Pos.CENTER);
             exitButton.setTextAlignment(TextAlignment.CENTER);
@@ -856,7 +855,12 @@ public class PlayController extends ScreenController {
             exitButton.setPrefHeight(80);
 
             Label restartButton = new Label("Restart");
-            restartButton.setStyle("-fx-font-family: Serif; -fx-font-size: 30; -fx-background-color: Gray; -fx-border-color: BLACK;");
+            restartButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 30; " +
+                    "-fx-background-color: LightGray; " +
+                    "-fx-border-color: BLACK;");
             restartButton.setTextFill(Color.BLACK);
             restartButton.setAlignment(Pos.CENTER);
             restartButton.setTextAlignment(TextAlignment.CENTER);
@@ -865,7 +869,12 @@ public class PlayController extends ScreenController {
             restartButton.setPrefHeight(80);
 
             Label mainMenuButton = new Label("Main Menu");
-            mainMenuButton.setStyle("-fx-font-family: Serif; -fx-font-size: 30; -fx-background-color: BLUE; -fx-border-color: BLACK;");
+            mainMenuButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 30; " +
+                    "-fx-background-color: Blue; " +
+                    "-fx-border-color: BLACK;");
             mainMenuButton.setTextFill(Color.BLACK);
             mainMenuButton.setAlignment(Pos.CENTER);
             mainMenuButton.setTextAlignment(TextAlignment.CENTER);
@@ -877,6 +886,9 @@ public class PlayController extends ScreenController {
                 saved = true;
                 System.out.println("Save");
             });
+
+            initDarken(saveButton);
+
             exitButton.setOnMouseClicked(e->{
                 if (!saved) {
                     displayExitWithoutSave(baseStage, popupWindow);
@@ -885,9 +897,15 @@ public class PlayController extends ScreenController {
                     exitFromPlay();
                 }
             });
+
+            initDarken(exitButton);
+
             restartButton.setOnMouseClicked(e->{
                 displayRestart(baseStage, popupWindow);
             });
+
+            initDarken(restartButton);
+
             mainMenuButton.setOnMouseClicked(e -> {
                 if (!saved) {
                     displayMainMenuWithoutSave(baseStage, popupWindow);
@@ -897,13 +915,16 @@ public class PlayController extends ScreenController {
                 }
             });
 
+            initDarken(mainMenuButton);
+
             VBox layout = new VBox(10);
             layout.getChildren().addAll(saveButton);
-            layout.getChildren().addAll(mainMenuButton);
             layout.getChildren().addAll(restartButton);
+            layout.getChildren().addAll(mainMenuButton);
             layout.getChildren().addAll(exitButton);
             layout.setAlignment(Pos.CENTER);
-            Scene exitScene = new Scene(layout, 300, 400);
+            Scene exitScene = new Scene(layout, 350, 400);
+            exitScene.getStylesheets().add(getClass().getResource("labelStyle.css").toString());
             exitScene.setFill(Color.MAROON);
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
@@ -918,6 +939,32 @@ public class PlayController extends ScreenController {
         Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
         popup.displayExit(curStage);
+    }
+
+    public void initDarken(Label label) {
+        label.setOnMouseEntered(e -> {
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.2);
+            label.setEffect(colorAdjust);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.setEffect(null);
+        });
+    }
+
+    public void outlineYesNo(Label label) {
+        label.setOnMouseEntered(e -> {
+            label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Blue;");
+        });
+
+        label.setOnMouseExited(e -> {
+            label.styleProperty().setValue("-fx-border-radius: 5 5 5 5; " +
+                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
+        });
     }
 }
 

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -41,12 +42,15 @@ public class MainController extends ScreenController {
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
-        VBox.setMargin(settingsButtonHBox, new Insets(10, 10, 10, 10));
+        VBox.setMargin(settingsButtonHBox, new Insets(15, 15, 10, 10));
         VBox.setVgrow(settingsButtonHBox, Priority.ALWAYS);
 
         settingsButton.setOnMouseClicked(event -> {
             settingsFromMain();
         });
+
+        initDarken(settingsButton);
+
 
         settingsButtonHBox.getChildren().add(settingsButton);
         screenVBox.getChildren().add(settingsButtonHBox);
@@ -73,12 +77,14 @@ public class MainController extends ScreenController {
             playFromMain();
         });
 
+        initDarken(playButton);
+
         Label newButton = new Label("Create Game");
         newButton.setStyle("-fx-border-radius: 10 10 10 10; " +
                 "-fx-background-radius: 10 10 10 10; " +
                 "-fx-font-family: Serif; " +
                 "-fx-font-size: 45; " +
-                "-fx-background-color: RoyalBlue; " +
+                "-fx-background-color: Blue; " +
                 "-fx-border-color: BLACK;");
         newButton.setTextFill(Color.BLACK);
         newButton.setAlignment(Pos.CENTER);
@@ -93,6 +99,9 @@ public class MainController extends ScreenController {
                 e.printStackTrace();
             }
         });
+
+        initDarken(newButton);
+
 
         Label editButton = new Label("Edit Game");
         editButton.setStyle("-fx-border-radius: 10 10 10 10; " +
@@ -115,6 +124,7 @@ public class MainController extends ScreenController {
             }
         });
 
+        initDarken(editButton);
 
         Label exitButton = new Label("Exit");
         exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
@@ -133,6 +143,9 @@ public class MainController extends ScreenController {
         exitButton.setOnMouseClicked(event -> {
             exitFromMain();
         });
+
+        initDarken(exitButton);
+
 
         fillHBox = new HBox();
         VBox.setVgrow(fillHBox, Priority.ALWAYS);
@@ -200,4 +213,23 @@ public class MainController extends ScreenController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
+
+    public void darken(MouseEvent e) {
+        Label label = (Label) e.getSource();
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(-0.2);
+        label.setEffect(colorAdjust);
+    }
+
+    public void initDarken(Label label) {
+        label.setOnMouseEntered(e -> {
+            darken(e);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.setEffect(null);
+        });
+    }
 }
+
+
