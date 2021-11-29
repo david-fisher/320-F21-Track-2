@@ -29,16 +29,8 @@ public class MainController extends ScreenController {
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        settingsButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 45; " +
-                "-fx-background-color: LightGrey; " +
-                "-fx-border-color: BLACK;");
-        settingsButton.setTextFill(Color.BLACK);
-        settingsButton.setAlignment(Pos.CENTER);
-        settingsButton.setPrefHeight(70);
-        settingsButton.setPrefWidth(175);
+        setStyle(settingsButton, "45", "LightGrey", 175, 70);
+
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
@@ -49,9 +41,6 @@ public class MainController extends ScreenController {
             settingsFromMain();
         });
 
-        initDarken(settingsButton);
-
-
         settingsButtonHBox.getChildren().add(settingsButton);
         screenVBox.getChildren().add(settingsButtonHBox);
     }
@@ -61,35 +50,17 @@ public class MainController extends ScreenController {
     private void initButtons() {
 
         Label playButton = new Label("Play Game");
-        playButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 45; " +
-                "-fx-background-color: LimeGreen; " +
-                "-fx-border-color: BLACK;");
-        playButton.setTextFill(Color.BLACK);
-        playButton.setAlignment(Pos.CENTER);
-        playButton.setPrefHeight(80);
-        playButton.setFont(playButton.getFont());
+        setStyle(playButton, "45", "LimeGreen", 275, 80);
+
         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
         playButton.setOnMouseClicked(event -> {
             playFromMain();
         });
 
-        initDarken(playButton);
-
         Label newButton = new Label("Create Game");
-        newButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 45; " +
-                "-fx-background-color: Blue; " +
-                "-fx-border-color: BLACK;");
-        newButton.setTextFill(Color.BLACK);
-        newButton.setAlignment(Pos.CENTER);
-        newButton.setPrefHeight(80);
-        newButton.setFont(playButton.getFont());
+        setStyle(newButton, "45", "Blue", 275, 80);
+
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
         newButton.setOnMouseClicked(event -> {
@@ -100,20 +71,9 @@ public class MainController extends ScreenController {
             }
         });
 
-        initDarken(newButton);
-
-
         Label editButton = new Label("Edit Game");
-        editButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 45; " +
-                "-fx-background-color: DarkMagenta; " +
-                "-fx-border-color: BLACK;");
-        editButton.setTextFill(Color.BLACK);
-        editButton.setAlignment(Pos.CENTER);
-        editButton.setPrefHeight(80);
-        editButton.setFont(playButton.getFont());
+        setStyle(editButton, "45", "DarkMagenta", 275, 80);
+
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
         editButton.setOnMouseClicked(event -> {
@@ -124,35 +84,17 @@ public class MainController extends ScreenController {
             }
         });
 
-        initDarken(editButton);
-
         Label exitButton = new Label("Exit");
-        exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 45; " +
-                "-fx-background-color: Red; " +
-                "-fx-border-color: BLACK;");
-        exitButton.setTextFill(Color.BLACK);
-        exitButton.setAlignment(Pos.CENTER);
-        exitButton.setPrefHeight(80);
-        exitButton.setPrefWidth(275);
-        exitButton.setFont(playButton.getFont());
+        setStyle(exitButton, "45", "Red", 275, 80);
+
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
         exitButton.setOnMouseClicked(event -> {
             exitFromMain();
         });
 
-        initDarken(exitButton);
-
-
         fillHBox = new HBox();
         VBox.setVgrow(fillHBox, Priority.ALWAYS);
-
-        playButton.prefWidthProperty().bind(exitButton.widthProperty());
-        newButton.prefWidthProperty().bind(exitButton.widthProperty());
-        editButton.prefWidthProperty().bind(exitButton.widthProperty());
 
         screenVBox.getChildren().addAll(playButton, newButton, editButton, exitButton, fillHBox);
     }
@@ -214,22 +156,32 @@ public class MainController extends ScreenController {
         stage.show();
     }
 
-    public void darken(MouseEvent e) {
-        Label label = (Label) e.getSource();
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness(-0.2);
-        label.setEffect(colorAdjust);
-    }
-
     public void initDarken(Label label) {
         label.setOnMouseEntered(e -> {
-            darken(e);
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.2);
+            label.setEffect(colorAdjust);
         });
 
         label.setOnMouseExited(e -> {
             label.setEffect(null);
         });
     }
+
+    public void setStyle(Label label, String size, String color, double width, double height) {
+        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: " + size + "; " +
+                "-fx-background-color: " + color + "; " +
+                "-fx-border-color: BLACK;");
+        label.setTextFill(Color.BLACK);
+        label.setAlignment(Pos.CENTER);
+        label.setPrefWidth(width);
+        label.setPrefHeight(height);
+        initDarken(label);
+    }
+
 }
 
 

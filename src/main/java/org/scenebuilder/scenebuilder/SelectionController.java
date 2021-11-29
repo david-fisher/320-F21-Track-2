@@ -127,12 +127,8 @@ public class SelectionController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        backButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 40; " +
-                "-fx-background-color: LightGrey; " +
-                "-fx-border-color: BLACK;");
+        setStyle(backButton, "40", "LightGrey", 200, 70);
+
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
@@ -141,26 +137,13 @@ public class SelectionController extends ScreenController {
             controller.initialize(stage);
         });
 
-        initDarken(backButton);
-
         fillerPane = new Pane();
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
         selectGameButton = new Label("Select a Game");
-        selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                "-fx-background-radius: 10 10 10 10; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 40; " +
-                "-fx-background-color: LightGrey; " +
-                "-fx-border-color: BLACK;");
-        selectGameButton.setTextFill(Color.BLACK);
-        selectGameButton.setAlignment(Pos.CENTER);
-        selectGameButton.setPrefWidth(290);
-        selectGameButton.setPrefHeight(70);
+        setStyle(selectGameButton, "40", "LightGrey", 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
-
-        initDarken(selectGameButton);
 
         HBox.setMargin(selectGameButton, HBox.getMargin(backButton));
 
@@ -220,15 +203,9 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
-                selectGameButton.setPrefSize(320, 70);
-                selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                        "-fx-background-radius: 10 10 10 10; " +
-                        "-fx-font-family: Serif; " +
-                        "-fx-font-size: 40; " +
-                        "-fx-background-color: LimeGreen; " +
-                        "-fx-border-color: BLACK;");
-                selectGameButton.setOnMouseClicked(event -> {
+                setStyle(selectGameButton, "40", "LimeGreen", 320, 70);
 
+                selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
 
@@ -258,13 +235,8 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Load Saved Game");
-                selectGameButton.setPrefSize(350, 70);
-                selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                        "-fx-background-radius: 10 10 10 10; " +
-                        "-fx-font-family: Serif; " +
-                        "-fx-font-size: 40; " +
-                        "-fx-background-color: Blue; " +
-                        "-fx-border-color: BLACK;");
+                setStyle(selectGameButton, "40", "Blue", 350, 70);
+
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
@@ -336,20 +308,29 @@ public class SelectionController extends ScreenController {
         selectedGame = (DummyGame)vbox.getUserData();
     }
 
-    public void darken(MouseEvent e) {
-        Label label = (Label) e.getSource();
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness(-0.2);
-        label.setEffect(colorAdjust);
-    }
-
     public void initDarken(Label label) {
         label.setOnMouseEntered(e -> {
-            darken(e);
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.2);
+            label.setEffect(colorAdjust);
         });
 
         label.setOnMouseExited(e -> {
             label.setEffect(null);
         });
+    }
+
+    public void setStyle(Label label, String size, String color, double width, double height) {
+        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: " + size + "; " +
+                "-fx-background-color: " + color + "; " +
+                "-fx-border-color: BLACK;");
+        label.setTextFill(Color.BLACK);
+        label.setAlignment(Pos.CENTER);
+        label.setPrefWidth(width);
+        label.setPrefHeight(height);
+        initDarken(label);
     }
 }

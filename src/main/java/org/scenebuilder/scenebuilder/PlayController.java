@@ -106,14 +106,18 @@ public class PlayController extends ScreenController {
     private void playerTurnCycle() {
         Label switchTurn = new Label();
         switchTurn.setText("End Turn");
-        switchTurn.setPrefWidth(100);
-        switchTurn.setPrefHeight(50);
-        switchTurn.setStyle("-fx-background-color: RED; -fx-font-size: 14; -fx-border-color: BLACK;");
+        setStyle(switchTurn, "14", "Red", 100, 50);
+
         switchTurn.setOnMouseClicked(e -> {
             int nextPlayerIndex = players.indexOf(curPlayer);
             DummyPlayer nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
             playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
-            playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 16; -fx-border-color: #000000;-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
+            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 16; " +
+                    "-fx-border-color: #000000;" +
+                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
             // set current player
             fillInventoryDrawer(nextPlayer.getInventory());
             curPlayer = nextPlayer;
@@ -296,19 +300,23 @@ public class PlayController extends ScreenController {
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
         playerTurnIndicator.setText(curPlayer.getPlayerID() + "'s Turn");
-        playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 16; -fx-font-color: BLACK; -fx-border-color: #000000; -fx-background-color:" + toHexString(curPlayer.getColor()) + ";");
+
+        playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 16; " +
+                "-fx-font-color: BLACK; " +
+                "-fx-border-color: #000000; " +
+                "-fx-background-color:" + toHexString(curPlayer.getColor()) + ";");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
         playerTurnIndicator.setAlignment(Pos.CENTER);
+        playerTurnIndicator.setPadding(new Insets(2, 2, 2, 2));
 
         playerTurnIndicator.setPrefWidth(70);
-        playerTurnIndicator.setMinWidth(playerTurnIndicator.getPrefWidth());
-        playerTurnIndicator.setMaxWidth(playerTurnIndicator.getPrefWidth());
 
         playerTurnIndicator.setPrefHeight(70);
-        playerTurnIndicator.setMinHeight(playerTurnIndicator.getPrefHeight());
-        playerTurnIndicator.setMaxHeight(playerTurnIndicator.getPrefHeight());
 
         playParent.getChildren().addAll(playerTurnIndicator);
         playParent.setRightAnchor(playerTurnIndicator, 70.0);
@@ -318,7 +326,10 @@ public class PlayController extends ScreenController {
     private void initDeckLabel(int numDrawers) {
         decksLabel = new Label();
         decksLabel.setText("Decks");
-        decksLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
+        decksLabel.setStyle("-fx-font-family: Serif; " +
+                "-fx-font-size: 24; " +
+                "-fx-background-color: DarkOliveGreen; " +
+                "-fx-border-color: BLACK;");
         decksLabel.setTextFill(Color.WHITE);
         decksLabel.setId("decksLabel");
         decksLabel.setTextAlignment(TextAlignment.CENTER);
@@ -347,7 +358,10 @@ public class PlayController extends ScreenController {
     private void initRNGLabel(int numDrawers) {
         rngLabel = new Label();
         rngLabel.setText("RNG");
-        rngLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
+        rngLabel.setStyle("-fx-font-family: Serif; " +
+                "-fx-font-size: 24; " +
+                "-fx-background-color: DarkSlateGrey; " +
+                "-fx-border-color: BLACK;");
         rngLabel.setTextFill(Color.WHITE);
         rngLabel.setId("rngLabel");
         rngLabel.setTextAlignment(TextAlignment.CENTER);
@@ -378,7 +392,10 @@ public class PlayController extends ScreenController {
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
         inventoryLabel.setText("Inventory");
-        inventoryLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 24; -fx-background-color: DarkSeaGreen; -fx-border-color: BLACK;");
+        inventoryLabel.setStyle("-fx-font-family: Serif; " +
+                "-fx-font-size: 24; " +
+                "-fx-background-color: DarkGoldenRod; " +
+                "-fx-border-color: BLACK;");
         inventoryLabel.setTextFill(Color.WHITE);
         inventoryLabel.setId("inventoryLabel");
         inventoryLabel.setTextAlignment(TextAlignment.CENTER);
@@ -809,8 +826,8 @@ public class PlayController extends ScreenController {
             Stage popupWindow = new Stage();
 
             yes = new Label("Yes");
-            yes.setStyle("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
+            yes.setStyle("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
                     "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
             yes.setAlignment(Pos.CENTER);
             yes.setPrefWidth(70);
@@ -827,67 +844,21 @@ public class PlayController extends ScreenController {
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
             Label saveButton = new Label("Save");
-            saveButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                    "-fx-background-radius: 10 10 10 10; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 30; " +
-                    "-fx-background-color: LimeGreen; " +
-                    "-fx-border-color: BLACK;");
-            saveButton.setTextFill(Color.BLACK);
-            saveButton.setAlignment(Pos.CENTER);
-            saveButton.setTextAlignment(TextAlignment.CENTER);
-            saveButton.setWrapText(true);
-            saveButton.setPrefWidth(170);
-            saveButton.setPrefHeight(80);
+            setStyle(saveButton, "30", "LimeGreen", 170, 80);
 
             Label exitButton = new Label("Exit");
-            exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                    "-fx-background-radius: 10 10 10 10; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 30; " +
-                    "-fx-background-color: Red; " +
-                    "-fx-border-color: BLACK;");
-            exitButton.setTextFill(Color.BLACK);
-            exitButton.setAlignment(Pos.CENTER);
-            exitButton.setTextAlignment(TextAlignment.CENTER);
-            exitButton.setWrapText(true);
-            exitButton.setPrefWidth(170);
-            exitButton.setPrefHeight(80);
+            setStyle(exitButton, "30", "Red", 170, 80);
 
             Label restartButton = new Label("Restart");
-            restartButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                    "-fx-background-radius: 10 10 10 10; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 30; " +
-                    "-fx-background-color: LightGray; " +
-                    "-fx-border-color: BLACK;");
-            restartButton.setTextFill(Color.BLACK);
-            restartButton.setAlignment(Pos.CENTER);
-            restartButton.setTextAlignment(TextAlignment.CENTER);
-            restartButton.setWrapText(true);
-            restartButton.setPrefWidth(170);
-            restartButton.setPrefHeight(80);
+            setStyle(restartButton, "30", "LightGrey", 170, 80);
 
             Label mainMenuButton = new Label("Main Menu");
-            mainMenuButton.setStyle("-fx-border-radius: 10 10 10 10; " +
-                    "-fx-background-radius: 10 10 10 10; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 30; " +
-                    "-fx-background-color: Blue; " +
-                    "-fx-border-color: BLACK;");
-            mainMenuButton.setTextFill(Color.BLACK);
-            mainMenuButton.setAlignment(Pos.CENTER);
-            mainMenuButton.setTextAlignment(TextAlignment.CENTER);
-            mainMenuButton.setWrapText(true);
-            mainMenuButton.setPrefWidth(170);
-            mainMenuButton.setPrefHeight(80);
+            setStyle(mainMenuButton, "30", "Blue", 170, 80);
 
             saveButton.setOnMouseClicked(e->{
                 saved = true;
                 System.out.println("Save");
             });
-
-            initDarken(saveButton);
 
             exitButton.setOnMouseClicked(e->{
                 if (!saved) {
@@ -898,13 +869,9 @@ public class PlayController extends ScreenController {
                 }
             });
 
-            initDarken(exitButton);
-
             restartButton.setOnMouseClicked(e->{
                 displayRestart(baseStage, popupWindow);
             });
-
-            initDarken(restartButton);
 
             mainMenuButton.setOnMouseClicked(e -> {
                 if (!saved) {
@@ -915,8 +882,6 @@ public class PlayController extends ScreenController {
                 }
             });
 
-            initDarken(mainMenuButton);
-
             VBox layout = new VBox(10);
             layout.getChildren().addAll(saveButton);
             layout.getChildren().addAll(restartButton);
@@ -924,7 +889,6 @@ public class PlayController extends ScreenController {
             layout.getChildren().addAll(exitButton);
             layout.setAlignment(Pos.CENTER);
             Scene exitScene = new Scene(layout, 350, 400);
-            exitScene.getStylesheets().add(getClass().getResource("labelStyle.css").toString());
             exitScene.setFill(Color.MAROON);
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
@@ -951,6 +915,20 @@ public class PlayController extends ScreenController {
         label.setOnMouseExited(e -> {
             label.setEffect(null);
         });
+    }
+
+    public void setStyle(Label label, String size, String color, double width, double height) {
+        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: " + size + "; " +
+                "-fx-background-color: " + color + "; " +
+                "-fx-border-color: BLACK;");
+        label.setTextFill(Color.BLACK);
+        label.setAlignment(Pos.CENTER);
+        label.setPrefWidth(width);
+        label.setPrefHeight(height);
+        initDarken(label);
     }
 
     public void outlineYesNo(Label label) {
