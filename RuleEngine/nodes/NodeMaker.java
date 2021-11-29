@@ -18,6 +18,8 @@ public final class NodeMaker {
                 return new WhileNode();
             case "move":
                 return new MoveNode();
+            case "invoke":
+                return new InvokeNode();
             default:
                 System.out.println("Unknown rule type: " + type);
                 return null;
