@@ -112,7 +112,7 @@ public class PlayController extends ScreenController {
             int nextPlayerIndex = players.indexOf(curPlayer);
             DummyPlayer nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
             playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
-            playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 14; -fx-border-color: #000000;-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
+            playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 16; -fx-border-color: #000000;-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
             // set current player
             fillInventoryDrawer(nextPlayer.getInventory());
             curPlayer = nextPlayer;
@@ -295,7 +295,7 @@ public class PlayController extends ScreenController {
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
         playerTurnIndicator.setText(curPlayer.getPlayerID() + "'s Turn");
-        playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 14; -fx-border-color: #000000; -fx-background-color:" + toHexString(curPlayer.getColor()) + ";");
+        playerTurnIndicator.setStyle("-fx-font-family: Serif; -fx-font-size: 16; -fx-font-color: BLACK; -fx-border-color: #000000; -fx-background-color:" + toHexString(curPlayer.getColor()) + ";");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
