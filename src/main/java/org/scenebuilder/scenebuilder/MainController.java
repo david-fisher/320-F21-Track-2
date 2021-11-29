@@ -28,7 +28,12 @@ public class MainController extends ScreenController {
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        settingsButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: DarkGrey; -fx-border-color: BLACK;");
+        settingsButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 45; " +
+                "-fx-background-color: LightGrey; " +
+                "-fx-border-color: BLACK;");
         settingsButton.setTextFill(Color.BLACK);
         settingsButton.setAlignment(Pos.CENTER);
         settingsButton.setPrefHeight(70);
@@ -52,7 +57,12 @@ public class MainController extends ScreenController {
     private void initButtons() {
 
         Label playButton = new Label("Play Game");
-        playButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: LimeGreen; -fx-border-color: BLACK;");
+        playButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 45; " +
+                "-fx-background-color: LimeGreen; " +
+                "-fx-border-color: BLACK;");
         playButton.setTextFill(Color.BLACK);
         playButton.setAlignment(Pos.CENTER);
         playButton.setPrefHeight(80);
@@ -64,7 +74,12 @@ public class MainController extends ScreenController {
         });
 
         Label newButton = new Label("Create Game");
-        newButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: RoyalBlue; -fx-border-color: BLACK;");
+        newButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 45; " +
+                "-fx-background-color: RoyalBlue; " +
+                "-fx-border-color: BLACK;");
         newButton.setTextFill(Color.BLACK);
         newButton.setAlignment(Pos.CENTER);
         newButton.setPrefHeight(80);
@@ -80,7 +95,12 @@ public class MainController extends ScreenController {
         });
 
         Label editButton = new Label("Edit Game");
-        editButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: DarkMagenta; -fx-border-color: BLACK;");
+        editButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 45; " +
+                "-fx-background-color: DarkMagenta; " +
+                "-fx-border-color: BLACK;");
         editButton.setTextFill(Color.BLACK);
         editButton.setAlignment(Pos.CENTER);
         editButton.setPrefHeight(80);
@@ -97,7 +117,12 @@ public class MainController extends ScreenController {
 
 
         Label exitButton = new Label("Exit");
-        exitButton.setStyle("-fx-font-family: Serif; -fx-font-size: 45; -fx-background-color: Red; -fx-border-color: BLACK;");
+        exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 45; " +
+                "-fx-background-color: Red; " +
+                "-fx-border-color: BLACK;");
         exitButton.setTextFill(Color.BLACK);
         exitButton.setAlignment(Pos.CENTER);
         exitButton.setPrefHeight(80);

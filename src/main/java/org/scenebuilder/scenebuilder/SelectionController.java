@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -25,18 +26,16 @@ import java.util.ArrayList;
 
 public class SelectionController extends ScreenController {
 
-    HBox newGamesLabelHBox;
-    Label newGamesLabel;
     private void initNewGamesLabel() {
 
         // bind HBox to vbox width to represent a row
-        newGamesLabelHBox = new HBox();
+        HBox newGamesLabelHBox = new HBox();
         newGamesLabelHBox.setStyle("-fx-background-color: transparent");
         newGamesLabelHBox.prefWidthProperty().bind(screenVBox.widthProperty());
 
-        newGamesLabel = new Label("New Games");
-        newGamesLabel.setFont(new Font(36));
-        HBox.setMargin(newGamesLabel, new Insets(10, 10, 10, 10));
+        Label newGamesLabel = new Label("New Games");
+        newGamesLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 45;");
+        HBox.setMargin(newGamesLabel, new Insets(10, 10, 10, 15));
 
         newGamesLabelHBox.getChildren().add(newGamesLabel);
         screenVBox.getChildren().add(newGamesLabelHBox);
@@ -73,14 +72,13 @@ public class SelectionController extends ScreenController {
     HBox savedGamesLabelHBox;
     Label savedGamesLabel;
     private void initSavedGamesLabel() {
-
         savedGamesLabelHBox = new HBox();
         savedGamesLabelHBox.setStyle("-fx-background-color: transparent");
         savedGamesLabelHBox.prefWidthProperty().bind(screenVBox.widthProperty());
 
         savedGamesLabel = new Label("Saved Games");
-        savedGamesLabel.setFont(newGamesLabel.getFont());
-        HBox.setMargin(savedGamesLabel, HBox.getMargin(newGamesLabel));
+        savedGamesLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 45;");
+        HBox.setMargin(savedGamesLabel, new Insets(10, 10, 10, 15));
 
         savedGamesLabelHBox.getChildren().add(savedGamesLabel);
         screenVBox.getChildren().add(savedGamesLabelHBox);
@@ -115,9 +113,9 @@ public class SelectionController extends ScreenController {
     }
 
     HBox buttonsHBox;
-    Button backButton;
+    Label backButton;
     Pane fillerPane;
-    Button selectGameButton;
+    Label selectGameButton;
     private void initButtons() {
 
         buttonsHBox = new HBox();
@@ -126,14 +124,17 @@ public class SelectionController extends ScreenController {
         buttonsHBox.setStyle("-fx-background-color: transparent");
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
-        backButton = new Button();
-        backButton.setText("Back");
-        backButton.setFont(new Font(24));
+        backButton = new Label("Back");
+        backButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 40; " +
+                "-fx-background-color: LightGrey; " +
+                "-fx-border-color: BLACK;");
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
-        backButton.setOnAction(event -> {
-
+        backButton.setOnMouseClicked(event -> {
             MainController controller = new MainController();
             controller.initialize(stage);
         });
@@ -141,12 +142,18 @@ public class SelectionController extends ScreenController {
         fillerPane = new Pane();
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
-        selectGameButton = new Button();
-        selectGameButton.setText("Select A Game");
-        selectGameButton.setTextFill(backButton.getTextFill());
-        selectGameButton.setFont(backButton.getFont());
+        selectGameButton = new Label("Select a Game");
+        selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                "-fx-background-radius: 10 10 10 10; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 40; " +
+                "-fx-background-color: LightGrey; " +
+                "-fx-border-color: BLACK;");
+        selectGameButton.setTextFill(Color.BLACK);
+        selectGameButton.setAlignment(Pos.CENTER);
+        selectGameButton.setPrefWidth(290);
+        selectGameButton.setPrefHeight(70);
         selectGameButton.setPadding(backButton.getPadding());
-        selectGameButton.setStyle(backButton.getStyle());
         selectGameButton.setDisable(true);
         HBox.setMargin(selectGameButton, HBox.getMargin(backButton));
 
@@ -206,7 +213,14 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
-                selectGameButton.setOnAction(event -> {
+                selectGameButton.setPrefSize(320, 70);
+                selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                        "-fx-background-radius: 10 10 10 10; " +
+                        "-fx-font-family: Serif; " +
+                        "-fx-font-size: 40; " +
+                        "-fx-background-color: LimeGreen; " +
+                        "-fx-border-color: BLACK;");
+                selectGameButton.setOnMouseClicked(event -> {
 
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
@@ -237,7 +251,14 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Load Saved Game");
-                selectGameButton.setOnAction(event -> {
+                selectGameButton.setPrefSize(350, 70);
+                selectGameButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                        "-fx-background-radius: 10 10 10 10; " +
+                        "-fx-font-family: Serif; " +
+                        "-fx-font-size: 40; " +
+                        "-fx-background-color: RoyalBlue; " +
+                        "-fx-border-color: BLACK;");
+                selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
                     BasicApplication.setSelectedGame(selectedGame);
                     BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
@@ -290,7 +311,7 @@ public class SelectionController extends ScreenController {
 
                     Label tempLabel = new Label();
                     tempLabel.setText(n.getGameName());
-                    tempLabel.setFont(new Font(16));
+                    tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);
 

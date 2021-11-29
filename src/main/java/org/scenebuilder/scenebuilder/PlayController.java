@@ -761,21 +761,36 @@ public class PlayController extends ScreenController {
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
             Label saveButton = new Label("Save");
-            saveButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Green; -fx-border-color: BLACK;");
+            saveButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 40; " +
+                    "-fx-background-color: Green; " +
+                    "-fx-border-color: BLACK;");
             saveButton.setTextFill(Color.BLACK);
             saveButton.setAlignment(Pos.CENTER);
             saveButton.setPrefWidth(170);
             saveButton.setPrefHeight(80);
 
             Label exitButton = new Label("Exit");
-            exitButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Red; -fx-border-color: BLACK;");
+            exitButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 40; " +
+                    "-fx-background-color: Red; " +
+                    "-fx-border-color: BLACK;");
             exitButton.setTextFill(Color.BLACK);
             exitButton.setAlignment(Pos.CENTER);
             exitButton.setPrefWidth(170);
             exitButton.setPrefHeight(80);
 
             Label restartButton = new Label("Restart");
-            restartButton.setStyle("-fx-font-family: Serif; -fx-font-size: 40; -fx-background-color: Gray; -fx-border-color: BLACK;");
+            restartButton.setStyle("-fx-border-radius: 10 10 10 10; " +
+                    "-fx-background-radius: 10 10 10 10; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 40; " +
+                    "-fx-background-color: LightGray; " +
+                    "-fx-border-color: BLACK;");
             restartButton.setTextFill(Color.BLACK);
             restartButton.setAlignment(Pos.CENTER);
             restartButton.setPrefWidth(170);
