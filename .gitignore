@@ -27,3 +27,6 @@ hs_err_pid*
 /.metadata/
 Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
 Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
+.DS_Store
+.DS_Store
+.DS_Store

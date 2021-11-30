@@ -18,6 +18,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
 
+import javafx.scene.input.MouseEvent; 
+import javafx.event.EventHandler;
+import javafx.collections.ObservableList;
+
 import nodes.OpNode;
 import nodes.NodeMaker;
 
@@ -42,7 +46,7 @@ public class Block {
   protected final int BLOCK_WIDTH = 150;
   protected final int CONNECTION_WIDTH = 19;
   protected final int CONNECTION_HEIGHT = 30;
-  //Total height of block is 70 + 50 + 20 + 2*5 = 150px
+  //Total width of block is 70 + 50 + 20 + 2*5 = 150px
   //The 3*5 term comes from the fact that each column has 5px spacing from HGAP
   protected final int COL0_WIDTH = 70;
   protected final int COL1_WIDTH = 50;
@@ -53,6 +57,8 @@ public class Block {
   //Resize factor for when adding row
   protected final int RESIZE_FACTOR = 40;
 
+  protected Rectangle result;
+  protected GridPane grid;
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
 
@@ -76,7 +82,7 @@ public class Block {
     });
 
     //Pane for placing the controls and text for the block
-    GridPane grid = new GridPane();
+    this.grid = new GridPane();
     //Padding of top, right, & bottom to 10px; padding of left 0px
     grid.setPadding(new Insets(10, 0, 10, 0));
     grid.setMinSize(BLOCK_WIDTH, blockHeight);
@@ -108,7 +114,7 @@ public class Block {
     }
 
     //Create result connection for block
-    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    this.result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
 
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, blockHeight, GREY);
@@ -141,4 +147,25 @@ public class Block {
   protected void createNode(String nodeType) {
     this.node = NodeMaker.makeNode(nodeType);
   }
+
+  public Rectangle getResultRect(){
+    return this.result; 
+  }
+
+  public int getBlockHeight(){
+    return blockHeight;
+  }
+
+  public int getBlockWidth(){
+    return BLOCK_WIDTH;
+  }
+
+  public ObservableList<Node> getGrayRect(){
+    return this.grid.getChildren();
+  }
+
+  public int getGreyRectHeight(){
+    return CONNECTION_WIDTH;
+  }
+
 }

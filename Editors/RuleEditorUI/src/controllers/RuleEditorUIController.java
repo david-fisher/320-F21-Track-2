@@ -50,6 +50,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 
+import javafx.scene.input.MouseEvent; 
+import javafx.event.EventHandler;
+import javafx.scene.shape.Line;
+import javafx.collections.ObservableList;
+
 public class RuleEditorUIController implements Initializable {
   @FXML
   private AnchorPane editorPane;
@@ -60,6 +65,11 @@ public class RuleEditorUIController implements Initializable {
   final Color GREY = Color.rgb(55, 55, 55);
   final Color WHITE = Color.rgb(255, 255, 255);
   final int HEADER_SIZE = 15;
+
+  protected double startLineX = -1;
+  protected double startLineY = -1;
+  protected double endLineX = -1;
+  protected double endLineY = -1;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -84,46 +94,88 @@ public class RuleEditorUIController implements Initializable {
     editorPane.getChildren().addAll(block.getBlock());
   }
 
+  private void drawLineResultRect(Block block){
+    if (startLineX == -1){
+      startLineX = block.getBlock().getTranslateX();
+      startLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
+    }
+    else if (startLineX != -1 && endLineX == -1){
+      endLineX = block.getBlock().getTranslateX();
+      endLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
+      Line link = new Line (startLineX, startLineY, endLineX, endLineY);
+      editorPane.getChildren().add(link);
+      startLineX = startLineY = endLineX = endLineY = -1;
+    }
+  }
+
+  private void drawLineGrayRect(Block block, final int order){
+    if (startLineX == -1){
+      startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
+      startLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+    }
+    else if (startLineX != -1 && endLineX == -1){
+      endLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
+      endLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+      Line link = new Line (startLineX, startLineY, endLineX, endLineY);
+      editorPane.getChildren().add(link);
+      startLineX = startLineY = endLineX = endLineY = -1;
+    }
+  }
+
+  private void drawLine(Block block){
+    block.getResultRect().setOnMouseClicked(e -> {
+      drawLineResultRect(block);
+    });
+
+    ObservableList<Node> listGrayRect = block.getGrayRect();
+    for (int i = 0; i < listGrayRect.size(); i++){
+      Node node = listGrayRect.get(i);
+      final int order = i +1;
+      node.setOnMouseClicked(e -> {
+        drawLineGrayRect(block, order);
+      });
+    }
+  }
+
+  private void blockActions(Block block){
+    placeBlock(block);
+    drawLine(block);
+    resizeAnchorPane();
+  }
+
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    placeBlock(new PSetBlock());
-    resizeAnchorPane();
+    blockActions(new PSetBlock());
   }
 
   @FXML
   private void handleAddRsetBtn(ActionEvent event) {
-    placeBlock(new RSetBlock());
-    resizeAnchorPane();
+    blockActions(new RSetBlock());
   }
 
   @FXML
   private void handleAddGetBtn(ActionEvent event) {
-    placeBlock(new GetBlock());
-    resizeAnchorPane();
+    blockActions(new GetBlock());
   }
 
   @FXML
   private void handleAddBinOpBtn(ActionEvent event) {
-    placeBlock(new BinOpBlock());
-    resizeAnchorPane();
+    blockActions(new BinOpBlock());
   }
 
   @FXML
   private void handleAddNotBtn(ActionEvent event) {
-    placeBlock(new NotBlock());
-    resizeAnchorPane();
+    blockActions(new NotBlock());
   }
 
   @FXML
   private void handleAddLengthBtn(ActionEvent event) {
-    placeBlock(new LengthBlock());
-    resizeAnchorPane();
+    blockActions(new LengthBlock());
   }
 
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
-    placeBlock(new GetTileIndexBlock());
-    resizeAnchorPane();
+    blockActions(new GetTileIndexBlock());
   }
 
   @FXML
@@ -137,62 +189,52 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddMoveToTileIndexBtn(ActionEvent event) {
-    placeBlock(new MoveToTileIndexBlock());
-    resizeAnchorPane();
+    blockActions(new MoveToTileIndexBlock());
   }
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
-    placeBlock(new MoveByStepsBlock());
-    resizeAnchorPane();
+    blockActions(new MoveByStepsBlock());
   }
 
   @FXML
   private void handleAddGetPlayerByIndexBtn(ActionEvent event) {
-    placeBlock(new GetPlayerByIndexBlock());
-    resizeAnchorPane();
+    blockActions(new GetPlayerByIndexBlock());
   }
 
   @FXML
   private void handleAddGetNextPlayerBtn(ActionEvent event) {
-    placeBlock(new GetNextPlayerBlock());
-    resizeAnchorPane();
+    blockActions(new GetNextPlayerBlock());
   }
 
   @FXML
   private void handleAddInvokeBtn(ActionEvent event) {
-    placeBlock(new InvokeBlock());
-    resizeAnchorPane();
+    blockActions(new InvokeBlock());
   }
 
   @FXML
   private void handleAddDeckDrawBtn(ActionEvent event) {
-    placeBlock(new DeckDrawBlock());
-    resizeAnchorPane();
+    blockActions(new DeckDrawBlock());
   }
 
   @FXML
   private void handleAddDeckPutBtn(ActionEvent event) {
-    placeBlock(new DeckPutBlock());
-    resizeAnchorPane();
+    blockActions(new DeckPutBlock());
   }
 
   @FXML
   private void handleAddDeckShuffleBtn(ActionEvent event) {
-    placeBlock(new DeckShuffleBlock());
-    resizeAnchorPane();
+    blockActions(new DeckShuffleBlock());
   }
 
   @FXML
   private void handleAddUseDieSpinnerBtn(ActionEvent event) {
-    placeBlock(new UseDieSpinnerBlock());
-    resizeAnchorPane();
+    blockActions(new UseDieSpinnerBlock());
   }
 
   @FXML 
   private void handleAddTextNodeBtn(ActionEvent event) {
-    placeBlock(new TextBlock());
-    resizeAnchorPane();
+    blockActions(new TextBlock());
   }
 
   @FXML
