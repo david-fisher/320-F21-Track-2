@@ -2,16 +2,17 @@ package tests;
 import java.util.ArrayList;
 import nodes.*;
 import engine.*;
+import objects.*;
 
 public class Test {
     public static void main(String[] args) {
-/*
+
         Interpreter interpreter = new Interpreter();
         GameState state = new GameState();
-        GameObject go1 = new GameObject("player1");
-        GameObject go2 = new GameObject("player2");
-        state.gameObjects.add(go1);
-        state.gameObjects.add(go2);
+        Gamepiece go1 = new Gamepiece();
+        Gamepiece go2 = new Gamepiece();
+        state.gamepieces.add(go1);
+        state.gamepieces.add(go2);
 
         OpNode ifSt = NodeMaker.makeNode("if");
         OpNode rset1 = NodeMaker.makeNode("rset");
@@ -19,17 +20,16 @@ public class Test {
 
         LiteralNode con = new LiteralNode<Boolean>(false);
         LiteralNode reg = new LiteralNode<String>("currPlayer");
-        LiteralNode p1 = new LiteralNode<String>("_player1");
-        LiteralNode p2 = new LiteralNode<String>("_player2");
+        LiteralNode p1 = new LiteralNode<String>("_gamepiece01");
+        LiteralNode p2 = new LiteralNode<String>("_gamepiece02");
 
         rset1.addOperand(reg).addOperand(p1);
         rset2.addOperand(reg).addOperand(p2);
-        ifSt.addOperand(con);
-        ifSt.addOperand(rset1, 1).addOperand(rset2, 2);
+        ifSt.addOperand(con).addOperand(rset1, 1).addOperand(rset2, 2);
 
         interpreter.interpretRule(ifSt, state);
         System.out.println("Content of register: " + state.registers.toString());
-        System.out.println("Label of the object in register \"currPlayer\": " + state.registers.get("currPlayer").label);
-*/
+        System.out.println("Label of the object in register \"currPlayer\": " + state.registers.get("currPlayer").getTrait("label"));
+
     }
 }

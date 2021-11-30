@@ -16,7 +16,7 @@ public abstract class OpNode extends Node {
 
     public OpNode() {
         operands = new ArrayList<ArrayList<Node>>();
-        operands.add(new ArrayList<Node>());
+        operands.add(new ArrayList<Node>(4));
     }
 
     // Check if a rule group exists at index i;

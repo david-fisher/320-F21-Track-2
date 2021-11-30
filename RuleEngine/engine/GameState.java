@@ -22,10 +22,20 @@ public class GameState {
     public ArrayList<GameObject> gameObjects;
 
     public HashMap<String, GameObject> registers;
-    public static HashMap<String, ArrayList<Node>> events;
+    public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
 
     public GameState() {
         gameObjects = new ArrayList<GameObject>();
+        buttons = new ArrayList<Button>();
+        cards = new ArrayList<Card>();
+        decks = new ArrayList<Deck>();
+        dice = new ArrayList<Die>();
+        gamepieces = new ArrayList<Gamepiece>();
+        timers = new ArrayList<GameTimer>();
+        spinners = new ArrayList<Spinner>();
+        tiles = new ArrayList<Tile>();
+        tokens = new ArrayList<Token>();
+
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
     }
