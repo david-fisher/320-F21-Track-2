@@ -16,8 +16,8 @@ public class ScreenController {
     private void initAnchorPane() {
 
         anchorPane = new AnchorPane();
-        anchorPane.prefHeightProperty().bind(stage.heightProperty());
-        anchorPane.prefWidthProperty().bind(stage.widthProperty());
+        //anchorPane.prefHeightProperty().bind(stage.heightProperty());
+        //anchorPane.prefWidthProperty().bind(stage.widthProperty());
 
         screenVBox = new VBox();
         AnchorPane.setTopAnchor(screenVBox, 3.0);
@@ -27,10 +27,10 @@ public class ScreenController {
         screenVBox.setStyle("-fx-border-color: black;");
 
         //Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();   // screen - task bar
-        //Rectangle2D fullScreenDimensions = Screen.getPrimary().getBounds();     // full screen
+        Rectangle2D fullScreenDimensions = Screen.getPrimary().getBounds();     // full screen
 
-        //anchorPane.setPrefWidth(screenDimensions.getWidth());
-        //anchorPane.setPrefHeight(screenDimensions.getHeight());
+        anchorPane.setPrefWidth(fullScreenDimensions.getWidth());
+        anchorPane.setPrefHeight(fullScreenDimensions.getHeight());
 
         anchorPane.getChildren().add(screenVBox);
     }
@@ -47,5 +47,6 @@ public class ScreenController {
         Scene newScene = new Scene(anchorPane);
         stage.setScene(newScene);
         stage.show();
+        stage.setMaximized(true);
     }
 }

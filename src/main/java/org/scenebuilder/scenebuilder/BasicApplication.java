@@ -250,7 +250,8 @@ public class BasicApplication extends Application {
         //int[] screenDimensions = calculateScreenDimensions();
         //System.out.println("Your Screen Dimensions: " + screenDimensions[0] + " x " + screenDimensions[1]);
 
-        stage = updateStage(stage);
+        //stage = updateStage(stage);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         // initialize controller and set initial scene
         MainController controller = new MainController();
