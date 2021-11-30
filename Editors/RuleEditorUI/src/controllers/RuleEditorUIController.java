@@ -71,6 +71,9 @@ public class RuleEditorUIController implements Initializable {
   protected double endLineX = -1;
   protected double endLineY = -1;
 
+  protected Block startBlock;
+  protected boolean isBlueFirstRect = false; // allowing connect only blue and gray
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // Implement
@@ -95,16 +98,21 @@ public class RuleEditorUIController implements Initializable {
   }
 
   private void drawLineResultRect(Block block){
+    // start to draw line
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX();
       startLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
+      startBlock = block;
+      isBlueFirstRect = true;
     }
-    else if (startLineX != -1 && endLineX == -1){
+    // this happens after we clicked on the first rect, this is the second click
+    else if (startLineX != -1 && endLineX == -1 && !isBlueFirstRect){
       endLineX = block.getBlock().getTranslateX();
       endLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
       startLineX = startLineY = endLineX = endLineY = -1;
+      // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
 
@@ -112,13 +120,16 @@ public class RuleEditorUIController implements Initializable {
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+      startBlock = block;
     }
-    else if (startLineX != -1 && endLineX == -1){
+    else if (startLineX != -1 && endLineX == -1 && isBlueFirstRect){
       endLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       endLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
       startLineX = startLineY = endLineX = endLineY = -1;
+      isBlueFirstRect = false;
+      // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
 
