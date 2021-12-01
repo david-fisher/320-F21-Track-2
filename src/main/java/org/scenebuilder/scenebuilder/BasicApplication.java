@@ -113,7 +113,7 @@ public class BasicApplication extends Application {
 
 
         ArrayList<Die> dice = new ArrayList<Die>();
-        ArrayList<Spinner> spinners = new ArrayList();
+        ArrayList<Spinner> spinners = new ArrayList<Spinner>();
 
         Die die1 = new Die();
         Die die2 = new Die();
@@ -132,7 +132,7 @@ public class BasicApplication extends Application {
 
         Spinner spinner1 = new Spinner();
         spinner1.setNumCategories(5);
-        List<Double> spinnerWeight = new ArrayList();
+        List<Double> spinnerWeight = new ArrayList<Double>();
         spinnerWeight.add(0.2);
         spinnerWeight.add(0.2);
         spinnerWeight.add(0.2);
@@ -140,7 +140,7 @@ public class BasicApplication extends Application {
         spinnerWeight.add(0.2);
         spinners.add(spinner1);
 
-        ArrayList<Token> gameTokens = new ArrayList<>();
+        ArrayList<Token> gameTokens = new ArrayList<Token>();
         Token gameToken = new Token();
         gameToken.setLabel("Token 1");
         gameToken.setShape("Rectangle");
