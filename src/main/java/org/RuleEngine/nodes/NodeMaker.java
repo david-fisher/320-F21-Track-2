@@ -6,12 +6,20 @@ public final class NodeMaker {
         switch (type) {
             case "addition":
                 return new ALNode("+");
-            case "multiplication":
-                return new ALNode("*");
             case "rset":
                 return new RSetNode();
+            case "pset":
+                return new PSetNode();
+            case "get":
+                return new GetNode();
             case "if":
                 return new IfNode();
+            case "while":
+                return new WhileNode();
+            case "invoke":
+                return new InvokeNode();
+            case "moveby":
+                return new MoveNode();
         }
 
         System.out.println("Unknown rule type");
