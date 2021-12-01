@@ -1,26 +1,38 @@
 package application;
 
-import java.awt.Color;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TreeSet;
 
+import javafx.scene.paint.Color;
 
 public abstract class GameObject extends Savable {
   
   protected HashMap<String, Object> traits;
   
-  private static ArrayList<String> labels = new ArrayList<String>(256);
+  private static List<String> labels = new ArrayList<String>(256);
 
   // default constructor
   public GameObject() {
 	traits = new HashMap<String, Object>(10) ;
+	this.setShape("default") ;
+	this.setXPos(0) ;
+	this.setYPos(0) ;
+	this.setWidth(0.) ;
+	this.setHeight(0.) ;
   }
   
   
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
-   * 	color 	:	Color
+   *    shape   :   String
+   * 	color 	:	String (Can be obtained as JAVAFX Color object)
+   *    xPos    :   Integer
+   *    yPos    :   Integer
+   *    width   :   Double
+   *    height  :   Double
    */
   
   // set trait to value. Do not allow creation of non-default traits
@@ -53,7 +65,12 @@ public abstract class GameObject extends Savable {
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("icon") && value instanceof String) ||	// check icon is String
-			  (trait.equals("color") && value instanceof Color)) {	// check color is Color
+			  (trait.equals("color") && value instanceof String) ||  // check color is Color
+			  (trait.equals("shape") && value instanceof String) || // check shape is String
+  			  (trait.equals("xPos") && value instanceof Integer) || // check xPos is Integer
+  			  (trait.equals("yPos") && value instanceof Integer) || // check yPos is Integer
+			  (trait.equals("width") && value instanceof Double) || // check width is Double
+  			  (trait.equals("height") && value instanceof Double)) {// check height is Double
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
@@ -105,11 +122,84 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setColor(Color color) {
+	 return setColorString(toHexCode(color));
+ }
+ 
+ protected String formatColor(double val) {
+	 String in = Integer.toHexString((int) Math.round(val * 255));
+	    return in.length() == 1 ? "0" + in : in;
+ }
+ 
+ protected String toHexCode(Color color) {
+	 return "#" + (formatColor(color.getRed()) + formatColor(color.getGreen()) + formatColor(color.getBlue()) + formatColor(color.getOpacity()))
+	            .toUpperCase();
+ }
+ 
+ public boolean setColorString(String color) {
 	 return this.setTrait("color", color);
  }
 
- public Color getColor() {
-	   return (Color)this.getTrait("color");
+ public String getColorString() {
+	   return (String)this.getTrait("color");
  }
  
+ public Color getColor() {
+	 return Color.web(getColorString());
+ }
+
+ public boolean setShape(String shape) {
+ 	return setTrait("shape", shape) ;
+ }
+
+ public String getShape() {
+ 	return (String)getTrait("shape") ;
+ }
+
+ public boolean setXPos(Integer xPos) {
+ 	return setTrait("xPos", xPos) ;
+ }
+
+ public int getXPos() {
+ 	return (int)getTrait("xPos") ;
+ }
+
+ public boolean setYPos(Integer yPos) {
+ 	return setTrait("yPos", yPos) ;
+ }
+
+ public int getYPos() {
+ 	return (int)getTrait("yPos") ;
+ }
+
+ public boolean setWidth(Double width) {
+ 	return setTrait("width", width) ;
+ }
+
+ public double getWidth() {
+ 	return (double)getTrait("width") ;
+ }
+
+ public boolean setHeight(Double height) {
+ 	return setTrait("height", height) ;
+ }
+
+ public double getHeight() {
+ 	return (double)getTrait("height") ;
+ }
+ 
+ public String toString() {
+	 return getLabel() ;
+ }
+ 
+ // GKNEW Integration Function
+ public String repr(boolean hasLabel) {
+	String s = "";
+	TreeSet<String> sortedKeys = new TreeSet<String>(this.traits.keySet());
+	for (String key: sortedKeys) {
+		if (hasLabel || !key.equals("label")) {
+			s = s + key + '=' + this.traits.get(key).toString() + "\n";
+		}
+	} 
+	return s;
+ }
 }

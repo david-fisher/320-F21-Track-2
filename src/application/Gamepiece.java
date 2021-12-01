@@ -1,6 +1,7 @@
 package application;
 
-import java.awt.Color;
+import application.GameObject;
+import application.Tile;
 
 public class Gamepiece extends GameObject{
 	
@@ -10,14 +11,14 @@ public class Gamepiece extends GameObject{
 	  super() ;  
 	  this.setLabel("gamepiece" + String.format("%02d", ++count));
 	  this.setIcon("default_gamepiece_icon.jpg") ;
-	  this.setColor(Color.BLACK) ;
+	  this.setColorString("#000000") ;
 	  this.setLocation(null);
   }
   
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
-   * 	color 	:	Color
+   * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	location:	Tile
    */
   
@@ -42,10 +43,27 @@ public class Gamepiece extends GameObject{
   }
 
   public boolean setLocation(Tile tile) {
-	  return this.setTrait("location", tile);
+	  
+	  // first clear current location
+	  if (this.getLocation() != null) {
+		  this.getLocation().removeGamepiece(this) ;
+	  }
+	  
+	  // set location
+	  if (this.setTrait("location", tile)) {
+		  if (!tile.hasGamepiece(this)) {
+			  return tile.addGamepiece(this) ;
+		  }
+		  return true ;
+	  }
+	  return false ;
   }
 
   public Tile getLocation() {
 	  return (Tile)this.getTrait("location");
+  }
+
+  public String repr(boolean hasLabel) {
+    return "Gamepiece\n" + super.repr(hasLabel);
   }
 }
