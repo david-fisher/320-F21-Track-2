@@ -17,4 +17,8 @@ public final class NodeMaker {
         System.out.println("Unknown rule type");
         return null;
     }
+    
+    public static LiteralNode<Integer> makeIntegerNode(Integer value) { return new LiteralNode<Integer>(value); }
+    public static LiteralNode<Double> makeDoubleNode(Double value) { return new LiteralNode<Double>(value); }
+    public static LiteralNode<String> makeStringNode(String value) { return new LiteralNode<String>(value); }
 }
