@@ -9,6 +9,7 @@ import nodes.*;
  */
 
 public class TicTacToe {
+/*
     public static void main(String args[]) {
         Interpreter interpreter = new Interpreter();
 
@@ -56,4 +57,5 @@ public class TicTacToe {
         
         StringNode eq = new StringNode("equivalence");
     }
+*/
 }

@@ -5,6 +5,7 @@ import engine.*;
 
 public class DemoTest {
     public static void main(String[] args) {
+/*
         Interpreter interpreter = new Interpreter();
         GameState state = new GameState();
         GameObject go1 = new GameObject("player1");
@@ -56,6 +57,7 @@ public class DemoTest {
         go1.label = "player3";
         System.out.println("Label of the object in register \"currPlayer\": " + state.registers.get("currPlayer").label);
         waitForKey();
+*/
     }
 
     public static void waitForKey() {

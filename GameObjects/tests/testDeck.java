@@ -6,7 +6,7 @@ import java.awt.Color;
 public class testDeck {
 	
 	//Whitebox testing
-	
+	/*
 	private boolean cardAndDeckNotStatic() {
 		try {
 			Card card = new Card();
@@ -197,4 +197,5 @@ public class testDeck {
 		testDeal();
 		testDeckGettersAndSetters();
 	}
+	*/
 }
