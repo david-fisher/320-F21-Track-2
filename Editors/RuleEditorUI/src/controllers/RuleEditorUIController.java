@@ -75,8 +75,9 @@ public class RuleEditorUIController implements Initializable {
   protected double endLineX = -1;
   protected double endLineY = -1;
 
-  protected Block startBlock;
-  protected boolean isBlueFirstRect = false; // allowing connect only blue and gray
+  private Block startBlock;
+  private int operandIndex;
+  private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
   private Block psetParent;
 
@@ -132,18 +133,19 @@ public class RuleEditorUIController implements Initializable {
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
-      startBlock.getNode().addOperand(block.getNode());
+      startBlock.getNode().addOperand(block.getNode(), operandIndex);
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
 
-  private void drawLineGrayRect(Block block, final int order){
+  private void drawLineGrayRect(Block block, final int order, final int opIndex){
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
 
       //temp
       startBlock = block;
+      operandIndex = opIndex;
     }
     else if (startLineX != -1 && endLineX == -1 && isBlueFirstRect){
       endLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
@@ -164,9 +166,10 @@ public class RuleEditorUIController implements Initializable {
     ObservableList<Node> listGrayRect = block.getGrayRect();
     for (int i = 0; i < listGrayRect.size(); i++){
       Node node = listGrayRect.get(i);
-      final int order = i +1;
+      final int order = i + 1;
+      final int index = i;
       node.setOnMouseClicked(e -> {
-        drawLineGrayRect(block, order);
+        drawLineGrayRect(block, order, index);
       });
     }
   }

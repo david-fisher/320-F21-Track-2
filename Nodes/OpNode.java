@@ -38,6 +38,7 @@ public abstract class OpNode extends Node {
     // Add a node to the group at index i. If no group is at index i yet, check if adding a new group can reach i.
     // If yes, add a new group and add the operand. Otherwise, give error. 
     public OpNode addOperand(Node operand, int i) {
+      System.out.println(i);
         if (operands.size() < i) {
             System.out.println("Error: Cannot add to target rule group. Index too far!");
             return this;
@@ -46,6 +47,7 @@ public abstract class OpNode extends Node {
             operands.add(new ArrayList<Node>());
         }
         operands.get(i).add(operand);
+        System.out.println("Operands size: " + operands.size());
         return this;
     }
 

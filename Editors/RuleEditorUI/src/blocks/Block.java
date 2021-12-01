@@ -21,6 +21,7 @@ import javafx.geometry.HPos;
 import javafx.scene.input.MouseEvent; 
 import javafx.event.EventHandler;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 import nodes.OpNode;
 import nodes.NodeMaker;
@@ -59,6 +60,10 @@ public class Block {
 
   protected Rectangle result;
   protected GridPane grid;
+
+  //List of connection blocks
+  private ObservableList<Node> connBlockList = FXCollections.observableArrayList();
+
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
 
@@ -110,7 +115,10 @@ public class Block {
       grid.add(newValName, 1, i+1);
       //Right-justify the text
       grid.setHalignment(newValName, HPos.RIGHT); 
-      grid.add(new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER), 2, i+1);
+      Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+      //Store the conneciton blocks in a list
+      connBlockList.addAll(connBlock);
+      grid.add(connBlock, 2, i+1);
     }
 
     //Create result connection for block
@@ -161,7 +169,7 @@ public class Block {
   }
 
   public ObservableList<Node> getGrayRect(){
-    return this.grid.getChildren();
+    return this.connBlockList;
   }
 
   public int getGreyRectHeight(){
