@@ -1,6 +1,6 @@
 package org.scenebuilder.scenebuilder.dummy;
 
-import org.objects.Tile;
+import org.GameObjects.objects.Tile;
 
 import java.util.ArrayList;
 
