@@ -187,7 +187,7 @@ public class SetupController extends ScreenController {
 
     private HashMap<Integer, Player> playerHashMap = new HashMap<Integer, Player>();
     int max_player = 8; // todo, read value from game settings
-    private HashMap<Token, Boolean> dummyTokenMap = generateNGameTokens(max_player);
+    private HashMap<Gamepiece, Boolean> dummyTokenMap = generateNGameTokens(max_player);
 
     private void initStuff() {
 
@@ -404,13 +404,13 @@ public class SetupController extends ScreenController {
         // Selects the top one for default and make it unavailable
         comboBox.getSelectionModel().select(0);
         Object selectedItem = comboBox.getSelectionModel().getSelectedItem();
-        dummyTokenMap.put((Token) selectedItem, !dummyTokenMap.get(selectedItem));
+        dummyTokenMap.put((Gamepiece) selectedItem, !dummyTokenMap.get(selectedItem));
 
         // On mouse click the combo box, we have to refresh the options
         comboBox.setOnMousePressed((e) -> {
             Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
             if (inSelectedItem != null)
-                dummyTokenMap.put((Token) inSelectedItem, true);
+                dummyTokenMap.put((Gamepiece) inSelectedItem, true);
             comboBox.getItems().clear();
             comboBox.getItems().addAll(getAvailableToken());
         });
@@ -419,7 +419,7 @@ public class SetupController extends ScreenController {
         comboBox.setOnAction((event) -> {
             Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
             if (inSelectedItem != null)
-                dummyTokenMap.put((Token) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
+                dummyTokenMap.put((Gamepiece) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
         });
         // --- Combo Box Code End ---
 
@@ -436,7 +436,7 @@ public class SetupController extends ScreenController {
         HBox player = playerNodeStack.pop();
         ComboBox x = (ComboBox) player.getChildren().get(player.getChildren().size()-1);
         //dummyTokenMap.remove(x.getValue());
-        dummyTokenMap.put((Token) x.getValue(), Boolean.TRUE);
+        dummyTokenMap.put((Gamepiece) x.getValue(), Boolean.TRUE);
         // Combo Box Cod End
 
         playersVBox.getChildren().remove(player);
@@ -449,21 +449,21 @@ public class SetupController extends ScreenController {
 
     // Generate N (dummy) tokens for the players
     // This is a shit method, only for DEMO purposes. If this makes the final product then LOL
-    private HashMap<Token, Boolean> generateNGameTokens(int n){
-        HashMap<Token, Boolean> dummyTokenMap = new HashMap<>();
+    private HashMap<Gamepiece, Boolean> generateNGameTokens(int n){
+        HashMap<Gamepiece, Boolean> dummyTokenMap = new HashMap<>();
 
         for(int i = 0; i < n; i++){
-            Token gt = new Token();
+            Gamepiece gt = new Gamepiece();
             //"Token " + (i+1), (Color) null, "Shape " + (i+1)
             dummyTokenMap.put(gt, true);
         }
         return dummyTokenMap;
     }
 
-    private ArrayList<Token> getAvailableToken(){
-        Set<Token> set = dummyTokenMap.keySet();
-        ArrayList<Token> availToken = new ArrayList<>();
-        for (Token gt : set){
+    private ArrayList<Gamepiece> getAvailableToken(){
+        Set<Gamepiece> set = dummyTokenMap.keySet();
+        ArrayList<Gamepiece> availToken = new ArrayList<>();
+        for (Gamepiece gt : set){
             if(dummyTokenMap.get(gt)){availToken.add(gt);}
         }
 //        Collections.sort(availToken);
