@@ -54,6 +54,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.shape.Line;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 import engine.*;
 
@@ -79,7 +80,12 @@ public class RuleEditorUIController implements Initializable {
   private int operandIndex;
   private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
+  //temp
   private Block psetParent;
+
+  //temp
+  //List of the literl nodes made so far
+  private ObservableList<Block> textBlockList = FXCollections.observableArrayList();
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -88,7 +94,10 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
+    Interpreter interpreter = new Interpreter();
     GameState state = new GameState();
+    //Create a new register
+    state.registers.put("oppPlayer", null);
     ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
     list.add(psetParent.getNode());
     System.out.println(psetParent.getNode().getOperand(0));
@@ -133,7 +142,7 @@ public class RuleEditorUIController implements Initializable {
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
-      startBlock.getNode().addOperand(block.getNode(), operandIndex);
+      startBlock.getNode().setOperand(block.getNode(), operandIndex);
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
@@ -141,7 +150,7 @@ public class RuleEditorUIController implements Initializable {
   private void drawLineGrayRect(Block block, final int order, final int opIndex){
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
-      startLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+      startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
 
       //temp
       startBlock = block;
@@ -149,7 +158,7 @@ public class RuleEditorUIController implements Initializable {
     }
     else if (startLineX != -1 && endLineX == -1 && isBlueFirstRect){
       endLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
-      endLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+      endLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
       startLineX = startLineY = endLineX = endLineY = -1;
@@ -273,7 +282,9 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML 
   private void handleAddTextNodeBtn(ActionEvent event) {
-    blockActions(new TextBlock());
+    TextBlock txtBlock = new TextBlock();
+    textBlockList.addAll(txtBlock);
+    blockActions(txtBlock);
   }
 
   @FXML
