@@ -14,7 +14,7 @@ public class Spinner extends GameObject
 	private static int count = 0;
 	  
     // instance variables
-    private ArrayList<Category> categories;
+    private List<Category> categories;
     private int numCategories;
 
     /**
@@ -59,7 +59,7 @@ public class Spinner extends GameObject
     	while (numCategories > num) {
         	categories.remove(categories.size() - 1);
         	numCategories-- ; 
-        } 
+        }
         
     	// regularize all categories
         for (Category c : categories) {

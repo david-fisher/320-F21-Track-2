@@ -19,7 +19,7 @@ import objects.*;
 public class GameObjectUIController {
     // Card tab
     @FXML private TextField cardName;
-    @FXML private TextField textureFilename;
+    @FXML private TextField cardFilename;
     @FXML private ColorPicker cardColor;
     @FXML private MenuButton cardAction;
 
@@ -39,6 +39,8 @@ public class GameObjectUIController {
     @FXML private ColorPicker spinnerColor;
     @FXML private TextField spinnerFilename;
     @FXML private TextField spinnerNumCategories;
+    @FXML private ListView spinnerElements;
+    @FXML private ListView spinnerCategoryList;
     private ObservableList<Category> spinnerCategories;
 
     // Token tab
@@ -67,6 +69,12 @@ public class GameObjectUIController {
 
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList(new Card(), new Card());
+        Category cat1 = new Category();
+        Category cat2 = new Category();
+        cat1.setTrait("label", "category 03", true);
+        cat2.setTrait("label", "category 04", true);
+        spinnerCategories = FXCollections.observableArrayList(cat1, cat2);
+
     }
 
     @FXML private void switchToMainMenu(Event event) {
@@ -83,7 +91,7 @@ public class GameObjectUIController {
     @FXML private void saveCard(ActionEvent event) {
         Card card = new Card();
         String cardNameString = cardName.getCharacters().toString();
-        String textureFilenameString = textureFilename.getCharacters().toString();
+        String textureFilenameString = cardFilename.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = cardColor.getValue();
         java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(), (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
         boolean labelRes = card.setTrait("label", cardNameString, false);
@@ -118,17 +126,31 @@ public class GameObjectUIController {
         }
     }
 
-
-    @FXML private void saveSpinner(ActionEvent event) {
-        // Spinner is ambiguous, is it worth changing the name of the class?
-        objects.Spinner spinner = new objects.Spinner();
-        
+    @FXML private void saveCategory(ActionEvent event) {
+        Category category = new Category();
+        String categoryNameString = categoryName.getCharacters().toString();
+        double catWeight = Double.valueOf(categoryWeight.getCharacters().toString()).doubleValue();
+        System.out.println(catWeight);
+        String categoryFilenameString = categoryFilename.getCharacters().toString();
+        javafx.scene.paint.Color catColor = categoryColor.getValue();
+        java.awt.Color colorOne = new java.awt.Color((float)catColor.getRed(),
+                (float)catColor.getGreen(), (float)catColor.getBlue());
+        boolean nameRes = category.setTrait("label", categoryNameString, false);
+        boolean weightRes = category.setWeight(catWeight);
+        boolean colorRes = category.setTrait("color", colorOne, false);
+        boolean fileRes = category.setTrait("icon", categoryFilenameString, false);
+        if (!(nameRes && weightRes && colorRes && fileRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new category: " + categoryNameString);
+            spinnerCategories.add(category);
+        }
     }
 
     @FXML private void saveGamepiece(ActionEvent event) {
         Gamepiece piece = new Gamepiece();
         String pieceNameString = gamepieceName.getCharacters().toString();
-        String textureFilenameString = textureFilename.getCharacters().toString();
+        String textureFilenameString = gamepieceFilename.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = gamepieceColor.getValue();
 
         // TODO: This is just a dummy tile as of now
@@ -148,13 +170,32 @@ public class GameObjectUIController {
         }
     }
 
+    @FXML private void saveToken(ActionEvent event) {
+        Token token = new Token();
+        String tokenNameString = tokenName.getCharacters().toString();
+        String textureFilenameString = tokenFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+        Integer value = Integer.valueOf(tokenValue.getCharacters().toString());
+        java.awt.Color awtColor = new java.awt.Color((float)jfxColor.getRed(),
+                (float)jfxColor.getGreen(), (float)jfxColor.getBlue());
+        boolean labelRes = token.setTrait("label", tokenNameString, false);
+        boolean iconRes = token.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = token.setTrait("color", awtColor, false);
+        boolean valRes = token.setTrait("value", value, false);
+        if (!(labelRes && iconRes && colorRes && valRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Token: " + tokenNameString);
+        }
+    }
+
     @FXML private void populateCardList(Event event) {
         deckCardList.setItems(deckCards);
         deckCardList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         deckDeckList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    @FXML private void addHighlighted(ActionEvent event) {
+    @FXML private void deckAddHighlighted(ActionEvent event) {
         ObservableList<Integer> selectedCardIndices = deckCardList.getSelectionModel().getSelectedIndices();
         ObservableList<Card> cards = deckCardList.getItems();
         ObservableList<Card> deck = deckDeckList.getItems();
@@ -177,7 +218,7 @@ public class GameObjectUIController {
         deckDeckList.setItems(deck);
     }
 
-    @FXML private void removeHighlighted(ActionEvent event) {
+    @FXML private void deckRemoveHighlighted(ActionEvent event) {
         ObservableList<Integer> selectedCardIndices = deckDeckList.getSelectionModel().getSelectedIndices();
         ObservableList<Card> cards = deckCardList.getItems();
         ObservableList<Card> deck = deckDeckList.getItems();
@@ -207,5 +248,76 @@ public class GameObjectUIController {
             deck.addCard(c, 1);
         }
         System.out.println(deck.getCards().toString());
+        Card c1 = deck.drawRandom();
+        Card c2 = deck.drawRandom();
+        deck.replaceRandom(c1);
+        deck.replaceRandom(c2);
+        System.out.println(c1.toString());
+        System.out.println(c2.toString());
+        
     }
+
+    @FXML private void populateSpinnerList(Event event) {
+        spinnerCategoryList.setItems(spinnerCategories);
+        spinnerCategoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        spinnerElements.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    @FXML private void spinnerAddHighlighted(ActionEvent event) {
+        ObservableList<Integer> selectedIndices = spinnerCategoryList.getSelectionModel().getSelectedIndices();
+        ObservableList<Category> elements = spinnerElements.getItems();
+        ObservableList<Category> categories = spinnerCategoryList.getItems();
+        ArrayList<Category> removedCategories = new ArrayList();
+
+        // For every category selected, add it to the spinner elements list
+        for (Integer i: selectedIndices) {
+            Category c = categories.get(i);
+            elements.add(c);
+            removedCategories.add(c);
+        }
+
+        // Then remove all the categories that are selected from the categories list
+        for (int i = 0; i < removedCategories.size(); i += 1) {
+            categories.remove(removedCategories.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        spinnerCategoryList.setItems(categories);
+        spinnerElements.setItems(elements);
+    }
+
+    @FXML private void spinnerRemoveHighlighted(ActionEvent event) {
+        ObservableList<Integer> selectedIndices = spinnerElements.getSelectionModel().getSelectedIndices();
+        ObservableList<Category> elements = spinnerElements.getItems();
+        ObservableList<Category> categories = spinnerCategoryList.getItems();
+        ArrayList<Category> removedElements = new ArrayList();
+
+        // For every category selected, add it to the spinner elements list
+        for (Integer i: selectedIndices) {
+            Category c = elements.get(i);
+            categories.add(c);
+            removedElements.add(c);
+        }
+
+        // Then remove all the categories that are selected from the categories list
+        for (int i = 0; i < removedElements.size(); i += 1) {
+            elements.remove(removedElements.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        spinnerCategoryList.setItems(categories);
+        spinnerElements.setItems(elements);
+    }
+
+    @FXML private void saveSpinner(ActionEvent event) {
+        objects.Spinner spinner = new objects.Spinner();
+        ObservableList<Category> elements = spinnerElements.getItems();
+        spinner.setNumCategories(elements.size());
+        System.out.println("Created spinner with " + spinner.getNumCategories() + " categories");
+        System.out.println(spinner.spin().toString());
+        System.out.println(spinner.spin().toString());
+        System.out.println(spinner.spin().toString());
+    }
+
+    @FXML private void saveTimer(ActionEvent event) {}
 }

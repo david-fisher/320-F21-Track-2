@@ -190,5 +190,4 @@ public abstract class Savable {
 		}
 		return x;
 	}
-
 }

@@ -21,7 +21,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/.metadata/
 /bin/
 .vscode/settings.json
 .vscode/launch.json
+/.metadata/
+Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
+Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
