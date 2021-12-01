@@ -225,9 +225,9 @@ public class BasicApplication extends Application {
             stage.setHeight(screenDimensions[1]);
 
             // theoretically keep the stage from becoming unuseable by going off the monitor
-            int[] maxScreenDimensions = calculateScreenDimensions();
-            stage.setMaxWidth(maxScreenDimensions[0]);
-            stage.setMaxHeight(maxScreenDimensions[1]);
+//            int[] maxScreenDimensions = calculateScreenDimensions();
+//            stage.setMaxWidth(maxScreenDimensions[0]);
+//            stage.setMaxHeight(maxScreenDimensions[1]);
         }
     }
 

@@ -71,15 +71,16 @@ public class PlayController extends ScreenController {
     private ArrayList<DummyPlayer> players;
     private DummyPlayer curPlayer;
 
-    Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-    double playWidth = screenDimensions.getWidth();
-    double playHeight = screenDimensions.getHeight();
+    double playWidth;
+    double playHeight;
 
     @FXML
     public void initialize(Stage stage) {
 
         super.initialize(stage);
         this.stage = stage;
+        playWidth = stage.getWidth();
+        playHeight = stage.getHeight();
 
         // load relevant data
         setupData = BasicApplication.getSetupData();
