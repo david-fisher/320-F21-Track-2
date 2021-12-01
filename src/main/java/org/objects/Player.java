@@ -12,22 +12,22 @@ public class Player {
     private String playerID;
 
     private Color color;
-    private ArrayList<Token> gameTokens;
+    private ArrayList<Gamepiece> gamePieces;
     private DummyInventory inventory;
 
     private boolean isHuman;
 
-    public Player(String playerID, Color color, ArrayList<Token> gameTokens, DummyInventory inventory, boolean isHuman) {
+    public Player(String playerID, Color color, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
         this.playerID = playerID;
         this.color = color;
-        this.gameTokens = gameTokens;
+        this.gamePieces = gamePieces;
         this.inventory = inventory;
         this.isHuman = isHuman;
     }
 
-    public Player(String playerID, ArrayList<Token> gameTokens, DummyInventory inventory, boolean isHuman) {
+    public Player(String playerID, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
         this.playerID = playerID;
-        this.gameTokens = gameTokens;
+        this.gamePieces = gamePieces;
         this.inventory = inventory;
         this.isHuman = isHuman;
 
@@ -39,7 +39,7 @@ public class Player {
         this.playerID = playerID;
     }
     public void setColor(Color color) { this.color = color; }
-    public void setGameTokens(ArrayList<Token> gameTokens) { this.gameTokens = gameTokens; }
+    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }
     public void setInventory(DummyInventory inventory) { this.inventory = inventory; }
     public void setIsHuman(boolean isHuman) {
         this.isHuman = isHuman;
@@ -50,15 +50,15 @@ public class Player {
         return this.playerID;
     }
     public Color getColor() { return this.color; }
-    public ArrayList<Token> getGameTokens() { return this.gameTokens; }
+    public ArrayList<Gamepiece> getGamePieces() { return this.gamePieces; }
     public DummyInventory getInventory() { return this.inventory; }
     public boolean getIsHuman() { return this.isHuman; }
 
     // modifiers
-    public void addToken(Token token) { this.gameTokens.add(token); }
-    public void removeToken(Token token) { this.gameTokens.remove(token); }
-    public void removeToken(int tokenIndex) { this.gameTokens.remove(tokenIndex); }
-    public void setToken(int tokenIndex, Token token) { this.gameTokens.set(tokenIndex, token); }
+    public void addPiece(Gamepiece piece) { this.gamePieces.add(piece); }
+    public void removePiece(Gamepiece piece) { this.gamePieces.remove(piece); }
+    public void removePiece(int pieceIndex) { this.gamePieces.remove(pieceIndex); }
+    public void setPiece(int pieceIndex, Gamepiece piece) { this.gamePieces.set(pieceIndex, piece); }
 
     public Color getRandomColor(){
         Random rand = new Random(System.currentTimeMillis());
@@ -72,10 +72,10 @@ public class Player {
 
     @Override
     public String toString() {
-        return "DummyPlayer{" +
+        return "Player{" +
                 "playerID='" + playerID + '\'' +
                 ", color=" + color +
-                ", gameTokens=" + gameTokens +
+                ", gamePieces=" + gamePieces +
                 ", inventory=" + inventory +
                 ", isHuman=" + isHuman +
                 '}';

@@ -2,6 +2,7 @@ package org.nodes;
 import java.util.ArrayList;
 import java.util.Map;
 import org.engine.*;
+import org.objects.GameObject;
 
 // Usage: Operand 0 - target (register name)
 //        Operand 1 - source name (register or gameobject)

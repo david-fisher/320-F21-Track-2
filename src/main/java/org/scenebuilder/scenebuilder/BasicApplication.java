@@ -57,8 +57,8 @@ public class BasicApplication extends Application {
     private static DummyGame createDummyGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
 
         ArrayList<Player> players = new ArrayList<>();
-        Player player1 = new Player("Player 1", Color.AQUAMARINE, new ArrayList<Token>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
-        player1.addToken(new Token());
+        Player player1 = new Player("Player 1", Color.AQUAMARINE, new ArrayList<Gamepiece>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
+        player1.addPiece(new Gamepiece());
 
         ArrayList<Tile> tiles = new ArrayList<>();
 

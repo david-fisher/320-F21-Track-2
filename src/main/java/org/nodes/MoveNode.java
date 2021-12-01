@@ -1,9 +1,9 @@
-package nodes;
+package org.nodes;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import engine.GameState;
-import objects.*;
+import org.engine.GameState;
+import org.objects.*;
 
 // Usage: Operand 0 - game piece name.
 //				Operand 1 - distance (LiteralNode<Integer>)
@@ -49,8 +49,10 @@ public class MoveNode extends OpNode {
         return null;
 	}
 	
-	// TODO: This method will be implemented by Minjex. 
-	private Tile Mystery(ArrayList<Tile> tiles) { return null; }
+	// TODO: This method will be implemented by Minjex.
+	private Tile Mystery(ArrayList<Tile> tiles) {
+        return null;
+    }
 	
 	// This method returns a list of reachable tiles at distance tDis from the tile t.
 	// Only tiles at the exact distance is included. If possible path is shorter than tDis, the end of that path

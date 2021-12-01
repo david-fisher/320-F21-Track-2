@@ -23,7 +23,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.impossible.Game;
 import org.objects.GameObject;
+import org.objects.Gamepiece;
+import org.objects.Player;
+import org.objects.Token;
 import org.scenebuilder.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.scenebuilder.dummy.DummyGameToken;
 import org.scenebuilder.scenebuilder.dummy.DummyInventory;
@@ -184,9 +188,9 @@ public class SetupController extends ScreenController {
     // game selected in selection scene
     private DummyGame selectedGame;
 
-    private HashMap<Integer, DummyPlayer> playerHashMap = new HashMap<Integer, DummyPlayer>();
+    private HashMap<Integer, Player> playerHashMap = new HashMap<Integer, Player>();
     int max_player = 8; // todo, read value from game settings
-    private HashMap<DummyGameToken, Boolean> dummyTokenMap = generateNGameTokens(max_player);
+    private HashMap<Token, Boolean> dummyTokenMap = generateNGameTokens(max_player);
 
     private void initStuff() {
 
@@ -198,9 +202,10 @@ public class SetupController extends ScreenController {
 
         // For loop to create num_players player to the stack
         for(int i = 0; i < min_player; i++) {
-            ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
-            gameTokens.add(new DummyGameToken("Token " + (i+1), "Square"));
-            DummyPlayer player = new DummyPlayer("Player " + (i+1), gameTokens, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
+            ArrayList<Gamepiece> gamePieces = new ArrayList<>();
+            gamePieces.add(new Gamepiece());
+            //"Token " + (i+1), "Square"
+            Player player = new Player("Player " + (i+1), gamePieces, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -218,10 +223,11 @@ public class SetupController extends ScreenController {
         // Add player to the stack
         if (num_players < 8) { // todo read value from game settings
 
-            ArrayList<DummyGameToken> gameTokens = new ArrayList<>();
-            gameTokens.add(new DummyGameToken("Token " + (num_players+1), "Square"));
+            ArrayList<Gamepiece> gamePieces = new ArrayList<>();
+            gamePieces.add(new Gamepiece());
+            //"Token " + (num_players+1), "Square"
 
-            DummyPlayer player = new DummyPlayer("Player " + (num_players+1), gameTokens, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
+            Player player = new Player("Player " + (num_players+1), gamePieces, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
 
             num_players += 1;
             playerCountTextField.setText(Integer.toString(num_players));
@@ -253,23 +259,23 @@ public class SetupController extends ScreenController {
 
         playerHBox.setAlignment(Pos.CENTER);
 
-        DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+        Player hboxPlayer = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
 
-        Color color = hboxPlayer.getGameTokens().get(0).getTokenColor(); // todo get game piece by reference
-        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+        Color color = hboxPlayer.getGamePieces().get(0).getColor(); // todo get game piece by reference
+//        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
 
         ColorPicker colorPicker = new ColorPicker(color);
         // Set bg color and disable text
-        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false ; ");
+        colorPicker.setStyle("-fx-background-color: " + color.toString() +  "; -fx-font-family: serif; -fx-color-label-visible: false ; ");
 
 
         // Add listener for Color Picker
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
-                DummyPlayer player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+                Player player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
                 Color initColor = player.getColor();
                 Integer ID = Integer.valueOf(playerHBox.getId());
-                for(Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
+                for(Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
                     if (p.getValue().getColor().equals(colorPicker.getValue())) {
                         if(p.getKey() == ID){
                             continue;
@@ -281,17 +287,18 @@ public class SetupController extends ScreenController {
                         player.setColor(initColor);
                         Rectangle rec = (Rectangle) colorPicker.lookup("Rectangle");
                         rec.setFill(initColor);
-                        hboxPlayer.getGameTokens().get(0).setTokenColor(initColor); // todo get game piece by reference
-                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
-                        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+                        hboxPlayer.getGamePieces().get(0).setColor(initColor); // todo get game piece by reference
+//                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+                        colorPicker.setStyle("-fx-background-color: " + initColor.toString() +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
                         alert.showAndWait();
                         break;
                     }
                     else{
-                        hboxPlayer.getGameTokens().get(0).setTokenColor(colorPicker.getValue()); // todo get game piece by reference
-                        player.setColor(colorPicker.getValue());
-                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
-                        colorPicker.setStyle("-fx-background-color: " + hex +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+                        hboxPlayer.getGamePieces().get(0).setColor(colorPicker.getValue()); // todo get game piece by reference
+                        Color c = colorPicker.getValue();
+                        player.setColor(c);
+//                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+                        colorPicker.setStyle("-fx-background-color: " + c.toString() +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
                     }
                 }
                 System.out.println(playerHashMap);
@@ -316,11 +323,11 @@ public class SetupController extends ScreenController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 Integer ID = Integer.valueOf(playerHBox.getId());
-                DummyPlayer player = playerHashMap.get(ID);
+                Player player = playerHashMap.get(ID);
                 String text = playerField.getText();
                 if(!t1) {
                     player.setPlayerID(text);
-                    for (Map.Entry<Integer, DummyPlayer> p : playerHashMap.entrySet()) {
+                    for (Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
                         if (p.getKey() == ID) {
                             continue;
                         }
@@ -400,13 +407,13 @@ public class SetupController extends ScreenController {
         // Selects the top one for default and make it unavailable
         comboBox.getSelectionModel().select(0);
         Object selectedItem = comboBox.getSelectionModel().getSelectedItem();
-        dummyTokenMap.put((DummyGameToken) selectedItem, !dummyTokenMap.get(selectedItem));
+        dummyTokenMap.put((Token) selectedItem, !dummyTokenMap.get(selectedItem));
 
         // On mouse click the combo box, we have to refresh the options
         comboBox.setOnMousePressed((e) -> {
             Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
             if (inSelectedItem != null)
-                dummyTokenMap.put((DummyGameToken) inSelectedItem, true);
+                dummyTokenMap.put((Token) inSelectedItem, true);
             comboBox.getItems().clear();
             comboBox.getItems().addAll(getAvailableToken());
         });
@@ -415,7 +422,7 @@ public class SetupController extends ScreenController {
         comboBox.setOnAction((event) -> {
             Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
             if (inSelectedItem != null)
-                dummyTokenMap.put((DummyGameToken) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
+                dummyTokenMap.put((Token) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
         });
         // --- Combo Box Code End ---
 
@@ -432,7 +439,7 @@ public class SetupController extends ScreenController {
         HBox player = playerNodeStack.pop();
         ComboBox x = (ComboBox) player.getChildren().get(player.getChildren().size()-1);
         //dummyTokenMap.remove(x.getValue());
-        dummyTokenMap.put((DummyGameToken) x.getValue(), Boolean.TRUE);
+        dummyTokenMap.put((Token) x.getValue(), Boolean.TRUE);
         // Combo Box Cod End
 
         playersVBox.getChildren().remove(player);
@@ -445,23 +452,24 @@ public class SetupController extends ScreenController {
 
     // Generate N (dummy) tokens for the players
     // This is a shit method, only for DEMO purposes. If this makes the final product then LOL
-    private HashMap<DummyGameToken, Boolean> generateNGameTokens(int n){
-        HashMap<DummyGameToken, Boolean> dummyTokenMap = new HashMap<>();
+    private HashMap<Token, Boolean> generateNGameTokens(int n){
+        HashMap<Token, Boolean> dummyTokenMap = new HashMap<>();
 
         for(int i = 0; i < n; i++){
-            DummyGameToken gt = new DummyGameToken("Token " + (i+1), (Color) null, "Shape " + (i+1));
+            Token gt = new Token();
+            //"Token " + (i+1), (Color) null, "Shape " + (i+1)
             dummyTokenMap.put(gt, true);
         }
         return dummyTokenMap;
     }
 
-    private ArrayList<DummyGameToken> getAvailableToken(){
-        Set<DummyGameToken> set = dummyTokenMap.keySet();
-        ArrayList<DummyGameToken> availToken = new ArrayList<>();
-        for (DummyGameToken gt : set){
+    private ArrayList<Token> getAvailableToken(){
+        Set<Token> set = dummyTokenMap.keySet();
+        ArrayList<Token> availToken = new ArrayList<>();
+        for (Token gt : set){
             if(dummyTokenMap.get(gt)){availToken.add(gt);}
         }
-        Collections.sort(availToken);
+//        Collections.sort(availToken);
         return availToken;
     }
 
@@ -470,7 +478,7 @@ public class SetupController extends ScreenController {
         // Get modified name
         for ( Node h: playersVBox.getChildren()) {
             for (Node t: ((HBox) h).getChildren()) {
-                DummyPlayer hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
+                Player hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
                 // This is setting the player name
                 if (t instanceof TextField)
                     hboxPlayer.setPlayerID(((TextField) t).getText());
@@ -478,25 +486,25 @@ public class SetupController extends ScreenController {
                 // This is setting the player's GameToken
                 if (t instanceof ComboBox) {
                     // Set the color to the Token
-                    DummyGameToken token = (DummyGameToken) ((ComboBox) t).getSelectionModel().getSelectedItem();
-                    Color c = hboxPlayer.getGameTokens().get(0).getTokenColor();
-                    token.setTokenColor(c);
-                    System.out.println(token);
+                    Gamepiece piece = (Gamepiece) ((ComboBox) t).getSelectionModel().getSelectedItem();
+                    Color c = hboxPlayer.getGamePieces().get(0).getColor();
+                    piece.setColor(c);
+                    System.out.println(piece);
 
                     // Assign the token to the player
-                    if(hboxPlayer.getGameTokens().size() == 1)
-                        hboxPlayer.setToken(0, token);
+                    if(hboxPlayer.getGamePieces().size() == 1)
+                        hboxPlayer.setPiece(0, piece);
                     else
-                        hboxPlayer.addToken(token);
+                        hboxPlayer.addPiece(piece);
                 }
             }
         }
 
         // Move all the players from the hashmaps to an array list
-        Collection<DummyPlayer> values = playerHashMap.values();
-        ArrayList<DummyPlayer> dummyPlayerArrayList = new ArrayList<>(values);
+        Collection<Player> values = playerHashMap.values();
+        ArrayList<Player> dummyPlayerArrayList = new ArrayList<>(values);
 
-        BasicApplication.setSetupData(new SetupData(new ArrayList<>(dummyPlayerArrayList), tutorialModeCheckBox.isSelected()));
+        BasicApplication.setSetupData(new SetupData(new ArrayList<Player>(dummyPlayerArrayList), tutorialModeCheckBox.isSelected()));
         PlayController controller = new PlayController();
         controller.initialize(stage);
     }

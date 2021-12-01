@@ -68,8 +68,8 @@ public class PlayController extends ScreenController {
     private Stage stage;
     private SetupData setupData;
     private DummyGame activeGame;
-    private ArrayList<DummyPlayer> players;
-    private DummyPlayer curPlayer;
+    private ArrayList<Player> players;
+    private Player curPlayer;
 
     double playWidth;
     double playHeight;
@@ -85,10 +85,10 @@ public class PlayController extends ScreenController {
         // load relevant data
         setupData = BasicApplication.getSetupData();
         if (setupData.playerList.size() == 0) {
-            ArrayList<DummyPlayer> dummyPlayers = new ArrayList<DummyPlayer>();
-            dummyPlayers.add(new DummyPlayer("Player 1", Color.RED, new ArrayList<DummyGameToken>(), new DummyInventory("1", new ArrayList<GameObject>()), true));
-            dummyPlayers.add(new DummyPlayer("Player 2", Color.BLUE, new ArrayList<DummyGameToken>(), new DummyInventory("2", new ArrayList<GameObject>()), true));
-            dummyPlayers.add(new DummyPlayer("Player 3", Color.GREEN, new ArrayList<DummyGameToken>(), new DummyInventory("3", new ArrayList<GameObject>()), true));
+            ArrayList<Player> dummyPlayers = new ArrayList<Player>();
+            dummyPlayers.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new DummyInventory("1", new ArrayList<GameObject>()), true));
+            dummyPlayers.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new DummyInventory("2", new ArrayList<GameObject>()), true));
+            dummyPlayers.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new DummyInventory("3", new ArrayList<GameObject>()), true));
             setupData = new SetupData(dummyPlayers, false);
         }
         activeGame = BasicApplication.getSelectedGame();
@@ -111,7 +111,7 @@ public class PlayController extends ScreenController {
 
         switchTurn.setOnMouseClicked(e -> {
             int nextPlayerIndex = players.indexOf(curPlayer);
-            DummyPlayer nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
+            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
             playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
             playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
                     "-fx-background-radius: 5 5 5 5; " +
@@ -257,7 +257,7 @@ public class PlayController extends ScreenController {
     private void initPlayers(ArrayList<Player> players) {
 
         players.forEach(p -> {
-            initGamePiece(p.getGameTokens().get(0)); // todo, get specific game piece by reference
+            initGamePiece(p.getGamePieces().get(0)); // todo, get specific game piece by reference
             //fill inventory
         });
 
@@ -266,7 +266,7 @@ public class PlayController extends ScreenController {
         // add player stuff to inventory (later)
     }
 
-    private void initGamePiece(Token gamePiece) {
+    private void initGamePiece(Gamepiece gamePiece) {
         // for each player
         // for each piece
         // get piece
