@@ -1,6 +1,6 @@
 package org.scenebuilder.scenebuilder.dummy;
 
-import org.engine.GameState;
+import org.RuleEngine.engine.GameState;
 
 public class DummyGame {
 

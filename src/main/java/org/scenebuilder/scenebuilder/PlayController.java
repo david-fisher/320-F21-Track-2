@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,13 +21,12 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import org.engine.GameState;
-import org.objects.*;
-import org.objects.Spinner;
+import org.RuleEngine.engine.GameState;
+import org.GameObjects.objects.*;
+import org.GameObjects.objects.Spinner;
 import org.scenebuilder.scenebuilder.dummy.*;
 
 import java.io.IOException;

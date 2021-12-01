@@ -1,8 +1,8 @@
 package org.scenebuilder.scenebuilder.dummy;
 
-import org.objects.Deck;
-import org.objects.Die;
-import org.objects.Spinner;
+import org.GameObjects.objects.Deck;
+import org.GameObjects.objects.Die;
+import org.GameObjects.objects.Spinner;
 
 import java.util.ArrayList;
 

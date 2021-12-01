@@ -1,6 +1,6 @@
 package org.scenebuilder.scenebuilder;
 
-import org.objects.*;
+import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 
