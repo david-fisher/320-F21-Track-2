@@ -91,11 +91,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+<!--         <dependency>
             <groupId>org.scenebuilder</groupId>
             <artifactId>SceneBuilder</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>

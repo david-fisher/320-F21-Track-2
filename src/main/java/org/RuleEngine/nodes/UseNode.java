@@ -1,8 +1,8 @@
-package nodes;
+package org.RuleEngine.nodes;
 
 import java.util.ArrayList;
-import engine.GameState;
-import objects.*;
+import org.RuleEngine.engine.GameState;
+import org.GameObjects.objects.*;
 
 //
 public class UseNode extends OpNode {
