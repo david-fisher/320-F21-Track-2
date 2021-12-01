@@ -1,17 +1,15 @@
 package org.RuleEngine.nodes;
 
-import java.util.ArrayList;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
 
-//
+// Usage: Operand 0 - The name of the die/spinner to be used.
 public class UseNode extends OpNode {
-    public UseNode() { super(); }
-    public UseNode(ArrayList<Node> operands) {
+    public UseNode() { 
         super();
-        this.operands.set(0, operands);
+        this.addOperand(null);
     }
-    
+
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {

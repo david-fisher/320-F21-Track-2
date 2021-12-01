@@ -2,22 +2,21 @@ package org.RuleEngine.nodes;
 import java.util.ArrayList;
 import org.RuleEngine.engine.GameState;
 
+//Probably will be changed a bit
 public class StringNode extends OpNode {
     private String operator;
     
     public StringNode(String op) {
         super();
         operator = op;
-    }
-
-    public StringNode(String op, ArrayList<ArrayList<Node>> operands) {
-        super(operands);
-        operator = op;
+        this.addOperand(null).addOperand(null);
     }
     
     public String getOperator() { return operator; }
     public void setOperator(String op) { operator = op; }
     
+    @Override
+    @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);
