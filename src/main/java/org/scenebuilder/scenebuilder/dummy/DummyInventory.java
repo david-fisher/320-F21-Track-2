@@ -1,6 +1,6 @@
 package org.scenebuilder.scenebuilder.dummy;
 
-import org.objects.GameObject;
+import org.GameObjects.objects.GameObject;
 
 import java.util.ArrayList;
 
