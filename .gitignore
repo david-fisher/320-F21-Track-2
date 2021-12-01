@@ -34,3 +34,5 @@ hs_err_pid*
 # 12/1/2021
 *.class
 GameObjects/bin/*
+.classpath
+.project
