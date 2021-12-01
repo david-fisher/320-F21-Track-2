@@ -23,43 +23,70 @@ public class GameState {
     public ArrayList<GameObject> gameObjects;
 
     public HashMap<String, GameObject> registers;
-    public static HashMap<String, ArrayList<Node>> events;
+    public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
 
     public GameState() {
         gameObjects = new ArrayList<GameObject>();
+        buttons = new ArrayList<Button>();
+        cards = new ArrayList<Card>();
+        decks = new ArrayList<Deck>();
+        dice = new ArrayList<Die>();
+        gamepieces = new ArrayList<Gamepiece>();
+        timers = new ArrayList<GameTimer>();
+        spinners = new ArrayList<Spinner>();
+        tiles = new ArrayList<Tile>();
+        tokens = new ArrayList<Token>();
+
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
     }
 
-    public GameObject getRegistry(String key) {
-        return registers.get(key);
-    }
+    public GameObject getRegistry(String key) { return registers.get(key); }
     
-    public void addRegistry(String key, GameObject obj) {
-    		registers.put(key, obj);
-    }
+    public void addRegistry(String key, GameObject obj) { registers.put(key, obj); }
     
-    public boolean removeRegistry(String key) {
-    	return registers.remove(key) != null;
-    }
+    public boolean removeRegistry(String key) { return registers.remove(key) != null; }
     
-    public ArrayList<Node> getEvent(String key) {
-      return events.get(key);
-	  }
+    public ArrayList<Node> getEvent(String key) { return events.get(key); }
 	  
-	  public void addEvent(String key, ArrayList<Node> obj) {
-	  		events.put(key, obj);
-	  }
-	  
-	  public boolean removeEvent(String key) {
-	  	return events.remove(key) != null;
-	  }
+	public void addEvent(String key, ArrayList<Node> obj) { events.put(key, obj); }
+	
+	public boolean removeEvent(String key) { return events.remove(key) != null; }
 
     public GameObject findObject(String label) {
+    	/*
         for(GameObject go : gameObjects) {
             if (go.label.equals(label)) {
                 return go;
             }
+        }
+    	*/
+        for(Button go : buttons) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Card go : cards) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Deck go : decks) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Die go : dice) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Gamepiece go : gamepieces) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(GameTimer go : timers) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Spinner go : spinners) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Tile go : tiles) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
+        for(Token go : tokens) {
+            if (go.getTrait("label").equals(label)) { return go; }
         }
         return null;
     }
@@ -68,7 +95,8 @@ public class GameState {
         String repr = "";
         TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
-            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
+        	
+            // repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }

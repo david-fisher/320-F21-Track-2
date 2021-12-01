@@ -1,11 +1,11 @@
-package org.engine;
+package engine;
 import java.util.Map;
 
 // Placeholder for GameObject
-public class GameObject {
+public class TestGameObject {
     public String label;
     public Map<String, Object> traits;
-    public GameObject(String label) {
+    public TestGameObject(String label) {
         this.label = label;
     }
 
