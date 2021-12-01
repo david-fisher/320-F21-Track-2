@@ -428,7 +428,14 @@ public class SetupController extends ScreenController {
     }
 
     public void removePlayerNode() {
-        playersVBox.getChildren().remove(playerNodeStack.pop());
+        // -- Make the selected shape Available Again (Combo Box Stuff) --
+        HBox player = playerNodeStack.pop();
+        ComboBox x = (ComboBox) player.getChildren().get(player.getChildren().size()-1);
+        //dummyTokenMap.remove(x.getValue());
+        dummyTokenMap.put((DummyGameToken) x.getValue(), Boolean.TRUE);
+        // Combo Box Cod End
+
+        playersVBox.getChildren().remove(player);
     }
 
     public void backFromSetup() {
