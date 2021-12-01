@@ -59,7 +59,7 @@ public class Spinner extends GameObject
     	while (numCategories > num) {
         	categories.remove(categories.size() - 1);
         	numCategories-- ; 
-        }
+        } 
         
     	// regularize all categories
         for (Category c : categories) {

@@ -55,6 +55,10 @@ import javafx.event.EventHandler;
 import javafx.scene.shape.Line;
 import javafx.collections.ObservableList;
 
+import engine.*;
+
+import java.util.ArrayList;
+
 public class RuleEditorUIController implements Initializable {
   @FXML
   private AnchorPane editorPane;
@@ -74,9 +78,23 @@ public class RuleEditorUIController implements Initializable {
   protected Block startBlock;
   protected boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
+  private Block psetParent;
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // Implement
+  }
+
+  @FXML 
+  private void handleSaveBtn(ActionEvent event) {
+    GameState state = new GameState();
+    ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
+    list.add(psetParent.getNode());
+    System.out.println(psetParent.getNode().getOperand(0));
+    System.out.println(psetParent.getNode().getOperand(1));
+    System.out.println(psetParent.getNode().getOperand(2));
+    state.events.put("main", list);
+    System.out.println(state.events);
   }
 
   /**
@@ -112,6 +130,9 @@ public class RuleEditorUIController implements Initializable {
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
       startLineX = startLineY = endLineX = endLineY = -1;
+
+      //temp
+      startBlock.getNode().addOperand(block.getNode());
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
@@ -120,6 +141,8 @@ public class RuleEditorUIController implements Initializable {
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + order*block.getGreyRectHeight();
+
+      //temp
       startBlock = block;
     }
     else if (startLineX != -1 && endLineX == -1 && isBlueFirstRect){
@@ -156,7 +179,9 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    blockActions(new PSetBlock());
+    PSetBlock pset = new PSetBlock();
+    this.psetParent = pset;
+    blockActions(pset);
   }
 
   @FXML

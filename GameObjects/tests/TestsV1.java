@@ -12,7 +12,7 @@ import java.awt.Color;
 
 public class TestsV1 {
 
-  
+  /*
   @Test
   public void DieGettersAndSetters() {
     Die die = new Die();
@@ -122,5 +122,5 @@ public class TestsV1 {
     game.setLocation(tile);
     assert (game.getLocation().equals(tile));
   } 
-
+	*/
 }

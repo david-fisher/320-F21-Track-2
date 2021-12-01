@@ -38,14 +38,14 @@ public class TextBlock extends Block {
     });
 
     //Pane for placing the controls and text for the block
-    GridPane grid = new GridPane();
+    this.grid = new GridPane();
     //Padding of top, right, & bottom to 10px; padding of left 0px
-    grid.setPadding(new Insets(10, 0, 10, 0));
-    grid.setMinSize(BLOCK_WIDTH, this.blockHeight);
-    grid.setPrefSize(BLOCK_WIDTH, this.blockHeight);
+    this.grid.setPadding(new Insets(10, 0, 10, 0));
+    this.grid.setMinSize(BLOCK_WIDTH, this.blockHeight);
+    this.grid.setPrefSize(BLOCK_WIDTH, this.blockHeight);
     //Set vertical gap between columns and horizontal gap
-    grid.setVgap(VGAP);
-    grid.setHgap(HGAP);
+    this.grid.setVgap(VGAP);
+    this.grid.setHgap(HGAP);
 
     final int leftColSize = 35;
     final int rightColSize = 10;
@@ -66,7 +66,8 @@ public class TextBlock extends Block {
     grid.add(field, 1, 0);
 
     //Create result connection for block
-    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    this.result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    
 
     //Stack the base Rectangle and grid GridPane of the block on the pane
     this.block.getChildren().addAll(base, grid, field, result);

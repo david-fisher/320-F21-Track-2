@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/bhavs/Downloads/snakeyaml-1.29.jar"/>
+	<classpathentry kind="lib" path="../lib/snakeyaml-1.29.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
