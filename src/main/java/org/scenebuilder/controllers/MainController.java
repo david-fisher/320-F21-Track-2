@@ -103,13 +103,6 @@ public class MainController extends ScreenController {
         screenVBox.getChildren().addAll(playButton, newButton, editButton, exitButton, fillHBox);
     }
 
-    private void initCSS() {
-
-        anchorPane.setStyle("-fx-background-color: black");
-        screenVBox.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-
-    }
-
     public void initialize(Stage stage) {
 
         super.initialize(stage);
@@ -117,7 +110,6 @@ public class MainController extends ScreenController {
         screenVBox.setAlignment(Pos.CENTER);
         initSettings();
         initButtons();
-        initCSS();
     }
 
     // event handlers

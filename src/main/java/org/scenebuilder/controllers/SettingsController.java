@@ -8,12 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.SettingsObject;
 
 import java.util.Arrays;
@@ -27,10 +30,11 @@ public class SettingsController extends ScreenController {
         settingsHBox = new HBox();
         settingsHBox.setAlignment(Pos.CENTER);
         settingsHBox.prefWidthProperty().bind(Bindings.subtract(screenVBox.widthProperty(), 10));
-        settingsHBox.setStyle("-fx-border-color: black");
+        settingsHBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + "; -fx-background-color: " + GlobalCSSValues.secondary);
         VBox.setMargin(settingsHBox, new Insets(10, 5, 10, 5));
 
         settingsLabel = new Label("Settings");
+        settingsLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
         settingsLabel.setFont(new Font(50));
 
         settingsHBox.getChildren().add(settingsLabel);
@@ -49,12 +53,14 @@ public class SettingsController extends ScreenController {
         fullScreenCheckBox = new CheckBox();
         fullScreenCheckBox.setText("Full Screen Mode");
         fullScreenCheckBox.setFont(new Font(36));
+        fullScreenCheckBox.setTextFill(Color.valueOf(GlobalCSSValues.text));
         HBox.setMargin(fullScreenCheckBox, new Insets(30, 30, 30, 50));
 
         fullScreenHBox.getChildren().add(fullScreenCheckBox);
         screenVBox.getChildren().add(fullScreenHBox);
     }
 
+    // this stuff is currently not being used ----------
     HBox windowSizeHBox;
     Label windowSizeLabel;
     ComboBox windowSizeComboBox;
@@ -80,6 +86,7 @@ public class SettingsController extends ScreenController {
         windowSizeHBox.getChildren().addAll(windowSizeLabel, windowSizeComboBox);
         //screenVBox.getChildren().add(windowSizeHBox);
     }
+    // -------------------------------------------------
 
     HBox themeHBox;
     Label themeLabel;
@@ -93,11 +100,12 @@ public class SettingsController extends ScreenController {
 
         themeLabel = new Label("Theme: ");
         themeLabel.setFont(new Font(36));
+        themeLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
         themeLabel.setAlignment(Pos.CENTER);
         HBox.setMargin(themeLabel, new Insets(0, 30, 0, 50));
 
         themeComboBox = new ComboBox();
-        themeComboBox.setStyle("-fx-font-size: 24pt");
+        themeComboBox.setStyle("-fx-font-size: 24pt; -fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
 
         themeComboBox.setItems(FXCollections.observableList(Arrays.asList(SettingsObject.THEME_STRING_TABLE)));
         themeComboBox.prefHeightProperty().bind(windowSizeLabel.heightProperty());
@@ -108,8 +116,8 @@ public class SettingsController extends ScreenController {
     }
 
     HBox buttonsHBox;
-    Button backButton;
-    Button saveButton;
+    Label backButton;
+    Label saveButton;
     private void initButtons() {
 
         buttonsHBox = new HBox();
@@ -117,25 +125,30 @@ public class SettingsController extends ScreenController {
         buttonsHBox.setAlignment(Pos.BOTTOM_LEFT);
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
-        backButton = new Button();
+        backButton = new Label("Back");
         backButton.setFont(new Font(36));
-        backButton.setText("Back");
         backButton.setPadding(new Insets(5, 10, 5, 10));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
-        backButton.setOnAction(event -> {
+        backButton.setOnMouseClicked(event -> {
             backFromSettings();
         });
 
-        saveButton = new Button();
+        initButtonCSS(backButton);
+        initDarken(backButton);
+
+        saveButton = new Label("Save");
         saveButton.setFont(backButton.getFont());
         saveButton.setText("Save");
         saveButton.setPadding(backButton.getPadding());
         HBox.setMargin(saveButton, HBox.getMargin(backButton));
 
-        saveButton.setOnAction(event -> {
+        saveButton.setOnMouseClicked(event -> {
            saveFromSettings();
         });
+
+        initButtonCSS(saveButton);
+        initDarken(saveButton);
 
         buttonsHBox.getChildren().addAll(backButton, saveButton);
         screenVBox.getChildren().add(buttonsHBox);
@@ -184,5 +197,22 @@ public class SettingsController extends ScreenController {
 
         MainController controller = new MainController();
         controller.initialize(stage);
+    }
+
+    // css
+    private void initButtonCSS(Label button) {
+        button.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        button.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+    }
+    public void initDarken(Label label) {
+        label.setOnMouseEntered(e -> {
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.2);
+            label.setEffect(colorAdjust);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.setEffect(null);
+        });
     }
 }

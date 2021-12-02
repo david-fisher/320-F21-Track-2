@@ -257,6 +257,10 @@ public class BasicApplication extends Application {
     }
 
     public static void main(String[] args) {
+
+        // stuff done before the app launches
+        GlobalCSSValues.initPurplePalette();
+
         launch();
     }
 

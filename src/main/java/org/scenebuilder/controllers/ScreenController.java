@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.SettingsObject;
 
 public class ScreenController {
@@ -16,6 +17,8 @@ public class ScreenController {
     private void initAnchorPane() {
 
         anchorPane = new AnchorPane();
+        anchorPane.setStyle("-fx-background-color: black");
+
         //anchorPane.prefHeightProperty().bind(stage.heightProperty());
         //anchorPane.prefWidthProperty().bind(stage.widthProperty());
 
@@ -24,7 +27,7 @@ public class ScreenController {
         AnchorPane.setBottomAnchor(screenVBox, 3.0);
         AnchorPane.setLeftAnchor(screenVBox, 3.0);
         AnchorPane.setRightAnchor(screenVBox, 3.0);
-        screenVBox.setStyle("-fx-border-color: black;");
+        screenVBox.setStyle("-fx-background-color:" + GlobalCSSValues.background);
 
 
         if(!BasicApplication.getSettingsObject().getIsFullScreen()) {
