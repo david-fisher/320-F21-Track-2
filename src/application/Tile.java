@@ -1,36 +1,20 @@
-//2nd way to implement Tile class. For now it's the safer way
-//because it's compatible with Odyssey/Game Object team's design flow
-//Currently modifying some attributing to be work with drag-and-drop
-
-package application;
+package application ;
 
 import java.awt.Color;
-
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-
-/**
- * description of class Tile here.
- *
- * @author William Ton
- * @version 11/17/21 - 1pm
- */
-
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
-
-public class Tile extends GameObject 
+/**
+ * Write a description of class Tile here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Tile extends GameObject
 {
     // instance variables - replace the example below with your own
-	private ArrayList<Tile> connections;
+	private List<Tile> connections;
+	private List<Gamepiece> pieces;
     private static int count = 0;
-    static final AtomicLong NEXT_ID = new AtomicLong(0);
-    final long id = NEXT_ID.getAndIncrement();
-    public Shape tileShape;
-    
+
     /**
      * Constructor for objects of class Tile
      */
@@ -39,16 +23,38 @@ public class Tile extends GameObject
     	super() ;  
 
         connections = new ArrayList<Tile>() ;
+        pieces = new ArrayList<Gamepiece>() ;
     	
     	this.setLabel("tile" + String.format("%02d", ++count));
         this.setIcon("default_tile_icon.jpg") ;
-        this.setColor(Color.BLACK) ;
+        this.setColorString("#000000") ;
+        this.setShape("square") ;
+        this.setXPos(0) ;
+        this.setYPos(0) ;
         this.setTrait("connections", connections, true) ;
+        this.setTrait("pieces", pieces, true) ;
     }
-
-    public long getTileId() {
-        return this.id;
-   }
+    
+    /* Trait Types:
+     * 	label 	: 	String
+     * 	icon 	: 	String
+     * 	color 	:	String (Can be obtained as JAVAFX Color object)
+     *  shape   :   String (one of "square", 
+     *  xPos    :   Integer
+     *  yPos    :   Integer
+     */
+    
+ // set trait to value. Overrides checking for default traits only
+    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
+  	  
+  	  // run game object's set trait first
+  	  if (super.setTrait(trait, value, suppressTraitChecker)) {
+  		  return true ;
+  	  }
+  	  
+  	  // returns false if input is invalid
+  	  return false ;
+    }
     
     public List<Tile> getConnect()
     {
@@ -56,13 +62,6 @@ public class Tile extends GameObject
     }
     
     public boolean addConnect(Tile tile) {
-    	Line line = new Line();
-    	Bounds localCoor = this.tileShape.localToScene(this.tileShape.getBoundsInLocal());
-    	Bounds outCoor = tile.tileShape.localToScene(tile.tileShape.getBoundsInLocal());
-    	line.setStartX((localCoor.getMaxX()+localCoor.getMinX())/2);
-    	line.setStartY((localCoor.getMaxY()+localCoor.getMinY())/2);
-    	line.setEndX((outCoor.getMaxX()+outCoor.getMinX())/2);
-    	line.setEndY((outCoor.getMaxY()+outCoor.getMinY())/2);
         return connections.add(tile);
     }
     
@@ -70,13 +69,37 @@ public class Tile extends GameObject
     	return connections.remove(tile);
     }
     
-    public List<Gamepiece> getGamePieces() {
-    	// TODO
-    	return new ArrayList<Gamepiece>() ;
+    public boolean addGamepiece(Gamepiece gp) {
+    	
+    	// if gp is already on this Tile
+    	if (this.hasGamepiece(gp)) {
+    		return true ;
+    	}
+    	
+    	// otherwise try to add to this
+    	if (pieces.add(gp)) {
+    		if (gp.getLocation() != this) {
+    			return gp.setLocation(this) ;
+    		}
+    		return true ;
+    	}
+    	
+    	return false ;
     }
     
-    public String toString() {
-    	return this.getLabel();
+    public boolean removeGamepiece(Gamepiece gp) {
+    	return pieces.remove(gp) ;
     }
     
+    public boolean hasGamepiece(Gamepiece gp) {
+    	return pieces.contains(gp) ;
+    }
+    
+    public List<Gamepiece> getGamepieces() {
+    	return this.pieces ;
+    }
+    
+    public String repr(boolean hasLabel) {
+        return "Tile\n" + super.repr(hasLabel);
+    }
 }

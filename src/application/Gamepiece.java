@@ -1,8 +1,5 @@
 package application;
 
-import application.GameObject;
-import application.Tile;
-
 public class Gamepiece extends GameObject{
 	
   private static int count = 0;

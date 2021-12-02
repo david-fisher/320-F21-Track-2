@@ -149,7 +149,7 @@ public class Controller {
 
 	@FXML
 	void genCircle(ActionEvent event) {
-		Tile c = new Tile();
+		TileWave c = new TileWave();
 		c.tileShape = new Circle(312, 300, 30, Color.BLACK);
 		shapeCanvas.getChildren().add(c.tileShape);
 		draggable.makeDraggable(c.tileShape);
@@ -159,7 +159,7 @@ public class Controller {
 
 	@FXML
 	void genSquare(ActionEvent event) {
-		Tile r = new Tile();
+		TileWave r = new TileWave();
 		r.tileShape = new Rectangle(60, 60, Color.BLACK);
 		((Rectangle) r.tileShape).setX(312);
 		((Rectangle) r.tileShape).setY(300);
