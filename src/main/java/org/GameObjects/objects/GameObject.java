@@ -61,14 +61,8 @@ public abstract class GameObject extends Savable {
 	  }
 	  
 	  // checks for other valid inputs
-	  else if (suppressTraitChecker ||	// if true don't check trait type
-			  (trait.equals("icon") && value instanceof String) ||	// check icon is String
-			  (trait.equals("color") && value instanceof Color) ||  // check color is Color
-			  (trait.equals("shape") && value instanceof String) || // check shape is String
-  			  (trait.equals("xPos") && value instanceof Integer) || // check xPos is Integer
-  			  (trait.equals("yPos") && value instanceof Integer) || // check yPos is Integer
-			  (trait.equals("width") && value instanceof Double) || // check width is Double
-  			  (trait.equals("height") && value instanceof Double)) {// check height is Double
+	  else if (suppressTraitChecker || traits.get(trait) != null &&	// if true don't check trait type
+			  (traits.get(trait).getClass().getName().equals(value.getClass().getName()))) {// check height is Double
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
@@ -104,7 +98,7 @@ public abstract class GameObject extends Savable {
    */
   
  public boolean setLabel(String label) {
-   return this.setTrait("label", label);
+   return this.setTrait("label", label, true);
  }
 
  public String getLabel() {
@@ -112,7 +106,7 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setIcon(String icon) {
-	 return this.setTrait("icon", icon);
+	 return this.setTrait("icon", icon, true);
  }
 
  public String getIcon() {
@@ -120,14 +114,14 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setColor(Color color) {
-	 return this.setTrait("color", color);
+	 return this.setTrait("color", color, true);
  }
 
  public Color getColor() {
 	   return (Color)this.getTrait("color");
  }
  public boolean setShape(String shape) {
- 	return setTrait("shape", shape) ;
+ 	return setTrait("shape", shape, true) ;
  }
 
  public String getShape() {
@@ -135,7 +129,7 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setXPos(Integer xPos) {
- 	return setTrait("xPos", xPos) ;
+ 	return setTrait("xPos", xPos, true) ;
  }
 
  public int getXPos() {
@@ -143,7 +137,7 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setYPos(Integer yPos) {
- 	return setTrait("yPos", yPos) ;
+ 	return setTrait("yPos", yPos, true) ;
  }
 
  public int getYPos() {
@@ -151,7 +145,7 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setWidth(Double width) {
- 	return setTrait("width", width) ;
+ 	return setTrait("width", width, true) ;
  }
 
  public double getWidth() {
@@ -159,7 +153,7 @@ public abstract class GameObject extends Savable {
  }
 
  public boolean setHeight(Double height) {
- 	return setTrait("height", height) ;
+ 	return setTrait("height", height, true) ;
  }
 
  public double getHeight() {

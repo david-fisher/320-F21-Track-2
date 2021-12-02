@@ -14,7 +14,7 @@ public class Test {
         Gamepiece go2 = new Gamepiece();
         state.gamepieces.add(go1);
         state.gamepieces.add(go2);
-        System.out.println(go1.setTrait("money", 100, true));
+        go1.setTrait("money", 100, true);
         go2.setTrait("money", 50, true);
         state.addRegistry("currPlayer", go1);
         
@@ -33,6 +33,7 @@ public class Test {
         //      -- "_gamepiece02"
         //
         //      -- get -- "money"
+        //
         //             -- "currPlayer"
 
         OpNode get = NodeMaker.makeNode("get");

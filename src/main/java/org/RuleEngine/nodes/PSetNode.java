@@ -40,7 +40,7 @@ public class PSetNode extends OpNode {
         }
 
         // TODO: Temporary hack. Need to talk to Umass Dining.
-        if (!go.setTrait(str1, e3.getValue(), true)) {
+        if (!go.setTrait(str1, e3.getValue())) {
             System.out.println("Error: Something went wrong when setting " + str1 + " property of " + str2 + " to " + e3.getValue().toString());
         }
 
