@@ -86,28 +86,48 @@ public class RuleEditorUIController implements Initializable {
 
   //temp
   //List of the literl nodes made so far
-  private ObservableList<Block> textBlockList = FXCollections.observableArrayList();
+  private ArrayList<TextBlock> textBlockList = new ArrayList<TextBlock>();
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // Implement
   }
 
+  //temp
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
-    Interpreter interpreter = new Interpreter();
-    GameState state = new GameState();
-    //Create a new register
-    state.registers.put("oppPlayer", null);
-    ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
-    list.add(psetParent.getNode());
-    if (psetParent.getNode() instanceof OpNode) {
-      System.out.println("Index 0: " + ((OpNode)psetParent.getNode()).getOperand(0));
-      System.out.println("Index 1: " + ((OpNode)psetParent.getNode()).getOperand(1));
-      System.out.println("Index 2: " + ((OpNode)psetParent.getNode()).getOperand(2));
+    //Initializaiton of GameState stuff
+    // Interpreter interpreter = new Interpreter();
+    // GameState state = new GameState();
+    // Gamepiece go1 = new Gamepiece();
+    // Gamepiece go2 = new Gamepiece();
+    // state.gamepieces.add(go1);
+    // state.gamepieces.add(go2);
+    // System.out.println(go1.setTrait("money", 100, true));
+    // go2.setTrait("money", 50, true);
+    // state.addRegistry("currPlayer", go1);
+    
+    // System.out.println("Player1 money is currently at: " + go1.getTrait("money"));
+    // System.out.println("Player2 money is currently at: " + go2.getTrait("money"));
+
+    //Event stuff
+    // ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
+    // list.add(psetParent.getNode());
+
+    //Set values of literal nodes to the values in their text boxes
+    for(int i = 0; i < textBlockList.size(); i++) {
+      String text = textBlockList.get(i).getFieldText();
+      textBlockList.get(i).getLiteralNode().setValue(text);
+      System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
-    state.events.put("main", list);
-    System.out.println(state.events);
+
+    // if (psetParent.getNode() instanceof OpNode) {
+    //   System.out.println("Index 0: " + ((OpNode)psetParent.getNode()).getOperand(0));
+    //   System.out.println("Index 1: " + ((OpNode)psetParent.getNode()).getOperand(1));
+    //   System.out.println("Index 2: " + ((OpNode)psetParent.getNode()).getOperand(2));
+    // }
+    // state.events.put("main", list);
+    // System.out.println(state.events);
   }
 
   /**
@@ -147,7 +167,11 @@ public class RuleEditorUIController implements Initializable {
       //temp
       System.out.println(startBlock.getNode());
       System.out.println(block.getNode());
-      if (startBlock.getNode() instanceof OpNode) {
+      if (block instanceof TextBlock) {
+        //We must check this because only TextBlock has the method getLiteralNode().
+        ((OpNode)startBlock.getNode()).setOperand(((TextBlock)block).getLiteralNode(), operandIndex);
+      }
+      else if (startBlock.getNode() instanceof OpNode) {
         ((OpNode)startBlock.getNode()).setOperand(block.getNode(), operandIndex);
       }
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
@@ -290,7 +314,7 @@ public class RuleEditorUIController implements Initializable {
   @FXML 
   private void handleAddTextNodeBtn(ActionEvent event) {
     TextBlock txtBlock = new TextBlock();
-    textBlockList.addAll(txtBlock);
+    textBlockList.add(txtBlock);
     blockActions(txtBlock);
   }
 

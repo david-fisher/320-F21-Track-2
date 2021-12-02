@@ -3,7 +3,7 @@ import engine.GameState;
 // A generic class for atomic expressions.
 // Potential expression types include Double, String, and org.GameObjects.
 public class LiteralNode<T> extends Node {
-    private T value;
+    public T value;
 
     public LiteralNode(T value) {
         this.value = value;

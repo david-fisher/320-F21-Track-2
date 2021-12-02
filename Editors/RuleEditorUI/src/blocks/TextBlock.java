@@ -19,8 +19,16 @@ import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 
 import nodes.NodeMaker;
+import nodes.LiteralNode;
+
+//SHOULD NOT CALL getNode() ON THIS CLASS!!! This class uses LiteralNode instead of OpNode.
 
 public class TextBlock extends Block {
+  private TextField field;
+  
+  //Since LiteralNodes are not of type OpNode, we must use this instead of the "node" field from the Block class.
+  private LiteralNode litNode;
+
   public TextBlock() {
     this.block = new StackPane();
 
@@ -62,7 +70,7 @@ public class TextBlock extends Block {
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, this.blockHeight, GREY);
 
-    TextField field = new TextField();
+    field = new TextField();
     field.setPrefWidth(middleColSize);
     field.setMaxWidth(middleColSize);
     grid.add(field, 1, 0);
@@ -76,6 +84,15 @@ public class TextBlock extends Block {
     this.block.setAlignment(result, Pos.CENTER_LEFT);
 
     //Set node for this block
-    this.node = NodeMaker.makeStringNode("");
+    //this.node = NodeMaker.makeStringNode("");
+    this.litNode = NodeMaker.makeStringNode("");
+  }
+
+  public String getFieldText() {
+    return field.getText();
+  }
+
+  public LiteralNode getLiteralNode() {
+    return this.litNode;
   }
 }
