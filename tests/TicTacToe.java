@@ -1,7 +1,8 @@
-package tests;
+package org.RuleEngine.tests;
+
 import java.util.ArrayList;
-import engine.*;
-import nodes.*;
+import org.RuleEngine.engine.*;
+import org.RuleEngine.nodes.*;
 // WIP
 /* 0 1 2
  * 3 4 5
@@ -30,24 +31,24 @@ public class TicTacToe {
         
         // Game Start
         for (int i = 0; i < 9; i++) {
-        	GetNode g = new GetNode();
-        	g.addOperand(new LiteralNode<String>(Integer.toString(i)));
-        	g.addOperand(new LiteralNode<String>("_gameBoard"));
+            GetNode g = new GetNode();
+            g.addOperand(new LiteralNode<String>(Integer.toString(i)));
+            g.addOperand(new LiteralNode<String>("_gameBoard"));
 
-        	StringNode eqX = new StringNode("equivalence");
-        	eqX.addOperand(g);
-        	eqX.addOperand(new LiteralNode<String>("X"));        	
-        	boardXNodes.add(eqX);
+            StringNode eqX = new StringNode("equivalence");
+            eqX.addOperand(g);
+            eqX.addOperand(new LiteralNode<String>("X"));           
+            boardXNodes.add(eqX);
 
-        	StringNode eqO = new StringNode("equivalence");
-        	eqO.addOperand(g);
-        	eqO.addOperand(new LiteralNode<String>("O"));
-        	boardONodes.add(eqO);
-        	
-        	StringNode eqEmpty = new StringNode("equivalence");
-        	eqEmpty.addOperand(g);
-        	eqEmpty.addOperand(new LiteralNode<String>(" "));
-        	boardEmptyNodes.add(eqEmpty);
+            StringNode eqO = new StringNode("equivalence");
+            eqO.addOperand(g);
+            eqO.addOperand(new LiteralNode<String>("O"));
+            boardONodes.add(eqO);
+            
+            StringNode eqEmpty = new StringNode("equivalence");
+            eqEmpty.addOperand(g);
+            eqEmpty.addOperand(new LiteralNode<String>(" "));
+            boardEmptyNodes.add(eqEmpty);
         }
 
         BooleanNode and0 = new BooleanNode("&&");

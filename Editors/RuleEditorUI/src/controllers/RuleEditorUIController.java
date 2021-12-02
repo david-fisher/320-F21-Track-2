@@ -57,6 +57,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 import engine.*;
+import nodes.*;
 
 import java.util.ArrayList;
 
@@ -100,9 +101,11 @@ public class RuleEditorUIController implements Initializable {
     state.registers.put("oppPlayer", null);
     ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
     list.add(psetParent.getNode());
-    System.out.println(psetParent.getNode().getOperand(0));
-    System.out.println(psetParent.getNode().getOperand(1));
-    System.out.println(psetParent.getNode().getOperand(2));
+    if (psetParent.getNode() instanceof OpNode) {
+      System.out.println("Index 0: " + ((OpNode)psetParent.getNode()).getOperand(0));
+      System.out.println("Index 1: " + ((OpNode)psetParent.getNode()).getOperand(1));
+      System.out.println("Index 2: " + ((OpNode)psetParent.getNode()).getOperand(2));
+    }
     state.events.put("main", list);
     System.out.println(state.events);
   }
@@ -142,7 +145,11 @@ public class RuleEditorUIController implements Initializable {
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
-      startBlock.getNode().setOperand(block.getNode(), operandIndex);
+      System.out.println(startBlock.getNode());
+      System.out.println(block.getNode());
+      if (startBlock.getNode() instanceof OpNode) {
+        ((OpNode)startBlock.getNode()).setOperand(block.getNode(), operandIndex);
+      }
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }

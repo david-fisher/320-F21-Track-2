@@ -1,20 +1,20 @@
 package objects;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 public class Die extends GameObject {
-	
+
   private static int count = 0;
 
   public Die() {
-	super() ;  
+	super() ;
 	this.setLabel("die" + String.format("%02d", ++count));
-	this.setIcon("default_gamepiece_icon.jpg") ;
+	this.setIcon("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXEcR0aF53GU48v8oHhhgTb8ERdIaiFHXswhZ6qTYvDEPHjH1H1V91NDhE1uVx4I0pXns&usqp=CAU");
 	this.setColor(Color.WHITE) ;
 	this.setNumSides(6);
     this.setDotColor(Color.BLACK);
   }
-  
+
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
@@ -22,23 +22,23 @@ public class Die extends GameObject {
    * 	dotColor:	Color
    * 	numSides:	Integer
    */
-  
+
 //set trait to value. Overrides checking for default traits only
  public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
-	  
+
 	  // run game object's set trait first
 	  if (super.setTrait(trait, value, suppressTraitChecker)) {
 		  return true ;
 	  }
-	  
+
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("dotColor") && value instanceof Color) || // check dotColor is Color
-			  (trait.equals("numSides") && value instanceof Integer)) {	
+			  (trait.equals("numSides") && value instanceof Integer)) {
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
-	  
+
 	  // returns false if input is invalid
 	  return false ;
  }

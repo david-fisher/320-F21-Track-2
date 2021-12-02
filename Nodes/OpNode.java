@@ -4,16 +4,9 @@ import java.util.ArrayList;
 // The base class for any rule statements.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
 public abstract class OpNode extends Node {
-
-    // TODO: Is it better to, instead of having a 2d list for all operation node,
-    // let each node have their own way of storing the children? May be doable with factory and visitors.
-    // A future topic to discuss perhaps.
+    
     protected ArrayList<ArrayList<Node>> operands;
-
-    public OpNode(ArrayList<ArrayList<Node>> operands) {
-        this.operands = operands;
-    }
-
+    
     public OpNode() {
         operands = new ArrayList<ArrayList<Node>>();
         operands.add(new ArrayList<Node>());
@@ -28,46 +21,52 @@ public abstract class OpNode extends Node {
 
     // Add a node to the first rule group (index 0). That is where the operands for non-control rules resides.
     public OpNode addOperand(Node operand) {
-        if (operands.get(0) == null) {
-            operands.add(new ArrayList<Node>());
-        }
-        operands.get(0).add(operand);
-        return this;
+        return addOperandToGroup(operand, 0);
     }
 
     // Add a node to the group at index i. If no group is at index i yet, check if adding a new group can reach i.
     // If yes, add a new group and add the operand. Otherwise, give error. 
-    public OpNode addOperand(Node operand, int i) {
-        if (operands.size() < i) {
-            System.out.println("Error: Cannot add to target rule group. Index too far!");
+    public OpNode addOperandToGroup(Node operand, int i) {
+        if (operands.size() <= i) {
+            System.out.println(operands.size() + " " + i);
+            System.out.println("Error: Cannot add to target rule group. Index out of bound!");
             return this;
         }
-        if (operands.size() == i) {
-            operands.add(new ArrayList<Node>());
+        if (operands.get(i) == null) {
+            System.out.println("Error: No valid rule group at index " + i);
+            return this;
         }
         operands.get(i).add(operand);
-        System.out.println("Operands size: " + operands.size());
         return this;
     }
 
-    // TODO: test this
-    // TODO: Probably need to have an overloaded version for any rule groups
     // Set the operand at index i at group 0.
     public OpNode setOperand(Node operand, int i) {
-        if (operands.get(0) == null) {
-            System.out.println("Error: No operands yet!");
-            return this;
-        } else if (operands.get(0).size() <= i) {
-            System.out.println("Error: Cannot set operand at position " + i + " because it does not exist!");
-            return this;
-        } else {
-            operands.get(0).set(i, operand);
+        return setOperandInGroup(operand, i, 0);
+    }
+    
+    // Set the operand at index i at group groupId.
+    public OpNode setOperandInGroup(Node operand, int i, int groupId) {
+        if (operands.size() <= groupId) {
+            System.out.println(operands.size() + " " + i);
+
+            System.out.println("Error: Cannot add to target rule group. Index out of bound!");
             return this;
         }
+        if (operands.get(groupId) == null) {
+            System.out.println("Error: No valid rule group at index " + i);
+            return this;
+        } 
+        if (operands.get(groupId).size() <= i) {
+            System.out.println("Error: Cannot set operand at position " + i + ", index out of bounds!");
+            return this;
+        } 
+        operands.get(groupId).set(i, operand);
+        return this;
     }
 
     // Manually add a group of rules to operands.
-    public OpNode addRuleGroup(ArrayList<Node> rules) {
+    protected OpNode addRuleGroup(ArrayList<Node> rules) {
         operands.add(rules);
         return this;
     }

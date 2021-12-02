@@ -1,5 +1,5 @@
 package objects;
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 public class Button extends GameObject {
     private static int count = 0;

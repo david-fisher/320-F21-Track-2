@@ -1,9 +1,7 @@
 package objects;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Project extends Savable {
 	private String projectName;

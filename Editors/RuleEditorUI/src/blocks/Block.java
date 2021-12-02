@@ -23,12 +23,11 @@ import javafx.event.EventHandler;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-import nodes.OpNode;
 import nodes.NodeMaker;
 
 public class Block {
   protected StackPane block;
-  protected OpNode node;
+  protected nodes.Node node;
 
   //Variables for dragging
   protected double startX;
@@ -62,7 +61,7 @@ public class Block {
   protected GridPane grid;
 
   //List of connection blocks
-  private ObservableList<Node> connBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
 
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
@@ -142,7 +141,7 @@ public class Block {
     return this.block;
   }
 
-  public OpNode getNode() {
+  public nodes.Node getNode() {
     return this.node;
   }
 
@@ -168,7 +167,7 @@ public class Block {
     return BLOCK_WIDTH;
   }
 
-  public ObservableList<Node> getGrayRect(){
+  public ObservableList<javafx.scene.Node> getGrayRect(){
     return this.connBlockList;
   }
 

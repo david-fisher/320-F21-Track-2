@@ -18,6 +18,8 @@ import javafx.scene.text.Text;
 
 import javafx.scene.control.TextField;
 
+import nodes.NodeMaker;
+
 public class TextBlock extends Block {
   public TextBlock() {
     this.block = new StackPane();
@@ -72,5 +74,8 @@ public class TextBlock extends Block {
     //Stack the base Rectangle and grid GridPane of the block on the pane
     this.block.getChildren().addAll(base, grid, field, result);
     this.block.setAlignment(result, Pos.CENTER_LEFT);
+
+    //Set node for this block
+    this.node = NodeMaker.makeStringNode("");
   }
 }

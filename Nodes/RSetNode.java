@@ -1,18 +1,18 @@
 package nodes;
-import java.util.ArrayList;
-import java.util.Map;
+
 import engine.*;
-import objects.*;
+import objects.GameObject;
 
 // Usage: Operand 0 - target (register name)
 //        Operand 1 - source name (register or gameobject)
 public class RSetNode extends OpNode {
-    public RSetNode() { super(); }
-    public RSetNode(ArrayList<Node> operands) {
+    public RSetNode() { 
         super();
-        this.operands.set(0, operands);
+        this.addOperand(null).addOperand(null);
     }
 
+    @Override
+    @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         GameObject go;
         LiteralNode e1 = getOperand(0).execute(currState);

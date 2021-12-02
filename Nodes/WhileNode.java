@@ -6,11 +6,14 @@ import engine.GameState;
 // Requires similar testing
 
 public class WhileNode extends OpNode {
-    public WhileNode() { super(); }
-    public WhileNode(ArrayList<ArrayList<Node>> operands) {
-        super(operands);
+    public WhileNode() { 
+        super();
+        this.addOperand(null);
+        this.addRuleGroup(new ArrayList<Node>());
     }
 
+    @Override
+    @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         LiteralNode condition = getOperand(0).execute(currState);
         if (condition == null) { return null; }

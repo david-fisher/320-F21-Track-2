@@ -1,8 +1,9 @@
-package tests;
+package org.RuleEngine.tests;
+
 import java.util.ArrayList;
-import nodes.*;
-import engine.*;
-import objects.*;
+import org.RuleEngine.engine.*;
+import org.RuleEngine.nodes.*;
+import org.GameObjects.objects.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -23,9 +24,9 @@ public class Test {
         LiteralNode p1 = new LiteralNode<String>("_gamepiece01");
         LiteralNode p2 = new LiteralNode<String>("_gamepiece02");
 
-        rset1.addOperand(reg).addOperand(p1);
-        rset2.addOperand(reg).addOperand(p2);
-        ifSt.addOperand(con).addOperand(rset1, 1).addOperand(rset2, 2);
+        rset1.setOperand(reg, 0).setOperand(p1, 1);
+        rset2.setOperand(reg, 0).setOperand(p2, 1);
+        ifSt.setOperand(con, 0).addOperandToGroup(rset1, 1).addOperandToGroup(rset2, 2);
 
         interpreter.interpretRule(ifSt, state);
         System.out.println("Content of register: " + state.registers.toString());

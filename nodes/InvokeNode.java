@@ -5,12 +5,11 @@ import engine.*;
 
 // Usage: Operand 0: Name of the event to be invoked
 public class InvokeNode extends OpNode {
-    public InvokeNode() { super(); }
-    public InvokeNode(ArrayList<Node> operands) {
+    public InvokeNode() { 
         super();
-        this.operands.set(0, operands);
+        this.addOperand(null);
     }
-    
+
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {

@@ -1,4 +1,5 @@
-package objects;
+/*
+package org.GameObjects.objects;
 
 import java.awt.Color;
 
@@ -40,8 +41,8 @@ public class Demo {
 		System.out.println(token1.getLabel());
 		System.out.println(token2.getLabel());
 
-		System.out.println("\nThis is important because the label acts as a primary key for GameObjects");
-		System.out.println("In other words, no 2 GameObjects can have the same label\n");
+		System.out.println("\nThis is important because the label acts as a primary key for org.GameObjects");
+		System.out.println("In other words, no 2 org.GameObjects can have the same label\n");
 
 		System.out.println("If we try to force them to have the same label we get:");
 
@@ -171,3 +172,4 @@ public class Demo {
 	}
 
 }
+*/

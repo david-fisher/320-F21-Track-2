@@ -6,15 +6,15 @@ import engine.GameState;
 import objects.*;
 
 // Usage: Operand 0 - game piece name.
-//				Operand 1 - distance (LiteralNode<Integer>)
+//	      Operand 1 - distance (LiteralNode<Integer>)
 public class MoveNode extends OpNode {
-    public MoveNode() { super(); }
-    public MoveNode(ArrayList<Node> operands) {
-        super();
-        this.operands.set(0, operands);
+    public MoveNode() { 
+        super(); 
+        this.addOperand(null).addOperand(null);
     }
-
+    
 	@Override
+	@SuppressWarnings("rawtypes")
 	public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);
@@ -49,8 +49,10 @@ public class MoveNode extends OpNode {
         return null;
 	}
 	
-	// TODO: This method will be implemented by Minjex. 
-	private Tile Mystery(ArrayList<Tile> tiles) { return null; }
+	// TODO: This method will be implemented by Minjex.
+	private Tile Mystery(ArrayList<Tile> tiles) {
+        return null;
+    }
 	
 	// This method returns a list of reachable tiles at distance tDis from the tile t.
 	// Only tiles at the exact distance is included. If possible path is shorter than tDis, the end of that path
