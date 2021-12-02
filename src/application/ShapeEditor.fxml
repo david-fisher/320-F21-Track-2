@@ -19,7 +19,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tileName" layoutX="20.0" layoutY="100.0" onAction="#setName" />
+                  <TextField fx:id="tileName" layoutX="20.0" layoutY="100.0" onAction="#setName" promptText="Enter Name..." />
                </children>
             </Pane>
             <Pane layoutX="300.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #595959; -fx-border-width: 2; -fx-border-radius: 4;">
@@ -39,13 +39,14 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="tileImage" layoutX="54.0" layoutY="100.0" mnemonicParsing="false" onAction="#setImage" prefHeight="35.0" prefWidth="94.0" text="Browse...">
+                  <Button fx:id="tileImage" layoutX="54.0" layoutY="100.0" mnemonicParsing="false" onAction="#setImage" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Browse">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
+            <Button fx:id="backBtn" layoutX="377.0" layoutY="305.0" mnemonicParsing="false" onAction="#returnToEditor" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Done" />
          </children>
       </Pane>
    </children>
