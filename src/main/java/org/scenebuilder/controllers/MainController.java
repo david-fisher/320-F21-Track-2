@@ -24,7 +24,7 @@ import java.io.IOException;
 public class MainController extends ScreenController {
 
     // css
-    String background = "#6E3CBC";
+    String background = "#4c0070";
     String text = "#FFFFFF";
 
     String buttonBackground = "#7267CB";
@@ -110,6 +110,7 @@ public class MainController extends ScreenController {
 
     private void initCSS() {
 
+        anchorPane.setStyle("-fx-background-color: black");
         screenVBox.setStyle("-fx-background-color: " + background);
 
     }
