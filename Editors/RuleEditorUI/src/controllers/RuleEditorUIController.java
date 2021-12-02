@@ -58,6 +58,7 @@ import javafx.collections.FXCollections;
 
 import engine.*;
 import nodes.*;
+import objects.*;
 
 import java.util.ArrayList;
 
@@ -97,18 +98,18 @@ public class RuleEditorUIController implements Initializable {
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
     //Initializaiton of GameState stuff
-    // Interpreter interpreter = new Interpreter();
-    // GameState state = new GameState();
-    // Gamepiece go1 = new Gamepiece();
-    // Gamepiece go2 = new Gamepiece();
-    // state.gamepieces.add(go1);
-    // state.gamepieces.add(go2);
-    // System.out.println(go1.setTrait("money", 100, true));
-    // go2.setTrait("money", 50, true);
-    // state.addRegistry("currPlayer", go1);
+    Interpreter interpreter = new Interpreter();
+    GameState state = new GameState();
+    Gamepiece go1 = new Gamepiece();
+    Gamepiece go2 = new Gamepiece();
+    state.gamepieces.add(go1);
+    state.gamepieces.add(go2);
+    System.out.println(go1.setTrait("money", 100, true));
+    go2.setTrait("money", 50, true);
+    state.addRegistry("currPlayer", go1);
     
-    // System.out.println("Player1 money is currently at: " + go1.getTrait("money"));
-    // System.out.println("Player2 money is currently at: " + go2.getTrait("money"));
+    System.out.println("Player1 money is currently at: " + go1.getTrait("money"));
+    System.out.println("Player2 money is currently at: " + go2.getTrait("money"));
 
     //Event stuff
     // ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
@@ -128,6 +129,11 @@ public class RuleEditorUIController implements Initializable {
     // }
     // state.events.put("main", list);
     // System.out.println(state.events);
+
+    //Run the rules
+    interpreter.interpretRule(psetParent.getNode(), state);
+    System.out.println("Content of register: " + state.registers.toString());
+    System.out.println("Player2 money is currently at: " + state.findObject("gamepiece02").getTrait("money"));
   }
 
   /**
@@ -165,8 +171,15 @@ public class RuleEditorUIController implements Initializable {
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
-      System.out.println(startBlock.getNode());
-      System.out.println(block.getNode());
+      
+      if (block instanceof TextBlock) {
+        System.out.println(startBlock.getNode());
+        System.out.println(((TextBlock)block).getLiteralNode());
+      }
+      else if (block instanceof Block) {
+        System.out.println(startBlock.getNode());
+        System.out.println(block.getNode());
+      }
       if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
         ((OpNode)startBlock.getNode()).setOperand(((TextBlock)block).getLiteralNode(), operandIndex);
