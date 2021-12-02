@@ -262,8 +262,42 @@ public class SetupController extends ScreenController {
 
         ArrayList<Gamepiece> pGamePiece = hboxPlayer.getGamePieces();
 
+        // --- Combo Box Code ---
+        final ComboBox comboBox = new ComboBox();
+        comboBox.setId("comboBox"+playerHBox.getId());
+        comboBox.setStyle("-fx-font-family: serif; -fx-start-margin: 10px; -fx-padding: 5px;\n" +
+                "    -fx-border-insets: 5px;\n" +
+                "    -fx-background-insets: 5px;");
+        // Adds all available token here
+        comboBox.getItems().addAll(getAvailableToken());
+
+        // Selects the top one for default and make it unavailable
+        comboBox.getSelectionModel().select(0);
+        Object selectedItem = comboBox.getSelectionModel().getSelectedItem();
+        // Add to player's gamepiece
+        playerHashMap.get(Integer.valueOf(playerHBox.getId())).addPiece((Gamepiece) selectedItem);
+        dummyTokenMap.put((Gamepiece) selectedItem, !dummyTokenMap.get(selectedItem));
+
+        // On mouse click the combo box, we have to refresh the options
+        comboBox.setOnMousePressed((e) -> {
+            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
+            if (inSelectedItem != null)
+                dummyTokenMap.put((Gamepiece) inSelectedItem, true);
+            comboBox.getItems().clear();
+            comboBox.getItems().addAll(getAvailableToken());
+        });
+
+        // On mouse clicked the items IN the combo box, we have to make that item unavailable
+        comboBox.setOnAction((event) -> {
+            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
+            if (inSelectedItem != null)
+                dummyTokenMap.put((Gamepiece) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
+        });
+        // --- Combo Box Code End ---
+
+        // -- Color picker Code Starts --
         Color color = getRandomColor();
-        if (pGamePiece.size() > 0){color = pGamePiece.get(0).getColor();}// todo get game piece by reference
+//        if (pGamePiece.size() > 0){color = pGamePiece.get(0).getColor();}// todo get game piece by reference
 
         ColorPicker colorPicker = new ColorPicker(color);
         // Set bg color and disable text
@@ -308,6 +342,7 @@ public class SetupController extends ScreenController {
                 System.out.println(initColor);
             }
         });
+        // -- Color picker Code Ends --
 
         Separator playerSeparator1 = new Separator();
         playerSeparator1.setOrientation(Orientation.VERTICAL);
@@ -395,39 +430,6 @@ public class SetupController extends ScreenController {
         humanToggleButton.setToggleGroup(group);
         aIToggleButton.setToggleGroup(group);
 
-        // --- Combo Box Code ---
-        final ComboBox comboBox = new ComboBox();
-        comboBox.setId("comboBox"+playerHBox.getId());
-        comboBox.setStyle("-fx-font-family: serif; -fx-start-margin: 10px; -fx-padding: 5px;\n" +
-                "    -fx-border-insets: 5px;\n" +
-                "    -fx-background-insets: 5px;");
-        // Adds all available token here
-        comboBox.getItems().addAll(getAvailableToken());
-
-        // Selects the top one for default and make it unavailable
-        comboBox.getSelectionModel().select(0);
-        Object selectedItem = comboBox.getSelectionModel().getSelectedItem();
-        // Add to player's gamepiece
-        playerHashMap.get(Integer.valueOf(playerHBox.getId())).addPiece((Gamepiece) selectedItem);
-        dummyTokenMap.put((Gamepiece) selectedItem, !dummyTokenMap.get(selectedItem));
-
-        // On mouse click the combo box, we have to refresh the options
-        comboBox.setOnMousePressed((e) -> {
-            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
-            if (inSelectedItem != null)
-                dummyTokenMap.put((Gamepiece) inSelectedItem, true);
-            comboBox.getItems().clear();
-            comboBox.getItems().addAll(getAvailableToken());
-        });
-
-        // On mouse clicked the items IN the combo box, we have to make that item unavailable
-        comboBox.setOnAction((event) -> {
-            Object inSelectedItem = comboBox.getSelectionModel().getSelectedItem();
-            if (inSelectedItem != null)
-                dummyTokenMap.put((Gamepiece) inSelectedItem, !dummyTokenMap.get(inSelectedItem));
-        });
-        // --- Combo Box Code End ---
-
         playerHBox.getChildren().addAll(colorPicker,comboBox, playerSeparator1, playerField, playerSeparator,
                 humanToggleButton, aIToggleButton);
 
@@ -439,7 +441,7 @@ public class SetupController extends ScreenController {
     public void removePlayerNode() {
         // -- Make the selected shape Available Again (Combo Box Stuff) --
         HBox player = playerNodeStack.pop();
-        ComboBox x = (ComboBox) player.getChildren().get(player.getChildren().size()-1);
+        ComboBox x = (ComboBox) player.getChildren().get(1);
         //dummyTokenMap.remove(x.getValue());
         dummyTokenMap.put((Gamepiece) x.getValue(), Boolean.TRUE);
         // Combo Box Cod End
@@ -459,7 +461,6 @@ public class SetupController extends ScreenController {
 
         for(int i = 0; i < n; i++){
             Gamepiece gt = new Gamepiece();
-            //"Token " + (i+1), (Color) null, "Shape " + (i+1)
             dummyTokenMap.put(gt, true);
         }
         return dummyTokenMap;
@@ -509,22 +510,6 @@ public class SetupController extends ScreenController {
         BasicApplication.setSetupData(new SetupData(new ArrayList<Player>(dummyPlayerArrayList), tutorialModeCheckBox.isSelected()));
         PlayController controller = new PlayController();
         controller.initialize(stage);
-    }
-
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
-        stage.setScene(scene);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
-        stage.show();
-
     }
 
     public static String hex( Color color )
