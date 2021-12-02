@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ShapeAttributeController">
+   <children>
+      <Pane prefHeight="365.0" prefWidth="800.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <Pane layoutX="43.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 2; -fx-border-color: #595959; -fx-border-radius: 4;">
+               <children>
+                  <Label alignment="CENTER" layoutX="19.0" layoutY="30.0" prefHeight="24.0" prefWidth="159.0" text="Tile Name:" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tileName" layoutX="20.0" layoutY="100.0" onAction="#setName" />
+               </children>
+            </Pane>
+            <Pane layoutX="300.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #595959; -fx-border-width: 2; -fx-border-radius: 4;">
+               <children>
+                  <Label alignment="CENTER" layoutX="21.0" layoutY="28.0" prefHeight="24.0" prefWidth="159.0" text="Tile Color:" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker fx:id="tileColor" editable="true" layoutX="40.0" layoutY="100.0" onAction="#setColor" prefHeight="35.0" prefWidth="122.0" promptText="Select Color" />
+               </children>
+            </Pane>
+            <Pane layoutX="561.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2;">
+               <children>
+                  <Label alignment="CENTER" layoutX="21.0" layoutY="25.0" prefHeight="24.0" prefWidth="159.0" text="Tile Image:" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="tileImage" layoutX="54.0" layoutY="100.0" mnemonicParsing="false" onAction="#setImage" prefHeight="35.0" prefWidth="94.0" text="Browse...">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
