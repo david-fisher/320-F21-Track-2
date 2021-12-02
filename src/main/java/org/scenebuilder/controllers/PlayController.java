@@ -28,6 +28,7 @@ import javafx.util.Duration;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveNode;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.dummy.DummyGameBoard;
 import org.scenebuilder.dummy.DummyInventory;
@@ -43,30 +44,18 @@ import java.util.Objects;
 
 public class PlayController extends ScreenController {
 
-    @FXML
+
     private ImageView playSettings;
-    @FXML
     private AnchorPane playParent;
-    @FXML
     private ScrollPane decksPane;
-    @FXML
     private ScrollPane rngPane;
-    @FXML
     private ScrollPane inventoryPane;
-
-    @FXML
     private Label playerTurnIndicator;
-    @FXML
     private Label decksLabel;
-    @FXML
     private Label rngLabel;
-    @FXML
     private Label inventoryLabel;
-    @FXML
     private Pane settingsPane;
-    @FXML
     private HBox inventoryContainer;
-
     private Stage stage;
     private SetupData setupData;
     private DummyGame activeGame;
@@ -78,7 +67,6 @@ public class PlayController extends ScreenController {
 
     Interpreter interpreter = new Interpreter();
 
-    @FXML
     public void initialize(Stage stage) {
 
         super.initialize(stage);
@@ -138,6 +126,7 @@ public class PlayController extends ScreenController {
     private void initGame(DummyGame game) {
 
         boardPane = new AnchorPane();
+        boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         DummyGameBoard gameBoard = game.getGameBoard();
         gameState = game.getInitialGamestate();
         if (activeGame.getGameName().equals("All Drawers")) {
@@ -363,9 +352,9 @@ public class PlayController extends ScreenController {
         decksLabel.setText("Decks");
         decksLabel.setStyle("-fx-font-family: Serif; " +
                 "-fx-font-size: 24; " +
-                "-fx-background-color: DarkOliveGreen; " +
-                "-fx-border-color: BLACK;");
-        decksLabel.setTextFill(Color.WHITE);
+                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                "; -fx-border-color: BLACK;");
+        decksLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         decksLabel.setId("decksLabel");
         decksLabel.setTextAlignment(TextAlignment.CENTER);
         decksLabel.setAlignment(Pos.CENTER);
@@ -395,9 +384,9 @@ public class PlayController extends ScreenController {
         rngLabel.setText("RNG");
         rngLabel.setStyle("-fx-font-family: Serif; " +
                 "-fx-font-size: 24; " +
-                "-fx-background-color: DarkSlateGrey; " +
-                "-fx-border-color: BLACK;");
-        rngLabel.setTextFill(Color.WHITE);
+                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                "; -fx-border-color: BLACK;");
+        rngLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         rngLabel.setId("rngLabel");
         rngLabel.setTextAlignment(TextAlignment.CENTER);
         rngLabel.setAlignment(Pos.CENTER);
@@ -429,9 +418,9 @@ public class PlayController extends ScreenController {
         inventoryLabel.setText("Inventory");
         inventoryLabel.setStyle("-fx-font-family: Serif; " +
                 "-fx-font-size: 24; " +
-                "-fx-background-color: DarkGoldenRod; " +
-                "-fx-border-color: BLACK;");
-        inventoryLabel.setTextFill(Color.WHITE);
+                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                "; -fx-border-color: BLACK;");
+        inventoryLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         inventoryLabel.setId("inventoryLabel");
         inventoryLabel.setTextAlignment(TextAlignment.CENTER);
         inventoryLabel.setAlignment(Pos.CENTER);
@@ -459,7 +448,8 @@ public class PlayController extends ScreenController {
 
     private void initializeDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
-        decksPane.setStyle("-fx-background-color: GREY;");
+        //decksPane.setStyle("-fx-background-color: GREY;");
+        decksPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         decksPane.setId("decksDrawer");
         decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -472,7 +462,8 @@ public class PlayController extends ScreenController {
 
     private void initializeRNGDrawer(int numDrawers) {
         rngPane = new ScrollPane();
-        rngPane.setStyle("-fx-background-color: GREY;");
+        //rngPane.setStyle("-fx-background-color: GREY;");
+        rngPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         rngPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         rngPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         playParent.setRightAnchor(rngPane, -215.0);
@@ -484,7 +475,8 @@ public class PlayController extends ScreenController {
 
     private void initializeInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
-        inventoryPane.setStyle("-fx-background-color: GREY;");
+        //inventoryPane.setStyle("-fx-background-color: GREY;");
+        inventoryPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         inventoryPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         inventoryPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         playParent.setRightAnchor(inventoryPane, -215.0);
@@ -498,6 +490,7 @@ public class PlayController extends ScreenController {
     private void fillDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {
 
         HBox container = new HBox();
+        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(-10);
         decks.forEach(d -> {
@@ -544,6 +537,8 @@ public class PlayController extends ScreenController {
     public void placeDice(ArrayList<Die> dice, ScrollPane rngPane, HBox container) {
 
         rngPane.setContent(container);
+        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
+
         AnchorPane diceView = new AnchorPane();
         AnchorPane diceDisplay = new AnchorPane();
         diceDisplay.setPrefSize(180, 180);
@@ -585,6 +580,8 @@ public class PlayController extends ScreenController {
     }
 
     public void placeSpinners(ArrayList<Spinner> spinners, ScrollPane rngPane, HBox container) {
+
+        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         spinners.forEach(d -> {
             double width = d.getWidth() == 0 ? 170 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
@@ -682,19 +679,20 @@ public class PlayController extends ScreenController {
             addToInventory(d);
         });
         inventoryPane.setContent(inventoryContainer);
-        inventoryPane.setStyle("-fx-border-color: black");
+        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
         //decksPane.toFront();
     }
 
     public void initializePlayScreen() {
         playParent = new AnchorPane();
+        playParent.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         playParent.setPrefWidth(playWidth);
         playParent.setPrefHeight(playHeight);
 
         //initSettings;
         initSettings();
     }
-    @FXML
+
     public void exitFromPlay() {
 //        MainController controller = new MainController();
 //        controller.initialize(stage);
@@ -713,7 +711,6 @@ public class PlayController extends ScreenController {
         int a = ((int) Math.round(color.getOpacity() * 255));
         return String.format("#%08X", (r + g + b + a));
     }
-    @FXML
     public void switchScene(ActionEvent event, String nextScene, Stage baseStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         if (baseStage == null) {
@@ -727,7 +724,6 @@ public class PlayController extends ScreenController {
         stage.show();
     }
 
-    @FXML
     public void slideOut(MouseEvent event) {
         Label parent = (Label) event.getSource();
         ScrollPane tab;
@@ -776,8 +772,10 @@ public class PlayController extends ScreenController {
         public void displayRestart(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
+            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
 
             Label restartMessage = new Label("Are you sure you want to restart? Your progress in the current game will be lost.");
+            restartMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
             restartMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
             restartMessage.setWrapText(true);
             restartMessage.setAlignment(Pos.CENTER);
@@ -788,6 +786,10 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
+            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             //Change these actions to actually handle restarting
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
@@ -811,9 +813,11 @@ public class PlayController extends ScreenController {
         public void displayExitWithoutSave(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
+            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
 
             Label exitMessage = new Label("Are you sure you want to exit to desktop? Your progress will be lost.");
             exitMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
+            exitMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
             exitMessage.setWrapText(true);
             exitMessage.setAlignment(Pos.CENTER);
             exitMessage.setPrefWidth(250);
@@ -823,6 +827,10 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
+            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
@@ -846,9 +854,11 @@ public class PlayController extends ScreenController {
         public void displayMainMenuWithoutSave(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
+            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
 
             Label exitMessage = new Label("Are you sure you want to return to the Main Menu? Your progress will be lost.");
             exitMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
+            exitMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
             exitMessage.setWrapText(true);
             exitMessage.setAlignment(Pos.CENTER);
             exitMessage.setPrefWidth(250);
@@ -858,6 +868,10 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
+            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
@@ -878,7 +892,7 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExit(Stage baseStage) {
+        public void displayExit(Stage baseStage) { // todo this function name is totally wrong
             Stage popupWindow = new Stage();
 
             yes = new Label("Yes");
@@ -900,16 +914,20 @@ public class PlayController extends ScreenController {
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
             Label saveButton = new Label("Save");
-            setStyle(saveButton, "30", "LimeGreen", 170, 80);
+            setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+            saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
             Label exitButton = new Label("Exit");
-            setStyle(exitButton, "30", "Red", 170, 80);
+            setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+            exitButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
             Label restartButton = new Label("Restart");
-            setStyle(restartButton, "30", "LightGrey", 170, 80);
+            setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+            restartButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
             Label mainMenuButton = new Label("Main Menu");
-            setStyle(mainMenuButton, "30", "Blue", 170, 80);
+            setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+            mainMenuButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
             saveButton.setOnMouseClicked(e->{
                 saved = true;
@@ -939,7 +957,8 @@ public class PlayController extends ScreenController {
             });
 
             VBox layout = new VBox(10);
-            layout.getChildren().addAll(saveButton);
+            layout.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
+            layout.getChildren().addAll(saveButton); // todo addAll can add all this stuff in one line
             layout.getChildren().addAll(restartButton);
             layout.getChildren().addAll(mainMenuButton);
             layout.getChildren().addAll(exitButton);
@@ -954,7 +973,7 @@ public class PlayController extends ScreenController {
         }
     }
 
-    @FXML
+
     public void displayPopup(MouseEvent event) {
         Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
@@ -991,12 +1010,14 @@ public class PlayController extends ScreenController {
         label.setOnMouseEntered(e -> {
             label.setStyle("-fx-border-radius: 5 5 5 5; " +
                     "-fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Blue;");
+                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
         });
 
         label.setOnMouseExited(e -> {
             label.styleProperty().setValue("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                    "; -fx-background-radius: 5 5 5 5; " +
                     "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
         });
     }
