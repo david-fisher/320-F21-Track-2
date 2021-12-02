@@ -34,11 +34,15 @@ public class ShapeAttributeController {
     
     @FXML
     void setName(ActionEvent event) {
+    	//TO-DO:
+    	//set name as property of tile
     	System.out.println("Name for tile is: " + tileName.getText());
     }
     
     @FXML
     void setColor(ActionEvent event) {
+    	//TO-DO:
+    	//set color as property of tile
     	System.out.println("Color selected is: " + tileColor.getValue());
     }
 
@@ -50,6 +54,8 @@ public class ShapeAttributeController {
     		int i = name.lastIndexOf('.');
     		String ext = name.substring(i + 1);
     		if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
+    			//TO-DO:
+    			//set image pathname as property of tile
     			System.out.println("Image file name is: " + name);
     		}
     	}
@@ -60,5 +66,5 @@ public class ShapeAttributeController {
     	Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
     }
-//<Button fx:id="backBtn" layoutX="375.0" layoutY="307.0" mnemonicParsing="false" onAction="#returnToEditor" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Done" />
+
 }
