@@ -61,7 +61,7 @@ public class Block {
   protected GridPane grid;
 
   //List of connection blocks
-  private ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
+  protected ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
 
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();

@@ -24,25 +24,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import editors.rule_editor_ui.blocks.Block;
-import editors.rule_editor_ui.blocks.RSetBlock;
-import editors.rule_editor_ui.blocks.PSetBlock;
-import editors.rule_editor_ui.blocks.GetBlock;
-import editors.rule_editor_ui.blocks.NotBlock;
-import editors.rule_editor_ui.blocks.BinOpBlock;
-import editors.rule_editor_ui.blocks.LengthBlock;
-import editors.rule_editor_ui.blocks.GetTileIndexBlock;
-import editors.rule_editor_ui.blocks.MoveToTileIndexBlock;
-import editors.rule_editor_ui.blocks.MoveByStepsBlock;
-import editors.rule_editor_ui.blocks.GetPlayerByIndexBlock;
-import editors.rule_editor_ui.blocks.GetNextPlayerBlock;
-import editors.rule_editor_ui.blocks.InvokeBlock;
-import editors.rule_editor_ui.blocks.DeckDrawBlock;
-import editors.rule_editor_ui.blocks.DeckPutBlock;
-import editors.rule_editor_ui.blocks.DeckShuffleBlock;
-import editors.rule_editor_ui.blocks.UseDieSpinnerBlock;
-import editors.rule_editor_ui.blocks.TextBlock;
-
 import editors.main_menu.MainMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +37,7 @@ import javafx.scene.shape.Line;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
+import editors.rule_editor_ui.blocks.*;
 import engine.*;
 import nodes.*;
 import objects.*;
@@ -111,24 +93,12 @@ public class RuleEditorUIController implements Initializable {
     System.out.println("Player1 money is currently at: " + go1.getTrait("money"));
     System.out.println("Player2 money is currently at: " + go2.getTrait("money"));
 
-    //Event stuff
-    // ArrayList<nodes.Node> list = new ArrayList<nodes.Node>();
-    // list.add(psetParent.getNode());
-
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
       textBlockList.get(i).getLiteralNode().setValue(text);
-      System.out.println(textBlockList.get(i).getLiteralNode().value);
+      //System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
-
-    // if (psetParent.getNode() instanceof OpNode) {
-    //   System.out.println("Index 0: " + ((OpNode)psetParent.getNode()).getOperand(0));
-    //   System.out.println("Index 1: " + ((OpNode)psetParent.getNode()).getOperand(1));
-    //   System.out.println("Index 2: " + ((OpNode)psetParent.getNode()).getOperand(2));
-    // }
-    // state.events.put("main", list);
-    // System.out.println(state.events);
 
     //Run the rules
     interpreter.interpretRule(psetParent.getNode(), state);
@@ -171,15 +141,8 @@ public class RuleEditorUIController implements Initializable {
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
-      
-      if (block instanceof TextBlock) {
-        System.out.println(startBlock.getNode());
-        System.out.println(((TextBlock)block).getLiteralNode());
-      }
-      else if (block instanceof Block) {
-        System.out.println(startBlock.getNode());
-        System.out.println(block.getNode());
-      }
+      System.out.println("Block " + startBlock + " connected to " + block);
+
       if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
         ((OpNode)startBlock.getNode()).setOperand(((TextBlock)block).getLiteralNode(), operandIndex);
@@ -212,9 +175,12 @@ public class RuleEditorUIController implements Initializable {
   }
 
   private void drawLine(Block block){
-    block.getResultRect().setOnMouseClicked(e -> {
-      drawLineResultRect(block);
-    });
+    //Check this because SequenceNode doesn't have a result rectangle
+    if (block.getResultRect() != null) {
+      block.getResultRect().setOnMouseClicked(e -> {
+        drawLineResultRect(block);
+      });
+    }
 
     ObservableList<Node> listGrayRect = block.getGrayRect();
     for (int i = 0; i < listGrayRect.size(); i++){
@@ -329,6 +295,11 @@ public class RuleEditorUIController implements Initializable {
     TextBlock txtBlock = new TextBlock();
     textBlockList.add(txtBlock);
     blockActions(txtBlock);
+  }
+
+  @FXML
+  private void handleAddSeqNodeBtn(ActionEvent event) {
+    //blockActions(new SequenceBlock());
   }
 
   @FXML

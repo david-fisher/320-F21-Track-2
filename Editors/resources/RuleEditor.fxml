@@ -51,6 +51,7 @@
                   <Button fx:id="addDeckShuffleBtn" layoutX="34.0" layoutY="527.0" mnemonicParsing="false" onAction="#handleAddDeckShuffleBtn" prefHeight="25.0" prefWidth="92.0" text="Add deck shuffle" />
                   <Button fx:id="addUseDieSpinnerBtn" layoutX="34.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleAddUseDieSpinnerBtn" prefHeight="25.0" prefWidth="92.0" text="Add use die/spinner" />
                   <Button fx:id="addTextNodeBtn" layoutX="34.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleAddTextNodeBtn" prefHeight="25.0" prefWidth="92.0" text="Add text node" />
+                  <Button fx:id="addSeqNodeBtn" layoutX="34.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleAddSeqNodeBtn" prefHeight="25.0" prefWidth="92.0" text="Add seq node" />
                </children>
                <cursor>
                   <Cursor fx:constant="SW_RESIZE" />
