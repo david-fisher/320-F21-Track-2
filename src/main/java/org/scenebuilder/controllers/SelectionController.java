@@ -60,7 +60,7 @@ public class SelectionController extends ScreenController {
         newGamesScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         newGamesScrollPane.prefWidthProperty().bind(Bindings.subtract(screenVBox.widthProperty(), 20));
         newGamesScrollPane.prefHeightProperty().bind(Bindings.multiply(screenVBox.heightProperty(), 0.35));
-        newGamesScrollPane.setStyle("-fx-background-color: transparent; -fx-border-color: black");
+        newGamesScrollPane.setStyle("-fx-background-color: transparent; -fx-border-color: " + GlobalCSSValues.text);
         HBox.setMargin(newGamesScrollPane, new Insets(10, 10, 10, 10));
 
         newGamesHBox = new HBox();
@@ -220,12 +220,13 @@ public class SelectionController extends ScreenController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;"));
+
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + "; -fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px"));
 
                 // select this rectangles
-                n.setStyle("-fx-border-color: " + invertColor(GlobalCSSValues.text) + ";-fx-border-style: dashed;");
+                n.setStyle("-fx-border-color: " + GlobalCSSValues.accent + ";-fx-border-style: solid; -fx-border-width: 3px");
 
                 // focus the node
                 //n.requestFocus();
@@ -251,12 +252,12 @@ public class SelectionController extends ScreenController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + "; -fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px"));
 
                 // select this rectangles
-                n.setStyle("-fx-border-color: " + invertColor(GlobalCSSValues.text) + ";-fx-border-style: dashed;");
+                n.setStyle("-fx-border-color: " + GlobalCSSValues.accent + ";-fx-border-style: solid; -fx-border-width: 3px");
 
                 // focus the node
                 //n.requestFocus();
@@ -281,7 +282,7 @@ public class SelectionController extends ScreenController {
                     tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
                     tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());
                     tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
-                    tempVBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;");
+                    tempVBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px");
 
                     // store the game in the selection VBox
                     tempVBox.setUserData(n);
@@ -341,6 +342,11 @@ public class SelectionController extends ScreenController {
 
     private String invertColor(String myColorString) {
 
-        return Color.valueOf(myColorString).invert().toString();
+        Color invertedColor = Color.valueOf(myColorString).invert();
+
+        // 6 symbols in capital letters.
+        String hex3 = Integer.toHexString(invertedColor.hashCode()).substring(0, 6).toUpperCase();
+
+        return "#" + hex3;
     }
 }

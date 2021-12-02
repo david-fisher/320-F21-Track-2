@@ -5,6 +5,8 @@ public class GlobalCSSValues {
     // css
     public static String background;
     public static String secondary;
+    public static String accent;
+
     public static String text;
 
     public static String buttonBackground;
@@ -14,6 +16,7 @@ public class GlobalCSSValues {
 
         background = "#544179";
         text = "#B8E4F0";
+        accent = "#000000";
 
         secondary = "#4c0070";
         buttonBackground = "#6166B3";
