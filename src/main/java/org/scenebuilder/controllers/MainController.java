@@ -24,8 +24,6 @@ import java.io.IOException;
 
 public class MainController extends ScreenController {
 
-
-
     HBox settingsButtonHBox;
     private void initSettings() {
 

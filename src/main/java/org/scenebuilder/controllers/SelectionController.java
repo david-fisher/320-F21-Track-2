@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.SetupData;
@@ -27,14 +28,17 @@ import java.util.ArrayList;
 
 public class SelectionController extends ScreenController {
 
+    HBox newGamesLabelHBox;
+    Label newGamesLabel;
     private void initNewGamesLabel() {
 
         // bind HBox to vbox width to represent a row
-        HBox newGamesLabelHBox = new HBox();
+        newGamesLabelHBox = new HBox();
         newGamesLabelHBox.setStyle("-fx-background-color: transparent");
         newGamesLabelHBox.prefWidthProperty().bind(screenVBox.widthProperty());
 
-        Label newGamesLabel = new Label("New Games");
+        newGamesLabel = new Label("New Games");
+        newGamesLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
         newGamesLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 45;");
         HBox.setMargin(newGamesLabel, new Insets(10, 10, 10, 15));
 
@@ -63,7 +67,7 @@ public class SelectionController extends ScreenController {
         newGamesHBox.setAlignment(Pos.CENTER_LEFT);
         newGamesHBox.prefWidthProperty().bind(Bindings.subtract(newGamesScrollPane.widthProperty(), 2));
         newGamesHBox.prefHeightProperty().bind(Bindings.subtract(newGamesScrollPane.heightProperty(), 2));
-        //newGamesHBox.setStyle("-fx-background-color: #" + secondaryColor.toString().substring(2));
+        newGamesHBox.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
 
         newGamesScrollPane.setContent(newGamesHBox);
         newGamesScrollPaneHBox.getChildren().add(newGamesScrollPane);
@@ -78,6 +82,7 @@ public class SelectionController extends ScreenController {
         savedGamesLabelHBox.prefWidthProperty().bind(screenVBox.widthProperty());
 
         savedGamesLabel = new Label("Saved Games");
+        savedGamesLabel.setTextFill(newGamesLabel.getTextFill());
         savedGamesLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 45;");
         HBox.setMargin(savedGamesLabel, new Insets(10, 10, 10, 15));
 
@@ -126,7 +131,7 @@ public class SelectionController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        setStyle(backButton, "40", "LightGrey", 200, 70);
+        setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
 
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
@@ -140,7 +145,7 @@ public class SelectionController extends ScreenController {
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
         selectGameButton = new Label("Select a Game");
-        setStyle(selectGameButton, "40", "LightGrey", 290, 70);
+        setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
 
@@ -202,7 +207,7 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
-                setStyle(selectGameButton, "40", "LimeGreen", 320, 70);
+                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -215,12 +220,12 @@ public class SelectionController extends ScreenController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + "; -fx-border-style: dashed;"));
 
                 // select this rectangles
-                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
+                n.setStyle("-fx-border-color: " + invertColor(GlobalCSSValues.text) + ";-fx-border-style: dashed;");
 
                 // focus the node
                 //n.requestFocus();
@@ -234,7 +239,7 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Load Saved Game");
-                setStyle(selectGameButton, "40", "Blue", 350, 70);
+                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -246,12 +251,12 @@ public class SelectionController extends ScreenController {
 
                 // deselect all rectangles
                 ObservableList<Node> children = newGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;"));
                 children = savedGamesHBox.getChildren();
-                children.forEach((n1) -> n1.setStyle("-fx-border-color: red;-fx-border-style: dashed;"));
+                children.forEach((n1) -> n1.setStyle("-fx-border-color: " + GlobalCSSValues.text + "; -fx-border-style: dashed;"));
 
                 // select this rectangles
-                n.setStyle("-fx-border-color: blue;-fx-border-style: dashed;");
+                n.setStyle("-fx-border-color: " + invertColor(GlobalCSSValues.text) + ";-fx-border-style: dashed;");
 
                 // focus the node
                 //n.requestFocus();
@@ -276,7 +281,7 @@ public class SelectionController extends ScreenController {
                     tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
                     tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());
                     tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
-                    tempVBox.setStyle("-fx-border-color: red;-fx-border-style: dashed;");
+                    tempVBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: dashed;");
 
                     // store the game in the selection VBox
                     tempVBox.setUserData(n);
@@ -288,6 +293,7 @@ public class SelectionController extends ScreenController {
                     //tempImageView.setImage(n.getIcon());
 
                     Label tempLabel = new Label();
+                    tempLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
                     tempLabel.setText(n.getGameName());
                     tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
@@ -319,17 +325,22 @@ public class SelectionController extends ScreenController {
         });
     }
 
-    public void setStyle(Label label, String size, String color, double width, double height) {
+    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
         label.setStyle("-fx-border-radius: 5 5 5 5; " +
                 "-fx-background-radius: 5 5 5 5; " +
                 "-fx-font-family: Serif; " +
                 "-fx-font-size: " + size + "; " +
                 "-fx-background-color: " + color + "; " +
                 "-fx-border-color: BLACK;");
-        label.setTextFill(Color.BLACK);
+        label.setTextFill(Color.valueOf(textColor));
         label.setAlignment(Pos.CENTER);
         label.setPrefWidth(width);
         label.setPrefHeight(height);
         initDarken(label);
+    }
+
+    private String invertColor(String myColorString) {
+
+        return Color.valueOf(myColorString).invert().toString();
     }
 }
