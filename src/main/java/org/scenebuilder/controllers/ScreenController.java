@@ -6,6 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.scenebuilder.BasicApplication;
+import org.scenebuilder.SettingsObject;
 
 public class ScreenController {
 
@@ -24,11 +26,22 @@ public class ScreenController {
         AnchorPane.setRightAnchor(screenVBox, 3.0);
         screenVBox.setStyle("-fx-border-color: black;");
 
-        //Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();   // screen - task bar
-        Rectangle2D fullScreenDimensions = Screen.getPrimary().getBounds();     // full screen
 
-        anchorPane.setPrefWidth(fullScreenDimensions.getWidth());
-        anchorPane.setPrefHeight(fullScreenDimensions.getHeight());
+        if(!BasicApplication.getSettingsObject().getIsFullScreen()) {
+
+            Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();   // screen - task bar
+
+            anchorPane.setPrefWidth(screenDimensions.getWidth());
+            anchorPane.setPrefHeight(screenDimensions.getHeight());
+        } else {
+
+            Rectangle2D fullScreenDimensions = Screen.getPrimary().getBounds();     // full screen
+
+            anchorPane.setPrefWidth(fullScreenDimensions.getWidth());
+            anchorPane.setPrefHeight(fullScreenDimensions.getHeight());
+
+        }
+
 
         anchorPane.getChildren().add(screenVBox);
     }
@@ -38,6 +51,7 @@ public class ScreenController {
     public void initialize(Stage stage) {
 
         this.stage = stage;
+        stage = BasicApplication.updateStage(stage);
 
         initAnchorPane();
 

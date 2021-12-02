@@ -212,18 +212,9 @@ public class BasicApplication extends Application {
     }
     public static void initScreenDimensions(Stage stage) {
 
-        //stage.setResizable(false);
-
         if(settingsObject.getIsFullScreen() == true) {
             stage.setMaximized(true);
-            int[] screenDimensions = calculateScreenDimensions();
-            settingsObject.setWindowSize(screenDimensions);
         } else {
-            stage.initStyle(StageStyle.DECORATED);
-
-            int[] screenDimensions = settingsObject.getWindowSize();
-            stage.setWidth(screenDimensions[0]);
-            stage.setHeight(screenDimensions[1]);
 
             // theoretically keep the stage from becoming unuseable by going off the monitor
 //            int[] maxScreenDimensions = calculateScreenDimensions();
@@ -232,7 +223,7 @@ public class BasicApplication extends Application {
         }
     }
 
-    public static Stage updateStage(Stage stage) {
+    public static Stage restartStage(Stage stage) {
 
         stage.close();
 
@@ -242,6 +233,12 @@ public class BasicApplication extends Application {
         initScreenDimensions(newStage);
 
         return newStage;
+    }
+    public static Stage updateStage(Stage stage) {
+
+        initScreenDimensions(stage);
+
+        return stage;
     }
 
     @Override

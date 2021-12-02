@@ -180,7 +180,7 @@ public class SettingsController extends ScreenController {
         SettingsObject newSettingsObject = new SettingsObject(isFullscreen, windowSize, theme);
         BasicApplication.setSettingsObject(newSettingsObject);
 
-        stage = BasicApplication.updateStage(stage);
+        stage = BasicApplication.restartStage(stage);
 
         MainController controller = new MainController();
         controller.initialize(stage);
