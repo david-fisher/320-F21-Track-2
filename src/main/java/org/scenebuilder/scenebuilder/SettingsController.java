@@ -76,7 +76,7 @@ public class SettingsController extends ScreenController {
         HBox.setMargin(windowSizeComboBox, new Insets(0, 0, 0, 0));
 
         windowSizeHBox.getChildren().addAll(windowSizeLabel, windowSizeComboBox);
-        screenVBox.getChildren().add(windowSizeHBox);
+        //screenVBox.getChildren().add(windowSizeHBox);
     }
 
     HBox themeHBox;
@@ -92,7 +92,6 @@ public class SettingsController extends ScreenController {
         themeLabel = new Label("Theme: ");
         themeLabel.setFont(new Font(36));
         themeLabel.setAlignment(Pos.CENTER);
-        themeLabel.prefWidthProperty().bind(windowSizeLabel.widthProperty());
         HBox.setMargin(themeLabel, new Insets(0, 30, 0, 50));
 
         themeComboBox = new ComboBox();
