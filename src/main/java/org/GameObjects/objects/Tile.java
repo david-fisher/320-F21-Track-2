@@ -1,7 +1,12 @@
 package org.GameObjects.objects;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
+
+
 import java.util.*;
+import java.util.List;
+
 /**
  * Write a description of class Tile here.
  *
@@ -13,6 +18,7 @@ public class Tile extends GameObject
     // instance variables - replace the example below with your own
 	private List<Tile> connections;
 	private List<Gamepiece> pieces;
+    private Shape parent;
   private static int count = 0;
 
     /**
@@ -99,4 +105,8 @@ public class Tile extends GameObject
     public List<Gamepiece> getGamepieces() {
     	return this.pieces ;
     }
+
+    public Shape getParent() { return parent; }
+
+    public void setParent(Shape p) { this.parent = p; }
 }
