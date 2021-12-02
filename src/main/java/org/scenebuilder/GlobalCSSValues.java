@@ -12,6 +12,11 @@ public class GlobalCSSValues {
     public static String buttonBackground;
     public static String buttonText;
 
+    public static void initDefaultPalette() {
+        // insert whatever palette should be loaded on startup
+        initPurplePalette();
+    }
+
     public static void initPurplePalette() {
 
         background = "#544179";

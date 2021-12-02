@@ -27,6 +27,7 @@ import org.GameObjects.objects.GameObject;
 import org.GameObjects.objects.Gamepiece;
 import org.GameObjects.objects.Player;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.SetupData;
 import org.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.dummy.DummyInventory;
@@ -43,11 +44,12 @@ public class SetupController extends ScreenController {
         gameSetupLabelHBox = new HBox();
         gameSetupLabelHBox.setAlignment(Pos.CENTER);
         gameSetupLabelHBox.prefWidthProperty().bind(screenVBox.widthProperty());
-        gameSetupLabelHBox.setStyle("-fx-border-color: black");
+        gameSetupLabelHBox.setStyle("-fx-border-color: " + GlobalCSSValues.text);
         gameSetupLabelHBox.setPadding(new Insets(10, 10, 10, 10));
         VBox.setMargin(gameSetupLabelHBox, new Insets(10, 5, 10, 5));
 
         gameSetupLabel = new Label("Game Setup");
+        gameSetupLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
         gameSetupLabel.setFont(new Font(45));
 
         gameSetupLabelHBox.getChildren().add(gameSetupLabel);
@@ -66,10 +68,13 @@ public class SetupController extends ScreenController {
         numPlayersHBox.prefWidthProperty().bind(screenVBox.widthProperty());
 
         numPlayersLabel = new Label("Number Of Players:");
+        numPlayersLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
         numPlayersLabel.setFont(new Font(24));
         HBox.setMargin(numPlayersLabel, new Insets(20, 100, 30, 10));
 
         minusPlayerButton = new Button();
+        minusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        minusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
         minusPlayerButton.setText("-");
         minusPlayerButton.setFont(new Font(24));
         HBox.setMargin(minusPlayerButton, new Insets(2, 2, 2, 2));
@@ -83,6 +88,7 @@ public class SetupController extends ScreenController {
         });
 
         playerCountTextField = new TextField();
+        playerCountTextField.setStyle("-fx-background-color: " + GlobalCSSValues.secondary + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
         playerCountTextField.setDisable(true);
         playerCountTextField.setFont(new Font(24));
         playerCountTextField.setAlignment(Pos.CENTER);
@@ -90,6 +96,8 @@ public class SetupController extends ScreenController {
         HBox.setMargin(playerCountTextField, new Insets(5, 5, 5, 5));
 
         plusPlayerButton = new Button();
+        plusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        plusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
         plusPlayerButton.setText("+");
         plusPlayerButton.setFont(new Font(24));
         HBox.setMargin(plusPlayerButton, HBox.getMargin(plusPlayerButton));
@@ -111,11 +119,12 @@ public class SetupController extends ScreenController {
     private void initPlayersVBox() {
 
         playersScrollPane = new ScrollPane();
-        playersScrollPane.setStyle("-fx-border-color: black");
+        playersScrollPane.setStyle("-fx-border-color: " + GlobalCSSValues.text);
         playersScrollPane.prefWidthProperty().bind(screenVBox.widthProperty());
         playersScrollPane.prefHeightProperty().bind(Bindings.multiply(screenVBox.heightProperty(), 0.7));
 
         playersVBox = new VBox();
+        playersVBox.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         playersVBox.setAlignment(Pos.TOP_CENTER);
         playersVBox.prefHeightProperty().bind(Bindings.subtract(playersScrollPane.heightProperty(), 10));
         playersVBox.prefWidthProperty().bind(Bindings.subtract(playersScrollPane.widthProperty(), 10));
@@ -128,15 +137,19 @@ public class SetupController extends ScreenController {
 
     HBox bottomHBox;
     Button backButton;
+    HBox checkBoxHBox;
     CheckBox tutorialModeCheckBox;
     Button startGameButton;
     private void initBottomBar() {
 
         bottomHBox = new HBox();
+        bottomHBox.setStyle("-fx-background-color: transparent");
         bottomHBox.setAlignment(Pos.BOTTOM_CENTER);
         VBox.setVgrow(bottomHBox, Priority.ALWAYS);
 
         backButton = new Button();
+        backButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        backButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         backButton.setText("Back");
         backButton.setFont(new Font(24));
         HBox.setMargin(backButton, new Insets(10, 20, 10, 20));
@@ -145,11 +158,19 @@ public class SetupController extends ScreenController {
             backFromSetup();
         });
 
+        checkBoxHBox = new HBox();
+        checkBoxHBox.setAlignment(Pos.CENTER);
+
         tutorialModeCheckBox = new CheckBox();
+        tutorialModeCheckBox.setTextFill(Color.valueOf(GlobalCSSValues.text));
         tutorialModeCheckBox.setText("Enable Tutorial Mode");
         HBox.setMargin(tutorialModeCheckBox, new Insets(10, 20, 10, 20));
 
+        checkBoxHBox.getChildren().add(tutorialModeCheckBox);
+
         startGameButton = new Button();
+        startGameButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        startGameButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         startGameButton.setText("Start Game");
         startGameButton.setFont(new Font(24));
         HBox.setMargin(startGameButton, new Insets(10, 20, 10, 20));
@@ -162,7 +183,7 @@ public class SetupController extends ScreenController {
             }
         });
 
-        bottomHBox.getChildren().addAll(backButton, tutorialModeCheckBox, startGameButton);
+        bottomHBox.getChildren().addAll(backButton, checkBoxHBox, startGameButton);
         screenVBox.getChildren().add(bottomHBox);
     }
 
@@ -254,6 +275,7 @@ public class SetupController extends ScreenController {
     }
 
     public void addPlayerNode() {
+
         HBox playerHBox = new HBox();
         playerHBox.setId(Integer.toString(num_players));
 
@@ -267,7 +289,7 @@ public class SetupController extends ScreenController {
         // --- Combo Box Code ---
         final ComboBox comboBox = new ComboBox();
         comboBox.setId("comboBox"+playerHBox.getId());
-        comboBox.setStyle("-fx-font-family: serif; -fx-start-margin: 10px; -fx-padding: 5px;\n" +
+        comboBox.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-start-margin: 10px; -fx-padding: 5px;\n" +
                 "    -fx-border-insets: 5px;\n" +
                 "    -fx-background-insets: 5px;");
         // Adds all available token here
@@ -354,7 +376,7 @@ public class SetupController extends ScreenController {
         playerField.setAlignment(Pos.CENTER);
         playerField.setText(hboxPlayer.getPlayerID());
         playerField.setFont(new Font(16));
-        playerField.setStyle("-fx-font-family: serif;");
+        playerField.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
         playerField.setPrefWidth(114);
         playerField.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
@@ -397,7 +419,8 @@ public class SetupController extends ScreenController {
         ToggleButton humanToggleButton = new ToggleButton();
         humanToggleButton.setMnemonicParsing(false);
         humanToggleButton.setFont(new Font(16));
-        humanToggleButton.setStyle("-fx-font-family: serif;");
+        humanToggleButton.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground);
+        humanToggleButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         humanToggleButton.setText("Human");
         humanToggleButton.setPrefHeight(32);
         humanToggleButton.setPrefWidth(72);
@@ -409,7 +432,8 @@ public class SetupController extends ScreenController {
         ToggleButton aIToggleButton = new ToggleButton();
         aIToggleButton.setMnemonicParsing(false);
         aIToggleButton.setFont(new Font(16));
-        aIToggleButton.setStyle("-fx-font-family: serif;");
+        aIToggleButton.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground);
+        aIToggleButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         aIToggleButton.setText("AI");
         aIToggleButton.setPrefHeight(32);
         aIToggleButton.setPrefWidth(48);
