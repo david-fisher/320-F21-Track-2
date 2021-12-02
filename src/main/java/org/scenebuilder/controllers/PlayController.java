@@ -34,6 +34,7 @@ import org.GameObjects.objects.Spinner;
 import org.scenebuilder.SetupData;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -569,7 +570,7 @@ public class PlayController extends ScreenController {
             ImageView dieImage = (ImageView) d;
             Die die = (Die) dieImage.getUserData();
             int roll = die.roll();
-            System.out.println(getClass().getResource("Dice1.png"));
+            System.out.println((InputStream) getClass().getResourceAsStream("/Dice1.png"));
             switch (roll) {
                 case 1:
                     dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
@@ -744,6 +745,9 @@ public class PlayController extends ScreenController {
                 popupWindow.close();
                 parentPopup.close();
             });
+            no.setOnMouseClicked(e -> {
+                popupWindow.close();
+            });
 
             buttons.getChildren().addAll(yes, no);
             buttons.setMargin(yes, new Insets(0, 5, 10, 0));
@@ -776,6 +780,9 @@ public class PlayController extends ScreenController {
                 parentPopup.close();
                 exitFromPlay();
             });
+            no.setOnMouseClicked(e -> {
+                popupWindow.close();
+            });
 
             buttons.getChildren().addAll(yes, no);
             buttons.setMargin(yes, new Insets(0, 5, 10, 0));
@@ -807,6 +814,9 @@ public class PlayController extends ScreenController {
                 popupWindow.close();
                 parentPopup.close();
                 mainMenuFromPlay();
+            });
+            no.setOnMouseClicked(e -> {
+                popupWindow.close();
             });
 
             buttons.getChildren().addAll(yes, no);
