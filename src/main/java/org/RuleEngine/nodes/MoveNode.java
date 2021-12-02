@@ -59,6 +59,7 @@ public class MoveNode extends OpNode {
 	// is not included.
 	private ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {
 	    LinkedList<Tile> tiles = new LinkedList<Tile>();
+	    ArrayList<Tile> processed = new ArrayList<Tile>();
 	    LinkedList<Integer> distances = new LinkedList<Integer>();
 	    ArrayList<Tile> targets = new ArrayList<Tile>();
 	    tiles.add(t);
@@ -67,8 +68,9 @@ public class MoveNode extends OpNode {
 	    while(distances.peek() <= tDis) {
 	        Integer currDis = distances.poll();
 	        Tile currTile = tiles.poll();
+	        processed.add(currTile);
 	        for (Tile c : currTile.getConnect()) {
-	            if (tiles.indexOf(c) >= 0) {
+	            if (tiles.indexOf(c) < 0 && processed.indexOf(c) < 0) {
     	            distances.add(currDis+1);
     	            tiles.add(c);
 	            }
