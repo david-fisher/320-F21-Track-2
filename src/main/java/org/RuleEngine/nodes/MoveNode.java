@@ -68,8 +68,10 @@ public class MoveNode extends OpNode {
 	        Integer currDis = distances.poll();
 	        Tile currTile = tiles.poll();
 	        for (Tile c : currTile.getConnect()) {
-	            distances.add(currDis+1);
-	            tiles.add(c);
+	            if (tiles.indexOf(c) >= 0) {
+    	            distances.add(currDis+1);
+    	            tiles.add(c);
+	            }
 	        }
 	        if (currDis == tDis) { targets.add(currTile); }
 	    }
