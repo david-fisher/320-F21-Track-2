@@ -150,7 +150,10 @@ public class PlayController extends ScreenController {
         initPlayerTurnIndicator();
 
         // TODO: do we do this?
-        gameState.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+        if (activeGame.getGameName().equals("All Drawers")) {
+            gameState.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+        }
+
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -295,6 +298,7 @@ public class PlayController extends ScreenController {
 //        System.out.println("Player screen: " + gamePiece.getColor().toString());
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
+        gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
         System.out.println(parent.getXPos());
         System.out.println(parent.getYPos());
@@ -598,11 +602,31 @@ public class PlayController extends ScreenController {
     }
 
     private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
-
+        AnchorPane source = (AnchorPane) e.getSource();
+        source.setDisable(true);
         System.out.println(gameState.getAllDice());
         Die die = dice.get(0);
         LiteralNode<String> name = new LiteralNode<>("currPlayer");
-        LiteralNode<Integer> value = new LiteralNode<>(die.roll());
+        int roll = die.roll();
+        LiteralNode<Integer> value = new LiteralNode<>(roll);
+
+        Label displayRoll = new Label("You Rolled: " + roll);
+        displayRoll.setPrefWidth(150);
+        displayRoll.setPrefHeight(50);
+        displayRoll.setStyle("-fx-font-family: Serif; -fx-font-size: 25;");
+        displayRoll.setTextFill(Color.BLACK);
+        displayRoll.setAlignment(Pos.CENTER);
+
+        playParent.getChildren().add(displayRoll);
+        displayRoll.setLayoutX(activeGame.getGameBoard().getXPos() + boardPane.getPrefWidth() / 2 + 220);
+        displayRoll.setLayoutY(activeGame.getGameBoard().getYPos() - 3);
+
+        final Timeline timeline = new Timeline();
+        timeline.setAutoReverse(true);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3000),
+        k -> playParent.getChildren().remove(displayRoll)));
+        timeline.play();
+
         ArrayList<org.RuleEngine.nodes.Node> operands = new ArrayList<>();
         operands.add(name);
         operands.add(value);
@@ -614,15 +638,20 @@ public class PlayController extends ScreenController {
         Gamepiece gp = currPlayer.getGamePieces().get(0);
         System.out.println(gp);
         System.out.println(gp.getLocation());
-        boardPane.getChildren().forEach(node -> {
-            if (node.getUserData() != null && node.getUserData().equals(gp)) {
-                Tile location = gp.getLocation();
-                node.setLayoutX(location.getXPos() + location.getWidth() / 2);
-                node.setLayoutY(location.getYPos() + location.getHeight() / 2);
-                node.toFront();
-                return;
-            }
-        });
+        Shape parent = gp.getParent();
+        Tile location = gp.getLocation();
+        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.toFront();
+        source.setDisable(false);
+
+//        boardPane.getChildren().forEach(node -> {
+//            if (node.getUserData() != null && node.getUserData().equals(gp)) {
+//
+//
+//                node.toFront();
+//            }
+//        });
     }
 
     private void addToInventory(GameObject object) {

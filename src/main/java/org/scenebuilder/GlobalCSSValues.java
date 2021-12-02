@@ -19,13 +19,13 @@ public class GlobalCSSValues {
 
     public static void initPurplePalette() {
 
-        background = "#544179";
-        text = "#B8E4F0";
-        accent = "#000000";
+        background = "White";
+        text = "Black";
+        accent = "Blue";
 
-        secondary = "#4c0070";
-        buttonBackground = "#6166B3";
-        buttonText = "#B8E4F0";
+        secondary = "LightGrey";
+        buttonBackground = "LightGrey";
+        buttonText = "Black";
     }
 
 }

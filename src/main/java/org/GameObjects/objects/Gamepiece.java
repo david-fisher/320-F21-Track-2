@@ -1,11 +1,13 @@
 package org.GameObjects.objects;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 public class Gamepiece extends GameObject{
 
   private static int count = 0;
 
+  private Shape parent;
   public Gamepiece() {
 	  super() ;
 	  this.setLabel("gamepiece" + String.format("%02d", ++count));
@@ -61,4 +63,7 @@ public class Gamepiece extends GameObject{
   public Tile getLocation() {
 	  return (Tile)this.getTrait("location");
   }
+
+  public Shape getParent() { return parent; }
+	public void setParent(Shape p) { this.parent = p; }
 }

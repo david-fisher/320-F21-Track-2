@@ -16,45 +16,47 @@ import org.GameObjects.objects.*;
 
 
 import javafx.scene.input.MouseEvent;
+import org.scenebuilder.controllers.PlayController;
+
 import java.util.ArrayList;
 
 //static methods
 public class Display {
 
     public static void displayDie(int roll) {
-//            ImageView dieImage = (ImageView) d;
-//            Die die = (Die) dieImage.getUserData();
-//            System.out.println(ClassLoader.getResource("Dice1.png"));
-//            switch (roll) {
-//                case 1:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//                case 2:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//                case 3:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//                case 4:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//                case 5:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//                case 6:
-//                    dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                    break;
-//            }
+//        ImageView dieImage = (ImageView) d;
+//        Die die = (Die) dieImage.getUserData();
+//        System.out.println(ClassLoader.getResource("Dice1.png"));
+//        switch (roll) {
+//            case 1:
+//                dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
+//            case 2:
+//                dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
+//            case 3:
+//                dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
+//            case 4:
+//                dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
+//            case 5:
+//                dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
+//            case 6:
+//                dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
+//                break;
 //        }
+//    }
 //
 //        playParent.getChildren().add(diceDisplay);
 //        diceDisplay.setLayoutX(playWidth / 2 - 100);
 //        diceDisplay.setLayoutY(playHeight / 2 - 90);
 //
-//        final Timeline timeline = new Timeline();
+//    final Timeline timeline = new Timeline();
 //        timeline.setAutoReverse(true);
 //        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
-//                k -> playParent.getChildren().remove(diceDisplay)));
+//    k -> playParent.getChildren().remove(diceDisplay)));
 //        timeline.play();
     }
 
@@ -83,8 +85,8 @@ public class Display {
                     Tile tile = tiles.get(i);
                     Shape parent = tile.getParent();
                     System.out.println("Parent xPos: " + parent.getLayoutX());
-//                    parent.setStroke(Color.LIMEGREEN);
-//                    parent.setStrokeWidth(2);
+                    parent.setStroke(Color.GOLD);
+                    parent.setStrokeWidth(2);
                     DropShadow borderGlow= new DropShadow();
                     borderGlow.setOffsetY(0f);
                     borderGlow.setOffsetX(0f);
@@ -104,6 +106,7 @@ public class Display {
             Shape parent = tiles.get(i).getParent();
             parent.removeEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             parent.setEffect(null);
+            parent.setStrokeWidth(0);
         }
         System.out.println(chosen);
         return chosen;
