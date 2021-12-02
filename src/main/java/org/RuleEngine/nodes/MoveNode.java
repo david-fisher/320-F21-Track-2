@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
+import static org.scenebuilder.Display.moveOptions;
 
 // Usage: Operand 0 - game piece name.
 //				Operand 1 - distance (LiteralNode<Integer>)
@@ -41,7 +42,7 @@ public class MoveNode extends OpNode {
         // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
         // The engine then promptly set the location of the gamepiece.
         // TODO: How could this possibly affect the AI?
-        Tile playerChoice = Mystery(findTargetTiles((Tile)go.getTrait("location"), dis));
+        Tile playerChoice = moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
         Gamepiece gp = (Gamepiece) go;
         if (!gp.setLocation(playerChoice)) {
             System.out.println("Error: Failed to move object " + name);
@@ -57,23 +58,27 @@ public class MoveNode extends OpNode {
 	// This method returns a list of reachable tiles at distance tDis from the tile t.
 	// Only tiles at the exact distance is included. If possible path is shorter than tDis, the end of that path
 	// is not included.
-	private ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {
-	    LinkedList<Tile> tiles = new LinkedList<Tile>();
-	    LinkedList<Integer> distances = new LinkedList<Integer>();
-	    ArrayList<Tile> targets = new ArrayList<Tile>();
-	    tiles.add(t);
-	    distances.add(0);
-	    
-	    while(distances.peek() <= tDis) {
-	        Integer currDis = distances.poll();
-	        Tile currTile = tiles.poll();
-	        for (Tile c : currTile.getConnect()) {
-	            distances.add(currDis+1);
-	            tiles.add(c);
-	        }
-	        if (currDis == tDis) { targets.add(currTile); }
-	    }
-	    
-	    return targets;
-	}
+    private ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {
+        LinkedList<Tile> tiles = new LinkedList<Tile>();
+        ArrayList<Tile> processed = new ArrayList<Tile>();
+        LinkedList<Integer> distances = new LinkedList<Integer>();
+        ArrayList<Tile> targets = new ArrayList<Tile>();
+        tiles.add(t);
+        distances.add(0);
+
+        while(distances.peek() <= tDis) {
+            Integer currDis = distances.poll();
+            Tile currTile = tiles.poll();
+            processed.add(currTile);
+            for (Tile c : currTile.getConnect()) {
+                if (tiles.indexOf(c) < 0 && processed.indexOf(c) < 0) {
+                    distances.add(currDis+1);
+                    tiles.add(c);
+                }
+            }
+            if (currDis == tDis) { targets.add(currTile); }
+        }
+        System.out.println("Targets: " + targets);
+        return targets;
+    }
 }

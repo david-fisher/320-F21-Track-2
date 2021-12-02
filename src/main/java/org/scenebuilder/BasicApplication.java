@@ -48,7 +48,7 @@ public class BasicApplication extends Application {
 
         DummyGame game1 = createDummyGame("All Drawers", "Rectangle", true, true, true);
         DummyGame game2 = createDummyGame("RNG and Inventory", "Rectangle", false, true, true);
-        DummyGame game3 = createDummyGame("Inventory Only", "Circle", false, false, true);
+        DummyGame game3 = createDummyGame("Inventory Only", "Rectangle", false, false, true);
 
         savedGames.clear();
         savedGames.add(game1);
@@ -59,7 +59,11 @@ public class BasicApplication extends Application {
 
         ArrayList<Player> players = new ArrayList<>();
         Player player1 = new Player("Player 1", Color.AQUAMARINE, new ArrayList<Gamepiece>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
+        Gamepiece gp = new Gamepiece();
+        gp.setColor(Color.WHITE);
         player1.addPiece(new Gamepiece());
+        players.add(player1);
+//        System.out.println("Basic screen: " + player1.getGamePieces().get(0).getColor().toString());
 
         ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -70,9 +74,10 @@ public class BasicApplication extends Application {
         int tileY = 0;
 
         boolean red = true;
+        Tile previous = new Tile();
         for (int i = 1; i < 57; i++) {
-
             Tile tile = new Tile();
+
             tile.setHeight(tileHeight);
             tile.setWidth(tileWidth);
             if (red) {
@@ -99,8 +104,34 @@ public class BasicApplication extends Application {
             } else {
                 tileX += 100;
             }
+            if (i == 1) {
+                previous = tile;
+            } else {
+                previous.addConnect(tile);
+                previous = tile;
+            }
         }
-
+        tiles.get(0).addConnect(tiles.get(1));
+        tiles.get(0).addConnect(tiles.get(8));
+        tiles.get(7).addConnect(tiles.get(6));
+        tiles.get(7).addConnect(tiles.get(15));
+        tiles.get(48).addConnect(tiles.get(40));
+        tiles.get(48).addConnect(tiles.get(49));
+        tiles.get(55).addConnect(tiles.get(54));
+        tiles.get(55).addConnect(tiles.get(47));
+        for (int i = 1; i < tiles.size() - 1; i++) {
+            if (i == 7 || i == 48) {
+                continue;
+            }
+            Tile tile = tiles.get(i);
+            if (i % 8 == 0 || i % 8 == 7) {
+                tile.addConnect(tiles.get(i + 8));
+                tile.addConnect(tiles.get(i - 8));
+            } else {
+                tile.addConnect(tiles.get(i + 1));
+                tile.addConnect(tiles.get(i - 1));
+            }
+        }
         ArrayList<Deck> decks = new ArrayList<>();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
@@ -120,19 +151,20 @@ public class BasicApplication extends Application {
         ArrayList<Spinner> spinners = new ArrayList();
 
         Die die1 = new Die();
-        Die die2 = new Die();
-        Die die3 = new Die();
-        Die die4 = new Die();
-        Die die5 = new Die();
-        Die die6 = new Die();
-        Die die7 = new Die();
+        System.out.println("Label die: " + die1.getLabel());
+//        Die die2 = new Die();
+//        Die die3 = new Die();
+//        Die die4 = new Die();
+//        Die die5 = new Die();
+//        Die die6 = new Die();
+//        Die die7 = new Die();
         dice.add(die1);
-        dice.add(die2);
-        dice.add(die3);
-        dice.add(die4);
-        dice.add(die5);
-        dice.add(die6);
-        dice.add(die7);
+//        dice.add(die2);
+//        dice.add(die3);
+//        dice.add(die4);
+//        dice.add(die5);
+//        dice.add(die6);
+//        dice.add(die7);
 
         Spinner spinner1 = new Spinner();
         spinner1.setNumCategories(5);
@@ -159,6 +191,7 @@ public class BasicApplication extends Application {
             gameState.setAllDice(dice);
             gameState.setAllSpinners(spinners);
         }
+
         gameState.setAllPlayers(players);
         gameState.setAllTokens(gameTokens);
         DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);

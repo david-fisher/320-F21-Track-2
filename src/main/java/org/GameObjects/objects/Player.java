@@ -6,7 +6,7 @@ import org.scenebuilder.dummy.DummyInventory;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player {
+public class Player extends GameObject{
 
     private String playerID;
 
@@ -37,7 +37,6 @@ public class Player {
     public void setPlayerID(String playerID) {
         this.playerID = playerID;
     }
-    public void setColor(Color color) { this.color = color; }
     public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }
     public void setInventory(DummyInventory inventory) { this.inventory = inventory; }
     public void setIsHuman(boolean isHuman) {

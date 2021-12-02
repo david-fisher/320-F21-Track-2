@@ -36,6 +36,7 @@ public class GameState {
         spinners = new ArrayList<Spinner>();
         tiles = new ArrayList<Tile>();
         tokens = new ArrayList<Token>();
+        players = new ArrayList<Player>();
 
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
