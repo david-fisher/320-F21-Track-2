@@ -18,24 +18,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.GlobalCSSValues;
 
 import java.io.IOException;
 
 public class MainController extends ScreenController {
 
-    // css
-    String background = "#4c0070";
-    String text = "#FFFFFF";
-
-    String buttonBackground = "#7267CB";
-    String buttonText = "#B8E4F0";
 
 
     HBox settingsButtonHBox;
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        setStyle(settingsButton, "45", buttonBackground, buttonText,175, 70);
+        setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
 
 
         settingsButtonHBox = new HBox();
@@ -59,7 +54,7 @@ public class MainController extends ScreenController {
     private void initButtons() {
 
         playButton = new Label("Play Game");
-        setStyle(playButton, "45", buttonBackground, buttonText,275, 80);
+        setStyle(playButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,275, 80);
 
         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
@@ -68,7 +63,7 @@ public class MainController extends ScreenController {
         });
 
         newButton = new Label("Create Game");
-        setStyle(newButton, "45", buttonBackground, buttonText, 275, 80);
+        setStyle(newButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
@@ -81,7 +76,7 @@ public class MainController extends ScreenController {
         });
 
         editButton = new Label("Edit Game");
-        setStyle(editButton, "45", buttonBackground, buttonText, 275, 80);
+        setStyle(editButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
@@ -94,7 +89,7 @@ public class MainController extends ScreenController {
         });
 
         exitButton = new Label("Exit");
-        setStyle(exitButton, "45", buttonBackground, buttonText, 275, 80);
+        setStyle(exitButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
@@ -111,7 +106,7 @@ public class MainController extends ScreenController {
     private void initCSS() {
 
         anchorPane.setStyle("-fx-background-color: black");
-        screenVBox.setStyle("-fx-background-color: " + background);
+        screenVBox.setStyle("-fx-background-color: " + GlobalCSSValues.background);
 
     }
 
