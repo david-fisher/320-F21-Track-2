@@ -83,6 +83,7 @@ public class SetupController extends ScreenController {
         });
 
         playerCountTextField = new TextField();
+        playerCountTextField.setDisable(true);
         playerCountTextField.setFont(new Font(24));
         playerCountTextField.setAlignment(Pos.CENTER);
         playerCountTextField.prefWidthProperty().bind(Bindings.multiply(minusPlayerButton.widthProperty(), 2));
@@ -257,6 +258,7 @@ public class SetupController extends ScreenController {
         playerHBox.setId(Integer.toString(num_players));
 
         playerHBox.setAlignment(Pos.CENTER);
+        playerHBox.setMinHeight(75);
 
         Player hboxPlayer = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
 
@@ -414,6 +416,12 @@ public class SetupController extends ScreenController {
 
         ToggleGroup group = new ToggleGroup();
 
+        // This bit of code prevents the toggle button from not being selected
+        group.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null)
+                oldVal.setSelected(true);
+        });
+
         // Add listener for the toggle group to change the corresponding player's property
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             public void changed(ObservableValue<? extends Toggle> ov,
@@ -476,6 +484,8 @@ public class SetupController extends ScreenController {
     }
 
     public void playFromSetup(ActionEvent event) throws IOException {
+
+        System.out.println(playerHashMap);
 
         // Get modified name
         for ( Node h: playersVBox.getChildren()) {
