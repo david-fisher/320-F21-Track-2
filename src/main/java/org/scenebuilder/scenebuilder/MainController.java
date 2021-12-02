@@ -25,11 +25,19 @@ import java.io.IOException;
 
 public class MainController extends ScreenController {
 
+    // css
+    String background = "#6E3CBC";
+    String text = "#FFFFFF";
+
+    String buttonBackground = "#7267CB";
+    String buttonText = "#B8E4F0";
+
+
     HBox settingsButtonHBox;
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        setStyle(settingsButton, "45", "LightGrey", 175, 70);
+        setStyle(settingsButton, "45", buttonBackground, buttonText,175, 70);
 
 
         settingsButtonHBox = new HBox();
@@ -45,12 +53,15 @@ public class MainController extends ScreenController {
         screenVBox.getChildren().add(settingsButtonHBox);
     }
 
-
     HBox fillHBox;
+    Label playButton;
+    Label newButton;
+    Label editButton;
+    Label exitButton;
     private void initButtons() {
 
-        Label playButton = new Label("Play Game");
-        setStyle(playButton, "45", "LimeGreen", 275, 80);
+        playButton = new Label("Play Game");
+        setStyle(playButton, "45", buttonBackground, buttonText,275, 80);
 
         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
@@ -58,8 +69,8 @@ public class MainController extends ScreenController {
             playFromMain();
         });
 
-        Label newButton = new Label("Create Game");
-        setStyle(newButton, "45", "Blue", 275, 80);
+        newButton = new Label("Create Game");
+        setStyle(newButton, "45", buttonBackground, buttonText, 275, 80);
 
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
@@ -71,8 +82,8 @@ public class MainController extends ScreenController {
             }
         });
 
-        Label editButton = new Label("Edit Game");
-        setStyle(editButton, "45", "DarkMagenta", 275, 80);
+        editButton = new Label("Edit Game");
+        setStyle(editButton, "45", buttonBackground, buttonText, 275, 80);
 
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
@@ -84,8 +95,8 @@ public class MainController extends ScreenController {
             }
         });
 
-        Label exitButton = new Label("Exit");
-        setStyle(exitButton, "45", "Red", 275, 80);
+        exitButton = new Label("Exit");
+        setStyle(exitButton, "45", buttonBackground, buttonText, 275, 80);
 
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
@@ -99,6 +110,12 @@ public class MainController extends ScreenController {
         screenVBox.getChildren().addAll(playButton, newButton, editButton, exitButton, fillHBox);
     }
 
+    private void initCSS() {
+
+        screenVBox.setStyle("-fx-background-color: " + background);
+
+    }
+
     public void initialize(Stage stage) {
 
         super.initialize(stage);
@@ -106,6 +123,7 @@ public class MainController extends ScreenController {
         screenVBox.setAlignment(Pos.CENTER);
         initSettings();
         initButtons();
+        initCSS();
     }
 
     // event handlers
@@ -168,14 +186,14 @@ public class MainController extends ScreenController {
         });
     }
 
-    public void setStyle(Label label, String size, String color, double width, double height) {
+    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
         label.setStyle("-fx-border-radius: 5 5 5 5; " +
                 "-fx-background-radius: 5 5 5 5; " +
                 "-fx-font-family: Serif; " +
                 "-fx-font-size: " + size + "; " +
                 "-fx-background-color: " + color + "; " +
                 "-fx-border-color: BLACK;");
-        label.setTextFill(Color.BLACK);
+        label.setTextFill(Color.valueOf(textColor));
         label.setAlignment(Pos.CENTER);
         label.setPrefWidth(width);
         label.setPrefHeight(height);
