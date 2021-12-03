@@ -64,10 +64,6 @@ public class RuleEditorUIController implements Initializable {
   private int operandIndex;
   private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
-  //temp
-  private Block psetParent;
-
-  //temp
   //List of the literl nodes made so far
   private ArrayList<TextBlock> textBlockList = new ArrayList<TextBlock>();
 
@@ -79,31 +75,12 @@ public class RuleEditorUIController implements Initializable {
   //temp
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
-    //Initializaiton of GameState stuff
-    Interpreter interpreter = new Interpreter();
-    GameState state = new GameState();
-    Gamepiece go1 = new Gamepiece();
-    Gamepiece go2 = new Gamepiece();
-    state.gamepieces.add(go1);
-    state.gamepieces.add(go2);
-    System.out.println(go1.setTrait("money", 100, true));
-    go2.setTrait("money", 50, true);
-    state.addRegistry("currPlayer", go1);
-    
-    System.out.println("Player1 money is currently at: " + go1.getTrait("money"));
-    System.out.println("Player2 money is currently at: " + go2.getTrait("money"));
-
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
       textBlockList.get(i).getLiteralNode().setValue(text);
       //System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
-
-    //Run the rules
-    interpreter.interpretRule(psetParent.getNode(), state);
-    System.out.println("Content of register: " + state.registers.toString());
-    System.out.println("Player2 money is currently at: " + state.findObject("gamepiece02").getTrait("money"));
   }
 
   /**
@@ -143,7 +120,18 @@ public class RuleEditorUIController implements Initializable {
       //temp
       System.out.println("Block " + startBlock + " connected to " + block);
 
-      if (block instanceof TextBlock) {
+      //If startBlock is a SequenceBlock it has null node field so we don't want to run setOperand
+      if (startBlock instanceof SequenceBlock) {
+        if (block instanceof TextBlock) {
+          ((SequenceBlock)startBlock).setParentPtr(((TextBlock)block).getLiteralNode());
+          System.out.println(((SequenceBlock)startBlock).getParentPtr());
+        }
+        else if (block.getNode() instanceof OpNode) {
+          ((SequenceBlock)startBlock).setParentPtr(block.getNode());
+          System.out.println(((SequenceBlock)startBlock).getParentPtr());
+        }
+      }
+      else if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
         ((OpNode)startBlock.getNode()).setOperand(((TextBlock)block).getLiteralNode(), operandIndex);
       }
@@ -201,9 +189,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    PSetBlock pset = new PSetBlock();
-    this.psetParent = pset;
-    blockActions(pset);
+    blockActions(new PSetBlock());
   }
 
   @FXML
@@ -299,7 +285,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddSeqNodeBtn(ActionEvent event) {
-    //blockActions(new SequenceBlock());
+    blockActions(new SequenceBlock());
   }
 
   @FXML

@@ -21,8 +21,11 @@ import javafx.scene.control.TextField;
 //node field for this class should always be null
 
 public class SequenceBlock extends Block {
-
+  //Width of the sequence block
   final int SEQ_WIDTH = 100;
+
+  //Pointer to parent of tree
+  private nodes.Node parentPtr; 
 
   public SequenceBlock() {
     this.block = new StackPane();
@@ -77,5 +80,17 @@ public class SequenceBlock extends Block {
     //Stack the base Rectangle and grid GridPane of the block on the pane
     this.block.getChildren().addAll(base, this.grid, field, connBlock);
     this.block.setAlignment(connBlock, Pos.CENTER_RIGHT);
+  }
+
+  public int getBlockWidth(){
+    return SEQ_WIDTH;
+  }
+
+  public nodes.Node getParentPtr() {
+    return this.parentPtr;
+  }
+
+  public void setParentPtr(nodes.Node parent) {
+    this.parentPtr = parent;
   }
 }
