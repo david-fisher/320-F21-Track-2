@@ -64,8 +64,12 @@ public class RuleEditorUIController implements Initializable {
   private int operandIndex;
   private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
-  //List of the literl nodes made so far
+  //List of the TextBlocks made so far.
+  //Need this to get the text from them and set LiteralNode values once save button is pressed.
   private ArrayList<TextBlock> textBlockList = new ArrayList<TextBlock>();
+  //List of the SequenceBlocks made so far.
+  //Need this to parse all the trees once the save button is pressed.
+  private ArrayList<SequenceBlock> seqBlockList = new ArrayList<SequenceBlock>();
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -120,8 +124,10 @@ public class RuleEditorUIController implements Initializable {
       //temp
       System.out.println("Block " + startBlock + " connected to " + block);
 
-      //If startBlock is a SequenceBlock it has null node field so we don't want to run setOperand
+      //If startBlock is a SequenceBlock it has null node field so we don't want to run setOperand,
+      //we simply want to set the parentPtr of the SequenceBlock
       if (startBlock instanceof SequenceBlock) {
+        //Check for instanceof TextBlock because only TextBlock has getLiteralNode() method
         if (block instanceof TextBlock) {
           ((SequenceBlock)startBlock).setParentPtr(((TextBlock)block).getLiteralNode());
           System.out.println(((SequenceBlock)startBlock).getParentPtr());
@@ -285,7 +291,9 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddSeqNodeBtn(ActionEvent event) {
-    blockActions(new SequenceBlock());
+    SequenceBlock seqBlock = new SequenceBlock();
+    seqBlockList.add(seqBlock);
+    blockActions(seqBlock);
   }
 
   @FXML
