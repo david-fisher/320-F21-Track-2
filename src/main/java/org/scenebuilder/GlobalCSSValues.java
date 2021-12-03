@@ -14,16 +14,26 @@ public class GlobalCSSValues {
 
     public static void initDefaultPalette() {
         // insert whatever palette should be loaded on startup
-        initPurplePalette();
+        initWhiteandGray();
     }
 
     public static void initPurplePalette() {
+        background = "#544179";
+        text = "#B8E4F0";
+        accent = "#000000";
 
+        secondary = "#4c0070";
+        buttonBackground = "#6166B3";
+        buttonText = "#B8E4F0";
+
+    }
+
+    public static void initWhiteandGray() {
         background = "White";
         text = "Black";
         accent = "Blue";
 
-        secondary = "LightGrey";
+        secondary = "DarkGrey";
         buttonBackground = "LightGrey";
         buttonText = "Black";
     }
