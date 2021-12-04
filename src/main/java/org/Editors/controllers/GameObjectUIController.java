@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.net.URL;
 import editors.MainMenu;
-import objects.*;
+import org.GameObjects.objects.*;
 
 public class GameObjectUIController {
     // Card tab
@@ -310,7 +310,7 @@ public class GameObjectUIController {
     }
 
     @FXML private void saveSpinner(ActionEvent event) {
-        objects.Spinner spinner = new objects.Spinner();
+        org.GameObjects.objects.Spinner spinner = new org.GameObjects.objects.Spinner();
         ObservableList<Category> elements = spinnerElements.getItems();
         spinner.setNumCategories(elements.size());
         System.out.println("Created spinner with " + spinner.getNumCategories() + " categories");

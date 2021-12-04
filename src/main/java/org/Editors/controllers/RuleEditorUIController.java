@@ -40,7 +40,7 @@ import javafx.collections.FXCollections;
 import editors.blocks.*;
 import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
-import objects.*;
+import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 
@@ -229,12 +229,9 @@ public class RuleEditorUIController implements Initializable {
   }
 
   @FXML
-  private void handleAddCondition(ActionEvent event) {
-    // ConditionBlock condtBlock = new ConditionBlock();
-
-    // condtBlock.setTopLeft(editorPane);
-    // editorPane.getChildren().addAll(condtBlock.getBlock());
-    // resizeAnchorPane();
+  private void handleAddIfBtn(ActionEvent event) {
+    placeBlock(new IfBlock());
+    //blockActions(new IfBlock());
   }
 
   @FXML

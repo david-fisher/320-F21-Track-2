@@ -39,7 +39,7 @@
                   <Button fx:id="addBinOpBtn" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" text="Add bin op" />
                   <Button fx:id="addGetTileIndexBtn" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add get tile[i]" />
                   <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" text="Add get" />
-                  <Button fx:id="addCondition" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" text="Add Condition" />
+                  <Button fx:id="addIfBtn" mnemonicParsing="false" onAction="#handleAddIfBtn" prefHeight="25.0" prefWidth="92.0" text="Add if" />
                   <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="92.0" text="Add move to tile[i]" />
                   <Button fx:id="addMoveByStepsBtn" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddMoveByStepsBtn" prefHeight="25.0" prefWidth="92.0" text="Add move by steps" />
                   <Button fx:id="addLengthBtn" layoutX="34.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddLengthBtn" prefHeight="25.0" prefWidth="92.0" text="Add length" />

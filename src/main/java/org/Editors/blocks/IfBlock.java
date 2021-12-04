@@ -1,4 +1,4 @@
-package editors.rule_editor_ui.blocks;
+package editors.blocks;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -26,6 +26,21 @@ public class IfBlock extends Block {
   int WIDTH = 170;
 
   public IfBlock() {
+    this.block = new StackPane();
+
+    //Make the block draggable
+    this.block.setOnMousePressed(e -> {
+        //calculate offset
+        this.startX = e.getSceneX() - this.block.getTranslateX();
+        this.startY = e.getSceneY() - this.block.getTranslateY();
+      });
+  
+    this.block.setOnMouseDragged(e -> {
+    //set new position
+    this.block.setTranslateX(e.getSceneX() - this.startX);
+    this.block.setTranslateY(e.getSceneY() - this.startY);
+    });
+
     //Base visual of the stackpane
     Rectangle base = new Rectangle(WIDTH, HEIGHT, GREY);
 
