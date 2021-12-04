@@ -5,7 +5,7 @@ import java.util.TreeSet;
 import org.GameObjects.objects.*;
 import org.RuleEngine.nodes.*;
 
-public class GameState {
+public class GameState extends Savable {
 
     public GameBoard board;
     public ArrayList<Button> buttons;
