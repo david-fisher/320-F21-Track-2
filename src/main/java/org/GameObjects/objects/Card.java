@@ -1,6 +1,4 @@
-
 package org.GameObjects.objects;
-
 import javafx.scene.paint.Color;
 
 public class Card extends GameObject {
