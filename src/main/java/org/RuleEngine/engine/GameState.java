@@ -24,6 +24,10 @@ public class GameState extends Savable {
 
     public HashMap<String, GameObject> registers;
     public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
+    
+    static {
+        events.put("heuristic", null);
+    }
 
     public GameState() {
         gameObjects = new ArrayList<GameObject>();

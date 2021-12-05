@@ -61,8 +61,10 @@ public abstract class GameObject extends Savable {
 	  }
 	  
 	  // checks for other valid inputs
-	  else if (suppressTraitChecker || traits.get(trait) != null &&	// if true don't check trait type
-			  (traits.get(trait).getClass().getName().equals(value.getClass().getName()))) {// check height is Double
+	  else if (suppressTraitChecker || 
+	          (traits.get(trait) != null && 
+	          traits.get(trait).getClass().getName().equals(value.getClass().getName()))) 
+	  {// check height is Double
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
