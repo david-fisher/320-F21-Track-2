@@ -1,3 +1,12 @@
-# 320-F21-Track-2
+# This branch is for Minjex!
 
-Team UMass Dining will be working on object modeling functionality. 
+### Install Jfoenix
+
+download the jar file for the latest version
+https://github.com/sshahine/JFoenix
+
+go to project structure -> modules -> 
+dependencies -> click the plus button -> New ->
+add JAR
+
+select the jar file and add it then apply changes
