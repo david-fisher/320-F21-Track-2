@@ -22,8 +22,11 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.VBox;
 
 public class IfBlock extends Block {
-  int HEIGHT = 270;
-  int WIDTH = 170;
+  private int HEIGHT = 270;
+
+  private int firstColWidth = 20;
+  private int midColWidth = 100;
+  private int lastColWidth = 20;
 
   public IfBlock() {
     this.block = new StackPane();
@@ -42,55 +45,60 @@ public class IfBlock extends Block {
     });
 
     //Base visual of the stackpane
-    Rectangle base = new Rectangle(WIDTH, HEIGHT, GREY);
+    Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
 
     //Pane for placing the controls and text for the block
     GridPane grid = new GridPane();
     //Padding of top & bottom to 10px; padding of left  & right 0px
     grid.setPadding(new Insets(10, 0, 10, 0));
-    grid.setMinSize(WIDTH, HEIGHT);
-    grid.setPrefSize(WIDTH, HEIGHT);
+    grid.setMinSize(BLOCK_WIDTH, HEIGHT);
+    grid.setPrefSize(BLOCK_WIDTH, HEIGHT);
     //Vertical gap between columns 10px; horizontal gap 5px
     grid.setVgap(10);
     grid.setHgap(5);
-    //Set width of column 0 to px
-    grid.getColumnConstraints().add(new ColumnConstraints(140));
-    //Set width of column 1 to 10px
-    grid.getColumnConstraints().add(new ColumnConstraints(10));
+    //Set width of column 0 to 20px
+    grid.getColumnConstraints().add(new ColumnConstraints(firstColWidth));
+    //Set width of column 1 to 130px
+    grid.getColumnConstraints().add(new ColumnConstraints(midColWidth));
+    //Set width of column 2 to 20px
+    grid.getColumnConstraints().add(new ColumnConstraints(lastColWidth));
     //Set height of row 0 to 5px
     grid.getRowConstraints().add(new RowConstraints(5));
-
+    
     //Defining row 0 of grid
-    Text name = new Text("If");
+    Text name = new Text("if");
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
-    grid.add(name, 0, 0);
-
+  
     //Defining row 1 of grid
-    Rectangle ifInput = new Rectangle(19, 30, SILVER);
+    Rectangle ifInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
     Text index = new Text("Condition");
     index.setFill(WHITE);
-    grid.add(index, 0, 1);
-    grid.add(ifInput, 1, 1);
+    grid.add(index, 1, 1);
+    grid.add(ifInput, 2, 1);
+    grid.setHalignment(index, HPos.RIGHT); 
     
     // Defining row 2 of grid
     Text thenText  = new Text("Then");
     thenText.setFill(WHITE);
-    grid.add(thenText,0, 2);
+    grid.add(thenText, 1, 2);
+    grid.setHalignment(thenText, HPos.CENTER); 
 
     //Defining row 3 of grid
-    Rectangle thenInput = new Rectangle(19, 30, BLUE);
+    Rectangle thenInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
     VBox vbox = new VBox(5, thenInput);
-    grid.add(vbox, 1, 3);
+    grid.add(vbox, 2, 3);
     
     // Define row 4
     Button addThenOfIf = new Button("+");
-    grid.add(addThenOfIf,0, 4);
+    grid.add(addThenOfIf, 1, 4);
+    grid.setHalignment(addThenOfIf, HPos.CENTER); 
+
     // action event
     EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
       public void handle(MouseEvent e)
       {
-        Rectangle thenInput2 = new Rectangle(19, 30, BLUE);
+        Rectangle thenInput2 = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
         vbox.getChildren().add(thenInput2);
         HEIGHT = HEIGHT + 35;
         base.setHeight(HEIGHT);
@@ -103,21 +111,24 @@ public class IfBlock extends Block {
     Text elseName = new Text("Else");
     elseName.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     elseName.setFill(WHITE);
-    grid.add(elseName, 0,5);
+    grid.add(elseName, 1, 5);
+    grid.setHalignment(elseName, HPos.CENTER);
 
     //Defining row 6 of grid
-    Rectangle thenElsePart = new Rectangle(19, 30, BLUE);
+    Rectangle thenElsePart = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
     VBox vboxElsePart = new VBox(5, thenElsePart);
-    grid.add(vboxElsePart, 1, 6);
+    grid.add(vboxElsePart, 2, 6);
     
     // Define row 7
     Button addThenOfElse = new Button("+");
-    grid.add(addThenOfElse,0, 7);
+    grid.add(addThenOfElse, 1, 7);
+    grid.setHalignment(addThenOfElse, HPos.CENTER); 
+
     // action event
     EventHandler<MouseEvent> eventElsePart = new EventHandler<MouseEvent>() {
       public void handle(MouseEvent e)
       {
-        Rectangle thenInput2 = new Rectangle(19, 30, BLUE);
+        Rectangle thenInput2 = new Rectangle(19, 30, SILVER);
         vboxElsePart.getChildren().add(thenInput2);
         HEIGHT = HEIGHT + 35;
         base.setHeight(HEIGHT);
@@ -126,7 +137,7 @@ public class IfBlock extends Block {
     addThenOfElse.addEventFilter(MouseEvent.MOUSE_CLICKED, eventElsePart); 
     
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
-    this.block.getChildren().addAll(base, grid);
+    this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
     //Create the actual Node object for this block
