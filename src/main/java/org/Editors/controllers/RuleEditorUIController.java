@@ -44,6 +44,8 @@ import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 
+//TODO: Change handleIf and handleWhile to not solely use placeBlock
+
 public class RuleEditorUIController implements Initializable {
   @FXML
   private AnchorPane editorPane;
@@ -291,6 +293,11 @@ public class RuleEditorUIController implements Initializable {
     SequenceBlock seqBlock = new SequenceBlock();
     seqBlockList.add(seqBlock);
     blockActions(seqBlock);
+  }
+
+  @FXML
+  private void handleAddWhileBtn(ActionEvent event) {
+    placeBlock(new WhileBlock());
   }
 
   @FXML
