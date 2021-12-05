@@ -7,8 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX17"/>
-	<classpathentry kind="lib" path="C:/Users/bhavs/Downloads/snakeyaml-1.29.jar"/>
-	<classpathentry kind="lib" path="C:/Users/bhavs/Downloads/jfoenix-9.0.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/bhavs/Downloads/openjfx-17.0.1_windows-x64_bin-sdk.zip"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
