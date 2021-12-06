@@ -64,7 +64,14 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="editorPane" prefHeight="404.0" prefWidth="474.0" />
+            <AnchorPane fx:id="editorPane" prefHeight="404.0" prefWidth="474.0">
+               <children>
+                  <Label fx:id="errorLabel" layoutX="223.0" layoutY="6.0" textFill="#dd1010">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
          </content>
       </ScrollPane>
    </center>
