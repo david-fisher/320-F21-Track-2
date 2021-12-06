@@ -25,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.GameObjects.objects.Button;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveNode;
 import org.scenebuilder.BasicApplication;
@@ -163,6 +164,7 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initPlayers(gameState.getAllPlayers());
+        initButtons(gameState);
 
         ArrayList<Deck> decks = gameState.getAllDecks();
         ArrayList<Die> dice = gameState.getAllDice();
@@ -267,6 +269,16 @@ public class PlayController extends ScreenController {
         // for each player
         // set player info
         // add player stuff to inventory (later)
+    }
+
+    private void initButtons(GameState gameState) {
+        ArrayList<Button> buttons = gameState.getAllButtons();
+        buttons.forEach(button -> {
+            String event = (String) button.getTrait("event");
+            button.getParent().setOnMouseClicked(e -> {
+                interpreter.interpretEvent(gameState.events.get(event), gameState);
+            });
+        });
     }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {

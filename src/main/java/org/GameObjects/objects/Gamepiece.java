@@ -64,6 +64,7 @@ public class Gamepiece extends GameObject{
 	  return (Tile)this.getTrait("location");
   }
 
+
+  public void setParent(Shape p) { this.parent = p; }
   public Shape getParent() { return parent; }
-	public void setParent(Shape p) { this.parent = p; }
 }
