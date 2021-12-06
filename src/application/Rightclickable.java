@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class Rightclickable {
 	
-	public void makeRightClickable(Node shape, AnchorPane canvas) {
+	public void makeRightClickable(Tile tile, AnchorPane canvas) {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem deleteButton = new MenuItem(null, new Label("Delete"));
 		MenuItem shapeEditor = new MenuItem(null, new Label("Shape Editor"));
@@ -25,7 +26,7 @@ public class Rightclickable {
 	        @Override
 	        public void handle(ActionEvent event)
 	        {
-	            canvas.getChildren().remove(shape);
+	            canvas.getChildren().remove(tile.tileShape);
 	        }
 	    });
 		
@@ -33,25 +34,30 @@ public class Rightclickable {
 			@FXML
 			public void handle(ActionEvent event)
 			{
-				FXMLLoader root = new FXMLLoader();
-				root.setLocation(getClass().getResource("ShapeEditor.fxml"));
-				Scene scene;
+				
+				
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("ShapeEditor.fxml"));
 				try {
-					scene = new Scene(root.load(), 800, 365);
+					loader.load();
+					Parent p = loader.getRoot();
 					Stage stage = new Stage();
 					stage.setTitle("Shape Editor");
-					stage.setScene(scene);
+					stage.setScene(new Scene(p));
 					stage.show();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
+				ShapeAttributeController attributeController = loader.getController();
+                attributeController.getTile(tile);
 			}
 		});
 		
-		shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+		tile.tileShape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent event) {
-                contextMenu.show(shape, event.getScreenX(), event.getScreenY());
+                contextMenu.show(tile.tileShape, event.getScreenX(), event.getScreenY());
             }
 		});
 		

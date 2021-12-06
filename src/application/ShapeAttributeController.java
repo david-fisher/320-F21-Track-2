@@ -12,10 +12,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ShapeAttributeController {
+	
+	Tile importedTile = new Tile();
 	
 	Stage stage = new Stage();
 	private FileChooser fileChooser = new FileChooser();
@@ -32,31 +36,30 @@ public class ShapeAttributeController {
     @FXML
     private Button backBtn;
     
+    public void getTile(Tile tile) {
+        this.importedTile = tile;
+    }
+    
     @FXML
     void setName(ActionEvent event) {
-    	//TO-DO:
-    	//set name as property of tile
-    	System.out.println("Name for tile is: " + tileName.getText());
+    	importedTile.setTileName(tileName.getText());
     }
     
     @FXML
     void setColor(ActionEvent event) {
-    	//TO-DO:
-    	//set color as property of tile
-    	System.out.println("Color selected is: " + tileColor.getValue());
+    	importedTile.tileShape.setFill(tileColor.getValue());
     }
 
     @FXML
     void setImage(ActionEvent event) {
     	File file = fileChooser.showOpenDialog(stage);
     	if (file != null) {
-    		String name = file.getName();
+    		String name = file.getAbsolutePath();
     		int i = name.lastIndexOf('.');
     		String ext = name.substring(i + 1);
     		if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
-    			//TO-DO:
-    			//set image pathname as property of tile
-    			System.out.println("Image file name is: " + name);
+    			Image img = new Image(file.toURI().toString());
+    			importedTile.tileShape.setFill(new ImagePattern(img));
     		}
     	}
     }

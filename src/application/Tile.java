@@ -30,6 +30,7 @@ public class Tile extends GameObject
     static final AtomicLong NEXT_ID = new AtomicLong(0);
     final long id = NEXT_ID.getAndIncrement();
     public Shape tileShape;
+    private String tileName;
     
     /**
      * Constructor for objects of class Tile
@@ -53,6 +54,18 @@ public class Tile extends GameObject
     public List<Tile> getConnect()
     {
         return connections;
+    }
+    
+    public void setTileName(String tileName) {
+    	this.tileName = tileName;
+    }
+    
+    public String getTileName() {
+    	return this.tileName;
+    }
+    
+    public String getTileImage() {
+    	return this.tileShape.getFill().toString();
     }
     
     public boolean addConnect(Tile tile) {

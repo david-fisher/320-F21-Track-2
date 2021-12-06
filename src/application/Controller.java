@@ -153,7 +153,7 @@ public class Controller {
 		c.tileShape = new Circle(312, 300, 30, Color.BLACK);
 		shapeCanvas.getChildren().add(c.tileShape);
 		draggable.makeDraggable(c.tileShape);
-		rightclickable.makeRightClickable(c.tileShape, shapeCanvas);
+		rightclickable.makeRightClickable(c, shapeCanvas);
 		leftclickable.makeLeftclickable(c, nameTf, imageTf, colorTf);
 	}
 
@@ -165,7 +165,7 @@ public class Controller {
 		((Rectangle) r.tileShape).setY(300);
 		shapeCanvas.getChildren().add(r.tileShape);
 		draggable.makeDraggable(r.tileShape);
-		rightclickable.makeRightClickable(r.tileShape, shapeCanvas);
+		rightclickable.makeRightClickable(r, shapeCanvas);
 		leftclickable.makeLeftclickable(r, nameTf, imageTf, colorTf);
 	}
 	
