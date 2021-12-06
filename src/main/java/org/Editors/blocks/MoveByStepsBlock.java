@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 public class MoveByStepsBlock extends Block {
   public MoveByStepsBlock() {

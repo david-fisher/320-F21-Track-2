@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 public class NotBlock extends Block {
   public NotBlock() {

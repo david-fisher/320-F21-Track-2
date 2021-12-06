@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 public class GetTileIndexBlock extends Block {
   public GetTileIndexBlock() {
