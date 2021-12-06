@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 public class InvokeBlock extends Block {
   public InvokeBlock() {

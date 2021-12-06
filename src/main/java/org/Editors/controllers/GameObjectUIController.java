@@ -1,4 +1,4 @@
-package editors.controllers;
+package org.Editors.controllers;
 
 import javafx.scene.control.*;
 import javafx.scene.Parent;
@@ -13,7 +13,7 @@ import javafx.collections.FXCollections;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.net.URL;
-import editors.MainMenu;
+import org.Editors.MainMenu;
 import org.GameObjects.objects.*;
 
 public class GameObjectUIController {

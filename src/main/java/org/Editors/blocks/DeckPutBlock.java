@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 public class DeckPutBlock extends Block {
   public DeckPutBlock() {

@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;

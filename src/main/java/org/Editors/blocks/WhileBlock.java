@@ -23,21 +23,19 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-/**Well, this is bad code but the conndition connection rectangle is stored in connBlockList which
-is stored in the Block class. The connection blocks from the if part and the else part are stored in their
-own lists defined here: ifConnBlockList and elseConnBlockList**/
+/* Condition block stored in connBlockList from Block class. Statements from while stored
+in stmntsConnBlockList defined below*/
 
-public class IfBlock extends Block {
-  private int HEIGHT = 270;
+public class WhileBlock extends Block {
+  private int HEIGHT = 150;
 
   private int firstColWidth = 20;
   private int midColWidth = 100;
   private int lastColWidth = 20;
 
-  protected ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
-  protected ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
+  protected ObservableList<javafx.scene.Node> stmntsConnBlockList = FXCollections.observableArrayList();
 
-  public IfBlock() {
+  public WhileBlock() {
     this.block = new StackPane();
 
     //Make the block draggable
@@ -75,7 +73,7 @@ public class IfBlock extends Block {
     grid.getRowConstraints().add(new RowConstraints(5));
     
     //Defining row 0 of grid
-    Text name = new Text("if");
+    Text name = new Text("while");
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
   
@@ -88,75 +86,37 @@ public class IfBlock extends Block {
     grid.add(result, 0, 1);
     grid.add(connText, 1, 1);
     grid.add(conditionInput, 2, 1);
-    grid.setHalignment(connText, HPos.RIGHT); 
-    
-    // Defining row 2 of grid
-    Text thenText  = new Text("Then");
-    thenText.setFill(WHITE);
-    grid.add(thenText, 1, 2);
-    grid.setHalignment(thenText, HPos.CENTER); 
+    grid.setHalignment(connText, HPos.RIGHT);
 
     //Defining row 3 of grid
-    Rectangle thenInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    ifConnBlockList.addAll(thenInput);
-    VBox vbox = new VBox(5, thenInput);
-    grid.add(vbox, 2, 3);
+    Rectangle firstStmntConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+    stmntsConnBlockList.addAll(firstStmntConn);
+    VBox vbox = new VBox(5, firstStmntConn);
+    grid.add(vbox, 2, 2);
     
     // Define row 4
-    Button addThenOfIf = new Button("+");
-    grid.add(addThenOfIf, 1, 4);
-    grid.setHalignment(addThenOfIf, HPos.CENTER); 
+    Button addStmntBtn = new Button("+");
+    grid.add(addStmntBtn, 1, 3);
+    grid.setHalignment(addStmntBtn, HPos.CENTER); 
 
     // action event
     EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
       public void handle(MouseEvent e)
       {
-        Rectangle thenInput2 = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-        ifConnBlockList.addAll(thenInput2);
-        vbox.getChildren().add(thenInput2);
+        Rectangle newStmntConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+        stmntsConnBlockList.addAll(newStmntConn);
+        vbox.getChildren().add(newStmntConn);
         HEIGHT = HEIGHT + 35;
         base.setHeight(HEIGHT);
       }
     };
-    addThenOfIf.addEventFilter(MouseEvent.MOUSE_CLICKED, event); 
-    
-    //ELSE PART
-    //Defining row 5 of grid
-    Text elseName = new Text("Else");
-    elseName.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
-    elseName.setFill(WHITE);
-    grid.add(elseName, 1, 5);
-    grid.setHalignment(elseName, HPos.CENTER);
-
-    //Defining row 6 of grid
-    Rectangle thenElsePart = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    elseConnBlockList.addAll(thenElsePart);
-    VBox vboxElsePart = new VBox(5, thenElsePart);
-    grid.add(vboxElsePart, 2, 6);
-    
-    // Define row 7
-    Button addThenOfElse = new Button("+");
-    grid.add(addThenOfElse, 1, 7);
-    grid.setHalignment(addThenOfElse, HPos.CENTER); 
-
-    // action event
-    EventHandler<MouseEvent> eventElsePart = new EventHandler<MouseEvent>() {
-      public void handle(MouseEvent e)
-      {
-        Rectangle thenInput2 = new Rectangle(19, 30, SILVER);
-        elseConnBlockList.addAll(thenInput2);
-        vboxElsePart.getChildren().add(thenInput2);
-        HEIGHT = HEIGHT + 35;
-        base.setHeight(HEIGHT);
-      }
-    };
-    addThenOfElse.addEventFilter(MouseEvent.MOUSE_CLICKED, eventElsePart); 
+    addStmntBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event); 
     
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
     this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
     //Create the actual Node object for this block
-    this.createNode("if");
+    //this.createNode("while");
   }
 }
