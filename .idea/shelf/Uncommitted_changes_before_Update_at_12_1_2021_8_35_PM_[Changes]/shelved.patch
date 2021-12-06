@@ -1,0 +1,1187 @@
+Index: src/main/java/org/GameObjects/objects/Tile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.GameObjects.objects;\r\n\r\nimport javafx.scene.paint.Color;\r\nimport java.util.*;\r\n/**\r\n * Write a description of class Tile here.\r\n *\r\n * @author (your name)\r\n * @version (a version number or a date)\r\n */\r\npublic class Tile extends GameObject\r\n{\r\n    // instance variables - replace the example below with your own\r\n\tprivate List<Tile> connections;\r\n\tprivate List<Gamepiece> pieces;\r\n  private static int count = 0;\r\n\r\n    /**\r\n     * Constructor for objects of class Tile\r\n     */\r\n    public Tile()\r\n    {\r\n    \tsuper() ;  \r\n\r\n        connections = new ArrayList<Tile>() ;\r\n        pieces = new ArrayList<Gamepiece>() ;\r\n    \t\r\n        this.setLabel(\"tile\" + String.format(\"%02d\", ++count));\r\n        this.setIcon(\"default_tile_icon.jpg\") ;\r\n        this.setColor(Color.BLACK) ;\r\n\r\n        this.setShape(\"square\") ;\r\n        this.setXPos(0) ;\r\n        this.setYPos(0) ;\r\n        this.setTrait(\"connections\", connections, true) ;\r\n        this.setTrait(\"pieces\", pieces, true) ;\r\n    }\r\n    \r\n    /* Trait Types:\r\n     * \tlabel \t: \tString\r\n     * \ticon \t: \tString\r\n     * \tcolor \t:\tColor\r\n     *  shape   :   String (one of \"square\", \r\n     *  xPos    :   Integer\r\n     *  yPos    :   Integer\r\n     */\r\n    \r\n // set trait to value. Overrides checking for default traits only\r\n    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {\r\n  \t  \r\n  \t  // run game object's set trait first\r\n  \t  if (super.setTrait(trait, value, suppressTraitChecker)) {\r\n  \t\t  return true ;\r\n  \t  }\r\n  \t  \r\n  \t  // returns false if input is invalid\r\n  \t  return false ;\r\n    }\r\n    \r\n    public List<Tile> getConnect()\r\n    {\r\n        return connections;\r\n    }\r\n    \r\n    public boolean addConnect(Tile tile) {\r\n        return connections.add(tile);\r\n    }\r\n    \r\n    public boolean deleteConnect(Tile tile) {\r\n    \treturn connections.remove(tile);\r\n    }\r\n    \r\n    public boolean addGamepiece(Gamepiece gp) {\r\n    \t\r\n    \t// if gp is already on this Tile\r\n    \tif (this.hasGamepiece(gp)) {\r\n    \t\treturn true ;\r\n    \t}\r\n    \t\r\n    \t// otherwise try to add to this\r\n    \tif (pieces.add(gp)) {\r\n    \t\tif (gp.getLocation() != this) {\r\n    \t\t\treturn gp.setLocation(this) ;\r\n    \t\t}\r\n    \t\treturn true ;\r\n    \t}\r\n    \t\r\n    \treturn false ;\r\n    }\r\n    \r\n    public boolean removeGamepiece(Gamepiece gp) {\r\n    \treturn pieces.remove(gp) ;\r\n    }\r\n    \r\n    public boolean hasGamepiece(Gamepiece gp) {\r\n    \treturn pieces.contains(gp) ;\r\n    }\r\n    \r\n    public List<Gamepiece> getGamepieces() {\r\n    \treturn this.pieces ;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/GameObjects/objects/Tile.java b/src/main/java/org/GameObjects/objects/Tile.java
+--- a/src/main/java/org/GameObjects/objects/Tile.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameObjects/objects/Tile.java	(date 1638405122766)
+@@ -1,7 +1,12 @@
+ package org.GameObjects.objects;
+ 
+ import javafx.scene.paint.Color;
++import javafx.scene.shape.Shape;
++
++
+ import java.util.*;
++import java.util.List;
++
+ /**
+  * Write a description of class Tile here.
+  *
+@@ -13,6 +18,7 @@
+     // instance variables - replace the example below with your own
+ 	private List<Tile> connections;
+ 	private List<Gamepiece> pieces;
++    private Shape parent;
+   private static int count = 0;
+ 
+     /**
+@@ -99,4 +105,8 @@
+     public List<Gamepiece> getGamepieces() {
+     	return this.pieces ;
+     }
++
++    public Shape getParent() { return parent; }
++
++    public void setParent(Shape p) { this.parent = p; }
+ }
+Index: src/main/java/org/scenebuilder/scenebuilder/Display.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/Display.java b/src/main/java/org/GameplayUI/Display.java
+rename from src/main/java/org/scenebuilder/scenebuilder/Display.java
+rename to src/main/java/org/GameplayUI/Display.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/Display.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/Display.java	(date 1638408891590)
+@@ -1,7 +1,11 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI;
+ 
++import javafx.scene.effect.DropShadow;
++import javafx.scene.paint.Color;
++import javafx.scene.shape.Shape;
+ import org.GameObjects.objects.*;
+ 
++
+ import java.util.ArrayList;
+ 
+ //static methods
+@@ -11,15 +15,41 @@
+ 
+     }
+ 
++
+     public static Tile displayMoveOptions(ArrayList<Tile> tiles) {
+ // TODO: This method will be implemented by Minjex.
+-            if (tiles.size() == 1) {
+-                return tiles.get(0);
++        if (tiles.size() == 1) {
++            return tiles.get(0);
++        }
++        Tile chosen = null;
++        boolean waiting = true;
++        //highlight tiles
++        for (int i = 0; i < tiles.size(); i++) {
++            Tile tile = tiles.get(i);
++            Shape parent = tile.getParent();
++            DropShadow borderGlow= new DropShadow();
++            borderGlow.setOffsetY(0f);
++            borderGlow.setOffsetX(0f);
++            borderGlow.setColor(Color.GOLD);
++            parent.setEffect(borderGlow);
++            parent.setOnMouseClicked(event -> {
++                parent.setDisable(true);
++            });
++        }
++
++        while (waiting) {
++            for (int i = 0; i < tiles.size(); i++) {
++                Tile tile = tiles.get(i);
++                if (tile.getParent().isDisable()) {
++                    tile.getParent().setDisable(false);
++                    chosen = tile;
++                    break;
++                }
+             }
+-            while (true) {
+-                return null;
+         }
++        return chosen;
+     }
++
+ 
+     public static void print(String string) {
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/MainController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/MainController.java b/src/main/java/org/GameplayUI/controllers/MainController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/MainController.java
+rename to src/main/java/org/GameplayUI/controllers/MainController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/MainController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/MainController.java	(date 1638408072525)
+@@ -1,7 +1,6 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.event.ActionEvent;
+-import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+ import javafx.geometry.Insets;
+ import javafx.geometry.Pos;
+@@ -9,7 +8,6 @@
+ import javafx.scene.Node;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
+-import javafx.scene.control.Button;
+ import javafx.scene.control.Label;
+ import javafx.scene.effect.ColorAdjust;
+ import javafx.scene.input.MouseEvent;
+@@ -17,9 +15,9 @@
+ import javafx.scene.layout.Priority;
+ import javafx.scene.layout.VBox;
+ import javafx.scene.paint.Color;
+-import javafx.scene.text.Font;
+ import javafx.stage.Screen;
+ import javafx.stage.Stage;
++import org.GameplayUI.BasicApplication;
+ 
+ import java.io.IOException;
+ 
+@@ -29,7 +27,7 @@
+     private void initSettings() {
+ 
+         Label settingsButton = new Label("Settings");
+-        setStyle(settingsButton, "45", "LightGrey", 175, 70);
++        setStyle(settingsButton, "45", 175, 70);
+ 
+ 
+         settingsButtonHBox = new HBox();
+@@ -50,7 +48,7 @@
+     private void initButtons() {
+ 
+         Label playButton = new Label("Play Game");
+-        setStyle(playButton, "45", "LimeGreen", 275, 80);
++        setStyle(playButton, "45", 275, 80);
+ 
+         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
+ 
+@@ -59,7 +57,7 @@
+         });
+ 
+         Label newButton = new Label("Create Game");
+-        setStyle(newButton, "45", "Blue", 275, 80);
++        setStyle(newButton, "45", 275, 80);
+ 
+         VBox.setMargin(newButton, VBox.getMargin(playButton));
+ 
+@@ -72,7 +70,7 @@
+         });
+ 
+         Label editButton = new Label("Edit Game");
+-        setStyle(editButton, "45", "DarkMagenta", 275, 80);
++        setStyle(editButton, "45", 275, 80);
+ 
+         VBox.setMargin(editButton, VBox.getMargin(playButton));
+ 
+@@ -85,7 +83,7 @@
+         });
+ 
+         Label exitButton = new Label("Exit");
+-        setStyle(exitButton, "45", "Red", 275, 80);
++        setStyle(exitButton, "45", 275, 80);
+ 
+         VBox.setMargin(exitButton, VBox.getMargin(playButton));
+ 
+@@ -156,10 +154,10 @@
+         stage.show();
+     }
+ 
+-    public void initDarken(Label label) {
++    public void initLighten(Label label) {
+         label.setOnMouseEntered(e -> {
+             ColorAdjust colorAdjust = new ColorAdjust();
+-            colorAdjust.setBrightness(-0.2);
++            colorAdjust.setBrightness(0.2);
+             label.setEffect(colorAdjust);
+         });
+ 
+@@ -168,18 +166,18 @@
+         });
+     }
+ 
+-    public void setStyle(Label label, String size, String color, double width, double height) {
++    public void setStyle(Label label, String size, double width, double height) {
+         label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                 "-fx-background-radius: 5 5 5 5; " +
+                 "-fx-font-family: Serif; " +
+                 "-fx-font-size: " + size + "; " +
+-                "-fx-background-color: " + color + "; " +
+-                "-fx-border-color: BLACK;");
+-        label.setTextFill(Color.BLACK);
++                "-fx-background-color: Black; " +
++                "-fx-border-color: White;");
++        label.setTextFill(Color.WHITE);
+         label.setAlignment(Pos.CENTER);
+         label.setPrefWidth(width);
+         label.setPrefHeight(height);
+-        initDarken(label);
++        initLighten(label);
+     }
+ 
+ }
+Index: src/main/java/org/scenebuilder/scenebuilder/PlayController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/PlayController.java b/src/main/java/org/GameplayUI/controllers/PlayController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/PlayController.java
+rename to src/main/java/org/GameplayUI/controllers/PlayController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/PlayController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/PlayController.java	(date 1638403831255)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.animation.KeyFrame;
+ import javafx.animation.Timeline;
+@@ -24,10 +24,14 @@
+ import javafx.stage.Stage;
+ import javafx.util.Duration;
+ 
+-import org.RuleEngine.engine.GameState;
++import org.GameplayUI.BasicApplication;
++import org.GameplayUI.dummy.DummyGame;
++import org.GameplayUI.dummy.DummyGameBoard;
++import org.GameplayUI.dummy.DummyInventory;
++import org.RuleEngine.engine.*;
+ import org.GameObjects.objects.*;
+ import org.GameObjects.objects.Spinner;
+-import org.scenebuilder.scenebuilder.dummy.*;
++import org.GameplayUI.SetupData;
+ 
+ import java.io.IOException;
+ import java.util.ArrayList;
+@@ -35,10 +39,6 @@
+ 
+ public class PlayController extends ScreenController {
+ 
+-    @FXML
+-    private Label playGameLabel;
+-    @FXML
+-    private Label playSetupLabel;
+     @FXML
+     private ImageView playSettings;
+     @FXML
+@@ -245,6 +245,7 @@
+             boardPane.getChildren().addAll(tile);
+             tile.setLayoutX(t.getXPos());
+             tile.setLayoutY(t.getYPos());
++            t.setParent(tile);
+         });
+         // for each tile
+         // create tile
+Index: src/main/java/org/scenebuilder/scenebuilder/BasicApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/BasicApplication.java b/src/main/java/org/GameplayUI/BasicApplication.java
+rename from src/main/java/org/scenebuilder/scenebuilder/BasicApplication.java
+rename to src/main/java/org/GameplayUI/BasicApplication.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/BasicApplication.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/BasicApplication.java	(date 1638399492002)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI;
+ 
+ import javafx.application.Application;
+ import javafx.geometry.Rectangle2D;
+@@ -6,9 +6,13 @@
+ import javafx.stage.Screen;
+ import javafx.stage.Stage;
+ import javafx.stage.StageStyle;
++import org.GameplayUI.dummy.DummyGame;
++import org.GameplayUI.dummy.DummyGameBoard;
++import org.GameplayUI.dummy.DummyGameRules;
++import org.GameplayUI.dummy.DummyInventory;
+ import org.RuleEngine.engine.GameState;
+ import org.GameObjects.objects.*;
+-import org.scenebuilder.scenebuilder.dummy.*;
++import org.GameplayUI.controllers.MainController;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+Index: target/classes/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,60 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.layout.ColumnConstraints?>
+-<?import javafx.scene.layout.GridPane?>
+-<?import javafx.scene.layout.RowConstraints?>
+-<?import javafx.scene.text.Font?>
+-
+-<AnchorPane prefHeight="560.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+-   <children>
+-      <GridPane alignment="CENTER" hgap="10.0" layoutY="14.0" prefHeight="385.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+-        <columnConstraints>
+-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="701.3333333333334" minWidth="10.0" percentWidth="80.0" prefWidth="674.3333485921224" />
+-          <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER" maxWidth="733.9999580383301" minWidth="0.0" prefWidth="26.999984741210938" />
+-          <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER" maxWidth="399.3333740234375" minWidth="10.0" percentWidth="20.0" prefWidth="155.33334350585938" />
+-        </columnConstraints>
+-        <rowConstraints>
+-            <RowConstraints maxHeight="107.33331298828125" minHeight="10.0" percentHeight="20.0" prefHeight="87.33331298828125" vgrow="SOMETIMES" />
+-            <RowConstraints maxHeight="107.33331298828125" minHeight="10.0" prefHeight="18.33334096272786" vgrow="SOMETIMES" />
+-            <RowConstraints maxHeight="213.3333231608073" minHeight="8.666684468587235" percentHeight="30.0" prefHeight="180.00001017252606" vgrow="SOMETIMES" />
+-          <RowConstraints maxHeight="215.99998219807944" minHeight="8.666646321614564" prefHeight="8.666646321614564" vgrow="SOMETIMES" />
+-          <RowConstraints maxHeight="201.0" minHeight="0.0" prefHeight="190.33331298828125" vgrow="SOMETIMES" />
+-          <RowConstraints fillHeight="false" maxHeight="166.66666666666663" minHeight="6.333333333333314" percentHeight="5.0" prefHeight="17.000020345052064" valignment="BASELINE" vgrow="NEVER" />
+-            <RowConstraints fillHeight="false" maxHeight="100.3333129882813" minHeight="10.0" percentHeight="14.0" prefHeight="73.66662597656256" valignment="BASELINE" vgrow="NEVER" />
+-        </rowConstraints>
+-         <children>
+-            <Label alignment="CENTER" prefHeight="70.0" prefWidth="802.0" style="-fx-background-color: gray;" text="Inventory" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+-               <font>
+-                  <Font size="48.0" />
+-               </font>
+-            </Label>
+-            <Label alignment="CENTER" prefHeight="123.0" prefWidth="156.0" style="-fx-background-color: gray;" text="Settings" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label alignment="CENTER" prefHeight="235.0" prefWidth="156.0" style="-fx-background-color: gray;" text="Decks" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label alignment="CENTER" prefHeight="235.0" prefWidth="156.0" style="-fx-background-color: gray;" text="RNG" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="508.0" prefWidth="658.0" style="-fx-background-color: gray;" text="Board" GridPane.hgrow="ALWAYS" GridPane.rowSpan="5" GridPane.vgrow="ALWAYS">
+-               <font>
+-                  <Font size="48.0" />
+-               </font>
+-            </Label>
+-         </children>
+-         <padding>
+-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+-         </padding>
+-      </GridPane>
+-   </children>
+-</AnchorPane>
+Index: target/classes/org/scenebuilder/scenebuilder/testfxmL.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/testfxmL.fxml b/target/classes/org/scenebuilder/scenebuilder/testfxmL.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/testfxmL.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.layout.BorderPane?>
+-<?import javafx.scene.layout.VBox?>
+-
+-
+-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1">
+-   <center>
+-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+-         <children>
+-            <Button mnemonicParsing="false" text="Button" />
+-            <Button mnemonicParsing="false" text="Button" />
+-         </children>
+-      </VBox>
+-   </center>
+-</BorderPane>
+Index: target/classes/org/scenebuilder/scenebuilder/mainFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/mainFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/mainFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/mainFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,45 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.layout.BorderPane?>
+-<?import javafx.scene.layout.VBox?>
+-<?import javafx.scene.text.Font?>
+-
+-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.MainFXMLController">
+-   <center>
+-      <VBox alignment="CENTER" layoutX="250.0" layoutY="79.0" prefHeight="200.0" prefWidth="100.0">
+-         <children>
+-            <Button fx:id="mainPlay" contentDisplay="CENTER" mnemonicParsing="false" onAction="#playFromMain" prefHeight="50.0" prefWidth="200.0" text="Play Game" textAlignment="CENTER">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin></Button>
+-            <Button fx:id="mainNew" mnemonicParsing="false" onAction="#newFromMain" prefHeight="50.0" prefWidth="200.0" text="New Game">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin></Button>
+-            <Button fx:id="mainEdit" alignment="CENTER" mnemonicParsing="false" onAction="#editFromMain" prefHeight="50.0" prefWidth="200.0" text="Edit Game" textAlignment="CENTER">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin></Button>
+-            <Button fx:id="mainEdit1" alignment="CENTER" mnemonicParsing="false" onAction="#exitFromMain" prefHeight="50.0" prefWidth="200.0" text="Exit To Desktop" textAlignment="CENTER">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin>
+-            </Button>
+-         </children>
+-      </VBox>
+-   </center>
+-</BorderPane>
+Index: target/classes/org/scenebuilder/scenebuilder/setupFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/setupFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/setupFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/setupFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,79 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.CheckBox?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.control.ScrollPane?>
+-<?import javafx.scene.control.Separator?>
+-<?import javafx.scene.control.TextField?>
+-<?import javafx.scene.layout.BorderPane?>
+-<?import javafx.scene.layout.HBox?>
+-<?import javafx.scene.layout.VBox?>
+-<?import javafx.scene.text.Font?>
+-
+-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SetupFXMLController">
+-   <top>
+-      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="606.0" style="-fx-font-family: serif; -fx-background-color: radial-gradient(radius 100%, maroon, lightgrey); -fx-border-color: black;" text="Game Setup" BorderPane.alignment="CENTER">
+-         <font>
+-            <Font size="24.0" />
+-         </font></Label>
+-   </top>
+-   <center>
+-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+-         <children>
+-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="600.0">
+-               <children>
+-                  <Label prefHeight="27.0" prefWidth="149.0" style="-fx-font-family: serif;" text="Number of Players:">
+-                     <font>
+-                        <Font size="18.0" />
+-                     </font>
+-                  </Label>
+-                  <Separator halignment="LEFT" orientation="VERTICAL" prefHeight="31.0" prefWidth="46.0" />
+-                  <Button id="minusButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decPlayer" pickOnBounds="false" prefHeight="26.0" prefWidth="26.0" text="-">
+-                     <font>
+-                        <Font size="10.0" />
+-                     </font>
+-                  </Button>
+-                  <TextField id="numPlayers" fx:id="numPlayersTextField" alignment="CENTER" prefHeight="26.0" prefWidth="62.0" />
+-                  <Button id="plusButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPlayer" pickOnBounds="false" prefHeight="26.0" prefWidth="26.0" text="+">
+-                     <font>
+-                        <Font size="10.0" />
+-                     </font>
+-                  </Button>
+-               </children>
+-            </HBox>
+-            <Separator prefHeight="16.0" prefWidth="600.0" />
+-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+-               <content>
+-                  <VBox fx:id="setupVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="582.0" />
+-               </content>
+-            </ScrollPane>
+-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" VBox.vgrow="NEVER">
+-               <children>
+-                  <Button id="backButton" alignment="CENTER" mnemonicParsing="false" onAction="#backFromSetup" prefHeight="45.0" prefWidth="82.0" style="-fx-font-family: serif;" text="Back">
+-                     <HBox.margin>
+-                        <Insets left="5.0" />
+-                     </HBox.margin>
+-                     <font>
+-                        <Font size="16.0" />
+-                     </font></Button>
+-                  <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="133.0" />
+-                  <CheckBox id="enableTutorialMode" fx:id="setupIsTutorial" alignment="CENTER" mnemonicParsing="false" prefHeight="44.0" prefWidth="159.0" style="-fx-font-family: serif;" text="Enable Tutorial Mode" />
+-                  <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="128.0" />
+-                  <Button id="startGameButton" alignment="CENTER" mnemonicParsing="false" onAction="#playFromSetup" prefHeight="44.0" prefWidth="96.0" style="-fx-font-family: serif;" text="Start Game">
+-                     <HBox.margin>
+-                        <Insets right="5.0" />
+-                     </HBox.margin>
+-                     <font>
+-                        <Font size="16.0" />
+-                     </font></Button>
+-               </children>
+-               <VBox.margin>
+-                  <Insets />
+-               </VBox.margin>
+-            </HBox>
+-         </children>
+-      </VBox>
+-   </center>
+-</BorderPane>
+Index: target/classes/org/scenebuilder/scenebuilder/selectionFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/selectionFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/selectionFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/selectionFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,87 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.control.ScrollPane?>
+-<?import javafx.scene.layout.BorderPane?>
+-<?import javafx.scene.layout.HBox?>
+-<?import javafx.scene.layout.Pane?>
+-<?import javafx.scene.layout.VBox?>
+-<?import javafx.scene.text.Font?>
+-
+-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/1.8.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SelectionFXMLController">
+-   <bottom>
+-      <HBox fx:id="selectionButtonHBox" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+-         <children>
+-            <Button fx:id="selectionBack" mnemonicParsing="false" onAction="#backFromSelection" prefHeight="51.0" prefWidth="115.0" text="Back">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <HBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </HBox.margin>
+-            </Button>
+-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+-            <Button fx:id="selectionPlayButton" disable="true" mnemonicParsing="false" onAction="#backFromSelection" prefHeight="51.0" prefWidth="267.0" text="Select A Game">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <HBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </HBox.margin>
+-            </Button>
+-         </children>
+-      </HBox>
+-   </bottom>
+-   <center>
+-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+-         <children>
+-            <Label fx:id="selectionNewGamesLabel" text="New Games">
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin>
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <ScrollPane fx:id="selectionNewScrollPane" fitToHeight="True" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin>
+-               <content>
+-                  <HBox fx:id="newGamesHBox" alignment="CENTER_LEFT">
+-                     <padding>
+-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-                     </padding></HBox>
+-               </content>
+-               <padding>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </padding>
+-            </ScrollPane>
+-            <Label text="Saved Games">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin>
+-            </Label>
+-            <ScrollPane fx:id="selectionSavedScrollPane" fitToHeight="True" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+-               <VBox.margin>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </VBox.margin>
+-               <content>
+-                  <HBox fx:id="savedGamesHBox" alignment="CENTER_LEFT">
+-                     <padding>
+-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-                     </padding></HBox>
+-               </content>
+-               <padding>
+-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+-               </padding>
+-            </ScrollPane>
+-         </children>
+-      </VBox>
+-   </center>
+-</BorderPane>
+Index: target/classes/org/scenebuilder/scenebuilder/SettingsFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/SettingsFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/SettingsFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/SettingsFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,29 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.scene.control.CheckBox?>
+-<?import javafx.scene.control.ComboBox?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.text.Font?>
+-
+-
+-<AnchorPane prefHeight="495.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SettingsController">
+-   <children>
+-      <Label alignment="CENTER" layoutX="249.0" layoutY="23.0" prefHeight="41.0" prefWidth="205.0" text="Settings">
+-         <font>
+-            <Font size="36.0" />
+-         </font>
+-      </Label>
+-      <CheckBox layoutX="192.0" layoutY="118.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="320.0" text="Full Screen">
+-         <font>
+-            <Font size="36.0" />
+-         </font>
+-      </CheckBox>
+-      <Label alignment="CENTER" layoutX="192.0" layoutY="189.0" prefHeight="41.0" prefWidth="205.0" text="Window Size">
+-         <font>
+-            <Font size="36.0" />
+-         </font>
+-      </Label>
+-      <ComboBox layoutX="27.0" layoutY="225.0" prefHeight="35.0" prefWidth="205.0" />
+-   </children>
+-</AnchorPane>
+Index: target/classes/org/scenebuilder/scenebuilder/playFXML.fxml
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml
+deleted file mode 100644
+--- a/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ /dev/null	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
+@@ -1,49 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.control.ScrollPane?>
+-<?import javafx.scene.image.ImageView?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.layout.Pane?>
+-<?import javafx.scene.text.Font?>
+-
+-<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+-   <children>
+-      <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="2.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+-         <font>
+-            <Font size="14.0" />
+-         </font>
+-      </Label>
+-      <Pane layoutX="908.3333129882812" layoutY="15.0" onMouseClicked="#displayPopup" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+-         <children>
+-            <ImageView fx:id="playSettings" />
+-         </children>
+-      </Pane>
+-      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-235.0">
+-         <opaqueInsets>
+-            <Insets />
+-         </opaqueInsets>
+-      </ScrollPane>
+-      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="75.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="120.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+-         <font>
+-            <Font size="24.0" />
+-         </font>
+-         <opaqueInsets>
+-            <Insets />
+-         </opaqueInsets>
+-      </Label>
+-      <ScrollPane fx:id="rngPane" layoutX="19.0" layoutY="293.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-234.33333333333331" />
+-      <Label fx:id="buttonRNG" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="293.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="120.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="RNG" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+-         <font>
+-            <Font size="24.0" />
+-         </font>
+-      </Label>
+-      <ScrollPane fx:id="inventoryPane" layoutX="19.0" layoutY="511.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-234.33333333333331" />
+-      <Label fx:id="buttonInventory" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="511.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="120.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Inventory" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+-         <font>
+-            <Font size="24.0" />
+-         </font>
+-      </Label>
+-   </children>
+-</AnchorPane>
+Index: src/main/java/org/scenebuilder/scenebuilder/SettingsObject.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/SettingsObject.java b/src/main/java/org/GameplayUI/SettingsObject.java
+rename from src/main/java/org/scenebuilder/scenebuilder/SettingsObject.java
+rename to src/main/java/org/GameplayUI/SettingsObject.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/SettingsObject.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/SettingsObject.java	(date 1638398644570)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI;
+ 
+ import java.util.Arrays;
+ 
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/src/main/java/org/GameplayUI/.gitignore
+rename from .gitignore
+rename to src/main/java/org/GameplayUI/.gitignore
+--- a/.gitignore	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/.gitignore	(date 1638407702154)
+@@ -11,7 +11,7 @@
+ .mtj.tmp/
+ 
+ ### IntelliJ IDEA ###
+-.idea
++../../../../../.idea
+ *.iws
+ *.iml
+ *.ipr
+Index: src/main/java/org/scenebuilder/scenebuilder/SetupController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/SetupController.java b/src/main/java/org/GameplayUI/controllers/SetupController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/SetupController.java
+rename to src/main/java/org/GameplayUI/controllers/SetupController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/SetupController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/SetupController.java	(date 1638398644819)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.beans.binding.Bindings;
+ import javafx.beans.value.ChangeListener;
+@@ -26,9 +26,10 @@
+ import org.GameObjects.objects.GameObject;
+ import org.GameObjects.objects.Gamepiece;
+ import org.GameObjects.objects.Player;
+-import org.GameObjects.objects.Token;
+-import org.scenebuilder.scenebuilder.dummy.DummyGame;
+-import org.scenebuilder.scenebuilder.dummy.DummyInventory;
++import org.GameplayUI.BasicApplication;
++import org.GameplayUI.SetupData;
++import org.GameplayUI.dummy.DummyGame;
++import org.GameplayUI.dummy.DummyInventory;
+ 
+ import java.io.IOException;
+ import java.util.*;
+Index: src/main/java/org/scenebuilder/scenebuilder/ScreenController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/ScreenController.java b/src/main/java/org/GameplayUI/controllers/ScreenController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/ScreenController.java
+rename to src/main/java/org/GameplayUI/controllers/ScreenController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/ScreenController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/ScreenController.java	(date 1638398644792)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.geometry.Pos;
+ import javafx.geometry.Rectangle2D;
+Index: src/main/java/org/scenebuilder/scenebuilder/SetupData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/SetupData.java b/src/main/java/org/GameplayUI/SetupData.java
+rename from src/main/java/org/scenebuilder/scenebuilder/SetupData.java
+rename to src/main/java/org/GameplayUI/SetupData.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/SetupData.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/SetupData.java	(date 1638398644583)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI;
+ 
+ import org.GameObjects.objects.Player;
+ 
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>org.scenebuilder</groupId>\r\n    <artifactId>SceneBuilder</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n    <name>SceneBuilder</name>\r\n\r\n    <properties>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n        <junit.version>5.7.1</junit.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        \r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-controls</artifactId>\r\n            <version>11.0.2</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-fxml</artifactId>\r\n            <version>11.0.2</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-web</artifactId>\r\n            <version>11.0.2</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.controlsfx</groupId>\r\n            <artifactId>controlsfx</artifactId>\r\n            <version>11.1.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.dlsc.formsfx</groupId>\r\n            <artifactId>formsfx-core</artifactId>\r\n            <version>11.3.2</version>\r\n            <exclusions>\r\n                <exclusion>\r\n                    <groupId>org.openjfx</groupId>\r\n                    <artifactId>*</artifactId>\r\n                </exclusion>\r\n            </exclusions>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>net.synedra</groupId>\r\n            <artifactId>validatorfx</artifactId>\r\n            <version>0.1.13</version>\r\n            <exclusions>\r\n                <exclusion>\r\n                    <groupId>org.openjfx</groupId>\r\n                    <artifactId>*</artifactId>\r\n                </exclusion>\r\n            </exclusions>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.kordamp.ikonli</groupId>\r\n            <artifactId>ikonli-javafx</artifactId>\r\n            <version>12.2.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.kordamp.bootstrapfx</groupId>\r\n            <artifactId>bootstrapfx-core</artifactId>\r\n            <version>0.4.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>eu.hansolo</groupId>\r\n            <artifactId>tilesfx</artifactId>\r\n            <version>11.48</version>\r\n            <exclusions>\r\n                <exclusion>\r\n                    <groupId>org.openjfx</groupId>\r\n                    <artifactId>*</artifactId>\r\n                </exclusion>\r\n            </exclusions>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-api</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-engine</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.scenebuilder</groupId>\r\n            <artifactId>SceneBuilder</artifactId>\r\n            <version>1.0-SNAPSHOT</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-fxml</artifactId>\r\n            <version>15.0.1</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>junit</groupId>\r\n            <artifactId>junit</artifactId>\r\n            <version>RELEASE</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>junit</groupId>\r\n            <artifactId>junit</artifactId>\r\n            <version>RELEASE</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <version>3.8.1</version>\r\n                <configuration>\r\n                    <source>16</source>\r\n                    <target>16</target>\r\n                </configuration>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.openjfx</groupId>\r\n                <artifactId>javafx-maven-plugin</artifactId>\r\n                <version>0.0.6</version>\r\n                <executions>\r\n                    <execution>\r\n                        <!-- Default configuration for running with: mvn clean javafx:run -->\r\n                        <id>default-cli</id>\r\n                        <configuration>\r\n                            <mainClass>org.scenebuilder.scenebuilder/org.scenebuilder.scenebuilder.BasicApplication\r\n                            </mainClass>\r\n                        </configuration>\r\n                    </execution>\r\n                </executions>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/pom.xml	(date 1638398644706)
+@@ -91,11 +91,11 @@
+             <version>${junit.version}</version>
+             <scope>test</scope>
+         </dependency>
+-        <dependency>
+-            <groupId>org.scenebuilder</groupId>
+-            <artifactId>SceneBuilder</artifactId>
+-            <version>1.0-SNAPSHOT</version>
+-        </dependency>
++<!--        <dependency>-->
++<!--            <groupId>org.scenebuilder</groupId>-->
++<!--            <artifactId>SceneBuilder</artifactId>-->
++<!--            <version>1.0-SNAPSHOT</version>-->
++<!--        </dependency>-->
+         <dependency>
+             <groupId>org.openjfx</groupId>
+             <artifactId>javafx-fxml</artifactId>
+@@ -135,7 +135,7 @@
+                         <!-- Default configuration for running with: mvn clean javafx:run -->
+                         <id>default-cli</id>
+                         <configuration>
+-                            <mainClass>org.scenebuilder.scenebuilder/org.scenebuilder.scenebuilder.BasicApplication
++                            <mainClass>org.scenebuilder.scenebuilder/org.GameplayUI.BasicApplication
+                             </mainClass>
+                         </configuration>
+                     </execution>
+Index: src/main/java/org/GameObjects/objects/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.GameObjects.objects;\r\n\r\nimport javafx.scene.paint.Color;\r\nimport org.scenebuilder.scenebuilder.dummy.DummyInventory;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Random;\r\n\r\npublic class Player {\r\n\r\n    private String playerID;\r\n\r\n    private Color color;\r\n    private ArrayList<Gamepiece> gamePieces;\r\n    private DummyInventory inventory;\r\n\r\n    private boolean isHuman;\r\n\r\n    public Player(String playerID, Color color, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {\r\n        this.playerID = playerID;\r\n        this.color = color;\r\n        this.gamePieces = gamePieces;\r\n        this.inventory = inventory;\r\n        this.isHuman = isHuman;\r\n    }\r\n\r\n    public Player(String playerID, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {\r\n        this.playerID = playerID;\r\n        this.gamePieces = gamePieces;\r\n        this.inventory = inventory;\r\n        this.isHuman = isHuman;\r\n\r\n        this.color = getRandomColor();\r\n    }\r\n\r\n    // setters\r\n    public void setPlayerID(String playerID) {\r\n        this.playerID = playerID;\r\n    }\r\n    public void setColor(Color color) { this.color = color; }\r\n    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }\r\n    public void setInventory(DummyInventory inventory) { this.inventory = inventory; }\r\n    public void setIsHuman(boolean isHuman) {\r\n        this.isHuman = isHuman;\r\n    }\r\n\r\n    // getters\r\n    public String getPlayerID() {\r\n        return this.playerID;\r\n    }\r\n    public Color getColor() { return this.color; }\r\n    public ArrayList<Gamepiece> getGamePieces() { return this.gamePieces; }\r\n    public DummyInventory getInventory() { return this.inventory; }\r\n    public boolean getIsHuman() { return this.isHuman; }\r\n\r\n    // modifiers\r\n    public void addPiece(Gamepiece piece) { this.gamePieces.add(piece); }\r\n    public void removePiece(Gamepiece piece) { this.gamePieces.remove(piece); }\r\n    public void removePiece(int pieceIndex) { this.gamePieces.remove(pieceIndex); }\r\n    public void setPiece(int pieceIndex, Gamepiece piece) { this.gamePieces.set(pieceIndex, piece); }\r\n\r\n    public Color getRandomColor(){\r\n        Random rand = new Random(System.currentTimeMillis());\r\n\r\n        int red = rand.nextInt(255);\r\n        int green = rand.nextInt(255);\r\n        int blue = rand.nextInt(255);\r\n\r\n        return Color.rgb(red, green, blue, .99);\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Player{\" +\r\n                \"playerID='\" + playerID + '\\'' +\r\n                \", color=\" + color +\r\n                \", gamePieces=\" + gamePieces +\r\n                \", inventory=\" + inventory +\r\n                \", isHuman=\" + isHuman +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/GameObjects/objects/Player.java b/src/main/java/org/GameObjects/objects/Player.java
+--- a/src/main/java/org/GameObjects/objects/Player.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameObjects/objects/Player.java	(date 1638398644558)
+@@ -1,7 +1,7 @@
+ package org.GameObjects.objects;
+ 
+ import javafx.scene.paint.Color;
+-import org.scenebuilder.scenebuilder.dummy.DummyInventory;
++import org.GameplayUI.dummy.DummyInventory;
+ 
+ import java.util.ArrayList;
+ import java.util.Random;
+Index: src/main/java/org/scenebuilder/scenebuilder/SelectionController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/SelectionController.java b/src/main/java/org/GameplayUI/controllers/SelectionController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/SelectionController.java
+rename to src/main/java/org/GameplayUI/controllers/SelectionController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/SelectionController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/SelectionController.java	(date 1638398644475)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.beans.binding.Bindings;
+ import javafx.collections.ObservableList;
+@@ -10,18 +10,17 @@
+ import javafx.scene.Node;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
+-import javafx.scene.control.Button;
+ import javafx.scene.control.Label;
+ import javafx.scene.control.ScrollPane;
+ import javafx.scene.effect.ColorAdjust;
+ import javafx.scene.image.ImageView;
+-import javafx.scene.input.MouseEvent;
+ import javafx.scene.layout.*;
+ import javafx.scene.paint.Color;
+-import javafx.scene.text.Font;
+ import javafx.stage.Screen;
+ import javafx.stage.Stage;
+-import org.scenebuilder.scenebuilder.dummy.DummyGame;
++import org.GameplayUI.dummy.DummyGame;
++import org.GameplayUI.BasicApplication;
++import org.GameplayUI.SetupData;
+ 
+ import java.io.IOException;
+ import java.util.ArrayList;
+Index: src/main/resources/org/scenebuilder/scenebuilder/SettingsFXML.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/SettingsFXML.fxml b/src/main/resources/org/GameplayUI/SettingsFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/SettingsFXML.fxml
+rename to src/main/resources/org/GameplayUI/SettingsFXML.fxml
+--- a/src/main/resources/org/scenebuilder/scenebuilder/SettingsFXML.fxml	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/resources/org/GameplayUI/SettingsFXML.fxml	(date 1638398644804)
+@@ -7,7 +7,7 @@
+ <?import javafx.scene.text.Font?>
+ 
+ 
+-<AnchorPane prefHeight="495.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.SettingsController">
++<AnchorPane prefHeight="495.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.GameplayUI.controllers.SettingsController">
+    <children>
+       <Label alignment="CENTER" layoutX="249.0" layoutY="23.0" prefHeight="41.0" prefWidth="205.0" text="Settings">
+          <font>
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyTile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyTile.java b/src/main/java/org/GameplayUI/dummy/DummyTile.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyTile.java
+rename to src/main/java/org/GameplayUI/dummy/DummyTile.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyTile.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyTile.java	(date 1638398644750)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import javafx.scene.paint.Color;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyPlayer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyPlayer.java b/src/main/java/org/GameplayUI/dummy/DummyPlayer.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyPlayer.java
+rename to src/main/java/org/GameplayUI/dummy/DummyPlayer.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyPlayer.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyPlayer.java	(date 1638398644658)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import javafx.scene.paint.Color;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyRNG.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyRNG.java b/src/main/java/org/GameplayUI/dummy/DummyRNG.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyRNG.java
+rename to src/main/java/org/GameplayUI/dummy/DummyRNG.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyRNG.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyRNG.java	(date 1638398644507)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ public class DummyRNG {
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameToken.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameToken.java b/src/main/java/org/GameplayUI/dummy/DummyGameToken.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameToken.java
+rename to src/main/java/org/GameplayUI/dummy/DummyGameToken.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameToken.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyGameToken.java	(date 1638398644542)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import javafx.scene.paint.Color;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyInventory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyInventory.java b/src/main/java/org/GameplayUI/dummy/DummyInventory.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyInventory.java
+rename to src/main/java/org/GameplayUI/dummy/DummyInventory.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyInventory.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyInventory.java	(date 1638398644682)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import org.GameObjects.objects.GameObject;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameRules.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameRules.java b/src/main/java/org/GameplayUI/dummy/DummyGameRules.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameRules.java
+rename to src/main/java/org/GameplayUI/dummy/DummyGameRules.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameRules.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyGameRules.java	(date 1638398644694)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ public class DummyGameRules {
+ 
+Index: src/main/java/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module org.scenebuilder.scenebuilder {\r\n    requires javafx.controls;\r\n    requires javafx.fxml;\r\n    requires com.jfoenix;\r\n    requires java.desktop;\r\n    requires org.yaml.snakeyaml;\r\n\r\n\r\n    opens org.scenebuilder.scenebuilder to javafx.fxml;\r\n    exports org.scenebuilder.scenebuilder;\r\n    exports org.scenebuilder.scenebuilder.dummy;\r\n    opens org.scenebuilder.scenebuilder.dummy to javafx.fxml;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/module-info.java b/src/main/java/module-info.java
+--- a/src/main/java/module-info.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/module-info.java	(date 1638398644492)
+@@ -6,8 +6,10 @@
+     requires org.yaml.snakeyaml;
+ 
+ 
+-    opens org.scenebuilder.scenebuilder to javafx.fxml;
+-    exports org.scenebuilder.scenebuilder;
+-    exports org.scenebuilder.scenebuilder.dummy;
+-    opens org.scenebuilder.scenebuilder.dummy to javafx.fxml;
++    opens org.GameplayUI to javafx.fxml;
++    exports org.GameplayUI;
++    exports org.GameplayUI.dummy;
++    opens org.GameplayUI.dummy to javafx.fxml;
++    exports org.GameplayUI.controllers;
++    opens org.GameplayUI.controllers to javafx.fxml;
+ }
+\ No newline at end of file
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGamestate.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGamestate.java b/src/main/java/org/GameplayUI/dummy/DummyGamestate.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGamestate.java
+rename to src/main/java/org/GameplayUI/dummy/DummyGamestate.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGamestate.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyGamestate.java	(date 1638398644717)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import org.GameObjects.objects.Deck;
+ import org.GameObjects.objects.Die;
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGame.java b/src/main/java/org/GameplayUI/dummy/DummyGame.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGame.java
+rename to src/main/java/org/GameplayUI/dummy/DummyGame.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGame.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyGame.java	(date 1638398644736)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import org.RuleEngine.engine.GameState;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameBoard.java b/src/main/java/org/GameplayUI/dummy/DummyGameBoard.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameBoard.java
+rename to src/main/java/org/GameplayUI/dummy/DummyGameBoard.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyGameBoard.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyGameBoard.java	(date 1638398644670)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import org.GameObjects.objects.Tile;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyCard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyCard.java b/src/main/java/org/GameplayUI/dummy/DummyCard.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyCard.java
+rename to src/main/java/org/GameplayUI/dummy/DummyCard.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyCard.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyCard.java	(date 1638398644764)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ public class DummyCard {
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/SettingsController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/SettingsController.java b/src/main/java/org/GameplayUI/controllers/SettingsController.java
+rename from src/main/java/org/scenebuilder/scenebuilder/SettingsController.java
+rename to src/main/java/org/GameplayUI/controllers/SettingsController.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/SettingsController.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/controllers/SettingsController.java	(date 1638398644456)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder;
++package org.GameplayUI.controllers;
+ 
+ import javafx.beans.binding.Bindings;
+ import javafx.collections.FXCollections;
+@@ -13,6 +13,8 @@
+ import javafx.scene.layout.VBox;
+ import javafx.scene.text.Font;
+ import javafx.stage.Stage;
++import org.GameplayUI.BasicApplication;
++import org.GameplayUI.SettingsObject;
+ 
+ import java.util.Arrays;
+ 
+Index: src/main/java/org/scenebuilder/scenebuilder/dummy/DummyDeck.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyDeck.java b/src/main/java/org/GameplayUI/dummy/DummyDeck.java
+rename from src/main/java/org/scenebuilder/scenebuilder/dummy/DummyDeck.java
+rename to src/main/java/org/GameplayUI/dummy/DummyDeck.java
+--- a/src/main/java/org/scenebuilder/scenebuilder/dummy/DummyDeck.java	(revision 02af68cc73a5f9caf1b9b81243c3ab6452c8ac66)
++++ b/src/main/java/org/GameplayUI/dummy/DummyDeck.java	(date 1638398644647)
+@@ -1,4 +1,4 @@
+-package org.scenebuilder.scenebuilder.dummy;
++package org.GameplayUI.dummy;
+ 
+ import java.util.ArrayList;
+ 
+diff --git a/.classpath b/src/main/java/org/GameplayUI/.classpath
+rename from .classpath
+rename to src/main/java/org/GameplayUI/.classpath
+diff --git a/.project b/src/main/java/org/GameplayUI/.project
+rename from .project
+rename to src/main/java/org/GameplayUI/.project
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml b/src/main/resources/org/GameplayUI/gridPanePlayFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/gridPanePlayFXML.fxml
+rename to src/main/resources/org/GameplayUI/gridPanePlayFXML.fxml
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/setupFXML.fxml b/src/main/resources/org/GameplayUI/setupFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/setupFXML.fxml
+rename to src/main/resources/org/GameplayUI/setupFXML.fxml
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/testfxmL.fxml b/src/main/resources/org/GameplayUI/testfxmL.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/testfxmL.fxml
+rename to src/main/resources/org/GameplayUI/testfxmL.fxml
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml b/src/main/resources/org/GameplayUI/playFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml
+rename to src/main/resources/org/GameplayUI/playFXML.fxml
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/selectionFXML.fxml b/src/main/resources/org/GameplayUI/selectionFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/selectionFXML.fxml
+rename to src/main/resources/org/GameplayUI/selectionFXML.fxml
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/mainFXML.fxml b/src/main/resources/org/GameplayUI/mainFXML.fxml
+rename from src/main/resources/org/scenebuilder/scenebuilder/mainFXML.fxml
+rename to src/main/resources/org/GameplayUI/mainFXML.fxml

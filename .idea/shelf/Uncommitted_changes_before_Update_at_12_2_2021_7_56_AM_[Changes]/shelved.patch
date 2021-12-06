@@ -1,0 +1,349 @@
+Index: src/main/java/org/scenebuilder/Display.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.scenebuilder;\r\n\r\nimport javafx.scene.effect.DropShadow;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.scene.shape.Shape;\r\nimport org.GameObjects.objects.*;\r\n\r\n\r\nimport java.util.ArrayList;\r\n\r\n//static methods\r\npublic class Display {\r\n\r\n    public static void displayDie(int roll) {\r\n\r\n    }\r\n\r\n\r\n    public static Tile displayMoveOptions(ArrayList<Tile> tiles) {\r\n// TODO: This method will be implemented by Minjex.\r\n        if (tiles.size() == 1) {\r\n            return tiles.get(0);\r\n        }\r\n        Tile chosen = null;\r\n        boolean waiting = true;\r\n        //highlight tiles\r\n        for (int i = 0; i < tiles.size(); i++) {\r\n            Tile tile = tiles.get(i);\r\n            Shape parent = tile.getParent();\r\n            DropShadow borderGlow= new DropShadow();\r\n            borderGlow.setOffsetY(0f);\r\n            borderGlow.setOffsetX(0f);\r\n            borderGlow.setColor(Color.GOLD);\r\n            parent.setEffect(borderGlow);\r\n            parent.setOnMouseClicked(event -> {\r\n                parent.setDisable(true);\r\n            });\r\n        }\r\n\r\n        while (waiting) {\r\n            for (int i = 0; i < tiles.size(); i++) {\r\n                Tile tile = tiles.get(i);\r\n                if (tile.getParent().isDisable()) {\r\n                    tile.getParent().setDisable(false);\r\n                    chosen = tile;\r\n                    break;\r\n                }\r\n            }\r\n        }\r\n        return chosen;\r\n    }\r\n\r\n\r\n    public static void print(String string) {\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/Display.java b/src/main/java/org/scenebuilder/Display.java
+--- a/src/main/java/org/scenebuilder/Display.java	(revision 0887955e8e251a5bfef16e50f4aa9a58ebb6cba7)
++++ b/src/main/java/org/scenebuilder/Display.java	(date 1638413801100)
+@@ -1,8 +1,14 @@
+ package org.scenebuilder;
+ 
++import javafx.animation.KeyFrame;
++import javafx.animation.Timeline;
++import javafx.scene.Node;
+ import javafx.scene.effect.DropShadow;
++import javafx.scene.image.Image;
++import javafx.scene.image.ImageView;
+ import javafx.scene.paint.Color;
+ import javafx.scene.shape.Shape;
++import javafx.util.Duration;
+ import org.GameObjects.objects.*;
+ 
+ 
+@@ -12,11 +18,44 @@
+ public class Display {
+ 
+     public static void displayDie(int roll) {
+-
++//            ImageView dieImage = (ImageView) d;
++//            Die die = (Die) dieImage.getUserData();
++//            System.out.println(ClassLoader.getResource("Dice1.png"));
++//            switch (roll) {
++//                case 1:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//                case 2:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//                case 3:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//                case 4:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//                case 5:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//                case 6:
++//                    dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
++//                    break;
++//            }
++//        }
++//
++//        playParent.getChildren().add(diceDisplay);
++//        diceDisplay.setLayoutX(playWidth / 2 - 100);
++//        diceDisplay.setLayoutY(playHeight / 2 - 90);
++//
++//        final Timeline timeline = new Timeline();
++//        timeline.setAutoReverse(true);
++//        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
++//                k -> playParent.getChildren().remove(diceDisplay)));
++//        timeline.play();
+     }
+ 
+ 
+-    public static Tile displayMoveOptions(ArrayList<Tile> tiles) {
++    public static Tile moveOptions(ArrayList<Tile> tiles) {
+ // TODO: This method will be implemented by Minjex.
+         if (tiles.size() == 1) {
+             return tiles.get(0);
+Index: src/main/java/org/scenebuilder/controllers/PlayController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.scenebuilder.controllers;\r\n\r\nimport javafx.animation.KeyFrame;\r\nimport javafx.animation.Timeline;\r\nimport javafx.animation.TranslateTransition;\r\nimport javafx.application.Platform;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.effect.ColorAdjust;\r\nimport javafx.scene.image.*;\r\nimport javafx.scene.input.*;\r\nimport javafx.scene.layout.*;\r\nimport javafx.scene.paint.*;\r\nimport javafx.scene.shape.*;\r\nimport javafx.scene.text.TextAlignment;\r\nimport javafx.stage.Modality;\r\nimport javafx.stage.Stage;\r\nimport javafx.util.Duration;\r\n\r\nimport org.scenebuilder.BasicApplication;\r\nimport org.scenebuilder.dummy.DummyGame;\r\nimport org.scenebuilder.dummy.DummyGameBoard;\r\nimport org.scenebuilder.dummy.DummyInventory;\r\nimport org.RuleEngine.engine.*;\r\nimport org.GameObjects.objects.*;\r\nimport org.GameObjects.objects.Spinner;\r\nimport org.scenebuilder.SetupData;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Objects;\r\n\r\npublic class PlayController extends ScreenController {\r\n\r\n    @FXML\r\n    private ImageView playSettings;\r\n    @FXML\r\n    private AnchorPane playParent;\r\n    @FXML\r\n    private ScrollPane decksPane;\r\n    @FXML\r\n    private ScrollPane rngPane;\r\n    @FXML\r\n    private ScrollPane inventoryPane;\r\n\r\n    @FXML\r\n    private Label playerTurnIndicator;\r\n    @FXML\r\n    private Label decksLabel;\r\n    @FXML\r\n    private Label rngLabel;\r\n    @FXML\r\n    private Label inventoryLabel;\r\n    @FXML\r\n    private Pane settingsPane;\r\n    @FXML\r\n    private HBox inventoryContainer;\r\n\r\n    private Stage stage;\r\n    private SetupData setupData;\r\n    private DummyGame activeGame;\r\n    private ArrayList<Player> players;\r\n    private Player curPlayer;\r\n\r\n    double playWidth;\r\n    double playHeight;\r\n\r\n    @FXML\r\n    public void initialize(Stage stage) {\r\n\r\n        super.initialize(stage);\r\n        this.stage = stage;\r\n        playWidth = stage.getWidth();\r\n        playHeight = stage.getHeight();\r\n\r\n        // load relevant data\r\n        setupData = BasicApplication.getSetupData();\r\n        if (setupData.playerList.size() == 0) {\r\n            ArrayList<Player> dummyPlayers = new ArrayList<Player>();\r\n            dummyPlayers.add(new Player(\"Player 1\", Color.RED, new ArrayList<Gamepiece>(), new DummyInventory(\"1\", new ArrayList<GameObject>()), true));\r\n            dummyPlayers.add(new Player(\"Player 2\", Color.BLUE, new ArrayList<Gamepiece>(), new DummyInventory(\"2\", new ArrayList<GameObject>()), true));\r\n            dummyPlayers.add(new Player(\"Player 3\", Color.GREEN, new ArrayList<Gamepiece>(), new DummyInventory(\"3\", new ArrayList<GameObject>()), true));\r\n            setupData = new SetupData(dummyPlayers, false);\r\n        }\r\n        activeGame = BasicApplication.getSelectedGame();\r\n        players = setupData.playerList;\r\n        curPlayer = players.get(0);\r\n\r\n        initializePlayScreen();\r\n        initGame(activeGame);\r\n\r\n        Scene newScene = new Scene(playParent);\r\n        stage.setScene(newScene);\r\n        stage.setResizable(true);\r\n        stage.show();\r\n    }\r\n\r\n    private void playerTurnCycle() {\r\n        Label switchTurn = new Label();\r\n        switchTurn.setText(\"End Turn\");\r\n        setStyle(switchTurn, \"14\", \"Red\", 100, 50);\r\n\r\n        switchTurn.setOnMouseClicked(e -> {\r\n            int nextPlayerIndex = players.indexOf(curPlayer);\r\n            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);\r\n            playerTurnIndicator.setText(nextPlayer.getPlayerID() + \"'s Turn\");\r\n            playerTurnIndicator.setStyle(\"-fx-border-radius: 5 5 5 5; \" +\r\n                    \"-fx-background-radius: 5 5 5 5; \" +\r\n                    \"-fx-font-family: Serif; \" +\r\n                    \"-fx-font-size: 16; \" +\r\n                    \"-fx-border-color: #000000;\" +\r\n                    \"-fx-background-color:\" + toHexString(nextPlayer.getColor()) + \";\");\r\n            // set current player\r\n            fillInventoryDrawer(nextPlayer.getInventory());\r\n            curPlayer = nextPlayer;\r\n            playerTurnCycle();\r\n        });\r\n        playParent.getChildren().addAll(switchTurn);\r\n        playParent.setLeftAnchor(switchTurn, 5.0);\r\n        playParent.setTopAnchor(switchTurn, 5.0);\r\n        switchTurn.setAlignment(Pos.CENTER);\r\n    }\r\n    private void initGame(DummyGame game) {\r\n        DummyGameBoard gameBoard = game.getGameBoard();\r\n        GameState gameState = game.getInitialGamestate();\r\n\r\n        AnchorPane boardPane = new AnchorPane();\r\n\r\n        double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();\r\n        double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();\r\n        double scale = scaleHeight >= scaleWidth ? scaleWidth : scaleHeight;\r\n\r\n        double boardWidth = scale * gameBoard.getWidth();\r\n        double boardHeight = scale * gameBoard.getHeight();\r\n        //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens\r\n        boardPane.setPrefWidth(boardWidth);\r\n        boardPane.setPrefHeight(boardHeight);\r\n\r\n        playParent.getChildren().add(boardPane);\r\n\r\n        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);\r\n        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 20)/2);\r\n        playParent.setBottomAnchor(boardPane, (playHeight - boardHeight - 20)/2);\r\n\r\n        initBoard(gameBoard, boardPane);\r\n        initTiles(gameBoard.getTiles(), boardPane, gameBoard);\r\n\r\n        ArrayList<Deck> decks = gameState.getAllDecks();\r\n        ArrayList<Die> dice = gameState.getAllDice();\r\n        ArrayList<Spinner> spinners = gameState.getAllSpinners();\r\n        //players = gameState.getAllPlayers();\r\n\r\n        int numDrawers = 0;\r\n        boolean decksNeeded = decks.size() != 0;\r\n        boolean diceNeeded = dice.size() != 0;\r\n        boolean spinnersNeeded = spinners.size() != 0;\r\n        boolean inventoryNeeded = true; //no indicator yet\r\n\r\n        numDrawers = decksNeeded ? numDrawers + 1 : numDrawers;\r\n        numDrawers = diceNeeded || spinnersNeeded ? numDrawers + 1 : numDrawers;\r\n        numDrawers = inventoryNeeded ? numDrawers + 1 : numDrawers;\r\n\r\n        if (decksNeeded) {\r\n            initializeDeckDrawer(numDrawers);\r\n            initDeckLabel(numDrawers);\r\n            fillDeckDrawer(decks, decksPane);\r\n        }\r\n\r\n        HBox container = new HBox();\r\n        container.setSpacing(20);\r\n        container.setAlignment(Pos.CENTER);\r\n\r\n        if (diceNeeded || spinnersNeeded) {\r\n            initializeRNGDrawer(numDrawers);\r\n            initRNGLabel(numDrawers);\r\n        }\r\n        if (diceNeeded) {\r\n            placeDice(dice, rngPane, container);\r\n        }\r\n        if (spinnersNeeded) {\r\n            placeSpinners(spinners, rngPane, container);\r\n        }\r\n\r\n        if (Objects.nonNull(players)) {\r\n            initPlayers(gameState.getAllPlayers());\r\n            curPlayer = players.get(0);\r\n            playerTurnCycle();\r\n        }\r\n\r\n        //Have some indicator for whether inventory is needed\r\n        if (inventoryNeeded) {\r\n            initializeInventoryDrawer(numDrawers);\r\n            initInventoryLabel(numDrawers);\r\n            initInventory(new DummyInventory(\"1\", new ArrayList<GameObject>()));\r\n        }\r\n\r\n    }\r\n\r\n    private void initBoard(DummyGameBoard gameBoard, AnchorPane boardPane) {\r\n        Shape board;\r\n        double width = boardPane.getPrefWidth();\r\n        double height = boardPane.getPrefHeight();\r\n\r\n        if (gameBoard.getShape().equals(\"Rectangle\")) {\r\n            board = new Rectangle(width, height);\r\n        } else {\r\n            board = new Circle(height / 2);\r\n        }\r\n        board.setFill(Color.AQUAMARINE);\r\n        boardPane.getChildren().add(board);\r\n\r\n        boardPane.setLeftAnchor(board, 0.0);\r\n        boardPane.setTopAnchor(board, 0.0);\r\n        boardPane.setRightAnchor(board, 0.0);\r\n        boardPane.setBottomAnchor(board, 0.0);\r\n\r\n        // create board anchorPane\r\n        // set anchorPane values\r\n    }\r\n\r\n    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {\r\n        double scale = boardPane.getPrefWidth() / gameBoard.getWidth();\r\n        tiles.forEach(t -> {\r\n            Shape tile;\r\n            double width = t.getWidth() * scale;\r\n            double height = t.getHeight() * scale;\r\n\r\n            if (t.getShape().equals(\"Rectangle\")) {\r\n                tile = new Rectangle(width, height);\r\n            } else {\r\n                tile = new Circle(width / 2);\r\n            }\r\n            tile.setUserData(t);\r\n            tile.setFill(t.getColor());\r\n            boardPane.getChildren().addAll(tile);\r\n            tile.setLayoutX(t.getXPos());\r\n            tile.setLayoutY(t.getYPos());\r\n            t.setParent(tile);\r\n        });\r\n        // for each tile\r\n        // create tile\r\n        // set tile values\r\n        // add tile to anchorPane\r\n    }\r\n\r\n    private void initPlayers(ArrayList<Player> players) {\r\n\r\n        players.forEach(p -> {\r\n            initGamePiece(p.getGamePieces().get(0)); // todo, get specific game piece by reference\r\n            //fill inventory\r\n        });\r\n\r\n        // for each player\r\n        // set player info\r\n        // add player stuff to inventory (later)\r\n    }\r\n\r\n    private void initGamePiece(Gamepiece gamePiece) {\r\n        // for each player\r\n        // for each piece\r\n        // get piece\r\n        // draw piece at its location\r\n        // set other info..?\r\n    }\r\n\r\n    private void initInventory(DummyInventory inventory) {\r\n        fillInventoryDrawer(inventory);\r\n    }\r\n\r\n    public void initSettings() {\r\n        playSettings = new ImageView();\r\n        settingsPane = new Pane();\r\n        playSettings.setImage(new Image(\"https://images-ext-1.discordapp.net/external/C1VkLgkVceGoEsJogTZ4Nfjo4W-cnZ2GF6FR-XFnIzk/https/cdn-icons-png.flaticon.com/512/61/61094.png?width=375&height=375\",\r\n                40, 40, true, true));\r\n        settingsPane.getChildren().addAll(playSettings);\r\n        settingsPane.setPrefWidth(40);\r\n        settingsPane.setPrefHeight(40);\r\n\r\n        settingsPane.setOnMouseClicked(e -> {\r\n            displayPopup(e);\r\n        });\r\n\r\n        playParent.getChildren().addAll(settingsPane);\r\n        playParent.setRightAnchor(settingsPane, 15.0);\r\n        playParent.setTopAnchor(settingsPane, 25.0);\r\n//        sptiHBox.getChildren().addAll(settingsPane);\r\n//        sptiHBox.setMargin(settingsPane, new Insets(25, 10, 10, 20));\r\n    }\r\n\r\n    private void initPlayerTurnIndicator() {\r\n        playerTurnIndicator = new Label();\r\n        playerTurnIndicator.setText(curPlayer.getPlayerID() + \"'s Turn\");\r\n\r\n        playerTurnIndicator.setStyle(\"-fx-border-radius: 5 5 5 5; \" +\r\n                \"-fx-background-radius: 5 5 5 5; \" +\r\n                \"-fx-font-family: Serif; \" +\r\n                \"-fx-font-size: 16; \" +\r\n                \"-fx-font-color: BLACK; \" +\r\n                \"-fx-border-color: #000000; \" +\r\n                \"-fx-background-color:\" + toHexString(curPlayer.getColor()) + \";\");\r\n        playerTurnIndicator.setId(\"playerTurnIndicator\");\r\n        playerTurnIndicator.setWrapText(true);\r\n        playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);\r\n        playerTurnIndicator.setAlignment(Pos.CENTER);\r\n        playerTurnIndicator.setPadding(new Insets(2, 2, 2, 2));\r\n\r\n        playerTurnIndicator.setPrefWidth(70);\r\n\r\n        playerTurnIndicator.setPrefHeight(70);\r\n\r\n        playParent.getChildren().addAll(playerTurnIndicator);\r\n        playParent.setRightAnchor(playerTurnIndicator, 70.0);\r\n        playParent.setTopAnchor(playerTurnIndicator, 10.0);\r\n    }\r\n\r\n    private void initDeckLabel(int numDrawers) {\r\n        decksLabel = new Label();\r\n        decksLabel.setText(\"Decks\");\r\n        decksLabel.setStyle(\"-fx-font-family: Serif; \" +\r\n                \"-fx-font-size: 24; \" +\r\n                \"-fx-background-color: DarkOliveGreen; \" +\r\n                \"-fx-border-color: BLACK;\");\r\n        decksLabel.setTextFill(Color.WHITE);\r\n        decksLabel.setId(\"decksLabel\");\r\n        decksLabel.setTextAlignment(TextAlignment.CENTER);\r\n        decksLabel.setAlignment(Pos.CENTER);\r\n\r\n        decksLabel.setPrefWidth(140);\r\n        decksLabel.setMinWidth(decksLabel.getPrefWidth());\r\n        decksLabel.setMaxWidth(decksLabel.getPrefWidth());\r\n\r\n        decksLabel.setPrefHeight(209);\r\n        decksLabel.setMinHeight(decksLabel.getPrefHeight());\r\n        decksLabel.setMaxHeight(decksLabel.getPrefHeight());\r\n\r\n        decksLabel.setOnMouseClicked(e -> {\r\n            slideOut(e);\r\n        });\r\n\r\n        playParent.getChildren().addAll(decksLabel);\r\n        initDarken(decksLabel);\r\n\r\n        playParent.setRightAnchor(decksLabel, 0.0);\r\n        playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));\r\n        //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));\r\n    }\r\n\r\n    private void initRNGLabel(int numDrawers) {\r\n        rngLabel = new Label();\r\n        rngLabel.setText(\"RNG\");\r\n        rngLabel.setStyle(\"-fx-font-family: Serif; \" +\r\n                \"-fx-font-size: 24; \" +\r\n                \"-fx-background-color: DarkSlateGrey; \" +\r\n                \"-fx-border-color: BLACK;\");\r\n        rngLabel.setTextFill(Color.WHITE);\r\n        rngLabel.setId(\"rngLabel\");\r\n        rngLabel.setTextAlignment(TextAlignment.CENTER);\r\n        rngLabel.setAlignment(Pos.CENTER);\r\n\r\n        rngLabel.setPrefWidth(140);\r\n        rngLabel.setMinWidth(rngLabel.getPrefWidth());\r\n        rngLabel.setMaxWidth(rngLabel.getPrefWidth());\r\n\r\n        rngLabel.setPrefHeight(209);\r\n        rngLabel.setMinHeight(rngLabel.getPrefHeight());\r\n        rngLabel.setMaxHeight(rngLabel.getPrefHeight());\r\n\r\n        rngLabel.setOnMouseClicked(e -> {\r\n            slideOut(e);\r\n        });\r\n\r\n        playParent.getChildren().add(rngLabel);\r\n        initDarken(rngLabel);\r\n\r\n        playParent.setRightAnchor(rngLabel, 0.0);\r\n        playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));\r\n\r\n        //tabsVBox.getChildren().addAll(rngLabel);\r\n        //tabsVBox.setMargin(rngLabel, new Insets(2, 0, 10, 0));\r\n    }\r\n\r\n    private void initInventoryLabel(int numDrawers) {\r\n        inventoryLabel = new Label();\r\n        inventoryLabel.setText(\"Inventory\");\r\n        inventoryLabel.setStyle(\"-fx-font-family: Serif; \" +\r\n                \"-fx-font-size: 24; \" +\r\n                \"-fx-background-color: DarkGoldenRod; \" +\r\n                \"-fx-border-color: BLACK;\");\r\n        inventoryLabel.setTextFill(Color.WHITE);\r\n        inventoryLabel.setId(\"inventoryLabel\");\r\n        inventoryLabel.setTextAlignment(TextAlignment.CENTER);\r\n        inventoryLabel.setAlignment(Pos.CENTER);\r\n\r\n        inventoryLabel.setPrefWidth(140);\r\n        inventoryLabel.setMinWidth(inventoryLabel.getPrefWidth());\r\n        inventoryLabel.setMaxWidth(inventoryLabel.getPrefWidth());\r\n\r\n        inventoryLabel.setPrefHeight(209);\r\n        inventoryLabel.setMinHeight(inventoryLabel.getPrefHeight());\r\n        inventoryLabel.setMaxHeight(inventoryLabel.getPrefHeight());\r\n\r\n        inventoryLabel.setOnMouseClicked(e -> {\r\n            slideOut(e);\r\n        });\r\n        initDarken(inventoryLabel);\r\n\r\n        playParent.getChildren().addAll(inventoryLabel);\r\n\r\n        playParent.setRightAnchor(inventoryLabel, 0.0);\r\n        playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));\r\n        //tabsVBox.getChildren().addAll(inventoryLabel);\r\n        //tabsVBox.setMargin(inventoryLabel, new Insets(2, 0, 10, 0));\r\n    }\r\n\r\n    private void initializeDeckDrawer(int numDrawers) {\r\n        decksPane = new ScrollPane();\r\n        decksPane.setStyle(\"-fx-background-color: GREY;\");\r\n        decksPane.setId(\"decksDrawer\");\r\n        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);\r\n        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);\r\n        decksPane.setPrefWidth(355);\r\n        decksPane.setPrefHeight(209);\r\n        playParent.setRightAnchor(decksPane, -215.0);\r\n        playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));\r\n        playParent.getChildren().addAll(decksPane);\r\n    }\r\n\r\n    private void initializeRNGDrawer(int numDrawers) {\r\n        rngPane = new ScrollPane();\r\n        rngPane.setStyle(\"-fx-background-color: GREY;\");\r\n        rngPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);\r\n        rngPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);\r\n        playParent.setRightAnchor(rngPane, -215.0);\r\n        playParent.setTopAnchor(rngPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));\r\n        rngPane.setPrefWidth(355);\r\n        rngPane.setPrefHeight(209);\r\n        playParent.getChildren().add(rngPane);\r\n    }\r\n\r\n    private void initializeInventoryDrawer(int numDrawers) {\r\n        inventoryPane = new ScrollPane();\r\n        inventoryPane.setStyle(\"-fx-background-color: GREY;\");\r\n        inventoryPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);\r\n        inventoryPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);\r\n        playParent.setRightAnchor(inventoryPane, -215.0);\r\n        playParent.setTopAnchor(inventoryPane, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));\r\n        inventoryPane.setPrefWidth(355);\r\n        inventoryPane.setPrefHeight(209);\r\n        playParent.getChildren().add(inventoryPane);\r\n    }\r\n\r\n    //A method to add all the decks to the deck slider\r\n    private void fillDeckDrawer(ArrayList<Deck> decks, ScrollPane decksPane) {\r\n\r\n        HBox container = new HBox();\r\n        container.setAlignment(Pos.CENTER);\r\n        container.setSpacing(-10);\r\n        decks.forEach(d -> {\r\n            double width = d.getWidth() == 0 ? 100 : d.getWidth();\r\n            double height = d.getHeight() == 0 ? 170 : d.getHeight();\r\n            Rectangle deck = new Rectangle(width, height);\r\n            deck.setUserData(d);\r\n\r\n            if(d.getIcon() != null) {\r\n                deck.setFill(new ImagePattern(new Image(d.getIcon())));\r\n            } else {\r\n                deck.setFill(Color.RED);\r\n            }\r\n            deck.setOnMouseClicked(e -> {\r\n                //Open this deck if you can // todo\r\n                Card card = d.drawTop();\r\n                ImageView cardImage = new ImageView(card.getIcon());\r\n\r\n                cardImage.setFitWidth(200);\r\n                cardImage.setFitHeight(340);\r\n                playParent.getChildren().add(cardImage);\r\n                cardImage.setX(playWidth / 2 - 100);\r\n                cardImage.setY(playHeight / 2 - 170);\r\n\r\n                final Timeline timeline = new Timeline();\r\n                timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),\r\n                        k -> playParent.getChildren().remove(cardImage)));\r\n                timeline.play();\r\n\r\n                //Only in some cases but added for now\r\n                //inventoryPane.getChildren().add(card);\r\n                addToInventory(card);\r\n            });\r\n            container.getChildren().addAll(deck);\r\n            container.setMargin(deck, new Insets(10, 10, 20, 10));\r\n        });\r\n        decksPane.setContent(container);\r\n        decksPane.setStyle(\"-fx-border-color: black\");\r\n\r\n        //decksPane.toFront();\r\n        //tabsVBox.getChildren().addAll(decksPane);\r\n    }\r\n\r\n    public void placeDice(ArrayList<Die> dice, ScrollPane rngPane, HBox container) {\r\n\r\n        rngPane.setContent(container);\r\n        AnchorPane diceView = new AnchorPane();\r\n        AnchorPane diceDisplay = new AnchorPane();\r\n        diceDisplay.setPrefSize(180, 180);\r\n        container.getChildren().add(diceView);\r\n        container.setMargin(diceView, new Insets(10, 0, 20, 20));\r\n        double rowMax = Math.ceil(Math.sqrt(dice.size()));\r\n        double diceSize = 180 / rowMax;\r\n        double currX = 0.0;\r\n        double currY = 0.0;\r\n        int diceCount = 0;\r\n\r\n        for (int i = 0; i < dice.size(); i++) {\r\n            ImageView die1 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));\r\n            ImageView die2 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));\r\n            die1.setUserData(dice.get(i));\r\n\r\n            die2.setUserData(dice.get(i));\r\n            die2.setFitWidth(diceSize);\r\n            die2.setFitHeight(diceSize);\r\n\r\n            diceView.getChildren().add(die1);\r\n            diceDisplay.getChildren().add(die2);\r\n            die1.setX(currX);\r\n            die1.setY(currY);\r\n            die2.setX(currX);\r\n            die2.setY(currY);\r\n            currX = (currX + diceSize) % 180;\r\n\r\n            diceCount++;\r\n            if (diceCount % rowMax == 0) {\r\n                currY += diceSize;\r\n            }\r\n        }\r\n\r\n        diceView.setOnMouseClicked(e -> {\r\n            rollDice(e, dice, diceDisplay);\r\n        });\r\n//        container.getChildren().add(diceView);\r\n    }\r\n\r\n    public void placeSpinners(ArrayList<Spinner> spinners, ScrollPane rngPane, HBox container) {\r\n        spinners.forEach(d -> {\r\n            double width = d.getWidth() == 0 ? 170 : d.getWidth();\r\n            double height = d.getHeight() == 0 ? 170 : d.getHeight();\r\n            ImageView spinner = new ImageView(new Image(d.getIcon(), width, width, true, true));\r\n            spinner.setUserData(d);\r\n            //spinner.setFill(new ImagePattern(new Image(d.getIcon())));\r\n            spinner.setOnMouseClicked(e -> {\r\n                // spin this spinner if you can\r\n            });\r\n            container.getChildren().addAll(spinner);\r\n            container.setMargin(spinner, new Insets(10, 10, 20, 10));\r\n        });\r\n        //rngPane.setContent(container);\r\n        rngPane.setStyle(\"-fx-border-color: BLACK;\");\r\n    }\r\n\r\n    private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {\r\n\r\n        for (Node d: diceDisplay.getChildren()) {\r\n            ImageView dieImage = (ImageView) d;\r\n            Die die = (Die) dieImage.getUserData();\r\n            int roll = die.roll();\r\n            System.out.println(getClass().getResource(\"Dice1.png\"));\r\n            switch (roll) {\r\n                case 1:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice1.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n                case 2:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice2.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n                case 3:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice3.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n                case 4:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice4.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n                case 5:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice5.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n                case 6:\r\n                    dieImage.setImage(new Image(getClass().getResource(\"Dice6.png\").toString(), die.getWidth(), die.getHeight(), true, true));\r\n                    break;\r\n            }\r\n        }\r\n\r\n        playParent.getChildren().add(diceDisplay);\r\n        diceDisplay.setLayoutX(playWidth / 2 - 100);\r\n        diceDisplay.setLayoutY(playHeight / 2 - 90);\r\n\r\n        final Timeline timeline = new Timeline();\r\n        timeline.setAutoReverse(true);\r\n        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),\r\n                k -> playParent.getChildren().remove(diceDisplay)));\r\n        timeline.play();\r\n\r\n    }\r\n\r\n    private void addToInventory(GameObject object) {\r\n        double width = object.getWidth() == 0 ? 100 : object.getWidth();\r\n        double height = object.getHeight() == 0 ? 170 : object.getHeight();\r\n\r\n        Rectangle inventoryObject = new Rectangle(width, height);\r\n        inventoryObject.setUserData(object);\r\n\r\n        if(object.getIcon() != null) {\r\n            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));\r\n        } else {\r\n            inventoryObject.setFill(Color.RED);\r\n        }\r\n        inventoryObject.setOnMouseClicked(e -> {\r\n            //Open this deck if you can // todo\r\n        });\r\n        curPlayer.getInventory().getInventory().add(object);\r\n        inventoryContainer.getChildren().addAll(inventoryObject);\r\n        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));\r\n    }\r\n\r\n    private void fillInventoryDrawer(DummyInventory inventory) {\r\n        inventoryContainer = new HBox();\r\n        inventoryContainer.setAlignment(Pos.CENTER);\r\n        inventoryContainer.setSpacing(-10);\r\n        inventory.getInventory().forEach(d -> {\r\n            addToInventory(d);\r\n        });\r\n        inventoryPane.setContent(inventoryContainer);\r\n        inventoryPane.setStyle(\"-fx-border-color: black\");\r\n        //decksPane.toFront();\r\n    }\r\n\r\n    public void initializePlayScreen() {\r\n        playParent = new AnchorPane();\r\n        playParent.setPrefWidth(playWidth);\r\n        playParent.setPrefHeight(playHeight);\r\n\r\n        //initSettingsAndPlayerIndicatorHBox();\r\n        initPlayerTurnIndicator();\r\n        initSettings();\r\n    }\r\n    @FXML\r\n    public void exitFromPlay() {\r\n//        MainController controller = new MainController();\r\n//        controller.initialize(stage);\r\n        Platform.exit();\r\n    }\r\n\r\n    public void mainMenuFromPlay() {\r\n        MainController controller = new MainController();\r\n        controller.initialize(stage);\r\n    }\r\n\r\n    private static String toHexString(Color color) {\r\n        int r = ((int) Math.round(color.getRed()     * 255)) << 24;\r\n        int g = ((int) Math.round(color.getGreen()   * 255)) << 16;\r\n        int b = ((int) Math.round(color.getBlue()    * 255)) << 8;\r\n        int a = ((int) Math.round(color.getOpacity() * 255));\r\n        return String.format(\"#%08X\", (r + g + b + a));\r\n    }\r\n    @FXML\r\n    public void switchScene(ActionEvent event, String nextScene, Stage baseStage) throws IOException {\r\n        Parent root = FXMLLoader.load(getClass().getResource(nextScene));\r\n        if (baseStage == null) {\r\n            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        } else {\r\n            stage = baseStage;\r\n        }\r\n        Scene scene = new Scene(root, playWidth, playHeight);\r\n        stage.setScene(scene);\r\n        scene.getRoot().setStyle(\"-fx-font-family: 'serif'\");\r\n        stage.show();\r\n    }\r\n\r\n    @FXML\r\n    public void slideOut(MouseEvent event) {\r\n        Label parent = (Label) event.getSource();\r\n        ScrollPane tab;\r\n        if (parent.getId().equals(\"decksLabel\")) {\r\n            tab = decksPane;\r\n        } else if (parent.getId().equals(\"rngLabel\")){\r\n            tab = rngPane;\r\n        } else {\r\n            tab = inventoryPane;\r\n        }\r\n\r\n        tab.toFront();\r\n        parent.toFront();\r\n        TranslateTransition tt = new TranslateTransition(Duration.millis(700), tab);\r\n        tt.setOnFinished(e -> {\r\n            if (tt.getToX() == -355f) {\r\n                tab.setLayoutX(1100.8);\r\n            } else {\r\n                tab.setTranslateX(0);\r\n                tab.setLayoutX(1495.8);\r\n            }\r\n        });\r\n        if (tab.getTranslateX() == 0.0) {\r\n            tt.setToX(-355f);\r\n        } else {\r\n            tt.setToX(355f);\r\n        }\r\n        tt.play();\r\n    }\r\n\r\n    public class Popup {\r\n        Label yes;\r\n        Label no;\r\n        public boolean saved = false;\r\n//        public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {\r\n//            button.setPrefWidth(prefWidth);\r\n//            button.setPrefHeight(prefHeight);\r\n//\r\n//            button.setMinWidth(button.getPrefWidth());\r\n//            button.setMaxWidth(button.getPrefWidth());\r\n//            button.setMinHeight(button.getPrefHeight());\r\n//            button.setMaxHeight(button.getPrefHeight());\r\n//\r\n//            button.setStyle(\"-fx-font-size: \"+fontSize+\"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;\");\r\n//        }\r\n        public void displayRestart(Stage baseStage, Stage parentPopup){\r\n            Stage popupWindow = new Stage();\r\n            BorderPane borderPane = new BorderPane();\r\n\r\n            Label restartMessage = new Label(\"Are you sure you want to restart? Your progress in the current game will be lost.\");\r\n            restartMessage.setStyle(\"-fx-font-size: 25; -fx-font-family: serif;\");\r\n            restartMessage.setWrapText(true);\r\n            restartMessage.setAlignment(Pos.CENTER);\r\n            restartMessage.setPrefWidth(250);\r\n\r\n            borderPane.setAlignment(restartMessage, Pos.CENTER);\r\n            borderPane.setCenter(restartMessage);\r\n\r\n            HBox buttons = new HBox(10);\r\n\r\n            //Change these actions to actually handle restarting\r\n            yes.setOnMouseClicked(e-> {\r\n                popupWindow.close();\r\n                parentPopup.close();\r\n            });\r\n\r\n            buttons.getChildren().addAll(yes, no);\r\n            buttons.setMargin(yes, new Insets(0, 5, 10, 0));\r\n            buttons.setMargin(no, new Insets(0, 0, 10, 5));\r\n\r\n            buttons.setAlignment(Pos.CENTER);\r\n            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);\r\n            borderPane.setBottom(buttons);\r\n            Scene exitScene = new Scene(borderPane, 300, 250);\r\n            popupWindow.setScene(exitScene);\r\n            popupWindow.showAndWait();\r\n        }\r\n        public void displayExitWithoutSave(Stage baseStage, Stage parentPopup){\r\n            Stage popupWindow = new Stage();\r\n            BorderPane borderPane = new BorderPane();\r\n\r\n            Label exitMessage = new Label(\"Are you sure you want to exit to desktop? Your progress will be lost.\");\r\n            exitMessage.setStyle(\"-fx-font-size: 25; -fx-font-family: serif;\");\r\n            exitMessage.setWrapText(true);\r\n            exitMessage.setAlignment(Pos.CENTER);\r\n            exitMessage.setPrefWidth(250);\r\n\r\n            borderPane.setAlignment(exitMessage, Pos.CENTER);\r\n            borderPane.setCenter(exitMessage);\r\n\r\n            HBox buttons = new HBox(10);\r\n\r\n            yes.setOnMouseClicked(e-> {\r\n                popupWindow.close();\r\n                parentPopup.close();\r\n                exitFromPlay();\r\n            });\r\n\r\n            buttons.getChildren().addAll(yes, no);\r\n            buttons.setMargin(yes, new Insets(0, 5, 10, 0));\r\n            buttons.setMargin(no, new Insets(0, 0, 10, 5));\r\n\r\n            buttons.setAlignment(Pos.CENTER);\r\n            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);\r\n            borderPane.setBottom(buttons);\r\n            Scene exitScene = new Scene(borderPane, 300, 250);\r\n            popupWindow.setScene(exitScene);\r\n            popupWindow.showAndWait();\r\n        }\r\n        public void displayMainMenuWithoutSave(Stage baseStage, Stage parentPopup){\r\n            Stage popupWindow = new Stage();\r\n            BorderPane borderPane = new BorderPane();\r\n\r\n            Label exitMessage = new Label(\"Are you sure you want to return to the Main Menu? Your progress will be lost.\");\r\n            exitMessage.setStyle(\"-fx-font-size: 25; -fx-font-family: serif;\");\r\n            exitMessage.setWrapText(true);\r\n            exitMessage.setAlignment(Pos.CENTER);\r\n            exitMessage.setPrefWidth(250);\r\n\r\n            borderPane.setAlignment(exitMessage, Pos.CENTER);\r\n            borderPane.setCenter(exitMessage);\r\n\r\n            HBox buttons = new HBox(10);\r\n\r\n            yes.setOnMouseClicked(e-> {\r\n                popupWindow.close();\r\n                parentPopup.close();\r\n                mainMenuFromPlay();\r\n            });\r\n\r\n            buttons.getChildren().addAll(yes, no);\r\n            buttons.setMargin(yes, new Insets(0, 5, 10, 0));\r\n            buttons.setMargin(no, new Insets(0, 0, 10, 5));\r\n\r\n            buttons.setAlignment(Pos.CENTER);\r\n            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);\r\n            borderPane.setBottom(buttons);\r\n            Scene exitScene = new Scene(borderPane, 300, 250);\r\n            popupWindow.setScene(exitScene);\r\n            popupWindow.showAndWait();\r\n        }\r\n        public void displayExit(Stage baseStage) {\r\n            Stage popupWindow = new Stage();\r\n\r\n            yes = new Label(\"Yes\");\r\n            yes.setStyle(\"-fx-border-radius: 2 2 2 2; \" +\r\n                    \"-fx-background-radius: 2 2 2 2; \" +\r\n                    \"-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;\");\r\n            yes.setAlignment(Pos.CENTER);\r\n            yes.setPrefWidth(70);\r\n\r\n            no = new Label(\"No\");\r\n            no.setStyle(yes.getStyle());\r\n            no.setAlignment(Pos.CENTER);\r\n            no.setPrefWidth(yes.getPrefWidth());\r\n\r\n            no.setOnMouseClicked(e->popupWindow.close());\r\n            outlineYesNo(yes);\r\n            outlineYesNo(no);\r\n\r\n            popupWindow.initModality(Modality.APPLICATION_MODAL);\r\n\r\n            Label saveButton = new Label(\"Save\");\r\n            setStyle(saveButton, \"30\", \"LimeGreen\", 170, 80);\r\n\r\n            Label exitButton = new Label(\"Exit\");\r\n            setStyle(exitButton, \"30\", \"Red\", 170, 80);\r\n\r\n            Label restartButton = new Label(\"Restart\");\r\n            setStyle(restartButton, \"30\", \"LightGrey\", 170, 80);\r\n\r\n            Label mainMenuButton = new Label(\"Main Menu\");\r\n            setStyle(mainMenuButton, \"30\", \"Blue\", 170, 80);\r\n\r\n            saveButton.setOnMouseClicked(e->{\r\n                saved = true;\r\n                System.out.println(\"Save\");\r\n            });\r\n\r\n            exitButton.setOnMouseClicked(e->{\r\n                if (!saved) {\r\n                    displayExitWithoutSave(baseStage, popupWindow);\r\n                } else {\r\n                    popupWindow.close();\r\n                    exitFromPlay();\r\n                }\r\n            });\r\n\r\n            restartButton.setOnMouseClicked(e->{\r\n                displayRestart(baseStage, popupWindow);\r\n            });\r\n\r\n            mainMenuButton.setOnMouseClicked(e -> {\r\n                if (!saved) {\r\n                    displayMainMenuWithoutSave(baseStage, popupWindow);\r\n                } else {\r\n                    popupWindow.close();\r\n                    mainMenuFromPlay();\r\n                }\r\n            });\r\n\r\n            VBox layout = new VBox(10);\r\n            layout.getChildren().addAll(saveButton);\r\n            layout.getChildren().addAll(restartButton);\r\n            layout.getChildren().addAll(mainMenuButton);\r\n            layout.getChildren().addAll(exitButton);\r\n            layout.setAlignment(Pos.CENTER);\r\n            Scene exitScene = new Scene(layout, 350, 400);\r\n            exitScene.setFill(Color.MAROON);\r\n            popupWindow.setScene(exitScene);\r\n            popupWindow.showAndWait();\r\n        }\r\n        public void displayMainMenu(Stage backStage) {\r\n\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    public void displayPopup(MouseEvent event) {\r\n        Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        Popup popup = new Popup();\r\n        popup.displayExit(curStage);\r\n    }\r\n\r\n    public void initDarken(Label label) {\r\n        label.setOnMouseEntered(e -> {\r\n            ColorAdjust colorAdjust = new ColorAdjust();\r\n            colorAdjust.setBrightness(-0.2);\r\n            label.setEffect(colorAdjust);\r\n        });\r\n\r\n        label.setOnMouseExited(e -> {\r\n            label.setEffect(null);\r\n        });\r\n    }\r\n\r\n    public void setStyle(Label label, String size, String color, double width, double height) {\r\n        label.setStyle(\"-fx-border-radius: 5 5 5 5; \" +\r\n                \"-fx-background-radius: 5 5 5 5; \" +\r\n                \"-fx-font-family: Serif; \" +\r\n                \"-fx-font-size: \" + size + \"; \" +\r\n                \"-fx-background-color: \" + color + \"; \" +\r\n                \"-fx-border-color: BLACK;\");\r\n        label.setTextFill(Color.BLACK);\r\n        label.setAlignment(Pos.CENTER);\r\n        label.setPrefWidth(width);\r\n        label.setPrefHeight(height);\r\n        initDarken(label);\r\n    }\r\n\r\n    public void outlineYesNo(Label label) {\r\n        label.setOnMouseEntered(e -> {\r\n            label.setStyle(\"-fx-border-radius: 5 5 5 5; \" +\r\n                    \"-fx-background-radius: 5 5 5 5; \" +\r\n                    \"-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Blue;\");\r\n        });\r\n\r\n        label.setOnMouseExited(e -> {\r\n            label.styleProperty().setValue(\"-fx-border-radius: 5 5 5 5; \" +\r\n                    \"-fx-background-radius: 5 5 5 5; \" +\r\n                    \"-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;\");\r\n        });\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/controllers/PlayController.java b/src/main/java/org/scenebuilder/controllers/PlayController.java
+--- a/src/main/java/org/scenebuilder/controllers/PlayController.java	(revision 0887955e8e251a5bfef16e50f4aa9a58ebb6cba7)
++++ b/src/main/java/org/scenebuilder/controllers/PlayController.java	(date 1638449673197)
+@@ -24,6 +24,8 @@
+ import javafx.stage.Stage;
+ import javafx.util.Duration;
+ 
++import org.RuleEngine.nodes.LiteralNode;
++import org.RuleEngine.nodes.MoveNode;
+ import org.scenebuilder.BasicApplication;
+ import org.scenebuilder.dummy.DummyGame;
+ import org.scenebuilder.dummy.DummyGameBoard;
+@@ -72,6 +74,8 @@
+     double playWidth;
+     double playHeight;
+ 
++    Interpreter interpreter = new Interpreter();
++
+     @FXML
+     public void initialize(Stage stage) {
+ 
+@@ -83,14 +87,14 @@
+         // load relevant data
+         setupData = BasicApplication.getSetupData();
+         if (setupData.playerList.size() == 0) {
+-            ArrayList<Player> dummyPlayers = new ArrayList<Player>();
+-            dummyPlayers.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new DummyInventory("1", new ArrayList<GameObject>()), true));
+-            dummyPlayers.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new DummyInventory("2", new ArrayList<GameObject>()), true));
+-            dummyPlayers.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new DummyInventory("3", new ArrayList<GameObject>()), true));
+-            setupData = new SetupData(dummyPlayers, false);
++            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new DummyInventory("1", new ArrayList<GameObject>()), true));
++            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new DummyInventory("2", new ArrayList<GameObject>()), true));
++            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new DummyInventory("3", new ArrayList<GameObject>()), true));
++            setupData = new SetupData(players, false);
+         }
+         activeGame = BasicApplication.getSelectedGame();
+         players = setupData.playerList;
++
+         curPlayer = players.get(0);
+ 
+         initializePlayScreen();
+@@ -127,11 +131,14 @@
+         playParent.setTopAnchor(switchTurn, 5.0);
+         switchTurn.setAlignment(Pos.CENTER);
+     }
++
++    AnchorPane boardPane;
++    GameState gameState;
+     private void initGame(DummyGame game) {
+         DummyGameBoard gameBoard = game.getGameBoard();
+-        GameState gameState = game.getInitialGamestate();
++        gameState = game.getInitialGamestate();
+ 
+-        AnchorPane boardPane = new AnchorPane();
++        boardPane = new AnchorPane();
+ 
+         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
+         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
+@@ -155,7 +162,7 @@
+         ArrayList<Deck> decks = gameState.getAllDecks();
+         ArrayList<Die> dice = gameState.getAllDice();
+         ArrayList<Spinner> spinners = gameState.getAllSpinners();
+-        //players = gameState.getAllPlayers();
++        players = gameState.getAllPlayers();
+ 
+         int numDrawers = 0;
+         boolean decksNeeded = decks.size() != 0;
+@@ -188,7 +195,7 @@
+             placeSpinners(spinners, rngPane, container);
+         }
+ 
+-        if (Objects.nonNull(players)) {
++        if (players.size() != 0) {
+             initPlayers(gameState.getAllPlayers());
+             curPlayer = players.get(0);
+             playerTurnCycle();
+@@ -263,6 +270,11 @@
+     }
+ 
+     private void initGamePiece(Gamepiece gamePiece) {
++
++        gamePiece.setLocation(gameState.getAllTiles().get(0));
++        Circle gp = new Circle(20, gamePiece.getColor());
++        gp.setUserData(gamePiece);
++
+         // for each player
+         // for each piece
+         // get piece
+@@ -564,44 +576,16 @@
+     }
+ 
+     private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
+-
+-        for (Node d: diceDisplay.getChildren()) {
+-            ImageView dieImage = (ImageView) d;
+-            Die die = (Die) dieImage.getUserData();
+-            int roll = die.roll();
+-            System.out.println(getClass().getResource("Dice1.png"));
+-            switch (roll) {
+-                case 1:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-                case 2:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-                case 3:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-                case 4:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-                case 5:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-                case 6:
+-                    dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
+-                    break;
+-            }
+-        }
+-
+-        playParent.getChildren().add(diceDisplay);
+-        diceDisplay.setLayoutX(playWidth / 2 - 100);
+-        diceDisplay.setLayoutY(playHeight / 2 - 90);
+-
+-        final Timeline timeline = new Timeline();
+-        timeline.setAutoReverse(true);
+-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
+-                k -> playParent.getChildren().remove(diceDisplay)));
+-        timeline.play();
+-
++        Die die = dice.get(0);
++        LiteralNode<String> name = new LiteralNode<>(die.getLabel());
++        LiteralNode<Integer> value = new LiteralNode<>(die.roll());
++        ArrayList<org.RuleEngine.nodes.Node> operands = new ArrayList<>();
++        operands.add(name);
++        operands.add(value);
++        MoveNode move = new MoveNode(operands);
++        ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
++        moveNodes.add(move);
++        interpreter.interpretEvent(moveNodes, gameState);
+     }
+ 
+     private void addToInventory(GameObject object) {
+Index: src/main/java/org/scenebuilder/BasicApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.scenebuilder;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.geometry.Rectangle2D;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.stage.Screen;\r\nimport javafx.stage.Stage;\r\nimport javafx.stage.StageStyle;\r\nimport org.scenebuilder.dummy.DummyGame;\r\nimport org.scenebuilder.dummy.DummyGameBoard;\r\nimport org.scenebuilder.dummy.DummyGameRules;\r\nimport org.scenebuilder.dummy.DummyInventory;\r\nimport org.RuleEngine.engine.GameState;\r\nimport org.GameObjects.objects.*;\r\nimport org.scenebuilder.controllers.MainController;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class BasicApplication extends Application {\r\n\r\n    private static SettingsObject settingsObject = new SettingsObject();\r\n\r\n    private static ArrayList<DummyGame> newGames = new ArrayList<>();\r\n    private static ArrayList<DummyGame> savedGames = new ArrayList<>();\r\n\r\n    private static DummyGame selectedGame;\r\n    private static SetupData setupData;\r\n\r\n    public static void loadNewGames() {\r\n\r\n        // do stuff to get list of playable games (on start) from Persistent Data team\r\n        // todo\r\n\r\n        DummyGame game1 = createDummyGame(\"All Drawers\", \"Rectangle\", true, true, true);\r\n        DummyGame game2 = createDummyGame(\"RNG and Inventory\", \"Rectangle\", false, true, true);\r\n        DummyGame game3 = createDummyGame(\"Inventory Only\", \"Circle\", false, false, true);\r\n\r\n        newGames.clear();\r\n        newGames.add(game1);\r\n        newGames.add(game2);\r\n        newGames.add(game3);\r\n    }\r\n    public static void loadSavedGames() {\r\n\r\n        // do stuff to get list of saved games\r\n        // todo\r\n\r\n        DummyGame game1 = createDummyGame(\"All Drawers\", \"Rectangle\", true, true, true);\r\n        DummyGame game2 = createDummyGame(\"RNG and Inventory\", \"Rectangle\", false, true, true);\r\n        DummyGame game3 = createDummyGame(\"Inventory Only\", \"Circle\", false, false, true);\r\n\r\n        savedGames.clear();\r\n        savedGames.add(game1);\r\n        savedGames.add(game2);\r\n        savedGames.add(game3);\r\n    }\r\n    private static DummyGame createDummyGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {\r\n\r\n        ArrayList<Player> players = new ArrayList<>();\r\n        Player player1 = new Player(\"Player 1\", Color.AQUAMARINE, new ArrayList<Gamepiece>(), new DummyInventory(\"Inventory 1\", new ArrayList<GameObject>()), true);\r\n        player1.addPiece(new Gamepiece());\r\n\r\n        ArrayList<Tile> tiles = new ArrayList<>();\r\n\r\n        double tileWidth = 100;\r\n        double tileHeight = 100;\r\n\r\n        int tileX = 0;\r\n        int tileY = 0;\r\n\r\n        boolean red = true;\r\n        for (int i = 1; i < 57; i++) {\r\n\r\n            Tile tile = new Tile();\r\n            tile.setHeight(tileHeight);\r\n            tile.setWidth(tileWidth);\r\n            if (red) {\r\n                tile.setColor(Color.RED);\r\n                tile.setLabel(\"Tile 1\");\r\n                tile.setShape(\"Rectangle\");\r\n                tile.setXPos(tileX);\r\n                tile.setYPos(tileY);\r\n                tiles.add(tile);\r\n                red = false;\r\n            } else {\r\n                tile.setColor(Color.BLACK);\r\n                tile.setLabel(\"Tile 1\");\r\n                tile.setShape(\"Rectangle\");\r\n                tile.setXPos(tileX);\r\n                tile.setYPos(tileY);\r\n                tiles.add(tile);\r\n                red = true;\r\n            }\r\n            if (i%8 == 0) {\r\n                red = !red;\r\n                tileY += 100;\r\n                tileX = 0;\r\n            } else {\r\n                tileX += 100;\r\n            }\r\n        }\r\n\r\n        ArrayList<Deck> decks = new ArrayList<>();\r\n        Deck deck1 = new Deck();\r\n        Deck deck2 = new Deck();\r\n        Deck deck3 = new Deck();\r\n        Deck deck4 = new Deck();\r\n        deck1.addCard(new Card(), 52);\r\n        deck2.addCard(new Card(), 52);\r\n        deck3.addCard(new Card(), 52);\r\n        deck4.addCard(new Card(), 52);\r\n        decks.add(deck1);\r\n        decks.add(deck2);\r\n        decks.add(deck3);\r\n        decks.add(deck4);\r\n\r\n\r\n        ArrayList<Die> dice = new ArrayList<Die>();\r\n        ArrayList<Spinner> spinners = new ArrayList();\r\n\r\n        Die die1 = new Die();\r\n        Die die2 = new Die();\r\n        Die die3 = new Die();\r\n        Die die4 = new Die();\r\n        Die die5 = new Die();\r\n        Die die6 = new Die();\r\n        Die die7 = new Die();\r\n        dice.add(die1);\r\n        dice.add(die2);\r\n        dice.add(die3);\r\n        dice.add(die4);\r\n        dice.add(die5);\r\n        dice.add(die6);\r\n        dice.add(die7);\r\n\r\n        Spinner spinner1 = new Spinner();\r\n        spinner1.setNumCategories(5);\r\n        List<Double> spinnerWeight = new ArrayList();\r\n        spinnerWeight.add(0.2);\r\n        spinnerWeight.add(0.2);\r\n        spinnerWeight.add(0.2);\r\n        spinnerWeight.add(0.2);\r\n        spinnerWeight.add(0.2);\r\n        spinners.add(spinner1);\r\n\r\n        ArrayList<Token> gameTokens = new ArrayList<>();\r\n        Token gameToken = new Token();\r\n        gameToken.setLabel(\"Token 1\");\r\n        gameToken.setShape(\"Rectangle\");\r\n        gameTokens.add(gameToken);\r\n\r\n        GameState gameState = new GameState(); //players, tiles, decks, dice, spinners, gameTokens\r\n        gameState.setAllTiles(tiles);\r\n        if (decksOn) {\r\n            gameState.setAllDecks(decks);\r\n        }\r\n        if (rngOn) {\r\n            gameState.setAllDice(dice);\r\n            gameState.setAllSpinners(spinners);\r\n        }\r\n        gameState.setAllPlayers(players);\r\n        gameState.setAllTokens(gameTokens);\r\n        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);\r\n\r\n        DummyGameRules gameRules = new DummyGameRules();\r\n\r\n        return new DummyGame(gameName, gameBoard, gameRules, gameState);\r\n    }\r\n\r\n    // setters\r\n    public static void setSelectedGame(DummyGame game) {\r\n        selectedGame = game;\r\n    }\r\n    public static void setSetupData(SetupData data) {\r\n        setupData = data;\r\n    }\r\n    public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }\r\n\r\n    // getters\r\n    public static ArrayList<DummyGame> getNewGames() {\r\n        return newGames;\r\n    }\r\n    public static ArrayList<DummyGame> getSavedGames() {\r\n        return savedGames;\r\n    }\r\n    public static DummyGame getSelectedGame() {\r\n        return selectedGame;\r\n    }\r\n    public static SetupData getSetupData() {\r\n        return setupData;\r\n    }\r\n    public static SettingsObject getSettingsObject() { return settingsObject; }\r\n\r\n    public static int[] calculateScreenDimensions() {\r\n\r\n        int[] screenDimensions = new int[2];\r\n\r\n        Rectangle2D dims = Screen.getPrimary().getBounds();\r\n        screenDimensions[0] = (int)dims.getWidth();\r\n        screenDimensions[1] = (int)dims.getHeight();\r\n\r\n        return screenDimensions;\r\n    }\r\n    public static void initScreenStyle(Stage stage) {\r\n\r\n        if(settingsObject.getIsFullScreen() == true) {\r\n            stage.initStyle(StageStyle.UNDECORATED); // remove title bar\r\n        } else {\r\n            stage.initStyle(StageStyle.DECORATED); // title bar intact\r\n        }\r\n    }\r\n    public static void initScreenDimensions(Stage stage) {\r\n\r\n        //stage.setResizable(false);\r\n\r\n        if(settingsObject.getIsFullScreen() == true) {\r\n            stage.setMaximized(true);\r\n            int[] screenDimensions = calculateScreenDimensions();\r\n            settingsObject.setWindowSize(screenDimensions);\r\n        } else {\r\n            stage.initStyle(StageStyle.DECORATED);\r\n\r\n            int[] screenDimensions = settingsObject.getWindowSize();\r\n            stage.setWidth(screenDimensions[0]);\r\n            stage.setHeight(screenDimensions[1]);\r\n\r\n            // theoretically keep the stage from becoming unuseable by going off the monitor\r\n//            int[] maxScreenDimensions = calculateScreenDimensions();\r\n//            stage.setMaxWidth(maxScreenDimensions[0]);\r\n//            stage.setMaxHeight(maxScreenDimensions[1]);\r\n        }\r\n    }\r\n\r\n    public static Stage updateStage(Stage stage) {\r\n\r\n        stage.close();\r\n\r\n        Stage newStage = new Stage();\r\n\r\n        initScreenStyle(newStage);\r\n        initScreenDimensions(newStage);\r\n\r\n        return newStage;\r\n    }\r\n\r\n    @Override\r\n    public void start(Stage stage) {\r\n\r\n        // calculate default screen dimensions\r\n        //int[] screenDimensions = calculateScreenDimensions();\r\n        //System.out.println(\"Your Screen Dimensions: \" + screenDimensions[0] + \" x \" + screenDimensions[1]);\r\n\r\n        //stage = updateStage(stage);\r\n        stage.initStyle(StageStyle.UNDECORATED);\r\n\r\n        // initialize controller and set initial scene\r\n        MainController controller = new MainController();\r\n        controller.initialize(stage);\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        launch();\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/scenebuilder/BasicApplication.java b/src/main/java/org/scenebuilder/BasicApplication.java
+--- a/src/main/java/org/scenebuilder/BasicApplication.java	(revision 0887955e8e251a5bfef16e50f4aa9a58ebb6cba7)
++++ b/src/main/java/org/scenebuilder/BasicApplication.java	(date 1638415375747)
+@@ -59,6 +59,8 @@
+ 
+         ArrayList<Player> players = new ArrayList<>();
+         Player player1 = new Player("Player 1", Color.AQUAMARINE, new ArrayList<Gamepiece>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
++        Gamepiece gp = new Gamepiece();
++        gp.setColor(Color.WHITE);
+         player1.addPiece(new Gamepiece());
+ 
+         ArrayList<Tile> tiles = new ArrayList<>();
+@@ -70,9 +72,10 @@
+         int tileY = 0;
+ 
+         boolean red = true;
++        Tile previous = new Tile();
+         for (int i = 1; i < 57; i++) {
+-
+             Tile tile = new Tile();
++
+             tile.setHeight(tileHeight);
+             tile.setWidth(tileWidth);
+             if (red) {
+@@ -99,8 +102,34 @@
+             } else {
+                 tileX += 100;
+             }
++            if (i == 1) {
++                previous = tile;
++            } else {
++                previous.addConnect(tile);
++                previous = tile;
++            }
+         }
+-
++        tiles.get(0).addConnect(tiles.get(1));
++        tiles.get(0).addConnect(tiles.get(8));
++        tiles.get(7).addConnect(tiles.get(6));
++        tiles.get(7).addConnect(tiles.get(15));
++        tiles.get(48).addConnect(tiles.get(40));
++        tiles.get(48).addConnect(tiles.get(49));
++        tiles.get(55).addConnect(tiles.get(54));
++        tiles.get(55).addConnect(tiles.get(47));
++        for (int i = 1; i < tiles.size() - 1; i++) {
++            if (i == 7 || i == 48) {
++                continue;
++            }
++            Tile tile = tiles.get(i);
++            if (i % 8 == 0 || i % 8 == 7) {
++                tile.addConnect(tiles.get(i + 8));
++                tile.addConnect(tiles.get(i - 8));
++            } else {
++                tile.addConnect(tiles.get(i + 1));
++                tile.addConnect(tiles.get(i - 1));
++            }
++        }
+         ArrayList<Deck> decks = new ArrayList<>();
+         Deck deck1 = new Deck();
+         Deck deck2 = new Deck();
+@@ -120,19 +149,20 @@
+         ArrayList<Spinner> spinners = new ArrayList();
+ 
+         Die die1 = new Die();
+-        Die die2 = new Die();
+-        Die die3 = new Die();
+-        Die die4 = new Die();
+-        Die die5 = new Die();
+-        Die die6 = new Die();
+-        Die die7 = new Die();
++        die1.setLabel("Die");
++//        Die die2 = new Die();
++//        Die die3 = new Die();
++//        Die die4 = new Die();
++//        Die die5 = new Die();
++//        Die die6 = new Die();
++//        Die die7 = new Die();
+         dice.add(die1);
+-        dice.add(die2);
+-        dice.add(die3);
+-        dice.add(die4);
+-        dice.add(die5);
+-        dice.add(die6);
+-        dice.add(die7);
++//        dice.add(die2);
++//        dice.add(die3);
++//        dice.add(die4);
++//        dice.add(die5);
++//        dice.add(die6);
++//        dice.add(die7);
+ 
+         Spinner spinner1 = new Spinner();
+         spinner1.setNumCategories(5);
+Index: src/main/java/org/RuleEngine/nodes/MoveNode.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.RuleEngine.nodes;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.LinkedList;\r\nimport org.RuleEngine.engine.GameState;\r\nimport org.GameObjects.objects.*;\r\n\r\n// Usage: Operand 0 - game piece name.\r\n//\t\t\t\tOperand 1 - distance (LiteralNode<Integer>)\r\npublic class MoveNode extends OpNode {\r\n    public MoveNode() { super(); }\r\n    public MoveNode(ArrayList<Node> operands) {\r\n        super();\r\n        this.operands.set(0, operands);\r\n    }\r\n\r\n\t@Override\r\n\tpublic LiteralNode execute(GameState currState) {\r\n        LiteralNode e1 = getOperand(0).execute(currState);\r\n        LiteralNode e2 = getOperand(1).execute(currState);\r\n    \r\n        if (e1 == null || e2 == null) {\r\n            System.out.println(\"Error: Something went wrong processing rset operation\");\r\n            return null;\r\n        }\r\n    \r\n        if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof Integer)) {\r\n            System.out.println(\"Error: rset operation only takes strings!\");\r\n            return null;\r\n        }\r\n        \r\n        String name = (String)e1.getValue();\r\n        Integer dis = (Integer)e2.getValue();\r\n        GameObject go = (name.charAt(0) == '_') ? go = currState.findObject(name) : currState.getRegistry(name);\r\n    \r\n        if (go == null || !(go instanceof Gamepiece)) {\r\n            System.out.println(\"Error: Cannot find GAMEPIECE of label \" + name);\r\n            return null;\r\n        }\r\n        \r\n        // This will send a list of possible destinations to Minjex, who makes the user choose a destination.\r\n        // The engine then promptly set the location of the gamepiece.\r\n        // TODO: How could this possibly affect the AI?\r\n        Tile playerChoice = Mystery(findTargetTiles((Tile)go.getTrait(\"location\"), dis));\r\n        Gamepiece gp = (Gamepiece) go;\r\n        if (!gp.setLocation(playerChoice)) {\r\n            System.out.println(\"Error: Failed to move object \" + name);\r\n        }\r\n        return null;\r\n\t}\r\n\t\r\n\t// TODO: This method will be implemented by Minjex.\r\n\tprivate Tile Mystery(ArrayList<Tile> tiles) {\r\n        return null;\r\n    }\r\n\t\r\n\t// This method returns a list of reachable tiles at distance tDis from the tile t.\r\n\t// Only tiles at the exact distance is included. If possible path is shorter than tDis, the end of that path\r\n\t// is not included.\r\n\tprivate ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {\r\n\t    LinkedList<Tile> tiles = new LinkedList<Tile>();\r\n\t    LinkedList<Integer> distances = new LinkedList<Integer>();\r\n\t    ArrayList<Tile> targets = new ArrayList<Tile>();\r\n\t    tiles.add(t);\r\n\t    distances.add(0);\r\n\t    \r\n\t    while(distances.peek() <= tDis) {\r\n\t        Integer currDis = distances.poll();\r\n\t        Tile currTile = tiles.poll();\r\n\t        for (Tile c : currTile.getConnect()) {\r\n\t            distances.add(currDis+1);\r\n\t            tiles.add(c);\r\n\t        }\r\n\t        if (currDis == tDis) { targets.add(currTile); }\r\n\t    }\r\n\t    \r\n\t    return targets;\r\n\t}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/RuleEngine/nodes/MoveNode.java b/src/main/java/org/RuleEngine/nodes/MoveNode.java
+--- a/src/main/java/org/RuleEngine/nodes/MoveNode.java	(revision 0887955e8e251a5bfef16e50f4aa9a58ebb6cba7)
++++ b/src/main/java/org/RuleEngine/nodes/MoveNode.java	(date 1638413801026)
+@@ -4,6 +4,7 @@
+ import java.util.LinkedList;
+ import org.RuleEngine.engine.GameState;
+ import org.GameObjects.objects.*;
++import static org.scenebuilder.Display.moveOptions;
+ 
+ // Usage: Operand 0 - game piece name.
+ //				Operand 1 - distance (LiteralNode<Integer>)
+@@ -41,7 +42,7 @@
+         // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
+         // The engine then promptly set the location of the gamepiece.
+         // TODO: How could this possibly affect the AI?
+-        Tile playerChoice = Mystery(findTargetTiles((Tile)go.getTrait("location"), dis));
++        Tile playerChoice = moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
+         Gamepiece gp = (Gamepiece) go;
+         if (!gp.setLocation(playerChoice)) {
+             System.out.println("Error: Failed to move object " + name);

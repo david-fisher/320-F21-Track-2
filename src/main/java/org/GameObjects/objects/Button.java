@@ -1,9 +1,11 @@
 package org.GameObjects.objects;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 public class Button extends GameObject {
     private static int count = 0;
 
+	private Shape parent;
 	public Button() {
 		super() ;  
 		this.setLabel("button" + String.format("%02d", ++count));
@@ -78,4 +80,7 @@ public class Button extends GameObject {
 	public boolean getPressed() {
 		return (boolean)this.getTrait("pressed");
 	}
+
+	public void setParent(Shape p) { this.parent = p; }
+	public Shape getParent() { return parent; }
 }

@@ -1,0 +1,113 @@
+Index: src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import java.lang.*?>\r\n<?import javafx.geometry.*?>\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.image.*?>\r\n<?import javafx.scene.layout.*?>\r\n<?import javafx.scene.text.*?>\r\n<?import javafx.geometry.Insets?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.ScrollPane?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.HBox?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane fx:id=\"playParent\" xmlns=\"http://javafx.com/javafx/8\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"org.scenebuilder.scenebuilder.PlayFXMLController\">\r\n   <children>\r\n      <Label fx:id=\"playerTurnIndicator\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"783.0\" layoutY=\"2.0\" prefHeight=\"70.0\" prefWidth=\"70.0\" style=\"-fx-border-color: #000000;\" text=\" Player 1's Turn\" textAlignment=\"CENTER\" wrapText=\"true\" AnchorPane.rightAnchor=\"70.0\">\r\n         <font>\r\n            <Font size=\"14.0\" />\r\n         </font>\r\n      </Label>\r\n      <Pane layoutX=\"908.3333129882812\" layoutY=\"15.0\" onMouseClicked=\"#displayPopup\" AnchorPane.rightAnchor=\"15.0\" AnchorPane.topAnchor=\"15.0\">\r\n         <children>\r\n            <ImageView fx:id=\"playSettings\" />\r\n         </children>\r\n      </Pane>\r\n      <ScrollPane fx:id=\"decksPane\" layoutX=\"783.0\" layoutY=\"75.0\" prefHeight=\"209.0\" prefWidth=\"355.0\" style=\"-fx-background-color: WHITE;\" vbarPolicy=\"NEVER\" AnchorPane.rightAnchor=\"-215.0\">\r\n         <opaqueInsets>\r\n            <Insets />\r\n         </opaqueInsets>\r\n      </ScrollPane>\r\n      <Label fx:id=\"buttonDecks\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutY=\"75.0\" onMouseClicked=\"#slideOut\" prefHeight=\"209.0\" prefWidth=\"140.0\" style=\"-fx-background-color: DarkSeaGreen; -fx-border-color: Black;\" text=\"Decks\" textFill=\"WHITE\" AnchorPane.rightAnchor=\"0.0\">\r\n         <font>\r\n            <Font size=\"24.0\" />\r\n         </font>\r\n         <opaqueInsets>\r\n            <Insets />\r\n         </opaqueInsets>\r\n      </Label>\r\n      <ScrollPane fx:id=\"rngPane\" layoutX=\"783.0\" layoutY=\"325.0\" prefHeight=\"209.0\" prefWidth=\"355.0\" style=\"-fx-background-color: WHITE;\" vbarPolicy=\"NEVER\" AnchorPane.rightAnchor=\"-215.0\" />\r\n      <Label fx:id=\"buttonRNG\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutY=\"325.0\" onMouseClicked=\"#slideOut\" prefHeight=\"209.0\" prefWidth=\"140.0\" style=\"-fx-background-color: DarkSeaGreen; -fx-border-color: Black;\" text=\"RNG\" textFill=\"WHITE\" AnchorPane.rightAnchor=\"0.0\">\r\n         <font>\r\n            <Font size=\"24.0\" />\r\n         </font>\r\n      </Label>\r\n      <HBox alignment=\"CENTER\" prefHeight=\"168.0\" prefWidth=\"923.0\" style=\"-fx-border-color: black; -fx-background-color: DarkSeaGreen;\" AnchorPane.bottomAnchor=\"0.0\" AnchorPane.leftAnchor=\"0.0\" AnchorPane.rightAnchor=\"0.0\">\r\n         <children>\r\n            <Label text=\"Inventory Space\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n         </children>\r\n      </HBox>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml b/src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml
+--- a/src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml	(revision 78036a4fa0a28806905c54c8f1691415d881713b)
++++ b/src/main/resources/org/scenebuilder/scenebuilder/playFXML.fxml	(date 1636935545269)
+@@ -1,11 +1,5 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import java.lang.*?>
+-<?import javafx.geometry.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.image.*?>
+-<?import javafx.scene.layout.*?>
+-<?import javafx.scene.text.*?>
+ <?import javafx.geometry.Insets?>
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.ScrollPane?>
+@@ -15,9 +9,10 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
++
++<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+    <children>
+-      <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="2.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
++      <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="15.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+          <font>
+             <Font size="14.0" />
+          </font>
+@@ -27,12 +22,12 @@
+             <ImageView fx:id="playSettings" />
+          </children>
+       </Pane>
+-      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0">
++      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="100.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0">
+          <opaqueInsets>
+             <Insets />
+          </opaqueInsets>
+       </ScrollPane>
+-      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="75.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
++      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="100.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+          <font>
+             <Font size="24.0" />
+          </font>
+Index: target/classes/org/scenebuilder/scenebuilder/playFXML.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.geometry.Insets?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.ScrollPane?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.HBox?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane fx:id=\"playParent\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"org.scenebuilder.scenebuilder.PlayFXMLController2\">\r\n   <children>\r\n      <AnchorPane fx:id=\"board\" prefHeight=\"555.0\" prefWidth=\"747.0\" style=\"-fx-border-color: Black;\" AnchorPane.bottomAnchor=\"0.0\" AnchorPane.leftAnchor=\"0.0\" AnchorPane.rightAnchor=\"0.0\" AnchorPane.topAnchor=\"0.0\">\r\n         <children>\r\n            <Label layoutX=\"14.0\" layoutY=\"14.0\" prefHeight=\"0.0\" prefWidth=\"136.0\" text=\"Board Space\" AnchorPane.leftAnchor=\"14.0\" AnchorPane.topAnchor=\"14.0\">\r\n               <font>\r\n                  <Font size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n            <Label fx:id=\"playGameLabel\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"4.0\" layoutY=\"43.0\" prefHeight=\"199.0\" prefWidth=\"673.0\" text=\"Filler Label\" textAlignment=\"CENTER\" AnchorPane.leftAnchor=\"3.0\" AnchorPane.topAnchor=\"15.0\">\r\n               <font>\r\n                  <Font size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n            <Label fx:id=\"playSetupLabel\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"6.0\" layoutY=\"273.0\" prefHeight=\"211.0\" prefWidth=\"669.0\" text=\"Filler Label\" textAlignment=\"CENTER\" AnchorPane.leftAnchor=\"5.0\" AnchorPane.topAnchor=\"170.0\">\r\n               <font>\r\n                  <Font size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n            <Label fx:id=\"playerTurnIndicator\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"781.3333333333334\" layoutY=\"3.0\" prefHeight=\"70.0\" prefWidth=\"70.0\" style=\"-fx-border-color: #000000;\" text=\" Player 1's Turn\" textAlignment=\"CENTER\" wrapText=\"true\" AnchorPane.rightAnchor=\"70.0\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Label>\r\n         </children>\r\n      </AnchorPane>\r\n      <Pane layoutX=\"908.3333129882812\" layoutY=\"15.0\" onMouseClicked=\"#displayPopup\" AnchorPane.rightAnchor=\"15.0\" AnchorPane.topAnchor=\"15.0\">\r\n         <children>\r\n            <ImageView fx:id=\"playSettings\" />\r\n         </children>\r\n      </Pane>\r\n      <ScrollPane fx:id=\"decksPane\" layoutX=\"783.0\" layoutY=\"75.0\" prefHeight=\"209.0\" prefWidth=\"355.0\" style=\"-fx-background-color: WHITE;\" vbarPolicy=\"NEVER\" AnchorPane.rightAnchor=\"-215.0\">\r\n         <opaqueInsets>\r\n            <Insets />\r\n         </opaqueInsets>\r\n      </ScrollPane>\r\n      <Label fx:id=\"buttonDecks\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutY=\"75.0\" onMouseClicked=\"#slideOut\" prefHeight=\"209.0\" prefWidth=\"140.0\" style=\"-fx-background-color: DarkSeaGreen; -fx-border-color: Black;\" text=\"Decks\" textFill=\"WHITE\" AnchorPane.rightAnchor=\"0.0\">\r\n         <font>\r\n            <Font size=\"24.0\" />\r\n         </font>\r\n         <opaqueInsets>\r\n            <Insets />\r\n         </opaqueInsets>\r\n      </Label>\r\n      <ScrollPane fx:id=\"rngPane\" layoutX=\"783.0\" layoutY=\"325.0\" prefHeight=\"209.0\" prefWidth=\"355.0\" style=\"-fx-background-color: WHITE;\" vbarPolicy=\"NEVER\" AnchorPane.rightAnchor=\"-215.0\" />\r\n      <Label fx:id=\"buttonRNG\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutY=\"325.0\" onMouseClicked=\"#slideOut\" prefHeight=\"209.0\" prefWidth=\"140.0\" style=\"-fx-background-color: DarkSeaGreen; -fx-border-color: Black;\" text=\"RNG\" textFill=\"WHITE\" AnchorPane.rightAnchor=\"0.0\">\r\n         <font>\r\n            <Font size=\"24.0\" />\r\n         </font>\r\n      </Label>\r\n      <HBox alignment=\"CENTER\" prefHeight=\"168.0\" prefWidth=\"923.0\" style=\"-fx-border-color: black; -fx-background-color: DarkSeaGreen;\" AnchorPane.bottomAnchor=\"0.0\" AnchorPane.leftAnchor=\"0.0\" AnchorPane.rightAnchor=\"0.0\">\r\n         <children>\r\n            <Label text=\"Inventory Space\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n         </children>\r\n      </HBox>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml b/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml
+--- a/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml	(revision 78036a4fa0a28806905c54c8f1691415d881713b)
++++ b/target/classes/org/scenebuilder/scenebuilder/playFXML.fxml	(date 1636935545269)
+@@ -9,43 +9,25 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController2">
++
++<AnchorPane fx:id="playParent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scenebuilder.scenebuilder.PlayFXMLController">
+    <children>
+-      <AnchorPane fx:id="board" prefHeight="555.0" prefWidth="747.0" style="-fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+-         <children>
+-            <Label layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="136.0" text="Board Space" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label fx:id="playGameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="43.0" prefHeight="199.0" prefWidth="673.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="15.0">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label fx:id="playSetupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="273.0" prefHeight="211.0" prefWidth="669.0" text="Filler Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="170.0">
+-               <font>
+-                  <Font size="24.0" />
+-               </font>
+-            </Label>
+-            <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="781.3333333333334" layoutY="3.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
+-               <font>
+-                  <Font size="14.0" />
+-               </font>
+-            </Label>
+-         </children>
+-      </AnchorPane>
++      <Label fx:id="playerTurnIndicator" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="15.0" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: #000000;" text=" Player 1's Turn" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="70.0">
++         <font>
++            <Font size="14.0" />
++         </font>
++      </Label>
+       <Pane layoutX="908.3333129882812" layoutY="15.0" onMouseClicked="#displayPopup" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+          <children>
+             <ImageView fx:id="playSettings" />
+          </children>
+       </Pane>
+-      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="75.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0">
++      <ScrollPane fx:id="decksPane" layoutX="783.0" layoutY="100.0" prefHeight="209.0" prefWidth="355.0" style="-fx-background-color: WHITE;" vbarPolicy="NEVER" AnchorPane.rightAnchor="-215.0">
+          <opaqueInsets>
+             <Insets />
+          </opaqueInsets>
+       </ScrollPane>
+-      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="75.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
++      <Label fx:id="buttonDecks" alignment="CENTER" contentDisplay="CENTER" layoutY="100.0" onMouseClicked="#slideOut" prefHeight="209.0" prefWidth="140.0" style="-fx-background-color: DarkSeaGreen; -fx-border-color: Black;" text="Decks" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+          <font>
+             <Font size="24.0" />
+          </font>
