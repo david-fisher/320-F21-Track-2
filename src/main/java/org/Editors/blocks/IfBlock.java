@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

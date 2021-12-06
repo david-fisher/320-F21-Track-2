@@ -1,4 +1,4 @@
-package editors.controllers;
+package org.Editors.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import editors.MainMenu;
+import org.Editors.MainMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,7 +40,7 @@ import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
 import java.lang.NumberFormatException;
 
-import editors.blocks.*;
+import org.Editors.blocks.*;
 import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
 import org.GameObjects.objects.*;
