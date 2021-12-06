@@ -1,9 +1,9 @@
-package objects;
+package org.GameObjects.objects;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import engine.GameState;
+import org.RuleEngine.engine.GameState;
 
 class Project{
 	

@@ -333,7 +333,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleBackButton(ActionEvent event) {
-    URL location = getClass().getResource("../../resources/MainMenuScreen.fxml");
+    URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");
     try {
       Parent root = (Parent) FXMLLoader.load(location);
       MainMenu.stage.getScene().setRoot(root);

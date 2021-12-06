@@ -19,8 +19,5 @@ blocks = blocks/*.java
 all: $(board) $(dummies) $(objects) $(nodes) $(engine) $(blocks) $(controllers) $(menu)
 	javac -d . --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
-archive: objects node engine controllers menu
-	jar cfmv Editors.jar manifest.txt editors/ resources/
-
 run:
-	java --module-path $(PATH_TO_FX) --add-modules $(fxmodules) editors.MainMenu
+	java --module-path $(PATH_TO_FX) --add-modules $(fxmodules) org.Editors.MainMenu

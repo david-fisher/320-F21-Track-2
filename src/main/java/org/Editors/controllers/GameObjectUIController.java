@@ -78,7 +78,7 @@ public class GameObjectUIController {
     }
 
     @FXML private void switchToMainMenu(Event event) {
-        URL location = getClass().getResource("../../resources/MainMenuScreen.fxml");
+        URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");
         try {
             Parent root = (Parent)FXMLLoader.load(location);
             MainMenu.stage.getScene().setRoot(root);
