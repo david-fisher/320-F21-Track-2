@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fixed Editor packages in everything except &quot;old_blocks&quot;">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/BinOpBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/Block.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/ConditionBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/GetBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/GetTileConnBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/GetTileIndexBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/MoveByStepsBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/MoveToPosBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/MoveToTileIndexBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/NotBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/PsetBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/old_blocks/RsetBlock.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -327,7 +340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638751719696</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Fixed Editor packages in everything except &quot;old_blocks&quot;">
+      <created>1638829650046</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1638829650046</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,7 +363,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Card Display when you Click on a Deck" />
     <MESSAGE value="Add Card Display when you Click on a Deck and fix errors" />
     <MESSAGE value="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program." />
     <MESSAGE value="Pulled GKNEW's objects from main, and replaced all JFX Buttons with labels to avoid conflicts with UMass Dining's new Button object" />
@@ -368,7 +387,8 @@
     <MESSAGE value="Added White and Grey Css sheet" />
     <MESSAGE value="Minute Basic application change to player1" />
     <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added onClicks for buttons that send their event to interpreter" />
+    <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
