@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="New merge from main: adding Odyssey branch">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" afterDir="false" />
-    </list>
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,6 +40,7 @@
     </option>
   </component>
   <component name="ProjectId" id="20YHQYlpZDfZ78KjZ57VTwvAsIT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
