@@ -1,7 +1,7 @@
 module org.scenebuilder.scenebuilder {
     requires javafx.controls;
     requires javafx.fxml;
-    requires com.jfoenix;
+//    requires com.jfoenix;
     requires java.desktop;
     requires org.yaml.snakeyaml;
 
