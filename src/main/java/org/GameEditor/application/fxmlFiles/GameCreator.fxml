@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.Controller">
+   <children>
+      <Pane fx:id="gameBoardBackground" layoutX="23.0" layoutY="20.0" prefHeight="559.0" prefWidth="629.0">
+         <children>
+            <Text fill="WHITE" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! &#10;Please select the number &#10;of Rows and Columns&#10;This can be changed later!" textAlignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+            <Button fx:id="begin" layoutX="281.0" layoutY="390.0" mnemonicParsing="false" onAction="#showGameBoard" text="BEGIN" />
+         </children>
+      </Pane>
+      <Pane layoutX="137.0" layoutY="211.0" prefHeight="600.0" prefWidth="225.0" style="-fx-background-color: #999999ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="225.0">
+               <children>
+                  <Button fx:id="exitButton" layoutX="132.0" layoutY="4.0" mnemonicParsing="false" onAction="#exitProgram" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Exit" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="saveButton" layoutX="33.0" layoutY="4.0" mnemonicParsing="false" onAction="#chooseSaveType" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Save" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="33.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Undo" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="testButton" layoutX="33.0" layoutY="68.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Test" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="132.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Redo" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="helpButton" layoutX="132.0" layoutY="68.0" mnemonicParsing="false" onAction="#openHelp" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Help" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="objectEditor" layoutX="33.0" layoutY="100.0" mnemonicParsing="false" onAction="#objectEdit" style="-fx-pref-width: 160; -fx-max-width: 160; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Object Editor" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="32.0" layoutY="132.0" mnemonicParsing="false" style="-fx-pref-width: 160; -fx-max-width: 160; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Rule Editor" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <AnchorPane layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="225.0">
+               <children>
+                  <Pane layoutX="12.0" layoutY="2.0" prefHeight="101.0" prefWidth="199.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10;" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
+                     <children>
+                        <Text layoutX="40.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Game Tile:" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="genSquareButton" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onAction="#genSquare" style="-fx-pref-width: 140; -fx-max-width: 140; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Add Square" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="genCircleButton" layoutX="30.0" layoutY="62.0" mnemonicParsing="false" onAction="#genCircle" style="-fx-pref-width: 140; -fx-max-width: 140; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Add Circle" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="109.0" prefHeight="110.0" prefWidth="199.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10;">
+                     <children>
+                        <Text layoutX="9.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rows:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Columns:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="34.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Row/Column" textAlignment="CENTER" wrappingWidth="138.75">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="rowSize" layoutX="72.0" layoutY="43.0" onAction="#GridRowSelector" prefHeight="25.0" prefWidth="114.0" />
+                        <TextField fx:id="columnSize" layoutX="72.0" layoutY="72.0" onAction="#GridColumnSelector" prefHeight="25.0" prefWidth="114.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="381.0" prefHeight="221.0" prefWidth="225.0">
+               <children>
+                  <Pane layoutX="13.0" layoutY="8.0" prefHeight="181.0" prefWidth="199.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10;" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="8.0">
+                     <children>
+                        <Text layoutX="43.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tile Attributes:" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="colorTf" editable="false" layoutX="65.0" layoutY="70.0" prefHeight="25.0" prefWidth="121.0" />
+                        <TextField fx:id="nameTf" editable="false" layoutX="65.0" layoutY="39.0" prefHeight="25.0" prefWidth="121.0" />
+                        <TextField fx:id="imageTf" editable="false" layoutX="65.0" layoutY="100.0" prefHeight="25.0" prefWidth="121.0" />
+                        <Text layoutX="60.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections:" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField editable="false" layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="185.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
