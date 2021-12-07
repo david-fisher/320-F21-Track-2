@@ -27,6 +27,8 @@ public class SequenceBlock extends Block {
   //Pointer to parent of tree
   private org.RuleEngine.nodes.Node parentPtr; 
 
+  private TextField field;
+
   public SequenceBlock() {
     this.block = new StackPane();
 
@@ -68,7 +70,7 @@ public class SequenceBlock extends Block {
     //Base visual of the stackpane
     Rectangle base = new Rectangle(SEQ_WIDTH, this.blockHeight, GREY);
 
-    TextField field = new TextField();
+    field = new TextField();
     field.setPrefWidth(middleColSize);
     field.setMaxWidth(middleColSize);
     grid.add(field, 1, 0);
@@ -92,5 +94,9 @@ public class SequenceBlock extends Block {
 
   public void setParentPtr(org.RuleEngine.nodes.Node parent) {
     this.parentPtr = parent;
+  }
+
+  public String getFieldText() {
+    return field.getText();
   }
 }

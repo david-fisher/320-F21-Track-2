@@ -39,6 +39,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
 import java.lang.NumberFormatException;
+import java.util.Collections;
 
 import org.Editors.blocks.*;
 import org.RuleEngine.engine.*;
@@ -48,6 +49,8 @@ import org.GameObjects.objects.*;
 import java.util.ArrayList;
 
 //TODO: Change handleIf and handleWhile to not solely use placeBlock
+//TODO: Create verificaiton method in handleSaveBtn
+//TODO: Create method for handling errorLabel
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -82,6 +85,7 @@ public class RuleEditorUIController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // Implement
+    errorLabel.setOnMouseClicked((evt) -> errorLabel.setOpacity(0.0));
   }
 
   /**
@@ -190,6 +194,14 @@ public class RuleEditorUIController implements Initializable {
     resizeAnchorPane();
   }
 
+  private Integer parseIntOrNull(String value) {
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
   //temp
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
@@ -198,6 +210,43 @@ public class RuleEditorUIController implements Initializable {
       String text = textBlockList.get(i).getFieldText();
       textBlockList.get(i).getLiteralNode().setValue(text);
       //System.out.println(textBlockList.get(i).getLiteralNode().value);
+    }
+
+    //Will hold values from sequence blocks as ints
+    ArrayList<Integer> seqBlockVals = new ArrayList<Integer>();
+    //Verify that sequenceBlocks have only numeric values & that they're > 0 & collect them into seqBlockVals
+    for(int i = 0; i < seqBlockList.size(); i++) {
+      Integer fieldVal = parseIntOrNull(seqBlockList.get(i).getFieldText());
+      //Check that no sequence block contains a non-numeric value
+      if (fieldVal == null) {
+        errorLabel.setText("Sequence block must only contain numeric values.");
+        errorLabel.setOpacity(1.0);
+        return;
+      }
+      else if (fieldVal <= 0) {
+        errorLabel.setText("Sequence block must only contain numbers greater than 0.");
+        errorLabel.setOpacity(1.0);
+        return;
+      }
+      seqBlockVals.add(fieldVal);
+    }
+    //Sort the vals from the sequence blocks
+    Collections.sort(seqBlockVals);
+    //Verify that the values start at 1
+    if (seqBlockVals.size() > 0) {
+      if (seqBlockVals.get(0) != 1) {
+        errorLabel.setText("Sequence blocks must start from 1.");
+        errorLabel.setOpacity(1.0);
+        return;
+      }
+    }
+    //Verify that the values are sequential
+    for(int i = 1; i < seqBlockVals.size(); i++) {
+      if (seqBlockVals.get(i) - seqBlockVals.get(i-1) != 1) {
+        errorLabel.setText("Sequence blocks must contain numbers that consecutively have difference of only 1.");
+        errorLabel.setOpacity(1.0);
+        return;
+      }
     }
   }
 
@@ -301,7 +350,7 @@ public class RuleEditorUIController implements Initializable {
     blockActions(seqBlock);
   }
 
-  private Integer parseIntOrNull(Optional<String> value) {
+  private Integer dialogParseIntOrNull(Optional<String> value) {
     try {
       return Integer.parseInt(value.get());
     } catch (NumberFormatException e) {
@@ -317,7 +366,7 @@ public class RuleEditorUIController implements Initializable {
     dialog.setContentText("Statements:");
 
     Optional<String> result = dialog.showAndWait();
-    return parseIntOrNull(result);
+    return dialogParseIntOrNull(result);
   }
 
   @FXML
@@ -328,6 +377,7 @@ public class RuleEditorUIController implements Initializable {
     }
     else if (numStmnts == null) {
       errorLabel.setText("Input must be a number.");
+      errorLabel.setOpacity(1.0);
     }
   }
 
