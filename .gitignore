@@ -10,8 +10,15 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+Maven__*
+
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -27,3 +34,6 @@ hs_err_pid*
 /.metadata/
 Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
 Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
+.DS_Store
+.DS_Store
+.DS_Store
