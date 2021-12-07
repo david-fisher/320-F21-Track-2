@@ -8,6 +8,10 @@ module org.scenebuilder.scenebuilder {
 
     opens org.scenebuilder.scenebuilder to javafx.fxml;
     exports org.scenebuilder.scenebuilder;
-    exports org.scenebuilder.scenebuilder.dummy;
+//    exports org.scenebuilder.scenebuilder.dummy;
+    
+    opens org.GameObjects.objects;
+    opens org.RuleEngine.nodes;
+    opens org.RuleEngine.engine;
     opens org.scenebuilder.scenebuilder.dummy to javafx.fxml;
 }
