@@ -7,6 +7,8 @@ import org.RuleEngine.nodes.*;
 
 public class GameState extends Savable {
 
+    public String projectName;
+    
     public GameBoard board;
     public ArrayList<Button> buttons;
     public ArrayList<Card> cards;
@@ -22,6 +24,7 @@ public class GameState extends Savable {
     // Temporary GameObject list.
     public ArrayList<GameObject> gameObjects;
 
+    public boolean tutorialEnabled;
     public HashMap<String, GameObject> registers;
     public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
@@ -30,6 +33,8 @@ public class GameState extends Savable {
     }
 
     public GameState() {
+        projectName = "New Project";
+        
         gameObjects = new ArrayList<GameObject>();
         buttons = new ArrayList<Button>();
         cards = new ArrayList<Card>();
@@ -41,6 +46,7 @@ public class GameState extends Savable {
         tiles = new ArrayList<Tile>();
         tokens = new ArrayList<Token>();
 
+        tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
     }
@@ -110,6 +116,9 @@ public class GameState extends Savable {
     }
     
     // For object persistence
+    public String getProjectName() { return projectName; }
+    public void setProjectName(String name) { projectName = name; }
+    
     public GameBoard getGameBoard() { return board; }
     public void setGameBoard(GameBoard board) { this.board = board; }
 
