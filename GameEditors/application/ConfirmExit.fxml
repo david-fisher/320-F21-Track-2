@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ConfirmExitController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <Pane layoutX="50.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e04444; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;">
+               <children>
+                  <Text layoutX="-9.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are You Sure You Want To Exit Without Saving?" textAlignment="CENTER" wrappingWidth="218.89773559570312">
+                     <font>
+                        <Font name="Wingdings" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Button fx:id="exit" layoutX="50.0" layoutY="134.0" mnemonicParsing="false" onAction="#returnToMenu" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Exit  " />
+            <Button fx:id="save" layoutX="121.0" layoutY="134.0" mnemonicParsing="false" onAction="#saveButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
+            <Button fx:id="cancel" layoutX="194.0" layoutY="134.0" mnemonicParsing="false" onAction="#returnToEditor" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Cancel" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
