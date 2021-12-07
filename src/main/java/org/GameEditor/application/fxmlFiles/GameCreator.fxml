@@ -7,11 +7,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
       <Pane fx:id="gameBoardBackground" layoutX="23.0" layoutY="20.0" prefHeight="559.0" prefWidth="629.0">
          <children>
-            <Text fill="WHITE" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! &#10;Please select the number &#10;of Rows and Columns&#10;This can be changed later!" textAlignment="CENTER">
+            <Text layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! &#10;Please select the number &#10;of Rows and Columns&#10;This can be changed later!" textAlignment="CENTER">
                <font>
                   <Font size="48.0" />
                </font>

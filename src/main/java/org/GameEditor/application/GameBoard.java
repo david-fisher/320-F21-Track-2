@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -53,18 +52,12 @@ public class GameBoard {
         	Tile t = existingTiles.get(i);
         	
         	t.tileShape.resize(cellWidth, cellHeight);//doesn't work
+        	existingTiles.set(i, t);
         	
         	//need to change the original tile location of each t
         	t.setTileXInitial(t.getTileXLocation());
         	t.setTileYInitial(t.getTileYLocation());
         	
-        	if (t.tileShape.getClass().getSimpleName().equals("Rectangle")) {
-        		
-        		System.out.println("hello there");
-        	}
-        	if (t.tileShape.getClass().getSimpleName().equals("Circle")) {
-        		System.out.println("general kenobi");
-        	}
         	
         	if (t.getTileXLocation() < width || t.getTileYLocation() < height) {
         		gameBoardBackground.getChildren().add(t.tileShape);
@@ -105,7 +98,6 @@ public class GameBoard {
 		return boardWidth;
 	}
 	
-	//done
 	public int getBoardHeight() {
 		return boardHeight;
 	}
@@ -119,18 +111,6 @@ public class GameBoard {
 	//done
 	public void setSizeY(int h) {
 		width = h;
-	}
-	
-	//not done
-	public Tile newRectangle(Tile t) {
-		t.tileShape = new Rectangle();
-		return t;
-	}
-	
-	//not done
-	public Tile newCircl(Tile t) {
-		t.tileShape = new Circle();
-		return t;
 	}
 	
 }

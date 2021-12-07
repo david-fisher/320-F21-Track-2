@@ -1,15 +1,8 @@
-package application.Controllers;
+package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import application.Draggable;
-import application.GameBoard;
-import application.Leftclickable;
-import application.Rightclickable;
-import application.Tile;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +44,8 @@ public class Controller {
 
 	@FXML
 	private Button genSquareButton;
+
+	// Morgan Created These
 
 	@FXML
 	private Button saveButton;
@@ -97,7 +92,7 @@ public class Controller {
 		if (true) {
 
 		}
-		root.setLocation(getClass().getResource("../fxmlFiles/SaveAsOrSave.fxml"));
+		root.setLocation(getClass().getResource("SaveAsOrSave.fxml"));
 		Scene scene = new Scene(root.load(), 300, 200);
 		Stage stage = new Stage();
 		stage.setTitle("Confirm Save");
@@ -125,7 +120,7 @@ public class Controller {
 	void exitProgram(ActionEvent event) throws IOException {// This currently quits out of the system. We want it to
 															// quit the editor.
 		FXMLLoader root = new FXMLLoader();
-		root.setLocation(getClass().getResource("../fxmlFiles/ConfirmExit.fxml"));
+		root.setLocation(getClass().getResource("ConfirmExit.fxml"));
 		Scene scene = new Scene(root.load(), 300, 200);
 		Stage stage = new Stage();
 		stage.setTitle("Confirm Exit");
@@ -178,7 +173,7 @@ public class Controller {
 		c.tileShape = new Circle(radius, Color.BLACK);
 		
 		draggable.makeDraggable(c.tileShape, gameBoard, gameBoardBackground, gridLayout, c);
-		rightclickable.makeRightClickable(c.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		rightclickable.makeRightClickable(c,c.tileShape, gameBoardBackground, gridLayout, gameBoard);
 		leftclickable.makeLeftclickable(c, nameTf, imageTf, colorTf);
 		
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
@@ -213,7 +208,7 @@ public class Controller {
 		r.tileShape = new Rectangle(x, y, Color.BLACK);
 		
 		draggable.makeDraggable(r.tileShape, gameBoard, gameBoardBackground, gridLayout, r);
-		rightclickable.makeRightClickable(r.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		rightclickable.makeRightClickable(r,r.tileShape, gameBoardBackground, gridLayout, gameBoard);
 		leftclickable.makeLeftclickable(r, nameTf, imageTf, colorTf);
 		
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
@@ -234,11 +229,12 @@ public class Controller {
 		}
 	}
 	
+	
+	
 	@FXML
 	void GridRowSelector(ActionEvent event) {
-		//check that the rowSize.getText() is an integer between 1 and 40
-		int height = Integer.parseInt(rowSize.getText());
-		int width = Integer.parseInt(columnSize.getText());
+		int height = Integer.valueOf(rowSize.getText());
+		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];
 		gameBoard.draw(gameBoardBackground, width, height, gridLayout, existingTiles);
 	}
@@ -246,7 +242,7 @@ public class Controller {
 
 	
 	@FXML
-	void GridColumnSelector(ActionEvent event) {		
+	void GridColumnSelector(ActionEvent event) {
 		int height = Integer.valueOf(rowSize.getText());
 		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];

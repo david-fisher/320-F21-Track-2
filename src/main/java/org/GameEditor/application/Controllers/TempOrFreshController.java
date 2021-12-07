@@ -1,4 +1,4 @@
-package application.Controllers;
+package application;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class TempOrFreshController {
     @FXML
     //used to switch from the TemplateOrFresh class to the GameCreator class
     public void switchNewEditor(ActionEvent event) throws IOException {
-		Parent editor = FXMLLoader.load(getClass().getResource("../fxmlFiles/GameCreator.fxml"));
+		Parent editor = FXMLLoader.load(getClass().getResource("GameCreator.fxml"));
 		Scene editorScene = new Scene(editor);
 		
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -34,7 +34,7 @@ public class TempOrFreshController {
     }
     
     public void switchToTemplateSelect(ActionEvent event) throws IOException {
-		Parent editor = FXMLLoader.load(getClass().getResource("../fxmlFiles/PickTemplateOrExisting.fxml"));
+		Parent editor = FXMLLoader.load(getClass().getResource("PickTemplateOrExisting.fxml"));
 		Scene editorScene = new Scene(editor);
 		
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

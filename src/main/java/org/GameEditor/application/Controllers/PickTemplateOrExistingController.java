@@ -1,4 +1,4 @@
-package application.Controllers;
+package application;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -17,7 +17,7 @@ public class PickTemplateOrExistingController {
 	
     @FXML
     public void goBack(ActionEvent event) throws IOException {
-		Parent editor = FXMLLoader.load(getClass().getResource("../fxmlFiles/TemplateOrFresh.fxml"));
+		Parent editor = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
 		Scene editorScene = new Scene(editor);
 		
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

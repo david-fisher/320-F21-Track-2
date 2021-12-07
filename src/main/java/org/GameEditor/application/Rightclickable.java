@@ -1,8 +1,14 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -11,10 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 
 public class Rightclickable {
 	
-	public void makeRightClickable(Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard) {
+	public void makeRightClickable(Tile tile, Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard) {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem deleteButton = new MenuItem(null, new Label("Delete"));
 		MenuItem shapeEditor = new MenuItem(null, new Label("Shape Editor"));
@@ -36,6 +43,30 @@ public class Rightclickable {
 	            gameBoardBackground.getChildren().remove(shape);
 	        }
 	    });
+		
+		shapeEditor.setOnAction(new EventHandler<ActionEvent>() {
+			@FXML
+			public void handle(ActionEvent event)
+			{
+				
+				
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("ShapeEditor.fxml"));
+				try {
+					loader.load();
+					Parent p = loader.getRoot();
+					Stage stage = new Stage();
+					stage.setTitle("Shape Editor");
+					stage.setScene(new Scene(p));
+					stage.show();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				ShapeAttributeController attributeController = loader.getController();
+                attributeController.getTile(tile);
+			}
+		});
 		
 		shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
