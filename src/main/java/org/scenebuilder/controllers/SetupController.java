@@ -224,7 +224,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < min_player; i++) {
             ArrayList<Gamepiece> gamePieces = new ArrayList<>();
             //"Token " + (i+1), "Square"
-            Player player = new Player("Player " + (i+1), gamePieces, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
+            Player player = new Player("Player " + (i+1), gamePieces, new ArrayList<GameObject>(), true);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -246,7 +246,7 @@ public class SetupController extends ScreenController {
             // gamePieces.add(new Gamepiece());
             //"Token " + (num_players+1), "Square"
 
-            Player player = new Player("Player " + (num_players+1), gamePieces, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
+            Player player = new Player("Player " + (num_players+1), gamePieces, new ArrayList<GameObject>(), true);
 
             num_players += 1;
             playerCountTextField.setText(Integer.toString(num_players));
