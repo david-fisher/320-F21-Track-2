@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Removed &quot;org.Editors.old_blocks&quot;" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="workspace automatic update on pull (check effect)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,11 +50,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/nodes" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../Program Files/Java/jdk-9.0.4" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -341,7 +343,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638830006299</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="workspace automatic update on pull (check effect)">
+      <created>1638914578648</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1638914578648</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,7 +366,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program." />
     <MESSAGE value="Pulled GKNEW's objects from main, and replaced all JFX Buttons with labels to avoid conflicts with UMass Dining's new Button object" />
     <MESSAGE value="Scale dice to display all of them in one section of the RNG tab." />
     <MESSAGE value="Added rolling functionality to the Dice in the RNG tab and a display of the corresponding side landed that each die landed on." />
@@ -382,7 +390,8 @@
     <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
     <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed &quot;org.Editors.old_blocks&quot;" />
+    <MESSAGE value="workspace automatic update on pull (check effect)" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace automatic update on pull (check effect)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
