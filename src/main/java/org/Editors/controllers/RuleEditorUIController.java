@@ -1,4 +1,4 @@
-package editors.controllers;
+package org.Editors.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import editors.MainMenu;
+import org.Editors.MainMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,17 +36,25 @@ import javafx.event.EventHandler;
 import javafx.scene.shape.Line;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.scene.control.TextInputDialog;
+import java.util.Optional;
+import java.lang.NumberFormatException;
 
-import editors.blocks.*;
+import org.Editors.blocks.*;
 import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
 import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 
+//TODO: Change handleIf and handleWhile to not solely use placeBlock
+
 public class RuleEditorUIController implements Initializable {
   @FXML
   private AnchorPane editorPane;
+  @FXML
+  private Label errorLabel;
+
   double WIDTH = 400.00;
   double HEIGHT = 475.00;
 
@@ -291,6 +299,36 @@ public class RuleEditorUIController implements Initializable {
     SequenceBlock seqBlock = new SequenceBlock();
     seqBlockList.add(seqBlock);
     blockActions(seqBlock);
+  }
+
+  private Integer parseIntOrNull(Optional<String> value) {
+    try {
+      return Integer.parseInt(value.get());
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  //Helps get number of statements for while block from user
+  private Integer getStmntsInputDialog() {
+    TextInputDialog dialog = new TextInputDialog();
+
+    dialog.setHeaderText("Input number of statements");
+    dialog.setContentText("Statements:");
+
+    Optional<String> result = dialog.showAndWait();
+    return parseIntOrNull(result);
+  }
+
+  @FXML
+  private void handleAddWhileBtn(ActionEvent event) {
+    Integer numStmnts = getStmntsInputDialog();
+    if (numStmnts != null) {
+      placeBlock(new WhileBlock());
+    }
+    else if (numStmnts == null) {
+      errorLabel.setText("Input must be a number.");
+    }
   }
 
   @FXML

@@ -1,4 +1,4 @@
-package editors.controllers;
+package org.Editors.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.URL;
-import editors.MainMenu;
+import org.Editors.MainMenu;
 
 public class MainMenuController {
     private void changeScene(String fxmlFilename) {
