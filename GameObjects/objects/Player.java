@@ -32,21 +32,45 @@ public class Player extends GameObject {
         this.color = getRandomColor();
     }
     
-    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }
-    public void setInventory(ArrayList<GameObject> inventory) { this.inventory = inventory; }
+    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { 
+        this.gamePieces = gamePieces; 
+    }
+    
+    public void setInventory(ArrayList<GameObject> inventory) { 
+        this.inventory = inventory; 
+    }
+    
     public void setIsHuman(boolean isHuman) {
         this.isHuman = isHuman;
     }
 
-    public ArrayList<Gamepiece> getGamePieces() { return this.gamePieces; }
-    public ArrayList<GameObject> getInventory() { return this.inventory; }
-    public boolean getIsHuman() { return this.isHuman; }
+    public ArrayList<Gamepiece> getGamePieces() { 
+        return this.gamePieces; 
+    }
+    
+    public ArrayList<GameObject> getInventory() { 
+        return this.inventory; 
+    }
+    
+    public boolean getIsHuman() { 
+        return this.isHuman; 
+    }
 
-    // modifiers
-    public void addPiece(Gamepiece piece) { this.gamePieces.add(piece); }
-    public void removePiece(Gamepiece piece) { this.gamePieces.remove(piece); }
-    public void removePiece(int pieceIndex) { this.gamePieces.remove(pieceIndex); }
-    public void setPiece(int pieceIndex, Gamepiece piece) { this.gamePieces.set(pieceIndex, piece); }
+    public void addPiece(Gamepiece piece) { 
+        this.gamePieces.add(piece); 
+    }
+    
+    public void removePiece(Gamepiece piece) { 
+        this.gamePieces.remove(piece); 
+    }
+    
+    public void removePiece(int pieceIndex) { 
+        this.gamePieces.remove(pieceIndex); 
+    }
+    
+    public void setPiece(int pieceIndex, Gamepiece piece) { 
+        this.gamePieces.set(pieceIndex, piece); 
+    }
 
     public Color getRandomColor(){
         Random rand = new Random(System.currentTimeMillis());
