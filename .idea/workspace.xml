@@ -4,53 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Small fix to Play Screen popup">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2021_9_54_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2021_9_54_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_2021_8_35_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_2021_8_35_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_2_2021_7_56_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_2_2021_7_56_AM__Changes_.xml" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Removed &quot;org.Editors.old_blocks&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SceneBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SceneBuilder.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/BasicApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/SetupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/dummy/DummyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/dummy/DummyGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Savable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/MoveNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/DepthOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/HeuristicOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/PruningOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/RandomOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/GlobalCSSValues.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/ScreenController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SelectionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SettingsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/dummy/DummyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/dummy/DummyGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/dummy/DummyGamestate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
