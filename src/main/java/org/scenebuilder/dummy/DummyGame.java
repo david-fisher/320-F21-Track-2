@@ -1,18 +1,17 @@
 package org.scenebuilder.dummy;
 
-import org.GameObjects.objects.GameBoard;
 import org.RuleEngine.engine.GameState;
 
 public class DummyGame {
 
     // a "fake" game object
 
-    private GameBoard gameBoard;
+    private DummyGameBoard gameBoard;
     private DummyGameRules gameRules;
     private GameState initialGamestate;
     private String name;
 
-    public DummyGame(String name, GameBoard gameBoard, DummyGameRules gameRules, GameState initialGameState) {
+    public DummyGame(String name, DummyGameBoard gameBoard, DummyGameRules gameRules, GameState initialGameState) {
         this.name = name;
         this.gameBoard = gameBoard;
         this.gameRules = gameRules;
@@ -28,7 +27,7 @@ public class DummyGame {
 
     // setters
     public void setGameName(String name) { this.name = name; }
-    public void setGameBoard(GameBoard gameBoard) {
+    public void setGameBoard(DummyGameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
     public void setGameRules(DummyGameRules gameRules) {
@@ -40,7 +39,7 @@ public class DummyGame {
 
     // getters
     public String getGameName() {return this.name; }
-    public GameBoard getGameBoard() {
+    public DummyGameBoard getGameBoard() {
         return this.gameBoard;
     }
     public DummyGameRules getGameRules() {

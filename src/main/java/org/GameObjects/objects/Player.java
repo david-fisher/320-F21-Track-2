@@ -12,11 +12,11 @@ public class Player extends GameObject{
 
     private Color color;
     private ArrayList<Gamepiece> gamePieces;
-    private ArrayList<GameObject> inventory;
+    private DummyInventory inventory;
 
     private boolean isHuman;
 
-    public Player(String playerID, Color color, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
+    public Player(String playerID, Color color, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
         this.playerID = playerID;
         this.color = color;
         this.gamePieces = gamePieces;
@@ -24,7 +24,7 @@ public class Player extends GameObject{
         this.isHuman = isHuman;
     }
 
-    public Player(String playerID, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
+    public Player(String playerID, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
         this.playerID = playerID;
         this.gamePieces = gamePieces;
         this.inventory = inventory;
@@ -38,7 +38,7 @@ public class Player extends GameObject{
         this.playerID = playerID;
     }
     public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }
-    public void setInventory(ArrayList<GameObject> inventory) { this.inventory = inventory; }
+    public void setInventory(DummyInventory inventory) { this.inventory = inventory; }
     public void setIsHuman(boolean isHuman) {
         this.isHuman = isHuman;
     }
@@ -49,7 +49,7 @@ public class Player extends GameObject{
     }
     public Color getColor() { return this.color; }
     public ArrayList<Gamepiece> getGamePieces() { return this.gamePieces; }
-    public ArrayList<GameObject> getInventory() { return this.inventory; }
+    public DummyInventory getInventory() { return this.inventory; }
     public boolean getIsHuman() { return this.isHuman; }
 
     // modifiers
