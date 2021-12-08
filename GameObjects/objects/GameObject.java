@@ -10,12 +10,14 @@ import javafx.scene.paint.Color;
 public abstract class GameObject extends Savable {
   
   protected HashMap<String, Object> traits;
+  private HashMap<String, Object> prevTraits;
   
   private static List<String> labels = new ArrayList<String>(256);
 
   // default constructor
   public GameObject() {
 	traits = new HashMap<String, Object>(10) ;
+	prevTraits = new HashMap<String, Object>(10) ;
 	this.setShape("default") ;
 	this.setXPos(0) ;
 	this.setYPos(0) ;
@@ -58,6 +60,7 @@ public abstract class GameObject extends Savable {
 		  }
 		  
 		  // set label in HashMap
+		  prevTraits.put(trait, traits.get(trait)) ;
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
@@ -71,7 +74,8 @@ public abstract class GameObject extends Savable {
   			  (trait.equals("yPos") && value instanceof Integer) || // check yPos is Integer
 			  (trait.equals("width") && value instanceof Double) || // check width is Double
   			  (trait.equals("height") && value instanceof Double)) {// check height is Double
-		  traits.put(trait, value) ;
+		  prevTraits.put(trait, traits.get(trait)) ;
+	    traits.put(trait, value) ;
 		  return true ;
 	  }
 	  
@@ -82,6 +86,10 @@ public abstract class GameObject extends Savable {
   // gets trait of
   public Object getTrait(String key) {
 	  return this.traits.get(key) ;
+  }
+  
+  public Object getPrevTrait(String key) {
+    return this.prevTraits.get(key) ;
   }
   
   // returns HashMap of all the traits
