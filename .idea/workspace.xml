@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Cleaned Popup and fixed yes/no highlighting">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Removed &quot;org.Editors.old_blocks&quot;">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +52,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../Program Files/Java/jdk-9.0.4" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/nodes" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -84,7 +82,7 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.BasicApplication">
+  <component name="RunManager">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
       <module name="SceneBuilder" />
@@ -92,28 +90,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.Editors.MainMenu" />
-      <module name="SceneBuilder" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.Editors.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.BasicApplication" />
-      <item itemvalue="Application.MainMenu" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.MainMenu" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -369,28 +345,7 @@
       <option name="project" value="LOCAL" />
       <updated>1638830006299</updated>
     </task>
-    <task id="LOCAL-00036" summary="workspace automatic update on pull (check effect)">
-      <created>1638914578648</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1638914578648</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Downgraded to JDK 9">
-      <created>1638918331191</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1638918331192</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Cleaned Popup and fixed yes/no highlighting">
-      <created>1638924971640</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1638924971641</updated>
-    </task>
-    <option name="localTasksCounter" value="39" />
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,6 +361,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program." />
+    <MESSAGE value="Pulled GKNEW's objects from main, and replaced all JFX Buttons with labels to avoid conflicts with UMass Dining's new Button object" />
+    <MESSAGE value="Scale dice to display all of them in one section of the RNG tab." />
     <MESSAGE value="Added rolling functionality to the Dice in the RNG tab and a display of the corresponding side landed that each die landed on." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, only draw drawers when needed (and space others accordingly)." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly)." />
@@ -428,10 +386,7 @@
     <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
     <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
-    <MESSAGE value="workspace automatic update on pull (check effect)" />
-    <MESSAGE value="Downgraded to JDK 9" />
-    <MESSAGE value="Cleaned Popup and fixed yes/no highlighting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned Popup and fixed yes/no highlighting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed &quot;org.Editors.old_blocks&quot;" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
