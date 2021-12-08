@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.RuleEngine.engine.GameState;
 import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.BasicApplication;
@@ -176,9 +177,9 @@ public class SelectionController extends ScreenController {
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
-    private ArrayList<DummyGame> newGames = new ArrayList<>();
-    private ArrayList<DummyGame> savedGames = new ArrayList<>();
-    private DummyGame selectedGame;
+    private ArrayList<GameState> newGames = new ArrayList<>();
+    private ArrayList<GameState> savedGames = new ArrayList<>();
+    private GameState selectedGame;
 
     public void switchScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
@@ -194,7 +195,7 @@ public class SelectionController extends ScreenController {
         stage.show();
     }
 
-    public void populateSelectionMenus(ArrayList<DummyGame> newGames, ArrayList<DummyGame> savedGames) {
+    public void populateSelectionMenus(ArrayList<GameState> newGames, ArrayList<GameState> savedGames) {
 
         // convert games to nodes
         ArrayList<Node> newGameNodes = gamesToNodes(newGames);
@@ -267,7 +268,7 @@ public class SelectionController extends ScreenController {
 
     }
 
-    public ArrayList<Node> gamesToNodes(ArrayList<DummyGame> games) {
+    public ArrayList<Node> gamesToNodes(ArrayList<GameState> games) {
 
         ArrayList<Node> nodes = new ArrayList<>();
 
@@ -295,7 +296,7 @@ public class SelectionController extends ScreenController {
 
                     Label tempLabel = new Label();
                     tempLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
-                    tempLabel.setText(n.getGameName());
+                    tempLabel.setText(n.getGameBoard().getBoardID());
                     tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);
@@ -311,7 +312,7 @@ public class SelectionController extends ScreenController {
     }
 
     public void setSelectedGame(VBox vbox) {
-        selectedGame = (DummyGame)vbox.getUserData();
+        selectedGame = (GameState)vbox.getUserData();
     }
 
     public void initDarken(Label label) {

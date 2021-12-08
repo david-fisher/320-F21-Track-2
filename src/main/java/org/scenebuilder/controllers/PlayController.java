@@ -28,13 +28,11 @@ import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveNode;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.dummy.DummyGame;
-import org.scenebuilder.dummy.DummyGameBoard;
-import org.scenebuilder.dummy.DummyInventory;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
 import org.GameObjects.objects.Spinner;
 import org.scenebuilder.SetupData;
+import org.scenebuilder.dummy.DummyGame;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public class PlayController extends ScreenController {
     private HBox inventoryContainer;
     private Stage stage;
     private SetupData setupData;
-    private DummyGame activeGame;
+    private GameState activeGame;
     private ArrayList<Player> players;
     private Player currPlayer;
 
@@ -74,9 +72,9 @@ public class PlayController extends ScreenController {
         setupData = BasicApplication.getSetupData();
         players = setupData.playerList;
         if (players.size() == 0) {
-            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new DummyInventory("1", new ArrayList<GameObject>()), true));
-            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new DummyInventory("2", new ArrayList<GameObject>()), true));
-            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new DummyInventory("3", new ArrayList<GameObject>()), true));
+            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
             setupData = new SetupData(players, false);
         }
         activeGame = BasicApplication.getSelectedGame();
@@ -118,25 +116,24 @@ public class PlayController extends ScreenController {
     }
 
     AnchorPane boardPane;
-    GameState gameState;
-    private void initGame(DummyGame game) {
+    //GameState gameState;
+    private void initGame(GameState gameStateInput) {
 
         boardPane = new AnchorPane();
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-        DummyGameBoard gameBoard = game.getGameBoard();
-        gameState = game.getInitialGamestate();
-        if (activeGame.getGameName().equals("All Drawers")) {
-            players = activeGame.getInitialGamestate().getAllPlayers();
+        GameBoard gameBoard = gameStateInput.getGameBoard();
+        if (gameBoard.getBoardID().equals("All Drawers")) {
+            players = activeGame.getAllPlayers();
         }
         currPlayer = players.get(0);
-        gameState.setAllPlayers(players);
+        gameStateInput.setAllPlayers(players);
 
         playerTurnCycle();
         initPlayerTurnIndicator();
 
         // TODO: do we do this?
-        if (activeGame.getGameName().equals("All Drawers")) {
-            gameState.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+        if (gameBoard.getBoardID().equals("All Drawers")) {
+            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
         }
 
 
@@ -158,12 +155,12 @@ public class PlayController extends ScreenController {
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
-        initPlayers(gameState.getAllPlayers());
-        initButtons(gameState);
+        initPlayers(gameStateInput.getAllPlayers());
+        initButtons(gameStateInput);
 
-        ArrayList<Deck> decks = gameState.getAllDecks();
-        ArrayList<Die> dice = gameState.getAllDice();
-        ArrayList<Spinner> spinners = gameState.getAllSpinners();
+        ArrayList<Deck> decks = gameStateInput.getAllDecks();
+        ArrayList<Die> dice = gameStateInput.getAllDice();
+        ArrayList<Spinner> spinners = gameStateInput.getAllSpinners();
         //players = gameState.getAllPlayers();
 
         int numDrawers = 0;
@@ -202,12 +199,12 @@ public class PlayController extends ScreenController {
         if (inventoryNeeded) {
             initializeInventoryDrawer(numDrawers);
             initInventoryLabel(numDrawers);
-            initInventory(new DummyInventory("1", new ArrayList<GameObject>()));
+            initInventory(new ArrayList<GameObject>());
         }
 
     }
 
-    private void initBoard(DummyGameBoard gameBoard, AnchorPane boardPane) {
+    private void initBoard(GameBoard gameBoard, AnchorPane boardPane) {
         Shape board;
         double width = boardPane.getPrefWidth();
         double height = boardPane.getPrefHeight();
@@ -229,7 +226,7 @@ public class PlayController extends ScreenController {
         // set anchorPane values
     }
 
-    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, DummyGameBoard gameBoard) {
+    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, GameBoard gameBoard) {
         double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
@@ -289,7 +286,7 @@ public class PlayController extends ScreenController {
     }
 
     private void drawPiece(Gamepiece gamePiece) {
-        Tile parent = gameState.getAllTiles().get(0);
+        Tile parent = activeGame.getAllTiles().get(0);
         gamePiece.setLocation(parent);
 //        System.out.println("Player screen: " + gamePiece.getColor().toString());
         Circle gp = new Circle(40, Color.WHITE);
@@ -304,7 +301,7 @@ public class PlayController extends ScreenController {
 
     }
 
-    private void initInventory(DummyInventory inventory) {
+    private void initInventory(ArrayList<GameObject> inventory) {
         fillInventoryDrawer(inventory);
     }
 
@@ -608,7 +605,7 @@ public class PlayController extends ScreenController {
     private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
         AnchorPane source = (AnchorPane) e.getSource();
         source.setDisable(true);
-        System.out.println(gameState.getAllDice());
+        System.out.println(activeGame.getAllDice());
         Die die = dice.get(0);
         LiteralNode<String> name = new LiteralNode<>("currPlayer");
         int roll = die.roll();
@@ -637,7 +634,7 @@ public class PlayController extends ScreenController {
         MoveNode move = new MoveNode(operands);
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
-        interpreter.interpretEvent(moveNodes, gameState);
+        interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
         Gamepiece gp = currPlayer.getGamePieces().get(0);
         System.out.println(gp);
@@ -673,16 +670,16 @@ public class PlayController extends ScreenController {
         inventoryObject.setOnMouseClicked(e -> {
             //Open this deck if you can // todo
         });
-        currPlayer.getInventory().getInventory().add(object);
+        currPlayer.getInventory().add(object);
         inventoryContainer.getChildren().addAll(inventoryObject);
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }
 
-    private void fillInventoryDrawer(DummyInventory inventory) {
+    private void fillInventoryDrawer(ArrayList<GameObject> inventory) {
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
-        inventory.getInventory().forEach(d -> {
+        inventory.forEach(d -> {
             addToInventory(d);
         });
         inventoryPane.setContent(inventoryContainer);
@@ -765,17 +762,7 @@ public class PlayController extends ScreenController {
         Label yes;
         Label no;
         public boolean saved = false;
-//        public void setButtonSize(Button button, float prefWidth, float prefHeight, int fontSize) {
-//            button.setPrefWidth(prefWidth);
-//            button.setPrefHeight(prefHeight);
-//
-//            button.setMinWidth(button.getPrefWidth());
-//            button.setMaxWidth(button.getPrefWidth());
-//            button.setMinHeight(button.getPrefHeight());
-//            button.setMaxHeight(button.getPrefHeight());
-//
-//            button.setStyle("-fx-font-size: "+fontSize+"; -fx-font-family: serif; -fx-background-color: linear-gradient(to top, #D3D3D3, #FFFFFF); -fx-border-color: #000000; -fx-background-insets: 1; -fx-border-radius: 4;");
-//        }
+
         public void displayRestart(Stage baseStage, Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
@@ -792,9 +779,8 @@ public class PlayController extends ScreenController {
             borderPane.setCenter(restartMessage);
 
             HBox buttons = new HBox(10);
-
-            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
             yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             //Change these actions to actually handle restarting
@@ -834,8 +820,8 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
             yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
@@ -875,8 +861,8 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
             yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
@@ -899,24 +885,28 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExit(Stage baseStage) { // todo this function name is totally wrong
+        public void displaySettingsPopup(Stage baseStage) { // todo this function name is totally wrong
             Stage popupWindow = new Stage();
 
             yes = new Label("Yes");
-            yes.setStyle("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            //yes.setStyle("-fx-border-radius: 2 2 2 2; " +
+            //        "-fx-background-radius: 2 2 2 2; " +
+            //        "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
             yes.setAlignment(Pos.CENTER);
-            yes.setPrefWidth(70);
+            yes.setPrefWidth(100);
+            yes.setPrefHeight(35);
+            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-border-color: BLACK; -fx-font-size: 16;");
 
             no = new Label("No");
-            no.setStyle(yes.getStyle());
+            //no.setStyle(yes.getStyle());
             no.setAlignment(Pos.CENTER);
             no.setPrefWidth(yes.getPrefWidth());
+            no.setPrefHeight(yes.getPrefHeight());
+            no.setStyle(yes.getStyle());
 
-            no.setOnMouseClicked(e->popupWindow.close());
-            outlineYesNo(yes);
-            outlineYesNo(no);
+            //no.setOnMouseClicked(e->popupWindow.close());
+            //outlineYesNo(yes);
+            //outlineYesNo(no);
 
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
@@ -984,7 +974,7 @@ public class PlayController extends ScreenController {
     public void displayPopup(MouseEvent event) {
         Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
-        popup.displayExit(curStage);
+        popup.displaySettingsPopup(curStage);
     }
 
     public void initDarken(Label label) {

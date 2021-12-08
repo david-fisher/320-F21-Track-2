@@ -6,10 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.scenebuilder.dummy.DummyGame;
-import org.scenebuilder.dummy.DummyGameBoard;
-import org.scenebuilder.dummy.DummyGameRules;
-import org.scenebuilder.dummy.DummyInventory;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
 import org.scenebuilder.controllers.MainController;
@@ -21,10 +17,10 @@ public class BasicApplication extends Application {
 
     private static SettingsObject settingsObject = new SettingsObject();
 
-    private static ArrayList<DummyGame> newGames = new ArrayList<>();
-    private static ArrayList<DummyGame> savedGames = new ArrayList<>();
+    private static ArrayList<GameState> newGames = new ArrayList<>();
+    private static ArrayList<GameState> savedGames = new ArrayList<>();
 
-    private static DummyGame selectedGame;
+    private static GameState selectedGame;
     private static SetupData setupData;
 
     public static void loadNewGames() {
@@ -32,33 +28,35 @@ public class BasicApplication extends Application {
         // do stuff to get list of playable games (on start) from Persistent Data team
         // todo
 
-        DummyGame game1 = createDummyGame("All Drawers", "Rectangle", true, true, true);
-        DummyGame game2 = createDummyGame("RNG and Inventory", "Rectangle", false, true, true);
-        DummyGame game3 = createDummyGame("Inventory Only", "Circle", false, false, true);
+        GameState game1 = createGame("All Drawers", "Rectangle", true, true, true);
+        GameState game2 = createGame("RNG and Inventory", "Rectangle", false, true, true);
+        GameState game3 = createGame("Inventory Only", "Circle", false, false, true);
 
         newGames.clear();
         newGames.add(game1);
         newGames.add(game2);
         newGames.add(game3);
+        System.out.println(newGames);
     }
     public static void loadSavedGames() {
 
         // do stuff to get list of saved games
         // todo
 
-        DummyGame game1 = createDummyGame("All Drawers", "Rectangle", true, true, true);
-        DummyGame game2 = createDummyGame("RNG and Inventory", "Rectangle", false, true, true);
-        DummyGame game3 = createDummyGame("Inventory Only", "Rectangle", false, false, true);
+        GameState game1 = createGame("All Drawers", "Rectangle", true, true, true);
+        GameState game2 = createGame("RNG and Inventory", "Rectangle", false, true, true);
+        GameState game3 = createGame("Inventory Only", "Rectangle", false, false, true);
 
         savedGames.clear();
         savedGames.add(game1);
         savedGames.add(game2);
         savedGames.add(game3);
+        System.out.println(savedGames);
     }
-    private static DummyGame createDummyGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
+    private static GameState createGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
 
         ArrayList<Player> players = new ArrayList<>();
-        Player player1 = new Player("David", Color.PURPLE, new ArrayList<Gamepiece>(), new DummyInventory("Inventory 1", new ArrayList<GameObject>()), true);
+        Player player1 = new Player("David", Color.PURPLE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
         Gamepiece gp = new Gamepiece();
         gp.setColor(Color.WHITE);
         player1.addPiece(new Gamepiece());
@@ -194,15 +192,15 @@ public class BasicApplication extends Application {
 
         gameState.setAllPlayers(players);
         gameState.setAllTokens(gameTokens);
-        DummyGameBoard gameBoard = new DummyGameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
+        GameBoard gameBoard = new GameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
 
-        DummyGameRules gameRules = new DummyGameRules();
-
-        return new DummyGame(gameName, gameBoard, gameRules, gameState);
+        gameState.setGameBoard(gameBoard);
+        gameState.getGameBoard().setBoardID(gameName);
+        return gameState;
     }
 
     // setters
-    public static void setSelectedGame(DummyGame game) {
+    public static void setSelectedGame(GameState game) {
         selectedGame = game;
     }
     public static void setSetupData(SetupData data) {
@@ -211,13 +209,13 @@ public class BasicApplication extends Application {
     public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }
 
     // getters
-    public static ArrayList<DummyGame> getNewGames() {
+    public static ArrayList<GameState> getNewGames() {
         return newGames;
     }
-    public static ArrayList<DummyGame> getSavedGames() {
+    public static ArrayList<GameState> getSavedGames() {
         return savedGames;
     }
-    public static DummyGame getSelectedGame() {
+    public static GameState getSelectedGame() {
         return selectedGame;
     }
     public static SetupData getSetupData() {

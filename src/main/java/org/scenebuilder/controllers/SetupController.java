@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import org.GameObjects.objects.GameObject;
 import org.GameObjects.objects.Gamepiece;
 import org.GameObjects.objects.Player;
+import org.RuleEngine.engine.GameState;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.SetupData;
@@ -206,7 +207,7 @@ public class SetupController extends ScreenController {
     private int num_players;
 
     // game selected in selection scene
-    private DummyGame selectedGame;
+    private GameState selectedGame;
 
     private HashMap<Integer, Player> playerHashMap = new HashMap<Integer, Player>();
     int max_player = 8; // todo, read value from game settings
@@ -224,7 +225,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < min_player; i++) {
             ArrayList<Gamepiece> gamePieces = new ArrayList<>();
             //"Token " + (i+1), "Square"
-            Player player = new Player("Player " + (i+1), gamePieces, new DummyInventory("Inventory " + (i+1), new ArrayList<GameObject>()), true);
+            Player player = new Player("Player " + (i+1), gamePieces, new ArrayList<GameObject>(), true);
             num_players+=1;
             playerHashMap.put(num_players, player);
 
@@ -246,7 +247,7 @@ public class SetupController extends ScreenController {
             // gamePieces.add(new Gamepiece());
             //"Token " + (num_players+1), "Square"
 
-            Player player = new Player("Player " + (num_players+1), gamePieces, new DummyInventory("Inventory " + (num_players+1), new ArrayList<GameObject>()), true);
+            Player player = new Player("Player " + (num_players+1), gamePieces, new ArrayList<GameObject>(), true);
 
             num_players += 1;
             playerCountTextField.setText(Integer.toString(num_players));
