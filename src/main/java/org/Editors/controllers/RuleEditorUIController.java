@@ -357,7 +357,7 @@ public class RuleEditorUIController implements Initializable {
   private void handleAddWhileBtn(ActionEvent event) {
     Integer numStmnts = getStmntsInputDialog();
     if (numStmnts != null) {
-      placeBlock(new WhileBlock());
+      placeBlock(new WhileBlock(numStmnts));
     }
     else if (numStmnts == null) {
       errorLabel.setText("Input must be a number.");
