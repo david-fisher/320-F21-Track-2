@@ -33,6 +33,7 @@ public class Tile extends GameObject
         this.setYPos(0) ;
         this.setTrait("connections", connections, true) ;
         this.setTrait("pieces", pieces, true) ;
+        this.setOnLand("");
     }
     
     /* Trait Types:
@@ -42,6 +43,7 @@ public class Tile extends GameObject
      *  shape   :   String (one of "square", 
      *  xPos    :   Integer
      *  yPos    :   Integer
+     *  onLand  :   String
      */
     
  // set trait to value. Overrides checking for default traits only
@@ -50,10 +52,22 @@ public class Tile extends GameObject
   	  // run game object's set trait first
   	  if (super.setTrait(trait, value, suppressTraitChecker)) {
   		  return true ;
-  	  }
+  	  } else if (suppressTraitChecker ||
+                trait.equals("onLand") && value instanceof String )) {
+            traits.put(trait, value);
+            return true ;
+      }
   	  
   	  // returns false if input is invalid
   	  return false ;
+    }
+
+    public String setOnLand(String onLand){
+        return this.setTrait("onLand", onLand);
+    }
+
+    public boolean getOnLand(){
+        return (String)this.getTrait("onLand");
     }
     
     public List<Tile> getConnect()

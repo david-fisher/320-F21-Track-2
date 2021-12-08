@@ -10,6 +10,9 @@ public class Card extends GameObject {
 	  this.setIcon("default_gamepiece_icon.jpg") ;
 	  this.setColorString("#000000") ;
 	  this.setText("default text");
+	  this.setEnabled(true);
+	  this.setPressed(false);
+	  this.setOnPlay("");
   }
   
   /* Trait Types:
@@ -17,6 +20,9 @@ public class Card extends GameObject {
    * 	icon 	: 	String
    * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	text	:	String
+   *    onPlay  :   String
+   *    enabled :   Boolean
+   *    pressed :   Boolean
    */
   
 //set trait to value. Overrides checking for default traits only
@@ -29,7 +35,10 @@ public class Card extends GameObject {
 	  
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
-			  (trait.equals("text") && value instanceof String)) {	// check value is String
+			  (trait.equals("text") && value instanceof String) ||
+			  (trait.equals("pressed") && value instanceof Boolean) ||
+			  (trait.equals("enabled") && value instanceof Boolean) ||
+			  (trait.equals("onPlay") && value instanceof String)) {	// check value is String
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
@@ -37,6 +46,42 @@ public class Card extends GameObject {
 	  // returns false if input is invalid
 	  return false ;
  }
+
+ public boolean setEnabled(boolean enabled) {
+	 return this.setTrait("enabled", enabled);
+ }
+
+ public boolean getEnabled() {
+ 	 return (boolean)this.getTrait("enabled");
+ }
+
+ public boolean setPressed(boolean pressed) {
+	 return this.setTrait("pressed", pressed);
+ }
+
+ public boolean getPressed() {
+	 return (boolean)this.getTrait("pressed");
+ }
+
+ public boolean toggleEnabled() {
+	 setEnabled(!getEnabled());
+	 return getEnabled();
+ }
+
+ public boolean togglePressed() {
+	 if(getEnabled() == true){
+		 setPressed(!getPressed());
+	 }
+	 return getPressed();
+ }
+ 
+  public boolean setOnPlay(String onPlay){
+	  return this.setTrait("onPlay", onPlay);
+  }
+
+  public String getOnPlay(){
+	  return (String)this.getTrait("onPlay");
+  }
 
   public boolean setText(String text) {
 	  return this.setTrait("text", text);

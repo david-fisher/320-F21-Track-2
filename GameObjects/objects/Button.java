@@ -24,6 +24,7 @@ public class Button extends GameObject {
      *  text    :   String
      *  enabled :   Boolean
      *  pressed :   Boolean
+	 *  onClick :   String
      */
 
 	//set trait to value. Overrides checking for default traits only.
