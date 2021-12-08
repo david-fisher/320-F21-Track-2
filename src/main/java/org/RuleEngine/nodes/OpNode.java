@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 // The base class for any rule statements.
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
+// NOTE: the parent of a node is only set if it is added via setOperand or setOperandInGroup.
 public abstract class OpNode extends Node {
     
     protected ArrayList<ArrayList<Node>> operands;
@@ -60,7 +61,8 @@ public abstract class OpNode extends Node {
         if (operands.get(groupId).size() <= i) {
             System.out.println("Error: Cannot set operand at position " + i + ", index out of bounds!");
             return this;
-        } 
+        }
+        if (operand != null) { operand.parent = this; }
         operands.get(groupId).set(i, operand);
         return this;
     }
