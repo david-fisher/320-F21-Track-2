@@ -23,11 +23,13 @@ public class UseNode extends OpNode {
         
         if (go instanceof Die) {
             Integer result = ((Die)go).roll();
-            // DisplayDie(result);
+            // Display(result);
             return new LiteralNode<Integer>(result);
         } else if (go instanceof Spinner) {
-            // TODO: Set up spinner spin
-            //return new LiteralNode<String>(((Spinner)go).spin().getTrait("label")); 
+            Category c = ((Spinner)go).spin();
+            String result = c.getTrait("label").toString();
+            // Display(result);
+            return new LiteralNode<String>(result); 
         } else {
             System.out.println("Error: Only a Die or Spinner can be used.");
         }

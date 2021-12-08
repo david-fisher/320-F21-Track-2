@@ -7,6 +7,8 @@ import org.RuleEngine.nodes.*;
 
 public class GameState extends Savable {
 
+    public String projectName;
+    
     public GameBoard board;
     public ArrayList<Button> buttons;
     public ArrayList<Card> cards;
@@ -22,14 +24,13 @@ public class GameState extends Savable {
     // Temporary GameObject list.
     public ArrayList<GameObject> gameObjects;
 
+    public boolean tutorialEnabled;
     public HashMap<String, GameObject> registers;
-    public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
+    public HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
-    static {
-        events.put("heuristic", null);
-    }
-
     public GameState() {
+        projectName = "New Project";
+        
         gameObjects = new ArrayList<GameObject>();
         buttons = new ArrayList<Button>();
         cards = new ArrayList<Card>();
@@ -41,8 +42,10 @@ public class GameState extends Savable {
         tiles = new ArrayList<Tile>();
         tokens = new ArrayList<Token>();
 
+        tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
+        events.put("heuristic", null);
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
@@ -110,6 +113,9 @@ public class GameState extends Savable {
     }
     
     // For object persistence
+    public String getProjectName() { return projectName; }
+    public void setProjectName(String name) { projectName = name; }
+    
     public GameBoard getGameBoard() { return board; }
     public void setGameBoard(GameBoard board) { this.board = board; }
 
@@ -146,6 +152,6 @@ public class GameState extends Savable {
     public HashMap<String, GameObject> getAllRegisters() { return registers; }
     public void setAllRegisters(HashMap<String, GameObject> registers) { this.registers = registers; }
 
-    public static HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
-    public static void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
+    public HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
+    public void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
 }
