@@ -62,53 +62,44 @@ public class Display {
 
     private static final Object KEY = new Object();
     public static Tile moveOptions(ArrayList<Tile> tiles) {
-// TODO: This method will be implemented by Minjex.
+        //Return if there is only one choice
         if (tiles.size() == 1) {
             return tiles.get(0);
         }
-
-        System.out.println("Options: " + tiles);
-        //highlight tiles
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (Platform.isNestedLoopRunning()) {
-                    Shape parent = (Shape) event.getSource();
-                    Platform.exitNestedEventLoop(KEY, parent.getUserData());
-                }
+        //Create the onClick event for viable tiles
+        EventHandler<MouseEvent> handler = event -> {
+            if (Platform.isNestedLoopRunning()) {
+                Shape parent = (Shape) event.getSource();
+                Platform.exitNestedEventLoop(KEY, parent.getUserData());
             }
         };
-        Runnable runner = new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < tiles.size(); i++) {
-                    Tile tile = tiles.get(i);
-                    Shape parent = tile.getParent();
-                    System.out.println("Parent xPos: " + parent.getLayoutX());
-                    parent.setStroke(Color.GOLD);
-                    parent.setStrokeWidth(2);
-                    DropShadow borderGlow= new DropShadow();
-                    borderGlow.setOffsetY(0f);
-                    borderGlow.setOffsetX(0f);
-                    borderGlow.setColor(Color.YELLOW);
-                    parent.setEffect(borderGlow);
-                    parent.toFront();
-                    parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
-                }
-                System.out.println("Ran");
+        //Highlight the viable tiles and add the onClick event
+        Runnable runner = () -> {
+            for (int i = 0; i < tiles.size(); i++) {
+                Tile tile = tiles.get(i);
+                Shape parent = tile.getParent();
+                parent.setStroke(Color.GOLD);
+                parent.setStrokeWidth(2);
+                DropShadow borderGlow= new DropShadow();
+                borderGlow.setOffsetY(0f);
+                borderGlow.setOffsetX(0f);
+                borderGlow.setColor(Color.YELLOW);
+                parent.setEffect(borderGlow);
+                parent.toFront();
+                parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         };
+        //Run the runner after entering the event loop
         Platform.runLater(runner);
-        System.out.println("Setup");
-
+        //Get the viable tile that was chosen by the player
         Tile chosen = (Tile) Platform.enterNestedEventLoop(KEY);
+        //Remove the onClick events and highlighting from the viable tiles
         for (int i = 0; i < tiles.size(); i++) {
             Shape parent = tiles.get(i).getParent();
             parent.removeEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             parent.setEffect(null);
             parent.setStrokeWidth(0);
         }
-        System.out.println(chosen);
         return chosen;
     }
 

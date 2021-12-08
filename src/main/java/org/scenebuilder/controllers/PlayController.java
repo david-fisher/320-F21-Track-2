@@ -266,7 +266,7 @@ public class PlayController extends ScreenController {
     private void initButtons(GameState gameState) {
         ArrayList<Button> buttons = gameState.getAllButtons();
         buttons.forEach(button -> {
-            String event = (String) button.getTrait("event");
+            String event = (String) button.getTrait("onClick");
             button.getParent().setOnMouseClicked(e -> {
                 interpreter.interpretEvent(gameState.events.get(event), gameState);
             });
@@ -293,9 +293,6 @@ public class PlayController extends ScreenController {
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        System.out.println(parent.getXPos());
-        System.out.println(parent.getYPos());
-        System.out.println(parent.getWidth());
         gp.setLayoutX(parent.getXPos() + parent.getWidth() / 2);
         gp.setLayoutY(parent.getYPos() + parent.getHeight() / 2);
 
@@ -321,8 +318,6 @@ public class PlayController extends ScreenController {
         playParent.getChildren().addAll(settingsPane);
         playParent.setRightAnchor(settingsPane, 15.0);
         playParent.setTopAnchor(settingsPane, 25.0);
-//        sptiHBox.getChildren().addAll(settingsPane);
-//        sptiHBox.setMargin(settingsPane, new Insets(25, 10, 10, 20));
     }
 
     private void initPlayerTurnIndicator() {
@@ -412,9 +407,6 @@ public class PlayController extends ScreenController {
 
         playParent.setRightAnchor(rngLabel, 0.0);
         playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
-
-        //tabsVBox.getChildren().addAll(rngLabel);
-        //tabsVBox.setMargin(rngLabel, new Insets(2, 0, 10, 0));
     }
 
     private void initInventoryLabel(int numDrawers) {
@@ -446,13 +438,10 @@ public class PlayController extends ScreenController {
 
         playParent.setRightAnchor(inventoryLabel, 0.0);
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
-        //tabsVBox.getChildren().addAll(inventoryLabel);
-        //tabsVBox.setMargin(inventoryLabel, new Insets(2, 0, 10, 0));
     }
 
     private void initializeDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
-        //decksPane.setStyle("-fx-background-color: GREY;");
         decksPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         decksPane.setId("decksDrawer");
         decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -466,7 +455,6 @@ public class PlayController extends ScreenController {
 
     private void initializeRNGDrawer(int numDrawers) {
         rngPane = new ScrollPane();
-        //rngPane.setStyle("-fx-background-color: GREY;");
         rngPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         rngPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         rngPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -479,7 +467,6 @@ public class PlayController extends ScreenController {
 
     private void initializeInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
-        //inventoryPane.setStyle("-fx-background-color: GREY;");
         inventoryPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         inventoryPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         inventoryPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -508,8 +495,8 @@ public class PlayController extends ScreenController {
             } else {
                 deck.setFill(Color.RED);
             }
+            //TODO: change this so it is integrated
             deck.setOnMouseClicked(e -> {
-                //Open this deck if you can // todo
                 Card card = d.drawTop();
                 ImageView cardImage = new ImageView(card.getIcon());
 
@@ -684,7 +671,6 @@ public class PlayController extends ScreenController {
         });
         inventoryPane.setContent(inventoryContainer);
         inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
-        //decksPane.toFront();
     }
 
     public void initializePlayScreen() {
@@ -698,8 +684,6 @@ public class PlayController extends ScreenController {
     }
 
     public void exitFromPlay() {
-//        MainController controller = new MainController();
-//        controller.initialize(stage);
         Platform.exit();
     }
 
@@ -715,18 +699,6 @@ public class PlayController extends ScreenController {
         int a = ((int) Math.round(color.getOpacity() * 255));
         return String.format("#%08X", (r + g + b + a));
     }
-    public void switchScene(ActionEvent event, String nextScene, Stage baseStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
-        if (baseStage == null) {
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        } else {
-            stage = baseStage;
-        }
-        Scene scene = new Scene(root, playWidth, playHeight);
-        stage.setScene(scene);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
-        stage.show();
-    }
 
     public void slideOut(MouseEvent event) {
         Label parent = (Label) event.getSource();
@@ -738,7 +710,6 @@ public class PlayController extends ScreenController {
         } else {
             tab = inventoryPane;
         }
-
         tab.toFront();
         parent.toFront();
         TranslateTransition tt = new TranslateTransition(Duration.millis(700), tab);
@@ -763,7 +734,7 @@ public class PlayController extends ScreenController {
         Label no;
         public boolean saved = false;
 
-        public void displayRestart(Stage baseStage, Stage parentPopup){
+        public void displayRestart(Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
             borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
@@ -779,11 +750,8 @@ public class PlayController extends ScreenController {
             borderPane.setCenter(restartMessage);
 
             HBox buttons = new HBox(10);
-//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-            //Change these actions to actually handle restarting
+
+            //TODO: Change these actions to actually handle restarting
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
@@ -803,7 +771,7 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayExitWithoutSave(Stage baseStage, Stage parentPopup){
+        public void displayExitWithoutSave(Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
             borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
@@ -820,10 +788,6 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
@@ -844,7 +808,8 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayMainMenuWithoutSave(Stage baseStage, Stage parentPopup){
+
+        public void displayMainMenuWithoutSave(Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
             borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
@@ -861,14 +826,10 @@ public class PlayController extends ScreenController {
 
             HBox buttons = new HBox(10);
 
-//            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-//            no.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-            yes.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-            no.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
-                mainMenuFromPlay();
+                exitFromPlay();
             });
             no.setOnMouseClicked(e -> {
                 popupWindow.close();
@@ -885,28 +846,28 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displaySettingsPopup(Stage baseStage) { // todo this function name is totally wrong
+
+        public void displaySettingsPopup() {
             Stage popupWindow = new Stage();
 
             yes = new Label("Yes");
-            //yes.setStyle("-fx-border-radius: 2 2 2 2; " +
-            //        "-fx-background-radius: 2 2 2 2; " +
-            //        "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+            yes.setStyle("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
+                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
             yes.setAlignment(Pos.CENTER);
             yes.setPrefWidth(100);
             yes.setPrefHeight(35);
-            yes.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-border-color: BLACK; -fx-font-size: 16;");
-
             no = new Label("No");
-            //no.setStyle(yes.getStyle());
+            no.setStyle(yes.getStyle());
             no.setAlignment(Pos.CENTER);
             no.setPrefWidth(yes.getPrefWidth());
             no.setPrefHeight(yes.getPrefHeight());
             no.setStyle(yes.getStyle());
 
-            //no.setOnMouseClicked(e->popupWindow.close());
-            //outlineYesNo(yes);
-            //outlineYesNo(no);
+            outlineYesNo(yes);
+            outlineYesNo(no);
 
             popupWindow.initModality(Modality.APPLICATION_MODAL);
 
@@ -933,7 +894,7 @@ public class PlayController extends ScreenController {
 
             exitButton.setOnMouseClicked(e->{
                 if (!saved) {
-                    displayExitWithoutSave(baseStage, popupWindow);
+                    displayExitWithoutSave(popupWindow);
                 } else {
                     popupWindow.close();
                     exitFromPlay();
@@ -941,12 +902,12 @@ public class PlayController extends ScreenController {
             });
 
             restartButton.setOnMouseClicked(e->{
-                displayRestart(baseStage, popupWindow);
+                displayRestart(popupWindow);
             });
 
             mainMenuButton.setOnMouseClicked(e -> {
                 if (!saved) {
-                    displayMainMenuWithoutSave(baseStage, popupWindow);
+                    displayMainMenuWithoutSave(popupWindow);
                 } else {
                     popupWindow.close();
                     mainMenuFromPlay();
@@ -955,26 +916,18 @@ public class PlayController extends ScreenController {
 
             VBox layout = new VBox(10);
             layout.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-            layout.getChildren().addAll(saveButton); // todo addAll can add all this stuff in one line
-            layout.getChildren().addAll(restartButton);
-            layout.getChildren().addAll(mainMenuButton);
-            layout.getChildren().addAll(exitButton);
+            layout.getChildren().addAll(saveButton, restartButton, mainMenuButton, exitButton);
             layout.setAlignment(Pos.CENTER);
             Scene exitScene = new Scene(layout, 350, 400);
             exitScene.setFill(Color.MAROON);
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
-        public void displayMainMenu(Stage backStage) {
-
-        }
     }
 
-
     public void displayPopup(MouseEvent event) {
-        Stage curStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Popup popup = new Popup();
-        popup.displaySettingsPopup(curStage);
+        popup.displaySettingsPopup();
     }
 
     public void initDarken(Label label) {
@@ -1005,17 +958,19 @@ public class PlayController extends ScreenController {
 
     public void outlineYesNo(Label label) {
         label.setOnMouseEntered(e -> {
-            label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
+            label.setStyle("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
+                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
         });
 
         label.setOnMouseExited(e -> {
-            label.styleProperty().setValue("-fx-border-radius: 5 5 5 5; " +
+            label.styleProperty().setValue("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
                     "-fx-background-color: " + GlobalCSSValues.buttonBackground +
                     "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
+                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
         });
     }
 }
