@@ -20,6 +20,8 @@ public final class NodeMaker {
                 return new InvokeNode();
             case "moveby":
                 return new MoveNode();
+            case "use":
+                return new UseNode();
         }
 
         System.out.println("Unknown rule type");
