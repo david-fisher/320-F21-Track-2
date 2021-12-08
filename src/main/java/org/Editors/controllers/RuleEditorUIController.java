@@ -107,15 +107,8 @@ public class RuleEditorUIController implements Initializable {
   }
 
   private void drawLineResultRect(Block block){
-    // start to draw line
-    if (startLineX == -1){
-      startLineX = block.getBlock().getTranslateX();
-      startLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
-      startBlock = block;
-      isBlueFirstRect = true;
-    }
     // this happens after we clicked on the first rect, this is the second click
-    else if (startLineX != -1 && endLineX == -1 && !isBlueFirstRect){
+    if (startLineX != -1 && endLineX == -1 && !isBlueFirstRect && block != startBlock){
       endLineX = block.getBlock().getTranslateX();
       endLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
@@ -157,15 +150,6 @@ public class RuleEditorUIController implements Initializable {
       //temp
       startBlock = block;
       operandIndex = opIndex;
-    }
-    else if (startLineX != -1 && endLineX == -1 && isBlueFirstRect){
-      endLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
-      endLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
-      Line link = new Line (startLineX, startLineY, endLineX, endLineY);
-      editorPane.getChildren().add(link);
-      startLineX = startLineY = endLineX = endLineY = -1;
-      isBlueFirstRect = false;
-      // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
 
