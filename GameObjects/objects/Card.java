@@ -30,6 +30,7 @@ public class Card extends GameObject {
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("text") && value instanceof String)) {	// check value is String
+	      prevTraits.put(trait, traits.get(trait)) ;
 		  traits.put(trait, value) ;
 		  return true ;
 	  }

@@ -50,6 +50,7 @@ public class Category extends GameObject
    	  // checks for other valid inputs
    	  else if (suppressTraitChecker ||	// if true don't check trait type
    			  (trait.equals("weight") && value instanceof Double)) {	// check weight is Double
+   	      prevTraits.put(trait, traits.get(trait)) ;
    		  traits.put(trait, value) ;
    		  return true ;
    	  }

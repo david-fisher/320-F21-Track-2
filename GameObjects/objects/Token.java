@@ -32,6 +32,7 @@ public class Token extends GameObject{
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("value") && value instanceof Integer)) {	// check value is String
+	      prevTraits.put(trait, traits.get(trait)) ;
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
