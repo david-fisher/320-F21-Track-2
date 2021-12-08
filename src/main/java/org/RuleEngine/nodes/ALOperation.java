@@ -1,5 +1,6 @@
 package org.RuleEngine.nodes;
 // A static class that provides the actual arithmetic-logic operations.
+@SuppressWarnings("rawtypes")
 public final class ALOperation {
     private ALOperation() {}
 
@@ -75,7 +76,7 @@ public final class ALOperation {
         return null;
     }
 
-    public static LiteralNode modulo(Object op1, Object op2) {
+    public static LiteralNode<Integer> modulo(Object op1, Object op2) {
         if (op1 instanceof Integer && op2 instanceof Integer) {
             return new LiteralNode<Integer>((Integer)op1 % (Integer)op2);
         }
@@ -91,7 +92,7 @@ public final class ALOperation {
         return null;
     }
     
-    public static LiteralNode and(Object op1, Object op2) {
+    public static LiteralNode<Boolean> and(Object op1, Object op2) {
         if (op1 instanceof Boolean && op2 instanceof Boolean) {
             return new LiteralNode<Boolean>((Boolean)op1 && (Boolean)op2);
         }
@@ -99,7 +100,7 @@ public final class ALOperation {
         return null;
     }
     
-    public static LiteralNode or(Object op1, Object op2) {
+    public static LiteralNode<Boolean> or(Object op1, Object op2) {
         if (op1 instanceof Boolean && op2 instanceof Boolean) {
             return new LiteralNode<Boolean>((Boolean)op1 || (Boolean)op2);
         }
