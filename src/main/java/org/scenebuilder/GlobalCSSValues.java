@@ -34,7 +34,7 @@ public class GlobalCSSValues {
         text = "Black";
         accent = "Blue";
 
-        secondary = "DarkGrey";
+        secondary = "#f0f0f0";
         buttonBackground = "LightGrey";
         buttonText = "Black";
     }
