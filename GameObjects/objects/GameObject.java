@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.TreeSet;
 
 import javafx.scene.paint.Color;
+import javafx.scene.Node;
 
 public abstract class GameObject extends Savable {
   
   protected HashMap<String, Object> traits;
-  private HashMap<String, Object> prevTraits;
+  protected HashMap<String, Object> prevTraits;
   
   private static List<String> labels = new ArrayList<String>(256);
 
@@ -73,7 +74,9 @@ public abstract class GameObject extends Savable {
   			  (trait.equals("xPos") && value instanceof Integer) || // check xPos is Integer
   			  (trait.equals("yPos") && value instanceof Integer) || // check yPos is Integer
 			  (trait.equals("width") && value instanceof Double) || // check width is Double
-  			  (trait.equals("height") && value instanceof Double)) {// check height is Double
+  			  (trait.equals("height") && value instanceof Double) || // check height is Double
+	          (trait.equals("parent") && value instanceof Node) || // check parent is Node 
+	          (traits.get(trait) != null && traits.get(trait).getClass().getName().equals(value.getClass().getName()))) { 
 		  prevTraits.put(trait, traits.get(trait)) ;
 	    traits.put(trait, value) ;
 		  return true ;
@@ -193,6 +196,14 @@ public abstract class GameObject extends Savable {
 
  public double getHeight() {
  	return (double)getTrait("height") ;
+ }
+ 
+ public boolean setParent(Node parent) {
+   return setTrait("parent", parent);
+ }
+ 
+ public Node getParent() {
+   return (Node)getTrait("parent");
  }
  
  public String toString() {

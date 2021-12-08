@@ -39,6 +39,7 @@ public class Card extends GameObject {
 			  (trait.equals("pressed") && value instanceof Boolean) ||
 			  (trait.equals("enabled") && value instanceof Boolean) ||
 			  (trait.equals("onPlay") && value instanceof String)) {	// check value is String
+	      prevTraits.put(trait, traits.get(trait)) ;
 		  traits.put(trait, value) ;
 		  return true ;
 	  }

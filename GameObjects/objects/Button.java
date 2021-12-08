@@ -36,6 +36,7 @@ public class Button extends GameObject {
 				(trait.equals("pressed") && value instanceof Boolean) ||
 				(trait.equals("enabled") && value instanceof Boolean) ||
 				(trait.equals("onClick") && value instanceof String)) { 
+		    prevTraits.put(trait, traits.get(trait)) ;
 			traits.put(trait, value);
 			return true ;
 		}

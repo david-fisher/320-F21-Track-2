@@ -7,69 +7,86 @@ import java.util.Random;
 
 public class Player extends GameObject {
 
-    private String Label;
-
-    private Color color;
     private ArrayList<Gamepiece> gamePieces;
     private ArrayList<GameObject> inventory;
 
     private boolean isHuman;
 
     public Player(String Label, Color color, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
-        this.Label = Label;
-        this.color = color;
-        this.gamePieces = gamePieces;
-        this.inventory = inventory;
-        this.isHuman = isHuman;
+        this.setLabel(Label);
+        this.setColor(color);
+        this.setGamePieces(gamePieces);
+        this.setInventory(inventory);
+        this.setIsHuman(isHuman);
     }
 
     public Player(String Label, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
-        this.Label = Label;
-        this.gamePieces = gamePieces;
-        this.inventory = inventory;
-        this.isHuman = isHuman;
+        this.setLabel(Label);
+        this.setColor(getRandomColor());
+        this.setGamePieces(gamePieces);
+        this.setInventory(inventory);
+        this.setIsHuman(isHuman);
+    }
+    
+    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 
-        this.color = getRandomColor();
+      // run game object's set trait first
+      if (super.setTrait(trait, value, suppressTraitChecker)) {
+          return true;
+      }
+
+      // checks for other valid inputs
+      else if (suppressTraitChecker || // if true don't check trait type
+              (trait.equals("gamePieces") && value instanceof ArrayList) ||
+              (trait.equals("inventory") && value instanceof ArrayList) ||
+              (trait.equals("isHuman") && value instanceof Boolean)) {
+          prevTraits.put(trait, traits.get(trait)) ;
+          traits.put(trait, value);
+          return true;
+      }
+
+      // returns false if input is invalid
+      return false;
     }
     
-    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { 
-        this.gamePieces = gamePieces; 
+    public boolean setGamePieces(ArrayList<Gamepiece> gamePieces) { 
+        return this.setTrait("gamePieces", gamePieces);
     }
     
-    public void setInventory(ArrayList<GameObject> inventory) { 
-        this.inventory = inventory; 
+    public boolean setInventory(ArrayList<GameObject> inventory) { 
+      return this.setTrait("inventory", inventory);
     }
     
-    public void setIsHuman(boolean isHuman) {
-        this.isHuman = isHuman;
+    public boolean setIsHuman(boolean isHuman) {
+      return this.setTrait("isHuman", isHuman);
     }
 
     public ArrayList<Gamepiece> getGamePieces() { 
-        return this.gamePieces; 
+        return (ArrayList<Gamepiece>) this.traits.get("gamePieces");
     }
     
     public ArrayList<GameObject> getInventory() { 
-        return this.inventory; 
+      return (ArrayList<GameObject>) this.traits.get("inventory");
     }
     
     public boolean getIsHuman() { 
-        return this.isHuman; 
+        return (Boolean) this.traits.get("isHuman");
     }
 
     public void addPiece(Gamepiece piece) { 
-        this.gamePieces.add(piece); 
+        this.getGamePieces().add(piece); 
     }
     
     public void removePiece(Gamepiece piece) { 
-        this.gamePieces.remove(piece); 
+        this.getGamePieces().remove(piece); 
     }
     
     public void removePiece(int pieceIndex) { 
-        this.gamePieces.remove(pieceIndex); 
+        this.getGamePieces().remove(pieceIndex); 
     }
     
     public void setPiece(int pieceIndex, Gamepiece piece) { 
-        this.gamePieces.set(pieceIndex, piece); 
+        this.getGamePieces().set(pieceIndex, piece); 
     }
 
     public Color getRandomColor(){
@@ -85,11 +102,11 @@ public class Player extends GameObject {
     @Override
     public String toString() {
         return "Player{" +
-                "Label='" + Label + '\'' +
-                ", color=" + color +
-                ", gamePieces=" + gamePieces +
-                ", inventory=" + inventory +
-                ", isHuman=" + isHuman +
+                "Label='" + this.getLabel() + '\'' +
+                ", color=" + this.getColor() +
+                ", gamePieces=" + this.getGamePieces() +
+                ", inventory=" + this.getInventory() +
+                ", isHuman=" + this.getIsHuman() +
                 '}';
     }
 }

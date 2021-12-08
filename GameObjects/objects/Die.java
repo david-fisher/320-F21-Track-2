@@ -33,6 +33,7 @@ public class Die extends GameObject {
 		else if (suppressTraitChecker || // if true don't check trait type
 				(trait.equals("dotColor") && value instanceof String) || // check dotColor is Color
 				(trait.equals("numSides") && value instanceof Integer)) {
+		    prevTraits.put(trait, traits.get(trait)) ;
 			traits.put(trait, value);
 			return true;
 		}
