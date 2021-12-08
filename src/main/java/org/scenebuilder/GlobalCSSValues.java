@@ -2,6 +2,9 @@ package org.scenebuilder;
 
 public class GlobalCSSValues {
 
+//    public Enum<>
+//    public static String[] COLOR_PALETTES = {}
+
     // css
     public static String background;
     public static String secondary;
