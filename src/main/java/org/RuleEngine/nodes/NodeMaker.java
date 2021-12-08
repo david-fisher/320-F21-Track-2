@@ -4,7 +4,7 @@ public final class NodeMaker {
 
     public static OpNode makeNode(String type) {
         switch (type) {
-            case "addition":
+            case "AL":
                 return new ALNode("+");
             case "rset":
                 return new RSetNode();

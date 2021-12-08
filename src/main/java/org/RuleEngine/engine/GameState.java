@@ -26,12 +26,8 @@ public class GameState extends Savable {
 
     public boolean tutorialEnabled;
     public HashMap<String, GameObject> registers;
-    public static HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
+    public HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
-    static {
-        events.put("heuristic", null);
-    }
-
     public GameState() {
         projectName = "New Project";
         
@@ -49,6 +45,7 @@ public class GameState extends Savable {
         tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();
         registers.put("currPlayer", null);
+        events.put("heuristic", null);
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
@@ -155,6 +152,6 @@ public class GameState extends Savable {
     public HashMap<String, GameObject> getAllRegisters() { return registers; }
     public void setAllRegisters(HashMap<String, GameObject> registers) { this.registers = registers; }
 
-    public static HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
-    public static void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
+    public HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
+    public void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
 }
