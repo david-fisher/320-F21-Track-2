@@ -14,6 +14,7 @@ public class Button extends GameObject {
 		this.setText("type text here");
 		this.setEnabled(true);
 		this.setPressed(false);
+		this.setTrait("onClick", null);
 	}
 	
 	/* Trait Types:

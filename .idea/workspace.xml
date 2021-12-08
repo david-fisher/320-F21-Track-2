@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Downgraded to JDK 9">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Cleaned Popup and fixed yes/no highlighting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638918331192</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Cleaned Popup and fixed yes/no highlighting">
+      <created>1638924971640</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1638924971641</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -403,7 +406,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Scale dice to display all of them in one section of the RNG tab." />
     <MESSAGE value="Added rolling functionality to the Dice in the RNG tab and a display of the corresponding side landed that each die landed on." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, only draw drawers when needed (and space others accordingly)." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly)." />
@@ -428,7 +430,8 @@
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
     <MESSAGE value="workspace automatic update on pull (check effect)" />
     <MESSAGE value="Downgraded to JDK 9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Downgraded to JDK 9" />
+    <MESSAGE value="Cleaned Popup and fixed yes/no highlighting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned Popup and fixed yes/no highlighting" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

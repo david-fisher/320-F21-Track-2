@@ -4,8 +4,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -32,15 +30,14 @@ import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
 import org.GameObjects.objects.Spinner;
 import org.scenebuilder.SetupData;
-import org.scenebuilder.dummy.DummyGame;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private AnchorPane playParent;
+    private GameState activeGame;
     private ScrollPane decksPane;
     private ScrollPane rngPane;
     private ScrollPane inventoryPane;
@@ -52,7 +49,7 @@ public class PlayController extends ScreenController {
     private HBox inventoryContainer;
     private Stage stage;
     private SetupData setupData;
-    private GameState activeGame;
+
     private ArrayList<Player> players;
     private Player currPlayer;
 
@@ -116,7 +113,6 @@ public class PlayController extends ScreenController {
     }
 
     AnchorPane boardPane;
-    //GameState gameState;
     private void initGame(GameState gameStateInput) {
 
         boardPane = new AnchorPane();
@@ -252,7 +248,6 @@ public class PlayController extends ScreenController {
     }
 
     private void initPlayers(ArrayList<Player> players) {
-
         players.forEach(p -> {
             initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
             //fill inventory
@@ -260,7 +255,7 @@ public class PlayController extends ScreenController {
 
         // for each player
         // set player info
-        // add player stuff to inventory (later)
+        // TODO: add player stuff to inventory (later)
     }
 
     private void initButtons(GameState gameState) {
@@ -348,133 +343,77 @@ public class PlayController extends ScreenController {
 
     private void initDeckLabel(int numDrawers) {
         decksLabel = new Label();
-        decksLabel.setText("Decks");
-        decksLabel.setStyle("-fx-font-family: Serif; " +
-                "-fx-font-size: 24; " +
-                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                "; -fx-border-color: BLACK;");
-        decksLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        decksLabel.setId("decksLabel");
-        decksLabel.setTextAlignment(TextAlignment.CENTER);
-        decksLabel.setAlignment(Pos.CENTER);
-
-        decksLabel.setPrefWidth(140);
-        decksLabel.setMinWidth(decksLabel.getPrefWidth());
-        decksLabel.setMaxWidth(decksLabel.getPrefWidth());
-
-        decksLabel.setPrefHeight(209);
-        decksLabel.setMinHeight(decksLabel.getPrefHeight());
-        decksLabel.setMaxHeight(decksLabel.getPrefHeight());
-
-        decksLabel.setOnMouseClicked(e -> {
-            slideOut(e);
-        });
-
-        playParent.getChildren().addAll(decksLabel);
-        initDarken(decksLabel);
-
-        playParent.setRightAnchor(decksLabel, 0.0);
+        initLabel(decksLabel, "Decks", "decksLabel");
         playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
         //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
     private void initRNGLabel(int numDrawers) {
         rngLabel = new Label();
-        rngLabel.setText("RNG");
-        rngLabel.setStyle("-fx-font-family: Serif; " +
-                "-fx-font-size: 24; " +
-                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                "; -fx-border-color: BLACK;");
-        rngLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        rngLabel.setId("rngLabel");
-        rngLabel.setTextAlignment(TextAlignment.CENTER);
-        rngLabel.setAlignment(Pos.CENTER);
-
-        rngLabel.setPrefWidth(140);
-        rngLabel.setMinWidth(rngLabel.getPrefWidth());
-        rngLabel.setMaxWidth(rngLabel.getPrefWidth());
-
-        rngLabel.setPrefHeight(209);
-        rngLabel.setMinHeight(rngLabel.getPrefHeight());
-        rngLabel.setMaxHeight(rngLabel.getPrefHeight());
-
-        rngLabel.setOnMouseClicked(e -> {
-            slideOut(e);
-        });
-
-        playParent.getChildren().add(rngLabel);
-        initDarken(rngLabel);
-
-        playParent.setRightAnchor(rngLabel, 0.0);
+        initLabel(rngLabel, "RNG", "rngLabel");
         playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
-        inventoryLabel.setText("Inventory");
-        inventoryLabel.setStyle("-fx-font-family: Serif; " +
+        initLabel(inventoryLabel, "Inventory", "inventoryLabel");
+        playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
+    }
+
+    private void initLabel(Label label, String text, String id) {
+        label.setText(text);
+        label.setStyle("-fx-font-family: Serif; " +
                 "-fx-font-size: 24; " +
                 "-fx-background-color: " + GlobalCSSValues.buttonBackground +
                 "; -fx-border-color: BLACK;");
-        inventoryLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        inventoryLabel.setId("inventoryLabel");
-        inventoryLabel.setTextAlignment(TextAlignment.CENTER);
-        inventoryLabel.setAlignment(Pos.CENTER);
+        label.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        label.setId(id);
+        label.setTextAlignment(TextAlignment.CENTER);
+        label.setAlignment(Pos.CENTER);
 
-        inventoryLabel.setPrefWidth(140);
-        inventoryLabel.setMinWidth(inventoryLabel.getPrefWidth());
-        inventoryLabel.setMaxWidth(inventoryLabel.getPrefWidth());
+        label.setPrefWidth(140);
+//        label.setMinWidth(inventoryLabel.getPrefWidth());
+//        label.setMaxWidth(inventoryLabel.getPrefWidth());
 
-        inventoryLabel.setPrefHeight(209);
-        inventoryLabel.setMinHeight(inventoryLabel.getPrefHeight());
-        inventoryLabel.setMaxHeight(inventoryLabel.getPrefHeight());
+        label.setPrefHeight(209);
+//        label.setMinHeight(inventoryLabel.getPrefHeight());
+//        label.setMaxHeight(inventoryLabel.getPrefHeight());
 
-        inventoryLabel.setOnMouseClicked(e -> {
+        label.setOnMouseClicked(e -> {
             slideOut(e);
         });
-        initDarken(inventoryLabel);
+        initDarken(label);
 
-        playParent.getChildren().addAll(inventoryLabel);
-
-        playParent.setRightAnchor(inventoryLabel, 0.0);
-        playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
+        playParent.getChildren().addAll(label);
+        playParent.setRightAnchor(label, 0.0);
     }
 
     private void initializeDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
-        decksPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-        decksPane.setId("decksDrawer");
-        decksPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        decksPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        decksPane.setPrefWidth(355);
-        decksPane.setPrefHeight(209);
-        playParent.setRightAnchor(decksPane, -215.0);
+        initializeDrawer(decksPane);
         playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
-        playParent.getChildren().addAll(decksPane);
     }
 
     private void initializeRNGDrawer(int numDrawers) {
         rngPane = new ScrollPane();
-        rngPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-        rngPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        rngPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        playParent.setRightAnchor(rngPane, -215.0);
+        initializeDrawer(rngPane);
         playParent.setTopAnchor(rngPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
-        rngPane.setPrefWidth(355);
-        rngPane.setPrefHeight(209);
-        playParent.getChildren().add(rngPane);
     }
 
     private void initializeInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
-        inventoryPane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-        inventoryPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        inventoryPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        playParent.setRightAnchor(inventoryPane, -215.0);
+        initializeDrawer(inventoryPane);
         playParent.setTopAnchor(inventoryPane, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
-        inventoryPane.setPrefWidth(355);
-        inventoryPane.setPrefHeight(209);
-        playParent.getChildren().add(inventoryPane);
+    }
+
+    private void initializeDrawer(ScrollPane pane) {
+        pane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
+        pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        playParent.setRightAnchor(pane, -215.0);
+        pane.setPrefWidth(355);
+        pane.setPrefHeight(209);
+        playParent.getChildren().add(pane);
     }
 
     //A method to add all the decks to the deck slider
@@ -632,14 +571,6 @@ public class PlayController extends ScreenController {
         parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
         parent.toFront();
         source.setDisable(false);
-
-//        boardPane.getChildren().forEach(node -> {
-//            if (node.getUserData() != null && node.getUserData().equals(gp)) {
-//
-//
-//                node.toFront();
-//            }
-//        });
     }
 
     private void addToInventory(GameObject object) {
@@ -771,6 +702,7 @@ public class PlayController extends ScreenController {
             popupWindow.setScene(exitScene);
             popupWindow.showAndWait();
         }
+
         public void displayExitWithoutSave(Stage parentPopup){
             Stage popupWindow = new Stage();
             BorderPane borderPane = new BorderPane();
@@ -973,5 +905,8 @@ public class PlayController extends ScreenController {
                     "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
         });
     }
+
+    public AnchorPane getPlayParent() { return playParent; }
+    public GameState getGameState() { return activeGame; }
 }
 
