@@ -54,6 +54,7 @@ public class Tile extends GameObject
   		  return true ;
   	  } else if (suppressTraitChecker ||
                 trait.equals("onLand") && value instanceof String )) {
+	prevTraits.put(trait, traits.get(trait)) ;
             traits.put(trait, value);
             return true ;
       }
