@@ -1,5 +1,7 @@
 package org.GameObjects.objects ;
 
+import javafx.scene.shape.Shape;
+
 import java.awt.Color;
 import java.util.*;
 /**
@@ -14,6 +16,7 @@ public class Tile extends GameObject
 	private List<Tile> connections;
 	private List<Gamepiece> pieces;
     private static int count = 0;
+    private static Shape parent;
 
     /**
      * Constructor for objects of class Tile
@@ -94,6 +97,10 @@ public class Tile extends GameObject
     public boolean hasGamepiece(Gamepiece gp) {
     	return pieces.contains(gp) ;
     }
+
+    public void setParent(Shape parent) { this.parent = parent; }
+
+    public Shape getParent() { return parent; }
     
     public List<Gamepiece> getGamepieces() {
     	return this.pieces ;

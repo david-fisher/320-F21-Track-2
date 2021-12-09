@@ -94,16 +94,16 @@ public class Display extends PlayController {
         Runnable runner = () -> {
             for (int i = 0; i < tiles.size(); i++) {
                 Tile tile = tiles.get(i);
-//                Shape parent = tile.getParent();
-//                parent.setStroke(Color.GOLD);
-//                parent.setStrokeWidth(2);
-//                DropShadow borderGlow= new DropShadow();
-//                borderGlow.setOffsetY(0f);
-//                borderGlow.setOffsetX(0f);
-//                borderGlow.setColor(Color.YELLOW);
-//                parent.setEffect(borderGlow);
-//                parent.toFront();
-//                parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                Shape parent = tile.getParent();
+                parent.setStroke(Color.GOLD);
+                parent.setStrokeWidth(2);
+                DropShadow borderGlow= new DropShadow();
+                borderGlow.setOffsetY(0f);
+                borderGlow.setOffsetX(0f);
+                borderGlow.setColor(Color.YELLOW);
+                parent.setEffect(borderGlow);
+                parent.toFront();
+                parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         };
         //Run the runner after entering the event loop
@@ -112,10 +112,10 @@ public class Display extends PlayController {
         Tile chosen = (Tile) Platform.enterNestedEventLoop(KEY);
         //Remove the onClick events and highlighting from the viable tiles
         for (int i = 0; i < tiles.size(); i++) {
-//            Shape parent = tiles.get(i).getParent();
-//            parent.removeEventHandler(MouseEvent.MOUSE_CLICKED, handler);
-//            parent.setEffect(null);
-//            parent.setStrokeWidth(0);
+            Shape parent = tiles.get(i).getParent();
+            parent.removeEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+            parent.setEffect(null);
+            parent.setStrokeWidth(0);
         }
         return chosen;
     }

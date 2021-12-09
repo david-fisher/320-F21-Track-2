@@ -1,8 +1,11 @@
 package org.GameObjects.objects;
 
+import javafx.scene.shape.Shape;
+
 public class Gamepiece extends GameObject{
 	
   private static int count = 0;
+  private static Shape parent;
 
   public Gamepiece() {
 	  super() ;  
@@ -55,6 +58,9 @@ public class Gamepiece extends GameObject{
 	  }
 	  return false ;
   }
+
+  public Shape getParent() { return parent; }
+  public void setParent(Shape parent) { this.parent = parent; }
 
   public Tile getLocation() {
 	  return (Tile)this.getTrait("location");

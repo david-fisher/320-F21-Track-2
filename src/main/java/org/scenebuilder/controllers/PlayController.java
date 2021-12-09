@@ -69,12 +69,12 @@ public class PlayController extends ScreenController {
         // load relevant data
         setupData = BasicApplication.getSetupData();
         players = setupData.playerList;
-//        if (players.size() == 0) {
-//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            setupData = new SetupData(players, false);
-//        }
+        if (players.size() == 0) {
+            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+            setupData = new SetupData(players, false);
+        }
         activeGame = BasicApplication.getSelectedGame();
 
         initializePlayScreen();
@@ -95,15 +95,15 @@ public class PlayController extends ScreenController {
         switchTurn.setOnMouseClicked(e -> {
             int nextPlayerIndex = players.indexOf(currPlayer);
             Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-//            playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
-//            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-//                    "-fx-background-radius: 5 5 5 5; " +
-//                    "-fx-font-family: Serif; " +
-//                    "-fx-font-size: 16; " +
-//                    "-fx-border-color: #000000;" +
-//                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
+            playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
+            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                    "-fx-background-radius: 5 5 5 5; " +
+                    "-fx-font-family: Serif; " +
+                    "-fx-font-size: 16; " +
+                    "-fx-border-color: #000000;" +
+                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
             // set current player
-//            fillInventoryDrawer(nextPlayer.getInventory());
+            fillInventoryDrawer(nextPlayer.getInventory());
             currPlayer = nextPlayer;
             playerTurnCycle();
         });
@@ -242,7 +242,7 @@ public class PlayController extends ScreenController {
             boardPane.getChildren().addAll(tile);
             tile.setLayoutX(t.getXPos());
             tile.setLayoutY(t.getYPos());
-//            t.setParent(tile);
+            t.setParent(tile);
         });
         // for each tile
         // create tile
@@ -252,7 +252,7 @@ public class PlayController extends ScreenController {
 
     private void initPlayers(ArrayList<Player> players) {
         players.forEach(p -> {
-//            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
+            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
             //fill inventory
         });
 
@@ -261,15 +261,15 @@ public class PlayController extends ScreenController {
         // TODO: add player stuff to inventory (later)
     }
 
-//    private void initButtons(GameState gameState) {
-//        ArrayList<Button> buttons = gameState.getAllButtons();
-//        buttons.forEach(button -> {
-//            String event = (String) button.getTrait("onClick");
-//            button.getParent().setOnMouseClicked(e -> {
-//                interpreter.interpretEvent(gameState.events.get(event), gameState);
-//            });
-//        });
-//    }
+    private void initButtons(GameState gameState) {
+        ArrayList<Button> buttons = gameState.getAllButtons();
+        buttons.forEach(button -> {
+            String event = (String) button.getTrait("onClick");
+            button.getParent().setOnMouseClicked(e -> {
+                interpreter.interpretEvent(gameState.events.get(event), gameState);
+            });
+        });
+    }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
 
@@ -318,15 +318,15 @@ public class PlayController extends ScreenController {
 
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
-//        playerTurnIndicator.setText(currPlayer.getPlayerID() + "'s Turn");
+        playerTurnIndicator.setText(currPlayer.getPlayerID() + "'s Turn");
 
-//        playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-//                "-fx-background-radius: 5 5 5 5; " +
-//                "-fx-font-family: Serif; " +
-//                "-fx-font-size: 16; " +
-//                "-fx-font-color: BLACK; " +
-//                "-fx-border-color: #000000; " +
-//                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
+        playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 16; " +
+                "-fx-font-color: BLACK; " +
+                "-fx-border-color: #000000; " +
+                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
@@ -547,12 +547,12 @@ public class PlayController extends ScreenController {
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
-//        Gamepiece gp = currPlayer.getGamePieces().get(0);
-//        Shape parent = gp.getParent();
-//        Tile location = gp.getLocation();
-//        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-//        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
-//        parent.toFront();
+        Gamepiece gp = currPlayer.getGamePieces().get(0);
+        Shape parent = gp.getParent();
+        Tile location = gp.getLocation();
+        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.toFront();
         source.setDisable(false);
     }
 
@@ -571,7 +571,7 @@ public class PlayController extends ScreenController {
         inventoryObject.setOnMouseClicked(e -> {
             //Open this deck if you can // todo
         });
-//        currPlayer.getInventory().add(object);
+        currPlayer.getInventory().add(object);
         inventoryContainer.getChildren().addAll(inventoryObject);
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }

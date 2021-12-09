@@ -1,7 +1,10 @@
 package org.GameObjects.objects;
 
+import javafx.scene.shape.Shape;
+
 public class Button extends GameObject {
     private static int count = 0;
+	private static Shape parent;
 
 	public Button() {
 		super() ;  
@@ -74,6 +77,10 @@ public class Button extends GameObject {
 	public boolean getPressed() {
 		return (boolean)this.getTrait("pressed");
 	}
+
+	public void setParent(Shape parent) { this.parent = parent; }
+
+	public Shape getParent() { return parent; }
 
 	public String repr(boolean hasLabel) {
 		return "Button\n" + super.repr(hasLabel);
