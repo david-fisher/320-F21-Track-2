@@ -78,7 +78,6 @@ public class MoveNode extends OpNode {
             }
             if (currDis == tDis) { targets.add(currTile); }
         }
-        System.out.println("Targets: " + targets);
         return targets;
     }
 }

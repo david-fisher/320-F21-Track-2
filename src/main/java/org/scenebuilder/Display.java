@@ -1,6 +1,7 @@
 package org.scenebuilder;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -131,8 +132,8 @@ public class Display extends PlayController {
         displayRoll.setLayoutY(gameState.getGameBoard().getYPos() - 3);
 
         final Timeline timeline = new Timeline();
-        timeline.setAutoReverse(true);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3000),
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2800), new KeyValue(displayRoll.opacityProperty(), 0)));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2800),
                 k -> playParent.getChildren().remove(displayRoll)));
         timeline.play();
     }

@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Removed &quot;org.Editors.old_blocks&quot;">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Added print to Display">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/GlobalCSSValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/GlobalCSSValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/GlobalCSSValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/GlobalCSSValues.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/MoveNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/MoveNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
