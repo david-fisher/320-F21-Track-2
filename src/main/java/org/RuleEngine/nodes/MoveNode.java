@@ -6,15 +6,15 @@ import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
 
 // Usage: Operand 0 - game piece name.
-//				Operand 1 - distance (LiteralNode<Integer>)
+//	      Operand 1 - distance (LiteralNode<Integer>)
 public class MoveNode extends OpNode {
-    public MoveNode() { super(); }
-    public MoveNode(ArrayList<Node> operands) {
-        super();
-        this.operands.set(0, operands);
+    public MoveNode() { 
+        super(); 
+        this.addOperand(null).addOperand(null);
     }
-
+    
 	@Override
+	@SuppressWarnings("rawtypes")
 	public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);
@@ -59,6 +59,7 @@ public class MoveNode extends OpNode {
 	// is not included.
 	private ArrayList<Tile> findTargetTiles(Tile t, Integer tDis) {
 	    LinkedList<Tile> tiles = new LinkedList<Tile>();
+	    ArrayList<Tile> processed = new ArrayList<Tile>();
 	    LinkedList<Integer> distances = new LinkedList<Integer>();
 	    ArrayList<Tile> targets = new ArrayList<Tile>();
 	    tiles.add(t);
@@ -67,9 +68,12 @@ public class MoveNode extends OpNode {
 	    while(distances.peek() <= tDis) {
 	        Integer currDis = distances.poll();
 	        Tile currTile = tiles.poll();
+	        processed.add(currTile);
 	        for (Tile c : currTile.getConnect()) {
-	            distances.add(currDis+1);
-	            tiles.add(c);
+	            if (tiles.indexOf(c) < 0 && processed.indexOf(c) < 0) {
+    	            distances.add(currDis+1);
+    	            tiles.add(c);
+	            }
 	        }
 	        if (currDis == tDis) { targets.add(currTile); }
 	    }
