@@ -4,13 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Small updates before main pull">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SceneBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SceneBuilder.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/SettingsFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/gridPanePlayFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/mainFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/playFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/selectionFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/setupFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/testfxmL.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/SettingsFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/gridPanePlayFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/mainFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/playFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/selectionFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/setupFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/testfxmL.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +63,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="usePluginRegistry" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="20YHQYlpZDfZ78KjZ57VTwvAsIT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -55,19 +72,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/nodes" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org.Editors" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org.Editors" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine\engine\nodes" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
@@ -85,7 +102,7 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
       <module name="SceneBuilder" />
@@ -93,6 +110,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.Editors.MainMenu" />
+      <module name="SceneBuilder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.Editors.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainMenu" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

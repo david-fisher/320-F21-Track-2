@@ -746,7 +746,7 @@ public class PlayController extends ScreenController {
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
-                exitFromPlay();
+                mainMenuFromPlay();
             });
             no.setOnMouseClicked(e -> {
                 popupWindow.close();
