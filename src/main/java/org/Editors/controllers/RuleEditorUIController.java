@@ -125,21 +125,17 @@ public class RuleEditorUIController implements Initializable {
         //Check for instanceof TextBlock because only TextBlock has getLiteralNode() method
         if (block instanceof TextBlock) {
           ((SequenceBlock)startBlock).setParentPtr(((TextBlock)block).getLiteralNode());
-          System.out.println(((SequenceBlock)startBlock).getParentPtr());
         }
         else if (block.getNode() instanceof OpNode) {
           ((SequenceBlock)startBlock).setParentPtr(block.getNode());
-          System.out.println(((SequenceBlock)startBlock).getParentPtr());
         }
       }
       else if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
-        //((OpNode)startBlock.getNode()).setOperandInGroup(((TextBlock)block).getLiteralNode(), operandIndex, currRuleGroupID);
-        ((OpNode)startBlock.getNode()).addOperandToGroup(((TextBlock)block).getLiteralNode(), currRuleGroupID);
+        ((OpNode)startBlock.getNode()).setOperandInGroup(((TextBlock)block).getLiteralNode(), operandIndex, currRuleGroupID);
       }
       else if (startBlock.getNode() instanceof OpNode) {
-        //((OpNode)startBlock.getNode()).setOperandInGroup(block.getNode(), operandIndex, currRuleGroupID);
-        ((OpNode)startBlock.getNode()).addOperandToGroup(block.getNode(), currRuleGroupID);
+        ((OpNode)startBlock.getNode()).setOperandInGroup(block.getNode(), operandIndex, currRuleGroupID);
       }
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
@@ -150,9 +146,11 @@ public class RuleEditorUIController implements Initializable {
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
 
-      //temp
+      //Keep track of the block we want to draw to when the user clicks the blue connection
       startBlock = block;
+      //Keep track of which gray connection block the user clicked
       operandIndex = opIndex;
+      //Keep track of the rule group that the gray connection block is apart of
       currRuleGroupID = ruleGroupID;
     }
   }
@@ -165,14 +163,26 @@ public class RuleEditorUIController implements Initializable {
       });
     }
 
+    //Get the list of rule groups from this block
     ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = block.getRuleGroupList();
-    //TODO: Adjust to process ruleGroupList
     for (int i = 0; i < ruleGroupList.size(); i++) {
       ObservableList<javafx.scene.Node> ruleGroup = ruleGroupList.get(i);
       for(int j = 0; j < ruleGroup.size(); j++) {
+        //For calculating the positioning of lines when making connections
         final int order = j + 1;
+        //Pass the index for when user adds lines out of order
         final int index = j;
+        //Index of the rulegroup this connection block is apart of
         final int ruleGroupID = i;
+        //If we have a While or If block, we need to add some null operands to their operand lists for 
+        //their additional rule groups. This is because their operands lists for rule groups greater than 0
+        //are of size 0 initially. Rule group 0 always has only 1 operand and it's already initialized for us
+        //so we don't need to add to that one.
+        if (((block instanceof WhileBlock) || (block instanceof IfBlock)) && (i > 0)) {
+          if (block.getNode() instanceof OpNode) {
+            ((OpNode)block.getNode()).addOperandToGroup(null, i);
+          }
+        }
         javafx.scene.Node node = ruleGroup.get(j);
         node.setOnMouseClicked(e -> {
           drawLineGrayRect(block, order, index, ruleGroupID);
