@@ -5,10 +5,13 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
@@ -16,14 +19,27 @@ import org.GameObjects.objects.*;
 
 
 import javafx.scene.input.MouseEvent;
+import org.RuleEngine.engine.GameState;
 import org.scenebuilder.controllers.PlayController;
 
 import java.util.ArrayList;
 
-//static methods
-public class Display {
+public class Display extends PlayController {
 
-    public static void displayDie(int roll) {
+    private static Display display;
+
+    public static Display getDisplay() {
+        if (display == null) { display = new Display(); }
+        return display;
+    }
+
+    private AnchorPane playParent = super.getPlayParent();
+    private AnchorPane boardPane = super.getBoardPane();
+    private GameState gameState = super.getGameState();
+
+    private Display() {}
+
+    public void displayDie(int roll) {
 //        ImageView dieImage = (ImageView) d;
 //        Die die = (Die) dieImage.getUserData();
 //        System.out.println(ClassLoader.getResource("Dice1.png"));
@@ -60,8 +76,8 @@ public class Display {
 //        timeline.play();
     }
 
-    private static final Object KEY = new Object();
-    public static Tile moveOptions(ArrayList<Tile> tiles) {
+    private final Object KEY = new Object();
+    public Tile moveOptions(ArrayList<Tile> tiles) {
         //Return if there is only one choice
         if (tiles.size() == 1) {
             return tiles.get(0);
@@ -103,25 +119,22 @@ public class Display {
         return chosen;
     }
 
-    public static void highlight(Tile tile, Object KEY) {
-        Shape parent = tile.getParent();
-        System.out.println("Parent xPos: " + parent.getLayoutX());
-        parent.setStroke(Color.LIMEGREEN);
-        parent.setStrokeWidth(2);
-        DropShadow borderGlow= new DropShadow();
-        borderGlow.setOffsetY(0f);
-        borderGlow.setOffsetX(0f);
-        borderGlow.setColor(Color.GOLD);
-        parent.setEffect(borderGlow);
-        parent.setOnMouseClicked(event -> {
-            Platform.exitNestedEventLoop(KEY, parent.getUserData());
-        });
+    public void print(String string) {
+        Label displayRoll = new Label(string);
+        displayRoll.setPrefWidth(150);
+        displayRoll.setPrefHeight(50);
+        displayRoll.setStyle("-fx-font-family: Serif; -fx-font-size: 25;");
+        displayRoll.setTextFill(Color.BLACK);
+        displayRoll.setAlignment(Pos.CENTER);
+        playParent.getChildren().add(displayRoll);
+        displayRoll.setLayoutX(gameState.getGameBoard().getXPos() + boardPane.getPrefWidth() / 2 + 220);
+        displayRoll.setLayoutY(gameState.getGameBoard().getYPos() - 3);
 
-    }
-
-
-    public static void print(String string) {
-
+        final Timeline timeline = new Timeline();
+        timeline.setAutoReverse(true);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3000),
+                k -> playParent.getChildren().remove(displayRoll)));
+        timeline.play();
     }
 
 }

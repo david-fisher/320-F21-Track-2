@@ -25,6 +25,7 @@ import org.GameObjects.objects.Button;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveNode;
 import org.scenebuilder.BasicApplication;
+import org.scenebuilder.Display;
 import org.scenebuilder.GlobalCSSValues;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
@@ -36,8 +37,8 @@ import java.util.ArrayList;
 public class PlayController extends ScreenController {
 
     private ImageView playSettings;
-    private AnchorPane playParent;
-    private GameState activeGame;
+    private static AnchorPane playParent;
+    private static GameState activeGame;
     private ScrollPane decksPane;
     private ScrollPane rngPane;
     private ScrollPane inventoryPane;
@@ -112,10 +113,12 @@ public class PlayController extends ScreenController {
         switchTurn.setAlignment(Pos.CENTER);
     }
 
-    AnchorPane boardPane;
+    private static AnchorPane boardPane;
     private void initGame(GameState gameStateInput) {
 
-        boardPane = new AnchorPane();
+        if (boardPane == null) {
+            boardPane = new AnchorPane();
+        }
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         GameBoard gameBoard = gameStateInput.getGameBoard();
         if (gameBoard.getBoardID().equals("All Drawers")) {
@@ -283,7 +286,6 @@ public class PlayController extends ScreenController {
     private void drawPiece(Gamepiece gamePiece) {
         Tile parent = activeGame.getAllTiles().get(0);
         gamePiece.setLocation(parent);
-//        System.out.println("Player screen: " + gamePiece.getColor().toString());
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
@@ -309,7 +311,6 @@ public class PlayController extends ScreenController {
         settingsPane.setOnMouseClicked(e -> {
             displayPopup(e);
         });
-
         playParent.getChildren().addAll(settingsPane);
         playParent.setRightAnchor(settingsPane, 15.0);
         playParent.setTopAnchor(settingsPane, 25.0);
@@ -531,28 +532,12 @@ public class PlayController extends ScreenController {
     private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
         AnchorPane source = (AnchorPane) e.getSource();
         source.setDisable(true);
-        System.out.println(activeGame.getAllDice());
         Die die = dice.get(0);
         LiteralNode<String> name = new LiteralNode<>("currPlayer");
         int roll = die.roll();
         LiteralNode<Integer> value = new LiteralNode<>(roll);
 
-        Label displayRoll = new Label("You Rolled: " + roll);
-        displayRoll.setPrefWidth(150);
-        displayRoll.setPrefHeight(50);
-        displayRoll.setStyle("-fx-font-family: Serif; -fx-font-size: 25;");
-        displayRoll.setTextFill(Color.BLACK);
-        displayRoll.setAlignment(Pos.CENTER);
-
-        playParent.getChildren().add(displayRoll);
-        displayRoll.setLayoutX(activeGame.getGameBoard().getXPos() + boardPane.getPrefWidth() / 2 + 220);
-        displayRoll.setLayoutY(activeGame.getGameBoard().getYPos() - 3);
-
-        final Timeline timeline = new Timeline();
-        timeline.setAutoReverse(true);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3000),
-        k -> playParent.getChildren().remove(displayRoll)));
-        timeline.play();
+        Display.getDisplay().print("You rolled: " + roll);
 
         ArrayList<org.RuleEngine.nodes.Node> operands = new ArrayList<>();
         operands.add(name);
@@ -563,8 +548,6 @@ public class PlayController extends ScreenController {
         interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
         Gamepiece gp = currPlayer.getGamePieces().get(0);
-        System.out.println(gp);
-        System.out.println(gp.getLocation());
         Shape parent = gp.getParent();
         Tile location = gp.getLocation();
         parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
@@ -605,7 +588,9 @@ public class PlayController extends ScreenController {
     }
 
     public void initializePlayScreen() {
-        playParent = new AnchorPane();
+        if (playParent == null) {
+            playParent = new AnchorPane();
+        }
         playParent.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         playParent.setPrefWidth(playWidth);
         playParent.setPrefHeight(playHeight);
@@ -907,6 +892,7 @@ public class PlayController extends ScreenController {
     }
 
     public AnchorPane getPlayParent() { return playParent; }
+    public AnchorPane getBoardPane() { return boardPane; }
     public GameState getGameState() { return activeGame; }
 }
 

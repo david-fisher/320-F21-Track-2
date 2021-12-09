@@ -149,7 +149,6 @@ public class BasicApplication extends Application {
         ArrayList<Spinner> spinners = new ArrayList();
 
         Die die1 = new Die();
-        System.out.println("Label die: " + die1.getLabel());
 //        Die die2 = new Die();
 //        Die die3 = new Die();
 //        Die die4 = new Die();

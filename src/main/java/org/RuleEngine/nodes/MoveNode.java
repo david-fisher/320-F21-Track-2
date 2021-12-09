@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
-import static org.scenebuilder.Display.moveOptions;
+import org.scenebuilder.Display;
 
 // Usage: Operand 0 - game piece name.
 //				Operand 1 - distance (LiteralNode<Integer>)
@@ -42,7 +42,7 @@ public class MoveNode extends OpNode {
         // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
         // The engine then promptly set the location of the gamepiece.
         // TODO: How could this possibly affect the AI?
-        Tile playerChoice = moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
+        Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
         Gamepiece gp = (Gamepiece) go;
         if (!gp.setLocation(playerChoice)) {
             System.out.println("Error: Failed to move object " + name);
