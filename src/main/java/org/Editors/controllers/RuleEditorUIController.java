@@ -134,12 +134,12 @@ public class RuleEditorUIController implements Initializable {
       }
       else if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
-        //((OpNode)startBlock.getNode()).setOperandInGroup(((TextBlock)block).getLiteralNode(), operandIndex, currRuleGroupID);
-        ((OpNode)startBlock.getNode()).addOperandToGroup(((TextBlock)block).getLiteralNode(), currRuleGroupID);
+        ((OpNode)startBlock.getNode()).setOperandInGroup(((TextBlock)block).getLiteralNode(), operandIndex, currRuleGroupID);
+        //((OpNode)startBlock.getNode()).addOperandToGroup(((TextBlock)block).getLiteralNode(), currRuleGroupID);
       }
       else if (startBlock.getNode() instanceof OpNode) {
-        //((OpNode)startBlock.getNode()).setOperandInGroup(block.getNode(), operandIndex, currRuleGroupID);
-        ((OpNode)startBlock.getNode()).addOperandToGroup(block.getNode(), currRuleGroupID);
+        ((OpNode)startBlock.getNode()).setOperandInGroup(block.getNode(), operandIndex, currRuleGroupID);
+        //((OpNode)startBlock.getNode()).addOperandToGroup(block.getNode(), currRuleGroupID);
       }
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
