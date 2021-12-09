@@ -166,13 +166,21 @@ public class RuleEditorUIController implements Initializable {
     }
 
     ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = block.getRuleGroupList();
-    //TODO: Adjust to process ruleGroupList
     for (int i = 0; i < ruleGroupList.size(); i++) {
       ObservableList<javafx.scene.Node> ruleGroup = ruleGroupList.get(i);
       for(int j = 0; j < ruleGroup.size(); j++) {
         final int order = j + 1;
         final int index = j;
         final int ruleGroupID = i;
+        //If we have a While or If block, we need to add some null operands to their operand lists for 
+        //their additional rule groups. This is because their operands lists for rule groups greater than 0
+        //are of size 0 initially. Rule group 0 always has only 1 operand and it's already initialized for us
+        //so we don't need to add to that one.
+        if (((block instanceof WhileBlock) || (block instanceof IfBlock)) && (i > 0)) {
+          if (block.getNode() instanceof OpNode) {
+            ((OpNode)block.getNode()).addOperandToGroup(null, i);
+          }
+        }
         javafx.scene.Node node = ruleGroup.get(j);
         node.setOnMouseClicked(e -> {
           drawLineGrayRect(block, order, index, ruleGroupID);

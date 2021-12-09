@@ -129,7 +129,7 @@ public class IfBlock extends Block {
     }
 
     //Add the lists of connection blocks to the ruleGroupList
-    this.ruleGroupList.addAll(elseConnBlockList, ifConnBlockList, conditionConnBlockList);
+    this.ruleGroupList.addAll(conditionConnBlockList, ifConnBlockList, elseConnBlockList);
 
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
