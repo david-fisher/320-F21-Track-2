@@ -177,13 +177,11 @@ public class RuleEditorUIController implements Initializable {
     drawLine(block);
     resizeAnchorPane();
   }
-
-  private Integer parseIntOrNull(String value) {
-    try {
-      return Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-      return null;
-    }
+  
+  //Display the error message in the error label
+  private void displayError(String errMsg) {
+    errorLabel.setText(errMsg);
+    errorLabel.setOpacity(1.0);
   }
 
   //temp
@@ -203,13 +201,11 @@ public class RuleEditorUIController implements Initializable {
       Integer fieldVal = parseIntOrNull(seqBlockList.get(i).getFieldText());
       //Check that no sequence block contains a non-numeric value
       if (fieldVal == null) {
-        errorLabel.setText("Sequence block must only contain numeric values.");
-        errorLabel.setOpacity(1.0);
+        displayError("Sequence block must only contain numeric values.");
         return;
       }
       else if (fieldVal <= 0) {
-        errorLabel.setText("Sequence block must only contain numbers greater than 0.");
-        errorLabel.setOpacity(1.0);
+        displayError("Sequence block must only contain numbers greater than 0.");
         return;
       }
       seqBlockVals.add(fieldVal);
@@ -219,16 +215,14 @@ public class RuleEditorUIController implements Initializable {
     //Verify that the values start at 1
     if (seqBlockVals.size() > 0) {
       if (seqBlockVals.get(0) != 1) {
-        errorLabel.setText("Sequence blocks must start from 1.");
-        errorLabel.setOpacity(1.0);
+        displayError("Sequence blocks must start from 1.");
         return;
       }
     }
     //Verify that the values are sequential
     for(int i = 1; i < seqBlockVals.size(); i++) {
       if (seqBlockVals.get(i) - seqBlockVals.get(i-1) != 1) {
-        errorLabel.setText("Sequence blocks must contain numbers that consecutively have difference of only 1.");
-        errorLabel.setOpacity(1.0);
+        displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
         return;
       }
     }
@@ -267,12 +261,6 @@ public class RuleEditorUIController implements Initializable {
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
     blockActions(new GetTileIndexBlock());
-  }
-
-  @FXML
-  private void handleAddIfBtn(ActionEvent event) {
-    placeBlock(new IfBlock());
-    //blockActions(new IfBlock());
   }
 
   @FXML
@@ -334,6 +322,14 @@ public class RuleEditorUIController implements Initializable {
     blockActions(seqBlock);
   }
 
+  private Integer parseIntOrNull(String value) {
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
   private Integer dialogParseIntOrNull(Optional<String> value) {
     try {
       return Integer.parseInt(value.get());
@@ -343,26 +339,64 @@ public class RuleEditorUIController implements Initializable {
   }
 
   //Helps get number of statements for while block from user
-  private Integer getStmntsInputDialog() {
+  private Integer getWhileStmntsInputDialog() {
     TextInputDialog dialog = new TextInputDialog();
 
-    dialog.setHeaderText("Input number of statements");
+    dialog.setHeaderText("Input # of statements");
     dialog.setContentText("Statements:");
 
     Optional<String> result = dialog.showAndWait();
     return dialogParseIntOrNull(result);
   }
 
+  private String getIfStmntsInputDialog() {
+    TextInputDialog dialog = new TextInputDialog();
+
+    dialog.setHeaderText("Input # of statements for if & else sep. by comma");
+    dialog.setContentText("Statements:");
+
+    Optional<String> result = dialog.showAndWait();
+    return result.get();
+  }
+
   @FXML
   private void handleAddWhileBtn(ActionEvent event) {
-    Integer numStmnts = getStmntsInputDialog();
+    Integer numStmnts = getWhileStmntsInputDialog();
     if (numStmnts != null) {
       placeBlock(new WhileBlock(numStmnts));
     }
     else if (numStmnts == null) {
-      errorLabel.setText("Input must be a number.");
-      errorLabel.setOpacity(1.0);
+      displayError("Input must be a number.");
     }
+  }
+
+  @FXML
+  private void handleAddIfBtn(ActionEvent event) {
+    String[] strInput = getIfStmntsInputDialog().split(",");
+    //Check that user provided correct number of inputs
+    if (strInput.length != 2) {
+      displayError("Invalid length: must input exactly 2 numbers.");
+      return;
+    }
+    //Check that user only input numbers
+    for(int i = 0; i < strInput.length; ++i) {
+      //Remove any spaces within the string
+      strInput[i] = strInput[i].replaceAll("\\s", "");
+      //Check that string only contains numeric chars
+      if (!strInput[i].matches("[0-9]+")) {
+        displayError("Invalid character(s): must input only numeric values.");
+        return;
+      }
+    }
+    Integer numIfStmnts = parseIntOrNull(strInput[0]);
+    Integer numElseStmnts = parseIntOrNull(strInput[1]);
+    if ((numIfStmnts != null) && (numElseStmnts != null)) {
+      placeBlock(new IfBlock((int)numIfStmnts, (int)numElseStmnts));
+    }
+    else {
+      System.out.println("Unknown error encountered in handleAddIfBtn");
+    }
+    //blockActions(new IfBlock());
   }
 
   @FXML
