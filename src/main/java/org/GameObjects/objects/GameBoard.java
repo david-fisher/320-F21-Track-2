@@ -1,4 +1,3 @@
-
 package org.GameObjects.objects;
 
 import java.util.ArrayList;
@@ -51,4 +50,3 @@ public class GameBoard {
     public double getYPos() { return this.yPos; }
     public ArrayList<Tile> getTiles() { return this.tiles; }
 }
-

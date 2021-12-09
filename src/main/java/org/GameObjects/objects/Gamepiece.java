@@ -1,44 +1,40 @@
 package org.GameObjects.objects;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
-
 public class Gamepiece extends GameObject{
-
+	
   private static int count = 0;
 
-  private Shape parent;
   public Gamepiece() {
-	  super() ;
+	  super() ;  
 	  this.setLabel("gamepiece" + String.format("%02d", ++count));
 	  this.setIcon("default_gamepiece_icon.jpg") ;
-	  this.setColor(Color.BLACK) ;
+	  this.setColorString("#000000") ;
 	  this.setLocation(null);
   }
-
+  
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
-   * 	color 	:	Color
+   * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	location:	Tile
    */
-
+  
 
   // set trait to value. Overrides checking for default traits only
   public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
-
+	  
 	  // run game object's set trait first
 	  if (super.setTrait(trait, value, suppressTraitChecker)) {
 		  return true ;
 	  }
-
+	  
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker ||	// if true don't check trait type
 			  (trait.equals("location") && value instanceof Tile)) {	// check value is String
 		  traits.put(trait, value) ;
 		  return true ;
 	  }
-
+	  
 	  // returns false if input is invalid
 	  return false ;
   }
@@ -64,7 +60,7 @@ public class Gamepiece extends GameObject{
 	  return (Tile)this.getTrait("location");
   }
 
-
-  public void setParent(Shape p) { this.parent = p; }
-  public Shape getParent() { return parent; }
+  public String repr(boolean hasLabel) {
+    return "Gamepiece\n" + super.repr(hasLabel);
+  }
 }

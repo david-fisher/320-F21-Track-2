@@ -6,10 +6,12 @@ module org.scenebuilder.scenebuilder {
     requires org.yaml.snakeyaml;
 
 
-    opens org.scenebuilder to javafx.fxml;
-    exports org.scenebuilder;
-    exports org.scenebuilder.dummy;
-    opens org.scenebuilder.dummy to javafx.fxml;
-    exports org.scenebuilder.controllers;
-    opens org.scenebuilder.controllers to javafx.fxml;
+    opens org.scenebuilder.scenebuilder to javafx.fxml;
+    exports org.scenebuilder.scenebuilder;
+//    exports org.scenebuilder.scenebuilder.dummy;
+    
+    opens org.GameObjects.objects;
+    opens org.RuleEngine.nodes;
+    opens org.RuleEngine.engine;
+    opens org.scenebuilder.scenebuilder.dummy to javafx.fxml;
 }
