@@ -206,6 +206,8 @@ public class RuleEditorUIController implements Initializable {
   //temp
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
+    //temp
+    //print out info for the operands of blocks
     if (startBlock.getNode() instanceof OpNode) {
       ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
       for(int i = 0; i < operandsList.size(); i++) {
@@ -240,22 +242,35 @@ public class RuleEditorUIController implements Initializable {
       }
       seqBlockVals.add(fieldVal);
     }
+
+    ArrayList<Integer> copySeqBlockVals = new ArrayList<Integer>();
+    for(int i = 0; i < seqBlockVals.size(); i++) {
+      copySeqBlockVals.add(seqBlockVals.get(i));
+    }
     //Sort the vals from the sequence blocks
-    Collections.sort(seqBlockVals);
+    Collections.sort(copySeqBlockVals);
     //Verify that the values start at 1
-    if (seqBlockVals.size() > 0) {
-      if (seqBlockVals.get(0) != 1) {
+    if (copySeqBlockVals.size() > 0) {
+      if (copySeqBlockVals.get(0) != 1) {
         displayError("Sequence blocks must start from 1.");
         return;
       }
     }
     //Verify that the values are sequential
-    for(int i = 1; i < seqBlockVals.size(); i++) {
-      if (seqBlockVals.get(i) - seqBlockVals.get(i-1) != 1) {
+    for(int i = 1; i < copySeqBlockVals.size(); i++) {
+      if (copySeqBlockVals.get(i) - copySeqBlockVals.get(i-1) != 1) {
         displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
         return;
       }
     }
+
+    // ArrayList<org.RuleEngine.nodes.Node> treeOfParents = new ArrayList<org.RuleEngine.nodes.Node>();
+    // for(int i = 0; i < seqBlockVals.size(); i++) {
+    //   treeOfParents.add(null);
+    // }
+    // for(int i = 0; i < seqBlockVals.size(); i++) {
+    //   treeOfParents.set(i, )
+    // }
   }
 
   @FXML
