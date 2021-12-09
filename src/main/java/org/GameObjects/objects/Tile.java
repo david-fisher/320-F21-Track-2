@@ -53,7 +53,7 @@ public class Tile extends GameObject
   	  if (super.setTrait(trait, value, suppressTraitChecker)) {
   		  return true ;
   	  } else if (suppressTraitChecker ||
-                trait.equals("onLand") && value instanceof String )) {
+                trait.equals("onLand") && value instanceof String ) {
 	prevTraits.put(trait, traits.get(trait)) ;
             traits.put(trait, value);
             return true ;
@@ -63,11 +63,11 @@ public class Tile extends GameObject
   	  return false ;
     }
 
-    public String setOnLand(String onLand){
+    public boolean setOnLand(String onLand){
         return this.setTrait("onLand", onLand);
     }
 
-    public boolean getOnLand(){
+    public String getOnLand(){
         return (String)this.getTrait("onLand");
     }
     
