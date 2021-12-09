@@ -47,10 +47,11 @@ import org.RuleEngine.nodes.*;
 import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
+import javafx.geometry.Bounds;
 
-//TODO: Change handleIf and handleWhile to not solely use placeBlock
-//TODO: Create verificaiton method in handleSaveBtn
-//TODO: Create method for handling errorLabel
+// TODO: Change handleIf and handleWhile to not solely use placeBlock
+// TODO: Create verificaiton method in handleSaveBtn
+// TODO: Create method for handling errorLabel
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -74,7 +75,6 @@ public class RuleEditorUIController implements Initializable {
   private Block startBlock;
   private int operandIndex;
   private int currRuleGroupID;
-  private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
   //List of the TextBlocks made so far.
   //Need this to get the text from them and set LiteralNode values once save button is pressed.
@@ -107,11 +107,12 @@ public class RuleEditorUIController implements Initializable {
     editorPane.getChildren().addAll(block.getBlock());
   }
 
-  private void drawLineResultRect(Block block){
+  private void drawLineResultRect(Block block, Node target){
     // this happens after we clicked on the first rect, this is the second click
-    if (startLineX != -1 && endLineX == -1 && !isBlueFirstRect && block != startBlock){
-      endLineX = block.getBlock().getTranslateX();
-      endLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
+    if (startLineX != -1 && endLineX == -1 && block != startBlock){
+      Bounds bounds = target.localToScene(target.getBoundsInLocal());
+      endLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
+      endLineY = bounds.getMinY();
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
       startLineX = startLineY = endLineX = endLineY = -1;
@@ -141,11 +142,11 @@ public class RuleEditorUIController implements Initializable {
     }
   }
 
-  private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID){
+  private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID, Node target){
     if (startLineX == -1){
-      startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
-      startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
-
+      Bounds bounds = target.localToScene(target.getBoundsInLocal());
+      startLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
+      startLineY = bounds.getMinY();
       //Keep track of the block we want to draw to when the user clicks the blue connection
       startBlock = block;
       //Keep track of which gray connection block the user clicked
@@ -155,15 +156,17 @@ public class RuleEditorUIController implements Initializable {
     }
   }
 
+
+
   private void drawLine(Block block){
     //Check this because SequenceNode doesn't have a result rectangle
-    if (block.getResultRect() != null) {
-      block.getResultRect().setOnMouseClicked(e -> {
-        drawLineResultRect(block);
+    Rectangle resultRect = block.getResultRect();
+    if (resultRect != null) {
+      resultRect.setOnMouseClicked(e -> {
+        drawLineResultRect(block, resultRect);
       });
     }
 
-    //Get the list of rule groups from this block
     ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = block.getRuleGroupList();
     for (int i = 0; i < ruleGroupList.size(); i++) {
       ObservableList<javafx.scene.Node> ruleGroup = ruleGroupList.get(i);
@@ -185,7 +188,7 @@ public class RuleEditorUIController implements Initializable {
         }
         javafx.scene.Node node = ruleGroup.get(j);
         node.setOnMouseClicked(e -> {
-          drawLineGrayRect(block, order, index, ruleGroupID);
+          drawLineGrayRect(block, order, index, ruleGroupID, node);
         });
       }
     }
