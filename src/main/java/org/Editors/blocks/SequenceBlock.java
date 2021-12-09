@@ -18,6 +18,9 @@ import javafx.scene.text.Text;
 
 import javafx.scene.control.TextField;
 
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
 //node field for this class should always be null
 
 public class SequenceBlock extends Block {
@@ -77,7 +80,11 @@ public class SequenceBlock extends Block {
 
     //Create outgoing connection for block
     Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    this.connBlockList.addAll(connBlock);
+    ObservableList<javafx.scene.Node> seqConnBlockList = FXCollections.observableArrayList();
+    seqConnBlockList.addAll(connBlock);
+
+    //Add the sequence connection block list to the rule group list
+    this.ruleGroupList.addAll(seqConnBlockList);
     
     //Stack the base Rectangle and grid GridPane of the block on the pane
     this.block.getChildren().addAll(base, this.grid, field, connBlock);

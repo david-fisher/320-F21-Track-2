@@ -23,10 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-/**Well, this is bad code but the conndition connection rectangle is stored in connBlockList which
-is stored in the Block class. The connection blocks from the if part and the else part are stored in their
-own lists defined here: ifConnBlockList and elseConnBlockList**/
-
 public class IfBlock extends Block {
   //Default height
   private int HEIGHT = 220;
@@ -38,8 +34,9 @@ public class IfBlock extends Block {
   private int midColWidth = 100;
   private int lastColWidth = 20;
 
-  protected ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
-  protected ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> conditionConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
 
   public IfBlock(int numIfStmnts, int numElseStmnts) {
     this.block = new StackPane();
@@ -82,7 +79,7 @@ public class IfBlock extends Block {
   
     //Defining row 1 of grid
     Rectangle conditionInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    connBlockList.addAll(conditionInput);
+    conditionConnBlockList.addAll(conditionInput);
     Text connText = new Text("Condition");
     connText.setFill(WHITE);
     Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
@@ -103,7 +100,7 @@ public class IfBlock extends Block {
     for(int i = 0; i < numIfStmnts; i++) {
       Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
       //Store the conneciton blocks in a list
-      connBlockList.addAll(connBlock);
+      ifConnBlockList.addAll(connBlock);
       vboxIf.getChildren().add(connBlock);
       if (i + 1 != numIfStmnts) {
         HEIGHT = HEIGHT + SIZE_REFACTOR;
@@ -124,12 +121,15 @@ public class IfBlock extends Block {
     for(int i = 0; i < numElseStmnts; i++) {
       Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
       //Store the conneciton blocks in a list
-      connBlockList.addAll(connBlock);
+      elseConnBlockList.addAll(connBlock);
       vboxElse.getChildren().add(connBlock);
       if (i + 1 != numElseStmnts) {
         HEIGHT = HEIGHT + SIZE_REFACTOR;
       }
     }
+
+    //Add the lists of connection blocks to the ruleGroupList
+    this.ruleGroupList.addAll(elseConnBlockList, ifConnBlockList, conditionConnBlockList);
 
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);

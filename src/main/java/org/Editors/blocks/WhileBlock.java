@@ -23,9 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-/* Condition block stored in connBlockList from Block class. Statements from while stored
-in stmntsConnBlockList defined below*/
-
 public class WhileBlock extends Block {
   private int HEIGHT = 150;
 
@@ -33,7 +30,11 @@ public class WhileBlock extends Block {
   private int midColWidth = 100;
   private int lastColWidth = 20;
 
-  protected ObservableList<javafx.scene.Node> stmntsConnBlockList = FXCollections.observableArrayList();
+  //List to hold the blocks we add as statements
+  private ObservableList<javafx.scene.Node> stmntsConnBlockList = FXCollections.observableArrayList();
+
+  //List to hold the condition block
+  ObservableList<javafx.scene.Node> conditionConnBlockList = FXCollections.observableArrayList();
 
   public WhileBlock(int numStmnts) {
     this.block = new StackPane();
@@ -76,7 +77,7 @@ public class WhileBlock extends Block {
   
     //Defining row 1 of grid
     Rectangle conditionInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    connBlockList.addAll(conditionInput);
+    conditionConnBlockList.addAll(conditionInput);
     Text connText = new Text("Condition");
     connText.setFill(WHITE);
     Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
@@ -97,12 +98,15 @@ public class WhileBlock extends Block {
     for(int i = 0; i < numStmnts; i++) {
       Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
       //Store the conneciton blocks in a list
-      connBlockList.addAll(connBlock);
+      stmntsConnBlockList.addAll(connBlock);
       grid.add(connBlock, 2, i+startRow);
       if (i + 1 != numStmnts) {
         HEIGHT = HEIGHT + 35;
       }
     }
+
+    //Add all the lists of connection blocks to the rule group list
+    this.ruleGroupList.addAll(conditionConnBlockList, stmntsConnBlockList);
 
     //Base visual of the stackpane
     Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
@@ -112,6 +116,6 @@ public class WhileBlock extends Block {
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
     //Create the actual Node object for this block
-    //this.createNode("while");
+    this.createNode("while");
   }
 }

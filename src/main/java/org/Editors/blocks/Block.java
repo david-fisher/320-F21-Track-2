@@ -60,8 +60,8 @@ public class Block {
   protected Rectangle result;
   protected GridPane grid;
 
-  //List of connection blocks
-  protected ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
+  //List of lists of connection blocks
+  protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
 
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
@@ -107,6 +107,8 @@ public class Block {
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
 
+    //List to hold the connection blocks we create
+    ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
     //Create the names and connections for each value being passed to block
     for(int i = 0; i < valueNames.length; i++) {
       Text newValName = new Text(valueNames[i]);
@@ -119,7 +121,9 @@ public class Block {
       connBlockList.addAll(connBlock);
       grid.add(connBlock, 2, i+1);
     }
-
+    //Add list of connection blocks to list of lists
+    ruleGroupList.addAll(connBlockList);
+    
     //Create result connection for block
     this.result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
 
@@ -167,8 +171,8 @@ public class Block {
     return BLOCK_WIDTH;
   }
 
-  public ObservableList<javafx.scene.Node> getGrayRect(){
-    return this.connBlockList;
+  public ObservableList<ObservableList<javafx.scene.Node>> getRuleGroupList(){
+    return this.ruleGroupList;
   }
 
   public int getGreyRectHeight(){

@@ -73,6 +73,7 @@ public class RuleEditorUIController implements Initializable {
 
   private Block startBlock;
   private int operandIndex;
+  private int currRuleGroupID;
   private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
   //List of the TextBlocks made so far.
@@ -117,7 +118,7 @@ public class RuleEditorUIController implements Initializable {
 
       //temp
       System.out.println("Block " + startBlock + " connected to " + block);
-
+      System.out.println("currGroupID: " + currRuleGroupID);
       //If startBlock is a SequenceBlock it has null node field so we don't want to run setOperand,
       //we simply want to set the parentPtr of the SequenceBlock
       if (startBlock instanceof SequenceBlock) {
@@ -133,16 +134,18 @@ public class RuleEditorUIController implements Initializable {
       }
       else if (block instanceof TextBlock) {
         //We must check this because only TextBlock has the method getLiteralNode().
-        ((OpNode)startBlock.getNode()).setOperand(((TextBlock)block).getLiteralNode(), operandIndex);
+        //((OpNode)startBlock.getNode()).setOperandInGroup(((TextBlock)block).getLiteralNode(), operandIndex, currRuleGroupID);
+        ((OpNode)startBlock.getNode()).addOperandToGroup(((TextBlock)block).getLiteralNode(), currRuleGroupID);
       }
       else if (startBlock.getNode() instanceof OpNode) {
-        ((OpNode)startBlock.getNode()).setOperand(block.getNode(), operandIndex);
+        //((OpNode)startBlock.getNode()).setOperandInGroup(block.getNode(), operandIndex, currRuleGroupID);
+        ((OpNode)startBlock.getNode()).addOperandToGroup(block.getNode(), currRuleGroupID);
       }
       // now we can do somethings with 2 blocks. the first one is startBlock, second is block (the result block)
     }
   }
 
-  private void drawLineGrayRect(Block block, final int order, final int opIndex){
+  private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID){
     if (startLineX == -1){
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
@@ -150,6 +153,7 @@ public class RuleEditorUIController implements Initializable {
       //temp
       startBlock = block;
       operandIndex = opIndex;
+      currRuleGroupID = ruleGroupID;
     }
   }
 
@@ -161,14 +165,19 @@ public class RuleEditorUIController implements Initializable {
       });
     }
 
-    ObservableList<Node> listGrayRect = block.getGrayRect();
-    for (int i = 0; i < listGrayRect.size(); i++){
-      Node node = listGrayRect.get(i);
-      final int order = i + 1;
-      final int index = i;
-      node.setOnMouseClicked(e -> {
-        drawLineGrayRect(block, order, index);
-      });
+    ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = block.getRuleGroupList();
+    //TODO: Adjust to process ruleGroupList
+    for (int i = 0; i < ruleGroupList.size(); i++) {
+      ObservableList<javafx.scene.Node> ruleGroup = ruleGroupList.get(i);
+      for(int j = 0; j < ruleGroup.size(); j++) {
+        final int order = j + 1;
+        final int index = j;
+        final int ruleGroupID = i;
+        javafx.scene.Node node = ruleGroup.get(j);
+        node.setOnMouseClicked(e -> {
+          drawLineGrayRect(block, order, index, ruleGroupID);
+        });
+      }
     }
   }
 
@@ -187,6 +196,17 @@ public class RuleEditorUIController implements Initializable {
   //temp
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
+    if (startBlock.getNode() instanceof OpNode) {
+      ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
+      for(int i = 0; i < operandsList.size(); i++) {
+        System.out.print(i + " rule group:");
+        System.out.println(" (size = " + operandsList.get(i).size() + ")");
+        for(int j = 0; j < operandsList.get(i).size(); j++) {
+          System.out.println(operandsList.get(i).get(j));
+        }
+      }
+    }
+
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
@@ -363,7 +383,7 @@ public class RuleEditorUIController implements Initializable {
   private void handleAddWhileBtn(ActionEvent event) {
     Integer numStmnts = getWhileStmntsInputDialog();
     if (numStmnts != null) {
-      placeBlock(new WhileBlock(numStmnts));
+      blockActions(new WhileBlock(numStmnts));
     }
     else if (numStmnts == null) {
       displayError("Input must be a number.");
@@ -391,7 +411,7 @@ public class RuleEditorUIController implements Initializable {
     Integer numIfStmnts = parseIntOrNull(strInput[0]);
     Integer numElseStmnts = parseIntOrNull(strInput[1]);
     if ((numIfStmnts != null) && (numElseStmnts != null)) {
-      placeBlock(new IfBlock((int)numIfStmnts, (int)numElseStmnts));
+      blockActions(new IfBlock((int)numIfStmnts, (int)numElseStmnts));
     }
     else {
       System.out.println("Unknown error encountered in handleAddIfBtn");
