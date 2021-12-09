@@ -30,7 +30,9 @@ public class Tile extends GameObject
     static final AtomicLong NEXT_ID = new AtomicLong(0);
     final long id = NEXT_ID.getAndIncrement();
     public Shape tileShape;
+    public boolean hasImage = false;
     private String tileName;
+    private String tileImage;
     
     public int x;
     public int y;
@@ -69,8 +71,12 @@ public class Tile extends GameObject
     	return this.tileName;
     }
     
+    public void setTileImage(String tileImage) {
+    	this.tileImage = tileImage;
+    }
+    
     public String getTileImage() {
-    	return this.tileShape.getFill().toString();
+    	return this.tileImage;
     }
     
     public boolean addConnect(Tile tile) {

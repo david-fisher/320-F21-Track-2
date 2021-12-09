@@ -12,9 +12,13 @@ public class Leftclickable {
 	public void makeLeftclickable(Tile tile, TextField nameTf, TextField imageTf, TextField colorTf) {
 		tile.tileShape.setOnMouseClicked((t) -> {
 			nameTf.setText(tile.getTileName());
-			colorTf.setText(tile.tileShape.getFill().toString());
-			imageTf.setText(tile.getTileImage());
-			
+			if (!tile.hasImage) {
+				colorTf.setText(tile.tileShape.getFill().toString());
+				imageTf.setText("None");
+			}else {
+				colorTf.setText("None");
+				imageTf.setText(tile.getTileImage());
+			}
 		    });
 	}
 

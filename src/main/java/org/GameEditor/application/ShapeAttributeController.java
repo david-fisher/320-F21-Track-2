@@ -48,18 +48,21 @@ public class ShapeAttributeController {
     @FXML
     void setColor(ActionEvent event) {
     	importedTile.tileShape.setFill(tileColor.getValue());
+    	importedTile.hasImage = false;
     }
 
     @FXML
     void setImage(ActionEvent event) {
     	File file = fileChooser.showOpenDialog(stage);
     	if (file != null) {
-    		String name = file.getAbsolutePath();
+    		String name = file.getName();
     		int i = name.lastIndexOf('.');
     		String ext = name.substring(i + 1);
     		if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
     			Image img = new Image(file.toURI().toString());
     			importedTile.tileShape.setFill(new ImagePattern(img));
+    			importedTile.setTileImage(name);
+    			importedTile.hasImage = true;
     		}
     	}
     }
