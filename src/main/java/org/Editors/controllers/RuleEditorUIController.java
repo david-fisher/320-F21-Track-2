@@ -146,9 +146,11 @@ public class RuleEditorUIController implements Initializable {
       startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
       startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
 
-      //temp
+      //Keep track of the block we want to draw to when the user clicks the blue connection
       startBlock = block;
+      //Keep track of which gray connection block the user clicked
       operandIndex = opIndex;
+      //Keep track of the rule group that the gray connection block is apart of
       currRuleGroupID = ruleGroupID;
     }
   }
