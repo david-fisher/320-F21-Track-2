@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ListView?>
@@ -9,13 +10,115 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.GameObjectUIController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.GameObjectUIController">
   <tabs>
+      <Tab text="Card">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="cardName1" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texture" />
+                                    <TextField fx:id="cardFilename1" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="cardColor1">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Action" />
+                                    <MenuButton fx:id="action1" mnemonicParsing="false" text="Action 1">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Action 1" />
+                                          <MenuItem mnemonicParsing="false" text="Action 2" />
+                                       </items>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </MenuButton>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <right>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Button fx:id="doneButton1" mnemonicParsing="false" onAction="#saveCard" prefWidth="62.0" text="Done" />
+                              <Pane prefHeight="25.0" prefWidth="200.0">
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </Pane>
+                              <Button fx:id="cancelButton1" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Button>
+                              <Pane prefHeight="50.0" prefWidth="100.0" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets right="50.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </right>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
     <Tab text="Card">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane prefHeight="180.0" prefWidth="466.0">
                <children>
                   <Text layoutX="215.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
                   <Text layoutX="215.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
