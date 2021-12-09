@@ -69,12 +69,12 @@ public class PlayController extends ScreenController {
         // load relevant data
         setupData = BasicApplication.getSetupData();
         players = setupData.playerList;
-        if (players.size() == 0) {
-            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            setupData = new SetupData(players, false);
-        }
+//        if (players.size() == 0) {
+//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            setupData = new SetupData(players, false);
+//        }
         activeGame = BasicApplication.getSelectedGame();
 
         initializePlayScreen();
@@ -95,15 +95,15 @@ public class PlayController extends ScreenController {
         switchTurn.setOnMouseClicked(e -> {
             int nextPlayerIndex = players.indexOf(currPlayer);
             Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-            playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
-            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 16; " +
-                    "-fx-border-color: #000000;" +
-                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
+//            playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
+//            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                    "-fx-background-radius: 5 5 5 5; " +
+//                    "-fx-font-family: Serif; " +
+//                    "-fx-font-size: 16; " +
+//                    "-fx-border-color: #000000;" +
+//                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
             // set current player
-            fillInventoryDrawer(nextPlayer.getInventory());
+//            fillInventoryDrawer(nextPlayer.getInventory());
             currPlayer = nextPlayer;
             playerTurnCycle();
         });
@@ -132,7 +132,7 @@ public class PlayController extends ScreenController {
 
         // TODO: do we do this?
         if (gameBoard.getBoardID().equals("All Drawers")) {
-            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+//            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
         }
 
 
@@ -155,7 +155,7 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initPlayers(gameStateInput.getAllPlayers());
-        initButtons(gameStateInput);
+//        initButtons(gameStateInput);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
         ArrayList<Die> dice = gameStateInput.getAllDice();
@@ -242,7 +242,7 @@ public class PlayController extends ScreenController {
             boardPane.getChildren().addAll(tile);
             tile.setLayoutX(t.getXPos());
             tile.setLayoutY(t.getYPos());
-            t.setParent(tile);
+//            t.setParent(tile);
         });
         // for each tile
         // create tile
@@ -252,7 +252,7 @@ public class PlayController extends ScreenController {
 
     private void initPlayers(ArrayList<Player> players) {
         players.forEach(p -> {
-            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
+//            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
             //fill inventory
         });
 
@@ -261,15 +261,15 @@ public class PlayController extends ScreenController {
         // TODO: add player stuff to inventory (later)
     }
 
-    private void initButtons(GameState gameState) {
-        ArrayList<Button> buttons = gameState.getAllButtons();
-        buttons.forEach(button -> {
-            String event = (String) button.getTrait("onClick");
-            button.getParent().setOnMouseClicked(e -> {
-                interpreter.interpretEvent(gameState.events.get(event), gameState);
-            });
-        });
-    }
+//    private void initButtons(GameState gameState) {
+//        ArrayList<Button> buttons = gameState.getAllButtons();
+//        buttons.forEach(button -> {
+//            String event = (String) button.getTrait("onClick");
+//            button.getParent().setOnMouseClicked(e -> {
+//                interpreter.interpretEvent(gameState.events.get(event), gameState);
+//            });
+//        });
+//    }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
 
@@ -288,7 +288,7 @@ public class PlayController extends ScreenController {
         gamePiece.setLocation(parent);
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
-        gamePiece.setParent(gp);
+//        gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
         gp.setLayoutX(parent.getXPos() + parent.getWidth() / 2);
         gp.setLayoutY(parent.getYPos() + parent.getHeight() / 2);
@@ -318,15 +318,15 @@ public class PlayController extends ScreenController {
 
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
-        playerTurnIndicator.setText(currPlayer.getPlayerID() + "'s Turn");
+//        playerTurnIndicator.setText(currPlayer.getPlayerID() + "'s Turn");
 
-        playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: 16; " +
-                "-fx-font-color: BLACK; " +
-                "-fx-border-color: #000000; " +
-                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
+//        playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                "-fx-background-radius: 5 5 5 5; " +
+//                "-fx-font-family: Serif; " +
+//                "-fx-font-size: 16; " +
+//                "-fx-font-color: BLACK; " +
+//                "-fx-border-color: #000000; " +
+//                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
@@ -431,25 +431,25 @@ public class PlayController extends ScreenController {
             deck.setUserData(d);
 
             if(d.getIcon() != null) {
-                deck.setFill(new ImagePattern(new Image(d.getIcon())));
+//                deck.setFill(new ImagePattern(new Image(d.getIcon())));
             } else {
                 deck.setFill(Color.RED);
             }
             //TODO: change this so it is integrated
             deck.setOnMouseClicked(e -> {
                 Card card = d.drawTop();
-                ImageView cardImage = new ImageView(card.getIcon());
+//                ImageView cardImage = new ImageView(card.getIcon());
+//
+//                cardImage.setFitWidth(200);
+//                cardImage.setFitHeight(340);
+//                playParent.getChildren().add(cardImage);
+//                cardImage.setX(playWidth / 2 - 100);
+//                cardImage.setY(playHeight / 2 - 170);
 
-                cardImage.setFitWidth(200);
-                cardImage.setFitHeight(340);
-                playParent.getChildren().add(cardImage);
-                cardImage.setX(playWidth / 2 - 100);
-                cardImage.setY(playHeight / 2 - 170);
-
-                final Timeline timeline = new Timeline();
-                timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
-                        k -> playParent.getChildren().remove(cardImage)));
-                timeline.play();
+//                final Timeline timeline = new Timeline();
+//                timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
+//                        k -> playParent.getChildren().remove(cardImage)));
+//                timeline.play();
 
                 //Only in some cases but added for now
                 //inventoryPane.getChildren().add(card);
@@ -482,26 +482,26 @@ public class PlayController extends ScreenController {
         int diceCount = 0;
 
         for (int i = 0; i < dice.size(); i++) {
-            ImageView die1 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
-            ImageView die2 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
-            die1.setUserData(dice.get(i));
-
-            die2.setUserData(dice.get(i));
-            die2.setFitWidth(diceSize);
-            die2.setFitHeight(diceSize);
-
-            diceView.getChildren().add(die1);
-            diceDisplay.getChildren().add(die2);
-            die1.setX(currX);
-            die1.setY(currY);
-            die2.setX(currX);
-            die2.setY(currY);
-            currX = (currX + diceSize) % 180;
-
-            diceCount++;
-            if (diceCount % rowMax == 0) {
-                currY += diceSize;
-            }
+//            ImageView die1 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
+//            ImageView die2 = new ImageView(new Image(dice.get(i).getIcon(), diceSize, diceSize, true, true));
+//            die1.setUserData(dice.get(i));
+//
+//            die2.setUserData(dice.get(i));
+//            die2.setFitWidth(diceSize);
+//            die2.setFitHeight(diceSize);
+//
+//            diceView.getChildren().add(die1);
+//            diceDisplay.getChildren().add(die2);
+//            die1.setX(currX);
+//            die1.setY(currY);
+//            die2.setX(currX);
+//            die2.setY(currY);
+//            currX = (currX + diceSize) % 180;
+//
+//            diceCount++;
+//            if (diceCount % rowMax == 0) {
+//                currY += diceSize;
+//            }
         }
 
         diceView.setOnMouseClicked(e -> {
@@ -516,14 +516,14 @@ public class PlayController extends ScreenController {
         spinners.forEach(d -> {
             double width = d.getWidth() == 0 ? 170 : d.getWidth();
             double height = d.getHeight() == 0 ? 170 : d.getHeight();
-            ImageView spinner = new ImageView(new Image(d.getIcon(), width, width, true, true));
-            spinner.setUserData(d);
-            //spinner.setFill(new ImagePattern(new Image(d.getIcon())));
-            spinner.setOnMouseClicked(e -> {
-                // spin this spinner if you can
-            });
-            container.getChildren().addAll(spinner);
-            container.setMargin(spinner, new Insets(10, 10, 20, 10));
+//            ImageView spinner = new ImageView(new Image(d.getIcon(), width, width, true, true));
+//            spinner.setUserData(d);
+//            //spinner.setFill(new ImagePattern(new Image(d.getIcon())));
+//            spinner.setOnMouseClicked(e -> {
+//                // spin this spinner if you can
+//            });
+//            container.getChildren().addAll(spinner);
+//            container.setMargin(spinner, new Insets(10, 10, 20, 10));
         });
         //rngPane.setContent(container);
         rngPane.setStyle("-fx-border-color: BLACK;");
@@ -547,12 +547,12 @@ public class PlayController extends ScreenController {
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
-        Gamepiece gp = currPlayer.getGamePieces().get(0);
-        Shape parent = gp.getParent();
-        Tile location = gp.getLocation();
-        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
-        parent.toFront();
+//        Gamepiece gp = currPlayer.getGamePieces().get(0);
+//        Shape parent = gp.getParent();
+//        Tile location = gp.getLocation();
+//        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+//        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+//        parent.toFront();
         source.setDisable(false);
     }
 
@@ -563,15 +563,15 @@ public class PlayController extends ScreenController {
         Rectangle inventoryObject = new Rectangle(width, height);
         inventoryObject.setUserData(object);
 
-        if(object.getIcon() != null) {
-            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));
-        } else {
-            inventoryObject.setFill(Color.RED);
-        }
+//        if(object.getIcon() != null) {
+//            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));
+//        } else {
+//            inventoryObject.setFill(Color.RED);
+//        }
         inventoryObject.setOnMouseClicked(e -> {
             //Open this deck if you can // todo
         });
-        currPlayer.getInventory().add(object);
+//        currPlayer.getInventory().add(object);
         inventoryContainer.getChildren().addAll(inventoryObject);
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }

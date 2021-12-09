@@ -1,4 +1,4 @@
-module org.scenebuilder.scenebuilder {
+module org {
     requires javafx.controls;
     requires javafx.fxml;
 //    requires com.jfoenix;
@@ -6,12 +6,11 @@ module org.scenebuilder.scenebuilder {
     requires org.yaml.snakeyaml;
 
 
-    opens org.scenebuilder.scenebuilder to javafx.fxml;
-    exports org.scenebuilder.scenebuilder;
+    opens org.scenebuilder to javafx.fxml;
+    exports org.scenebuilder;
 //    exports org.scenebuilder.scenebuilder.dummy;
     
     opens org.GameObjects.objects;
     opens org.RuleEngine.nodes;
     opens org.RuleEngine.engine;
-    opens org.scenebuilder.scenebuilder.dummy to javafx.fxml;
 }
