@@ -95,7 +95,7 @@ public class PlayController extends ScreenController {
         switchTurn.setOnMouseClicked(e -> {
             int nextPlayerIndex = players.indexOf(currPlayer);
             Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-            playerTurnIndicator.setText(nextPlayer.getPlayerID() + "'s Turn");
+            playerTurnIndicator.setText(nextPlayer.getLabel() + "'s Turn");
             playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
                     "-fx-background-radius: 5 5 5 5; " +
                     "-fx-font-family: Serif; " +
@@ -318,7 +318,7 @@ public class PlayController extends ScreenController {
 
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
-        playerTurnIndicator.setText(currPlayer.getPlayerID() + "'s Turn");
+        playerTurnIndicator.setText(currPlayer.getLabel() + "'s Turn");
 
         playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
                 "-fx-background-radius: 5 5 5 5; " +

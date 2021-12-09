@@ -4,37 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SceneBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SceneBuilder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Small updates before main pull including deleting unused fxml files">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/SettingsFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/gridPanePlayFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/mainFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/playFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/selectionFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/setupFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/testfxmL.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/SetupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/SettingsFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/gridPanePlayFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/mainFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/playFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/selectionFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/setupFXML.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/testfxmL.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SelectionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SettingsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/dummy/DummyGame.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -404,7 +392,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639082098967</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Small updates before main pull including deleting unused fxml files">
+      <created>1639090511396</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1639090511396</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Small updates before main pull including deleting unused fxml files">
+      <created>1639090533221</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1639090533221</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,7 +422,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Scale dice to display all of them in one section of the RNG tab." />
     <MESSAGE value="Added rolling functionality to the Dice in the RNG tab and a display of the corresponding side landed that each die landed on." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, only draw drawers when needed (and space others accordingly)." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly)." />
@@ -445,7 +446,8 @@
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
     <MESSAGE value="Added fade to print method" />
     <MESSAGE value="Small updates before main pull" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small updates before main pull" />
+    <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small updates before main pull including deleting unused fxml files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

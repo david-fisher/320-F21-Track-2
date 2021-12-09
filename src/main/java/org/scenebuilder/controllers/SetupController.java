@@ -375,7 +375,7 @@ public class SetupController extends ScreenController {
 
         TextField playerField = new TextField();
         playerField.setAlignment(Pos.CENTER);
-        playerField.setText(hboxPlayer.getPlayerID());
+        playerField.setText(hboxPlayer.getLabel());
         playerField.setFont(new Font(16));
         playerField.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
         playerField.setPrefWidth(114);
@@ -387,12 +387,12 @@ public class SetupController extends ScreenController {
                 Player player = playerHashMap.get(ID);
                 String text = playerField.getText();
                 if(!t1) {
-                    player.setPlayerID(text);
+                    player.setLabel(text);
                     for (Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
                         if (p.getKey() == ID) {
                             continue;
                         }
-                        if (p.getValue().getPlayerID().equals(text)) {
+                        if (p.getValue().getLabel().equals(text)) {
 
 //                          OPTIONAL: Alert box below.
                             System.out.println("Old State: " + playerHashMap.entrySet());
@@ -403,7 +403,7 @@ public class SetupController extends ScreenController {
                             alert.setContentText("Players cannot have the same names, please change it.");
                             alert.showAndWait();
                             playerField.setText((text.substring(0, text.length() - 1)));
-                            player.setPlayerID(playerField.getText());
+                            player.setLabel(playerField.getText());
                             System.out.println("New State: " + playerHashMap.entrySet());
                             playerField.requestFocus();
                         }
@@ -518,7 +518,7 @@ public class SetupController extends ScreenController {
                 Player hboxPlayer = playerHashMap.get(Integer.valueOf(((HBox) h).getId()));
                 // This is setting the player name
                 if (t instanceof TextField)
-                    hboxPlayer.setPlayerID(((TextField) t).getText());
+                    hboxPlayer.setLabel(((TextField) t).getText());
 
                 // This is setting the player's GameToken
                 if (t instanceof ComboBox) {
