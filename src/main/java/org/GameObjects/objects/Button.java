@@ -14,6 +14,7 @@ public class Button extends GameObject {
 		this.setText("type text here");
 		this.setEnabled(true);
 		this.setPressed(false);
+		this.setOnClick("");
 	}
 	
 	/* Trait Types:
@@ -26,6 +27,7 @@ public class Button extends GameObject {
      *  text    :   String
      *  enabled :   Boolean
      *  pressed :   Boolean
+	 *  onClick :   String
      */
 
 	//set trait to value. Overrides checking for default traits only.
@@ -35,13 +37,23 @@ public class Button extends GameObject {
 		} else if (suppressTraitChecker || 
 				(trait.equals("text") && value instanceof String) || // check text is String
 				(trait.equals("pressed") && value instanceof Boolean) ||
-				(trait.equals("enabled") && value instanceof Boolean)) { 
+				(trait.equals("enabled") && value instanceof Boolean) ||
+				(trait.equals("onClick") && value instanceof String)) { 
+		    prevTraits.put(trait, traits.get(trait)) ;
 			traits.put(trait, value);
 			return true ;
 		}
 	  
 		// returns false if input is invalid
 		return false ;
+	}
+
+	public boolean setOnClick(String onClick){
+		return this.setTrait("onClick", onClick);
+	}
+
+	public String getOnClick(){
+		return (String)this.getTrait("onClick");
 	}
 	  
 	public boolean toggleEnabled() {
@@ -50,7 +62,9 @@ public class Button extends GameObject {
 	}
 	
 	public boolean togglePressed() {
-		setPressed(!getPressed());
+		if(getEnabled() == true){
+			setPressed(!getPressed());
+		}
 		return getPressed();
 	}
 
