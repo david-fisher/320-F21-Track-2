@@ -80,8 +80,8 @@ public class WhileBlock extends Block {
     conditionConnBlockList.addAll(conditionInput);
     Text connText = new Text("Condition");
     connText.setFill(WHITE);
-    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
-    grid.add(result, 0, 1);
+    Rectangle resultConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    grid.add(resultConn, 0, 1);
     grid.add(connText, 1, 1);
     grid.add(conditionInput, 2, 1);
     grid.setHalignment(connText, HPos.RIGHT);
@@ -104,6 +104,9 @@ public class WhileBlock extends Block {
         HEIGHT = HEIGHT + 35;
       }
     }
+
+    //Set the result block for this block to the result connection we made
+    this.result = resultConn;
 
     //Add all the lists of connection blocks to the rule group list
     this.ruleGroupList.addAll(conditionConnBlockList, stmntsConnBlockList);
