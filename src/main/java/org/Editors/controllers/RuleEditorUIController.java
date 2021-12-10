@@ -206,7 +206,43 @@ public class RuleEditorUIController implements Initializable {
     errorLabel.setOpacity(1.0);
   }
 
-  //temp
+  private boolean verifySequenceBlocks(ArrayList<SequenceBlock> newSeqBlockList) {
+    //Will hold values from sequence blocks as ints
+    ArrayList<Integer> newSeqBlockVals = new ArrayList<Integer>();
+    //Verify that sequence blocks have only numeric values & that they're > 0 & collect them into newSeqBlockVals
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      Integer fieldVal = parseIntOrNull(newSeqBlockList.get(i).getFieldText());
+      //Check that no sequence block contains a non-numeric value
+      if (fieldVal == null) {
+        displayError("Sequence block must only contain numeric values.");
+        return false;
+      }
+      else if (fieldVal <= 0) {
+        displayError("Sequence block must only contain numbers greater than 0.");
+        return false;
+      }
+      newSeqBlockVals.add(fieldVal);
+    }
+
+    //Sort the vals from the sequence blocks
+    Collections.sort(newSeqBlockVals);
+    //Verify that the values start at 1
+    if (newSeqBlockVals.size() > 0) {
+      if (newSeqBlockVals.get(0) != 1) {
+        displayError("Sequence blocks must start from 1.");
+        return false;
+      }
+    }
+    //Verify that the values are sequential
+    for(int i = 1; i < newSeqBlockVals.size(); i++) {
+      if (newSeqBlockVals.get(i) - newSeqBlockVals.get(i-1) != 1) {
+        displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
+        return false;
+      }
+    }
+    return true;
+  }
+
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
     //temp
@@ -229,51 +265,45 @@ public class RuleEditorUIController implements Initializable {
       //System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
 
-    //Will hold values from sequence blocks as ints
-    ArrayList<Integer> seqBlockVals = new ArrayList<Integer>();
-    //Verify that sequenceBlocks have only numeric values & that they're > 0 & collect them into seqBlockVals
+    //Only get the sequence blocks that have been connected to some block.
+    //We only want these because these are the only ones that are apart of some tree and thus
+    //are the only ones we care about parsing.
+    ArrayList<SequenceBlock> newSeqBlockList = new ArrayList<SequenceBlock>();
     for(int i = 0; i < seqBlockList.size(); i++) {
-      Integer fieldVal = parseIntOrNull(seqBlockList.get(i).getFieldText());
-      //Check that no sequence block contains a non-numeric value
-      if (fieldVal == null) {
-        displayError("Sequence block must only contain numeric values.");
-        return;
-      }
-      else if (fieldVal <= 0) {
-        displayError("Sequence block must only contain numbers greater than 0.");
-        return;
-      }
-      seqBlockVals.add(fieldVal);
-    }
-
-    ArrayList<Integer> copySeqBlockVals = new ArrayList<Integer>();
-    for(int i = 0; i < seqBlockVals.size(); i++) {
-      copySeqBlockVals.add(seqBlockVals.get(i));
-    }
-    //Sort the vals from the sequence blocks
-    Collections.sort(copySeqBlockVals);
-    //Verify that the values start at 1
-    if (copySeqBlockVals.size() > 0) {
-      if (copySeqBlockVals.get(0) != 1) {
-        displayError("Sequence blocks must start from 1.");
-        return;
-      }
-    }
-    //Verify that the values are sequential
-    for(int i = 1; i < copySeqBlockVals.size(); i++) {
-      if (copySeqBlockVals.get(i) - copySeqBlockVals.get(i-1) != 1) {
-        displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
-        return;
+      if (seqBlockList.get(i).getParentPtr() != null) {
+        newSeqBlockList.add(seqBlockList.get(i));
       }
     }
 
-    // ArrayList<org.RuleEngine.nodes.Node> treeOfParents = new ArrayList<org.RuleEngine.nodes.Node>();
-    // for(int i = 0; i < seqBlockVals.size(); i++) {
-    //   treeOfParents.add(null);
-    // }
-    // for(int i = 0; i < seqBlockVals.size(); i++) {
-    //   treeOfParents.set(i, )
-    // }
+    //Abort saving if the sequence blocks contain an error
+    if (verifySequenceBlocks(newSeqBlockList) == false) {
+      return;
+    }
+
+    //Will hold the root nodes of the trees we are going to parse
+    ArrayList<org.RuleEngine.nodes.Node> treeOfParents = new ArrayList<org.RuleEngine.nodes.Node>();
+    //Initialize the size of the list to be the same size as the amount of sequence blocks we're processing
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      treeOfParents.add(null);
+    }
+    //Go through the sequence blocks and put their root node they hold into the list at the index
+    //that the sequence block text indicates
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      Integer index = parseIntOrNull(newSeqBlockList.get(i).getFieldText());
+      if (index != null) {
+        //Because user starts the sequence blocks at 1
+        index--;
+        treeOfParents.set((int)index, newSeqBlockList.get(i).getParentPtr());
+      }
+      else {
+        System.out.println("Unknown error in handleSaveBtn.");
+        return;
+      }
+    }
+    //temp
+    for(int i = 0; i < treeOfParents.size(); i++) {
+      System.out.println("i=" + i + ": " + treeOfParents.get(i));
+    }
   }
 
   @FXML
