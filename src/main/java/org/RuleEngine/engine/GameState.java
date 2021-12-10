@@ -104,7 +104,7 @@ public class GameState extends Savable {
         TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
         	
-            // repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
+            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }
