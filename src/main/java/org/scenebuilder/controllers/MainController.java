@@ -21,6 +21,7 @@ import org.scenebuilder.BasicApplication;
 import org.scenebuilder.GlobalCSSValues;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MainController extends ScreenController {
 
@@ -134,6 +135,7 @@ public class MainController extends ScreenController {
     // todo implement new button
     public void newFromMain(MouseEvent event) throws IOException {
         System.out.println("New");
+        switchScene(event, "MainMenuScreen.fxml");
     }
 
     // todo implement edit button
@@ -143,7 +145,7 @@ public class MainController extends ScreenController {
 
 
     // todo do we need this still?
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
+    public void switchScene(MouseEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

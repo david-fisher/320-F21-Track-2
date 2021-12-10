@@ -1,5 +1,7 @@
 package org.Editors.controllers;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,10 +15,14 @@ import javafx.collections.FXCollections;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.net.URL;
+
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.*;
+import org.scenebuilder.controllers.ScreenController;
 
-public class GameObjectUIController {
+public class GameObjectUIController extends ScreenController {
     // Card tab
     @FXML private TextField cardName;
     @FXML private TextField cardFilename;
@@ -75,17 +81,6 @@ public class GameObjectUIController {
         cat2.setTrait("label", "category 04", true);
         spinnerCategories = FXCollections.observableArrayList(cat1, cat2);
 
-    }
-
-    @FXML private void switchToMainMenu(Event event) {
-        URL location = getClass().getResource("MainMenuScreen.fxml");
-        try {
-            Parent root = (Parent)FXMLLoader.load(location);
-            MainMenu.stage.getScene().setRoot(root);
-            MainMenu.stage.show();
-        } catch (IOException e){ 
-            e.printStackTrace();
-        }
     }
 
     @FXML private void saveCard(ActionEvent event) {
@@ -320,4 +315,24 @@ public class GameObjectUIController {
     }
 
     @FXML private void saveTimer(ActionEvent event) {}
+
+    @FXML
+    private void switchToMainMenu(ActionEvent event) throws IOException {
+        changeScene(event, "/org/scenebuilder/controllers/MainMenuScreen.fxml");
+    }
+
+    public void changeScene(ActionEvent event, String nextScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        // full screen dimensions
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double width = screenDimensions.getWidth();
+        double height = screenDimensions.getHeight();
+
+        Scene scene = new Scene(root, width, height);
+        stage.setScene(scene);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        stage.show();
+    }
 }

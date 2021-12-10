@@ -4,32 +4,42 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.URL;
-import org.Editors.MainMenu;
 
-public class MainMenuController {
-    private void changeScene(String fxmlFilename) {
-        URL location = getClass().getResource(fxmlFilename);
-        try {
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import org.scenebuilder.BasicApplication;
+import org.scenebuilder.controllers.MainController;
+import org.scenebuilder.controllers.ScreenController;
 
-            System.out.println(location);
-            Parent root = (Parent)FXMLLoader.load(location);
-            MainMenu.stage.getScene().setRoot(root);
-            MainMenu.stage.show();
-        } catch (IOException e){ 
-            e.printStackTrace();
-        }
+public class MainMenuController extends ScreenController {
+
+    public void changeScene(ActionEvent event, String nextScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        // full screen dimensions
+        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
+        double width = screenDimensions.getWidth();
+        double height = screenDimensions.getHeight();
+
+        Scene scene = new Scene(root, width, height);
+        stage.setScene(scene);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        stage.show();
     }
 
     
-    @FXML private void changeToGameObjectEditor(ActionEvent event) {
-        changeScene("/GameObjectEditor.fxml");
+    @FXML private void changeToGameObjectEditor(ActionEvent event) throws IOException {
+        changeScene(event,"GameObjectEditor.fxml");
     }
 
-    @FXML private void changeToRuleEditor(ActionEvent event) {
-        changeScene("/RuleEditor.fxml");
+    @FXML private void changeToRuleEditor(ActionEvent event) throws IOException {
+        changeScene(event,"RuleEditor.fxml");
     }
 }

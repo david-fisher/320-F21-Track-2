@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Deleted dummy objects">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/scenebuilder/controllers/MainMenuScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/GameObjectEditor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/MainMenuScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/RuleEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/MainMenuScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/RuleEditor.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,28 +52,29 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org.Editors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org/Editors/controllers" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org.Editors" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine\engine\nodes" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.scenebuilder.controllers" />
       <recent name="org" />
       <recent name="org.scenebuilder.scenebuilder" />
       <recent name="" />
