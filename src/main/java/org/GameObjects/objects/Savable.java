@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.BeanAccess;
 
@@ -94,4 +95,8 @@ public abstract class Savable {
 		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
 		return true;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5f9bdf59724d01d3f64668803d845bb3513a603d
