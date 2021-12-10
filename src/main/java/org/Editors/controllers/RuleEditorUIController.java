@@ -266,7 +266,23 @@ public class RuleEditorUIController implements Initializable {
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
-      textBlockList.get(i).getLiteralNode().setValue(text);
+      Double val = parseDoubleOrNull(text);
+      //The text is non-numeric
+      if (val == null) {
+        textBlockList.get(i).getLiteralNode().setValue(text);
+      }
+      else {
+        //The text is numeric
+        System.out.println(val.getClass());
+        if (val == Math.floor(val)) {
+          //val is an integer
+          textBlockList.get(i).getLiteralNode().setValue(val.intValue());
+        }
+        else {
+          //val is a double
+          textBlockList.get(i).getLiteralNode().setValue((double)val);
+        }
+      }
       //System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
 
@@ -414,6 +430,14 @@ public class RuleEditorUIController implements Initializable {
   private Integer parseIntOrNull(String value) {
     try {
       return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  private Double parseDoubleOrNull(String value) {
+    try {
+      return Double.parseDouble(value);
     } catch (NumberFormatException e) {
       return null;
     }
