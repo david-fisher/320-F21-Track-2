@@ -14,6 +14,8 @@ public class MainMenuController {
     private void changeScene(String fxmlFilename) {
         URL location = getClass().getResource(fxmlFilename);
         try {
+
+            System.out.println(location);
             Parent root = (Parent)FXMLLoader.load(location);
             MainMenu.stage.getScene().setRoot(root);
             MainMenu.stage.show();
@@ -24,10 +26,10 @@ public class MainMenuController {
 
     
     @FXML private void changeToGameObjectEditor(ActionEvent event) {
-        changeScene("../../resources/GameObjectEditor.fxml");
+        changeScene("/GameObjectEditor.fxml");
     }
 
     @FXML private void changeToRuleEditor(ActionEvent event) {
-        changeScene("../../resources/RuleEditor.fxml");
+        changeScene("/RuleEditor.fxml");
     }
 }

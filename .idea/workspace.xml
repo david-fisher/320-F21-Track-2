@@ -7,6 +7,13 @@
     <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Deleted dummy objects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/GameObjectEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/MainMenuScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/resources/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/RuleEditor.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,11 +66,11 @@
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\scenebuilder" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org" />

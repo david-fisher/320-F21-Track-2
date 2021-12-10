@@ -6,7 +6,10 @@ module org {
 //
     exports org.scenebuilder;
 //    opens org.Editors to javafx.fxml;
-//    exports org.Editors to javafx.graphics;
+    exports org.Editors;
+
+    opens org.Editors.controllers;
+    exports org.Editors.controllers;
 
 //    opens org.GameObjects.objects;
 //    opens org.RuleEngine.nodes;
