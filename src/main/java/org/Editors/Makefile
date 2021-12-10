@@ -14,6 +14,8 @@ controllers = controllers/*.java
 
 menu = MainMenu.java
 
+lib = *.jar
+
 blocks = blocks/*.java
 
 all: $(board) $(dummies) $(objects) $(nodes) $(engine) $(blocks) $(controllers) $(menu)

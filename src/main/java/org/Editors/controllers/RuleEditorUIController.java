@@ -47,10 +47,11 @@ import org.RuleEngine.nodes.*;
 import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
+import javafx.geometry.Bounds;
 
-//TODO: Change handleIf and handleWhile to not solely use placeBlock
-//TODO: Create verificaiton method in handleSaveBtn
-//TODO: Create method for handling errorLabel
+// TODO: Change handleIf and handleWhile to not solely use placeBlock
+// TODO: Create verificaiton method in handleSaveBtn
+// TODO: Create method for handling errorLabel
 
 public class RuleEditorUIController implements Initializable {
   @FXML
@@ -74,7 +75,6 @@ public class RuleEditorUIController implements Initializable {
   private Block startBlock;
   private int operandIndex;
   private int currRuleGroupID;
-  private boolean isBlueFirstRect = false; // allowing connect only blue and gray
 
   //List of the TextBlocks made so far.
   //Need this to get the text from them and set LiteralNode values once save button is pressed.
@@ -107,13 +107,17 @@ public class RuleEditorUIController implements Initializable {
     editorPane.getChildren().addAll(block.getBlock());
   }
 
-  private void drawLineResultRect(Block block){
+  private void drawLineResultRect(Block block, Node target){
     // this happens after we clicked on the first rect, this is the second click
-    if (startLineX != -1 && endLineX == -1 && !isBlueFirstRect && block != startBlock){
-      endLineX = block.getBlock().getTranslateX();
-      endLineY = block.getBlock().getTranslateY() + block.getBlockHeight()/2;
+    if (startLineX != -1 && endLineX == -1 && block != startBlock){
+      Bounds bounds = target.localToScene(target.getBoundsInLocal());
+      endLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
+      endLineY = bounds.getMinY();
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
+      //anchor 2 blocks
+      block.setBlockAnchor();
+      startBlock.setBlockAnchor();
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp
@@ -141,11 +145,11 @@ public class RuleEditorUIController implements Initializable {
     }
   }
 
-  private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID){
+  private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID, Node target){
     if (startLineX == -1){
-      startLineX = block.getBlock().getTranslateX() + block.getBlockWidth();
-      startLineY = block.getBlock().getTranslateY() + 20+order*10 + (order-1)*block.getGreyRectHeight() + 1/2*block.getGreyRectHeight();
-
+      Bounds bounds = target.localToScene(target.getBoundsInLocal());
+      startLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
+      startLineY = bounds.getMinY();
       //Keep track of the block we want to draw to when the user clicks the blue connection
       startBlock = block;
       //Keep track of which gray connection block the user clicked
@@ -155,15 +159,17 @@ public class RuleEditorUIController implements Initializable {
     }
   }
 
+
+
   private void drawLine(Block block){
     //Check this because SequenceNode doesn't have a result rectangle
-    if (block.getResultRect() != null) {
-      block.getResultRect().setOnMouseClicked(e -> {
-        drawLineResultRect(block);
+    Rectangle resultRect = block.getResultRect();
+    if (resultRect != null) {
+      resultRect.setOnMouseClicked(e -> {
+        drawLineResultRect(block, resultRect);
       });
     }
 
-    //Get the list of rule groups from this block
     ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = block.getRuleGroupList();
     for (int i = 0; i < ruleGroupList.size(); i++) {
       ObservableList<javafx.scene.Node> ruleGroup = ruleGroupList.get(i);
@@ -185,7 +191,7 @@ public class RuleEditorUIController implements Initializable {
         }
         javafx.scene.Node node = ruleGroup.get(j);
         node.setOnMouseClicked(e -> {
-          drawLineGrayRect(block, order, index, ruleGroupID);
+          drawLineGrayRect(block, order, index, ruleGroupID, node);
         });
       }
     }
@@ -203,16 +209,56 @@ public class RuleEditorUIController implements Initializable {
     errorLabel.setOpacity(1.0);
   }
 
-  //temp
+  private boolean verifySequenceBlocks(ArrayList<SequenceBlock> newSeqBlockList) {
+    //Will hold values from sequence blocks as ints
+    ArrayList<Integer> newSeqBlockVals = new ArrayList<Integer>();
+    //Verify that sequence blocks have only numeric values & that they're > 0 & collect them into newSeqBlockVals
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      Integer fieldVal = parseIntOrNull(newSeqBlockList.get(i).getFieldText());
+      //Check that no sequence block contains a non-numeric value
+      if (fieldVal == null) {
+        displayError("Sequence block must only contain numeric values.");
+        return false;
+      }
+      else if (fieldVal <= 0) {
+        displayError("Sequence block must only contain numbers greater than 0.");
+        return false;
+      }
+      newSeqBlockVals.add(fieldVal);
+    }
+
+    //Sort the vals from the sequence blocks
+    Collections.sort(newSeqBlockVals);
+    //Verify that the values start at 1
+    if (newSeqBlockVals.size() > 0) {
+      if (newSeqBlockVals.get(0) != 1) {
+        displayError("Sequence blocks must start from 1.");
+        return false;
+      }
+    }
+    //Verify that the values are sequential
+    for(int i = 1; i < newSeqBlockVals.size(); i++) {
+      if (newSeqBlockVals.get(i) - newSeqBlockVals.get(i-1) != 1) {
+        displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
+        return false;
+      }
+    }
+    return true;
+  }
+
   @FXML 
   private void handleSaveBtn(ActionEvent event) {
-    if (startBlock.getNode() instanceof OpNode) {
-      ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
-      for(int i = 0; i < operandsList.size(); i++) {
-        System.out.print(i + " rule group:");
-        System.out.println(" (size = " + operandsList.get(i).size() + ")");
-        for(int j = 0; j < operandsList.get(i).size(); j++) {
-          System.out.println(operandsList.get(i).get(j));
+    //temp
+    //print out info for the operands of blocks
+    if (startBlock != null) {
+      if (startBlock.getNode() instanceof OpNode) {
+        ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
+        for(int i = 0; i < operandsList.size(); i++) {
+          System.out.print(i + " rule group:");
+          System.out.println(" (size = " + operandsList.get(i).size() + ")");
+          for(int j = 0; j < operandsList.get(i).size(); j++) {
+            System.out.println(operandsList.get(i).get(j));
+          }
         }
       }
     }
@@ -220,41 +266,70 @@ public class RuleEditorUIController implements Initializable {
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
-      textBlockList.get(i).getLiteralNode().setValue(text);
+      Double val = parseDoubleOrNull(text);
+      //The text is non-numeric
+      if (val == null) {
+        textBlockList.get(i).getLiteralNode().setValue(text);
+      }
+      else {
+        //The text is numeric
+        System.out.println(val.getClass());
+        if (val == Math.floor(val)) {
+          //val is an integer
+          textBlockList.get(i).getLiteralNode().setValue(val.intValue());
+        }
+        else {
+          //val is a double
+          textBlockList.get(i).getLiteralNode().setValue((double)val);
+        }
+      }
       //System.out.println(textBlockList.get(i).getLiteralNode().value);
     }
 
-    //Will hold values from sequence blocks as ints
-    ArrayList<Integer> seqBlockVals = new ArrayList<Integer>();
-    //Verify that sequenceBlocks have only numeric values & that they're > 0 & collect them into seqBlockVals
+    //Only get the sequence blocks that have been connected to some block.
+    //We only want these because these are the only ones that are apart of some tree and thus
+    //are the only ones we care about parsing.
+    ArrayList<SequenceBlock> newSeqBlockList = new ArrayList<SequenceBlock>();
     for(int i = 0; i < seqBlockList.size(); i++) {
-      Integer fieldVal = parseIntOrNull(seqBlockList.get(i).getFieldText());
-      //Check that no sequence block contains a non-numeric value
-      if (fieldVal == null) {
-        displayError("Sequence block must only contain numeric values.");
-        return;
-      }
-      else if (fieldVal <= 0) {
-        displayError("Sequence block must only contain numbers greater than 0.");
-        return;
-      }
-      seqBlockVals.add(fieldVal);
-    }
-    //Sort the vals from the sequence blocks
-    Collections.sort(seqBlockVals);
-    //Verify that the values start at 1
-    if (seqBlockVals.size() > 0) {
-      if (seqBlockVals.get(0) != 1) {
-        displayError("Sequence blocks must start from 1.");
-        return;
+      if (seqBlockList.get(i).getParentPtr() != null) {
+        newSeqBlockList.add(seqBlockList.get(i));
       }
     }
-    //Verify that the values are sequential
-    for(int i = 1; i < seqBlockVals.size(); i++) {
-      if (seqBlockVals.get(i) - seqBlockVals.get(i-1) != 1) {
-        displayError("Sequence blocks must contain numbers that consecutively have difference of only 1.");
+
+    //Check that there's at least 1 tree made
+    if (newSeqBlockList.size() == 0) {
+      displayError("Cannot save unless a sequence block points to a tree.");
+      return;
+    }
+
+    //Abort saving if the sequence blocks contain an error
+    if (verifySequenceBlocks(newSeqBlockList) == false) {
+      return;
+    }
+
+    //Will hold the root nodes of the trees we are going to parse
+    ArrayList<org.RuleEngine.nodes.Node> treeOfParents = new ArrayList<org.RuleEngine.nodes.Node>();
+    //Initialize the size of the list to be the same size as the amount of sequence blocks we're processing
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      treeOfParents.add(null);
+    }
+    //Go through the sequence blocks and put their root node they hold into the list at the index
+    //that the sequence block text indicates
+    for(int i = 0; i < newSeqBlockList.size(); i++) {
+      Integer index = parseIntOrNull(newSeqBlockList.get(i).getFieldText());
+      if (index != null) {
+        //Because user starts the sequence blocks at 1
+        index--;
+        treeOfParents.set((int)index, newSeqBlockList.get(i).getParentPtr());
+      }
+      else {
+        System.out.println("Unknown error in handleSaveBtn.");
         return;
       }
+    }
+    //temp
+    for(int i = 0; i < treeOfParents.size(); i++) {
+      System.out.println("i=" + i + ": " + treeOfParents.get(i));
     }
   }
 
@@ -355,6 +430,14 @@ public class RuleEditorUIController implements Initializable {
   private Integer parseIntOrNull(String value) {
     try {
       return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  private Double parseDoubleOrNull(String value) {
+    try {
+      return Double.parseDouble(value);
     } catch (NumberFormatException e) {
       return null;
     }
