@@ -63,6 +63,7 @@ public class Block {
 
   protected Rectangle result;
   protected GridPane grid;
+  protected Boolean isConnected = false;
 
   //List of lists of connection blocks
   protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
@@ -106,9 +107,11 @@ public class Block {
     });
 
     this.block.setOnMouseDragged(e -> {
-      //set new position
-      this.block.setTranslateX(e.getSceneX() - startX);
-      this.block.setTranslateY(e.getSceneY() - startY);
+      if (!isConnected){
+        //set new position
+        this.block.setTranslateX(e.getSceneX() - startX);
+        this.block.setTranslateY(e.getSceneY() - startY);
+      }
     });
 
     //Pane for placing the controls and text for the block
@@ -203,6 +206,10 @@ public class Block {
 
   public int getGreyRectHeight(){
     return CONNECTION_HEIGHT;
+  }
+
+  public void setBlockAnchor(){
+    isConnected = true;
   }
 
 }
