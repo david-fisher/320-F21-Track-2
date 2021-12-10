@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="New UD object updates">
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/dummy/DummyCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/dummy/DummyDeck.java" beforeDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Deleted dummy objects">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Button.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -405,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639091064851</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Deleted dummy objects">
+      <created>1639097891519</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1639097891519</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -421,7 +426,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Transitioned to GKNEW's GameState object, only draw drawers when needed (and space others accordingly)." />
     <MESSAGE value="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly)." />
     <MESSAGE value="Matt's playerTurnCycle method (not yet used by any onClick event)" />
     <MESSAGE value="Added our Player.java to objects folder" />
@@ -446,7 +450,8 @@
     <MESSAGE value="Small updates before main pull" />
     <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
     <MESSAGE value="New UD object updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="New UD object updates" />
+    <MESSAGE value="Deleted dummy objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted dummy objects" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

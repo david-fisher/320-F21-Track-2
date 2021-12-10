@@ -548,7 +548,7 @@ public class PlayController extends ScreenController {
         interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
         Gamepiece gp = currPlayer.getGamePieces().get(0);
-        Shape parent = gp.getParent();
+        Shape parent = (Shape) gp.getParent();
         Tile location = gp.getLocation();
         parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
         parent.setLayoutY(location.getYPos() + location.getHeight() / 2);

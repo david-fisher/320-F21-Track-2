@@ -94,7 +94,7 @@ public class Display extends PlayController {
         Runnable runner = () -> {
             for (int i = 0; i < tiles.size(); i++) {
                 Tile tile = tiles.get(i);
-                Shape parent = tile.getParent();
+                Shape parent = (Shape) tile.getParent();
                 parent.setStroke(Color.GOLD);
                 parent.setStrokeWidth(2);
                 DropShadow borderGlow= new DropShadow();
@@ -112,7 +112,7 @@ public class Display extends PlayController {
         Tile chosen = (Tile) Platform.enterNestedEventLoop(KEY);
         //Remove the onClick events and highlighting from the viable tiles
         for (int i = 0; i < tiles.size(); i++) {
-            Shape parent = tiles.get(i).getParent();
+            Shape parent = (Shape) tiles.get(i).getParent();
             parent.removeEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             parent.setEffect(null);
             parent.setStrokeWidth(0);
