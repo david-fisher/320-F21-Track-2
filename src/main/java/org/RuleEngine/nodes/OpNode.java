@@ -63,7 +63,19 @@ public abstract class OpNode extends Node {
     public Node removeOperand(int i) {
         return removeOperandInGroup(i, 0);
     }
-    
+
+    public boolean removeOperand(Node node) {
+        for (int i = 0; i < operands.size(); i++) {
+            ArrayList<Node> temp = getRuleGroup(i);
+            if (temp.contains(node)) {
+                temp.set(temp.indexOf(node), null);
+                node.parent = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Remove the operand at index i in group groupId.
     public Node removeOperandInGroup(int i, int groupId) {
         if (isValidAt(i, groupId)) {
