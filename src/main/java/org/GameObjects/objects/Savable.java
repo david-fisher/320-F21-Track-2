@@ -95,8 +95,4 @@ public abstract class Savable {
 		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
 		return true;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5f9bdf59724d01d3f64668803d845bb3513a603d

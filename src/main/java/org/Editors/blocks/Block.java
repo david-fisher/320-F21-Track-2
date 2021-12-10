@@ -211,3 +211,4 @@ public class Block {
   public void setBlockAnchor(){
     isConnected = true;
   }
+}

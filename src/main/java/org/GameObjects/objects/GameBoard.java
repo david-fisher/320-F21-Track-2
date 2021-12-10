@@ -5,17 +5,14 @@ import java.util.ArrayList;
 public class GameBoard {
     private String boardID;
 
-  public GameBoard() {
-	  super() ;
-	  
-	  this.setLabel("gameboard" + String.format("%02d", ++count));
-  }
-  /*
-  public String repr(boolean hasLabel) {
-    return "GameBoard\n" + super.repr(hasLabel);
-  }
-  */
-}
+    private String shape;
+    private double width;
+    private double height;
+
+    private double xPos;
+    private double yPos;
+
+    private ArrayList<Tile> tiles;
 
     public GameBoard(String boardID, String shape, double width, double height, double xPos, double yPos, ArrayList<Tile> tiles) {
         this.boardID = boardID;
