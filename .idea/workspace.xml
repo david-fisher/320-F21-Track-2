@@ -5,121 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Deleted dummy objects">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_15_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_15_0_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/BinOpBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/Block.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckDrawBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckPutBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckShuffleBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetNextPlayerBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetPlayerByIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetTileIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/InvokeBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/LengthBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/MoveByStepsBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/MoveToTileIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/NotBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/PSetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/RSetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/SequenceBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/TextBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/UseDieSpinnerBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/WhileBlock$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/WhileBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/GameObjectUIController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/MainMenuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/RuleEditorUIController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Die.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameTimer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Project$GameStates.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Savable$Projects.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Savable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Spinner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Token.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/Interpreter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/TestGameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/HumanAgent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/MinimaxAgent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/TieGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/ALNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/ALOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/BooleanNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/BooleanOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/GetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/IfNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/InvokeNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/LiteralNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/MoveNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/NodeMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/OpNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/PSetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/RSetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/StringNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/StringOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/WhileNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Action.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Cache.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/DepthOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/HeuristicOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Oracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/PruningOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/RandomOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/GlobalCSSValues.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/SettingsObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/SetupData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/ScreenController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SelectionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SettingsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +48,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
