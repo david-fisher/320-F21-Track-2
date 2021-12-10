@@ -41,6 +41,7 @@ public class GameState extends Savable {
         spinners = new ArrayList<Spinner>();
         tiles = new ArrayList<Tile>();
         tokens = new ArrayList<Token>();
+        players = new ArrayList<Player>();
 
         tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();

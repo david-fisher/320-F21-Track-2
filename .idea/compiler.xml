@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SceneBuilder" target="16" />
+      <module name="SceneBuilder" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

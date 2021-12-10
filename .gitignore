@@ -29,4 +29,24 @@ Maven__*
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
+.vscode/settings.json
+.vscode/launch.json
 /.metadata/
+/src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
+/src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
+.DS_Store
+.DS_Store
+.DS_Store
+
+# Default ignored files
+/.idea/shelf/
+/workspace.xml
+
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+#Target Folder
+target/
