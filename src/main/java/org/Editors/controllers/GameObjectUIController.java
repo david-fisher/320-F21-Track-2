@@ -1,5 +1,8 @@
 package org.Editors.controllers;
 
+import java.io.File;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -369,5 +372,18 @@ public class GameObjectUIController {
         System.out.println(spinner.spin().toString());
         System.out.println(spinner.spin().toString());
         System.out.println(spinner.spin().toString());
+    }
+
+    @FXML
+    private void getFile(ActionEvent e) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open texture file");
+        fileChooser.getExtensionFilters().addAll(
+          new ExtensionFilter("Image files", "*.png")
+        );
+        File selectedFile = fileChooser.showOpenDialog(MainMenu.stage);
+        if (selectedFile != null) {
+            System.out.println(selectedFile.getName());
+        }
     }
 }

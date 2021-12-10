@@ -44,11 +44,11 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texture" />
-                                    <TextField fx:id="cardFilename" promptText="Filename">
+                                    <Button mnemonicParsing="false" onAction="#getFile" text="Chose file" textAlignment="CENTER">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </Button>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">

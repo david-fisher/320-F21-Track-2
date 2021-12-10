@@ -429,6 +429,10 @@ public class RuleEditorUIController implements Initializable {
     //blockActions(new IfBlock());
   }
 
+  private void constructBlockTree(org.RuleEngine.nodes.OpNode tree) {
+      ArrayList<ArrayList<org.RuleEngine.nodes.Node>> children = tree.getAllOperands();
+  }
+
   @FXML
   private void handleBackButton(ActionEvent event) {
     URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");

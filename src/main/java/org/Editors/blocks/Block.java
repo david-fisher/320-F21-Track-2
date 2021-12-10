@@ -178,5 +178,4 @@ public class Block {
   public int getGreyRectHeight(){
     return CONNECTION_HEIGHT;
   }
-
 }
