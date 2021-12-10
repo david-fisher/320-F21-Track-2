@@ -1,4 +1,4 @@
-package editors.blocks;
+package org.Editors.blocks;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -20,6 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent; 
 import javafx.event.EventHandler;
 import javafx.scene.layout.VBox;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
+/**Well, this is bad code but the conndition connection rectangle is stored in connBlockList which
+is stored in the Block class. The connection blocks from the if part and the else part are stored in their
+own lists defined here: ifConnBlockList and elseConnBlockList**/
 
 public class IfBlock extends Block {
   private int HEIGHT = 270;
@@ -27,6 +33,9 @@ public class IfBlock extends Block {
   private int firstColWidth = 20;
   private int midColWidth = 100;
   private int lastColWidth = 20;
+
+  protected ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
+  protected ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
 
   public IfBlock() {
     this.block = new StackPane();
@@ -71,12 +80,15 @@ public class IfBlock extends Block {
     name.setFill(WHITE);
   
     //Defining row 1 of grid
-    Rectangle ifInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    Text index = new Text("Condition");
-    index.setFill(WHITE);
-    grid.add(index, 1, 1);
-    grid.add(ifInput, 2, 1);
-    grid.setHalignment(index, HPos.RIGHT); 
+    Rectangle conditionInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+    connBlockList.addAll(conditionInput);
+    Text connText = new Text("Condition");
+    connText.setFill(WHITE);
+    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    grid.add(result, 0, 1);
+    grid.add(connText, 1, 1);
+    grid.add(conditionInput, 2, 1);
+    grid.setHalignment(connText, HPos.RIGHT); 
     
     // Defining row 2 of grid
     Text thenText  = new Text("Then");
@@ -86,6 +98,7 @@ public class IfBlock extends Block {
 
     //Defining row 3 of grid
     Rectangle thenInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+    ifConnBlockList.addAll(thenInput);
     VBox vbox = new VBox(5, thenInput);
     grid.add(vbox, 2, 3);
     
@@ -99,6 +112,7 @@ public class IfBlock extends Block {
       public void handle(MouseEvent e)
       {
         Rectangle thenInput2 = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+        ifConnBlockList.addAll(thenInput2);
         vbox.getChildren().add(thenInput2);
         HEIGHT = HEIGHT + 35;
         base.setHeight(HEIGHT);
@@ -116,6 +130,7 @@ public class IfBlock extends Block {
 
     //Defining row 6 of grid
     Rectangle thenElsePart = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+    elseConnBlockList.addAll(thenElsePart);
     VBox vboxElsePart = new VBox(5, thenElsePart);
     grid.add(vboxElsePart, 2, 6);
     
@@ -129,6 +144,7 @@ public class IfBlock extends Block {
       public void handle(MouseEvent e)
       {
         Rectangle thenInput2 = new Rectangle(19, 30, SILVER);
+        elseConnBlockList.addAll(thenInput2);
         vboxElsePart.getChildren().add(thenInput2);
         HEIGHT = HEIGHT + 35;
         base.setHeight(HEIGHT);

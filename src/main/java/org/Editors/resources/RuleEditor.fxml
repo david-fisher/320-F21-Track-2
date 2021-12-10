@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="458.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editors.controllers.RuleEditorUIController">
+<BorderPane prefHeight="458.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.RuleEditorUIController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
@@ -52,6 +52,7 @@
                   <Button fx:id="addUseDieSpinnerBtn" layoutX="34.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleAddUseDieSpinnerBtn" prefHeight="25.0" prefWidth="92.0" text="Add use die/spinner" />
                   <Button fx:id="addTextNodeBtn" layoutX="34.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleAddTextNodeBtn" prefHeight="25.0" prefWidth="92.0" text="Add text node" />
                   <Button fx:id="addSeqNodeBtn" layoutX="34.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleAddSeqNodeBtn" prefHeight="25.0" prefWidth="92.0" text="Add seq node" />
+                  <Button fx:id="addWhileBtn" layoutX="34.0" layoutY="686.0" mnemonicParsing="false" onAction="#handleAddWhileBtn" prefHeight="25.0" prefWidth="92.0" text="Add while" />
                </children>
                <cursor>
                   <Cursor fx:constant="SW_RESIZE" />
@@ -63,7 +64,14 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="editorPane" prefHeight="404.0" prefWidth="474.0" />
+            <AnchorPane fx:id="editorPane" prefHeight="404.0" prefWidth="474.0">
+               <children>
+                  <Label fx:id="errorLabel" layoutX="223.0" layoutY="6.0" textFill="#dd1010">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
          </content>
       </ScrollPane>
    </center>

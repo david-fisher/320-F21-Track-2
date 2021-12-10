@@ -1,63 +1,93 @@
 package org.GameObjects.objects;
 
 import javafx.scene.paint.Color;
-import org.scenebuilder.scenebuilder.dummy.DummyInventory;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player {
+public class Player extends GameObject {
 
-    private String playerID;
-
-    private Color color;
     private ArrayList<Gamepiece> gamePieces;
-    private DummyInventory inventory;
+    private ArrayList<GameObject> inventory;
 
     private boolean isHuman;
 
-    public Player(String playerID, Color color, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
-        this.playerID = playerID;
-        this.color = color;
-        this.gamePieces = gamePieces;
-        this.inventory = inventory;
-        this.isHuman = isHuman;
+    public Player(String Label, Color color, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
+        this.setLabel(Label);
+        this.setColor(color);
+        this.setGamePieces(gamePieces);
+        this.setInventory(inventory);
+        this.setIsHuman(isHuman);
     }
 
-    public Player(String playerID, ArrayList<Gamepiece> gamePieces, DummyInventory inventory, boolean isHuman) {
-        this.playerID = playerID;
-        this.gamePieces = gamePieces;
-        this.inventory = inventory;
-        this.isHuman = isHuman;
+    public Player(String Label, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
+        this.setLabel(Label);
+        this.setColor(getRandomColor());
+        this.setGamePieces(gamePieces);
+        this.setInventory(inventory);
+        this.setIsHuman(isHuman);
+    }
+    
+    public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 
-        this.color = getRandomColor();
+      // run game object's set trait first
+      if (super.setTrait(trait, value, suppressTraitChecker)) {
+          return true;
+      }
+
+      // checks for other valid inputs
+      else if (suppressTraitChecker || // if true don't check trait type
+              (trait.equals("gamePieces") && value instanceof ArrayList) ||
+              (trait.equals("inventory") && value instanceof ArrayList) ||
+              (trait.equals("isHuman") && value instanceof Boolean)) {
+          prevTraits.put(trait, traits.get(trait)) ;
+          traits.put(trait, value);
+          return true;
+      }
+
+      // returns false if input is invalid
+      return false;
+    }
+    
+    public boolean setGamePieces(ArrayList<Gamepiece> gamePieces) { 
+        return this.setTrait("gamePieces", gamePieces);
+    }
+    
+    public boolean setInventory(ArrayList<GameObject> inventory) { 
+      return this.setTrait("inventory", inventory);
+    }
+    
+    public boolean setIsHuman(boolean isHuman) {
+      return this.setTrait("isHuman", isHuman);
     }
 
-    // setters
-    public void setPlayerID(String playerID) {
-        this.playerID = playerID;
+    public ArrayList<Gamepiece> getGamePieces() { 
+        return (ArrayList<Gamepiece>) this.traits.get("gamePieces");
     }
-    public void setColor(Color color) { this.color = color; }
-    public void setGameTokens(ArrayList<Gamepiece> gamePieces) { this.gamePieces = gamePieces; }
-    public void setInventory(DummyInventory inventory) { this.inventory = inventory; }
-    public void setIsHuman(boolean isHuman) {
-        this.isHuman = isHuman;
+    
+    public ArrayList<GameObject> getInventory() { 
+      return (ArrayList<GameObject>) this.traits.get("inventory");
+    }
+    
+    public boolean getIsHuman() { 
+        return (Boolean) this.traits.get("isHuman");
     }
 
-    // getters
-    public String getPlayerID() {
-        return this.playerID;
+    public void addPiece(Gamepiece piece) { 
+        this.getGamePieces().add(piece); 
     }
-    public Color getColor() { return this.color; }
-    public ArrayList<Gamepiece> getGamePieces() { return this.gamePieces; }
-    public DummyInventory getInventory() { return this.inventory; }
-    public boolean getIsHuman() { return this.isHuman; }
-
-    // modifiers
-    public void addPiece(Gamepiece piece) { this.gamePieces.add(piece); }
-    public void removePiece(Gamepiece piece) { this.gamePieces.remove(piece); }
-    public void removePiece(int pieceIndex) { this.gamePieces.remove(pieceIndex); }
-    public void setPiece(int pieceIndex, Gamepiece piece) { this.gamePieces.set(pieceIndex, piece); }
+    
+    public void removePiece(Gamepiece piece) { 
+        this.getGamePieces().remove(piece); 
+    }
+    
+    public void removePiece(int pieceIndex) { 
+        this.getGamePieces().remove(pieceIndex); 
+    }
+    
+    public void setPiece(int pieceIndex, Gamepiece piece) { 
+        this.getGamePieces().set(pieceIndex, piece); 
+    }
 
     public Color getRandomColor(){
         Random rand = new Random(System.currentTimeMillis());
@@ -72,11 +102,11 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "playerID='" + playerID + '\'' +
-                ", color=" + color +
-                ", gamePieces=" + gamePieces +
-                ", inventory=" + inventory +
-                ", isHuman=" + isHuman +
+                "Label='" + this.getLabel() + '\'' +
+                ", color=" + this.getColor() +
+                ", gamePieces=" + this.getGamePieces() +
+                ", inventory=" + this.getInventory() +
+                ", isHuman=" + this.getIsHuman() +
                 '}';
     }
 }

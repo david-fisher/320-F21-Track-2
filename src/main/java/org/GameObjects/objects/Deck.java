@@ -1,7 +1,5 @@
 package org.GameObjects.objects;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +14,8 @@ public class Deck extends GameObject {
     deck = new ArrayList<Card>() ;
     
 	this.setLabel("deck" + String.format("%02d", ++count));
-	this.setIcon("https://i.pinimg.com/originals/23/3e/ff/233eff1a0bcd8812bf8ba73fd94235bc.jpg") ;
-	this.setColor(Color.BLACK) ;
+	this.setIcon("default_gamepiece_icon.jpg") ;
+	this.setColorString("#000000") ;
     this.setTrait("cards", deck, true) ;
   }
   
@@ -112,5 +110,9 @@ public class Deck extends GameObject {
 
   public List<Card> getCards() {
 	  return deck;
+  }
+
+  public String repr(boolean hasLabel) {
+    return "Deck\n" + super.repr(hasLabel);
   }
 }

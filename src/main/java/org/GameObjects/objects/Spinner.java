@@ -1,6 +1,5 @@
 package org.GameObjects.objects;
 
-import javafx.scene.paint.Color;
 import java.util.*;
 /**
  * Write a description of class Spinner here.
@@ -8,10 +7,11 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Spinner extends GameObject {
+public class Spinner extends GameObject
+{
 
 	private static int count = 0;
-
+	  
     // instance variables
     private List<Category> categories;
     private int numCategories;
@@ -21,22 +21,22 @@ public class Spinner extends GameObject {
      */
     public Spinner()
     {
-    	super() ;
-
+    	super() ;  
+    	
     	categories = new ArrayList<Category>() ;
     	numCategories = 0;
-
+    	
     	this.setLabel("deck" + String.format("%02d", ++count));
-    	this.setIcon("https://images-na.ssl-images-amazon.com/images/I/41YLOCzcsRL.png") ;
-    	this.setColor(Color.BLACK) ;
+    	this.setIcon("default_gamepiece_icon.jpg") ;
+    	this.setColorString("#000000") ;
         this.setTrait("categories", categories, true) ;
         this.setNumCategories(1) ;
     }
-
+    
     /* Trait Types:
      * 	label 	: 	String
      * 	icon 	: 	String
-     * 	color 	:	Color
+     * 	color 	:	String (Can be obtained as JAVAFX Color object)
      * 	categories: ArrayList
      */
 
@@ -47,31 +47,31 @@ public class Spinner extends GameObject {
     	if (num < 1) {
     		return false ;
     	}
-
+        
     	// if old spinner has less categories than new spinner, add categories
     	while (numCategories < num) {
         	categories.add(new Category());
-        	numCategories++ ;
-        }
-
+        	numCategories++ ; 
+        } 
+    	
     	// if old spinner has more categories than new spinner, remove cats
     	while (numCategories > num) {
         	categories.remove(categories.size() - 1);
-        	numCategories-- ;
-        }
-
+        	numCategories-- ; 
+        } 
+        
     	// regularize all categories
         for (Category c : categories) {
         	if (!c.setWeight(1.0 / num)) return false ;
         }
-
+        
         return true ;
     }
-
+    
     public int getNumCategories() {
         return numCategories;
     }
-
+    
     public boolean setCategoryWeights(List<Double> weights) {
     	if (weights.size() != numCategories) return false ;
 
@@ -79,15 +79,15 @@ public class Spinner extends GameObject {
     	for (double w : weights) {
     		sum += w ;
     	}
-
+    	
     	if (sum < 0.99 || sum > 1.01) return false ;
-
+    	
     	for (int i = 0; i < numCategories; ++i) {
     		if (!this.getCategory(i).setWeight(weights.get(i))) return false ;
     	}
     	return true ;
     }
-
+    
     public Category spin() {
         //calculates spin based off category weights
         //if weights don't add up to 1, return null (Error State);
@@ -98,12 +98,12 @@ public class Spinner extends GameObject {
             total += curW;
             arr[i] = total;
         }
-
+        
         if (total != 1) { //invalid weights
             return null;
         }
         double output = Math.random();
-
+        
         int idx = 0;
         for (int i = 0; i < getNumCategories(); i++) {
         	if (arr[i] > output) { //if value found
@@ -111,24 +111,27 @@ public class Spinner extends GameObject {
             }
             idx++;
         }
-
+        
         return null ;
     }
-
+    
     public Category getCategory(int i) {
     	return categories.get(i) ;
     }
-
+    
     public Category getCategory(String label) {
     	for (Category cat : categories) {
     		if (cat.getLabel().equals(label)) return cat ;
     	}
-    	return null ;
+    	return null ; 
     }
-
-
+    
+    
     public List<Category> getCategories() {
     	return categories ;
     }
-
+  
+    public String repr(boolean hasLabel) {
+        return "Spinner\n" + super.repr(hasLabel);
+    }  
 }
