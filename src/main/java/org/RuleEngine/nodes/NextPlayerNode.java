@@ -17,6 +17,4 @@ public class NextPlayerNode extends OpNode {
         int newId = (pid+1) % size;
         return new LiteralNode<Player>(currState.players.get(newId));
     }
-    
-    
 }

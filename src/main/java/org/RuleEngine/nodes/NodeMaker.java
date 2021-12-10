@@ -16,10 +16,24 @@ public final class NodeMaker {
                 return new IfNode();
             case "while":
                 return new WhileNode();
+            case "tile":
+                return new TileNode();
+            case "moveBy":
+                return new MoveByNode();
+            case "moveTo":
+                return new MoveToNode();
+            case "nextPlayer":
+                return new NextPlayerNode();
             case "invoke":
                 return new InvokeNode();
-            case "moveby":
-                return new MoveByNode();
+            case "display":
+                return new DisplayNode();
+            case "draw":
+                return new DrawNode();
+            case "put":
+                return new PutNode();
+            case "shuffle":
+                return new ShuffleNode();
             case "use":
                 return new UseNode();
         }

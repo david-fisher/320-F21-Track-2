@@ -42,7 +42,7 @@ public class PutNode extends OpNode {
             System.out.println("Error: Cannot find CARD of label " + cardName);
         }
         if (deck == null || !(deck instanceof Deck)) {
-            System.out.println("Error: Cannot find deck of label " + deckName);
+            System.out.println("Error: Cannot find DECK of label " + deckName);
         }
         
         switch(placement) {
