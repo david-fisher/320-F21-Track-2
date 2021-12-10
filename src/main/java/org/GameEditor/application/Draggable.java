@@ -1,4 +1,4 @@
-package application;
+package org.GameEditor.application;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;

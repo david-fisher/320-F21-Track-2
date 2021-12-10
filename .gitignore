@@ -28,7 +28,7 @@ Maven__*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/bin/
+bin/
 .vscode/settings.json
 .vscode/launch.json
 /.metadata/
@@ -39,7 +39,7 @@ hs_err_pid*
 .DS_Store
 
 # Default ignored files
-/.idea/shelf/
+.idea/shelf/
 /workspace.xml
 
 # Eclipse Core

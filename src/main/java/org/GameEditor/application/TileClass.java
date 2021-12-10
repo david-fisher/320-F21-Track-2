@@ -1,4 +1,4 @@
-package application;
+package org.GameEditor.application;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;

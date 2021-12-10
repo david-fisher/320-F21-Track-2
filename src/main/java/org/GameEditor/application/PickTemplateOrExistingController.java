@@ -1,4 +1,4 @@
-package application;
+package org.GameEditor.application;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;

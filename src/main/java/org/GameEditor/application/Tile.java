@@ -2,7 +2,7 @@
 //because it's compatible with Odyssey/Game Object team's design flow
 //Currently modifying some attributing to be work with drag-and-drop
 
-package application;
+package org.GameEditor.application;
 
 import java.awt.Color;
 

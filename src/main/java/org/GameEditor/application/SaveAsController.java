@@ -1,4 +1,4 @@
-package application;
+package org.GameEditor.application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

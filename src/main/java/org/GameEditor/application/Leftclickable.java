@@ -1,11 +1,10 @@
-package application;
+package org.GameEditor.application;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Shape;
-import application.Controller;
 
 public class Leftclickable {
 	
