@@ -19,7 +19,7 @@ public final class NodeMaker {
             case "invoke":
                 return new InvokeNode();
             case "moveby":
-                return new MoveNode();
+                return new MoveByNode();
             case "use":
                 return new UseNode();
         }

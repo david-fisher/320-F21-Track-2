@@ -49,6 +49,13 @@ public class Test {
         System.out.println("Size: " + ifst.getRuleGroup(1).size());
         System.out.println("Node is: " + ifst.getOperandInGroup(1, 1));
         
+        // Test player complex trait casting
+        ArrayList arr = new ArrayList<Card>();
+        Object obj = arr;
+        ArrayList<Card> cards = (ArrayList<Card>)obj;
+        cards.add(new Card());
+        System.out.println(cards.size());
+        
         Node mysteryNode = NodeMaker.makeIntegerNode(1);
         System.out.println("Name is: " + mysteryNode.getClass().getSimpleName());
         

@@ -96,6 +96,9 @@ public class GameState extends Savable {
         for(Token go : tokens) {
             if (go.getTrait("label").equals(label)) { return go; }
         }
+        for(Player go : players) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
         return null;
     }
 

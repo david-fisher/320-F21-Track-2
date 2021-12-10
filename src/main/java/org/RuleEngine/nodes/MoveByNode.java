@@ -7,32 +7,32 @@ import org.GameObjects.objects.*;
 import org.scenebuilder.Display;
 
 // Usage: Operand 0 - game piece name.
-//				Operand 1 - distance (LiteralNode<Integer>)
-public class MoveNode extends OpNode {
-    public MoveNode() { super(); }
-    public MoveNode(ArrayList<Node> operands) {
+//		  Operand 1 - distance (LiteralNode<Integer>)
+public class MoveByNode extends OpNode {
+    public MoveByNode() { 
         super();
-        this.operands.set(0, operands);
+        addOperand(null).addOperand(null);
     }
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
         LiteralNode e2 = getOperand(1).execute(currState);
     
         if (e1 == null || e2 == null) {
-            System.out.println("Error: Something went wrong processing rset operation");
+            System.out.println("Error: Something went wrong processing MoveBy operation");
             return null;
         }
     
         if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof Integer)) {
-            System.out.println("Error: rset operation only takes strings!");
+            System.out.println("Error: MoveBy operation takes a string and an integer as input!");
             return null;
         }
         
         String name = (String)e1.getValue();
         Integer dis = (Integer)e2.getValue();
-        GameObject go = (name.charAt(0) == '_') ? go = currState.findObject(name) : currState.getRegistry(name);
+        GameObject go = (name.charAt(0) == '_') ? currState.findObject(name.substring(1)) : currState.getRegistry(name);
     
         if (go == null || !(go instanceof Gamepiece)) {
             System.out.println("Error: Cannot find GAMEPIECE of label " + name);
@@ -41,7 +41,7 @@ public class MoveNode extends OpNode {
         
         // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
         // The engine then promptly set the location of the gamepiece.
-        // TODO: How could this possibly affect the AI?
+        // TODO AI: Configure this so it calls some other function if the player is AI.
         Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
         Gamepiece gp = (Gamepiece) go;
         if (!gp.setLocation(playerChoice)) {
