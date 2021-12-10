@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Most up to date working on intellij">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Removed some bin files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameObjects/bin/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodes/bin/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodes/bin/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodes/bin/bin/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ConfirmExit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ConfirmExit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameCreator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/PickTemplateOrExisting.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/PickTemplateOrExisting.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/SaveAs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAs.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/SaveAsOrSave.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAsOrSave.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ShapeEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/TemplateOrFresh.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/TemplateOrFresh.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,11 +90,11 @@
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor\application" />
+      <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\scenebuilder" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org" />
@@ -101,10 +105,23 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.BasicApplication">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
       <module name="SceneBuilder" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.GameEditor.application.Main" />
+      <module name="SceneBuilder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.GameEditor.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -124,6 +141,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
@@ -136,7 +154,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-      <workItem from="1639173282493" duration="2916000" />
+      <workItem from="1639173282493" duration="5155000" />
     </task>
     <task id="LOCAL-00001" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
       <created>1636243444825</created>
@@ -446,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639175825564</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Removed some bin files">
+      <created>1639176247404</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1639176247404</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +489,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Matt's playerTurnCycle method (not yet used by any onClick event)" />
     <MESSAGE value="Added our Player.java to objects folder" />
     <MESSAGE value="Changed buttons in Main Menu to labels with color" />
     <MESSAGE value="Button aesthetic changes" />
@@ -489,7 +513,8 @@
     <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
     <MESSAGE value="Most up to date working on intellij" />
-    <option name="LAST_COMMIT_MESSAGE" value="Most up to date working on intellij" />
+    <MESSAGE value="Removed some bin files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed some bin files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -5,6 +5,8 @@ module org {
     requires org.yaml.snakeyaml;
     requires javafx.web;
 
+    opens org.GameEditor.application;
+    exports org.GameEditor.application;
 
     opens org.scenebuilder to javafx.fxml;
     exports org.scenebuilder;
