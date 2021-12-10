@@ -20,7 +20,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.RuleEngine.engine.GameState;
 import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.dummy.DummyGame;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.SetupData;
 
