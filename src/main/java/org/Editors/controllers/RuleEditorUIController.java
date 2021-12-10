@@ -115,6 +115,9 @@ public class RuleEditorUIController implements Initializable {
       endLineY = bounds.getMinY();
       Line link = new Line (startLineX, startLineY, endLineX, endLineY);
       editorPane.getChildren().add(link);
+      //anchor 2 blocks
+      block.setBlockAnchor();
+      startBlock.setBlockAnchor();
       startLineX = startLineY = endLineX = endLineY = -1;
 
       //temp

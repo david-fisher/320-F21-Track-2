@@ -47,9 +47,10 @@ public class WhileBlock extends Block {
       });
   
     this.block.setOnMouseDragged(e -> {
-    //set new position
-    this.block.setTranslateX(e.getSceneX() - this.startX);
-    this.block.setTranslateY(e.getSceneY() - this.startY);
+      if (!this.isConnected){
+        this.block.setTranslateX(e.getSceneX() - this.startX);
+        this.block.setTranslateY(e.getSceneY() - this.startY);
+      }
     });
 
     //Pane for placing the controls and text for the block
