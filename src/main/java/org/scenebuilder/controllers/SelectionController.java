@@ -180,20 +180,6 @@ public class SelectionController extends ScreenController {
     private ArrayList<GameState> savedGames = new ArrayList<>();
     private GameState selectedGame;
 
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void populateSelectionMenus(ArrayList<GameState> newGames, ArrayList<GameState> savedGames) {
 
         // convert games to nodes

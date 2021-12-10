@@ -1,13 +1,9 @@
 package org.scenebuilder.controllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
@@ -40,11 +36,11 @@ public class PlayController extends ScreenController {
     private static AnchorPane playParent;
     private static GameState activeGame;
     private ScrollPane decksPane;
-    private ScrollPane rngPane;
+    private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
     private Label playerTurnIndicator;
     private Label decksLabel;
-    private Label rngLabel;
+    private Label buttonLabel;
     private Label inventoryLabel;
     private Pane settingsPane;
     private HBox inventoryContainer;
@@ -103,7 +99,7 @@ public class PlayController extends ScreenController {
                     "-fx-border-color: #000000;" +
                     "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
             // set current player
-            fillInventoryDrawer(nextPlayer.getInventory());
+            fillInventory(nextPlayer.getInventory());
             currPlayer = nextPlayer;
             playerTurnCycle();
         });
@@ -155,21 +151,20 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initPlayers(gameStateInput.getAllPlayers());
-//        initButtons(gameStateInput);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
-        ArrayList<Die> dice = gameStateInput.getAllDice();
-        ArrayList<Spinner> spinners = gameStateInput.getAllSpinners();
+        ArrayList<Button> buttons = gameStateInput.getAllButtons();
+
         //players = gameState.getAllPlayers();
 
         int numDrawers = 0;
         boolean decksNeeded = decks.size() != 0;
-        boolean diceNeeded = dice.size() != 0;
-        boolean spinnersNeeded = spinners.size() != 0;
+        boolean buttonsNeeded = buttons.size() != 0;
+        //TODO
         boolean inventoryNeeded = true; //no indicator yet
 
         numDrawers = decksNeeded ? numDrawers + 1 : numDrawers;
-        numDrawers = diceNeeded || spinnersNeeded ? numDrawers + 1 : numDrawers;
+        numDrawers = buttonsNeeded ? numDrawers + 1 : numDrawers;
         numDrawers = inventoryNeeded ? numDrawers + 1 : numDrawers;
 
         if (decksNeeded) {
@@ -182,23 +177,17 @@ public class PlayController extends ScreenController {
         container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
 
-        if (diceNeeded || spinnersNeeded) {
-            initializeRNGDrawer(numDrawers);
-            initRNGLabel(numDrawers);
+        if (buttonsNeeded) {
+            initializeButtonDrawer(numDrawers);
+            initButtonLabel(numDrawers);
+            initButtons(gameStateInput);
         }
-        if (diceNeeded) {
-            placeDice(dice, rngPane, container);
-        }
-        if (spinnersNeeded) {
-            placeSpinners(spinners, rngPane, container);
-        }
-
 
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
             initializeInventoryDrawer(numDrawers);
             initInventoryLabel(numDrawers);
-            initInventory(new ArrayList<GameObject>());
+            fillInventory(currPlayer.getInventory());
         }
 
     }
@@ -263,12 +252,28 @@ public class PlayController extends ScreenController {
 
     private void initButtons(GameState gameState) {
         ArrayList<Button> buttons = gameState.getAllButtons();
+        System.out.println(buttons);
+        HBox container = new HBox();
+        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(-10);
         buttons.forEach(button -> {
-            String event = (String) button.getTrait("onClick");
+            String event = button.getOnClick();
+            Label label = new Label(button.getText());
+            button.setParent(label);
+            setStyle(label, "18", button.getColorString(), button.getText().length() * 12, button.getHeight());
             button.getParent().setOnMouseClicked(e -> {
-                interpreter.interpretEvent(gameState.events.get(event), gameState);
+                if (button.getEnabled()) {
+                    interpreter.interpretEvent(gameState.events.get(event), gameState);
+                }
             });
+            container.getChildren().add(button.getParent());
+            System.out.println("Added: " + button.getText());
+            label.setCenterShape(true);
+            container.setMargin(button.getParent(), new Insets(10, 10, 20, 10));
         });
+        buttonPane.setContent(container);
+        buttonPane.setStyle("-fx-border-color: black");
     }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
@@ -288,15 +293,11 @@ public class PlayController extends ScreenController {
         gamePiece.setLocation(parent);
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
-//        gamePiece.setParent(gp);
+        gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
         gp.setLayoutX(parent.getXPos() + parent.getWidth() / 2);
         gp.setLayoutY(parent.getYPos() + parent.getHeight() / 2);
 
-    }
-
-    private void initInventory(ArrayList<GameObject> inventory) {
-        fillInventoryDrawer(inventory);
     }
 
     public void initSettings() {
@@ -349,10 +350,10 @@ public class PlayController extends ScreenController {
         //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
-    private void initRNGLabel(int numDrawers) {
-        rngLabel = new Label();
-        initLabel(rngLabel, "RNG", "rngLabel");
-        playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
+    private void initButtonLabel(int numDrawers) {
+        buttonLabel = new Label();
+        initLabel(buttonLabel, "Buttons", "buttonLabel");
+        playParent.setTopAnchor(buttonLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
     private void initInventoryLabel(int numDrawers) {
@@ -395,10 +396,10 @@ public class PlayController extends ScreenController {
         playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
-    private void initializeRNGDrawer(int numDrawers) {
-        rngPane = new ScrollPane();
-        initializeDrawer(rngPane);
-        playParent.setTopAnchor(rngPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
+    private void initializeButtonDrawer(int numDrawers) {
+        buttonPane = new ScrollPane();
+        initializeDrawer(buttonPane);
+        playParent.setTopAnchor(buttonPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
     private void initializeInventoryDrawer(int numDrawers) {
@@ -408,6 +409,7 @@ public class PlayController extends ScreenController {
     }
 
     private void initializeDrawer(ScrollPane pane) {
+        pane.setFitToHeight(true);
         pane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -576,7 +578,7 @@ public class PlayController extends ScreenController {
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }
 
-    private void fillInventoryDrawer(ArrayList<GameObject> inventory) {
+    private void fillInventory(ArrayList<GameObject> inventory) {
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
@@ -621,8 +623,8 @@ public class PlayController extends ScreenController {
         ScrollPane tab;
         if (parent.getId().equals("decksLabel")) {
             tab = decksPane;
-        } else if (parent.getId().equals("rngLabel")){
-            tab = rngPane;
+        } else if (parent.getId().equals("buttonLabel")){
+            tab = buttonPane;
         } else {
             tab = inventoryPane;
         }

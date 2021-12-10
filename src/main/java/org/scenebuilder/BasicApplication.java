@@ -10,6 +10,7 @@ import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
 import org.scenebuilder.controllers.MainController;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +174,22 @@ public class BasicApplication extends Application {
         spinnerWeight.add(0.2);
         spinners.add(spinner1);
 
+        ArrayList<Button> buttons = new ArrayList<>();
+        Button button = new Button();
+        button.setText("Roll Dice");
+        button.setColorString("#FFFFFF");
+        button.setWidth(100.0);
+        button.setHeight(50.0);
+        buttons.add(button);
+
+        Button button1 = new Button();
+        button1.setText("Draw From Deck");
+        button1.setColorString("#FFFFFF");
+        button1.setWidth(100.0);
+        button1.setHeight(50.0);
+        buttons.add(button1);
+
+
         ArrayList<Token> gameTokens = new ArrayList<>();
         Token gameToken = new Token();
         gameToken.setLabel("Token 1");
@@ -188,6 +205,8 @@ public class BasicApplication extends Application {
             gameState.setAllDice(dice);
             gameState.setAllSpinners(spinners);
         }
+
+        gameState.setAllButtons(buttons);
 
         gameState.setAllPlayers(players);
         gameState.setAllTokens(gameTokens);
