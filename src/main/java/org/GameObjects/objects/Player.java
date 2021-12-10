@@ -49,12 +49,28 @@ public class Player extends GameObject {
       return false;
     }
     
-    public boolean setGamePieces(ArrayList<Gamepiece> gamePieces) { 
-        return this.setTrait("gamePieces", gamePieces);
+    public void setGamePieces(ArrayList<Gamepiece> gamePieces) { 
+        this.gamePieces = gamePieces;
     }
     
-    public boolean setInventory(ArrayList<GameObject> inventory) { 
-      return this.setTrait("inventory", inventory);
+    public void setInventory(ArrayList<GameObject> inventory) { 
+        this.inventory = inventory;
+    }
+
+    public void addInventory(GameObject gameobj){
+        this.getInventory().add(gameobj)
+    }
+
+    public void removeInventory(GameObject gameobj){
+        this.getInventory().remove(gameobj)
+    }
+
+    public void removeInventory(int index){
+        this.getInventory().remove(index)
+    }
+
+    public void addInventoryAtIndex(int index, GameObject gameobj){
+        this.getInventory().set(index, gameobj)
     }
     
     public boolean setIsHuman(boolean isHuman) {
@@ -62,11 +78,11 @@ public class Player extends GameObject {
     }
 
     public ArrayList<Gamepiece> getGamePieces() { 
-        return (ArrayList<Gamepiece>) this.traits.get("gamePieces");
+        return this.gamepieces;
     }
     
     public ArrayList<GameObject> getInventory() { 
-      return (ArrayList<GameObject>) this.traits.get("inventory");
+      return this.inventory;
     }
     
     public boolean getIsHuman() { 
