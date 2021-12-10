@@ -250,13 +250,15 @@ public class RuleEditorUIController implements Initializable {
   private void handleSaveBtn(ActionEvent event) {
     //temp
     //print out info for the operands of blocks
-    if (startBlock.getNode() instanceof OpNode) {
-      ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
-      for(int i = 0; i < operandsList.size(); i++) {
-        System.out.print(i + " rule group:");
-        System.out.println(" (size = " + operandsList.get(i).size() + ")");
-        for(int j = 0; j < operandsList.get(i).size(); j++) {
-          System.out.println(operandsList.get(i).get(j));
+    if (startBlock != null) {
+      if (startBlock.getNode() instanceof OpNode) {
+        ArrayList<ArrayList<org.RuleEngine.nodes.Node>> operandsList = ((OpNode)startBlock.getNode()).getAllOperands();
+        for(int i = 0; i < operandsList.size(); i++) {
+          System.out.print(i + " rule group:");
+          System.out.println(" (size = " + operandsList.get(i).size() + ")");
+          for(int j = 0; j < operandsList.get(i).size(); j++) {
+            System.out.println(operandsList.get(i).get(j));
+          }
         }
       }
     }
@@ -276,6 +278,12 @@ public class RuleEditorUIController implements Initializable {
       if (seqBlockList.get(i).getParentPtr() != null) {
         newSeqBlockList.add(seqBlockList.get(i));
       }
+    }
+
+    //Check that there's at least 1 tree made
+    if (newSeqBlockList.size() == 0) {
+      displayError("Cannot save unless a sequence block points to a tree.");
+      return;
     }
 
     //Abort saving if the sequence blocks contain an error
