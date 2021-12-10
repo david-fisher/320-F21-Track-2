@@ -10,11 +10,14 @@ import org.RuleEngine.engine.GameState;
 //        Rule group 1 - true block
 //        Rule gorup 2 - false block
 public class IfNode extends OpNode {
-    public IfNode() { super(); }
-    public IfNode(ArrayList<ArrayList<Node>> operands) {
-        super(operands);
+    public IfNode() { 
+        super(); 
+        this.addOperand(null);
+        this.addRuleGroup(new ArrayList<Node>()).addRuleGroup(new ArrayList<Node>());
     }
 
+    @Override
+    @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         LiteralNode condition = getOperand(0).execute(currState);
         if (condition == null) { return null; }
