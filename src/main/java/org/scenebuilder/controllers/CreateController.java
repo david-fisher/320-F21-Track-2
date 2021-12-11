@@ -28,9 +28,8 @@ public class CreateController extends ScreenController {
         changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
     }
 
-    public void changeToMain(MouseEvent event) {
+    public void changeToMain(ActionEvent event) {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        BasicApplication.initScreenStyle(stage);
         MainController main = new MainController();
         main.initialize(stage);
     }
