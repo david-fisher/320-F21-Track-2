@@ -3,6 +3,14 @@ import java.util.ArrayList;
 import org.RuleEngine.nodes.*;
 
 public class Interpreter {
+    
+    public static Interpreter instance;
+    
+    public static Interpreter getInstance() {
+        if (instance == null) { instance = new Interpreter(); }
+        return instance;
+    }
+    
     public void interpretRule(Node rule, GameState currState) {
         LiteralNode result = rule.execute(currState);
         if (result != null) 

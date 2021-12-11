@@ -146,7 +146,7 @@ public class RuleEditorUIController implements Initializable {
   }
 
   private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID, Node target){
-    if (startLineX == -1){
+    if (startLineX == -1) {
       Bounds bounds = target.localToScene(target.getBoundsInLocal());
       startLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
       startLineY = bounds.getMinY();
@@ -335,17 +335,17 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    blockActions(new PSetBlock());
+    blockActions(GenBlockMaker.makeBlock("pset"));
   }
 
   @FXML
   private void handleAddRsetBtn(ActionEvent event) {
-    blockActions(new RSetBlock());
+    blockActions(GenBlockMaker.makeBlock("rset"));
   }
 
   @FXML
   private void handleAddGetBtn(ActionEvent event) {
-    blockActions(new GetBlock());
+    blockActions(GenBlockMaker.makeBlock("get"));
   }
 
   @FXML
@@ -375,7 +375,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
-    blockActions(new MoveByStepsBlock());
+    blockActions(GenBlockMaker.makeBlock("moveby"));
   }
 
   @FXML
@@ -390,7 +390,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddInvokeBtn(ActionEvent event) {
-    blockActions(new InvokeBlock());
+    blockActions(GenBlockMaker.makeBlock("invoke"));
   }
 
   @FXML
