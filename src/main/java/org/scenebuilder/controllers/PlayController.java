@@ -73,7 +73,7 @@ public class PlayController extends ScreenController {
         }
         activeGame = BasicApplication.getSelectedGame();
 
-        initializePlayScreen();
+        initPlayScreen();
 
         initGame(activeGame);
 
@@ -84,29 +84,25 @@ public class PlayController extends ScreenController {
     }
 
     private void playerTurnCycle() {
-        Label switchTurn = new Label();
-        switchTurn.setText("End Turn");
-        setStyle(switchTurn, "14", "Red", 100, 50);
-
-        switchTurn.setOnMouseClicked(e -> {
-            int nextPlayerIndex = players.indexOf(currPlayer);
-            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-            playerTurnIndicator.setText(nextPlayer.getLabel() + "'s Turn");
-            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 16; " +
-                    "-fx-border-color: #000000;" +
-                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
-            // set current player
-            fillInventory(nextPlayer.getInventory());
-            currPlayer = nextPlayer;
-            playerTurnCycle();
-        });
-        playParent.getChildren().addAll(switchTurn);
-        playParent.setLeftAnchor(switchTurn, 5.0);
-        playParent.setTopAnchor(switchTurn, 5.0);
-        switchTurn.setAlignment(Pos.CENTER);
+//        Label switchTurn = new Label();
+//        switchTurn.setText("End Turn");
+//        setStyle(switchTurn, "14", "Red", 100, 50);
+//
+//        switchTurn.setOnMouseClicked(e -> {
+//            int nextPlayerIndex = players.indexOf(currPlayer);
+//            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
+//            playerTurnIndicator.setText(nextPlayer.getLabel() + "'s Turn");
+//            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                    "-fx-background-radius: 5 5 5 5; " +
+//                    "-fx-font-family: Serif; " +
+//                    "-fx-font-size: 16; " +
+//                    "-fx-border-color: #000000;" +
+//                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
+//            // set current player
+//            fillInventory(nextPlayer.getInventory());
+//            currPlayer = nextPlayer;
+//            playerTurnCycle();
+//        });
     }
 
     private static AnchorPane boardPane;
@@ -123,7 +119,6 @@ public class PlayController extends ScreenController {
         currPlayer = players.get(0);
         gameStateInput.setAllPlayers(players);
 
-        playerTurnCycle();
         initPlayerTurnIndicator();
 
         // TODO: do we do this?
@@ -168,7 +163,7 @@ public class PlayController extends ScreenController {
         numDrawers = inventoryNeeded ? numDrawers + 1 : numDrawers;
 
         if (decksNeeded) {
-            initializeDeckDrawer(numDrawers);
+            initDeckDrawer(numDrawers);
             initDeckLabel(numDrawers);
             fillDeckDrawer(decks, decksPane);
         }
@@ -178,14 +173,14 @@ public class PlayController extends ScreenController {
         container.setAlignment(Pos.CENTER);
 
         if (buttonsNeeded) {
-            initializeButtonDrawer(numDrawers);
+            initButtonDrawer(numDrawers);
             initButtonLabel(numDrawers);
             initButtons(gameStateInput);
         }
 
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
-            initializeInventoryDrawer(numDrawers);
+            initInventoryDrawer(numDrawers);
             initInventoryLabel(numDrawers);
             fillInventory(currPlayer.getInventory());
         }
@@ -390,25 +385,25 @@ public class PlayController extends ScreenController {
         playParent.setRightAnchor(label, 0.0);
     }
 
-    private void initializeDeckDrawer(int numDrawers) {
+    private void initDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
-        initializeDrawer(decksPane);
+        initDrawer(decksPane);
         playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
-    private void initializeButtonDrawer(int numDrawers) {
+    private void initButtonDrawer(int numDrawers) {
         buttonPane = new ScrollPane();
-        initializeDrawer(buttonPane);
+        initDrawer(buttonPane);
         playParent.setTopAnchor(buttonPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
-    private void initializeInventoryDrawer(int numDrawers) {
+    private void initInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
-        initializeDrawer(inventoryPane);
+        initDrawer(inventoryPane);
         playParent.setTopAnchor(inventoryPane, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
-    private void initializeDrawer(ScrollPane pane) {
+    private void initDrawer(ScrollPane pane) {
         pane.setFitToHeight(true);
         pane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -589,7 +584,7 @@ public class PlayController extends ScreenController {
         inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
     }
 
-    public void initializePlayScreen() {
+    public void initPlayScreen() {
         if (playParent == null) {
             playParent = new AnchorPane();
         }
