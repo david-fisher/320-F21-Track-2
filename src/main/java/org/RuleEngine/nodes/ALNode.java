@@ -7,9 +7,9 @@ public class ALNode extends OpNode {
 
     private String operator;
     
-    public ALNode(String op) {
+    public ALNode() {
         super();
-        operator = op;
+        operator = "+";
         this.addOperand(null).addOperand(null);
     }
 
