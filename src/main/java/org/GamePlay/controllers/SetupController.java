@@ -169,9 +169,11 @@ public class SetupController extends ScreenController {
         loadSetupFromBasicApplication();
 
         // instantiate setup object
-
+        initSetupObject();
 
         // populate stuff -
+        initPlayerNodesInVBox();
+
 
         // add event handlers -
 
@@ -186,6 +188,7 @@ public class SetupController extends ScreenController {
     // the setup data that is passed back to BasicApplication to be read by PlayScreen
     SetupData setupData;
 
+    // init functions
     private void loadSetupFromBasicApplication() {
 
         // load in the selected project from BasicApplication // todo what is this for?
@@ -194,7 +197,6 @@ public class SetupController extends ScreenController {
         // load in the selected game from BasicApplication
         selectedGame = BasicApplication.getSelectedGame();
     }
-
     private void initSetupObject() {
 
         // instantiate new setupData object
@@ -209,17 +211,28 @@ public class SetupController extends ScreenController {
             addNewPlayer();
         }
 
+        // set tutorial mode to be initially disabled
+        setupData.setIsTutorialMode(false);
+    }
+    private void initPlayerNodesInVBox() {
+
+        // clear (init means start fresh as opposed to add)
+        playersVBox.getChildren().clear();
+
+        // for each player, add a corresponding node
+        setupData.getPlayers().forEach( (player) -> {
+            addPlayerNode();
+        });
     }
 
     // helpers
+    // todo implement helpers
     private void addNewPlayer() {
 
     }
-
+    private void addPlayerNode() {}
 
     // event handlers
-
-
 
     // todo this function needs a lot of work
 //    public void playFromSetup(ActionEvent event) throws IOException {
