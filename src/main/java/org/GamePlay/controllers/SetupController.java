@@ -89,6 +89,8 @@ public class SetupController extends ScreenController {
         plusPlayerButton.setFont(new Font(24));
         HBox.setMargin(plusPlayerButton, HBox.getMargin(plusPlayerButton));
 
+        minusPlayerButton.prefWidthProperty().bind(plusPlayerButton.widthProperty());
+
         numPlayersHBox.getChildren().addAll(numPlayersLabel, minusPlayerButton, playerCountTextField, plusPlayerButton);
         screenVBox.getChildren().add(numPlayersHBox);
     }
@@ -116,8 +118,11 @@ public class SetupController extends ScreenController {
 
     HBox bottomHBox;
     Button backButton;
-    HBox checkBoxHBox;
-    CheckBox tutorialModeCheckBox;
+    HBox centralHBox;
+    Label tutorialLabel;
+    Label tutorialToggleLabel;
+    Label playerOrderLabel;
+    Label playerOrderToggleLabel;
     Button startGameButton;
     private void initBottomBar() {
 
@@ -131,26 +136,52 @@ public class SetupController extends ScreenController {
         backButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         backButton.setText("Back");
         backButton.setFont(new Font(24));
+        backButton.setPadding(new Insets(10, 30, 10, 30));
         HBox.setMargin(backButton, new Insets(10, 20, 10, 20));
 
-        checkBoxHBox = new HBox();
-        checkBoxHBox.setAlignment(Pos.CENTER);
+        centralHBox = new HBox();
+        centralHBox.setAlignment(Pos.CENTER);
+        centralHBox.setStyle("-fx-background-color: transparent");
+        HBox.setHgrow(centralHBox, Priority.ALWAYS);
 
-        tutorialModeCheckBox = new CheckBox();
-        tutorialModeCheckBox.setTextFill(Color.valueOf(GlobalCSSValues.text));
-        tutorialModeCheckBox.setText("Enable Tutorial Mode");
-        HBox.setMargin(tutorialModeCheckBox, new Insets(10, 20, 10, 20));
+        tutorialLabel = new Label("Tutorial Mode: ");
+        tutorialLabel.setFont(new Font(24));
+        tutorialLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
+        HBox.setMargin(tutorialLabel, new Insets(0, 0, 0, 20));
 
-        checkBoxHBox.getChildren().add(tutorialModeCheckBox);
+        tutorialToggleLabel = new Label("Disabled");
+        tutorialToggleLabel.setFont(tutorialLabel.getFont());
+        tutorialToggleLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        tutorialToggleLabel.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        tutorialToggleLabel.prefHeightProperty().bind(tutorialLabel.heightProperty());
+        tutorialToggleLabel.setPadding(new Insets(10, 30, 10, 30));
+        HBox.setMargin(tutorialToggleLabel, new Insets(0, 0, 0, 40));
+
+        playerOrderLabel = new Label("Turn Order: ");
+        playerOrderLabel.setFont(tutorialLabel.getFont());
+        playerOrderLabel.setTextFill(tutorialLabel.getTextFill());
+        playerOrderLabel.prefHeightProperty().bind(tutorialLabel.heightProperty());
+        HBox.setMargin(playerOrderLabel, new Insets(0, 0, 0, 100));
+
+        playerOrderToggleLabel = new Label("Random");
+        playerOrderToggleLabel.setFont(playerOrderLabel.getFont());
+        playerOrderToggleLabel.setTextFill(tutorialToggleLabel.getTextFill());
+        playerOrderToggleLabel.setStyle(tutorialToggleLabel.getStyle());
+        playerOrderToggleLabel.prefHeightProperty().bind(playerOrderLabel.heightProperty());
+        playerOrderToggleLabel.setPadding(tutorialToggleLabel.getPadding());
+        HBox.setMargin(playerOrderToggleLabel, HBox.getMargin(tutorialToggleLabel));
+
+        centralHBox.getChildren().addAll(tutorialLabel, tutorialToggleLabel, playerOrderLabel, playerOrderToggleLabel);
 
         startGameButton = new Button();
         startGameButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
         startGameButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         startGameButton.setText("Start Game");
         startGameButton.setFont(new Font(24));
+        startGameButton.setPadding(new Insets(10, 30, 10, 30));
         HBox.setMargin(startGameButton, new Insets(10, 20, 10, 20));
 
-        bottomHBox.getChildren().addAll(backButton, checkBoxHBox, startGameButton);
+        bottomHBox.getChildren().addAll(backButton, centralHBox, startGameButton);
         screenVBox.getChildren().add(bottomHBox);
     }
 
@@ -171,8 +202,10 @@ public class SetupController extends ScreenController {
         // instantiate setup object
         initSetupObject();
 
-        // populate stuff -
+        // initialize visuals with their values
         initPlayerNodesInVBox();
+        initTutorial();
+        initPlayerOrder();
 
 
         // add event handlers -
@@ -224,6 +257,8 @@ public class SetupController extends ScreenController {
             addPlayerNode();
         });
     }
+    private void initTutorial() {} // todo
+    private void initPlayerOrder() {} // todo
 
     // helpers
     // todo implement helpers
