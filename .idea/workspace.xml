@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Replaced RNG with Buttons">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Centered controllers, fixed back/cancel buttons.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/scenebuilder/controllers/CreateController.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +17,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaFXApplication" />
         <option value="Class" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -51,7 +50,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -422,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639159096164</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Centered controllers, fixed back/cancel buttons.">
+      <created>1639239608630</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1639239608630</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,7 +444,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Matt's playerTurnCycle method (not yet used by any onClick event)" />
     <MESSAGE value="Added our Player.java to objects folder" />
     <MESSAGE value="Changed buttons in Main Menu to labels with color" />
     <MESSAGE value="Button aesthetic changes" />
@@ -463,7 +468,8 @@
     <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
     <MESSAGE value="Connected Editor controllers (through &quot;create game&quot;)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Connected Editor controllers (through &quot;create game&quot;)" />
+    <MESSAGE value="Centered controllers, fixed back/cancel buttons." />
+    <option name="LAST_COMMIT_MESSAGE" value="Centered controllers, fixed back/cancel buttons." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
