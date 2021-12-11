@@ -325,13 +325,9 @@ public class GameObjectUIController extends ScreenController {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }

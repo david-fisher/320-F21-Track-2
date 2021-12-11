@@ -54,6 +54,7 @@ public class Gamepiece extends GameObject{
 			}
 			return true ;
 		}
+
 		return false ;
 	}
 
