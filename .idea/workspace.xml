@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fixed back">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
-    </list>
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Full loop" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,13 +109,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
-      <created>1636243444825</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1636243444825</updated>
     </task>
     <task id="LOCAL-00002" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
       <created>1636250671710</created>
@@ -455,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639265014041</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Full loop">
+      <created>1639265912725</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1639265912726</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -472,7 +470,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added a custom setStyle method to initialize the style's of most labels to clean up code." />
     <MESSAGE value="Added a custom setStyle method: clean up code and increase mutability of labels." />
     <MESSAGE value="PlayScreen no longer overrides stage dimensions" />
     <MESSAGE value="Replace DummyPlayer with Player and replaced Token with Gamepiece. Merged GKNEW's new files." />
@@ -497,7 +494,8 @@
     <MESSAGE value="Small fix to static playParent" />
     <MESSAGE value="Small progress in returning to main" />
     <MESSAGE value="Fixed back" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed back" />
+    <MESSAGE value="Full loop" />
+    <option name="LAST_COMMIT_MESSAGE" value="Full loop" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
