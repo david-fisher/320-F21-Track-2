@@ -24,10 +24,10 @@ public class MainMenuController {
 
     
     @FXML private void changeToGameObjectEditor(ActionEvent event) {
-        changeScene("../../resources/GameObjectEditor.fxml");
+        changeScene("../../../resources/GameObjectEditor.fxml");
     }
 
     @FXML private void changeToRuleEditor(ActionEvent event) {
-        changeScene("../../resources/RuleEditor.fxml");
+        changeScene("../../../resources/RuleEditor.fxml");
     }
 }

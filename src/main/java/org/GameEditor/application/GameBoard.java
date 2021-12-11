@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.control.TextField;
 
 public class GameBoard {
 
@@ -17,16 +18,22 @@ public class GameBoard {
 	int height = 8;
 	int cellWidth = boardWidth / width;
 	int cellHeight = boardHeight / height;
+
+	TextField nameTf;
+	TextField colorTf;
+	TextField imgTf;
 	
 	public GameBoard() {
 		//board = new Rectangle[width][height];
 	}
 	
-	public void resize(Rectangle[][] rectangle) {
-		
+	public void sendNameColorImg(TextField nameTf, TextField colorTf, TextField imgTf){
+		this.nameTf = nameTf;
+		this.colorTf = colorTf;
+		this.imgTf = imgTf;
 	}
 	
-	public void draw(Pane gameBoardBackground, int w, int h, int[][] gridLayout, ArrayList<Tile> existingTiles) {
+	public void draw(GameBoard gameBoard, Pane gameBoardBackground, int w, int h, int[][] gridLayout, ArrayList<Tile> existingTiles) {
 		gameBoardBackground.getChildren().clear();
 		width = w;
 		height = h;
@@ -46,13 +53,23 @@ public class GameBoard {
                 gameBoardBackground.getChildren().add(r);
             }
         }
-        
+
         //this is to redraw the tiles themselves
         for (int i = 0; i < existingTiles.size(); i++) {
         	Tile t = existingTiles.get(i);
+        	Draggable drag = new Draggable();
+			Leftclickable left = new Leftclickable();
+			Rightclickable right = new Rightclickable();
 
-        	
-        	t.tileShape.resize(cellWidth, cellHeight);//doesn't work
+        	Rectangle rec = new Rectangle(cellWidth, cellHeight);
+			rec.setFill(t.tileShape.getFill());
+
+			t.tileShape = rec;
+
+			drag.makeDraggable(t.tileShape,gameBoard,gameBoardBackground, gridLayout, t);
+			left.makeLeftclickable(t, nameTf, imgTf, colorTf);
+			right.makeRightClickable(t, t.tileShape, gameBoardBackground, gridLayout, gameBoard);
+			//t.tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
         	//need to change the original tile location of each t

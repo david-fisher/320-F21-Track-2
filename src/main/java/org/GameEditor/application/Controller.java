@@ -248,7 +248,8 @@ public class Controller {
 		int height = Integer.valueOf(rowSize.getText());
 		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];
-		gameBoard.draw(gameBoardBackground, width, height, gridLayout, existingTiles);
+		gameBoard.sendNameColorImg(nameTf, colorTf, imageTf);
+		gameBoard.draw(gameBoard, gameBoardBackground, width, height, gridLayout, existingTiles);
 	}
 	
 
@@ -258,7 +259,8 @@ public class Controller {
 		int height = Integer.valueOf(rowSize.getText());
 		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];
-		gameBoard.draw(gameBoardBackground, width, height, gridLayout, existingTiles);
+		gameBoard.sendNameColorImg(nameTf, colorTf, imageTf);
+		gameBoard.draw(gameBoard, gameBoardBackground, width, height, gridLayout, existingTiles);
 	}
 	
 	
@@ -282,7 +284,8 @@ public class Controller {
     	int y = Integer.valueOf(rowSize.getText());
     	int x = Integer.valueOf(columnSize.getText());
     	gridLayout = new int[x][y];
-    	gameBoard.draw(gameBoardBackground, x, y, gridLayout, existingTiles);
+		gameBoard.sendNameColorImg(nameTf, colorTf, imageTf);
+    	gameBoard.draw(gameBoard, gameBoardBackground, x, y, gridLayout, existingTiles);
     	//also need to hide the old button
     	//also need to hide the text
     }

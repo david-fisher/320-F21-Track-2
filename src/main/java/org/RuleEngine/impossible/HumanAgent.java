@@ -41,6 +41,7 @@ public class HumanAgent {
 		String choice = scan.nextLine();
 		String s0 = s.toString();
 		s0 = s0.substring(0, Integer.valueOf(choice)) + this.player +  s0.substring(Integer.valueOf(choice)+1);
+		scan.close();
 		return new State(this.other(), s0);
 	}	
 }
