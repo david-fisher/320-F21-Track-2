@@ -11,7 +11,7 @@
    <children>
       <Pane fx:id="gameBoardBackground" layoutX="23.0" layoutY="20.0" prefHeight="559.0" prefWidth="629.0">
          <children>
-            <Text layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! &#10;Please select the number &#10;of Rows and Columns&#10;This can be changed later!" textAlignment="CENTER">
+            <Text fill="WHITE" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! &#10;Please select the number &#10;of Rows and Columns&#10;This can be changed later!" textAlignment="CENTER">
                <font>
                   <Font size="48.0" />
                </font>
@@ -33,7 +33,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="33.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Undo" textAlignment="CENTER">
+                  <Button fx:id="undoButton" layoutX="33.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Undo" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -43,7 +43,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="132.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Redo" textAlignment="CENTER">
+                  <Button fx:id="redoButton" layoutX="132.0" layoutY="36.0" mnemonicParsing="false" style="-fx-pref-width: 60; -fx-max-width: 60; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Redo" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -58,7 +58,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="32.0" layoutY="132.0" mnemonicParsing="false" style="-fx-pref-width: 160; -fx-max-width: 160; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Rule Editor" textAlignment="CENTER">
+                  <Button fx:id="ruleEditor" layoutX="32.0" layoutY="132.0" mnemonicParsing="false" style="-fx-pref-width: 160; -fx-max-width: 160; -fx-background-color: #e06666ff; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Rule Editor" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
