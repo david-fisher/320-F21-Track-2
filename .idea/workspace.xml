@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified a few buttons">
+      <change beforePath="$PROJECT_DIR$/SceneBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SceneBuilder.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -490,7 +488,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed buttons in Main Menu to labels with color" />
     <MESSAGE value="Button aesthetic changes" />
     <MESSAGE value="Button aesthetic changes part 2: added a darkening effect when they are hovered over and curved their edges." />
     <MESSAGE value="Added a custom setStyle method to initialize the style's of most labels to clean up code." />
@@ -515,7 +512,8 @@
     <MESSAGE value="Most up to date working on intellij" />
     <MESSAGE value="Removed some bin files" />
     <MESSAGE value="Modified paths to allow our code to run" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified paths to allow our code to run" />
+    <MESSAGE value="Modified a few buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified a few buttons" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
