@@ -11,10 +11,15 @@ public class SetupData {
     public ArrayList<Player> playerList = new ArrayList<>();
     private boolean isTutorialMode;
 
+    public SetupData() {
+
+    }
+
     public SetupData(ArrayList<Player> playerList, boolean isTutorialMode) {
         this.playerList = playerList;
         this.isTutorialMode = isTutorialMode;
     }
+
     @Override
     public String toString() {
 

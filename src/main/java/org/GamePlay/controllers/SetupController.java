@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import org.GameObjects.objects.GameObject;
 import org.GameObjects.objects.Gamepiece;
 import org.GameObjects.objects.Player;
+import org.GameObjects.objects.Project;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
@@ -167,15 +168,30 @@ public class SetupController extends ScreenController {
         // load settings from BasicApplication
         loadSetupFromBasicApplication();
 
+        // instantiate setup object
+
+
         // populate stuff -
 
         // add event handlers -
 
     }
 
+    // the project selected in selectionScreen
+    Project selectedProject;
+
+    // the setup data that is passed back to BasicApplication to be read by PlayScreen
+    SetupData setupData;
+
     private void loadSetupFromBasicApplication() {
 
+        // load in the selected project from BasicApplication
+        selectedProject = BasicApplication.getProject();
+    }
 
+    private void initSetupObject() {
+
+        setupData = new SetupData();
     }
 
 
