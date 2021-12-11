@@ -23,9 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-/* Condition block stored in connBlockList from Block class. Statements from while stored
-in stmntsConnBlockList defined below*/
-
 public class WhileBlock extends Block {
   private int HEIGHT = 150;
 
@@ -33,9 +30,13 @@ public class WhileBlock extends Block {
   private int midColWidth = 100;
   private int lastColWidth = 20;
 
-  protected ObservableList<javafx.scene.Node> stmntsConnBlockList = FXCollections.observableArrayList();
+  //List to hold the blocks we add as statements
+  private ObservableList<javafx.scene.Node> stmntsConnBlockList = FXCollections.observableArrayList();
 
-  public WhileBlock() {
+  //List to hold the condition block
+  ObservableList<javafx.scene.Node> conditionConnBlockList = FXCollections.observableArrayList();
+
+  public WhileBlock(int numStmnts) {
     this.block = new StackPane();
 
     //Make the block draggable
@@ -46,13 +47,11 @@ public class WhileBlock extends Block {
       });
   
     this.block.setOnMouseDragged(e -> {
-    //set new position
-    this.block.setTranslateX(e.getSceneX() - this.startX);
-    this.block.setTranslateY(e.getSceneY() - this.startY);
+      if (!this.isConnected){
+        this.block.setTranslateX(e.getSceneX() - this.startX);
+        this.block.setTranslateY(e.getSceneY() - this.startY);
+      }
     });
-
-    //Base visual of the stackpane
-    Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
 
     //Pane for placing the controls and text for the block
     GridPane grid = new GridPane();
@@ -79,44 +78,48 @@ public class WhileBlock extends Block {
   
     //Defining row 1 of grid
     Rectangle conditionInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    connBlockList.addAll(conditionInput);
+    conditionConnBlockList.addAll(conditionInput);
     Text connText = new Text("Condition");
     connText.setFill(WHITE);
-    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
-    grid.add(result, 0, 1);
+    Rectangle resultConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    grid.add(resultConn, 0, 1);
     grid.add(connText, 1, 1);
     grid.add(conditionInput, 2, 1);
     grid.setHalignment(connText, HPos.RIGHT);
 
-    //Defining row 3 of grid
-    Rectangle firstStmntConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    stmntsConnBlockList.addAll(firstStmntConn);
-    VBox vbox = new VBox(5, firstStmntConn);
-    grid.add(vbox, 2, 2);
+    //Defining row 2 of grid
+    Text stmntsText = new Text("Statements");
+    stmntsText.setFill(WHITE);
+    grid.add(stmntsText, 1, 2);
+    grid.setHalignment(stmntsText, HPos.CENTER);
     
-    // Define row 4
-    Button addStmntBtn = new Button("+");
-    grid.add(addStmntBtn, 1, 3);
-    grid.setHalignment(addStmntBtn, HPos.CENTER); 
-
-    // action event
-    EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
-      public void handle(MouseEvent e)
-      {
-        Rectangle newStmntConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-        stmntsConnBlockList.addAll(newStmntConn);
-        vbox.getChildren().add(newStmntConn);
+    //Start row is the row at which we want to start adding the statements. Since "Statements" text is on
+    //row 2, we start at row 3.
+    int startRow = 3;
+    for(int i = 0; i < numStmnts; i++) {
+      Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+      //Store the conneciton blocks in a list
+      stmntsConnBlockList.addAll(connBlock);
+      grid.add(connBlock, 2, i+startRow);
+      if (i + 1 != numStmnts) {
         HEIGHT = HEIGHT + 35;
-        base.setHeight(HEIGHT);
       }
-    };
-    addStmntBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event); 
+    }
+
+    //Set the result block for this block to the result connection we made
+    this.result = resultConn;
+
+    //Add all the lists of connection blocks to the rule group list
+    this.ruleGroupList.addAll(conditionConnBlockList, stmntsConnBlockList);
+
+    //Base visual of the stackpane
+    Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
     
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
     this.block.getChildren().addAll(base, grid, name);
     //Position the name of the block at the top of the stackpane
     this.block.setAlignment(name, Pos.TOP_CENTER);
     //Create the actual Node object for this block
-    //this.createNode("while");
+    this.createNode("while");
   }
 }

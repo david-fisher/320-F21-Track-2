@@ -14,7 +14,7 @@ public class LiteralNode<T> extends Node {
 
     // In a sense, an atomic expression is a kind of rule.
     // When executed, it simply returns itself (base case).
-    public LiteralNode execute(GameState currState) {
+    public LiteralNode<T> execute(GameState currState) {
         return this;
     }
 }
