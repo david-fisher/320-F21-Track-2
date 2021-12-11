@@ -605,6 +605,8 @@ public class PlayController extends ScreenController {
         Platform.exit();
     }
 
+    public void clearPlayParent() { playParent = new AnchorPane();}
+
     public void mainMenuFromPlay() {
         MainController controller = new MainController();
         controller.initialize(stage);
@@ -710,6 +712,7 @@ public class PlayController extends ScreenController {
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
+                clearPlayParent();
                 exitFromPlay();
             });
             no.setOnMouseClicked(e -> {
@@ -748,6 +751,7 @@ public class PlayController extends ScreenController {
             yes.setOnMouseClicked(e-> {
                 popupWindow.close();
                 parentPopup.close();
+                clearPlayParent();
                 mainMenuFromPlay();
             });
             no.setOnMouseClicked(e -> {
@@ -815,6 +819,7 @@ public class PlayController extends ScreenController {
                 if (!saved) {
                     displayExitWithoutSave(popupWindow);
                 } else {
+                    clearPlayParent();
                     popupWindow.close();
                     exitFromPlay();
                 }
@@ -828,6 +833,7 @@ public class PlayController extends ScreenController {
                 if (!saved) {
                     displayMainMenuWithoutSave(popupWindow);
                 } else {
+                    clearPlayParent();
                     popupWindow.close();
                     mainMenuFromPlay();
                 }
