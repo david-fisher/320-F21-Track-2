@@ -50,6 +50,7 @@ public class GameBoard {
         //this is to redraw the tiles themselves
         for (int i = 0; i < existingTiles.size(); i++) {
         	Tile t = existingTiles.get(i);
+
         	
         	t.tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);

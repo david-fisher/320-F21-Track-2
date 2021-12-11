@@ -32,6 +32,18 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
 public class Controller {
+
+	@FXML
+	private Button objectEditor;
+
+	@FXML
+	private Button undoButton;
+
+	@FXML
+	private Button redoButton;
+
+	@FXML
+	private Button ruleEditor;
 	
 	@FXML
 	private Button exitButton;
@@ -52,9 +64,6 @@ public class Controller {
 
 	@FXML
 	private Button testButton;
-
-	@FXML
-	private Button objectEditor;
 	
 	@FXML
     private TextField colorTf;
@@ -152,6 +161,9 @@ public class Controller {
 		genSquareButton.setCursor(Cursor.HAND);
 		saveButton.setCursor(Cursor.HAND);
 		testButton.setCursor(Cursor.HAND);
+		objectEditor.setCursor(Cursor.HAND);
+		ruleEditor.setCursor(Cursor.HAND);
+		undoButton.setCursor(Cursor.HAND);
 	}
 
 	// TODO Placeholder for adding shape to group root

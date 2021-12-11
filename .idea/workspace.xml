@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +74,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -144,7 +149,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-      <workItem from="1639173282493" duration="5543000" />
+      <workItem from="1639173282493" duration="5946000" />
+      <workItem from="1639246214810" duration="6232000" />
     </task>
     <task id="LOCAL-00001" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
       <created>1636243444825</created>
@@ -512,6 +518,16 @@
     <MESSAGE value="Removed some bin files" />
     <MESSAGE value="Modified paths to allow our code to run" />
     <option name="LAST_COMMIT_MESSAGE" value="Modified paths to allow our code to run" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/GameEditor/application/Tile.java</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
