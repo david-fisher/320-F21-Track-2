@@ -1,17 +1,13 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -21,7 +17,7 @@ import org.GameObjects.objects.*;
 
 import javafx.scene.input.MouseEvent;
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.controllers.PlayController;
+import org.GamePlay.controllers.PlayController;
 
 import java.util.ArrayList;
 

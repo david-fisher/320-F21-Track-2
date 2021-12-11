@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
-import org.scenebuilder.Display;
+import org.GamePlay.Display;
 
 // Usage: Operand 0 - game piece name.
 //		  Operand 1 - distance (LiteralNode<Integer>)

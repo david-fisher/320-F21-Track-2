@@ -8,11 +8,11 @@ module org {
     opens org.GameEditor.application;
     exports org.GameEditor.application;
 
-    opens org.scenebuilder.controllers;
-    exports org.scenebuilder.controllers;
+    opens org.GamePlay.controllers;
+    exports org.GamePlay.controllers;
 
-    opens org.scenebuilder to javafx.fxml;
-    exports org.scenebuilder;
+    opens org.GamePlay to javafx.fxml;
+    exports org.GamePlay;
 
     opens org.Editors.controllers;
     exports org.Editors.controllers;

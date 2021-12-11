@@ -1,4 +1,4 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -22,9 +22,9 @@ import org.GameObjects.objects.GameObject;
 import org.GameObjects.objects.Gamepiece;
 import org.GameObjects.objects.Player;
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.SetupData;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.GlobalCSSValues;
+import org.GamePlay.SetupData;
 
 import java.io.IOException;
 import java.util.*;

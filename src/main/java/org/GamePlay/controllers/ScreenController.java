@@ -1,4 +1,4 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -6,9 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.SettingsObject;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.GlobalCSSValues;
 
 public class ScreenController {
 

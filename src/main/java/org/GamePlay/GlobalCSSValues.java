@@ -1,4 +1,4 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 public class GlobalCSSValues {
 

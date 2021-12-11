@@ -1,4 +1,4 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Savable;
-import org.RuleEngine.engine.GameState;
-import org.scenebuilder.BasicApplication;
 
 import java.io.IOException;
 
