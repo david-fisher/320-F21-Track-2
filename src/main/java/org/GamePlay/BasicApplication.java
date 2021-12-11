@@ -17,6 +17,7 @@ public class BasicApplication extends Application {
 
     private static SettingsObject settingsObject = new SettingsObject();
 
+
     //TODO: Phase these out
     private static ArrayList<GameState> newGames = new ArrayList<>();
     private static ArrayList<GameState> savedGames = new ArrayList<>();
@@ -39,7 +40,6 @@ public class BasicApplication extends Application {
         newGames.add(game1);
         newGames.add(game2);
         newGames.add(game3);
-        System.out.println(newGames);
     }
     public static void loadSavedGames() {
 
@@ -54,7 +54,6 @@ public class BasicApplication extends Application {
         savedGames.add(game1);
         savedGames.add(game2);
         savedGames.add(game3);
-        System.out.println(savedGames);
     }
     private static GameState createGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
 

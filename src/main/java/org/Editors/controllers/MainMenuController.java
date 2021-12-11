@@ -14,10 +14,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.Savable;
+import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.MainController;
 import org.GamePlay.controllers.ScreenController;
 
 public class MainMenuController extends ScreenController {
+
     public void changeScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -42,8 +44,8 @@ public class MainMenuController extends ScreenController {
     }
 
     @FXML private void returnToMain(ActionEvent event) {
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Savable.closeDB();
+        stage = BasicApplication.restartStage(new Stage());
         MainController main = new MainController();
         main.initialize(stage);
     }

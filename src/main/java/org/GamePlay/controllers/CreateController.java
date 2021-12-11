@@ -30,11 +30,7 @@ public class CreateController extends ScreenController {
     }
 
     public void changeToMain(ActionEvent event) {
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        double width = Screen.getPrimary().getVisualBounds().getWidth();
-        double height = Screen.getPrimary().getBounds().getWidth();
-        stage.setWidth(width);
-        stage.setHeight(height);
+        stage = BasicApplication.restartStage(new Stage());
         MainController main = new MainController();
         main.initialize(stage);
     }
@@ -48,5 +44,7 @@ public class CreateController extends ScreenController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
+
+
 }
 

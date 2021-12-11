@@ -24,5 +24,5 @@ module org {
 
     opens org.RuleEngine.nodes;
     exports org.RuleEngine.engine;
-//    opens org.RuleEngine.engine;
+    opens org.RuleEngine.engine;
 }
