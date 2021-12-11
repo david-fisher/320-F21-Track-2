@@ -25,11 +25,15 @@ public class GameState extends Savable {
     public ArrayList<GameObject> gameObjects;
 
     public boolean tutorialEnabled;
+    public int minPlayer, maxPlayer;
+    
     public HashMap<String, GameObject> registers;
     public HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
     public GameState() {
         projectName = "New Project";
+        minPlayer = 1;
+        maxPlayer = 4;
         
         gameObjects = new ArrayList<GameObject>();
         buttons = new ArrayList<Button>();
@@ -119,6 +123,12 @@ public class GameState extends Savable {
     // For object persistence
     public String getProjectName() { return projectName; }
     public void setProjectName(String name) { projectName = name; }
+    
+    public int getMaxPlayer() { return maxPlayer; }
+    public void setMaxPlayer(int num) { maxPlayer = num; }
+    
+    public int getMinPlayer() { return minPlayer; }
+    public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
     
     public GameBoard getGameBoard() { return board; }
     public void setGameBoard(GameBoard board) { this.board = board; }
