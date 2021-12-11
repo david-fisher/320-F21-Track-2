@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.*;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.MainController;
 import org.GamePlay.controllers.ScreenController;
 
@@ -111,9 +109,18 @@ public class Controller extends ScreenController {
 
 	@FXML
 	void exitProgram(ActionEvent event) throws IOException {// This currently quits out of the system. We want it to
+		changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
+	}
+
+	public void changeScene(ActionEvent event, String nextScene) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(nextScene));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		MainController main = new MainController();
-		main.initialize(stage);
+
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		scene.getRoot().setStyle("-fx-font-family: 'serif'");
+		stage.show();
 	}
 
 	@FXML
