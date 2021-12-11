@@ -1,4 +1,4 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.BasicApplication;
+import org.GamePlay.BasicApplication;
 
 import java.io.IOException;
 

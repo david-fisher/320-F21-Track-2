@@ -14,8 +14,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.Savable;
-import org.scenebuilder.controllers.MainController;
-import org.scenebuilder.controllers.ScreenController;
+import org.GamePlay.controllers.MainController;
+import org.GamePlay.controllers.ScreenController;
 
 public class MainMenuController extends ScreenController {
     public void changeScene(ActionEvent event, String nextScene) throws IOException {
