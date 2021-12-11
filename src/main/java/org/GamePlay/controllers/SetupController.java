@@ -204,13 +204,14 @@ public class SetupController extends ScreenController {
 
         // initialize visuals with their values
         initPlayerNodesInVBox();
-        initTutorial();
-        initPlayerOrder();
-
+        updateTutorialToggleValue();
+        initPlayerOrderToggleValue();
 
         // add event handlers -
-
+        initEventHandlers();
     }
+
+    private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
 
     // the project selected in selectionScreen // todo determine what the point of this is... do we need it?
     Project selectedProject;
@@ -257,8 +258,30 @@ public class SetupController extends ScreenController {
             addPlayerNode();
         });
     }
-    private void initTutorial() {} // todo
-    private void initPlayerOrder() {} // todo
+    private void initPlayerOrderToggleValue() {
+
+        playerOrderToggleLabel.setText(PLAYER_ORDER_STRINGS[0]);
+    }
+    private void initEventHandlers() {
+
+        // add event handlers to each individual node
+    }
+
+    // update functions
+    private void updateTutorialToggleValue() {
+
+        boolean tutorialEnabled = setupData.isTutorialMode();
+
+        if(tutorialEnabled == true) {
+
+            tutorialToggleLabel.setText("Enabled");
+
+        } else {
+
+            tutorialToggleLabel.setText("Disabled");
+        }
+
+    }
 
     // helpers
     // todo implement helpers
@@ -267,9 +290,14 @@ public class SetupController extends ScreenController {
     }
     private void addPlayerNode() {}
 
-    // event handlers
+    // event handlers // todo implement handlers
+    private void minusButtonPressed() {}
+    private void plusButtonPressed() {}
+    private void tutorialButtonPressed() {}
+    private void playerOrderButtonPressed() {}
+    private void backFromSetup() {}
+    private void playFromSetup() {}
 
-    // todo this function needs a lot of work
 //    public void playFromSetup(ActionEvent event) throws IOException {
 //
 //        // Get modified name
