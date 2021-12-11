@@ -49,7 +49,6 @@ src/main/java/org/Editors/META-INF/MANIFEST.MF
 .project
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
 
 #Target Folder
 target/

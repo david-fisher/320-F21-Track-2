@@ -23,7 +23,7 @@ import javafx.util.Duration;
 
 import org.GameObjects.objects.Button;
 import org.RuleEngine.nodes.LiteralNode;
-import org.RuleEngine.nodes.MoveNode;
+import org.RuleEngine.nodes.MoveByNode;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.Display;
 import org.scenebuilder.GlobalCSSValues;
@@ -539,10 +539,8 @@ public class PlayController extends ScreenController {
 
         Display.getDisplay().print("You rolled: " + roll);
 
-        ArrayList<org.RuleEngine.nodes.Node> operands = new ArrayList<>();
-        operands.add(name);
-        operands.add(value);
-        MoveNode move = new MoveNode(operands);
+        MoveByNode move = new MoveByNode();
+        move.setOperand(name, 0).setOperand(value, 1);
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
