@@ -41,6 +41,7 @@ public class MainMenuController extends ScreenController {
     }
 
     @FXML private void returnToMain(ActionEvent event) {
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         MainController main = new MainController();
         main.initialize(stage);
     }

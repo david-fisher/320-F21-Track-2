@@ -54,7 +54,7 @@ public class ScreenController {
     public void initialize(Stage stage) {
 
         this.stage = stage;
-        BasicApplication.updateStage(stage);
+        stage = BasicApplication.updateStage(stage);
 
         initAnchorPane();
 

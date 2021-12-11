@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
+import org.scenebuilder.BasicApplication;
 
 import java.io.IOException;
 
@@ -28,6 +29,8 @@ public class CreateController extends ScreenController {
     }
 
     public void changeToMain(MouseEvent event) {
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        BasicApplication.initScreenStyle(stage);
         MainController main = new MainController();
         main.initialize(stage);
     }
