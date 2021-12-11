@@ -1,8 +1,7 @@
 fxmodules = javafx.controls,javafx.fxml
 
-board = ../scenebuilder/scenebuilder/*.java
-
-dummies = ../scenebuilder/scenebuilder/dummy/*.java
+board = ../scenebuilder/*.java
+board_controllers = ../scenebuilder/controllers/*.java
 
 objects = ../GameObjects/objects/*.java
 
@@ -14,13 +13,12 @@ controllers = controllers/*.java
 
 menu = MainMenu.java
 
+lib = *.jar
+
 blocks = blocks/*.java
 
-all: $(board) $(dummies) $(objects) $(nodes) $(engine) $(blocks) $(controllers) $(menu)
+all: $(board) $(board_controllers) $(objects) $(nodes) $(engine) $(blocks) $(controllers) $(menu)
 	javac -d . --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
-archive: objects node engine controllers menu
-	jar cfmv Editors.jar manifest.txt editors/ resources/
-
 run:
-	java --module-path $(PATH_TO_FX) --add-modules $(fxmodules) editors.MainMenu
+	java --module-path $(PATH_TO_FX) --add-modules $(fxmodules) org.Editors.MainMenu

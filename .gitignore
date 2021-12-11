@@ -35,8 +35,7 @@ hs_err_pid*
 /src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
 /src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
 .DS_Store
-.DS_Store
-.DS_Store
+src/main/java/org/Editors/META-INF/MANIFEST.MF
 
 # Default ignored files
 /.idea/shelf/
