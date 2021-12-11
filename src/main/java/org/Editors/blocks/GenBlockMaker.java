@@ -22,12 +22,34 @@ public final class GenBlockMaker {
                 newBlock.createGenBlock("invoke", new String[] {"Event:"});
                 newBlock.createNode("invoke");
                 return newBlock;
-            case "moveby":
+            case "moveBy":
                 newBlock.createGenBlock("move by steps", new String[] {"Obj:", "Steps:"});
-                newBlock.createNode("moveby");
+                newBlock.createNode("moveBy");
                 return newBlock;
-            // case "use":
-            //     return new UseNode();
+            case "nextPlayer":
+                newBlock.createGenBlock("get next player", new String[] {});
+                newBlock.createNode("nextPlayer");
+                return newBlock;
+            case "tile":
+                newBlock.createGenBlock("get tile[i]", new String[] {"i:"});
+                newBlock.createNode("tile");
+                return newBlock;
+            case "use":
+                newBlock.createGenBlock("use die/spinner", new String[] {"die/spnr:"});
+                newBlock.createNode("use");
+                return newBlock;
+            case "draw":
+                newBlock.createGenBlock("deck draw", new String[] {"Plcmnt:", "Deck:", "Player:"});
+                newBlock.createNode("draw");
+                return newBlock;
+            case "put":
+                newBlock.createGenBlock("deck put", new String[] {"Card:", "Plcmnt:", "Deck:"});
+                newBlock.createNode("put");
+                return newBlock;
+            case "shuffle":
+                newBlock.createGenBlock("deck shuffle", new String[] {"Deck:"});
+                newBlock.createNode("shuffle");
+                return newBlock;
         }
 
         System.out.println("Unknown block type");

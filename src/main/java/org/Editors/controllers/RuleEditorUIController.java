@@ -365,7 +365,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
-    blockActions(new GetTileIndexBlock());
+    blockActions(GenBlockMaker.makeBlock("tile"));
   }
 
   @FXML
@@ -375,7 +375,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
-    blockActions(GenBlockMaker.makeBlock("moveby"));
+    blockActions(GenBlockMaker.makeBlock("moveBy"));
   }
 
   @FXML
@@ -385,7 +385,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetNextPlayerBtn(ActionEvent event) {
-    blockActions(new GetNextPlayerBlock());
+    blockActions(GenBlockMaker.makeBlock("nextPlayer"));
   }
 
   @FXML
@@ -395,22 +395,22 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddDeckDrawBtn(ActionEvent event) {
-    blockActions(new DeckDrawBlock());
+    blockActions(GenBlockMaker.makeBlock("draw"));
   }
 
   @FXML
   private void handleAddDeckPutBtn(ActionEvent event) {
-    blockActions(new DeckPutBlock());
+    blockActions(GenBlockMaker.makeBlock("put"));
   }
 
   @FXML
   private void handleAddDeckShuffleBtn(ActionEvent event) {
-    blockActions(new DeckShuffleBlock());
+    blockActions(GenBlockMaker.makeBlock("shuffle"));
   }
 
   @FXML
   private void handleAddUseDieSpinnerBtn(ActionEvent event) {
-    blockActions(new UseDieSpinnerBlock());
+    blockActions(GenBlockMaker.makeBlock("use"));
   }
 
   @FXML 
