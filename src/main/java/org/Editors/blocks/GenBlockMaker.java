@@ -50,6 +50,10 @@ public final class GenBlockMaker {
                 newBlock.createGenBlock("deck shuffle", new String[] {"Deck:"});
                 newBlock.createNode("shuffle");
                 return newBlock;
+            case "display":
+                newBlock.createGenBlock("display", new String[] {"String:"});
+                newBlock.createNode("display");
+                return newBlock;
         }
 
         System.out.println("Unknown block type");

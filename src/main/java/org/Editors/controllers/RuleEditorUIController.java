@@ -413,6 +413,11 @@ public class RuleEditorUIController implements Initializable {
     blockActions(GenBlockMaker.makeBlock("use"));
   }
 
+  @FXML
+  private void handleAddDisplayBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("display"));
+  }
+
   @FXML 
   private void handleAddTextNodeBtn(ActionEvent event) {
     TextBlock txtBlock = new TextBlock();
