@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.control.TextField;
@@ -61,11 +62,20 @@ public class GameBoard {
 			Leftclickable left = new Leftclickable();
 			Rightclickable right = new Rightclickable();
 
-        	Rectangle rec = new Rectangle(cellWidth, cellHeight);
-			rec.setFill(t.tileShape.getFill());
+			System.out.println(t.tileShape.getClass().getSimpleName());
+			if (t.tileShape.getClass().getSimpleName().equals("Rectangle")) {
+				Rectangle rec = new Rectangle(cellWidth, cellHeight);
+				rec.setFill(t.tileShape.getFill());
 
-			t.tileShape = rec;
+				t.tileShape = rec;
+			}
+			else if (t.tileShape.getClass().getSimpleName().equals("Circle")) {
+				int radius = Math.min(cellWidth, cellHeight)/2;
+				Circle cir = new Circle(radius);
+				cir.setFill(t.tileShape.getFill());
 
+				t.tileShape = cir;
+			}
 			drag.makeDraggable(t.tileShape,gameBoard,gameBoardBackground, gridLayout, t);
 			left.makeLeftclickable(t, nameTf, imgTf, colorTf);
 			right.makeRightClickable(t, t.tileShape, gameBoardBackground, gridLayout, gameBoard);
