@@ -18,14 +18,17 @@ public class BasicApplication extends Application {
 
     private static SettingsObject settingsObject = new SettingsObject();
 
+    //TODO: Phase these out
     private static ArrayList<GameState> newGames = new ArrayList<>();
     private static ArrayList<GameState> savedGames = new ArrayList<>();
 
+    //TODO: selected game could be replaced by Project
     private static GameState selectedGame;
     private static SetupData setupData;
 
-    public static void loadNewGames() {
+    private static Project project;
 
+    public static void loadNewGames() {
         // do stuff to get list of playable games (on start) from Persistent Data team
         // todo
 
@@ -289,6 +292,8 @@ public class BasicApplication extends Application {
 
         return stage;
     }
+    public static void setProject(Project p) { project = p; }
+    public static Project getProject() { return project; }
 
     @Override
     public void start(Stage stage) {

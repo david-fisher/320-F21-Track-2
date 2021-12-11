@@ -13,6 +13,7 @@ import java.net.URL;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.Editors.MainMenu;
+import org.GameObjects.objects.Savable;
 import org.scenebuilder.controllers.MainController;
 import org.scenebuilder.controllers.ScreenController;
 
@@ -42,6 +43,7 @@ public class MainMenuController extends ScreenController {
 
     @FXML private void returnToMain(ActionEvent event) {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Savable.closeDB();
         MainController main = new MainController();
         main.initialize(stage);
     }

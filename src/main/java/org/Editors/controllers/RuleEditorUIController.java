@@ -49,6 +49,7 @@ import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 import javafx.geometry.Bounds;
+import org.scenebuilder.BasicApplication;
 import org.scenebuilder.controllers.ScreenController;
 
 // TODO: Change handleIf and handleWhile to not solely use placeBlock
@@ -520,6 +521,8 @@ public class RuleEditorUIController extends ScreenController implements Initiali
 
   @FXML
   private void handleBackButton(ActionEvent event) throws IOException {
+    Savable.closeDB();
+    System.out.println(BasicApplication.getProject().getProjectName());
     changeScene(event, "MainMenuScreen.fxml");
   }
 

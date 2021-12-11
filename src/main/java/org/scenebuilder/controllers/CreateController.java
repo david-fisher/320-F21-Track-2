@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
 import org.scenebuilder.BasicApplication;
@@ -23,13 +25,16 @@ public class CreateController extends ScreenController {
 
     public void createAndEdit(ActionEvent event) throws IOException {
         Savable.intitDB();
-        Savable.createProject(projectName.getText());
-        Savable.closeDB();
+        BasicApplication.setProject(Savable.createProject(projectName.getText()));
         changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
     }
 
     public void changeToMain(ActionEvent event) {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        double width = Screen.getPrimary().getVisualBounds().getWidth();
+        double height = Screen.getPrimary().getBounds().getWidth();
+        stage.setWidth(width);
+        stage.setHeight(height);
         MainController main = new MainController();
         main.initialize(stage);
     }
@@ -37,7 +42,6 @@ public class CreateController extends ScreenController {
     public void changeScene(ActionEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();

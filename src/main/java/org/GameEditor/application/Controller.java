@@ -120,6 +120,7 @@ public class Controller extends ScreenController {
 
 	@FXML
 	void exitProgram(ActionEvent event) throws IOException {// This currently quits out of the system. We want it to
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		MainController main = new MainController();
 		main.initialize(stage);
 	}

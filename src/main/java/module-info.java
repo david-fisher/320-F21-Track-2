@@ -11,7 +11,7 @@ module org {
     opens org.scenebuilder.controllers;
     exports org.scenebuilder.controllers;
 
-    opens org.scenebuilder to javafx.fxml;
+    opens org.scenebuilder;
     exports org.scenebuilder;
 
     opens org.Editors.controllers;

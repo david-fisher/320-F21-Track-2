@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Project;
 import org.scenebuilder.BasicApplication;
 import org.scenebuilder.GlobalCSSValues;
 import org.scenebuilder.SettingsObject;
