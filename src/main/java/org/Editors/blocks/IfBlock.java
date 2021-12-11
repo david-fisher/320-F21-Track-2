@@ -23,21 +23,22 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-/**Well, this is bad code but the conndition connection rectangle is stored in connBlockList which
-is stored in the Block class. The connection blocks from the if part and the else part are stored in their
-own lists defined here: ifConnBlockList and elseConnBlockList**/
-
 public class IfBlock extends Block {
-  private int HEIGHT = 270;
+  //Default height
+  private int HEIGHT = 220;
+  private final int VBOX_PADDING = 10;
+  //For readjusting size of if & else vboxes. 40 because each connection is 30px tall and vboxes have padding of 10px.
+  private final int SIZE_REFACTOR = 40;
 
   private int firstColWidth = 20;
   private int midColWidth = 100;
   private int lastColWidth = 20;
 
-  protected ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
-  protected ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> conditionConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> ifConnBlockList = FXCollections.observableArrayList();
+  private ObservableList<javafx.scene.Node> elseConnBlockList = FXCollections.observableArrayList();
 
-  public IfBlock() {
+  public IfBlock(int numIfStmnts, int numElseStmnts) {
     this.block = new StackPane();
 
     //Make the block draggable
@@ -49,12 +50,11 @@ public class IfBlock extends Block {
   
     this.block.setOnMouseDragged(e -> {
     //set new position
-    this.block.setTranslateX(e.getSceneX() - this.startX);
-    this.block.setTranslateY(e.getSceneY() - this.startY);
+      if (!this.isConnected){
+        this.block.setTranslateX(e.getSceneX() - this.startX);
+        this.block.setTranslateY(e.getSceneY() - this.startY);
+      }
     });
-
-    //Base visual of the stackpane
-    Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
 
     //Pane for placing the controls and text for the block
     GridPane grid = new GridPane();
@@ -81,11 +81,11 @@ public class IfBlock extends Block {
   
     //Defining row 1 of grid
     Rectangle conditionInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    connBlockList.addAll(conditionInput);
+    conditionConnBlockList.addAll(conditionInput);
     Text connText = new Text("Condition");
     connText.setFill(WHITE);
-    Rectangle result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
-    grid.add(result, 0, 1);
+    Rectangle resultConn = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
+    grid.add(resultConn, 0, 1);
     grid.add(connText, 1, 1);
     grid.add(conditionInput, 2, 1);
     grid.setHalignment(connText, HPos.RIGHT); 
@@ -97,28 +97,17 @@ public class IfBlock extends Block {
     grid.setHalignment(thenText, HPos.CENTER); 
 
     //Defining row 3 of grid
-    Rectangle thenInput = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    ifConnBlockList.addAll(thenInput);
-    VBox vbox = new VBox(5, thenInput);
-    grid.add(vbox, 2, 3);
-    
-    // Define row 4
-    Button addThenOfIf = new Button("+");
-    grid.add(addThenOfIf, 1, 4);
-    grid.setHalignment(addThenOfIf, HPos.CENTER); 
-
-    // action event
-    EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
-      public void handle(MouseEvent e)
-      {
-        Rectangle thenInput2 = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-        ifConnBlockList.addAll(thenInput2);
-        vbox.getChildren().add(thenInput2);
-        HEIGHT = HEIGHT + 35;
-        base.setHeight(HEIGHT);
+    VBox vboxIf = new VBox(VBOX_PADDING);
+    grid.add(vboxIf, 2, 3);
+    for(int i = 0; i < numIfStmnts; i++) {
+      Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+      //Store the conneciton blocks in a list
+      ifConnBlockList.addAll(connBlock);
+      vboxIf.getChildren().add(connBlock);
+      if (i + 1 != numIfStmnts) {
+        HEIGHT = HEIGHT + SIZE_REFACTOR;
       }
-    };
-    addThenOfIf.addEventFilter(MouseEvent.MOUSE_CLICKED, event); 
+    }
     
     //ELSE PART
     //Defining row 5 of grid
@@ -129,28 +118,26 @@ public class IfBlock extends Block {
     grid.setHalignment(elseName, HPos.CENTER);
 
     //Defining row 6 of grid
-    Rectangle thenElsePart = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
-    elseConnBlockList.addAll(thenElsePart);
-    VBox vboxElsePart = new VBox(5, thenElsePart);
-    grid.add(vboxElsePart, 2, 6);
-    
-    // Define row 7
-    Button addThenOfElse = new Button("+");
-    grid.add(addThenOfElse, 1, 7);
-    grid.setHalignment(addThenOfElse, HPos.CENTER); 
-
-    // action event
-    EventHandler<MouseEvent> eventElsePart = new EventHandler<MouseEvent>() {
-      public void handle(MouseEvent e)
-      {
-        Rectangle thenInput2 = new Rectangle(19, 30, SILVER);
-        elseConnBlockList.addAll(thenInput2);
-        vboxElsePart.getChildren().add(thenInput2);
-        HEIGHT = HEIGHT + 35;
-        base.setHeight(HEIGHT);
+    VBox vboxElse = new VBox(VBOX_PADDING);
+    grid.add(vboxElse, 2, 6);
+    for(int i = 0; i < numElseStmnts; i++) {
+      Rectangle connBlock = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, SILVER);
+      //Store the conneciton blocks in a list
+      elseConnBlockList.addAll(connBlock);
+      vboxElse.getChildren().add(connBlock);
+      if (i + 1 != numElseStmnts) {
+        HEIGHT = HEIGHT + SIZE_REFACTOR;
       }
-    };
-    addThenOfElse.addEventFilter(MouseEvent.MOUSE_CLICKED, eventElsePart); 
+    }
+
+    //Add the lists of connection blocks to the ruleGroupList
+    this.ruleGroupList.addAll(conditionConnBlockList, ifConnBlockList, elseConnBlockList);
+
+    //Set the result block for this block to the result connection we made
+    this.result = resultConn;
+
+    //Base visual of the stackpane
+    Rectangle base = new Rectangle(BLOCK_WIDTH, HEIGHT, GREY);
     
     //Stack the base Rectangle, grid GridPane, and name of the block on the pane
     this.block.getChildren().addAll(base, grid, name);
