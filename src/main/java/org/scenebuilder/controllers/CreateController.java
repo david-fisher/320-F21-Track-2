@@ -23,11 +23,6 @@ public class CreateController extends ScreenController {
     public void createAndEdit(ActionEvent event) throws IOException {
         Savable.intitDB();
         Savable.createProject(projectName.getText());
-        GameState x = Savable.getProjects().get(0).getIntiGS();
-//		GameState x = p.getIntiGS();
-//		x.dice = new ArrayList<Die>();
-        x.dice.get(0).setNumSides(6);
-//		x.dice.add(new Die());
         Savable.closeDB();
         changeScene(event, "MainMenuScreen.fxml");
     }

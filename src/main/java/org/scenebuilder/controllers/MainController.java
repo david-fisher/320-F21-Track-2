@@ -135,7 +135,7 @@ public class MainController extends ScreenController {
     // todo implement new button
     public void newFromMain(MouseEvent event) throws IOException {
         System.out.println("New");
-        switchScene(event, "MainMenuScreen.fxml");
+        switchScene(event, "CreateController.fxml");
     }
 
     // todo implement edit button
