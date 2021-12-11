@@ -53,9 +53,9 @@ public class SetupController extends ScreenController {
 
     HBox numPlayersHBox;
     Label numPlayersLabel;
-    Button minusPlayerButton;
-    TextField playerCountTextField;
-    Button plusPlayerButton;
+    Label minusPlayerButton;
+    Label playerCountLabel;
+    Label plusPlayerButton;
     private void initPlayerHeading() {
 
         numPlayersHBox = new HBox();
@@ -67,31 +67,34 @@ public class SetupController extends ScreenController {
         numPlayersLabel.setFont(new Font(24));
         HBox.setMargin(numPlayersLabel, new Insets(20, 100, 30, 10));
 
-        minusPlayerButton = new Button();
+        minusPlayerButton = new Label("-");
+        minusPlayerButton.setAlignment(Pos.CENTER);
         minusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         minusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        minusPlayerButton.setText("-");
         minusPlayerButton.setFont(new Font(24));
+        minusPlayerButton.setPadding(new Insets(10, 20, 10, 20));
         HBox.setMargin(minusPlayerButton, new Insets(2, 2, 2, 2));
 
-        playerCountTextField = new TextField();
-        playerCountTextField.setStyle("-fx-background-color: " + GlobalCSSValues.secondary + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
-        playerCountTextField.setDisable(true);
-        playerCountTextField.setFont(new Font(24));
-        playerCountTextField.setAlignment(Pos.CENTER);
-        playerCountTextField.prefWidthProperty().bind(Bindings.multiply(minusPlayerButton.widthProperty(), 2));
-        HBox.setMargin(playerCountTextField, new Insets(5, 5, 5, 5));
+        playerCountLabel = new Label();
+        playerCountLabel.setAlignment(Pos.CENTER);
+        playerCountLabel.setStyle("-fx-background-color: " + GlobalCSSValues.secondary + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
+        playerCountLabel.setFont(new Font(24));
+        playerCountLabel.setAlignment(Pos.CENTER);
+        playerCountLabel.setPadding(minusPlayerButton.getPadding());
+        HBox.setMargin(playerCountLabel, new Insets(5, 5, 5, 5));
 
-        plusPlayerButton = new Button();
+        plusPlayerButton = new Label("+");
+        plusPlayerButton.setAlignment(Pos.CENTER);
         plusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         plusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        plusPlayerButton.setText("+");
         plusPlayerButton.setFont(new Font(24));
+        plusPlayerButton.setPadding(minusPlayerButton.getPadding());
         HBox.setMargin(plusPlayerButton, HBox.getMargin(plusPlayerButton));
 
         minusPlayerButton.prefWidthProperty().bind(plusPlayerButton.widthProperty());
+        playerCountLabel.prefWidthProperty().bind(Bindings.multiply(plusPlayerButton.widthProperty(), 2));
 
-        numPlayersHBox.getChildren().addAll(numPlayersLabel, minusPlayerButton, playerCountTextField, plusPlayerButton);
+        numPlayersHBox.getChildren().addAll(numPlayersLabel, minusPlayerButton, playerCountLabel, plusPlayerButton);
         screenVBox.getChildren().add(numPlayersHBox);
     }
 
