@@ -64,7 +64,7 @@ public class PlayController extends ScreenController {
 
         // load relevant data
         setupData = BasicApplication.getSetupData();
-        players = setupData.playerList;
+        players = setupData.getPlayers();
         if (players.size() == 0) {
             players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
             players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));

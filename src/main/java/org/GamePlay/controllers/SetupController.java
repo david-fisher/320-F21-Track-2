@@ -177,21 +177,43 @@ public class SetupController extends ScreenController {
 
     }
 
-    // the project selected in selectionScreen
+    // the project selected in selectionScreen // todo determine what the point of this is... do we need it?
     Project selectedProject;
+
+    // the selected game
+    GameState selectedGame;
 
     // the setup data that is passed back to BasicApplication to be read by PlayScreen
     SetupData setupData;
 
     private void loadSetupFromBasicApplication() {
 
-        // load in the selected project from BasicApplication
+        // load in the selected project from BasicApplication // todo what is this for?
         selectedProject = BasicApplication.getProject();
+
+        // load in the selected game from BasicApplication
+        selectedGame = BasicApplication.getSelectedGame();
     }
 
     private void initSetupObject() {
 
+        // instantiate new setupData object
         setupData = new SetupData();
+
+        // set players to default -> min num players
+        // todo read real min num players from project settings
+        int minNumPlayers = 2;
+        for(int i = 0; i < minNumPlayers; ++i) {
+
+            // add a player to the list
+            addNewPlayer();
+        }
+
+    }
+
+    // helpers
+    private void addNewPlayer() {
+
     }
 
 
