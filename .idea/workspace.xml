@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Added CreateController">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/MainController.java" afterDir="false" />
-    </list>
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,9 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JavaFXApplication" />
-        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -28,6 +22,11 @@
     <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -38,6 +37,23 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="david-fisher" />
+        <option name="repository" value="320-F21-Track-2" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="feb996ff-0f35-45cc-8103-4af7425e5920" />
+        <option name="url" value="git@github.com:david-fisher/320-F21-Track-2.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="20YHQYlpZDfZ78KjZ57VTwvAsIT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -45,31 +61,32 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org/Editors/controllers" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/snakeyaml-1.29.jar" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org.Editors" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine\engine\nodes" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\controllers" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers\controllers" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers" />
+      <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor\application" />
+      <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="org.scenebuilder.controllers" />
       <recent name="org" />
       <recent name="org.scenebuilder.scenebuilder" />
       <recent name="" />
@@ -78,10 +95,23 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.BasicApplication">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
       <module name="SceneBuilder" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.GameEditor.application.Main" />
+      <module name="SceneBuilder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.GameEditor.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,6 +131,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
@@ -113,6 +144,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
+      <workItem from="1639173282493" duration="5543000" />
     </task>
     <task id="LOCAL-00001" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
       <created>1636243444825</created>
@@ -415,29 +447,32 @@
       <option name="project" value="LOCAL" />
       <updated>1639097891519</updated>
     </task>
-    <task id="LOCAL-00044" summary="Connected Editor controllers (through &quot;create game&quot;)">
-      <created>1639159096163</created>
+    <task id="LOCAL-00044" summary="Most up to date working on intellij">
+      <created>1639175825564</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1639159096164</updated>
+      <updated>1639175825564</updated>
     </task>
-    <task id="LOCAL-00045" summary="Centered controllers, fixed back/cancel buttons.">
-      <created>1639239608630</created>
+    <task id="LOCAL-00045" summary="Removed some bin files">
+      <created>1639176247404</created>
       <option name="number" value="00045" />
       <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1639239608630</updated>
+      <updated>1639176247404</updated>
     </task>
-    <task id="LOCAL-00046" summary="Added CreateController">
-      <created>1639242180700</created>
+    <task id="LOCAL-00046" summary="Modified paths to allow our code to run">
+      <created>1639178687707</created>
       <option name="number" value="00046" />
       <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1639242180700</updated>
+      <updated>1639178687707</updated>
     </task>
     <option name="localTasksCounter" value="47" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -449,7 +484,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed buttons in Main Menu to labels with color" />
@@ -474,10 +508,10 @@
     <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
     <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
-    <MESSAGE value="Connected Editor controllers (through &quot;create game&quot;)" />
-    <MESSAGE value="Centered controllers, fixed back/cancel buttons." />
-    <MESSAGE value="Added CreateController" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added CreateController" />
+    <MESSAGE value="Most up to date working on intellij" />
+    <MESSAGE value="Removed some bin files" />
+    <MESSAGE value="Modified paths to allow our code to run" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified paths to allow our code to run" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

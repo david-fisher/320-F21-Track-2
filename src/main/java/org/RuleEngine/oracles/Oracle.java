@@ -4,10 +4,11 @@ package org.RuleEngine.oracles;
        - RandomOracle       -   Random (for any games)
        - DepthOracle        -   IDDFS (for games without a clear scoring mechanism)
        - HeuristicOracle    -   Greedy (for games with a clear scoring mechanism)
-       - PruningOracle      -   Alpha-Beta Pruning (for zero-sum games with a scoring mechanism)
 */
 
-public interface Oracle  {  
-    public void processMove(Action a);
-    public Action decideMove();
+import org.RuleEngine.engine.GameState;
+
+public interface Oracle  {
+    public GameState processMove(String a);
+    public String decideMove();
 }

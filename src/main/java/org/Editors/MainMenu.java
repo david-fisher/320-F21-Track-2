@@ -16,11 +16,17 @@ public class MainMenu extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        URL location = getClass().getResource("MainMenuScreen.fxml");
-        Parent root = (Parent)FXMLLoader.load(location);
-        stage.setScene(new Scene(root));
-        MainMenu.stage.show();
+        URL location = getClass().getResource("../../resources/MainMenuScreen.fxml");
+        try {
+            Parent root = (Parent)FXMLLoader.load(location);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            System.err.println(e.toString());
+            e.printStackTrace();
+        }
     }
 }
