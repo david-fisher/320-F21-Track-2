@@ -81,6 +81,7 @@ public class GameBoard {
         		gameBoardBackground.getChildren().add(t.tileShape);
         		t.tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
 				t.tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
+				gridLayout[t.getTileXLocation()][t.getTileYLocation()] = 1;
         	}
         	else {
         		//remove the tile from the arrayList
