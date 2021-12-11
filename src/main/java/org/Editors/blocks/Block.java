@@ -68,16 +68,9 @@ public class Block {
   //List of lists of connection blocks
   protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
 
-  protected void createGenBlock(String blockName, String[] valueNames) {
-    this.block = new StackPane();
-
-    //Size block to fit the number of values that it will be passing in.
-    //We will have 1 row in the gridpane for each value.
-    //If there are no arguments, still give it the size of as if it has 1 argument.
-    int resize = RESIZE_FACTOR * (valueNames.length == 0 ? 1 : valueNames.length);
-    this.blockHeight = this.blockHeight + resize;
-
-    //Make the block draggable
+  //Add event handlers for left and right click - left click & hold = drag, right click = delete
+  protected void makeDraggableAndDeletable() {
+    //Make the block draggable and deletable
     this.block.setOnMousePressed(e -> {
       if (e.isPrimaryButtonDown()) {
         //calculate offset
@@ -110,7 +103,6 @@ public class Block {
         this.grid = null;
       }
     });
-
     this.block.setOnMouseDragged(e -> {
       if (!isConnected){
         //set new position
@@ -118,6 +110,19 @@ public class Block {
         this.block.setTranslateY(e.getSceneY() - startY);
       }
     });
+  }
+
+  protected void createGenBlock(String blockName, String[] valueNames) {
+    this.block = new StackPane();
+
+    //Make the block draggable and deletable
+    makeDraggableAndDeletable();
+
+    //Size block to fit the number of values that it will be passing in.
+    //We will have 1 row in the gridpane for each value.
+    //If there are no arguments, still give it the size of as if it has 1 argument.
+    int resize = RESIZE_FACTOR * (valueNames.length == 0 ? 1 : valueNames.length);
+    this.blockHeight = this.blockHeight + resize;
 
     //Pane for placing the controls and text for the block
     this.grid = new GridPane();

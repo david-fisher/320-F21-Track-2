@@ -82,6 +82,9 @@ public class RuleEditorUIController implements Initializable {
   //List of the SequenceBlocks made so far.
   //Need this to parse all the trees once the save button is pressed.
   private ArrayList<SequenceBlock> seqBlockList = new ArrayList<SequenceBlock>();
+  //List of all ALBlocks made so far.
+  //Need this to get their selected operators and set them in their nodes when the user saves.
+  private ArrayList<ALBlock> alBlockList = new ArrayList<ALBlock>();
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -263,6 +266,14 @@ public class RuleEditorUIController implements Initializable {
       }
     }
 
+    //Set the operators of the ALNodes to their selected operator from the ALBlock
+    for(int i = 0; i < alBlockList.size(); i++) {
+      String op = alBlockList.get(i).getOp();
+      if (alBlockList.get(i).getNode() instanceof OpNode) {
+        ((ALNode)alBlockList.get(i).getNode()).setOperator(op);
+      }
+    }
+
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
@@ -349,8 +360,10 @@ public class RuleEditorUIController implements Initializable {
   }
 
   @FXML
-  private void handleAddBinOpBtn(ActionEvent event) {
-    blockActions(new BinOpBlock());
+  private void handleAddALBtn(ActionEvent event) {
+    ALBlock alBlock = new ALBlock();
+    alBlockList.add(alBlock);
+    blockActions(alBlock);
   }
 
   @FXML

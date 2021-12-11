@@ -31,7 +31,7 @@
                   <Button fx:id="addPsetBtn" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add pset" />
                   <Button fx:id="addRsetBtn" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add rset" />
                   <Button fx:id="addNotBtn" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add not" />
-                  <Button fx:id="addBinOpBtn" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add bin op" />
+                  <Button fx:id="addALBtn" mnemonicParsing="false" onAction="#handleAddALBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add AL" />
                   <Button fx:id="addGetTileIndexBtn" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get tile[i]" />
                   <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get" />
                   <Button fx:id="addIfBtn" mnemonicParsing="false" onAction="#handleAddIfBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add if" />
