@@ -1,7 +1,7 @@
 package org.RuleEngine.nodes;
 
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.Display;
+import org.GamePlay.Display;
 
 // Usage: Operand 0 - String to display
 public class DisplayNode extends OpNode {

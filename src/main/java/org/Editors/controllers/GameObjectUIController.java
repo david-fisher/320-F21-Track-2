@@ -10,19 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.net.URL;
 
 import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.*;
-import org.scenebuilder.controllers.ScreenController;
+import org.GamePlay.controllers.ScreenController;
 
 public class GameObjectUIController extends ScreenController {
     // Card tab

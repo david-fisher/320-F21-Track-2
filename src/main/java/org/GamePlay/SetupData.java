@@ -1,4 +1,4 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 import org.GameObjects.objects.Player;
 

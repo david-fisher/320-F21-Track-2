@@ -1,4 +1,4 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -20,13 +20,13 @@ import javafx.util.Duration;
 import org.GameObjects.objects.Button;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveByNode;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.Display;
-import org.scenebuilder.GlobalCSSValues;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.Display;
+import org.GamePlay.GlobalCSSValues;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
 import org.GameObjects.objects.Spinner;
-import org.scenebuilder.SetupData;
+import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 

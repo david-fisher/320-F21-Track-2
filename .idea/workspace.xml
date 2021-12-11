@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fixed &quot;Back&quot; bug">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/BasicApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/ScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/ScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ConfirmExit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ConfirmExit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/PickTemplateOrExisting.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/PickTemplateOrExisting.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAsOrSave.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/SaveAsOrSave.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ShapeEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/ShapeEditor.fxml" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Centered controllers, fixed back/cancel buttons.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +78,7 @@
   </component>
   <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
+      <option name="MAIN_CLASS_NAME" value="org.GamePlay.BasicApplication" />
       <module name="SceneBuilder" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -462,14 +448,7 @@
       <option name="project" value="LOCAL" />
       <updated>1639253751515</updated>
     </task>
-    <task id="LOCAL-00049" summary="Fixed &quot;Back&quot; bug">
-      <created>1639254543486</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1639254543486</updated>
-    </task>
-    <option name="localTasksCounter" value="50" />
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,6 +465,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Button aesthetic changes part 2: added a darkening effect when they are hovered over and curved their edges." />
     <MESSAGE value="Added a custom setStyle method to initialize the style's of most labels to clean up code." />
     <MESSAGE value="Added a custom setStyle method: clean up code and increase mutability of labels." />
     <MESSAGE value="PlayScreen no longer overrides stage dimensions" />
@@ -510,8 +490,7 @@
     <MESSAGE value="Added CreateController" />
     <MESSAGE value="Small fix to static playParent" />
     <MESSAGE value="Small progress in returning to main" />
-    <MESSAGE value="Fixed &quot;Back&quot; bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed &quot;Back&quot; bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small progress in returning to main" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,4 +1,4 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -8,9 +8,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
-import org.scenebuilder.controllers.MainController;
+import org.GamePlay.controllers.MainController;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -10,28 +10,18 @@ import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import org.scenebuilder.controllers.MainController;
-import org.scenebuilder.controllers.ScreenController;
+import org.GamePlay.controllers.MainController;
+import org.GamePlay.controllers.ScreenController;
 
 public class Controller extends ScreenController {
 	

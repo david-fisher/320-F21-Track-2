@@ -1,10 +1,9 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -15,9 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.SettingsObject;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.GlobalCSSValues;
+import org.GamePlay.SettingsObject;
 
 import java.util.Arrays;
 

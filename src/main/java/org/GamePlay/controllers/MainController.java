@@ -1,10 +1,8 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,13 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.GlobalCSSValues;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.GlobalCSSValues;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class MainController extends ScreenController {
 
