@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="tileresizing works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -472,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639178687707</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="tileresizing works">
+      <created>1639253096116</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1639253096116</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed buttons in Main Menu to labels with color" />
     <MESSAGE value="Button aesthetic changes" />
     <MESSAGE value="Button aesthetic changes part 2: added a darkening effect when they are hovered over and curved their edges." />
     <MESSAGE value="Added a custom setStyle method to initialize the style's of most labels to clean up code." />
@@ -515,7 +520,8 @@
     <MESSAGE value="Most up to date working on intellij" />
     <MESSAGE value="Removed some bin files" />
     <MESSAGE value="Modified paths to allow our code to run" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified paths to allow our code to run" />
+    <MESSAGE value="tileresizing works" />
+    <option name="LAST_COMMIT_MESSAGE" value="tileresizing works" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
