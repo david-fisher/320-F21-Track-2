@@ -24,7 +24,7 @@ public class CreateController extends ScreenController {
         Savable.intitDB();
         Savable.createProject(projectName.getText());
         Savable.closeDB();
-        changeScene(event, "MainMenuScreen.fxml");
+        changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
     }
 
     public void changeToMain(MouseEvent event) {

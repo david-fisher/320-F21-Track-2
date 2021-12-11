@@ -30,8 +30,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import org.scenebuilder.controllers.MainController;
+import org.scenebuilder.controllers.ScreenController;
 
-public class Controller {
+public class Controller extends ScreenController {
 	
 	@FXML
 	private Button exitButton;
@@ -118,14 +120,8 @@ public class Controller {
 
 	@FXML
 	void exitProgram(ActionEvent event) throws IOException {// This currently quits out of the system. We want it to
-															// quit the editor.
-		FXMLLoader root = new FXMLLoader();
-		root.setLocation(getClass().getResource("ConfirmExit.fxml"));
-		Scene scene = new Scene(root.load(), 300, 200);
-		Stage stage = new Stage();
-		stage.setTitle("Confirm Exit");
-		stage.setScene(scene);
-		stage.show();
+		MainController main = new MainController();
+		main.initialize(stage);
 	}
 
 	@FXML

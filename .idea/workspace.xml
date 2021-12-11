@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Modified paths to allow our code to run">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Editors/resources/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Editors/resources/RuleEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SceneBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SceneBuilder.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/RuleEditorUI/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/RuleEditorUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/CreateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/ScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/scenebuilder/controllers/ScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/RuleEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/RuleEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder/controllers/MainMenuScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/MainMenuScreen.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,11 +95,11 @@
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\" />
       <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor\application" />
       <recent name="C:\Users\bobho\IdeaProjects\320-F21-Track-2\src\main\resources\org\GameEditor" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org" />
@@ -95,7 +110,7 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
       <module name="SceneBuilder" />
@@ -484,6 +499,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed buttons in Main Menu to labels with color" />

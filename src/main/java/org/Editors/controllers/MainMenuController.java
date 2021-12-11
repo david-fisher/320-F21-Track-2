@@ -4,30 +4,45 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.URL;
+
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.Editors.MainMenu;
+import org.scenebuilder.controllers.MainController;
+import org.scenebuilder.controllers.ScreenController;
 
-public class MainMenuController {
-    private void changeScene(String fxmlFilename) {
-        URL location = getClass().getResource(fxmlFilename);
-        try {
-            Parent root = (Parent)FXMLLoader.load(location);
-            MainMenu.stage.getScene().setRoot(root);
-            MainMenu.stage.show();
-        } catch (IOException e){ 
-            e.printStackTrace();
-        }
+public class MainMenuController extends ScreenController {
+    public void changeScene(ActionEvent event, String nextScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        stage.show();
     }
 
-    
-    @FXML private void changeToGameObjectEditor(ActionEvent event) {
-        changeScene("../../../resources/GameObjectEditor.fxml");
+    @FXML private void changeToGameObjectEditor(ActionEvent event) throws IOException {
+        changeScene(event,"GameObjectEditor.fxml");
     }
 
-    @FXML private void changeToRuleEditor(ActionEvent event) {
-        changeScene("../../../resources/RuleEditor.fxml");
+    @FXML private void changeToRuleEditor(ActionEvent event) throws IOException {
+        changeScene(event,"RuleEditor.fxml");
     }
+
+    @FXML private void changeToGameBoardEditor(ActionEvent event) throws IOException {
+        changeScene(event, "/org/GameEditor/application/GameCreator.fxml");
+    }
+
+    @FXML private void returnToMain(ActionEvent event) {
+        MainController main = new MainController();
+        main.initialize(stage);
+    }
+
 }

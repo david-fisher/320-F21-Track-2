@@ -24,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,12 +49,13 @@ import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 import javafx.geometry.Bounds;
+import org.scenebuilder.controllers.ScreenController;
 
 // TODO: Change handleIf and handleWhile to not solely use placeBlock
 // TODO: Create verificaiton method in handleSaveBtn
 // TODO: Create method for handling errorLabel
 
-public class RuleEditorUIController implements Initializable {
+public class RuleEditorUIController extends ScreenController implements Initializable {
   @FXML
   private AnchorPane editorPane;
   @FXML
@@ -517,15 +519,19 @@ public class RuleEditorUIController implements Initializable {
   }
 
   @FXML
-  private void handleBackButton(ActionEvent event) {
-    URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");
-    try {
-      Parent root = (Parent) FXMLLoader.load(location);
-      MainMenu.stage.getScene().setRoot(root);
-      MainMenu.stage.show();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+  private void handleBackButton(ActionEvent event) throws IOException {
+    changeScene(event, "MainMenuScreen.fxml");
+  }
+
+  public void changeScene(ActionEvent event, String nextScene) throws IOException {
+    Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.centerOnScreen();
+    scene.getRoot().setStyle("-fx-font-family: 'serif'");
+    stage.show();
   }
 }
 
