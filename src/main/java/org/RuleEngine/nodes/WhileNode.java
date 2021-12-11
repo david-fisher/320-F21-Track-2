@@ -22,7 +22,7 @@ public class WhileNode extends OpNode {
         if (condition.getValue() instanceof Boolean) {
             result = (Boolean)condition.getValue();
         } else {
-            System.out.println("Error: While statement can only take boolean expressions as conditions.");
+            NodeUtil.OtherError("While statement can only take boolean expressions as conditions.");
             return null;
         }
 
