@@ -38,7 +38,7 @@ public class PlayController extends ScreenController {
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
-    private Label playerTurnIndicator;
+    private static Label playerTurnIndicator;
     private Label decksLabel;
     private Label buttonLabel;
     private Label inventoryLabel;
@@ -83,28 +83,6 @@ public class PlayController extends ScreenController {
         stage.show();
     }
 
-    private void playerTurnCycle() {
-//        Label switchTurn = new Label();
-//        switchTurn.setText("End Turn");
-//        setStyle(switchTurn, "14", "Red", 100, 50);
-//
-//        switchTurn.setOnMouseClicked(e -> {
-//            int nextPlayerIndex = players.indexOf(currPlayer);
-//            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-//            playerTurnIndicator.setText(nextPlayer.getLabel() + "'s Turn");
-//            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-//                    "-fx-background-radius: 5 5 5 5; " +
-//                    "-fx-font-family: Serif; " +
-//                    "-fx-font-size: 16; " +
-//                    "-fx-border-color: #000000;" +
-//                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
-//            // set current player
-//            fillInventory(nextPlayer.getInventory());
-//            currPlayer = nextPlayer;
-//            playerTurnCycle();
-//        });
-    }
-
     private static AnchorPane boardPane;
     private void initGame(GameState gameStateInput) {
 
@@ -123,7 +101,7 @@ public class PlayController extends ScreenController {
 
         // TODO: do we do this?
         if (gameBoard.getBoardID().equals("All Drawers")) {
-            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+            gameStateInput.addRegistry("currPlayer", currPlayer);
         }
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
@@ -315,8 +293,7 @@ public class PlayController extends ScreenController {
                 "-fx-font-family: Serif; " +
                 "-fx-font-size: 16; " +
                 "-fx-font-color: BLACK; " +
-                "-fx-border-color: #000000; " +
-                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
+                "-fx-border-color: #000000;");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
@@ -534,13 +511,6 @@ public class PlayController extends ScreenController {
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
-        //TODO: standardize and make way more efficient
-//        Gamepiece gp = currPlayer.getGamePieces().get(0);
-//        Shape parent = (Shape) gp.getParent();
-//        Tile location = gp.getLocation();
-//        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-//        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
-//        parent.toFront();
     }
 
     private void addToInventory(GameObject object) {
@@ -563,7 +533,7 @@ public class PlayController extends ScreenController {
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }
 
-    private void fillInventory(ArrayList<GameObject> inventory) {
+    public void fillInventory(ArrayList<GameObject> inventory) {
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
@@ -685,6 +655,7 @@ public class PlayController extends ScreenController {
 
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
+    public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
     public GameState getGameState() { return activeGame; }
 }
 

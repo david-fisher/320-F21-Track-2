@@ -105,4 +105,15 @@ public class Display extends PlayController {
         parent.toFront();
     }
 
+    public void updateCurrPlayer(Player player) {
+        Label indicator = getPlayerTurnIndicator();
+        indicator.setText(player.getLabel() + "'s Turn");
+        indicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 16; " +
+                "-fx-border-color: #000000;");
+        fillInventory(player.getInventory());
+    }
+
 }
