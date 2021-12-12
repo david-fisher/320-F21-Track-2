@@ -155,10 +155,12 @@ public class SetupController extends ScreenController {
         HBox.setMargin(tutorialLabel, new Insets(0, 0, 0, 20));
 
         tutorialToggleLabel = new Label("Disabled");
+        tutorialToggleLabel.setAlignment(Pos.CENTER);
         tutorialToggleLabel.setFont(tutorialLabel.getFont());
         tutorialToggleLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
         tutorialToggleLabel.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
         tutorialToggleLabel.prefHeightProperty().bind(tutorialLabel.heightProperty());
+        tutorialToggleLabel.prefWidthProperty().bind(tutorialLabel.widthProperty());
         tutorialToggleLabel.setPadding(new Insets(10, 30, 10, 30));
         HBox.setMargin(tutorialToggleLabel, new Insets(0, 0, 0, 40));
 
@@ -169,10 +171,12 @@ public class SetupController extends ScreenController {
         HBox.setMargin(playerOrderLabel, new Insets(0, 0, 0, 100));
 
         playerOrderToggleLabel = new Label("Random");
+        playerOrderToggleLabel.setAlignment(Pos.CENTER);
         playerOrderToggleLabel.setFont(playerOrderLabel.getFont());
         playerOrderToggleLabel.setTextFill(tutorialToggleLabel.getTextFill());
         playerOrderToggleLabel.setStyle(tutorialToggleLabel.getStyle());
         playerOrderToggleLabel.prefHeightProperty().bind(playerOrderLabel.heightProperty());
+        playerOrderToggleLabel.prefWidthProperty().bind(Bindings.multiply(tutorialLabel.widthProperty(), 1.2));
         playerOrderToggleLabel.setPadding(tutorialToggleLabel.getPadding());
         HBox.setMargin(playerOrderToggleLabel, HBox.getMargin(tutorialToggleLabel));
 
