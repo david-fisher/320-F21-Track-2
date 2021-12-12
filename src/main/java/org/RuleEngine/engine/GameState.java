@@ -52,6 +52,7 @@ public class GameState extends Savable {
         registers.put("winner", null);
         registers.put("currPlayer", null);
         events.put("heuristic", null);
+	events.put("initialization", null);
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
