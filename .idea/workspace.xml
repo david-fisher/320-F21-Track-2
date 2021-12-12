@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="added updateGamepiece to Display and Gamepiece's setLocation">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Implementing Inventory">
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
     </list>
@@ -112,13 +112,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Changed default size and margins of decks.">
-      <created>1636946400904</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1636946400904</updated>
     </task>
     <task id="LOCAL-00006" summary="Ensured that the board cannot be so large that it overlaps with the other elements on the screen.">
       <created>1636950685365</created>
@@ -456,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639279295304</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Implementing Inventory">
+      <created>1639334075330</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1639334075331</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +473,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="File structure with Minjex, GKNEW, and UMass Dining" />
     <MESSAGE value="Merged from main" />
     <MESSAGE value="Undo folder refactor" />
     <MESSAGE value="Movement on dice roll using interpreter" />
@@ -498,7 +497,8 @@
     <MESSAGE value="Stage edits" />
     <MESSAGE value="Edit edits" />
     <MESSAGE value="added updateGamepiece to Display and Gamepiece's setLocation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added updateGamepiece to Display and Gamepiece's setLocation" />
+    <MESSAGE value="Implementing Inventory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing Inventory" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -273,13 +273,15 @@ public class PlayController extends ScreenController {
 
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
-        inventoryContainer.setAlignment(Pos.CENTER);
-        inventoryContainer.setSpacing(-10);
-        inventory.forEach(c -> {
-            addToInventory(c);
-        });
-        inventoryPane.setContent(inventoryContainer);
-        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+        if (inventory.size() != 0) {
+            inventoryContainer.setAlignment(Pos.CENTER);
+            inventoryContainer.setSpacing(-10);
+            inventory.forEach(c -> {
+                addToInventory(c);
+            });
+            inventoryPane.setContent(inventoryContainer);
+            inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+        }
     }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
