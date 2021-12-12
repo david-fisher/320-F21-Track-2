@@ -32,6 +32,8 @@ import java.util.*;
 
 public class SetupController extends ScreenController {
 
+    // GUI creation ---------------------------------
+
     HBox gameSetupLabelHBox;
     Label gameSetupLabel;
     private void initGameSetupLabel() {
@@ -188,6 +190,7 @@ public class SetupController extends ScreenController {
         screenVBox.getChildren().add(bottomHBox);
     }
 
+    // constructor -----------------------------------
     public void initialize(Stage stage) {
 
         super.initialize(stage);
@@ -249,7 +252,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < minNumPlayers; ++i) {
 
             // add a player to the list
-            addNewPlayer();
+            addPlayer();
         }
 
         // set tutorial mode to be initially disabled
@@ -314,18 +317,61 @@ public class SetupController extends ScreenController {
 
     // helpers
     // todo implement helpers
-    private void addNewPlayer() {
+    private void addPlayer() {
 
     }
     private void addPlayerNode() {}
+    private void removePlayer() {}
+    private void removePlayerNode() {}
+    private void dealWithPlayerOrder() {
+    }
 
     // event handlers // todo implement handlers
-    private void minusButtonPressed() {}
-    private void plusButtonPressed() {}
-    private void tutorialButtonPressed() {}
-    private void playerOrderButtonPressed() {}
-    private void backFromSetup() {}
-    private void playFromSetup() {}
+    private void minusButtonPressed() {
+
+        // remove player from list
+        removePlayer();
+
+        // remove player node from vbox
+        removePlayerNode();
+    }
+    private void plusButtonPressed() {
+
+        // add player to list
+        addPlayer();
+
+        // add player node
+        addPlayerNode();
+    }
+    private void tutorialButtonPressed() {
+
+
+
+    }
+    private void playerOrderButtonPressed() {
+
+
+        
+    }
+    private void backFromSetup() {
+
+        SelectionController controller = new SelectionController();
+        controller.initialize(stage);
+    }
+    private void playFromSetup() {
+
+        // deal with playerOrder
+        dealWithPlayerOrder();
+
+        // save data somehow
+        // todo: We have two things: list of players, isTutorial
+        // todo: we need to pass this information along to playScreen somehow
+        // todo: idk how to do it
+
+        // switch screens
+        PlayController controller = new PlayController();
+        controller.initialize(stage);
+    }
 
 //    public void playFromSetup(ActionEvent event) throws IOException {
 //
