@@ -219,6 +219,7 @@ public class SetupController extends ScreenController {
 
     // constants -----------------
 
+    private final String[] TUTORIAL_STRINGS = { "Enabled", "Disabled" };
     private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
 
     // class attributes ----------
@@ -306,11 +307,11 @@ public class SetupController extends ScreenController {
 
         if(tutorialEnabled == true) {
 
-            tutorialToggleLabel.setText("Enabled");
+            tutorialToggleLabel.setText(TUTORIAL_STRINGS[0]);
 
         } else {
 
-            tutorialToggleLabel.setText("Disabled");
+            tutorialToggleLabel.setText(TUTORIAL_STRINGS[1]);
         }
 
     }
@@ -326,7 +327,7 @@ public class SetupController extends ScreenController {
     private void dealWithPlayerOrder() {
     }
 
-    // event handlers // todo implement handlers
+    // event handlers
     private void minusButtonPressed() {
 
         // remove player from list
@@ -345,13 +346,39 @@ public class SetupController extends ScreenController {
     }
     private void tutorialButtonPressed() {
 
+        // establish what the current setting is
+        int curSelection = Arrays.asList(TUTORIAL_STRINGS).indexOf(tutorialToggleLabel.getText());
 
+        // increment selection by 1 (next selection option)
+        curSelection += 1;
 
+        // check if we are at the end of the options list
+        if (curSelection == TUTORIAL_STRINGS.length) {
+
+            // move back to the beginning of the options list
+            curSelection = 0;
+        }
+
+        // set new text
+        tutorialToggleLabel.setText(TUTORIAL_STRINGS[curSelection]);
     }
     private void playerOrderButtonPressed() {
 
+        // establish what its current setting was
+        int curSelection = Arrays.asList(PLAYER_ORDER_STRINGS).indexOf(playerOrderToggleLabel.getText());
 
-        
+        // increment selection by 1 (next selection option)
+        curSelection += 1;
+
+        // check if we are at the end of the options list
+        if (curSelection == PLAYER_ORDER_STRINGS.length) {
+
+            // move back to the beginning of the options list
+            curSelection = 0;
+        }
+
+        // set new text
+        playerOrderToggleLabel.setText(PLAYER_ORDER_STRINGS[curSelection]);
     }
     private void backFromSetup() {
 
