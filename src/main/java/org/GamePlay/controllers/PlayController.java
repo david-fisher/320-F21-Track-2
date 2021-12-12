@@ -4,6 +4,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
@@ -34,7 +35,7 @@ public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private static AnchorPane playParent;
-    private static GameState activeGame;
+    private static GameState gameState;
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
@@ -71,11 +72,11 @@ public class PlayController extends ScreenController {
 //            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
 //            setupData = new SetupData(players, false);
 //        }
-        activeGame = BasicApplication.getSelectedGame();
+        gameState = BasicApplication.getSelectedGame();
 
         initPlayScreen();
 
-        initGame(activeGame);
+        initGame(gameState);
 
         Scene newScene = new Scene(playParent);
         stage.setScene(newScene);
@@ -92,9 +93,9 @@ public class PlayController extends ScreenController {
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         GameBoard gameBoard = gameStateInput.getGameBoard();
         if (gameBoard.getBoardID().equals("All Drawers")) {
-            players = activeGame.getAllPlayers();
+            players = gameStateInput.getAllPlayers();
         }
-        currPlayer = players.get(0);
+        currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
         gameStateInput.setAllPlayers(players);
 
         initPlayerTurnIndicator();
@@ -155,6 +156,7 @@ public class PlayController extends ScreenController {
             initButtons(gameStateInput);
         }
 
+        initCards(gameStateInput);
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
             initInventoryDrawer(numDrawers);
@@ -246,6 +248,40 @@ public class PlayController extends ScreenController {
         buttonPane.setStyle("-fx-border-color: black");
     }
 
+    private void initCards(GameState gameState) {
+        ArrayList<Card> cards = gameState.getAllCards();
+        cards.forEach(c -> {
+            String event = c.getOnPlay();
+            Label label = new Label(c.getLabel());
+            c.setParent(label);
+            setStyle(label, "18", c.getColorString(), c.getText().length() * 12, c.getHeight());
+            c.getParent().setOnMouseClicked(e -> {
+                if (!event.equals("")) {
+                    if (c.getEnabled()) {
+                        interpreter.interpretEvent(gameState.events.get(event), gameState);
+                    }
+                }
+            });
+        });
+    }
+    private void addToInventory(GameObject object) {
+        Node inventoryObject = object.getParent();
+        currPlayer.getInventory().add(object);
+        inventoryContainer.getChildren().addAll(inventoryObject);
+        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 10, 10));
+    }
+
+    public void fillInventory(ArrayList<GameObject> inventory) {
+        currPlayer = (Player) gameState.getRegistry("currPlayer");
+        inventoryContainer.setAlignment(Pos.CENTER);
+        inventoryContainer.setSpacing(-10);
+        inventory.forEach(c -> {
+            addToInventory(c);
+        });
+        inventoryPane.setContent(inventoryContainer);
+        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+    }
+
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
 
         gamePieces.forEach(gamePiece -> {
@@ -259,7 +295,7 @@ public class PlayController extends ScreenController {
     }
 
     private void drawPiece(Gamepiece gamePiece) {
-        Tile parent = activeGame.getAllTiles().get(0);
+        Tile parent = gameState.getAllTiles().get(0);
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
@@ -510,38 +546,7 @@ public class PlayController extends ScreenController {
         move.setOperand(name, 0).setOperand(value, 1);
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
-        interpreter.interpretEvent(moveNodes, activeGame);
-    }
-
-    private void addToInventory(GameObject object) {
-        double width = object.getWidth() == 0 ? 100 : object.getWidth();
-        double height = object.getHeight() == 0 ? 170 : object.getHeight();
-
-        Rectangle inventoryObject = new Rectangle(width, height);
-        inventoryObject.setUserData(object);
-
-//        if(object.getIcon() != null) {
-//            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));
-//        } else {
-//            inventoryObject.setFill(Color.RED);
-//        }
-        inventoryObject.setOnMouseClicked(e -> {
-            //Open this deck if you can // todo
-        });
-        currPlayer.getInventory().add(object);
-        inventoryContainer.getChildren().addAll(inventoryObject);
-        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
-    }
-
-    public void fillInventory(ArrayList<GameObject> inventory) {
-        inventoryContainer = new HBox();
-        inventoryContainer.setAlignment(Pos.CENTER);
-        inventoryContainer.setSpacing(-10);
-        inventory.forEach(d -> {
-            addToInventory(d);
-        });
-        inventoryPane.setContent(inventoryContainer);
-        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+        interpreter.interpretEvent(moveNodes, gameState);
     }
 
     public void initPlayScreen() {
@@ -656,6 +661,6 @@ public class PlayController extends ScreenController {
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
-    public GameState getGameState() { return activeGame; }
+    public GameState getGameState() { return gameState; }
 }
 
