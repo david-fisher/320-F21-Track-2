@@ -73,7 +73,6 @@ public class EditController extends ScreenController {
 
         gamesScrollPane.setContent(gamesHBox);
         gamesPaneHBox.getChildren().add(gamesScrollPane);
-        VBox.setVgrow(gamesPaneHBox, Priority.ALWAYS);
         screenVBox.getChildren().add(gamesPaneHBox);
     }
 
@@ -172,7 +171,6 @@ public class EditController extends ScreenController {
     public void changeScene(MouseEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)screenVBox.getScene().getWindow();
-        stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -190,11 +188,11 @@ public class EditController extends ScreenController {
                     VBox tempVBox = new VBox();
                     tempVBox.setAlignment(Pos.CENTER);
 
-                    tempVBox.prefHeight(200);
-//                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
-//                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
+                    tempVBox.prefHeight(100);
+                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
+                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
                     tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());
-//                    tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
+                    tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
                     tempVBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px");
 
                     // store the game in the selection VBox
