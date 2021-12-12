@@ -367,7 +367,7 @@ public class SetupController extends ScreenController {
         playerHBox.setUserData(player);
 
         // color picker
-        Color defaultColor = getRandomUniqueColor();
+        Color defaultColor = getRandomColor();
         ColorPicker colorPicker = new ColorPicker(defaultColor);
         colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) + "; -fx-font-family: serif;" +
                 " -fx-color-label-visible: false ; ");
@@ -613,7 +613,7 @@ public class SetupController extends ScreenController {
             Collections.shuffle(setupData.getPlayers());
         }
     }
-    private Color getRandomUniqueColor() {
+    private Color getRandomColor() {
 
         Random rand = new Random(System.currentTimeMillis());
 
@@ -621,17 +621,7 @@ public class SetupController extends ScreenController {
         int green = rand.nextInt(255);
         int blue = rand.nextInt(255);
 
-        Color uniqueColor = Color.rgb(red, green, blue, .99);
-
-        // if a player already has the color, generate a new one
-        ArrayList<Player> playerList = setupData.getPlayers();
-        for (int i = 0; i < playerList.size(); ++i) {
-            if (playerList.get(i).getColor().equals(uniqueColor)) {
-                return getRandomUniqueColor();
-            }
-        }
-        // if none of the players have the color, return it
-        return uniqueColor;
+        return  Color.rgb(red, green, blue, .99);
     }
     public String getHexFromColor(Color color) {
         return String.format("#%02X%02X%02X",
@@ -676,6 +666,8 @@ public class SetupController extends ScreenController {
     }
     private void colorPickerOnAction(ActionEvent event) {
 
+        System.out.println("Color Picker Action");
+
         // get source information
         ColorPicker colorPicker = (ColorPicker) event.getSource();
         HBox curPlayerHBox = (HBox) colorPicker.getParent();
@@ -685,10 +677,19 @@ public class SetupController extends ScreenController {
         Color chosenColor = colorPicker.getValue();
 
         // scan players for the chosen color
-        setupData.getPlayers().forEach((player) -> {
+        for (Player player : setupData.getPlayers()) {
 
             // give error message and revert if color is already taken
             if (player.getColor().equals(chosenColor)) {
+
+                System.out.println("Duplicate Detected");
+
+                // show alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Duplicate Color Detected!");
+                alert.setContentText("Players cannot have the same colors, please change it.");
+                alert.showAndWait();
 
                 // get player's original color
                 Color prevColor = curPlayer.getColor();
@@ -700,17 +701,12 @@ public class SetupController extends ScreenController {
                 colorPicker.setStyle("-fx-background-color: " +
                         getHexFromColor(prevColor) + "; -fx-font-family: serif; -fx-color-label-visible: false;");
 
-                // show alert
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error!");
-                alert.setHeaderText("Duplicate Color Detected!");
-                alert.setContentText("Players cannot have the same colors, please change it.");
-
-                alert.showAndWait();
-
+                // exit from function
                 return;
             }
-        });
+        }
+
+        System.out.println("No Duplicate");
 
         // otherwise -- color is not a duplicate
 
@@ -804,6 +800,10 @@ public class SetupController extends ScreenController {
     }
 
 
+
+
+
+    
     // stuff that I havent added to the clean write ------------------------------------------------------------------
 
 //    public void playFromSetup(ActionEvent event) throws IOException {
