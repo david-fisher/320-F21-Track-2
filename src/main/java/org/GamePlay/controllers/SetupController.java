@@ -1,21 +1,13 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.GameObjects.objects.GameObject;
@@ -27,7 +19,6 @@ import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.SetupData;
 
-import java.io.IOException;
 import java.util.*;
 
 public class SetupController extends ScreenController {
@@ -324,11 +315,65 @@ public class SetupController extends ScreenController {
     // todo implement helpers
     private void addPlayer() {
 
+        int curNumPlayers = setupData.getPlayers().size();
+
+        // return if addPlayer cannot be performed
+        if (curNumPlayers == 10) { // todo read real max players value
+            return;
+        }
+
+        // define player name
+        String playerName = "Player " + (curNumPlayers + 1);
+
+        // define list of player's pieces
+        ArrayList<Gamepiece> gamePieces = new ArrayList<>();
+        gamePieces.add(new Gamepiece());
+
+        // define list of player's game objects
+        ArrayList<GameObject> gameObjects = new ArrayList<>();
+
+        // define default isHuman
+        boolean isHuman = false;
+        if (curNumPlayers == 0) {
+
+            // make first player a human ; otherwise make them ai
+            isHuman = true;
+        }
+
+        Player newPlayer = new Player(playerName, gamePieces, gameObjects, isHuman);
+        setupData.addPlayer(newPlayer);
     }
-    private void addPlayerNode() {}
-    private void removePlayer() {}
-    private void removePlayerNode() {}
-    private void dealWithPlayerOrder() {
+    private void addPlayerNode() {
+
+
+    }
+    private void removePlayer() {
+
+        int curNumPlayers = setupData.getPlayers().size();
+
+        // return if addPlayer cannot be performed
+        if (curNumPlayers == 2) { // todo read real min players value
+            return;
+        }
+
+        // get player to remove
+        int lastPlayerIndex = curNumPlayers - 1;
+
+        // remove player
+        setupData.removePlayer(lastPlayerIndex);
+    }
+    private void removePlayerNode() {
+
+
+    }
+    private void dealWithPlayOrderOnLeaveSetup() {
+
+        // if randomized is selected
+        if("Randomized".equals(playerOrderToggleLabel.getText())) {
+
+            // randomize the order of the players
+            Collections.shuffle(setupData.getPlayers());
+        }
     }
 
     // event handlers
@@ -392,12 +437,16 @@ public class SetupController extends ScreenController {
     private void playFromSetup() {
 
         // deal with playerOrder
-        dealWithPlayerOrder();
+        dealWithPlayOrderOnLeaveSetup();
 
         // save data somehow
         // todo: We have two things: list of players, isTutorial
         // todo: we need to pass this information along to playScreen somehow
         // todo: idk how to do it
+
+        // we can get the above information with the follow functions
+        setupData.getPlayers();
+        setupData.isTutorialMode();
 
         // switch screens
         PlayController controller = new PlayController();
