@@ -25,7 +25,7 @@
                </font>
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
         </buttons>
       </ButtonBar>
@@ -41,57 +41,57 @@
             <Button fx:id="addPsetBtn" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add pset">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addRsetBtn" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add rset">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addNotBtn" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add not">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addBinOpBtn" mnemonicParsing="false" onAction="#handleAddBinOpBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add bin op">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addGetTileIndexBtn" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add get tile[i]">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add get">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addGetTileConnBtn" mnemonicParsing="false" onAction="#handleAddGetTileConnBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add get connection">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addCondition" mnemonicParsing="false" onAction="#handleAddCondition" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add Condition">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add move to tile[i]">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addMoveByStepsBtn" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddMoveByStepsBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add move by steps">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
             <Button fx:id="addMoveToPosBtn" layoutX="34.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleAddMoveToPosBtn" prefHeight="25.0" prefWidth="92.0" styleClass="label" text="Add move to pos">
                <stylesheets>
                   <URL value="@../RuleEditorUI/src/style.css" />
-                  <URL value="@../../src/main/java/org/Editors/RuleEditorUI/src/style.css" />
+                  <URL value="@../../src/main/resources/org/Editors/style.css" />
                </stylesheets></Button>
          </children>
          <cursor>

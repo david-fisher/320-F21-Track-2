@@ -1,5 +1,7 @@
 package org.RuleEngine.nodes;
 
+import org.GameObjects.objects.Player;
+import org.GamePlay.Display;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.GameObject;
 
@@ -41,8 +43,13 @@ public class RSetNode extends OpNode {
             NodeUtil.OtherError("Registry " + registryName + "does not exist and cannot be set!");
             return null;
         }
-        
+
+        //Update currPlayer for turn indicator
+        if (registryName.equals("currPlayer")) {
+            Display.getDisplay().updateCurrPlayer((Player) go);
+        }
         currState.registers.put(registryName, go);
+
         return null;
     }
 }
