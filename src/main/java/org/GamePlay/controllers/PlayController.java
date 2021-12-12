@@ -46,7 +46,6 @@ public class PlayController extends ScreenController {
     private Pane settingsPane;
     private HBox inventoryContainer;
     private Stage stage;
-    private SetupData setupData;
 
     private ArrayList<Player> players;
     private Player currPlayer;
@@ -62,16 +61,7 @@ public class PlayController extends ScreenController {
         this.stage = stage;
         playWidth = stage.getWidth();
         playHeight = stage.getHeight();
-
-        // load relevant data
-//        setupData = BasicApplication.getSetupData();
-//        players = setupData.getPlayers();
-//        if (players.size() == 0) {
-//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            setupData = new SetupData(players, false);
-//        }
+        
         gameState = BasicApplication.getProject().getIntiGS();
 
         initPlayScreen();
@@ -271,6 +261,7 @@ public class PlayController extends ScreenController {
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
         if (inventory == null) { return; }
+        inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
         inventory.forEach(c -> {
@@ -281,15 +272,9 @@ public class PlayController extends ScreenController {
     }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces, int i) {
-
         gamePieces.forEach(gamePiece -> {
             drawPiece(gamePiece, i);
         });
-        // for each player
-        // for each piece
-        // get piece
-        // draw piece at its location
-        // set other info..?
     }
 
     private void drawPiece(Gamepiece gamePiece, int i) {

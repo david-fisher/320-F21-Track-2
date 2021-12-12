@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Project;
+import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.BasicApplication;
@@ -161,26 +163,28 @@ public class SelectionController extends ScreenController {
         // todo, artifacts from original implementation
         BasicApplication.loadNewGames();
         BasicApplication.loadSavedGames();
-        newGames = BasicApplication.getNewGames();
-        savedGames = BasicApplication.getSavedGames();
-        populateSelectionMenus(newGames, savedGames);
+        Savable.intitDB();
+        newProjects = Savable.getProjects();
+        //TODO: load saved games
+        savedProjects = new ArrayList<>();
+        populateSelectionMenus(newProjects, savedProjects);
 
     }
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
-    private ArrayList<GameState> newGames = new ArrayList<>();
-    private ArrayList<GameState> savedGames = new ArrayList<>();
+    private ArrayList<Project> newProjects = new ArrayList<>();
+    private ArrayList<Project> savedProjects = new ArrayList<>();
     private GameState selectedGame;
 
-    public void populateSelectionMenus(ArrayList<GameState> newGames, ArrayList<GameState> savedGames) {
+    public void populateSelectionMenus(ArrayList<Project> newProjects, ArrayList<Project> savedProjects) {
 
         // convert games to nodes
-        ArrayList<Node> newGameNodes = gamesToNodes(newGames);
-        ArrayList<Node> savedGameNodes = gamesToNodes(savedGames);
+        ArrayList<Node> newProjectNodes = projectsToNodes(newProjects);
+        ArrayList<Node> savedProjectNodes = projectsToNodes(savedProjects);
 
         // populate the menus
-        newGameNodes.forEach((n) -> {
+        newProjectNodes.forEach((n) -> {
 
             n.setOnMouseClicked(mouseEvent -> {
 
@@ -190,7 +194,6 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-                    BasicApplication.setSelectedGame(selectedGame);
 
                     SetupController controller = new SetupController();
                     controller.initialize(stage);
@@ -213,7 +216,7 @@ public class SelectionController extends ScreenController {
             newGamesHBox.getChildren().add(n);
         });
 
-        savedGameNodes.forEach((n) -> {
+        savedProjectNodes.forEach((n) -> {
 
             n.setOnMouseClicked(mouseEvent -> {
 
@@ -223,7 +226,7 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-                    BasicApplication.setSelectedGame(selectedGame);
+
                     BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
                     PlayController controller = new PlayController();
                     controller.initialize(stage);
@@ -246,11 +249,11 @@ public class SelectionController extends ScreenController {
 
     }
 
-    public ArrayList<Node> gamesToNodes(ArrayList<GameState> games) {
+    public ArrayList<Node> projectsToNodes(ArrayList<Project> projects) {
 
         ArrayList<Node> nodes = new ArrayList<>();
 
-        games.forEach(
+        projects.forEach(
                 (n) -> {
 
                     VBox tempVBox = new VBox();
@@ -274,7 +277,7 @@ public class SelectionController extends ScreenController {
 
                     Label tempLabel = new Label();
                     tempLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
-                    tempLabel.setText(n.getGameBoard().getBoardID());
+                    tempLabel.setText(n.getProjectName());
                     tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);
@@ -290,7 +293,8 @@ public class SelectionController extends ScreenController {
     }
 
     public void setSelectedGame(VBox vbox) {
-        selectedGame = (GameState)vbox.getUserData();
+        BasicApplication.setProject((Project)vbox.getUserData());
+        System.out.println(BasicApplication.getProject().getProjectName());
     }
 
     public void initDarken(Label label) {

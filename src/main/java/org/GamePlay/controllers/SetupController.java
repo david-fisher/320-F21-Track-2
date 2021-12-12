@@ -351,6 +351,17 @@ public class SetupController extends ScreenController {
         Player newPlayer = copyPlayer(selectedGame.getAllPlayers().get(0));
         setupData.addPlayer(newPlayer);
     }
+
+    private Player copyPlayer(Player player) {
+        int curNumPlayers = setupData.getPlayers().size();
+        String playerName = "Player " + (curNumPlayers + 1);
+        ArrayList<Gamepiece> gamePieces = new ArrayList<>();
+        player.getGamePieces().forEach(gp -> {
+            gamePieces.add(new Gamepiece());
+        });
+        return new Player(playerName, gamePieces, new ArrayList<GameObject>(), true);
+
+    }
     private void addPlayerNode(Player player) {
 
         // return if addPlayer cannot be performed
@@ -776,7 +787,6 @@ public class SetupController extends ScreenController {
         playerOrderToggleLabel.setText(PLAYER_ORDER_STRINGS[curSelection]);
     }
     private void backFromSetup() {
-
         SelectionController controller = new SelectionController();
         controller.initialize(stage);
     }

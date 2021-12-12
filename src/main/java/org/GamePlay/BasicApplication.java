@@ -23,7 +23,6 @@ public class BasicApplication extends Application {
     private static ArrayList<GameState> savedGames = new ArrayList<>();
 
     //TODO: selected game could be replaced by Project
-    private static GameState selectedGame;
     private static SetupData setupData;
 
     private static Project project;
@@ -219,9 +218,6 @@ public class BasicApplication extends Application {
     }
 
     // setters
-    public static void setSelectedGame(GameState game) {
-        selectedGame = game;
-    }
     public static void setSetupData(SetupData data) {
         setupData = data;
     }
@@ -233,9 +229,6 @@ public class BasicApplication extends Application {
     }
     public static ArrayList<GameState> getSavedGames() {
         return savedGames;
-    }
-    public static GameState getSelectedGame() {
-        return selectedGame;
     }
     public static SetupData getSetupData() {
         return setupData;
