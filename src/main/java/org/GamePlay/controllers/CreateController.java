@@ -30,9 +30,8 @@ public class CreateController extends ScreenController {
     }
 
     public void changeToMain(ActionEvent event) {
-        stage = BasicApplication.restartStage(new Stage());
         MainController main = new MainController();
-        main.initialize(stage);
+        main.initialize(BasicApplication.newStage(new Stage()));
     }
 
     public void changeScene(ActionEvent event, String nextScene) throws IOException {

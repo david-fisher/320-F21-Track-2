@@ -2,6 +2,7 @@ package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,11 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 
 public class EditController extends ScreenController {
 
+    @FXML
+    AnchorPane editAnchor;
     HBox gamesLabelHBox;
     Label gamesLabel;
     private void initGamesLabel() {
@@ -114,7 +117,6 @@ public class EditController extends ScreenController {
     public void initialize(Stage stage) {
 
         super.initialize(stage);
-        stage.setMaximized(false);
         screenVBox.setAlignment(Pos.CENTER);
         initGamesLabel();
         initGamesScrollPane();
@@ -170,6 +172,7 @@ public class EditController extends ScreenController {
     public void changeScene(MouseEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)screenVBox.getScene().getWindow();
+        stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -187,7 +190,7 @@ public class EditController extends ScreenController {
                     VBox tempVBox = new VBox();
                     tempVBox.setAlignment(Pos.CENTER);
 
-                    tempVBox.prefHeightProperty().bind(Bindings.subtract(gamesScrollPane.heightProperty(), 20));
+                    tempVBox.prefHeight(200);
 //                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
 //                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
                     tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());

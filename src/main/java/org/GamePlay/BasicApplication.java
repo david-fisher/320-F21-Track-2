@@ -274,16 +274,20 @@ public class BasicApplication extends Application {
     }
 
     public static Stage restartStage(Stage stage) {
-
         stage.close();
-
         Stage newStage = new Stage();
-
         initScreenStyle(newStage);
         initScreenDimensions(newStage);
-
         return newStage;
     }
+
+    public static Stage newStage(Stage stage) {
+        stage.close();
+        Stage newStage = new Stage();
+        initScreenDimensions(newStage);
+        return newStage;
+    }
+
     public static Stage updateStage(Stage stage) {
 
         initScreenDimensions(stage);

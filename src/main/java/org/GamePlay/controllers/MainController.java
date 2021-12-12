@@ -64,7 +64,7 @@ public class MainController extends ScreenController {
 
         newButton.setOnMouseClicked(event -> {
             try {
-                newFromMain(event);
+                createFromMain(event);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -134,8 +134,8 @@ public class MainController extends ScreenController {
     }
 
     // todo implement new button
-    public void newFromMain(MouseEvent event) throws IOException {
-        System.out.println("New");
+    public void createFromMain(MouseEvent event) throws IOException {
+        System.out.println("Create");
         switchScene(event, "CreateController.fxml");
     }
 
@@ -143,10 +143,6 @@ public class MainController extends ScreenController {
     public void editFromMain(MouseEvent event) throws IOException {
         System.out.println("Edit");
         EditController controller = new EditController();
-        stage.close();
-        Stage stage = new Stage();
-        stage.setWidth(800);
-        stage.setHeight(600);
         controller.initialize(stage);
     }
 
