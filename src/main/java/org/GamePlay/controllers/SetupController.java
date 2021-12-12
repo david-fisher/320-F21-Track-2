@@ -356,8 +356,11 @@ public class SetupController extends ScreenController {
             return;
         }
 
-        
+        // get player to remove
+        int lastPlayerIndex = curNumPlayers - 1;
 
+        // remove player
+        setupData.removePlayer(lastPlayerIndex);
     }
     private void removePlayerNode() {
 
