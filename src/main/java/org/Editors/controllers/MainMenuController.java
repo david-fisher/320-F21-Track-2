@@ -45,9 +45,8 @@ public class MainMenuController extends ScreenController {
 
     @FXML private void returnToMain(ActionEvent event) {
         Savable.closeDB();
-        stage = BasicApplication.restartStage(new Stage());
         MainController main = new MainController();
-        main.initialize(stage);
+        main.initialize(BasicApplication.restartStage(new Stage()));
     }
 
 }

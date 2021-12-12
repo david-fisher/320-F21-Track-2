@@ -70,6 +70,7 @@ public class EditController extends ScreenController {
 
         gamesScrollPane.setContent(gamesHBox);
         gamesPaneHBox.getChildren().add(gamesScrollPane);
+        VBox.setVgrow(gamesPaneHBox, Priority.ALWAYS);
         screenVBox.getChildren().add(gamesPaneHBox);
     }
 
@@ -114,6 +115,7 @@ public class EditController extends ScreenController {
 
         super.initialize(stage);
         stage.setMaximized(false);
+        screenVBox.setAlignment(Pos.CENTER);
         initGamesLabel();
         initGamesScrollPane();
         initButtons();
@@ -186,27 +188,22 @@ public class EditController extends ScreenController {
                     tempVBox.setAlignment(Pos.CENTER);
 
                     tempVBox.prefHeightProperty().bind(Bindings.subtract(gamesScrollPane.heightProperty(), 20));
-                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
-                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
+//                    tempVBox.minHeightProperty().bind(tempVBox.prefHeightProperty());
+//                    tempVBox.maxHeightProperty().bind(tempVBox.prefHeightProperty());
                     tempVBox.prefWidthProperty().bind(tempVBox.heightProperty());
-                    tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
+//                    tempVBox.minWidthProperty().bind(tempVBox.heightProperty());
                     tempVBox.setStyle("-fx-border-color: " + GlobalCSSValues.text + ";-fx-border-style: solid; -fx-border-width: 3px");
 
                     // store the game in the selection VBox
                     tempVBox.setUserData(n);
 
-                    ImageView tempImageView = new ImageView();
-                    tempImageView.setPreserveRatio(true);
-                    tempImageView.setFitHeight(150);
-                    tempImageView.setFitWidth(200);
-                    //tempImageView.setImage(n.getIcon());
-
                     Label tempLabel = new Label();
                     tempLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
                     tempLabel.setText(n.getProjectName());
+                    tempLabel.setAlignment(Pos.CENTER);
                     tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
-                    tempVBox.getChildren().addAll(tempImageView, tempLabel);
+                    tempVBox.getChildren().addAll(tempLabel);
 
                     HBox.setMargin(tempVBox, new Insets(5,5,5,5));
 
