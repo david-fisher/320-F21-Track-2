@@ -563,5 +563,209 @@
             </AnchorPane>
          </content>
       </Tab>
+      <Tab text="Player">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="gamepieceName1" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
+                                    <TextField fx:id="gamepieceLocation1" promptText="Enter Coordinates">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="gamepieceColor1">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <TextField fx:id="gamepieceFilename1" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="gamepieceDoneButton1" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Button">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="gamepieceName2" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
+                                    <TextField fx:id="gamepieceLocation2" promptText="Enter Coordinates">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="gamepieceColor2">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <TextField fx:id="gamepieceFilename2" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111112" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="gamepieceDoneButton2" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Tile">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="gamepieceName3" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
+                                    <TextField fx:id="gamepieceLocation3" promptText="Enter Coordinates">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="gamepieceColor3">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <TextField fx:id="gamepieceFilename3" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111113" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="gamepieceDoneButton3" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
   </tabs>
 </TabPane>
