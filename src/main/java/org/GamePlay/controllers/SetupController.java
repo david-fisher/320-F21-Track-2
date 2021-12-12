@@ -205,6 +205,7 @@ public class SetupController extends ScreenController {
         initSetupObject();
 
         // initialize visuals with their values
+        updatePlayerCountLabel();
         initPlayerNodesInVBox();
         updateTutorialToggleValue();
         initPlayerOrderToggleValue();
@@ -312,48 +313,19 @@ public class SetupController extends ScreenController {
         }
 
     }
+    private void updatePlayerCountLabel() {
 
-    // helper helpers
-    private Color getRandomColor() {
-        Random rand = new Random(System.currentTimeMillis());
+        // get number of players
+        int numPlayers = setupData.getPlayers().size();
 
-        int red = rand.nextInt(255);
-        int green = rand.nextInt(255);
-        int blue = rand.nextInt(255);
-
-        return Color.rgb(red, green, blue, .99);
-    }
-    private void pieceSelectionButtonPressed() {
-
-    }
-    private void humanAITogglePressed(ActionEvent event) {
-
-        // get the button that was pressed
-        Button curButton = ((Button)event.getSource());
-
-        // get the text on that button
-        String curText = curButton.getText();
-
-        // switch text
-        if (curText.equals(HUMAN_AI_STRINGS[0])) {
-
-            curButton.setText(HUMAN_AI_STRINGS[1]);
-        } else {
-
-            curButton.setText(HUMAN_AI_STRINGS[0]);
-        }
+        // update text
+        playerCountLabel.setText(Integer.toString(numPlayers));
     }
 
     // helpers
-    // todo implement helpers
     private void addPlayer() {
 
         int curNumPlayers = setupData.getPlayers().size();
-
-        // return if addPlayer cannot be performed
-        if (curNumPlayers == 10) { // todo read real max players value
-            return;
-        }
 
         // define player name
         String playerName = "Player " + (curNumPlayers + 1);
@@ -391,6 +363,8 @@ public class SetupController extends ScreenController {
         // color picker
         Color defaultColor = getRandomColor();
         ColorPicker colorPicker = new ColorPicker(defaultColor);
+        colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) +  "; -fx-font-family: serif;" +
+                " -fx-color-label-visible: false ; ");
 
         // piece selection
         Label pieceSelectionButton = new Label("Select A Piece");
@@ -403,6 +377,8 @@ public class SetupController extends ScreenController {
             pieceSelectionButtonPressed();
         });
         HBox.setMargin(pieceSelectionButton, new Insets(0, 0, 0, 20));
+
+        colorPicker.prefHeightProperty().bind(pieceSelectionButton.heightProperty());
 
         // player name
         TextField playerName = new TextField();
@@ -442,8 +418,7 @@ public class SetupController extends ScreenController {
 //
 //        ColorPicker colorPicker = new ColorPicker(color);
 //        // Set bg color and disable text
-//        colorPicker.setStyle("-fx-background-color: " + hex(color) +  "; -fx-font-family: serif;" +
-//                " -fx-color-label-visible: false ; ");
+//
 //
 //        // Add listener for Color Picker
 //        colorPicker.setOnAction(new EventHandler() {
@@ -602,10 +577,14 @@ public class SetupController extends ScreenController {
     }
     private void removePlayerNode() {
 
-        // check if we can remove a node
-        
-        // remove last player node
+        // return if we are at minimum num players
+        if(playersVBox.getChildren().size() == 2) { // todo read real min value from gamestate
+            return;
+        }
 
+        // remove last player node
+        int lastPlayerNodeIndex = playersVBox.getChildren().size() - 1;
+        playersVBox.getChildren().remove(lastPlayerNodeIndex);
     }
     private void dealWithPlayOrderOnLeaveSetup() {
 
@@ -616,17 +595,45 @@ public class SetupController extends ScreenController {
             Collections.shuffle(setupData.getPlayers());
         }
     }
+    private Color getRandomColor() {
+        Random rand = new Random(System.currentTimeMillis());
+
+        int red = rand.nextInt(255);
+        int green = rand.nextInt(255);
+        int blue = rand.nextInt(255);
+
+        return Color.rgb(red, green, blue, .99);
+    }
+    public String getHexFromColor(Color color) {
+      return String.format( "#%02X%02X%02X",
+                (int)(color.getRed() * 255),
+                (int)(color.getGreen() * 255),
+                (int)(color.getBlue() * 255));
+    }
 
     // event handlers
     private void minusButtonPressed() {
+
+        // return if min players has been reached
+        if (setupData.getPlayers().size() == 2) { // todo read real min players value
+            return;
+        }
 
         // remove player from list
         removePlayer();
 
         // remove player node from vbox
         removePlayerNode();
+
+        // update player count
+        updatePlayerCountLabel();
     }
     private void plusButtonPressed() {
+
+        // return if max players has been reached
+        if (setupData.getPlayers().size() == 10) { // todo read real max players value
+            return;
+        }
 
         // add player to list
         addPlayer();
@@ -634,6 +641,30 @@ public class SetupController extends ScreenController {
         // add player node
         Player mostRecentlyAddedPlayer = setupData.getPlayer(setupData.getPlayers().size() - 1);
         addPlayerNode(mostRecentlyAddedPlayer);
+
+        // update textfield
+        updatePlayerCountLabel();
+    }
+    private void pieceSelectionButtonPressed() { // todo implement piece selection
+
+        // open selection window; allow user to select from a list of options and hit ok closing the window
+    }
+    private void humanAITogglePressed(ActionEvent event) {
+
+        // get the button that was pressed
+        Button curButton = ((Button)event.getSource());
+
+        // get the text on that button
+        String curText = curButton.getText();
+
+        // switch text
+        if (curText.equals(HUMAN_AI_STRINGS[0])) {
+
+            curButton.setText(HUMAN_AI_STRINGS[1]);
+        } else {
+
+            curButton.setText(HUMAN_AI_STRINGS[0]);
+        }
     }
     private void tutorialButtonPressed() {
 
@@ -694,6 +725,11 @@ public class SetupController extends ScreenController {
         PlayController controller = new PlayController();
         controller.initialize(stage);
     }
+
+
+
+
+    // stuff that I havent added yet to the clean write ------------------------------------------------------------------
 
 //    public void playFromSetup(ActionEvent event) throws IOException {
 //
@@ -1041,12 +1077,7 @@ public class SetupController extends ScreenController {
 //
 //
 //
-//    public static String hex( Color color ) {
-//        return String.format( "#%02X%02X%02X",
-//                (int)( color.getRed() * 255 ),
-//                (int)( color.getGreen() * 255 ),
-//                (int)( color.getBlue() * 255 ) );
-//    }
+//
 //
 
 
