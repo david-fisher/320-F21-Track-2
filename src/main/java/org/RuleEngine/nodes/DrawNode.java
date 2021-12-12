@@ -21,24 +21,27 @@ public class DrawNode extends OpNode {
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         LiteralNode e1 = getOperand(0).execute(currState);
-        if (e1 == null || !(e1.getValue() instanceof String)) {
-            System.out.println("Error: Draw operation takes a string as input!");
+        if (e1 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
         }
         
-        String deckName = (String)e1.getValue();
-        GameObject deck = (deckName.charAt(0) == '_') ? currState.findObject(deckName.substring(1)) : currState.getRegistry(deckName);
+        GameObject go = NodeUtil.processNodeToObj(e1, currState);
         
-        if (deck == null) {
-            System.out.println("Error: Cannot find deck of label " + deckName);
+        if (go == null || !(go instanceof Deck)) {
+            NodeUtil.InputTypeError(this, 0, "Deck");
+            return null;
         }
+        
+        Deck deck = (Deck)go;
         
         switch(placement) {
             case "top":
-                return new LiteralNode<Card>(((Deck)deck).drawTop());
+                return new LiteralNode<Card>(deck.drawTop());
             case "bottom":
-                return new LiteralNode<Card>(((Deck)deck).drawBottom());
+                return new LiteralNode<Card>(deck.drawBottom());
             case "random":
-                return new LiteralNode<Card>(((Deck)deck).drawRandom());
+                return new LiteralNode<Card>(deck.drawRandom());
             default:
                 System.out.println("Error: Unknown placement: " + placement);
         }
