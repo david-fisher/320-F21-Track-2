@@ -214,7 +214,11 @@ public class SetupController extends ScreenController {
         initEventHandlers();
     }
 
+    // constants -----------------
+
     private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
+
+    // class attributes ----------
 
     // the project selected in selectionScreen // todo determine what the point of this is... do we need it?
     Project selectedProject;
@@ -267,7 +271,29 @@ public class SetupController extends ScreenController {
     }
     private void initEventHandlers() {
 
-        // add event handlers to each individual node
+        minusPlayerButton.setOnMouseClicked( (event -> {
+            minusButtonPressed();
+        }));
+
+        plusPlayerButton.setOnMouseClicked( (event -> {
+            plusButtonPressed();
+        }));
+
+        tutorialToggleLabel.setOnMouseClicked( (event -> {
+            tutorialButtonPressed();
+        }));
+
+        playerOrderToggleLabel.setOnMouseClicked( (event -> {
+            playerOrderButtonPressed();
+        }));
+
+        backButton.setOnMouseClicked( (event -> {
+            backFromSetup();
+        }));
+
+        startGameButton.setOnMouseClicked( (event -> {
+            playFromSetup();
+        }));
     }
 
     // update functions
