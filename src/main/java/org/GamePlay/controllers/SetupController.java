@@ -1,6 +1,7 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -214,6 +215,7 @@ public class SetupController extends ScreenController {
 
     // constants -----------------
 
+    private final String[] HUMAN_AI_STRINGS = { "Human", "AI" };
     private final String[] TUTORIAL_STRINGS = { "Enabled", "Disabled" };
     private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
 
@@ -261,7 +263,7 @@ public class SetupController extends ScreenController {
 
         // for each player, add a corresponding node
         setupData.getPlayers().forEach( (player) -> {
-            addPlayerNode();
+            addPlayerNode(player);
         });
     }
     private void initPlayerOrderToggleValue() {
@@ -311,6 +313,37 @@ public class SetupController extends ScreenController {
 
     }
 
+    // helper helpers
+    private Color getRandomColor() {
+        Random rand = new Random(System.currentTimeMillis());
+
+        int red = rand.nextInt(255);
+        int green = rand.nextInt(255);
+        int blue = rand.nextInt(255);
+
+        return Color.rgb(red, green, blue, .99);
+    }
+    private void pieceSelectionButtonPressed() {
+
+    }
+    private void humanAITogglePressed(ActionEvent event) {
+
+        // get the button that was pressed
+        Button curButton = ((Button)event.getSource());
+
+        // get the text on that button
+        String curText = curButton.getText();
+
+        // switch text
+        if (curText.equals(HUMAN_AI_STRINGS[0])) {
+
+            curButton.setText(HUMAN_AI_STRINGS[1]);
+        } else {
+
+            curButton.setText(HUMAN_AI_STRINGS[0]);
+        }
+    }
+
     // helpers
     // todo implement helpers
     private void addPlayer() {
@@ -343,9 +376,214 @@ public class SetupController extends ScreenController {
         Player newPlayer = new Player(playerName, gamePieces, gameObjects, isHuman);
         setupData.addPlayer(newPlayer);
     }
-    private void addPlayerNode() {
+    private void addPlayerNode(Player player) {
+
+        // return if addPlayer cannot be performed
+        if (playersVBox.getChildren().size() == 10) { // todo read real max players value
+            return;
+        }
+
+        // outer box to encapsulate all the data corresponding to a single player
+        HBox playerHBox = new HBox();
+        playerHBox.setAlignment(Pos.CENTER);
+        VBox.setMargin(playerHBox, new Insets(0, 10, 50, 10));
+
+        // color picker
+        Color defaultColor = getRandomColor();
+        ColorPicker colorPicker = new ColorPicker(defaultColor);
+
+        // piece selection
+        Label pieceSelectionButton = new Label("Select A Piece");
+        pieceSelectionButton.setFont(new Font(24));
+        pieceSelectionButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        pieceSelectionButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        pieceSelectionButton.setAlignment(Pos.CENTER);
+        pieceSelectionButton.setPadding(new Insets(10, 20, 10, 20));
+        pieceSelectionButton.setOnMouseClicked(event -> {
+            pieceSelectionButtonPressed();
+        });
+        HBox.setMargin(pieceSelectionButton, new Insets(0, 0, 0, 20));
+
+        // player name
+        TextField playerName = new TextField();
+        playerName.setFont(pieceSelectionButton.getFont());
+        playerName.setText(player.getLabel());
+        playerName.setAlignment(Pos.CENTER);
+        HBox.setMargin(playerName, new Insets(0, 0, 0, 80));
+
+        // human / ai toggle switch
+        Button humanAIToggleLabel = new Button();
+        humanAIToggleLabel.setFont(pieceSelectionButton.getFont());
+        humanAIToggleLabel.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        humanAIToggleLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        humanAIToggleLabel.prefWidthProperty().bind(playerCountLabel.widthProperty());
+        humanAIToggleLabel.setOnAction(event -> {
+            humanAITogglePressed(event);
+        });
+        HBox.setMargin(humanAIToggleLabel, new Insets(0, 0, 0, 80));
+
+        // set human ai value
+        if (player.getIsHuman() == true) {
+            humanAIToggleLabel.setText(HUMAN_AI_STRINGS[0]);
+        } else {
+            humanAIToggleLabel.setText(HUMAN_AI_STRINGS[1]);
+        }
+
+        // add all the components to the hbox
+        playerHBox.getChildren().addAll(colorPicker, pieceSelectionButton, playerName, humanAIToggleLabel);
+
+        // add player to player vbox
+        playersVBox.getChildren().add(playerHBox);
 
 
+//        // -- Color picker Code Starts --
+//        Color color = getRandomColor();
+////        if (pGamePiece.size() > 0){color = pGamePiece.get(0).getColor();}// todo get game piece by reference
+//
+//        ColorPicker colorPicker = new ColorPicker(color);
+//        // Set bg color and disable text
+//        colorPicker.setStyle("-fx-background-color: " + hex(color) +  "; -fx-font-family: serif;" +
+//                " -fx-color-label-visible: false ; ");
+//
+//        // Add listener for Color Picker
+//        colorPicker.setOnAction(new EventHandler() {
+//            public void handle(Event t) {
+//                System.out.println("Something");
+//                Player player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
+//                Color initColor = player.getColor();
+//                Integer ID = Integer.valueOf(playerHBox.getId());
+//                for(Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
+//                    if (p.getValue().getColor().equals(colorPicker.getValue())) {
+//                        if(p.getKey() == ID){
+//                            continue;
+//                        }
+//                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                        alert.setTitle("Error!");
+//                        alert.setHeaderText("Duplicate Color Detected!");
+//                        alert.setContentText("Players cannot have the same colors, please change it.");
+//                        player.setColor(initColor);
+//                        Rectangle rec = (Rectangle) colorPicker.lookup("Rectangle");
+//                        rec.setFill(initColor);
+//                        hboxPlayer.getGamePieces().get(0).setColor(initColor); // todo get game piece by reference
+////                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+//                        colorPicker.setStyle("-fx-background-color: " + hex(initColor) +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+//                        alert.showAndWait();
+//                        break;
+//                    }
+//                    else{
+//                        hboxPlayer.getGamePieces().get(0).setColor(colorPicker.getValue()); // todo get game piece by reference
+//                        Color c = colorPicker.getValue();
+//                        player.setColor(c);
+////                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
+//                        colorPicker.setStyle("-fx-background-color: " + hex(c) +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
+//                    }
+//                }
+//                System.out.println(playerHashMap);
+//                System.out.println(initColor);
+//            }
+//        });
+//        // -- Color picker Code Ends --
+//
+//        Separator playerSeparator1 = new Separator();
+//        playerSeparator1.setOrientation(Orientation.VERTICAL);
+//        playerSeparator1.setPrefHeight(27);
+//        playerSeparator1.setPrefWidth(84);
+//
+//        TextField playerField = new TextField();
+//        playerField.setAlignment(Pos.CENTER);
+//        playerField.setText(hboxPlayer.getLabel());
+//        playerField.setFont(new Font(16));
+//        playerField.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground + "; -fx-text-fill: " + GlobalCSSValues.buttonText);
+//        playerField.setPrefWidth(114);
+//        playerField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+//
+//            @Override
+//            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+//                Integer ID = Integer.valueOf(playerHBox.getId());
+//                Player player = playerHashMap.get(ID);
+//                String text = playerField.getText();
+//                if(!t1) {
+//                    player.setLabel(text);
+//                    for (Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
+//                        if (p.getKey() == ID) {
+//                            continue;
+//                        }
+//                        if (p.getValue().getLabel().equals(text)) {
+//
+////                          OPTIONAL: Alert box below.
+//                            System.out.println("Old State: " + playerHashMap.entrySet());
+//
+//                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                            alert.setTitle("Error!");
+//                            alert.setHeaderText("Duplicate Name Detected!");
+//                            alert.setContentText("Players cannot have the same names, please change it.");
+//                            alert.showAndWait();
+//                            playerField.setText((text.substring(0, text.length() - 1)));
+//                            player.setLabel(playerField.getText());
+//                            System.out.println("New State: " + playerHashMap.entrySet());
+//                            playerField.requestFocus();
+//                        }
+//                    }
+//                }
+//            }
+//        });
+//
+//        Separator playerSeparator = new Separator();
+//        playerSeparator.setOrientation(Orientation.VERTICAL);
+//        playerSeparator.setPrefHeight(27);
+//        playerSeparator.setPrefWidth(84);
+//
+//        ToggleButton humanToggleButton = new ToggleButton();
+//        humanToggleButton.setMnemonicParsing(false);
+//        humanToggleButton.setFont(new Font(16));
+//        humanToggleButton.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        humanToggleButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        humanToggleButton.setText("Human");
+//        humanToggleButton.setPrefHeight(32);
+//        humanToggleButton.setPrefWidth(72);
+//
+//        humanToggleButton.setSelected(hboxPlayer.getIsHuman());
+//
+//        HBox.setMargin(humanToggleButton, new Insets(2, 2, 2, 2));
+//
+//        ToggleButton aIToggleButton = new ToggleButton();
+//        aIToggleButton.setMnemonicParsing(false);
+//        aIToggleButton.setFont(new Font(16));
+//        aIToggleButton.setStyle("-fx-font-family: serif; -fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        aIToggleButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        aIToggleButton.setText("AI");
+//        aIToggleButton.setPrefHeight(32);
+//        aIToggleButton.setPrefWidth(48);
+//
+//        ToggleGroup group = new ToggleGroup();
+//
+//        // This bit of code prevents the toggle button from not being selected
+//        group.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+//            if (newVal == null)
+//                oldVal.setSelected(true);
+//        });
+//
+//        // Add listener for the toggle group to change the corresponding player's property
+//        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+//            public void changed(ObservableValue<? extends Toggle> ov,
+//                                Toggle toggle, Toggle new_toggle) {
+//                ToggleButton selectedToggleButton =
+//                        (ToggleButton) group.getSelectedToggle();
+//
+//                String playerText = selectedToggleButton.getText();
+//                hboxPlayer.setIsHuman(playerText.equals("Human"));
+//            }
+//        });
+//
+//        humanToggleButton.setToggleGroup(group);
+//        aIToggleButton.setToggleGroup(group);
+//
+//        playerHBox.getChildren().addAll(colorPicker,comboBox, playerSeparator1, playerField, playerSeparator,
+//                humanToggleButton, aIToggleButton);
+//
+//        // add hbox storing all the player label, divider, and player/human controls
+//        playersVBox.getChildren().add(playerHBox);
+//        playerNodeStack.push(playerHBox);
     }
     private void removePlayer() {
 
@@ -364,6 +602,9 @@ public class SetupController extends ScreenController {
     }
     private void removePlayerNode() {
 
+        // check if we can remove a node
+        
+        // remove last player node
 
     }
     private void dealWithPlayOrderOnLeaveSetup() {
@@ -391,7 +632,8 @@ public class SetupController extends ScreenController {
         addPlayer();
 
         // add player node
-        addPlayerNode();
+        Player mostRecentlyAddedPlayer = setupData.getPlayer(setupData.getPlayers().size() - 1);
+        addPlayerNode(mostRecentlyAddedPlayer);
     }
     private void tutorialButtonPressed() {
 
@@ -806,14 +1048,6 @@ public class SetupController extends ScreenController {
 //                (int)( color.getBlue() * 255 ) );
 //    }
 //
-//    public Color getRandomColor() {
-//        Random rand = new Random(System.currentTimeMillis());
-//
-//        int red = rand.nextInt(255);
-//        int green = rand.nextInt(255);
-//        int blue = rand.nextInt(255);
-//
-//        return Color.rgb(red, green, blue, .99);
-//    }
+
 
 }
