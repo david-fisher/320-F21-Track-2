@@ -61,7 +61,7 @@ public class BasicApplication extends Application {
         Player player1 = new Player("David", Color.PURPLE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
         Gamepiece gp = new Gamepiece();
         gp.setColor(Color.WHITE);
-        player1.addPiece(new Gamepiece());
+        player1.addPiece(gp);
         players.add(player1);
 //        System.out.println("Basic screen: " + player1.getGamePieces().get(0).getColor().toString());
 
@@ -132,48 +132,48 @@ public class BasicApplication extends Application {
                 tile.addConnect(tiles.get(i - 1));
             }
         }
-        ArrayList<Deck> decks = new ArrayList<>();
-        Deck deck1 = new Deck();
-        Deck deck2 = new Deck();
-        Deck deck3 = new Deck();
-        Deck deck4 = new Deck();
-        deck1.addCard(new Card(), 52);
-        deck2.addCard(new Card(), 52);
-        deck3.addCard(new Card(), 52);
-        deck4.addCard(new Card(), 52);
-        decks.add(deck1);
-        decks.add(deck2);
-        decks.add(deck3);
-        decks.add(deck4);
-
-
+//        ArrayList<Deck> decks = new ArrayList<>();
+//        Deck deck1 = new Deck();
+//        Deck deck2 = new Deck();
+//        Deck deck3 = new Deck();
+//        Deck deck4 = new Deck();
+//        deck1.addCard(new Card(), 52);
+//        deck2.addCard(new Card(), 52);
+//        deck3.addCard(new Card(), 52);
+//        deck4.addCard(new Card(), 52);
+//        decks.add(deck1);
+//        decks.add(deck2);
+//        decks.add(deck3);
+//        decks.add(deck4);
+//
+//
         ArrayList<Die> dice = new ArrayList<Die>();
-        ArrayList<Spinner> spinners = new ArrayList();
-
+//        ArrayList<Spinner> spinners = new ArrayList();
+//
         Die die1 = new Die();
-//        Die die2 = new Die();
-//        Die die3 = new Die();
-//        Die die4 = new Die();
-//        Die die5 = new Die();
-//        Die die6 = new Die();
-//        Die die7 = new Die();
+////        Die die2 = new Die();
+////        Die die3 = new Die();
+////        Die die4 = new Die();
+////        Die die5 = new Die();
+////        Die die6 = new Die();
+////        Die die7 = new Die();
         dice.add(die1);
-//        dice.add(die2);
-//        dice.add(die3);
-//        dice.add(die4);
-//        dice.add(die5);
-//        dice.add(die6);
-//        dice.add(die7);
-
-        Spinner spinner1 = new Spinner();
-        spinner1.setNumCategories(5);
-        List<Double> spinnerWeight = new ArrayList();
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinners.add(spinner1);
+////        dice.add(die2);
+////        dice.add(die3);
+////        dice.add(die4);
+////        dice.add(die5);
+////        dice.add(die6);
+////        dice.add(die7);
+//
+//        Spinner spinner1 = new Spinner();
+//        spinner1.setNumCategories(5);
+//        List<Double> spinnerWeight = new ArrayList();
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinners.add(spinner1);
 
         ArrayList<Button> buttons = new ArrayList<>();
         Button button = new Button();
@@ -199,12 +199,12 @@ public class BasicApplication extends Application {
 
         GameState gameState = new GameState(); //players, tiles, decks, dice, spinners, gameTokens
         gameState.setAllTiles(tiles);
-        if (decksOn) {
-            gameState.setAllDecks(decks);
-        }
+//        if (decksOn) {
+//            gameState.setAllDecks(decks);
+//        }
         if (rngOn) {
             gameState.setAllDice(dice);
-            gameState.setAllSpinners(spinners);
+//            gameState.setAllSpinners(spinners);
         }
 
         gameState.setAllButtons(buttons);

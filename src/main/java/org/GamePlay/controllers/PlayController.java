@@ -63,14 +63,14 @@ public class PlayController extends ScreenController {
         playHeight = stage.getHeight();
 
         // load relevant data
-        setupData = BasicApplication.getSetupData();
-        players = setupData.getPlayers();
-        if (players.size() == 0) {
-            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            setupData = new SetupData(players, false);
-        }
+//        setupData = BasicApplication.getSetupData();
+//        players = setupData.getPlayers();
+//        if (players.size() == 0) {
+//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            setupData = new SetupData(players, false);
+//        }
         activeGame = BasicApplication.getSelectedGame();
 
         initPlayScreen();
@@ -123,9 +123,8 @@ public class PlayController extends ScreenController {
 
         // TODO: do we do this?
         if (gameBoard.getBoardID().equals("All Drawers")) {
-//            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
         }
-
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -247,7 +246,6 @@ public class PlayController extends ScreenController {
 
     private void initButtons(GameState gameState) {
         ArrayList<Button> buttons = gameState.getAllButtons();
-        System.out.println(buttons);
         HBox container = new HBox();
         container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         container.setAlignment(Pos.CENTER);
@@ -263,7 +261,6 @@ public class PlayController extends ScreenController {
                 }
             });
             container.getChildren().add(button.getParent());
-            System.out.println("Added: " + button.getText());
             label.setCenterShape(true);
             container.setMargin(button.getParent(), new Insets(10, 10, 20, 10));
         });
@@ -285,14 +282,11 @@ public class PlayController extends ScreenController {
 
     private void drawPiece(Gamepiece gamePiece) {
         Tile parent = activeGame.getAllTiles().get(0);
-        gamePiece.setLocation(parent);
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        gp.setLayoutX(parent.getXPos() + parent.getWidth() / 2);
-        gp.setLayoutY(parent.getYPos() + parent.getHeight() / 2);
-
+        gamePiece.setLocation(parent);
     }
 
     public void initSettings() {
@@ -502,7 +496,7 @@ public class PlayController extends ScreenController {
         }
 
         diceView.setOnMouseClicked(e -> {
-            rollDice(e, dice, diceDisplay);
+            rollDice(e, dice);
         });
 //        container.getChildren().add(diceView);
     }
@@ -526,9 +520,8 @@ public class PlayController extends ScreenController {
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 
-    private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
-        AnchorPane source = (AnchorPane) e.getSource();
-        source.setDisable(true);
+    private void rollDice(MouseEvent e, ArrayList<Die> dice) {
+        Label source = (Label) e.getSource();
         Die die = dice.get(0);
         LiteralNode<String> name = new LiteralNode<>("currPlayer");
         int roll = die.roll();
@@ -542,13 +535,12 @@ public class PlayController extends ScreenController {
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
         //TODO: standardize and make way more efficient
-        Gamepiece gp = currPlayer.getGamePieces().get(0);
-        Shape parent = (Shape) gp.getParent();
-        Tile location = gp.getLocation();
-        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
-        parent.toFront();
-        source.setDisable(false);
+//        Gamepiece gp = currPlayer.getGamePieces().get(0);
+//        Shape parent = (Shape) gp.getParent();
+//        Tile location = gp.getLocation();
+//        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+//        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+//        parent.toFront();
     }
 
     private void addToInventory(GameObject object) {

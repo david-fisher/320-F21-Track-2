@@ -36,43 +36,6 @@ public class Display extends PlayController {
 
     private Display() {}
 
-    public void displayDie(int roll) {
-//        ImageView dieImage = (ImageView) d;
-//        Die die = (Die) dieImage.getUserData();
-//        System.out.println(ClassLoader.getResource("Dice1.png"));
-//        switch (roll) {
-//            case 1:
-//                dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 2:
-//                dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 3:
-//                dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 4:
-//                dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 5:
-//                dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 6:
-//                dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//        }
-//    }
-//
-//        playParent.getChildren().add(diceDisplay);
-//        diceDisplay.setLayoutX(playWidth / 2 - 100);
-//        diceDisplay.setLayoutY(playHeight / 2 - 90);
-//
-//    final Timeline timeline = new Timeline();
-//        timeline.setAutoReverse(true);
-//        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
-//    k -> playParent.getChildren().remove(diceDisplay)));
-//        timeline.play();
-    }
-
     private final Object KEY = new Object();
     public Tile moveOptions(ArrayList<Tile> tiles) {
         //Return if there is only one choice
@@ -132,6 +95,15 @@ public class Display extends PlayController {
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2800),
                 k -> playParent.getChildren().remove(displayRoll)));
         timeline.play();
+    }
+
+    public void updatePiece(Gamepiece gp) {
+        Shape parent = (Shape) gp.getParent();
+        Tile location = gp.getLocation();
+        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.toFront();
+        System.out.println("Attempt");
     }
 
 }

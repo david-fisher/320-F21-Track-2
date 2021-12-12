@@ -1,5 +1,7 @@
 package org.GameObjects.objects;
 
+import org.GamePlay.Display;
+
 public class Gamepiece extends GameObject{
 
 	private static int count = 0;
@@ -50,7 +52,8 @@ public class Gamepiece extends GameObject{
 		// set location
 		if (this.setTrait("location", tile)) {
 			if (!tile.hasGamepiece(this)) {
-				return tile.addGamepiece(this) ;
+				Display.getDisplay().updatePiece(this);
+				return tile.addGamepiece(this);
 			}
 			return true ;
 		}
