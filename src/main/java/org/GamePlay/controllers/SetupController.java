@@ -241,7 +241,7 @@ public class SetupController extends ScreenController {
         selectedProject = BasicApplication.getProject();
 
         // load in the selected game from BasicApplication
-        selectedGame = BasicApplication.getSelectedGame();
+        selectedGame = BasicApplication.getProject().getIntiGS();
     }
     private void initSetupObject() {
 
@@ -348,7 +348,7 @@ public class SetupController extends ScreenController {
             isHuman = true;
         }
 
-        Player newPlayer = new Player(playerName, gamePieces, gameObjects, isHuman);
+        Player newPlayer = copyPlayer(selectedGame.getAllPlayers().get(0));
         setupData.addPlayer(newPlayer);
     }
     private void addPlayerNode(Player player) {
@@ -791,8 +791,13 @@ public class SetupController extends ScreenController {
         // todo: idk how to do it
 
         // we can get the above information with the follow functions
-        setupData.getPlayers();
-        setupData.isTutorialMode();
+        setupData.getPlayers().forEach(p -> {
+            p.getGamePieces().forEach(gp -> {
+                gp.setColor(p.getColor());
+            });
+        });
+        selectedGame.setAllPlayers(setupData.getPlayers());
+        selectedGame.tutorialEnabled = setupData.isTutorialMode();
 
         // switch screens
         PlayController controller = new PlayController();

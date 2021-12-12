@@ -100,8 +100,8 @@ public class Display extends PlayController {
     public void updatePiece(Gamepiece gp) {
         Shape parent = (Shape) gp.getParent();
         Tile location = gp.getLocation();
-        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.setLayoutX(location.getXPos() + parent.getLayoutX());
+        parent.setLayoutY(location.getYPos() + parent.getLayoutY());
         parent.toFront();
     }
 

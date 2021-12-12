@@ -72,7 +72,7 @@ public class PlayController extends ScreenController {
 //            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
 //            setupData = new SetupData(players, false);
 //        }
-        gameState = BasicApplication.getSelectedGame();
+        gameState = BasicApplication.getProject().getIntiGS();
 
         initPlayScreen();
 
@@ -92,18 +92,16 @@ public class PlayController extends ScreenController {
         }
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         GameBoard gameBoard = gameStateInput.getGameBoard();
+
         if (gameBoard.getBoardID().equals("All Drawers")) {
             players = gameStateInput.getAllPlayers();
         }
+
+        gameStateInput.addRegistry("currPlayer", players.get(0));
+
         currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
-        gameStateInput.setAllPlayers(players);
 
         initPlayerTurnIndicator();
-
-        // TODO: do we do this?
-        if (gameBoard.getBoardID().equals("All Drawers")) {
-            gameStateInput.addRegistry("currPlayer", currPlayer);
-        }
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -214,10 +212,9 @@ public class PlayController extends ScreenController {
     }
 
     private void initPlayers(ArrayList<Player> players) {
-        players.forEach(p -> {
-            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
-            //fill inventory
-        });
+        for (int i = 0; i < players.size(); i++) {
+            initGamePiece(players.get(i).getGamePieces(), i);
+        }
 
         // for each player
         // set player info
@@ -273,6 +270,7 @@ public class PlayController extends ScreenController {
 
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
+        if (inventory == null) { return; }
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
         inventory.forEach(c -> {
@@ -282,10 +280,10 @@ public class PlayController extends ScreenController {
         inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
     }
 
-    private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
+    private void initGamePiece(ArrayList<Gamepiece> gamePieces, int i) {
 
         gamePieces.forEach(gamePiece -> {
-            drawPiece(gamePiece);
+            drawPiece(gamePiece, i);
         });
         // for each player
         // for each piece
@@ -294,13 +292,20 @@ public class PlayController extends ScreenController {
         // set other info..?
     }
 
-    private void drawPiece(Gamepiece gamePiece) {
-        Tile parent = gameState.getAllTiles().get(0);
-        Circle gp = new Circle(40, Color.WHITE);
+    private void drawPiece(Gamepiece gamePiece, int i) {
+        Tile parent = gamePiece.getLocation();
+        if (parent == null) { return; }
+        int numPlayers = players.size();
+        double rows = Math.ceil(Math.sqrt(numPlayers));
+        double radius = (parent.getWidth() / rows) / 2 - ((rows + 1) * 2);
+        Circle gp = new Circle(radius, Color.WHITE);
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        gamePiece.setLocation(parent);
+        double shift = 2 * radius * (i % rows) + 2;
+        gp.setLayoutX(parent.getXPos() + shift);
+        gp.setLayoutY(parent.getYPos() + shift);
+        Display.getDisplay().updatePiece(gamePiece);
     }
 
     public void initSettings() {
@@ -471,14 +476,6 @@ public class PlayController extends ScreenController {
 
     public void placeDice(ArrayList<Die> dice, ScrollPane rngPane, HBox container) {
 
-        rngPane.setContent(container);
-        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-
-        AnchorPane diceView = new AnchorPane();
-        AnchorPane diceDisplay = new AnchorPane();
-        diceDisplay.setPrefSize(180, 180);
-        container.getChildren().add(diceView);
-        container.setMargin(diceView, new Insets(10, 0, 20, 20));
         double rowMax = Math.ceil(Math.sqrt(dice.size()));
         double diceSize = 180 / rowMax;
         double currX = 0.0;
@@ -508,10 +505,6 @@ public class PlayController extends ScreenController {
 //            }
         }
 
-        diceView.setOnMouseClicked(e -> {
-            rollDice(e, dice);
-        });
-//        container.getChildren().add(diceView);
     }
 
     public void placeSpinners(ArrayList<Spinner> spinners, ScrollPane rngPane, HBox container) {
