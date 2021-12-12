@@ -103,7 +103,6 @@ public class Display extends PlayController {
         parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
         parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
         parent.toFront();
-        System.out.println("Attempt");
     }
 
 }

@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Edit edits">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="added updateGamepiece to Display and Gamepiece's setLocation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/Popup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/MoveByNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/MoveByNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +17,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JavaFXApplication" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -117,13 +113,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Adjusted drawer sliding to come from behind the corresponding tab immediately">
-      <created>1636922489330</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1636922489330</updated>
     </task>
     <task id="LOCAL-00005" summary="Changed default size and margins of decks.">
       <created>1636946400904</created>
@@ -461,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639275546024</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="added updateGamepiece to Display and Gamepiece's setLocation">
+      <created>1639279295304</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1639279295304</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -478,7 +474,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replace DummyPlayer with Player and replaced Token with Gamepiece. Merged GKNEW's new files." />
     <MESSAGE value="File structure with Minjex, GKNEW, and UMass Dining" />
     <MESSAGE value="Merged from main" />
     <MESSAGE value="Undo folder refactor" />
@@ -503,7 +498,8 @@
     <MESSAGE value="Full loop" />
     <MESSAGE value="Stage edits" />
     <MESSAGE value="Edit edits" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit edits" />
+    <MESSAGE value="added updateGamepiece to Display and Gamepiece's setLocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added updateGamepiece to Display and Gamepiece's setLocation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
