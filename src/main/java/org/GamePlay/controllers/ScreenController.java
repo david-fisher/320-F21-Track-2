@@ -43,8 +43,6 @@ public class ScreenController {
             anchorPane.setPrefHeight(fullScreenDimensions.getHeight());
 
         }
-
-
         anchorPane.getChildren().add(screenVBox);
     }
 

@@ -14,6 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Savable;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
 
@@ -26,7 +27,6 @@ public class MainController extends ScreenController {
 
         Label settingsButton = new Label("Settings");
         setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
-
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
@@ -103,8 +103,13 @@ public class MainController extends ScreenController {
         super.initialize(stage);
 
         screenVBox.setAlignment(Pos.CENTER);
+        Savable.intitDB();
+
         initSettings();
         initButtons();
+        if (Savable.getProjects().size() == 0) {
+            editButton.setDisable(true);
+        }
     }
 
     // event handlers
@@ -137,6 +142,12 @@ public class MainController extends ScreenController {
     // todo implement edit button
     public void editFromMain(MouseEvent event) throws IOException {
         System.out.println("Edit");
+        EditController controller = new EditController();
+        stage.close();
+        Stage stage = new Stage();
+        stage.setWidth(800);
+        stage.setHeight(600);
+        controller.initialize(stage);
     }
 
 
