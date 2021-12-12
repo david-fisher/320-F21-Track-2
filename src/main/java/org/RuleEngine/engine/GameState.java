@@ -126,7 +126,7 @@ public class GameState extends Savable {
     public void setProjectName(String name) { projectName = name; }
     
     public int getMaxPlayer() { return maxPlayer; }
-    public void setMaxPlayer(int num) { maxPlayer = num; }
+    public void setMaxPlayer(int num) { maxPlayer = num >= minPlayer ? num : minPlayer; }
     
     public int getMinPlayer() { return minPlayer; }
     public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
