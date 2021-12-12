@@ -32,6 +32,8 @@ import java.util.*;
 
 public class SetupController extends ScreenController {
 
+    // GUI creation ---------------------------------
+
     HBox gameSetupLabelHBox;
     Label gameSetupLabel;
     private void initGameSetupLabel() {
@@ -188,6 +190,7 @@ public class SetupController extends ScreenController {
         screenVBox.getChildren().add(bottomHBox);
     }
 
+    // constructor -----------------------------------
     public void initialize(Stage stage) {
 
         super.initialize(stage);
@@ -214,7 +217,12 @@ public class SetupController extends ScreenController {
         initEventHandlers();
     }
 
+    // constants -----------------
+
+    private final String[] TUTORIAL_STRINGS = { "Enabled", "Disabled" };
     private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
+
+    // class attributes ----------
 
     // the project selected in selectionScreen // todo determine what the point of this is... do we need it?
     Project selectedProject;
@@ -245,7 +253,7 @@ public class SetupController extends ScreenController {
         for(int i = 0; i < minNumPlayers; ++i) {
 
             // add a player to the list
-            addNewPlayer();
+            addPlayer();
         }
 
         // set tutorial mode to be initially disabled
@@ -267,7 +275,29 @@ public class SetupController extends ScreenController {
     }
     private void initEventHandlers() {
 
-        // add event handlers to each individual node
+        minusPlayerButton.setOnMouseClicked( (event -> {
+            minusButtonPressed();
+        }));
+
+        plusPlayerButton.setOnMouseClicked( (event -> {
+            plusButtonPressed();
+        }));
+
+        tutorialToggleLabel.setOnMouseClicked( (event -> {
+            tutorialButtonPressed();
+        }));
+
+        playerOrderToggleLabel.setOnMouseClicked( (event -> {
+            playerOrderButtonPressed();
+        }));
+
+        backButton.setOnMouseClicked( (event -> {
+            backFromSetup();
+        }));
+
+        startGameButton.setOnMouseClicked( (event -> {
+            playFromSetup();
+        }));
     }
 
     // update functions
@@ -277,29 +307,98 @@ public class SetupController extends ScreenController {
 
         if(tutorialEnabled == true) {
 
-            tutorialToggleLabel.setText("Enabled");
+            tutorialToggleLabel.setText(TUTORIAL_STRINGS[0]);
 
         } else {
 
-            tutorialToggleLabel.setText("Disabled");
+            tutorialToggleLabel.setText(TUTORIAL_STRINGS[1]);
         }
 
     }
 
     // helpers
     // todo implement helpers
-    private void addNewPlayer() {
+    private void addPlayer() {
 
     }
     private void addPlayerNode() {}
+    private void removePlayer() {}
+    private void removePlayerNode() {}
+    private void dealWithPlayerOrder() {
+    }
 
-    // event handlers // todo implement handlers
-    private void minusButtonPressed() {}
-    private void plusButtonPressed() {}
-    private void tutorialButtonPressed() {}
-    private void playerOrderButtonPressed() {}
-    private void backFromSetup() {}
-    private void playFromSetup() {}
+    // event handlers
+    private void minusButtonPressed() {
+
+        // remove player from list
+        removePlayer();
+
+        // remove player node from vbox
+        removePlayerNode();
+    }
+    private void plusButtonPressed() {
+
+        // add player to list
+        addPlayer();
+
+        // add player node
+        addPlayerNode();
+    }
+    private void tutorialButtonPressed() {
+
+        // establish what the current setting is
+        int curSelection = Arrays.asList(TUTORIAL_STRINGS).indexOf(tutorialToggleLabel.getText());
+
+        // increment selection by 1 (next selection option)
+        curSelection += 1;
+
+        // check if we are at the end of the options list
+        if (curSelection == TUTORIAL_STRINGS.length) {
+
+            // move back to the beginning of the options list
+            curSelection = 0;
+        }
+
+        // set new text
+        tutorialToggleLabel.setText(TUTORIAL_STRINGS[curSelection]);
+    }
+    private void playerOrderButtonPressed() {
+
+        // establish what its current setting was
+        int curSelection = Arrays.asList(PLAYER_ORDER_STRINGS).indexOf(playerOrderToggleLabel.getText());
+
+        // increment selection by 1 (next selection option)
+        curSelection += 1;
+
+        // check if we are at the end of the options list
+        if (curSelection == PLAYER_ORDER_STRINGS.length) {
+
+            // move back to the beginning of the options list
+            curSelection = 0;
+        }
+
+        // set new text
+        playerOrderToggleLabel.setText(PLAYER_ORDER_STRINGS[curSelection]);
+    }
+    private void backFromSetup() {
+
+        SelectionController controller = new SelectionController();
+        controller.initialize(stage);
+    }
+    private void playFromSetup() {
+
+        // deal with playerOrder
+        dealWithPlayerOrder();
+
+        // save data somehow
+        // todo: We have two things: list of players, isTutorial
+        // todo: we need to pass this information along to playScreen somehow
+        // todo: idk how to do it
+
+        // switch screens
+        PlayController controller = new PlayController();
+        controller.initialize(stage);
+    }
 
 //    public void playFromSetup(ActionEvent event) throws IOException {
 //
