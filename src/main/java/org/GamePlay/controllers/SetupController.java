@@ -1,6 +1,8 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,6 +30,7 @@ public class SetupController extends ScreenController {
 
     HBox gameSetupLabelHBox;
     Label gameSetupLabel;
+
     private void initGameSetupLabel() {
 
         gameSetupLabelHBox = new HBox();
@@ -216,9 +219,9 @@ public class SetupController extends ScreenController {
 
     // constants -----------------
 
-    private final String[] HUMAN_AI_STRINGS = { "Human", "AI" };
-    private final String[] TUTORIAL_STRINGS = { "Enabled", "Disabled" };
-    private final String[] PLAYER_ORDER_STRINGS = { "In Order", "Randomized" };
+    private final String[] HUMAN_AI_STRINGS = {"Human", "AI"};
+    private final String[] TUTORIAL_STRINGS = {"Enabled", "Disabled"};
+    private final String[] PLAYER_ORDER_STRINGS = {"In Order", "Randomized"};
 
     // class attributes ----------
 
@@ -248,7 +251,7 @@ public class SetupController extends ScreenController {
         // set players to default -> min num players
         // todo read real min num players from project settings
         int minNumPlayers = 2;
-        for(int i = 0; i < minNumPlayers; ++i) {
+        for (int i = 0; i < minNumPlayers; ++i) {
 
             // add a player to the list
             addPlayer();
@@ -263,7 +266,7 @@ public class SetupController extends ScreenController {
         playersVBox.getChildren().clear();
 
         // for each player, add a corresponding node
-        setupData.getPlayers().forEach( (player) -> {
+        setupData.getPlayers().forEach((player) -> {
             addPlayerNode(player);
         });
     }
@@ -273,27 +276,27 @@ public class SetupController extends ScreenController {
     }
     private void initEventHandlers() {
 
-        minusPlayerButton.setOnMouseClicked( (event -> {
+        minusPlayerButton.setOnMouseClicked((event -> {
             minusButtonPressed();
         }));
 
-        plusPlayerButton.setOnMouseClicked( (event -> {
+        plusPlayerButton.setOnMouseClicked((event -> {
             plusButtonPressed();
         }));
 
-        tutorialToggleLabel.setOnMouseClicked( (event -> {
+        tutorialToggleLabel.setOnMouseClicked((event -> {
             tutorialButtonPressed();
         }));
 
-        playerOrderToggleLabel.setOnMouseClicked( (event -> {
+        playerOrderToggleLabel.setOnMouseClicked((event -> {
             playerOrderButtonPressed();
         }));
 
-        backButton.setOnMouseClicked( (event -> {
+        backButton.setOnMouseClicked((event -> {
             backFromSetup();
         }));
 
-        startGameButton.setOnMouseClicked( (event -> {
+        startGameButton.setOnMouseClicked((event -> {
             playFromSetup();
         }));
     }
@@ -303,7 +306,7 @@ public class SetupController extends ScreenController {
 
         boolean tutorialEnabled = setupData.isTutorialMode();
 
-        if(tutorialEnabled == true) {
+        if (tutorialEnabled == true) {
 
             tutorialToggleLabel.setText(TUTORIAL_STRINGS[0]);
 
@@ -360,11 +363,17 @@ public class SetupController extends ScreenController {
         playerHBox.setAlignment(Pos.CENTER);
         VBox.setMargin(playerHBox, new Insets(0, 10, 50, 10));
 
+        // store a reference to this hbox's player in the hbox
+        playerHBox.setUserData(player);
+
         // color picker
-        Color defaultColor = getRandomColor();
+        Color defaultColor = getRandomUniqueColor();
         ColorPicker colorPicker = new ColorPicker(defaultColor);
-        colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) +  "; -fx-font-family: serif;" +
+        colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) + "; -fx-font-family: serif;" +
                 " -fx-color-label-visible: false ; ");
+        colorPicker.setOnAction(event -> {
+            colorPickerOnAction(event);
+        });
 
         // piece selection
         Label pieceSelectionButton = new Label("Select A Piece");
@@ -386,6 +395,55 @@ public class SetupController extends ScreenController {
         playerName.setText(player.getLabel());
         playerName.setAlignment(Pos.CENTER);
         HBox.setMargin(playerName, new Insets(0, 0, 0, 80));
+
+        // player name change listener for duplicate name correction
+        playerName.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+
+                // if focus was lost
+                if(!t1) {
+
+                    // get new text
+                    String newText = playerName.getText();
+                    System.out.println(newText);
+
+                    // get old text
+                    String oldText = player.getLabel();
+                    System.out.println(oldText);
+
+                    // if the new text is the same as another player's
+                    setupData.getPlayers().forEach( p -> {
+
+                        // skip current player
+                        if(p == player) {
+
+                        } else if (newText.trim().equals(p.getLabel().trim())) {
+
+                            // revert text
+                            playerName.setText(oldText);
+
+                            // show alert
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Error!");
+                            alert.setHeaderText("Duplicate Name Detected!");
+                            alert.setContentText("Players cannot have the same names, please change it.");
+                            alert.showAndWait();
+
+                            // refocus textfield
+                            playerName.requestFocus();
+
+                            return;
+                        }
+                    });
+
+                    // otherwise, update player name
+                    player.setLabel(newText);
+                }
+            }
+        });
+
 
         // human / ai toggle switch
         Button humanAIToggleLabel = new Button();
@@ -413,49 +471,9 @@ public class SetupController extends ScreenController {
 
 
 //        // -- Color picker Code Starts --
-//        Color color = getRandomColor();
-////        if (pGamePiece.size() > 0){color = pGamePiece.get(0).getColor();}// todo get game piece by reference
-//
-//        ColorPicker colorPicker = new ColorPicker(color);
-//        // Set bg color and disable text
-//
 //
 //        // Add listener for Color Picker
-//        colorPicker.setOnAction(new EventHandler() {
-//            public void handle(Event t) {
-//                System.out.println("Something");
-//                Player player = playerHashMap.get(Integer.valueOf(playerHBox.getId()));
-//                Color initColor = player.getColor();
-//                Integer ID = Integer.valueOf(playerHBox.getId());
-//                for(Map.Entry<Integer, Player> p : playerHashMap.entrySet()) {
-//                    if (p.getValue().getColor().equals(colorPicker.getValue())) {
-//                        if(p.getKey() == ID){
-//                            continue;
-//                        }
-//                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                        alert.setTitle("Error!");
-//                        alert.setHeaderText("Duplicate Color Detected!");
-//                        alert.setContentText("Players cannot have the same colors, please change it.");
-//                        player.setColor(initColor);
-//                        Rectangle rec = (Rectangle) colorPicker.lookup("Rectangle");
-//                        rec.setFill(initColor);
-//                        hboxPlayer.getGamePieces().get(0).setColor(initColor); // todo get game piece by reference
-////                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
-//                        colorPicker.setStyle("-fx-background-color: " + hex(initColor) +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
-//                        alert.showAndWait();
-//                        break;
-//                    }
-//                    else{
-//                        hboxPlayer.getGamePieces().get(0).setColor(colorPicker.getValue()); // todo get game piece by reference
-//                        Color c = colorPicker.getValue();
-//                        player.setColor(c);
-////                        String hex = hboxPlayer.getGameTokens().get(0).getTokenHex();
-//                        colorPicker.setStyle("-fx-background-color: " + hex(c) +  "; -fx-font-family: serif; -fx-color-label-visible: false;");
-//                    }
-//                }
-//                System.out.println(playerHashMap);
-//                System.out.println(initColor);
-//            }
+//        colorPicker.setOnAction(
 //        });
 //        // -- Color picker Code Ends --
 //
@@ -578,7 +596,7 @@ public class SetupController extends ScreenController {
     private void removePlayerNode() {
 
         // return if we are at minimum num players
-        if(playersVBox.getChildren().size() == 2) { // todo read real min value from gamestate
+        if (playersVBox.getChildren().size() == 2) { // todo read real min value from gamestate
             return;
         }
 
@@ -589,26 +607,37 @@ public class SetupController extends ScreenController {
     private void dealWithPlayOrderOnLeaveSetup() {
 
         // if randomized is selected
-        if("Randomized".equals(playerOrderToggleLabel.getText())) {
+        if ("Randomized".equals(playerOrderToggleLabel.getText())) {
 
             // randomize the order of the players
             Collections.shuffle(setupData.getPlayers());
         }
     }
-    private Color getRandomColor() {
+    private Color getRandomUniqueColor() {
+
         Random rand = new Random(System.currentTimeMillis());
 
         int red = rand.nextInt(255);
         int green = rand.nextInt(255);
         int blue = rand.nextInt(255);
 
-        return Color.rgb(red, green, blue, .99);
+        Color uniqueColor = Color.rgb(red, green, blue, .99);
+
+        // if a player already has the color, generate a new one
+        ArrayList<Player> playerList = setupData.getPlayers();
+        for (int i = 0; i < playerList.size(); ++i) {
+            if (playerList.get(i).getColor().equals(uniqueColor)) {
+                return getRandomUniqueColor();
+            }
+        }
+        // if none of the players have the color, return it
+        return uniqueColor;
     }
     public String getHexFromColor(Color color) {
-      return String.format( "#%02X%02X%02X",
-                (int)(color.getRed() * 255),
-                (int)(color.getGreen() * 255),
-                (int)(color.getBlue() * 255));
+        return String.format("#%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
     }
 
     // event handlers
@@ -645,6 +674,54 @@ public class SetupController extends ScreenController {
         // update textfield
         updatePlayerCountLabel();
     }
+    private void colorPickerOnAction(ActionEvent event) {
+
+        // get source information
+        ColorPicker colorPicker = (ColorPicker) event.getSource();
+        HBox curPlayerHBox = (HBox) colorPicker.getParent();
+        Player curPlayer = (Player) curPlayerHBox.getUserData();
+
+        // store color that was chosen
+        Color chosenColor = colorPicker.getValue();
+
+        // scan players for the chosen color
+        setupData.getPlayers().forEach((player) -> {
+
+            // give error message and revert if color is already taken
+            if (player.getColor().equals(chosenColor)) {
+
+                // get player's original color
+                Color prevColor = curPlayer.getColor();
+
+                // revert color picker back to original color
+                colorPicker.setValue(prevColor);
+
+                // update colorpicker's color
+                colorPicker.setStyle("-fx-background-color: " +
+                        getHexFromColor(prevColor) + "; -fx-font-family: serif; -fx-color-label-visible: false;");
+
+                // show alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Duplicate Color Detected!");
+                alert.setContentText("Players cannot have the same colors, please change it.");
+
+                alert.showAndWait();
+
+                return;
+            }
+        });
+
+        // otherwise -- color is not a duplicate
+
+        // update player's color
+        curPlayer.setColor(chosenColor);
+
+        // update colorpicker's color
+        colorPicker.setStyle("-fx-background-color: " +
+                getHexFromColor(chosenColor) + "; -fx-font-family: serif; -fx-color-label-visible: false;");
+
+    }
     private void pieceSelectionButtonPressed() { // todo implement piece selection
 
         // open selection window; allow user to select from a list of options and hit ok closing the window
@@ -652,7 +729,7 @@ public class SetupController extends ScreenController {
     private void humanAITogglePressed(ActionEvent event) {
 
         // get the button that was pressed
-        Button curButton = ((Button)event.getSource());
+        Button curButton = ((Button) event.getSource());
 
         // get the text on that button
         String curText = curButton.getText();
@@ -727,9 +804,7 @@ public class SetupController extends ScreenController {
     }
 
 
-
-
-    // stuff that I havent added yet to the clean write ------------------------------------------------------------------
+    // stuff that I havent added to the clean write ------------------------------------------------------------------
 
 //    public void playFromSetup(ActionEvent event) throws IOException {
 //
@@ -766,8 +841,6 @@ public class SetupController extends ScreenController {
 //        PlayController controller = new PlayController();
 //        controller.initialize(stage);
 //    }
-
-    // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
     // Stack to get the player info
 //    private Stack<HBox> playerNodeStack = new Stack<>();
