@@ -1,4 +1,4 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.RuleEngine.engine.GameState;
 import org.GameObjects.objects.*;
-import org.scenebuilder.controllers.MainController;
+import org.GamePlay.controllers.MainController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,18 @@ public class BasicApplication extends Application {
 
     private static SettingsObject settingsObject = new SettingsObject();
 
+
+    //TODO: Phase these out
     private static ArrayList<GameState> newGames = new ArrayList<>();
     private static ArrayList<GameState> savedGames = new ArrayList<>();
 
+    //TODO: selected game could be replaced by Project
     private static GameState selectedGame;
     private static SetupData setupData;
 
-    public static void loadNewGames() {
+    private static Project project;
 
+    public static void loadNewGames() {
         // do stuff to get list of playable games (on start) from Persistent Data team
         // todo
 
@@ -36,7 +40,6 @@ public class BasicApplication extends Application {
         newGames.add(game1);
         newGames.add(game2);
         newGames.add(game3);
-        System.out.println(newGames);
     }
     public static void loadSavedGames() {
 
@@ -51,7 +54,6 @@ public class BasicApplication extends Application {
         savedGames.add(game1);
         savedGames.add(game2);
         savedGames.add(game3);
-        System.out.println(savedGames);
     }
     private static GameState createGame(String gameName, String gameShape, boolean decksOn, boolean rngOn, boolean inventoryOn) {
 
@@ -59,7 +61,7 @@ public class BasicApplication extends Application {
         Player player1 = new Player("David", Color.PURPLE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
         Gamepiece gp = new Gamepiece();
         gp.setColor(Color.WHITE);
-        player1.addPiece(new Gamepiece());
+        player1.addPiece(gp);
         players.add(player1);
 //        System.out.println("Basic screen: " + player1.getGamePieces().get(0).getColor().toString());
 
@@ -130,50 +132,66 @@ public class BasicApplication extends Application {
                 tile.addConnect(tiles.get(i - 1));
             }
         }
-        ArrayList<Deck> decks = new ArrayList<>();
-        Deck deck1 = new Deck();
-        Deck deck2 = new Deck();
-        Deck deck3 = new Deck();
-        Deck deck4 = new Deck();
-        deck1.addCard(new Card(), 52);
-        deck2.addCard(new Card(), 52);
-        deck3.addCard(new Card(), 52);
-        deck4.addCard(new Card(), 52);
-        decks.add(deck1);
-        decks.add(deck2);
-        decks.add(deck3);
-        decks.add(deck4);
-
-
+//        ArrayList<Deck> decks = new ArrayList<>();
+//        Deck deck1 = new Deck();
+//        Deck deck2 = new Deck();
+//        Deck deck3 = new Deck();
+//        Deck deck4 = new Deck();
+//        deck1.addCard(new Card(), 52);
+//        deck2.addCard(new Card(), 52);
+//        deck3.addCard(new Card(), 52);
+//        deck4.addCard(new Card(), 52);
+//        decks.add(deck1);
+//        decks.add(deck2);
+//        decks.add(deck3);
+//        decks.add(deck4);
+//
+//
         ArrayList<Die> dice = new ArrayList<Die>();
-        ArrayList<Spinner> spinners = new ArrayList<Spinner>();
-
+//        ArrayList<Spinner> spinners = new ArrayList();
+//
         Die die1 = new Die();
-//        Die die2 = new Die();
-//        Die die3 = new Die();
-//        Die die4 = new Die();
-//        Die die5 = new Die();
-//        Die die6 = new Die();
-//        Die die7 = new Die();
+////        Die die2 = new Die();
+////        Die die3 = new Die();
+////        Die die4 = new Die();
+////        Die die5 = new Die();
+////        Die die6 = new Die();
+////        Die die7 = new Die();
         dice.add(die1);
-//        dice.add(die2);
-//        dice.add(die3);
-//        dice.add(die4);
-//        dice.add(die5);
-//        dice.add(die6);
-//        dice.add(die7);
+////        dice.add(die2);
+////        dice.add(die3);
+////        dice.add(die4);
+////        dice.add(die5);
+////        dice.add(die6);
+////        dice.add(die7);
+//
+//        Spinner spinner1 = new Spinner();
+//        spinner1.setNumCategories(5);
+//        List<Double> spinnerWeight = new ArrayList();
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinnerWeight.add(0.2);
+//        spinners.add(spinner1);
 
-        Spinner spinner1 = new Spinner();
-        spinner1.setNumCategories(5);
-        List<Double> spinnerWeight = new ArrayList<Double>();
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinnerWeight.add(0.2);
-        spinners.add(spinner1);
+        ArrayList<Button> buttons = new ArrayList<>();
+        Button button = new Button();
+        button.setText("Roll Dice");
+        button.setColorString("#FFFFFF");
+        button.setWidth(100.0);
+        button.setHeight(50.0);
+        buttons.add(button);
 
-        ArrayList<Token> gameTokens = new ArrayList<Token>();
+        Button button1 = new Button();
+        button1.setText("Draw From Deck");
+        button1.setColorString("#FFFFFF");
+        button1.setWidth(100.0);
+        button1.setHeight(50.0);
+        buttons.add(button1);
+
+
+        ArrayList<Token> gameTokens = new ArrayList<>();
         Token gameToken = new Token();
         gameToken.setLabel("Token 1");
         gameToken.setShape("Rectangle");
@@ -181,13 +199,15 @@ public class BasicApplication extends Application {
 
         GameState gameState = new GameState(); //players, tiles, decks, dice, spinners, gameTokens
         gameState.setAllTiles(tiles);
-        if (decksOn) {
-            gameState.setAllDecks(decks);
-        }
+//        if (decksOn) {
+//            gameState.setAllDecks(decks);
+//        }
         if (rngOn) {
             gameState.setAllDice(dice);
-            gameState.setAllSpinners(spinners);
+//            gameState.setAllSpinners(spinners);
         }
+
+        gameState.setAllButtons(buttons);
 
         gameState.setAllPlayers(players);
         gameState.setAllTokens(gameTokens);
@@ -254,22 +274,28 @@ public class BasicApplication extends Application {
     }
 
     public static Stage restartStage(Stage stage) {
-
         stage.close();
-
         Stage newStage = new Stage();
-
         initScreenStyle(newStage);
         initScreenDimensions(newStage);
-
         return newStage;
     }
+
+    public static Stage newStage(Stage stage) {
+        stage.close();
+        Stage newStage = new Stage();
+        initScreenDimensions(newStage);
+        return newStage;
+    }
+
     public static Stage updateStage(Stage stage) {
 
         initScreenDimensions(stage);
 
         return stage;
     }
+    public static void setProject(Project p) { project = p; }
+    public static Project getProject() { return project; }
 
     @Override
     public void start(Stage stage) {

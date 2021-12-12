@@ -1,13 +1,9 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
@@ -24,13 +20,13 @@ import javafx.util.Duration;
 import org.GameObjects.objects.Button;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveByNode;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.Display;
-import org.scenebuilder.GlobalCSSValues;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.Display;
+import org.GamePlay.GlobalCSSValues;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
 import org.GameObjects.objects.Spinner;
-import org.scenebuilder.SetupData;
+import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 
@@ -40,11 +36,11 @@ public class PlayController extends ScreenController {
     private static AnchorPane playParent;
     private static GameState activeGame;
     private ScrollPane decksPane;
-    private ScrollPane rngPane;
+    private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
-    private Label playerTurnIndicator;
+    private static Label playerTurnIndicator;
     private Label decksLabel;
-    private Label rngLabel;
+    private Label buttonLabel;
     private Label inventoryLabel;
     private Pane settingsPane;
     private HBox inventoryContainer;
@@ -67,17 +63,17 @@ public class PlayController extends ScreenController {
         playHeight = stage.getHeight();
 
         // load relevant data
-        setupData = BasicApplication.getSetupData();
-        players = setupData.playerList;
-        if (players.size() == 0) {
-            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-            setupData = new SetupData(players, false);
-        }
+//        setupData = BasicApplication.getSetupData();
+//        players = setupData.getPlayers();
+//        if (players.size() == 0) {
+//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
+//            setupData = new SetupData(players, false);
+//        }
         activeGame = BasicApplication.getSelectedGame();
 
-        initializePlayScreen();
+        initPlayScreen();
 
         initGame(activeGame);
 
@@ -85,32 +81,6 @@ public class PlayController extends ScreenController {
         stage.setScene(newScene);
         stage.setResizable(true);
         stage.show();
-    }
-
-    private void playerTurnCycle() {
-        Label switchTurn = new Label();
-        switchTurn.setText("End Turn");
-        setStyle(switchTurn, "14", "Red", 100, 50);
-
-        switchTurn.setOnMouseClicked(e -> {
-            int nextPlayerIndex = players.indexOf(currPlayer);
-            Player nextPlayer = nextPlayerIndex == players.size()-1 ? players.get(0) : players.get(nextPlayerIndex + 1);
-            playerTurnIndicator.setText(nextPlayer.getLabel() + "'s Turn");
-            playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
-                    "-fx-background-radius: 5 5 5 5; " +
-                    "-fx-font-family: Serif; " +
-                    "-fx-font-size: 16; " +
-                    "-fx-border-color: #000000;" +
-                    "-fx-background-color:" + toHexString(nextPlayer.getColor()) + ";");
-            // set current player
-            fillInventoryDrawer(nextPlayer.getInventory());
-            currPlayer = nextPlayer;
-            playerTurnCycle();
-        });
-        playParent.getChildren().addAll(switchTurn);
-        playParent.setLeftAnchor(switchTurn, 5.0);
-        playParent.setTopAnchor(switchTurn, 5.0);
-        switchTurn.setAlignment(Pos.CENTER);
     }
 
     private static AnchorPane boardPane;
@@ -127,14 +97,12 @@ public class PlayController extends ScreenController {
         currPlayer = players.get(0);
         gameStateInput.setAllPlayers(players);
 
-        playerTurnCycle();
         initPlayerTurnIndicator();
 
         // TODO: do we do this?
         if (gameBoard.getBoardID().equals("All Drawers")) {
-//            gameStateInput.addRegistry("currPlayer", currPlayer.getGamePieces().get(0));
+            gameStateInput.addRegistry("currPlayer", currPlayer);
         }
-
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -155,25 +123,24 @@ public class PlayController extends ScreenController {
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
         initPlayers(gameStateInput.getAllPlayers());
-//        initButtons(gameStateInput);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
-        ArrayList<Die> dice = gameStateInput.getAllDice();
-        ArrayList<Spinner> spinners = gameStateInput.getAllSpinners();
+        ArrayList<Button> buttons = gameStateInput.getAllButtons();
+
         //players = gameState.getAllPlayers();
 
         int numDrawers = 0;
         boolean decksNeeded = decks.size() != 0;
-        boolean diceNeeded = dice.size() != 0;
-        boolean spinnersNeeded = spinners.size() != 0;
+        boolean buttonsNeeded = buttons.size() != 0;
+        //TODO
         boolean inventoryNeeded = true; //no indicator yet
 
         numDrawers = decksNeeded ? numDrawers + 1 : numDrawers;
-        numDrawers = diceNeeded || spinnersNeeded ? numDrawers + 1 : numDrawers;
+        numDrawers = buttonsNeeded ? numDrawers + 1 : numDrawers;
         numDrawers = inventoryNeeded ? numDrawers + 1 : numDrawers;
 
         if (decksNeeded) {
-            initializeDeckDrawer(numDrawers);
+            initDeckDrawer(numDrawers);
             initDeckLabel(numDrawers);
             fillDeckDrawer(decks, decksPane);
         }
@@ -182,23 +149,17 @@ public class PlayController extends ScreenController {
         container.setSpacing(20);
         container.setAlignment(Pos.CENTER);
 
-        if (diceNeeded || spinnersNeeded) {
-            initializeRNGDrawer(numDrawers);
-            initRNGLabel(numDrawers);
+        if (buttonsNeeded) {
+            initButtonDrawer(numDrawers);
+            initButtonLabel(numDrawers);
+            initButtons(gameStateInput);
         }
-        if (diceNeeded) {
-            placeDice(dice, rngPane, container);
-        }
-        if (spinnersNeeded) {
-            placeSpinners(spinners, rngPane, container);
-        }
-
 
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
-            initializeInventoryDrawer(numDrawers);
+            initInventoryDrawer(numDrawers);
             initInventoryLabel(numDrawers);
-            initInventory(new ArrayList<GameObject>());
+            fillInventory(currPlayer.getInventory());
         }
 
     }
@@ -263,12 +224,26 @@ public class PlayController extends ScreenController {
 
     private void initButtons(GameState gameState) {
         ArrayList<Button> buttons = gameState.getAllButtons();
+        HBox container = new HBox();
+        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(-10);
         buttons.forEach(button -> {
-            String event = (String) button.getTrait("onClick");
+            String event = button.getOnClick();
+            Label label = new Label(button.getText());
+            button.setParent(label);
+            setStyle(label, "18", button.getColorString(), button.getText().length() * 12, button.getHeight());
             button.getParent().setOnMouseClicked(e -> {
-                interpreter.interpretEvent(gameState.events.get(event), gameState);
+                if (button.getEnabled()) {
+                    interpreter.interpretEvent(gameState.events.get(event), gameState);
+                }
             });
+            container.getChildren().add(button.getParent());
+            label.setCenterShape(true);
+            container.setMargin(button.getParent(), new Insets(10, 10, 20, 10));
         });
+        buttonPane.setContent(container);
+        buttonPane.setStyle("-fx-border-color: black");
     }
 
     private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
@@ -285,18 +260,11 @@ public class PlayController extends ScreenController {
 
     private void drawPiece(Gamepiece gamePiece) {
         Tile parent = activeGame.getAllTiles().get(0);
-        gamePiece.setLocation(parent);
         Circle gp = new Circle(40, Color.WHITE);
         gp.setUserData(gamePiece);
-//        gamePiece.setParent(gp);
+        gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        gp.setLayoutX(parent.getXPos() + parent.getWidth() / 2);
-        gp.setLayoutY(parent.getYPos() + parent.getHeight() / 2);
-
-    }
-
-    private void initInventory(ArrayList<GameObject> inventory) {
-        fillInventoryDrawer(inventory);
+        gamePiece.setLocation(parent);
     }
 
     public void initSettings() {
@@ -325,8 +293,7 @@ public class PlayController extends ScreenController {
                 "-fx-font-family: Serif; " +
                 "-fx-font-size: 16; " +
                 "-fx-font-color: BLACK; " +
-                "-fx-border-color: #000000; " +
-                "-fx-background-color:" + toHexString(currPlayer.getColor()) + ";");
+                "-fx-border-color: #000000;");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
@@ -349,10 +316,10 @@ public class PlayController extends ScreenController {
         //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
-    private void initRNGLabel(int numDrawers) {
-        rngLabel = new Label();
-        initLabel(rngLabel, "RNG", "rngLabel");
-        playParent.setTopAnchor(rngLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
+    private void initButtonLabel(int numDrawers) {
+        buttonLabel = new Label();
+        initLabel(buttonLabel, "Buttons", "buttonLabel");
+        playParent.setTopAnchor(buttonLabel, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
     private void initInventoryLabel(int numDrawers) {
@@ -389,25 +356,26 @@ public class PlayController extends ScreenController {
         playParent.setRightAnchor(label, 0.0);
     }
 
-    private void initializeDeckDrawer(int numDrawers) {
+    private void initDeckDrawer(int numDrawers) {
         decksPane = new ScrollPane();
-        initializeDrawer(decksPane);
+        initDrawer(decksPane);
         playParent.setTopAnchor(decksPane, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
-    private void initializeRNGDrawer(int numDrawers) {
-        rngPane = new ScrollPane();
-        initializeDrawer(rngPane);
-        playParent.setTopAnchor(rngPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
+    private void initButtonDrawer(int numDrawers) {
+        buttonPane = new ScrollPane();
+        initDrawer(buttonPane);
+        playParent.setTopAnchor(buttonPane, (playHeight / 5) + 175 - 20 * Math.log(Math.pow(10, (numDrawers - 1))) * Math.log(Math.pow(10, (3 - numDrawers))));
     }
 
-    private void initializeInventoryDrawer(int numDrawers) {
+    private void initInventoryDrawer(int numDrawers) {
         inventoryPane = new ScrollPane();
-        initializeDrawer(inventoryPane);
+        initDrawer(inventoryPane);
         playParent.setTopAnchor(inventoryPane, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
-    private void initializeDrawer(ScrollPane pane) {
+    private void initDrawer(ScrollPane pane) {
+        pane.setFitToHeight(true);
         pane.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
         pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -505,7 +473,7 @@ public class PlayController extends ScreenController {
         }
 
         diceView.setOnMouseClicked(e -> {
-            rollDice(e, dice, diceDisplay);
+            rollDice(e, dice);
         });
 //        container.getChildren().add(diceView);
     }
@@ -529,9 +497,8 @@ public class PlayController extends ScreenController {
         rngPane.setStyle("-fx-border-color: BLACK;");
     }
 
-    private void rollDice(MouseEvent e, ArrayList<Die> dice, AnchorPane diceDisplay) {
-        AnchorPane source = (AnchorPane) e.getSource();
-        source.setDisable(true);
+    private void rollDice(MouseEvent e, ArrayList<Die> dice) {
+        Label source = (Label) e.getSource();
         Die die = dice.get(0);
         LiteralNode<String> name = new LiteralNode<>("currPlayer");
         int roll = die.roll();
@@ -544,14 +511,6 @@ public class PlayController extends ScreenController {
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
         interpreter.interpretEvent(moveNodes, activeGame);
-        //TODO: standardize and make way more efficient
-        Gamepiece gp = currPlayer.getGamePieces().get(0);
-        Shape parent = (Shape) gp.getParent();
-        Tile location = gp.getLocation();
-        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
-        parent.toFront();
-        source.setDisable(false);
     }
 
     private void addToInventory(GameObject object) {
@@ -574,7 +533,7 @@ public class PlayController extends ScreenController {
         inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
     }
 
-    private void fillInventoryDrawer(ArrayList<GameObject> inventory) {
+    public void fillInventory(ArrayList<GameObject> inventory) {
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
@@ -585,7 +544,7 @@ public class PlayController extends ScreenController {
         inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
     }
 
-    public void initializePlayScreen() {
+    public void initPlayScreen() {
         if (playParent == null) {
             playParent = new AnchorPane();
         }
@@ -601,7 +560,9 @@ public class PlayController extends ScreenController {
         Platform.exit();
     }
 
-    public void mainMenuFromPlay() {
+    public void clearPlayParent() { playParent = new AnchorPane();}
+
+    public void mainMenuFromPlay(Stage stage) {
         MainController controller = new MainController();
         controller.initialize(stage);
     }
@@ -619,8 +580,8 @@ public class PlayController extends ScreenController {
         ScrollPane tab;
         if (parent.getId().equals("decksLabel")) {
             tab = decksPane;
-        } else if (parent.getId().equals("rngLabel")){
-            tab = rngPane;
+        } else if (parent.getId().equals("buttonLabel")){
+            tab = buttonPane;
         } else {
             tab = inventoryPane;
         }
@@ -643,205 +604,8 @@ public class PlayController extends ScreenController {
         tt.play();
     }
 
-    public class Popup {
-        Label yes;
-        Label no;
-        public boolean saved = false;
-
-        public void displayRestart(Stage parentPopup){
-            Stage popupWindow = new Stage();
-            BorderPane borderPane = new BorderPane();
-            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-
-            Label restartMessage = new Label("Are you sure you want to restart? Your progress in the current game will be lost.");
-            restartMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
-            restartMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
-            restartMessage.setWrapText(true);
-            restartMessage.setAlignment(Pos.CENTER);
-            restartMessage.setPrefWidth(250);
-
-            borderPane.setAlignment(restartMessage, Pos.CENTER);
-            borderPane.setCenter(restartMessage);
-
-            HBox buttons = new HBox(10);
-
-            //TODO: Change these actions to actually handle restarting
-            yes.setOnMouseClicked(e-> {
-                popupWindow.close();
-                parentPopup.close();
-            });
-            no.setOnMouseClicked(e -> {
-                popupWindow.close();
-            });
-
-            buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 5));
-
-            buttons.setAlignment(Pos.CENTER);
-            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
-            borderPane.setBottom(buttons);
-            Scene exitScene = new Scene(borderPane, 300, 250);
-            popupWindow.setScene(exitScene);
-            popupWindow.showAndWait();
-        }
-
-        public void displayExitWithoutSave(Stage parentPopup){
-            Stage popupWindow = new Stage();
-            BorderPane borderPane = new BorderPane();
-            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-
-            Label exitMessage = new Label("Are you sure you want to exit to desktop? Your progress will be lost.");
-            exitMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
-            exitMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
-            exitMessage.setWrapText(true);
-            exitMessage.setAlignment(Pos.CENTER);
-            exitMessage.setPrefWidth(250);
-
-            borderPane.setAlignment(exitMessage, Pos.CENTER);
-            borderPane.setCenter(exitMessage);
-
-            HBox buttons = new HBox(10);
-
-            yes.setOnMouseClicked(e-> {
-                popupWindow.close();
-                parentPopup.close();
-                exitFromPlay();
-            });
-            no.setOnMouseClicked(e -> {
-                popupWindow.close();
-            });
-
-            buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 5));
-
-            buttons.setAlignment(Pos.CENTER);
-            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
-            borderPane.setBottom(buttons);
-            Scene exitScene = new Scene(borderPane, 300, 250);
-            popupWindow.setScene(exitScene);
-            popupWindow.showAndWait();
-        }
-
-        public void displayMainMenuWithoutSave(Stage parentPopup){
-            Stage popupWindow = new Stage();
-            BorderPane borderPane = new BorderPane();
-            borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-
-            Label exitMessage = new Label("Are you sure you want to return to the Main Menu? Your progress will be lost.");
-            exitMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
-            exitMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
-            exitMessage.setWrapText(true);
-            exitMessage.setAlignment(Pos.CENTER);
-            exitMessage.setPrefWidth(250);
-
-            borderPane.setAlignment(exitMessage, Pos.CENTER);
-            borderPane.setCenter(exitMessage);
-
-            HBox buttons = new HBox(10);
-
-            yes.setOnMouseClicked(e-> {
-                popupWindow.close();
-                parentPopup.close();
-                mainMenuFromPlay();
-            });
-            no.setOnMouseClicked(e -> {
-                popupWindow.close();
-            });
-
-            buttons.getChildren().addAll(yes, no);
-            buttons.setMargin(yes, new Insets(0, 5, 10, 0));
-            buttons.setMargin(no, new Insets(0, 0, 10, 5));
-
-            buttons.setAlignment(Pos.CENTER);
-            borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
-            borderPane.setBottom(buttons);
-            Scene exitScene = new Scene(borderPane, 300, 250);
-            popupWindow.setScene(exitScene);
-            popupWindow.showAndWait();
-        }
-
-        public void displaySettingsPopup() {
-            Stage popupWindow = new Stage();
-
-            yes = new Label("Yes");
-            yes.setStyle("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-            yes.setAlignment(Pos.CENTER);
-            yes.setPrefWidth(100);
-            yes.setPrefHeight(35);
-            no = new Label("No");
-            no.setStyle(yes.getStyle());
-            no.setAlignment(Pos.CENTER);
-            no.setPrefWidth(yes.getPrefWidth());
-            no.setPrefHeight(yes.getPrefHeight());
-            no.setStyle(yes.getStyle());
-
-            outlineYesNo(yes);
-            outlineYesNo(no);
-
-            popupWindow.initModality(Modality.APPLICATION_MODAL);
-
-            Label saveButton = new Label("Save");
-            setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
-            saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-
-            Label exitButton = new Label("Exit");
-            setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
-            exitButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-
-            Label restartButton = new Label("Restart");
-            setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
-            restartButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-
-            Label mainMenuButton = new Label("Main Menu");
-            setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
-            mainMenuButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-
-            saveButton.setOnMouseClicked(e->{
-                saved = true;
-                System.out.println("Save");
-            });
-
-            exitButton.setOnMouseClicked(e->{
-                if (!saved) {
-                    displayExitWithoutSave(popupWindow);
-                } else {
-                    popupWindow.close();
-                    exitFromPlay();
-                }
-            });
-
-            restartButton.setOnMouseClicked(e->{
-                displayRestart(popupWindow);
-            });
-
-            mainMenuButton.setOnMouseClicked(e -> {
-                if (!saved) {
-                    displayMainMenuWithoutSave(popupWindow);
-                } else {
-                    popupWindow.close();
-                    mainMenuFromPlay();
-                }
-            });
-
-            VBox layout = new VBox(10);
-            layout.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-            layout.getChildren().addAll(saveButton, restartButton, mainMenuButton, exitButton);
-            layout.setAlignment(Pos.CENTER);
-            Scene exitScene = new Scene(layout, 350, 400);
-            exitScene.setFill(Color.MAROON);
-            popupWindow.setScene(exitScene);
-            popupWindow.showAndWait();
-        }
-    }
-
     public void displayPopup(MouseEvent event) {
-        Popup popup = new Popup();
+        Popup popup = new Popup(stage);
         popup.displaySettingsPopup();
     }
 
@@ -891,6 +655,7 @@ public class PlayController extends ScreenController {
 
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
+    public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
     public GameState getGameState() { return activeGame; }
 }
 

@@ -1,5 +1,7 @@
 package org.RuleEngine.nodes;
 
+import org.GameObjects.objects.Player;
+import org.GamePlay.Display;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.GameObject;
 
@@ -34,6 +36,10 @@ public class RSetNode extends OpNode {
             go = currState.findObject(str2.substring(1));
         } else {
             go = currState.registers.get(str2);
+        }
+        //Update currPlayer for turn indicator
+        if (str1.equals("currPlayer")) {
+            Display.getDisplay().updateCurrPlayer((Player) go);
         }
         currState.registers.put(str1, go);
         return null;

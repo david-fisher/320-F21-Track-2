@@ -6,32 +6,23 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.controllers.MainController;
+import org.GamePlay.controllers.ScreenController;
 
-public class Controller {
+public class Controller extends ScreenController {
 	
 	@FXML
 	private Button exitButton;
@@ -118,13 +109,17 @@ public class Controller {
 
 	@FXML
 	void exitProgram(ActionEvent event) throws IOException {// This currently quits out of the system. We want it to
-															// quit the editor.
-		FXMLLoader root = new FXMLLoader();
-		root.setLocation(getClass().getResource("ConfirmExit.fxml"));
-		Scene scene = new Scene(root.load(), 300, 200);
-		Stage stage = new Stage();
-		stage.setTitle("Confirm Exit");
+		changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
+	}
+
+	public void changeScene(ActionEvent event, String nextScene) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.centerOnScreen();
+		scene.getRoot().setStyle("-fx-font-family: 'serif'");
 		stage.show();
 	}
 

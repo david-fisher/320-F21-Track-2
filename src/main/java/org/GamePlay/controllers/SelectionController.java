@@ -1,29 +1,22 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.GlobalCSSValues;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.SetupData;
+import org.GamePlay.GlobalCSSValues;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.SetupData;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectionController extends ScreenController {
@@ -179,20 +172,6 @@ public class SelectionController extends ScreenController {
     private ArrayList<GameState> newGames = new ArrayList<>();
     private ArrayList<GameState> savedGames = new ArrayList<>();
     private GameState selectedGame;
-
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public void populateSelectionMenus(ArrayList<GameState> newGames, ArrayList<GameState> savedGames) {
 

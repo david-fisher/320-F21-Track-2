@@ -1,17 +1,13 @@
-package org.scenebuilder;
+package org.GamePlay;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -21,7 +17,7 @@ import org.GameObjects.objects.*;
 
 import javafx.scene.input.MouseEvent;
 import org.RuleEngine.engine.GameState;
-import org.scenebuilder.controllers.PlayController;
+import org.GamePlay.controllers.PlayController;
 
 import java.util.ArrayList;
 
@@ -39,43 +35,6 @@ public class Display extends PlayController {
     private GameState gameState = super.getGameState();
 
     private Display() {}
-
-    public void displayDie(int roll) {
-//        ImageView dieImage = (ImageView) d;
-//        Die die = (Die) dieImage.getUserData();
-//        System.out.println(ClassLoader.getResource("Dice1.png"));
-//        switch (roll) {
-//            case 1:
-//                dieImage.setImage(new Image(getClass().getResource("Dice1.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 2:
-//                dieImage.setImage(new Image(getClass().getResource("Dice2.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 3:
-//                dieImage.setImage(new Image(getClass().getResource("Dice3.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 4:
-//                dieImage.setImage(new Image(getClass().getResource("Dice4.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 5:
-//                dieImage.setImage(new Image(getClass().getResource("Dice5.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//            case 6:
-//                dieImage.setImage(new Image(getClass().getResource("Dice6.png").toString(), die.getWidth(), die.getHeight(), true, true));
-//                break;
-//        }
-//    }
-//
-//        playParent.getChildren().add(diceDisplay);
-//        diceDisplay.setLayoutX(playWidth / 2 - 100);
-//        diceDisplay.setLayoutY(playHeight / 2 - 90);
-//
-//    final Timeline timeline = new Timeline();
-//        timeline.setAutoReverse(true);
-//        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2500),
-//    k -> playParent.getChildren().remove(diceDisplay)));
-//        timeline.play();
-    }
 
     private final Object KEY = new Object();
     public Tile moveOptions(ArrayList<Tile> tiles) {
@@ -136,6 +95,25 @@ public class Display extends PlayController {
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2800),
                 k -> playParent.getChildren().remove(displayRoll)));
         timeline.play();
+    }
+
+    public void updatePiece(Gamepiece gp) {
+        Shape parent = (Shape) gp.getParent();
+        Tile location = gp.getLocation();
+        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
+        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.toFront();
+    }
+
+    public void updateCurrPlayer(Player player) {
+        Label indicator = getPlayerTurnIndicator();
+        indicator.setText(player.getLabel() + "'s Turn");
+        indicator.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: 16; " +
+                "-fx-border-color: #000000;");
+        fillInventory(player.getInventory());
     }
 
 }

@@ -1,10 +1,8 @@
-package org.scenebuilder.controllers;
+package org.GamePlay.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,10 +13,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.scenebuilder.BasicApplication;
-import org.scenebuilder.GlobalCSSValues;
+import org.GameObjects.objects.Savable;
+import org.GamePlay.BasicApplication;
+import org.GamePlay.GlobalCSSValues;
 
 import java.io.IOException;
 
@@ -29,7 +27,6 @@ public class MainController extends ScreenController {
 
         Label settingsButton = new Label("Settings");
         setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
-
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
@@ -67,7 +64,7 @@ public class MainController extends ScreenController {
 
         newButton.setOnMouseClicked(event -> {
             try {
-                newFromMain(event);
+                createFromMain(event);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -106,8 +103,13 @@ public class MainController extends ScreenController {
         super.initialize(stage);
 
         screenVBox.setAlignment(Pos.CENTER);
+        Savable.intitDB();
+
         initSettings();
         initButtons();
+        if (Savable.getProjects().size() == 0) {
+            editButton.setDisable(true);
+        }
     }
 
     // event handlers
@@ -132,28 +134,27 @@ public class MainController extends ScreenController {
     }
 
     // todo implement new button
-    public void newFromMain(MouseEvent event) throws IOException {
-        System.out.println("New");
+    public void createFromMain(MouseEvent event) throws IOException {
+        System.out.println("Create");
+        switchScene(event, "CreateController.fxml");
     }
 
     // todo implement edit button
     public void editFromMain(MouseEvent event) throws IOException {
         System.out.println("Edit");
+        EditController controller = new EditController();
+        controller.initialize(stage);
     }
 
 
     // todo do we need this still?
-    public void switchScene(ActionEvent event, String nextScene) throws IOException {
+    public void switchScene(MouseEvent event, String nextScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(nextScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        // full screen dimensions
-        Rectangle2D screenDimensions = Screen.getPrimary().getVisualBounds();
-        double width = screenDimensions.getWidth();
-        double height = screenDimensions.getHeight();
-
-        Scene scene = new Scene(root, width, height);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
