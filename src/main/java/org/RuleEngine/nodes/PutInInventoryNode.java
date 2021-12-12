@@ -3,10 +3,10 @@ package org.RuleEngine.nodes;
 import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 
-// Usage: Operand 0 - The gamepiece
-//        Operand 1 - The tile
-public class MoveToNode extends OpNode {
-    public MoveToNode() {
+// Usage: Operand 0 - The GameObject to be added.
+//        Operand 1 - The target player 
+public class PutInInventoryNode extends OpNode {
+    public PutInInventoryNode() {
         super();
         addOperand(null).addOperand(null);
     }
@@ -16,7 +16,7 @@ public class MoveToNode extends OpNode {
     public LiteralNode execute(GameState currState) {
         LiteralNode op0 = getOperand(0).execute(currState);
         LiteralNode op1 = getOperand(1).execute(currState);
-
+        
         if (op0 == null) {
             NodeUtil.OperandError(this, 0);
             return null;
@@ -25,25 +25,20 @@ public class MoveToNode extends OpNode {
             NodeUtil.OperandError(this, 1);
             return null;
         }
-    
-        GameObject piece = NodeUtil.processNodeToObj(op0, currState);
-        GameObject tile = NodeUtil.processNodeToObj(op1, currState);
         
-        if (piece == null || !(piece instanceof Gamepiece)) {
-            NodeUtil.InputTypeError(this, 0, "Valid Gamepiece");
+        GameObject go0 = NodeUtil.processNodeToObj(op0, currState);
+        GameObject go1 = NodeUtil.processNodeToObj(op1, currState);
+        
+        if (go0 == null) {
+            NodeUtil.InputTypeError(this, 0, "Valid GameObject");
             return null;
         }
-        if (tile == null || !(tile instanceof Tile)) {
-            NodeUtil.InputTypeError(this, 1, "Valid Tile");
+        if (go1 == null || !(go1 instanceof Player)) {
+            NodeUtil.InputTypeError(this, 0, "Valid Player");
             return null;
         }
         
-        if (!((Gamepiece)piece).setLocation((Tile)tile)) {
-            NodeUtil.OtherError("Cannot move gamepiece " + op0.getValue() + " to " + op1.getValue());
-        }
-        
+        ((Player)go1).addInventory(go0);
         return null;
     }
-    
-    
 }

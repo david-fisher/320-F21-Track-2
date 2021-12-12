@@ -17,25 +17,28 @@ public class MoveByNode extends OpNode {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
-        LiteralNode e2 = getOperand(1).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
+        LiteralNode op1 = getOperand(1).execute(currState);
     
-        if (e1 == null || e2 == null) {
-            System.out.println("Error: Something went wrong processing MoveBy operation");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (op1 == null) {
+            NodeUtil.OperandError(this, 1);
             return null;
         }
     
-        if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof Integer)) {
-            System.out.println("Error: MoveBy operation takes a string and an integer as input!");
+        if (!(op1.getValue() instanceof Integer)) {
+            NodeUtil.InputTypeError(this, 1, "Integer");
             return null;
         }
         
-        String name = (String)e1.getValue();
-        Integer dis = (Integer)e2.getValue();
-        GameObject go = (name.charAt(0) == '_') ? currState.findObject(name.substring(1)) : currState.getRegistry(name);
+        Integer dis = (Integer)op1.getValue();
+        GameObject go = NodeUtil.processNodeToObj(op0, currState);
     
         if (go == null || !(go instanceof Gamepiece)) {
-            System.out.println("Error: Cannot find GAMEPIECE of label " + name);
+            NodeUtil.InputTypeError(this, 0, "Valid Gamepiece");
             return null;
         }
         
@@ -45,7 +48,7 @@ public class MoveByNode extends OpNode {
         Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
         Gamepiece gp = (Gamepiece) go;
         if (!gp.setLocation(playerChoice)) {
-            System.out.println("Error: Failed to move object " + name);
+            NodeUtil.OtherError("Failed to move object " + op0.getValue());
         }
         return null;
 	}

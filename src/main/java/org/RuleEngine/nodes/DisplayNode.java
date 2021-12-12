@@ -13,14 +13,18 @@ public class DisplayNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
         
-        if (e1 == null || !(e1.getValue() instanceof String)) {
-            System.out.println("Error: Display operation takes a string as input!");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (!(op0.getValue() instanceof String)) {
+            NodeUtil.InputTypeError(this, 0, "String");
+            return null;
         }
         
-        String message = (String)e1.getValue();
-        Display.getDisplay().print(message);
+        Display.getDisplay().print(op0.getValue().toString());
         return null;
     }
     
