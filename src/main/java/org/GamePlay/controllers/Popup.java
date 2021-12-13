@@ -143,22 +143,9 @@ public class Popup extends PlayController {
 
         yes = new Label("Yes");
         Style.setStyle(yes, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,100, 35);
-//        yes.setStyle("-fx-border-radius: 2 2 2 2; " +
-//                "-fx-background-radius: 2 2 2 2; " +
-//                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-//                "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-//                "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-//        yes.setAlignment(Pos.CENTER);
-//        yes.setPrefWidth(100);
-//        yes.setPrefHeight(35);
+
         no = new Label("No");
         no.setStyle(yes.getStyle());
-//        no.setAlignment(Pos.CENTER);
-//        no.setPrefWidth(yes.getPrefWidth());
-//        no.setPrefHeight(yes.getPrefHeight());
-
-//        outlineYesNo(yes);
-//        outlineYesNo(no);
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
@@ -215,23 +202,5 @@ public class Popup extends PlayController {
         exitScene.setFill(Color.MAROON);
         popupWindow.setScene(exitScene);
         popupWindow.showAndWait();
-    }
-
-    public void outlineYesNo(Label label) {
-        label.setOnMouseEntered(e -> {
-            label.setStyle("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.styleProperty().setValue("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
-        });
     }
 }
