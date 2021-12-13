@@ -25,11 +25,15 @@ public class GameState extends Savable {
     public ArrayList<GameObject> gameObjects;
 
     public boolean tutorialEnabled;
+    public int minPlayer, maxPlayer;
+    
     public HashMap<String, GameObject> registers;
     public HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
     public GameState() {
         projectName = "New Project";
+        minPlayer = 1;
+        maxPlayer = 4;
         
         gameObjects = new ArrayList<GameObject>();
         buttons = new ArrayList<Button>();
@@ -45,8 +49,10 @@ public class GameState extends Savable {
 
         tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();
+        registers.put("winner", null);
         registers.put("currPlayer", null);
         events.put("heuristic", null);
+	events.put("initialization", null);
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
@@ -96,15 +102,17 @@ public class GameState extends Savable {
         for(Token go : tokens) {
             if (go.getTrait("label").equals(label)) { return go; }
         }
+        for(Player go : players) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
         return null;
     }
 
-    public String toString() {
+    public String repr() {
         String repr = "";
         TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
-        	
-            // repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
+            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }
@@ -116,6 +124,12 @@ public class GameState extends Savable {
     // For object persistence
     public String getProjectName() { return projectName; }
     public void setProjectName(String name) { projectName = name; }
+    
+    public int getMaxPlayer() { return maxPlayer; }
+    public void setMaxPlayer(int num) { maxPlayer = num >= minPlayer ? num : minPlayer; }
+    
+    public int getMinPlayer() { return minPlayer; }
+    public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
     
     public GameBoard getGameBoard() { return board; }
     public void setGameBoard(GameBoard board) { this.board = board; }

@@ -1,6 +1,8 @@
 package org.Editors.controllers;
 
 import java.io.File;
+
+import javafx.scene.Node;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.*;
@@ -8,18 +10,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.net.URL;
+
+import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.*;
+import org.GamePlay.controllers.ScreenController;
 
-public class GameObjectUIController {
+public class GameObjectUIController extends ScreenController {
     // Card tab
     @FXML
     private TextField cardName;
@@ -113,15 +116,19 @@ public class GameObjectUIController {
     }
 
     @FXML
-    private void switchToMainMenu(Event event) {
-        URL location = getClass().getResource("../../../resources/MainMenuScreen.fxml");
-        try {
-            Parent root = (Parent) FXMLLoader.load(location);
-            MainMenu.stage.getScene().setRoot(root);
-            MainMenu.stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void switchToMainMenu(ActionEvent event) throws IOException {
+        changeScene(event, "MainMenuScreen.fxml");
+    }
+
+    public void changeScene(ActionEvent event, String nextScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(nextScene));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        stage.show();
     }
 
     @FXML

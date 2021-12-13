@@ -1,5 +1,7 @@
 package org.RuleEngine.nodes;
 
+import org.GameObjects.objects.Player;
+import org.GamePlay.Display;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.GameObject;
 
@@ -14,28 +16,40 @@ public class RSetNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        GameObject go;
-        LiteralNode e1 = getOperand(0).execute(currState);
-        LiteralNode e2 = getOperand(1).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
+        LiteralNode op1 = getOperand(1).execute(currState);
 
-        if (e1 == null || e2 == null) {
-            System.out.println("Error: Something went wrong processing rset operation");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (op1 == null) {
+            NodeUtil.OperandError(this, 1);
+            return null;
+        }
+        if (!(op0.getValue() instanceof String)) {
+            NodeUtil.InputTypeError(this, 0, "String");
+            return null;
+        }
+        
+        String registryName = (String)op0.getValue();
+        GameObject go = NodeUtil.processNodeToObj(op1, currState);
+        
+        if (go == null) {
+            NodeUtil.InputTypeError(this, 1, "Valid GameObject");
+            return null;
+        }
+        if (!currState.registers.containsKey(registryName)) {
+            NodeUtil.OtherError("Registry " + registryName + "does not exist and cannot be set!");
             return null;
         }
 
-        if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof String)) {
-            System.out.println("Error: rset operation only takes strings!");
-            return null;
+        //Update currPlayer for turn indicator
+        if (registryName.equals("currPlayer")) {
+            Display.getDisplay().updateCurrPlayer((Player) go);
         }
-        String str1 = (String)e1.getValue();
-        String str2 = (String)e2.getValue();
+        currState.registers.put(registryName, go);
 
-        if (str2.charAt(0) == '_') {
-            go = currState.findObject(str2.substring(1));
-        } else {
-            go = currState.registers.get(str2);
-        }
-        currState.registers.put(str1, go);
         return null;
     }
 }
