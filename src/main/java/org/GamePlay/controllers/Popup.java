@@ -216,4 +216,22 @@ public class Popup extends PlayController {
         popupWindow.setScene(exitScene);
         popupWindow.showAndWait();
     }
+
+    public void outlineYesNo(Label label) {
+        label.setOnMouseEntered(e -> {
+            label.setStyle("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
+                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.styleProperty().setValue("-fx-border-radius: 2 2 2 2; " +
+                    "-fx-background-radius: 2 2 2 2; " +
+                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
+        });
+    }
 }

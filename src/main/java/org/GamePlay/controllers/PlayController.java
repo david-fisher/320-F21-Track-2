@@ -35,7 +35,7 @@ public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private static AnchorPane playParent;
-    private static GameState gameState;
+    private GameState gameState;
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
@@ -83,9 +83,7 @@ public class PlayController extends ScreenController {
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         GameBoard gameBoard = gameStateInput.getGameBoard();
 
-        if (gameBoard.getBoardID().equals("All Drawers")) {
-            players = gameStateInput.getAllPlayers();
-        }
+        players = gameStateInput.getAllPlayers();
 
         gameStateInput.addRegistry("currPlayer", players.get(0));
 
@@ -111,12 +109,10 @@ public class PlayController extends ScreenController {
 
         initBoard(gameBoard, boardPane);
         initTiles(gameBoard.getTiles(), boardPane, gameBoard);
-        initPlayers(gameStateInput.getAllPlayers());
+        initPlayers(players);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
         ArrayList<Button> buttons = gameStateInput.getAllButtons();
-
-        //players = gameState.getAllPlayers();
 
         int numDrawers = 0;
         boolean decksNeeded = decks.size() != 0;
@@ -600,9 +596,23 @@ public class PlayController extends ScreenController {
 
     public void initDarken(Label label) {
         label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
+            if (label.getUserData() instanceof Button) {
+                    if (((Button)label.getUserData()).getEnabled()) {
+                        ColorAdjust colorAdjust = new ColorAdjust();
+                        colorAdjust.setBrightness(-0.2);
+                        label.setEffect(colorAdjust);
+                    }
+            } else if (label.getUserData() instanceof Button) {
+                if (((Button)label.getUserData()).getEnabled()) {
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    colorAdjust.setBrightness(-0.2);
+                    label.setEffect(colorAdjust);
+                }
+            } else {
+                ColorAdjust colorAdjust = new ColorAdjust();
+                colorAdjust.setBrightness(-0.2);
+                label.setEffect(colorAdjust);
+            }
         });
 
         label.setOnMouseExited(e -> {
@@ -624,27 +634,8 @@ public class PlayController extends ScreenController {
         initDarken(label);
     }
 
-    public void outlineYesNo(Label label) {
-        label.setOnMouseEntered(e -> {
-            label.setStyle("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.styleProperty().setValue("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
-        });
-    }
-
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
-    public GameState getGameState() { return gameState; }
 }
 

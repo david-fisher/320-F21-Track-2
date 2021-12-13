@@ -32,7 +32,7 @@ public class Display extends PlayController {
 
     private AnchorPane playParent = super.getPlayParent();
     private AnchorPane boardPane = super.getBoardPane();
-    private GameState gameState = super.getGameState();
+    private GameState gameState = BasicApplication.getProject().getIntiGS();
 
     private Display() {}
 
@@ -62,6 +62,9 @@ public class Display extends PlayController {
                 borderGlow.setColor(Color.YELLOW);
                 parent.setEffect(borderGlow);
                 parent.toFront();
+                tile.getGamepieces().forEach(gp -> {
+                    gp.getParent().toFront();
+                });
                 parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         };
