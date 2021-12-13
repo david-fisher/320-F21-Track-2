@@ -37,11 +37,13 @@ public class GameTimer extends GameObject {
 	  
 	  // check and set initial time
 	  else if (trait.equals("initialTime") && value instanceof Integer) {
+	      prevTraits.put(trait, traits.get(trait)) ;
 		  timer.setDelay((Integer)value);
 	  }
 	  
 	  // checks for other valid inputs
 	  else if (suppressTraitChecker) {	// if true don't check trait type
+	      prevTraits.put(trait, traits.get(trait)) ;
 		  traits.put(trait, value) ;
 		  return true ;
 	  }

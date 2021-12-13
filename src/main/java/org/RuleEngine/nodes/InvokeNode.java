@@ -5,25 +5,26 @@ import org.RuleEngine.engine.*;
 
 // Usage: Operand 0: Name of the event to be invoked
 public class InvokeNode extends OpNode {
-    public InvokeNode() { super(); }
-    public InvokeNode(ArrayList<Node> operands) {
+    public InvokeNode() { 
         super();
-        this.operands.set(0, operands);
+        this.addOperand(null);
     }
-    
+
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
         
-        if (e1 == null || !(e1.getValue() instanceof String)) {
-            System.out.println("Error: Invoke only accepts a string as input.");
+        if (op0 == null || !(op0.getValue() instanceof String)) {
+            NodeUtil.OtherError("Invoke only accepts a event name as input.");
+            return null;
         }
         
-        String name = (String)e1.getValue();
+        String name = (String)op0.getValue();
         ArrayList<Node> event = currState.getEvent(name);
         if (event == null) {
-            System.out.println("Error: No event of name " + name);
+            NodeUtil.OtherError("No event of name " + name);
+            return null;
         }
         Interpreter interpreter = new Interpreter();
         interpreter.interpretEvent(event, currState);

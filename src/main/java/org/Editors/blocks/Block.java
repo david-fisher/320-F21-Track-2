@@ -23,7 +23,11 @@ import javafx.event.EventHandler;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
+import org.Editors.controllers.RuleEditorUIController;
 import org.RuleEngine.nodes.NodeMaker;
+import org.RuleEngine.nodes.OpNode;
+
+import java.util.ArrayList;
 
 public class Block {
   protected StackPane block;
@@ -59,9 +63,10 @@ public class Block {
 
   protected Rectangle result;
   protected GridPane grid;
+  protected Boolean isConnected = false;
 
-  //List of connection blocks
-  protected ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
+  //List of lists of connection blocks
+  protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
 
   protected void createGenBlock(String blockName, String[] valueNames) {
     this.block = new StackPane();
@@ -74,15 +79,39 @@ public class Block {
 
     //Make the block draggable
     this.block.setOnMousePressed(e -> {
-      //calculate offset
-      startX = e.getSceneX() - this.block.getTranslateX();
-      startY = e.getSceneY() - this.block.getTranslateY();
+      if (e.isPrimaryButtonDown()) {
+        //calculate offset
+        startX = e.getSceneX() - this.block.getTranslateX();
+        startY = e.getSceneY() - this.block.getTranslateY();
+      } else if (e.isSecondaryButtonDown()) {
+        // Delete block if right clicked.
+        if(this.node instanceof OpNode){
+          ArrayList ops = ((OpNode) this.node).getAllOperands();
+          for (Object aNode: ops) {
+            if (aNode instanceof OpNode) {
+              ((OpNode) aNode).parent = null;
+            } else if (aNode instanceof ArrayList) {
+              for (Object bNode : ((ArrayList) aNode)) {
+                if (bNode instanceof OpNode) {
+                  ((OpNode) bNode).parent = null;
+                }
+              }
+            }
+          }
+        }
+        this.node = null;
+        this.block.setVisible(false);
+        this.block = null;
+        this.grid = null;
+      }
     });
 
     this.block.setOnMouseDragged(e -> {
-      //set new position
-      this.block.setTranslateX(e.getSceneX() - startX);
-      this.block.setTranslateY(e.getSceneY() - startY);
+      if (!isConnected){
+        //set new position
+        this.block.setTranslateX(e.getSceneX() - startX);
+        this.block.setTranslateY(e.getSceneY() - startY);
+      }
     });
 
     //Pane for placing the controls and text for the block
@@ -107,6 +136,8 @@ public class Block {
     name.setFont(Font.font("Verdana", FontWeight.BOLD, HEADER_SIZE));
     name.setFill(WHITE);
 
+    //List to hold the connection blocks we create
+    ObservableList<javafx.scene.Node> connBlockList = FXCollections.observableArrayList();
     //Create the names and connections for each value being passed to block
     for(int i = 0; i < valueNames.length; i++) {
       Text newValName = new Text(valueNames[i]);
@@ -119,7 +150,9 @@ public class Block {
       connBlockList.addAll(connBlock);
       grid.add(connBlock, 2, i+1);
     }
-
+    //Add list of connection blocks to list of lists
+    ruleGroupList.addAll(connBlockList);
+    
     //Create result connection for block
     this.result = new Rectangle(CONNECTION_WIDTH, CONNECTION_HEIGHT, BLUE);
 
@@ -167,12 +200,15 @@ public class Block {
     return BLOCK_WIDTH;
   }
 
-  public ObservableList<javafx.scene.Node> getGrayRect(){
-    return this.connBlockList;
+  public ObservableList<ObservableList<javafx.scene.Node>> getRuleGroupList(){
+    return this.ruleGroupList;
   }
 
   public int getGreyRectHeight(){
     return CONNECTION_HEIGHT;
   }
 
+  public void setBlockAnchor(){
+    isConnected = true;
+  }
 }

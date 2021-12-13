@@ -10,11 +10,14 @@ import org.RuleEngine.engine.GameState;
 //        Rule group 1 - true block
 //        Rule gorup 2 - false block
 public class IfNode extends OpNode {
-    public IfNode() { super(); }
-    public IfNode(ArrayList<ArrayList<Node>> operands) {
-        super(operands);
+    public IfNode() { 
+        super(); 
+        this.addOperand(null);
+        this.addRuleGroup(new ArrayList<Node>()).addRuleGroup(new ArrayList<Node>());
     }
 
+    @Override
+    @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
         LiteralNode condition = getOperand(0).execute(currState);
         if (condition == null) { return null; }
@@ -23,7 +26,7 @@ public class IfNode extends OpNode {
         if (condition.getValue() instanceof Boolean) {
             result = (Boolean)condition.getValue();
         } else {
-            System.out.println("Error: If statement can only take boolean expressions as conditions.");
+            NodeUtil.OtherError("If statement can only take boolean expressions as conditions.");
             return null;
         }
 
