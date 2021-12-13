@@ -210,10 +210,9 @@ public class BasicApplication extends Application {
 
         gameState.setAllPlayers(players);
         gameState.setAllTokens(gameTokens);
-        GameBoard gameBoard = new GameBoard(gameName, gameShape, 800, 700, 10, 10, tiles);
+        org.GameEditor.application.GameBoard gameBoard = new org.GameEditor.application.GameBoard();
 
         gameState.setGameBoard(gameBoard);
-        gameState.getGameBoard().setBoardID(gameName);
         return gameState;
     }
 

@@ -7,18 +7,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import org.GameObjects.objects.Button;
+import org.GameObjects.objects.Spinner;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveByNode;
 import org.GamePlay.BasicApplication;
@@ -26,8 +25,6 @@ import org.GamePlay.Display;
 import org.GamePlay.GlobalCSSValues;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
-import org.GameObjects.objects.Spinner;
-import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 
@@ -83,7 +80,7 @@ public class PlayController extends ScreenController {
             boardPane = new AnchorPane();
         }
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-        GameBoard gameBoard = gameStateInput.getGameBoard();
+        org.GameEditor.application.GameBoard gameBoard = gameStateInput.getGameBoard();
 
         players = gameStateInput.getAllPlayers();
 
@@ -110,7 +107,7 @@ public class PlayController extends ScreenController {
         playParent.setBottomAnchor(boardPane, (playHeight - boardHeight - 20)/2);
 
         initBoard(gameBoard, boardPane);
-        initTiles(gameBoard.getTiles(), boardPane, gameBoard);
+        initTiles(gameState.getAllTiles(), boardPane, gameBoard);
         initPlayers(players);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
@@ -152,7 +149,7 @@ public class PlayController extends ScreenController {
 
     }
 
-    private void initBoard(GameBoard gameBoard, AnchorPane boardPane) {
+    private void initBoard(org.GameEditor.application.GameBoard gameBoard, AnchorPane boardPane) {
         Shape board;
         double width = boardPane.getPrefWidth();
         double height = boardPane.getPrefHeight();
@@ -174,7 +171,7 @@ public class PlayController extends ScreenController {
         // set anchorPane values
     }
 
-    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, GameBoard gameBoard) {
+    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, org.GameEditor.application.GameBoard gameBoard) {
         double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;

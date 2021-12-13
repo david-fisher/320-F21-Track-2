@@ -5,10 +5,14 @@ import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import org.GameObjects.objects.GameObject;
+import org.GameObjects.objects.Tile;
 
-public class GameBoard {
+public class GameBoard extends GameObject {
 
 	//Rectangle[][] board;
 	int boardWidth = 634;
@@ -20,6 +24,8 @@ public class GameBoard {
 	
 	public GameBoard() {
 		//board = new Rectangle[width][height];
+		setHeight((double) boardHeight);
+		setWidth((double) boardWidth);
 	}
 	
 	public void resize(Rectangle[][] rectangle) {
@@ -32,7 +38,6 @@ public class GameBoard {
 		height = h;
 		cellWidth = boardWidth/width;
 		cellHeight = boardHeight/height;
-		
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
             	int x = i * cellWidth;
@@ -50,8 +55,13 @@ public class GameBoard {
         //this is to redraw the tiles themselves
         for (int i = 0; i < existingTiles.size(); i++) {
         	Tile t = existingTiles.get(i);
-        	
-        	t.tileShape.resize(cellWidth, cellHeight);//doesn't work
+			Shape shape;
+			if (t.getShape().equals("Rectangle")) {
+				shape = new Rectangle(t.getWidth(), t.getHeight(), t.getColor());
+			} else {
+				shape = new Circle(t.getWidth(), t.getColor());
+			}
+        	shape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
         	//need to change the original tile location of each t
@@ -60,9 +70,9 @@ public class GameBoard {
         	
         	
         	if (t.getTileXLocation() < width || t.getTileYLocation() < height) {
-        		gameBoardBackground.getChildren().add(t.tileShape);
-        		t.tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
-				t.tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
+        		gameBoardBackground.getChildren().add(shape);
+        		shape.setLayoutX((t.getTileXLocation() * cellWidth));
+				shape.setLayoutY((t.getTileYLocation() * cellHeight));
         	}
         	else {
         		//remove the tile from the arrayList
@@ -92,14 +102,6 @@ public class GameBoard {
 	//done
 	public int getCellHeight() {
 		return cellHeight;
-	}
-	
-	public int getBoardWidth() {
-		return boardWidth;
-	}
-	
-	public int getBoardHeight() {
-		return boardHeight;
 	}
 	
 	

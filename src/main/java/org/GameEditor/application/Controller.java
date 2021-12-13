@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.shape.Shape;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.control.Button;
@@ -18,7 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Tile;
+import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
+import org.RuleEngine.engine.GameState;
 
 public class Controller extends ScreenController {
 	
@@ -63,13 +67,14 @@ public class Controller extends ScreenController {
     @FXML
     private Pane gameBoardBackground;
 
-
 	// group root to store all the children shapes/tiles
 	@FXML
 	private Group root = new Group();
 	
 	@FXML
 	private TextField inputField;
+
+	private GameState gameState = BasicApplication.getProject().getIntiGS();
 
 	@FXML
 	// refers to the save button
@@ -162,34 +167,37 @@ public class Controller extends ScreenController {
 		int x = gameBoard.getCellWidth();
 		int y = gameBoard.getCellHeight();
 		int radius = Math.min(x, y) / 2;
+
+		Shape shape = new Circle(radius, Color.BLACK);
+		c.setShape("Circle");
+		c.setWidth((double) radius);
+		c.setColor(Color.BLACK);
 		
-		c.tileShape = new Circle(radius, Color.BLACK);
-		
-		draggable.makeDraggable(c.tileShape, gameBoard, gameBoardBackground, gridLayout, c);
-		rightclickable.makeRightClickable(c,c.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		draggable.makeDraggable(shape, gameBoard, gameBoardBackground, gridLayout, c);
+		rightclickable.makeRightClickable(c,shape, gameBoardBackground, gridLayout, gameBoard);
 		leftclickable.makeLeftclickable(c, nameTf, imageTf, colorTf);
 		
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
 				if (gridLayout[i][j] != 1) {
-					
-					gameBoardBackground.getChildren().add(c.tileShape);
-					c.tileShape.setLayoutX((i * gameBoard.getCellWidth() + x/2));
-					c.tileShape.setLayoutY((j * gameBoard.getCellHeight() + y/2));
+					gameBoardBackground.getChildren().add(shape);
+					shape.setLayoutX((i * gameBoard.getCellWidth() + x/2));
+					shape.setLayoutY((j * gameBoard.getCellHeight() + y/2));
 					gridLayout[i][j] = 1;
 					c.setTileXLocation(i);
 					c.setTileYLocation(j);
 					c.setTileXInitial(i);
 					c.setTileYInitial(j);
 					existingTiles.add(c);
-					break;
+					return;
 				}
 			}
 		}
-		
-		gameBoardBackground.getChildren().add(c.tileShape);
+		gameBoardBackground.getChildren().add(shape);
+		gameState.getAllTiles().add(c);
 	}
 
+	int count = 0;
 	@FXML
 	void genSquare(ActionEvent event) {
 		
@@ -198,32 +206,38 @@ public class Controller extends ScreenController {
 		int x = gameBoard.getCellWidth();
 		int y = gameBoard.getCellHeight();
 		
-		r.tileShape = new Rectangle(x, y, Color.BLACK);
+		Shape tileShape = new Rectangle(x, y, Color.BLACK);
+		r.setShape("Rectangle");
+		r.setWidth((double) x);
+		r.setHeight((double) y);
+		r.setColor(Color.BLACK);
 		
-		draggable.makeDraggable(r.tileShape, gameBoard, gameBoardBackground, gridLayout, r);
-		rightclickable.makeRightClickable(r,r.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		draggable.makeDraggable(tileShape, gameBoard, gameBoardBackground, gridLayout, r);
+		rightclickable.makeRightClickable(r,tileShape, gameBoardBackground, gridLayout, gameBoard);
 		leftclickable.makeLeftclickable(r, nameTf, imageTf, colorTf);
-		
+
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
 				if (gridLayout[i][j] != 1) {
-					gameBoardBackground.getChildren().add(r.tileShape);
-					r.tileShape.setLayoutX((i * gameBoard.getCellWidth()));
-					r.tileShape.setLayoutY((j * gameBoard.getCellHeight()));
+					tileShape.setId(Integer.toString(count));
+					r.setId(Integer.toString(count));
+					gameBoardBackground.getChildren().add(tileShape);
+					tileShape.setLayoutX((i * gameBoard.getCellWidth()));
+					tileShape.setLayoutY((j * gameBoard.getCellHeight()));
 					gridLayout[i][j] = 1;
 					r.setTileXLocation(i);
 					r.setTileYLocation(j);
 					r.setTileXInitial(i);
 					r.setTileYInitial(j);
 					existingTiles.add(r);
-					break;
+					gameState.getAllTiles().add(r);
+					count++;
+					return;
 				}
 			}
 		}
 	}
-	
-	
-	
+
 	@FXML
 	void GridRowSelector(ActionEvent event) {
 		int height = Integer.valueOf(rowSize.getText());
@@ -231,9 +245,7 @@ public class Controller extends ScreenController {
 		gridLayout = new int[width][height];
 		gameBoard.draw(gameBoardBackground, width, height, gridLayout, existingTiles);
 	}
-	
 
-	
 	@FXML
 	void GridColumnSelector(ActionEvent event) {
 		int height = Integer.valueOf(rowSize.getText());
@@ -241,10 +253,7 @@ public class Controller extends ScreenController {
 		gridLayout = new int[width][height];
 		gameBoard.draw(gameBoardBackground, width, height, gridLayout, existingTiles);
 	}
-	
-	
-	
-	
+
 	//draw the gameboard
 	
 	private GameBoard gameBoard;
@@ -259,7 +268,11 @@ public class Controller extends ScreenController {
     
     @FXML
     private void showGameBoard(ActionEvent event) {
-    	gameBoard = new GameBoard();
+		if (gameState.getGameBoard() == null) {
+			gameBoard = new GameBoard();
+			gameState.setGameBoard(gameBoard);
+		}
+    	gameBoard = gameState.getGameBoard();
     	int y = Integer.valueOf(rowSize.getText());
     	int x = Integer.valueOf(columnSize.getText());
     	gridLayout = new int[x][y];
@@ -267,16 +280,8 @@ public class Controller extends ScreenController {
     	//also need to hide the old button
     	//also need to hide the text
     }
-	
-    
-	
-	
-	
+
 	//end of draw the gameboard stuff
-	
-	
-	
-	
 	@FXML
 	public void start(Stage primaryStage) {
 
@@ -301,6 +306,4 @@ public class Controller extends ScreenController {
 
 		primaryStage.show();
 	}
-	
-	   
 }

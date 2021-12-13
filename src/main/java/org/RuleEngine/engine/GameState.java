@@ -9,7 +9,7 @@ public class GameState extends Savable {
 
     public String projectName;
     
-    public GameBoard board;
+    public org.GameEditor.application.GameBoard board;
     public ArrayList<Button> buttons;
     public ArrayList<Card> cards;
     public ArrayList<Deck> decks;
@@ -131,8 +131,8 @@ public class GameState extends Savable {
     public int getMinPlayer() { return minPlayer; }
     public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
     
-    public GameBoard getGameBoard() { return board; }
-    public void setGameBoard(GameBoard board) { this.board = board; }
+    public org.GameEditor.application.GameBoard getGameBoard() { return board; }
+    public void setGameBoard(org.GameEditor.application.GameBoard board) { this.board = board; }
 
     public ArrayList<Button> getAllButtons() { return buttons; }
     public void setAllButtons(ArrayList<Button> buttons) { this.buttons = buttons; }

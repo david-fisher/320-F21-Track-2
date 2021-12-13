@@ -13,11 +13,10 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Tile;
 
 public class Rightclickable {
 	
@@ -48,8 +47,6 @@ public class Rightclickable {
 			@FXML
 			public void handle(ActionEvent event)
 			{
-				
-				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("ShapeEditor.fxml"));
 				try {
@@ -62,9 +59,8 @@ public class Rightclickable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 				ShapeAttributeController attributeController = loader.getController();
-                attributeController.getTile(tile);
+                attributeController.setTile(tile, gameBoardBackground.getScene());
 			}
 		});
 		
