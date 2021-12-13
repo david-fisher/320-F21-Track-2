@@ -1,6 +1,8 @@
 package org.GameObjects.objects;
 
 import org.GamePlay.Display;
+import org.RuleEngine.engine.GameState;
+import org.RuleEngine.engine.Interpreter;
 
 public class Gamepiece extends GameObject{
 
@@ -11,7 +13,7 @@ public class Gamepiece extends GameObject{
 		this.setLabel("gamepiece" + String.format("%02d", ++count));
 		this.setIcon("default_gamepiece_icon.jpg") ;
 		this.setColorString("#000000") ;
-		this.setLocation(null);
+		this.setLocation(null, null);
 	}
 
 	/* Trait Types:
@@ -42,8 +44,28 @@ public class Gamepiece extends GameObject{
 		return false ;
 	}
 
-	public boolean setLocation(Tile tile) {
+    public boolean setLocation(Tile tile) {
 
+        // first clear current location
+        if (this.getLocation() != null) {
+            this.getLocation().removeGamepiece(this) ;
+        }
+
+        // set location
+        if (this.setTrait("location", tile)) {
+            if (!tile.hasGamepiece(this)) {
+                Display.getDisplay().updatePiece(this);
+                return tile.addGamepiece(this);
+            }
+            return true ;
+        }
+
+        return false ;
+    }
+    
+    // This setLocation overload method triggers the onLand event of the tile.
+    // This is primarily used by the rules.
+	public boolean setLocation(Tile tile, GameState currState) {
 		// first clear current location
 		if (this.getLocation() != null) {
 			this.getLocation().removeGamepiece(this) ;
@@ -53,6 +75,7 @@ public class Gamepiece extends GameObject{
 		if (this.setTrait("location", tile)) {
 			if (!tile.hasGamepiece(this)) {
 				Display.getDisplay().updatePiece(this);
+                Interpreter.getInstance().interpretEvent(currState.getEvent("onLand"), currState);
 				return tile.addGamepiece(this);
 			}
 			return true ;

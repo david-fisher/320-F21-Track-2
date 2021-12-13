@@ -38,7 +38,7 @@ public class MoveToNode extends OpNode {
             return null;
         }
         
-        if (!((Gamepiece)piece).setLocation((Tile)tile)) {
+        if (!((Gamepiece)piece).setLocation((Tile)tile, currState)) {
             NodeUtil.OtherError("Cannot move gamepiece " + op0.getValue() + " to " + op1.getValue());
         }
         
