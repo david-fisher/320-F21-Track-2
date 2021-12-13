@@ -43,8 +43,8 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texture" />
-                                    <Button mnemonicParsing="false" onAction="#getFile" text="Chose file" textAlignment="CENTER">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <Button mnemonicParsing="false" onAction="#getCardFile" text="Choose file" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -253,11 +253,11 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                                    <TextField fx:id="tokenFilename" promptText="Filename">
+                                    <Button mnemonicParsing="false" onAction="#getTokenFile" text="Choose file">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </Button>
                                  </children>
                               </HBox>
                            </children>
@@ -321,11 +321,11 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                                    <TextField fx:id="timerFilename" promptText="Filename">
+                                    <Button mnemonicParsing="false" onAction="#getTimerFile" text="Choose file">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </Button>
                                  </children>
                               </HBox>
                            </children>
@@ -389,11 +389,11 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                                    <TextField fx:id="categoryFilename" promptText="Filename">
+                                    <Button mnemonicParsing="false" onAction="#getCategoryFile" text="Choose file">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </Button>
                                  </children>
                               </HBox>
                            </children>
@@ -457,11 +457,11 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                                    <TextField fx:id="gamepieceFilename" promptText="Filename">
+                                    <Button mnemonicParsing="false" onAction="#getGamePieceFile" text="Choose file">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </Button>
                                  </children>
                               </HBox>
                            </children>
@@ -511,11 +511,11 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
-                                          <TextField fx:id="spinnerFilename" promptText="Filename">
+                                          <Button mnemonicParsing="false" onAction="#getSpinnerFile" text="Choose file">
                                              <HBox.margin>
-                                                <Insets left="15.0" />
+                                                <Insets left="10.0" />
                                              </HBox.margin>
-                                          </TextField>
+                                          </Button>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
