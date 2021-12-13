@@ -20,7 +20,9 @@ import java.io.IOException;
 import javafx.stage.Stage;
 import org.Editors.MainMenu;
 import org.GameObjects.objects.*;
+import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
+import org.RuleEngine.engine.GameState;
 
 public class GameObjectUIController extends ScreenController {
     // Card tab
@@ -105,6 +107,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML
     private TextField gamepieceFilename;
 
+    private GameState gameState = BasicApplication.getProject().getIntiGS();
+
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList(new Card(), new Card());
         Category cat1 = new Category();
@@ -117,6 +121,7 @@ public class GameObjectUIController extends ScreenController {
 
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
+        Savable.closeDB();
         changeScene(event, "MainMenuScreen.fxml");
     }
 
@@ -145,6 +150,7 @@ public class GameObjectUIController extends ScreenController {
         } else {
             System.out.println("Successfully created new card: " + card.toString());
             deckCards.add(card);
+            gameState.getAllCards().add(card);
         }
     }
 
@@ -153,16 +159,17 @@ public class GameObjectUIController extends ScreenController {
         Die die = new Die();
         String dieNameString = dieName.getCharacters().toString();
         Integer numSides = Integer.valueOf(dieNumSides.getCharacters().toString());
-        javafx.scene.paint.Color dieSideColor = dieColor.getValue();
-        javafx.scene.paint.Color pipColor = diePipColor.getValue();
+        String dieSideColor = dieColor.getValue().toString();
+        String pipColor = diePipColor.getValue().toString();
         boolean nameRes = die.setTrait("label", dieNameString, false);
         boolean numRes = die.setTrait("numSides", numSides, false);
         boolean colorRes = die.setTrait("color", dieSideColor, false);
         boolean pipRes = die.setTrait("dotColor", pipColor, false);
         if (!(nameRes && numRes && colorRes && pipRes)) {
-            System.err.println("Failure!");
+            System.err.println("Failure!" + nameRes + numRes + colorRes + pipRes);
         } else {
             System.out.println("Successfully created new die: " + dieNameString);
+            gameState.getAllDice().add(die);
         }
     }
 
@@ -204,6 +211,7 @@ public class GameObjectUIController extends ScreenController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Gamepiece: " + pieceNameString);
+            gameState.getAllGamePieces().add(piece);
         }
     }
 
@@ -222,6 +230,7 @@ public class GameObjectUIController extends ScreenController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Token: " + tokenNameString);
+            gameState.getAllTokens().add(token);
         }
     }
 
@@ -240,6 +249,7 @@ public class GameObjectUIController extends ScreenController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Timer: " + timerNameString);
+            gameState.getAllTimers().add(timer);
         }
     }
 
@@ -312,7 +322,7 @@ public class GameObjectUIController extends ScreenController {
         deck.replaceRandom(c2);
         System.out.println(c1.toString());
         System.out.println(c2.toString());
-
+        gameState.getAllDecks().add(deck);
     }
 
     @FXML
@@ -379,6 +389,7 @@ public class GameObjectUIController extends ScreenController {
         System.out.println(spinner.spin().toString());
         System.out.println(spinner.spin().toString());
         System.out.println(spinner.spin().toString());
+        gameState.getAllSpinners().add(spinner);
     }
 
     @FXML

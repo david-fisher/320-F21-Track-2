@@ -18,8 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import org.GamePlay.BasicApplication;
-import org.GamePlay.controllers.MainController;
 import org.GamePlay.controllers.ScreenController;
 
 public class Controller extends ScreenController {
@@ -127,7 +125,7 @@ public class Controller extends ScreenController {
 	void openHelp(ActionEvent event) {
 		WebView webView = new WebView();
 		WebEngine webEngine = webView.getEngine();
-		webEngine.load(getClass().getResource("helpdoc.html").toString());
+		webEngine.load(getClass().getResource("org/GameEditor/application/helpdoc.html").toString());
 		Scene scene = new Scene(webView, 600, 600);
 		Stage stage = new Stage();
 		stage.setTitle("Help Document");
