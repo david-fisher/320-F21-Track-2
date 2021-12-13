@@ -95,6 +95,8 @@ public class EditController extends ScreenController {
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
         backButton.setOnMouseClicked(event -> {
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
             MainController controller = new MainController();
             controller.initialize(BasicApplication.restartStage(new Stage()));
         });
@@ -143,6 +145,8 @@ public class EditController extends ScreenController {
                 setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
+                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    stage.close();
                     setSelectedGame((VBox)n);
                     try {
                         changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
