@@ -102,6 +102,18 @@ public class GameObjectUIController {
     @FXML
     private TextField gamepieceFilename;
 
+    // Button tab
+    @FXML
+    private TextField buttonName;
+    @FXML
+    private ColorPicker buttonColor;
+    @FXML
+    private TextField buttonText;
+    @FXML
+    private TextField buttonFilename;
+    @FXML
+    private TextField onClick;
+
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList(new Card(), new Card());
         Category cat1 = new Category();
@@ -233,6 +245,30 @@ public class GameObjectUIController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Timer: " + timerNameString);
+        }
+    }
+
+    @FXML
+    private void saveButton(ActionEvent event) {
+        org.GameObjects.objects.Button button = new org.GameObjects.objects.Button();
+        String buttonNameString = buttonName.getCharacters().toString();
+        String textureFilenameString = buttonFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = buttonColor.getValue();
+        String buttonTextString = buttonText.getCharacters().toString();
+        String onClickString = onClick.getCharacters().toString();
+        boolean pressed = false;
+        boolean enabled = false;
+        boolean labelRes = button.setTrait("label", buttonNameString, false);
+        boolean iconRes = button.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = button.setTrait("color", jfxColor, false);
+        boolean textRes = button.setTrait("text", buttonTextString, false);
+        boolean pressedRes = button.setTrait("pressed", pressed, false);
+        boolean enabledRes = button.setTrait("enabled", enabled, false);
+        boolean onClickRes = button.setTrait("onClick", onClickString, false);
+        if (!(labelRes && iconRes && colorRes && textRes && pressedRes && enabledRes && onClickRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Button: " + buttonNameString);
         }
     }
 
