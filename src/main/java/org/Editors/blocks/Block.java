@@ -233,6 +233,7 @@ public class Block {
       for(Line l: links){
         this.editorPane.getChildren().remove(l);
       }
+      links.clear();
   }
   public void setEditorPane(AnchorPane editorPane){
     this.editorPane = editorPane;
