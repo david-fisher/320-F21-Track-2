@@ -250,7 +250,7 @@ public class SetupController extends ScreenController {
 
         // set players to default -> min num players
         // todo read real min num players from project settings
-        int minNumPlayers = 2;
+        int minNumPlayers = selectedGame.getMinPlayer();
         for (int i = 0; i < minNumPlayers; ++i) {
 
             // add a player to the list
@@ -365,7 +365,7 @@ public class SetupController extends ScreenController {
     private void addPlayerNode(Player player) {
 
         // return if addPlayer cannot be performed
-        if (playersVBox.getChildren().size() == 10) { // todo read real max players value
+        if (playersVBox.getChildren().size() == selectedGame.getMaxPlayer()) { // todo read real max players value
             return;
         }
 
@@ -607,7 +607,7 @@ public class SetupController extends ScreenController {
     private void removePlayerNode() {
 
         // return if we are at minimum num players
-        if (playersVBox.getChildren().size() == 2) { // todo read real min value from gamestate
+        if (playersVBox.getChildren().size() == selectedGame.getMinPlayer()) { // todo read real min value from gamestate
             return;
         }
 
@@ -794,11 +794,6 @@ public class SetupController extends ScreenController {
 
         // deal with playerOrder
         dealWithPlayOrderOnLeaveSetup();
-
-        // save data somehow
-        // todo: We have two things: list of players, isTutorial
-        // todo: we need to pass this information along to playScreen somehow
-        // todo: idk how to do it
 
         // we can get the above information with the follow functions
         setupData.getPlayers().forEach(p -> {

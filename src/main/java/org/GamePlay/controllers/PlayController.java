@@ -282,14 +282,20 @@ public class PlayController extends ScreenController {
         if (parent == null) { return; }
         int numPlayers = players.size();
         double rows = Math.ceil(Math.sqrt(numPlayers));
-        double radius = (parent.getWidth() / rows) / 2 - ((rows + 1) * 2);
+        double radius = (((parent.getWidth() / rows) - (rows + 1)) / 2);
         Circle gp = new Circle(radius, Color.WHITE);
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        double shift = 2 * radius * (i % rows) + 2;
-        gp.setLayoutX(parent.getXPos() + shift);
-        gp.setLayoutY(parent.getYPos() + shift);
+        if (players.get(0).getGamePieces().size() == 1) {
+            double shift = (2 * (i % rows) + 1) * (radius + 2 * ((i % rows) + 1));
+            gp.setLayoutX(parent.getXPos() + shift);
+            gp.setLayoutY(parent.getYPos() + shift);
+        } else {
+            gp.setRadius(parent.getWidth() / 2 - 4);
+            gp.setLayoutX((parent.getXPos() + parent.getWidth()) / 2 + 2);
+            gp.setLayoutX((parent.getYPos() + parent.getHeight()) / 2 + 2);
+        }
         Display.getDisplay().updatePiece(gamePiece);
     }
 
