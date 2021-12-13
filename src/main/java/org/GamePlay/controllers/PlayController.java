@@ -539,6 +539,21 @@ public class PlayController extends ScreenController {
 
     public void clearPlayParent() { playParent = new AnchorPane();}
 
+    public void clearParents() {
+        gameState.getAllTiles().forEach(t -> {
+            t.setParent(null);
+        });
+        gameState.getAllGamePieces().forEach(gp -> {
+            gp.setParent(null);
+        });
+        gameState.getAllCards().forEach(c -> {
+            c.setParent(null);
+        });
+        gameState.getAllButtons().forEach(b -> {
+            b.setParent(null);
+        });
+    }
+
     public void mainMenuFromPlay(Stage stage) {
         MainController controller = new MainController();
         controller.initialize(stage);

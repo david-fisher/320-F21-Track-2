@@ -169,4 +169,7 @@ public class GameState extends Savable {
 
     public HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
     public void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
+
+    public boolean getTutorialEnabled() { return tutorialEnabled; }
+    public void setTutorialEnabled(boolean tutorialEnabled) { this.tutorialEnabled = tutorialEnabled; }
 }

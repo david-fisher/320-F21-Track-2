@@ -107,7 +107,9 @@ public class MainController extends ScreenController {
 
         initSettings();
         initButtons();
-        if (Savable.getProjects().size() == 0) {
+        boolean noProjects = Savable.getProjects().size() == 0;
+        if (noProjects) {
+            playButton.setDisable(true);
             editButton.setDisable(true);
         }
     }
@@ -124,28 +126,19 @@ public class MainController extends ScreenController {
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
     public void playFromMain() {
-
-        // update playable and saved games in selection panes
-        BasicApplication.loadNewGames();
-        BasicApplication.loadSavedGames();
-
         SelectionController controller = new SelectionController();
         controller.initialize(stage);
     }
 
-    // todo implement new button
     public void createFromMain(MouseEvent event) throws IOException {
         System.out.println("Create");
         switchScene(event, "CreateController.fxml");
     }
 
-    // todo implement edit button
     public void editFromMain(MouseEvent event) throws IOException {
-        System.out.println("Edit");
         EditController controller = new EditController();
         controller.initialize(stage);
     }
-
 
     // todo do we need this still?
     public void switchScene(MouseEvent event, String nextScene) throws IOException {

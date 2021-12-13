@@ -130,7 +130,7 @@ public class Controller extends ScreenController {
 	void openHelp(ActionEvent event) {
 		WebView webView = new WebView();
 		WebEngine webEngine = webView.getEngine();
-		webEngine.load(getClass().getResource("org/GameEditor/application/helpdoc.html").toString());
+		webEngine.load(getClass().getResource("helpdoc.html").toString());
 		Scene scene = new Scene(webView, 600, 600);
 		Stage stage = new Stage();
 		stage.setTitle("Help Document");

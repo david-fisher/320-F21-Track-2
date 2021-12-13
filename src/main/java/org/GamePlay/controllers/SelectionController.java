@@ -17,7 +17,6 @@ import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.BasicApplication;
-import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 
@@ -160,15 +159,11 @@ public class SelectionController extends ScreenController {
         initSavedGamesScrollPane();
         initButtons();
 
-        // todo, artifacts from original implementation
-        BasicApplication.loadNewGames();
-        BasicApplication.loadSavedGames();
         Savable.intitDB();
         newProjects = Savable.getProjects();
         //TODO: load saved games
         savedProjects = new ArrayList<>();
         populateSelectionMenus(newProjects, savedProjects);
-
     }
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
@@ -226,8 +221,6 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-
-                    BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
                     PlayController controller = new PlayController();
                     controller.initialize(stage);
                 });

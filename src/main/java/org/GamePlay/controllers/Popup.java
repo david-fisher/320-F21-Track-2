@@ -175,6 +175,7 @@ public class Popup extends PlayController {
                 displayExitWithoutSave(popupWindow);
             } else {
                 clearPlayParent();
+                clearParents();
                 popupWindow.close();
                 exitFromPlay();
             }
