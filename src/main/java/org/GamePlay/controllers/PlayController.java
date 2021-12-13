@@ -88,8 +88,6 @@ public class PlayController extends ScreenController {
 
         currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
 
-        //initPlayerTurnIndicator();
-
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
         double scale = scaleHeight >= scaleWidth ? scaleWidth : scaleHeight;
@@ -341,7 +339,6 @@ public class PlayController extends ScreenController {
         decksLabel = new Label();
         initLabel(decksLabel, "Decks", "decksLabel");
         playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
-        //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
     private void initButtonLabel(int numDrawers) {
@@ -368,12 +365,8 @@ public class PlayController extends ScreenController {
         label.setAlignment(Pos.CENTER);
 
         label.setPrefWidth(140);
-//        label.setMinWidth(inventoryLabel.getPrefWidth());
-//        label.setMaxWidth(inventoryLabel.getPrefWidth());
 
         label.setPrefHeight(209);
-//        label.setMinHeight(inventoryLabel.getPrefHeight());
-//        label.setMaxHeight(inventoryLabel.getPrefHeight());
 
         label.setOnMouseClicked(e -> {
             slideOut(e);
@@ -537,7 +530,6 @@ public class PlayController extends ScreenController {
         playParent.setPrefWidth(playWidth);
         playParent.setPrefHeight(playHeight);
 
-        //initSettings;
         initSettings();
     }
 
@@ -593,46 +585,6 @@ public class PlayController extends ScreenController {
         Popup popup = new Popup(stage);
         popup.displaySettingsPopup();
     }
-
-//    public void initDarken(Label label) {
-//        label.setOnMouseEntered(e -> {
-//            if (label.getUserData() instanceof Button) {
-//                    if (((Button)label.getUserData()).getEnabled()) {
-//                        ColorAdjust colorAdjust = new ColorAdjust();
-//                        colorAdjust.setBrightness(-0.2);
-//                        label.setEffect(colorAdjust);
-//                    }
-//            } else if (label.getUserData() instanceof Button) {
-//                if (((Button)label.getUserData()).getEnabled()) {
-//                    ColorAdjust colorAdjust = new ColorAdjust();
-//                    colorAdjust.setBrightness(-0.2);
-//                    label.setEffect(colorAdjust);
-//                }
-//            } else {
-//                ColorAdjust colorAdjust = new ColorAdjust();
-//                colorAdjust.setBrightness(-0.2);
-//                label.setEffect(colorAdjust);
-//            }
-//        });
-//
-//        label.setOnMouseExited(e -> {
-//            label.setEffect(null);
-//        });
-//    }
-
-//    public void setStyle(Label label, String size, String color, double width, double height) {
-//        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-//                "-fx-background-radius: 5 5 5 5; " +
-//                "-fx-font-family: Serif; " +
-//                "-fx-font-size: " + size + "; " +
-//                "-fx-background-color: " + color + "; " +
-//                "-fx-border-color: BLACK;");
-//        label.setTextFill(Color.BLACK);
-//        label.setAlignment(Pos.CENTER);
-//        label.setPrefWidth(width);
-//        label.setPrefHeight(height);
-//        initDarken(label);
-//    }
 
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }

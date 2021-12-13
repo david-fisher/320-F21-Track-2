@@ -13,6 +13,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
@@ -126,7 +127,6 @@ public class SettingsController extends ScreenController {
 
         backButton = new Label("Back");
         Style.setStyle(backButton, "36", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
-        //backButton.setFont(new Font(36));
         backButton.setPadding(new Insets(5, 10, 5, 10));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
@@ -134,22 +134,15 @@ public class SettingsController extends ScreenController {
             backFromSettings();
         });
 
-//        initButtonCSS(backButton);
-//        initDarken(backButton);
-
         saveButton = new Label("Save");
         Style.setStyle(saveButton, "36", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
-//        saveButton.setFont(backButton.getFont());
-//        saveButton.setText("Save");
         saveButton.setPadding(backButton.getPadding());
-        HBox.setMargin(saveButton, HBox.getMargin(backButton));
+        double shift = Screen.getPrimary().getVisualBounds().getWidth() - saveButton.getPrefWidth() - 80;
+        HBox.setMargin(saveButton, new Insets(10, 10, 10, shift));
 
         saveButton.setOnMouseClicked(event -> {
            saveFromSettings();
         });
-
-//        initButtonCSS(saveButton);
-//        initDarken(saveButton);
 
         buttonsHBox.getChildren().addAll(backButton, saveButton);
         screenVBox.getChildren().add(buttonsHBox);
@@ -198,22 +191,5 @@ public class SettingsController extends ScreenController {
 
         MainController controller = new MainController();
         controller.initialize(stage);
-    }
-
-    // css
-    private void initButtonCSS(Label button) {
-        button.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        button.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-    }
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
     }
 }
