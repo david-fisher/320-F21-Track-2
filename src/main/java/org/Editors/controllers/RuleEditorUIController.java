@@ -121,8 +121,11 @@ public class RuleEditorUIController implements Initializable {
       //anchor 2 blocks
       block.setBlockAnchor();
       startBlock.setBlockAnchor();
+      // add line to two block
+      block.addLink(link);
+      startBlock.addLink(link);
       startLineX = startLineY = endLineX = endLineY = -1;
-
+      
       //temp
       System.out.println("Block " + startBlock + " connected to " + block);
       System.out.println("currGroupID: " + currRuleGroupID);
@@ -202,6 +205,7 @@ public class RuleEditorUIController implements Initializable {
 
   private void blockActions(Block block){
     placeBlock(block);
+    block.setEditorPane(editorPane);
     drawLine(block);
     resizeAnchorPane();
   }
