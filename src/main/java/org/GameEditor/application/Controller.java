@@ -17,17 +17,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -185,7 +179,7 @@ public class Controller {
 		c.tileShape = new Circle(radius, Color.BLACK);
 		
 		draggable.makeDraggable(c.tileShape, gameBoard, gameBoardBackground, gridLayout, c);
-		rightclickable.makeRightClickable(c,c.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		rightclickable.makeRightClickable(c,c.tileShape, gameBoardBackground, gridLayout, gameBoard, existingTiles);
 		leftclickable.makeLeftclickable(c, nameTf, imageTf, colorTf);
 		
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
@@ -220,7 +214,7 @@ public class Controller {
 		r.tileShape = new Rectangle(x, y, Color.BLACK);
 		
 		draggable.makeDraggable(r.tileShape, gameBoard, gameBoardBackground, gridLayout, r);
-		rightclickable.makeRightClickable(r,r.tileShape, gameBoardBackground, gridLayout, gameBoard);
+		rightclickable.makeRightClickable(r,r.tileShape, gameBoardBackground, gridLayout, gameBoard, existingTiles);
 		leftclickable.makeLeftclickable(r, nameTf, imageTf, colorTf);
 		
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {

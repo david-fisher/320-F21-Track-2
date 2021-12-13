@@ -1,6 +1,7 @@
 package org.GameEditor.application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class Rightclickable {
 	
-	public void makeRightClickable(Tile tile, Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard) {
+	public void makeRightClickable(Tile tile, Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard, ArrayList<Tile> existingTiles) {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem deleteButton = new MenuItem(null, new Label("Delete"));
 		MenuItem shapeEditor = new MenuItem(null, new Label("Shape Editor"));
@@ -40,6 +41,8 @@ public class Rightclickable {
 				int gameBoardY = shapeCenterY / squareHeight;
 	        	//update the gridLayout
 	        	gridLayout[gameBoardX][gameBoardY] = 0;
+				//update the list of existing tiles
+				existingTiles.remove(shape);
 	            gameBoardBackground.getChildren().remove(shape);
 	        }
 	    });

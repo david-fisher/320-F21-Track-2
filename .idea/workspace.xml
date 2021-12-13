@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="tile's now get added to right location after resize">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Draggable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Draggable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Rightclickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Rightclickable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

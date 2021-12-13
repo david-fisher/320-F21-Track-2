@@ -78,7 +78,7 @@ public class GameBoard {
 			}
 			drag.makeDraggable(t.tileShape,gameBoard,gameBoardBackground, gridLayout, t);
 			left.makeLeftclickable(t, nameTf, imgTf, colorTf);
-			right.makeRightClickable(t, t.tileShape, gameBoardBackground, gridLayout, gameBoard);
+			right.makeRightClickable(t, t.tileShape, gameBoardBackground, gridLayout, gameBoard, existingTiles);
 			//t.tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
@@ -88,9 +88,17 @@ public class GameBoard {
         	
         	
         	if (t.getTileXLocation() < width || t.getTileYLocation() < height) {
+				String tileShape = t.tileShape.getClass().getSimpleName();
+				int offsetForCircleX = 0;
+				int offsetForCircleY = 0;
+				if (tileShape.equals("Circle")) {
+					offsetForCircleX = cellWidth/2;
+					offsetForCircleY = cellHeight/2;
+				}
+
         		gameBoardBackground.getChildren().add(t.tileShape);
-        		t.tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
-				t.tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
+        		t.tileShape.setLayoutX((t.getTileXLocation() * cellWidth + offsetForCircleX));
+				t.tileShape.setLayoutY((t.getTileYLocation() * cellHeight + offsetForCircleY));
 				gridLayout[t.getTileXLocation()][t.getTileYLocation()] = 1;
         	}
         	else {

@@ -42,12 +42,14 @@ public class Draggable {
 			
 			int newWidth = (gameBoardX-tile.getTileXInitial())*squareWidth;
 			int newHeight = (gameBoardY-tile.getTileYInitial())*squareHeight;
-			
+
+
 			//check to make sure the grid you are putting the tile in is empty/that it is within gameboard bounds
-			if (gridLayout[gameBoardX][gameBoardY] == 1) {
+			if (gridLayout[gameBoardX][gameBoardY] == 1 || (shapeCenterX > gameBoard.getBoardWidth() || shapeCenterY > gameBoard.getBoardHeight())) {
 				gameBoardX = tile.getTileXLocation();
 				gameBoardY = tile.getTileYLocation();
-				
+
+
 				newWidth = (gameBoardX-tile.getTileXInitial())*squareWidth;
 				newHeight = (gameBoardY-tile.getTileYInitial())*squareHeight;
 			}
