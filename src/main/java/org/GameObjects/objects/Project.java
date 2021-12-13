@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.RuleEngine.engine.GameState;
 
-class Project{
+public class Project{
 	
 	static class GameStates{
 		private ArrayList<GameState> gamestates;

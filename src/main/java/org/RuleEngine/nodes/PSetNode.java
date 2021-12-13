@@ -15,33 +15,37 @@ public class PSetNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
-        LiteralNode e2 = getOperand(1).execute(currState);
-        LiteralNode e3 = getOperand(2).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
+        LiteralNode op1 = getOperand(1).execute(currState);
+        LiteralNode op2 = getOperand(2).execute(currState);
 
-        if (e1 == null || e2 == null || e3 == null) {
-            System.out.println("Error: Something went wrong processing rset operation");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (op1 == null) {
+            NodeUtil.OperandError(this, 1);
+            return null;
+        }
+        if (op2 == null) {
+            NodeUtil.OperandError(this, 2);
+            return null;
+        }
+        if (!(op0.getValue() instanceof String)) {
+            NodeUtil.InputTypeError(this, 0, "String");
             return null;
         }
 
-        if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof String)) {
-            System.out.println("Error: rset operation only takes strings!");
+        String traitName = (String)op0.getValue();
+        GameObject go = NodeUtil.processNodeToObj(op1, currState);
+        if (go == null) { 
+            NodeUtil.InputTypeError(this, 1, "Valid GameObject");
             return null;
         }
 
-        String str1 = (String)e1.getValue();
-        String str2 = (String)e2.getValue();
-
-        GameObject go;
-        if (str2.charAt(0) == '_') {
-            go = currState.findObject(str2.substring(1));
-        } else {
-            go = currState.registers.get(str2);
-        }
-
-        // TODO: Temporary hack. Need to talk to Umass Dining.
-        if (!go.setTrait(str1, e3.getValue())) {
-            System.out.println("Error: Something went wrong when setting " + str1 + " property of " + str2 + " to " + e3.getValue().toString());
+        if (!go.setTrait(traitName, op2.getValue())) {
+            NodeUtil.OtherError("Something went wrong when setting " + traitName + " property of " + op1.getValue() + 
+                    " to " + op2.getValue().toString());
         }
 
         return null;

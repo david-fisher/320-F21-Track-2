@@ -4,11 +4,9 @@ import org.RuleEngine.engine.GameState;
 
 @SuppressWarnings("rawtypes")
 public class NegateNode extends OpNode {
-	private LiteralNode node;
-	public NegateNode(LiteralNode node) {
+	public NegateNode() {
 		super();
-		this.node = node;
-		this.addOperand(null).addOperand(null);
+		this.addOperand(null);
 	}
 	
 	/*
@@ -16,26 +14,25 @@ public class NegateNode extends OpNode {
 	 */
 	@Override
 	public LiteralNode execute(GameState currState) {
-//		LiteralNode e1 = getOperand(0).execute(currState);
-//		if (e1 == null) {
-//			System.out.println("Error: NegateNode initialized with null");
-//			return null;
-//		}		
-//		Object op1 = e1.getValue();
-		Object op1 = node.getValue();
+		LiteralNode op0 = getOperand(0).execute(currState);
+		if (op0 == null) {
+		    NodeUtil.OperandError(this, 0);
+		    return null;
+		}		
 		
 		// TODO: needs some testing
-		if (op1 instanceof Integer) {
-			return new LiteralNode<Integer>(-(Integer)op1);
+		Object val = op0.getValue();
+		if (val instanceof Integer) {
+			return new LiteralNode<Integer>(-(Integer)val);
 		}
-		if (op1 instanceof Double) {
-			return new LiteralNode<Double>(-(Double)op1);
+		if (val instanceof Double) {
+			return new LiteralNode<Double>(-(Double)val);
 		}
-		if (op1 instanceof Boolean) {
-			return new LiteralNode<Boolean>(!((Boolean) op1));
+		if (val instanceof Boolean) {
+			return new LiteralNode<Boolean>(!((Boolean)val));
 		}
 		//else
-		System.out.println("Error: Unsupported operand type for NegateNode.");
+		NodeUtil.InputTypeError(this, 0, "Integer | Double | Boolean");
 		return null;
 	}
 

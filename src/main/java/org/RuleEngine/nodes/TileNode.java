@@ -4,7 +4,6 @@ import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 
 // Usage: Operand 0 - index of the Tile.
-// TODO: Is this even necessary? 
 public class TileNode extends OpNode {
     public TileNode() {
         super();
@@ -14,16 +13,21 @@ public class TileNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
         
-        if (e1 == null || !(e1.getValue() instanceof Integer)) {
-            System.out.println("Error: Tile operation takes an integer as input!");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (!(op0.getValue() instanceof Integer)) {
+            NodeUtil.InputTypeError(this, 0, "Integer");
+            return null;
         }
         
-        Integer tIndex = (Integer)e1.getValue();
+        Integer tIndex = (Integer)op0.getValue();
         
         if (tIndex < 0 || tIndex >= currState.tiles.size()) {
-            System.out.println("Error: No tile at index " + tIndex);
+            NodeUtil.OtherError("No tile at index " + tIndex);
         }
         
         return new LiteralNode<Tile>(currState.tiles.get(tIndex)); 

@@ -35,11 +35,7 @@ hs_err_pid*
 /src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.xml
 /src/main/java/org/Editors/META-INF/maven/org.yaml/snakeyaml/pom.properties
 .DS_Store
-.DS_Store
-.DS_Store
-<<<<<<< HEAD
 src/main/java/org/Editors/META-INF/MANIFEST.MF
-=======
 
 # Default ignored files
 /.idea/shelf/
@@ -49,8 +45,6 @@ src/main/java/org/Editors/META-INF/MANIFEST.MF
 .project
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
 
 #Target Folder
 target/
->>>>>>> 5f9bdf59724d01d3f64668803d845bb3513a603d

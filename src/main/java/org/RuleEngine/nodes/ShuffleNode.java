@@ -13,19 +13,23 @@ public class ShuffleNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
-        if (e1 == null || !(e1.getValue() instanceof String)) {
-            System.out.println("Error: Shuffle operation takes a string as input!");
+        LiteralNode op0 = getOperand(0).execute(currState);
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (!(op0.getValue() instanceof String)) {
+            NodeUtil.InputTypeError(this, 0, "String");
         }
         
-        String deckName = (String)e1.getValue();
-        GameObject deck = (deckName.charAt(0) == '_') ? currState.findObject(deckName.substring(1)) : currState.getRegistry(deckName);
+        GameObject go = NodeUtil.processNodeToObj(op0, currState);
         
-        if (deck == null) {
-            System.out.println("Error: Cannot find deck of label " + deckName);
+        if (go == null || !(go instanceof Deck)) {
+            NodeUtil.InputTypeError(this, 0, "Valid Deck");
+            return null;
         }
         
-        ((Deck)deck).shuffle();
+        ((Deck)go).shuffle();
         return null;
     }
     

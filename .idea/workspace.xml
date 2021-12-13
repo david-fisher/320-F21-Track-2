@@ -4,122 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Deleted dummy objects">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_15_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_15_0_1.xml" beforeDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="added updateGamepiece to Display and Gamepiece's setLocation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/scenebuilder/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/scenebuilder.controllers/Dice6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/MainMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/BinOpBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/Block.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckDrawBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckPutBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/DeckShuffleBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetNextPlayerBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetPlayerByIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/GetTileIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/IfBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/InvokeBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/LengthBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/MoveByStepsBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/MoveToTileIndexBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/NotBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/PSetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/RSetBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/SequenceBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/TextBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/UseDieSpinnerBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/WhileBlock$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/blocks/WhileBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/GameObjectUIController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/MainMenuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/Editors/controllers/RuleEditorUIController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Button.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Die.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/GameTimer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Gamepiece.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Project$GameStates.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Savable$Projects.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Savable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Spinner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Tile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GameObjects/objects/Token.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/Interpreter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/engine/TestGameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/HumanAgent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/MinimaxAgent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/impossible/TieGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/ALNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/ALOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/BooleanNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/BooleanOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/GetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/IfNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/InvokeNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/LiteralNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/MoveNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/NodeMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/OpNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/PSetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/RSetNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/StringNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/StringOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/nodes/WhileNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Action.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Cache.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/DepthOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/HeuristicOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/Oracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/PruningOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/RuleEngine/oracles/RandomOracle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder.controllers/Dice6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/BasicApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/Display.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/GlobalCSSValues.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/SettingsObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/SetupData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController$Popup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/PlayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/ScreenController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SelectionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SettingsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/scenebuilder/controllers/SetupController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/RSetNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/RSetNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -155,9 +45,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org.Editors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org/Editors/controllers" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -165,20 +56,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org.Editors" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine\engine\nodes" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
       <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\RuleEngine\impossible" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\GameplayUI" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\java\org\RuleEngine" />
-      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\scenebuilder" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\Editors" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers\controllers" />
+      <recent name="C:\Users\irl3w\OneDrive\Documents\GitHub\320-F21-Track-2\src\main\resources\org\scenebuilder.controllers" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.scenebuilder.controllers" />
       <recent name="org" />
       <recent name="org.scenebuilder.scenebuilder" />
       <recent name="" />
@@ -189,7 +81,7 @@
   </component>
   <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="org.scenebuilder.BasicApplication" />
+      <option name="MAIN_CLASS_NAME" value="org.GamePlay.BasicApplication" />
       <module name="SceneBuilder" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -222,34 +114,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
-      <created>1636243444825</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1636243444825</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
-      <created>1636250671710</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1636250671711</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Replaced PlayScreen's BorderPane with an AnchorPane and implemented TranslateTransitions for the Decks tab.">
-      <created>1636390727559</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1636390727559</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Adjusted drawer sliding to come from behind the corresponding tab immediately">
-      <created>1636922489330</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1636922489330</updated>
     </task>
     <task id="LOCAL-00005" summary="Changed default size and margins of decks.">
       <created>1636946400904</created>
@@ -524,7 +388,77 @@
       <option name="project" value="LOCAL" />
       <updated>1639097891519</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Connected Editor controllers (through &quot;create game&quot;)">
+      <created>1639159096163</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1639159096164</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Centered controllers, fixed back/cancel buttons.">
+      <created>1639239608630</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1639239608630</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added CreateController">
+      <created>1639242180700</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1639242180700</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Small fix to static playParent">
+      <created>1639250049243</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1639250049243</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Small progress in returning to main">
+      <created>1639253751515</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1639253751515</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Fixed back">
+      <created>1639265014041</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1639265014041</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Full loop">
+      <created>1639265912725</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1639265912726</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Stage edits">
+      <created>1639275097959</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1639275097959</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Edit edits">
+      <created>1639275546023</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1639275546024</updated>
+    </task>
+    <task id="LOCAL-00053" summary="added updateGamepiece to Display and Gamepiece's setLocation">
+      <created>1639279295304</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1639279295304</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,16 +474,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly)." />
-    <MESSAGE value="Matt's playerTurnCycle method (not yet used by any onClick event)" />
-    <MESSAGE value="Added our Player.java to objects folder" />
-    <MESSAGE value="Changed buttons in Main Menu to labels with color" />
-    <MESSAGE value="Button aesthetic changes" />
-    <MESSAGE value="Button aesthetic changes part 2: added a darkening effect when they are hovered over and curved their edges." />
-    <MESSAGE value="Added a custom setStyle method to initialize the style's of most labels to clean up code." />
-    <MESSAGE value="Added a custom setStyle method: clean up code and increase mutability of labels." />
-    <MESSAGE value="PlayScreen no longer overrides stage dimensions" />
-    <MESSAGE value="Replace DummyPlayer with Player and replaced Token with Gamepiece. Merged GKNEW's new files." />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="File structure with Minjex, GKNEW, and UMass Dining" />
     <MESSAGE value="Merged from main" />
     <MESSAGE value="Undo folder refactor" />
@@ -565,7 +490,17 @@
     <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
     <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleted dummy objects" />
+    <MESSAGE value="Connected Editor controllers (through &quot;create game&quot;)" />
+    <MESSAGE value="Centered controllers, fixed back/cancel buttons." />
+    <MESSAGE value="Added CreateController" />
+    <MESSAGE value="Small fix to static playParent" />
+    <MESSAGE value="Small progress in returning to main" />
+    <MESSAGE value="Fixed back" />
+    <MESSAGE value="Full loop" />
+    <MESSAGE value="Stage edits" />
+    <MESSAGE value="Edit edits" />
+    <MESSAGE value="added updateGamepiece to Display and Gamepiece's setLocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added updateGamepiece to Display and Gamepiece's setLocation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

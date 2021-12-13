@@ -527,7 +527,6 @@ public class RuleEditorUIController implements Initializable {
     else {
       System.out.println("Unknown error encountered in handleAddIfBtn");
     }
-    //blockActions(new IfBlock());
   }
 
   private void constructBlockTree(org.RuleEngine.nodes.OpNode tree) {
