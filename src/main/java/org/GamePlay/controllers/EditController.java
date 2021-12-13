@@ -1,6 +1,7 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -145,8 +146,6 @@ public class EditController extends ScreenController {
                 Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
-                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    stage.close();
                     setSelectedGame((VBox)n);
                     try {
                         changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
@@ -222,18 +221,6 @@ public class EditController extends ScreenController {
 
     public void setSelectedGame(VBox vbox) {
         BasicApplication.setProject((Project)vbox.getUserData());
-    }
-
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
     }
 
     private String invertColor(String myColorString) {
