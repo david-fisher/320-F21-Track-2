@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -65,10 +66,11 @@ public class SetupController extends ScreenController {
         HBox.setMargin(numPlayersLabel, new Insets(20, 100, 30, 10));
 
         minusPlayerButton = new Label("-");
-        minusPlayerButton.setAlignment(Pos.CENTER);
-        minusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        minusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        minusPlayerButton.setFont(new Font(24));
+        Style.setStyle(minusPlayerButton, "24", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,0, 0);
+//        minusPlayerButton.setAlignment(Pos.CENTER);
+//        minusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        minusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        minusPlayerButton.setFont(new Font(24));
         minusPlayerButton.setPadding(new Insets(10, 20, 10, 20));
         HBox.setMargin(minusPlayerButton, new Insets(2, 2, 2, 2));
 
@@ -81,10 +83,11 @@ public class SetupController extends ScreenController {
         HBox.setMargin(playerCountLabel, new Insets(5, 5, 5, 5));
 
         plusPlayerButton = new Label("+");
-        plusPlayerButton.setAlignment(Pos.CENTER);
-        plusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        plusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        plusPlayerButton.setFont(new Font(24));
+        Style.setStyle(plusPlayerButton, "24", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,0, 0);
+//        plusPlayerButton.setAlignment(Pos.CENTER);
+//        plusPlayerButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        plusPlayerButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        plusPlayerButton.setFont(new Font(24));
         plusPlayerButton.setPadding(minusPlayerButton.getPadding());
         HBox.setMargin(plusPlayerButton, HBox.getMargin(plusPlayerButton));
 
@@ -117,13 +120,13 @@ public class SetupController extends ScreenController {
     }
 
     HBox bottomHBox;
-    Button backButton;
+    Label backButton;
     HBox centralHBox;
     Label tutorialLabel;
     Label tutorialToggleLabel;
     Label playerOrderLabel;
     Label playerOrderToggleLabel;
-    Button startGameButton;
+    Label startGameButton;
     private void initBottomBar() {
 
         bottomHBox = new HBox();
@@ -131,13 +134,14 @@ public class SetupController extends ScreenController {
         bottomHBox.setAlignment(Pos.BOTTOM_CENTER);
         VBox.setVgrow(bottomHBox, Priority.ALWAYS);
 
-        backButton = new Button();
-        backButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        backButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        backButton.setText("Back");
-        backButton.setFont(new Font(24));
-        backButton.setPadding(new Insets(10, 30, 10, 30));
-        HBox.setMargin(backButton, new Insets(10, 20, 10, 20));
+        backButton = new Label("Back");
+        Style.setStyle(backButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
+//        backButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        backButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        backButton.setText("Back");
+//        backButton.setFont(new Font(24));
+//        backButton.setPadding(new Insets(10, 30, 10, 30));
+        HBox.setMargin(backButton, new Insets(10, 10, 10, 20));
 
         centralHBox = new HBox();
         centralHBox.setAlignment(Pos.CENTER);
@@ -147,29 +151,31 @@ public class SetupController extends ScreenController {
         tutorialLabel = new Label("Tutorial Mode: ");
         tutorialLabel.setFont(new Font(24));
         tutorialLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
-        HBox.setMargin(tutorialLabel, new Insets(0, 0, 0, 20));
+        HBox.setMargin(tutorialLabel, new Insets(0, 10, 0, 10));
 
         tutorialToggleLabel = new Label("Disabled");
-        tutorialToggleLabel.setAlignment(Pos.CENTER);
-        tutorialToggleLabel.setFont(tutorialLabel.getFont());
-        tutorialToggleLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        tutorialToggleLabel.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+        Style.setStyle(tutorialToggleLabel, ""+tutorialLabel.getFont().getSize()+"", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,tutorialLabel.getWidth(), tutorialLabel.getHeight());
+        //tutorialToggleLabel.setAlignment(Pos.CENTER);
+        //tutorialToggleLabel.setFont(tutorialLabel.getFont());
+        //tutorialToggleLabel.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        //tutorialToggleLabel.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
         tutorialToggleLabel.prefHeightProperty().bind(tutorialLabel.heightProperty());
         tutorialToggleLabel.prefWidthProperty().bind(tutorialLabel.widthProperty());
-        tutorialToggleLabel.setPadding(new Insets(10, 30, 10, 30));
-        HBox.setMargin(tutorialToggleLabel, new Insets(0, 0, 0, 40));
+        tutorialToggleLabel.setPadding(new Insets(10, 20, 10, 20));
+        HBox.setMargin(tutorialToggleLabel, new Insets(0, 20, 0, 20));
 
         playerOrderLabel = new Label("Turn Order: ");
         playerOrderLabel.setFont(tutorialLabel.getFont());
         playerOrderLabel.setTextFill(tutorialLabel.getTextFill());
         playerOrderLabel.prefHeightProperty().bind(tutorialLabel.heightProperty());
-        HBox.setMargin(playerOrderLabel, new Insets(0, 0, 0, 100));
+        HBox.setMargin(playerOrderLabel, new Insets(0, 10, 0, 10));
 
         playerOrderToggleLabel = new Label("Random");
-        playerOrderToggleLabel.setAlignment(Pos.CENTER);
-        playerOrderToggleLabel.setFont(playerOrderLabel.getFont());
-        playerOrderToggleLabel.setTextFill(tutorialToggleLabel.getTextFill());
-        playerOrderToggleLabel.setStyle(tutorialToggleLabel.getStyle());
+        Style.setStyle(playerOrderToggleLabel, ""+playerOrderLabel.getFont().getSize()+"", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,playerOrderLabel.getWidth(), playerOrderLabel.getHeight());
+//        playerOrderToggleLabel.setAlignment(Pos.CENTER);
+//        playerOrderToggleLabel.setFont(playerOrderLabel.getFont());
+//        playerOrderToggleLabel.setTextFill(tutorialToggleLabel.getTextFill());
+//        playerOrderToggleLabel.setStyle(tutorialToggleLabel.getStyle());
         playerOrderToggleLabel.prefHeightProperty().bind(playerOrderLabel.heightProperty());
         playerOrderToggleLabel.prefWidthProperty().bind(Bindings.multiply(tutorialLabel.widthProperty(), 1.2));
         playerOrderToggleLabel.setPadding(tutorialToggleLabel.getPadding());
@@ -177,17 +183,43 @@ public class SetupController extends ScreenController {
 
         centralHBox.getChildren().addAll(tutorialLabel, tutorialToggleLabel, playerOrderLabel, playerOrderToggleLabel);
 
-        startGameButton = new Button();
-        startGameButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
-        startGameButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
-        startGameButton.setText("Start Game");
-        startGameButton.setFont(new Font(24));
-        startGameButton.setPadding(new Insets(10, 30, 10, 30));
-        HBox.setMargin(startGameButton, new Insets(10, 20, 10, 20));
+        startGameButton = new Label("Start Game");
+        Style.setStyle(startGameButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,270, 70);
+//        startGameButton.setStyle("-fx-background-color: " + GlobalCSSValues.buttonBackground);
+//        startGameButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+//        startGameButton.setText("Start Game");
+//        startGameButton.setFont(new Font(24));
+//        startGameButton.setPadding(new Insets(10, 30, 10, 30));
+        HBox.setMargin(startGameButton, new Insets(10, 20, 10, 10));
 
         bottomHBox.getChildren().addAll(backButton, centralHBox, startGameButton);
         screenVBox.getChildren().add(bottomHBox);
     }
+
+//    public void initDarken(Label label) {
+//        label.setOnMouseEntered(e -> {
+//            ColorAdjust colorAdjust = new ColorAdjust();
+//            colorAdjust.setBrightness(-0.2);
+//            label.setEffect(colorAdjust);
+//        });
+//
+//        label.setOnMouseExited(e -> {
+//            label.setEffect(null);
+//        });
+//    }
+//    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
+//        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                "-fx-background-radius: 5 5 5 5; " +
+//                "-fx-font-family: Serif; " +
+//                "-fx-font-size: " + size + "; " +
+//                "-fx-background-color: " + color + "; " +
+//                "-fx-border-color: BLACK;");
+//        label.setTextFill(Color.valueOf(textColor));
+//        label.setAlignment(Pos.CENTER);
+//        label.setPrefWidth(width);
+//        label.setPrefHeight(height);
+//        initDarken(label);
+//    }
 
     // constructor -----------------------------------
     public void initialize(Stage stage) {

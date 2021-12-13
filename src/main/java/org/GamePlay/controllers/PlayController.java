@@ -53,6 +53,8 @@ public class PlayController extends ScreenController {
     double playWidth;
     double playHeight;
 
+    int numDrawers;
+
     Interpreter interpreter = new Interpreter();
 
     public void initialize(Stage stage) {
@@ -89,7 +91,7 @@ public class PlayController extends ScreenController {
 
         currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
 
-        initPlayerTurnIndicator();
+        //initPlayerTurnIndicator();
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -114,7 +116,7 @@ public class PlayController extends ScreenController {
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
         ArrayList<Button> buttons = gameStateInput.getAllButtons();
 
-        int numDrawers = 0;
+        numDrawers = 0;
         boolean decksNeeded = decks.size() != 0;
         boolean buttonsNeeded = buttons.size() != 0;
         //TODO
@@ -217,7 +219,7 @@ public class PlayController extends ScreenController {
             String event = button.getOnClick();
             Label label = new Label(button.getText());
             button.setParent(label);
-            setStyle(label, "18", button.getColorString(), button.getText().length() * 12, button.getHeight());
+            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, button.getHeight());
             button.getParent().setOnMouseClicked(e -> {
                 if (button.getEnabled()) {
                     interpreter.interpretEvent(gameState.events.get(event), gameState);
@@ -237,7 +239,7 @@ public class PlayController extends ScreenController {
             String event = c.getOnPlay();
             Label label = new Label(c.getLabel());
             c.setParent(label);
-            setStyle(label, "18", c.getColorString(), c.getText().length() * 12, c.getHeight());
+            Style.setStyle(label, "18", c.getColorString(), GlobalCSSValues.text,c.getText().length() * 12, c.getHeight());
             c.getParent().setOnMouseClicked(e -> {
                 if (!event.equals("")) {
                     if (c.getEnabled()) {
@@ -256,6 +258,7 @@ public class PlayController extends ScreenController {
 
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
+        initInventoryLabel(numDrawers);
         if (inventory == null) { return; }
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
@@ -352,7 +355,7 @@ public class PlayController extends ScreenController {
 
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
-        initLabel(inventoryLabel, "Inventory", "inventoryLabel");
+        initLabel(inventoryLabel, ""+currPlayer.getLabel()+"'s Inventory" , "inventoryLabel");
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
@@ -378,7 +381,7 @@ public class PlayController extends ScreenController {
         label.setOnMouseClicked(e -> {
             slideOut(e);
         });
-        initDarken(label);
+        Style.initDarken(label);
 
         playParent.getChildren().addAll(label);
         playParent.setRightAnchor(label, 0.0);
@@ -594,45 +597,45 @@ public class PlayController extends ScreenController {
         popup.displaySettingsPopup();
     }
 
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            if (label.getUserData() instanceof Button) {
-                    if (((Button)label.getUserData()).getEnabled()) {
-                        ColorAdjust colorAdjust = new ColorAdjust();
-                        colorAdjust.setBrightness(-0.2);
-                        label.setEffect(colorAdjust);
-                    }
-            } else if (label.getUserData() instanceof Button) {
-                if (((Button)label.getUserData()).getEnabled()) {
-                    ColorAdjust colorAdjust = new ColorAdjust();
-                    colorAdjust.setBrightness(-0.2);
-                    label.setEffect(colorAdjust);
-                }
-            } else {
-                ColorAdjust colorAdjust = new ColorAdjust();
-                colorAdjust.setBrightness(-0.2);
-                label.setEffect(colorAdjust);
-            }
-        });
+//    public void initDarken(Label label) {
+//        label.setOnMouseEntered(e -> {
+//            if (label.getUserData() instanceof Button) {
+//                    if (((Button)label.getUserData()).getEnabled()) {
+//                        ColorAdjust colorAdjust = new ColorAdjust();
+//                        colorAdjust.setBrightness(-0.2);
+//                        label.setEffect(colorAdjust);
+//                    }
+//            } else if (label.getUserData() instanceof Button) {
+//                if (((Button)label.getUserData()).getEnabled()) {
+//                    ColorAdjust colorAdjust = new ColorAdjust();
+//                    colorAdjust.setBrightness(-0.2);
+//                    label.setEffect(colorAdjust);
+//                }
+//            } else {
+//                ColorAdjust colorAdjust = new ColorAdjust();
+//                colorAdjust.setBrightness(-0.2);
+//                label.setEffect(colorAdjust);
+//            }
+//        });
+//
+//        label.setOnMouseExited(e -> {
+//            label.setEffect(null);
+//        });
+//    }
 
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.BLACK);
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
-    }
+//    public void setStyle(Label label, String size, String color, double width, double height) {
+//        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                "-fx-background-radius: 5 5 5 5; " +
+//                "-fx-font-family: Serif; " +
+//                "-fx-font-size: " + size + "; " +
+//                "-fx-background-color: " + color + "; " +
+//                "-fx-border-color: BLACK;");
+//        label.setTextFill(Color.BLACK);
+//        label.setAlignment(Pos.CENTER);
+//        label.setPrefWidth(width);
+//        label.setPrefHeight(height);
+//        initDarken(label);
+//    }
 
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }

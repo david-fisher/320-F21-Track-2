@@ -142,40 +142,40 @@ public class Popup extends PlayController {
         Stage popupWindow = new Stage();
 
         yes = new Label("Yes");
-        yes.setStyle("-fx-border-radius: 2 2 2 2; " +
-                "-fx-background-radius: 2 2 2 2; " +
-                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
-        yes.setAlignment(Pos.CENTER);
-        yes.setPrefWidth(100);
-        yes.setPrefHeight(35);
+        Style.setStyle(yes, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,100, 35);
+//        yes.setStyle("-fx-border-radius: 2 2 2 2; " +
+//                "-fx-background-radius: 2 2 2 2; " +
+//                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+//                "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+//                "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+//        yes.setAlignment(Pos.CENTER);
+//        yes.setPrefWidth(100);
+//        yes.setPrefHeight(35);
         no = new Label("No");
         no.setStyle(yes.getStyle());
-        no.setAlignment(Pos.CENTER);
-        no.setPrefWidth(yes.getPrefWidth());
-        no.setPrefHeight(yes.getPrefHeight());
-        no.setStyle(yes.getStyle());
+//        no.setAlignment(Pos.CENTER);
+//        no.setPrefWidth(yes.getPrefWidth());
+//        no.setPrefHeight(yes.getPrefHeight());
 
-        outlineYesNo(yes);
-        outlineYesNo(no);
+//        outlineYesNo(yes);
+//        outlineYesNo(no);
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
         Label saveButton = new Label("Save");
-        setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+        Style.setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label exitButton = new Label("Exit");
-        setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+        Style.setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         exitButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label restartButton = new Label("Restart");
-        setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+        Style.setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         restartButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label mainMenuButton = new Label("Main Menu");
-        setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
+        Style.setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         mainMenuButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         saveButton.setOnMouseClicked(e->{

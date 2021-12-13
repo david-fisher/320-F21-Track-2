@@ -126,7 +126,7 @@ public class SelectionController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
+        Style.setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
 
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
@@ -140,7 +140,7 @@ public class SelectionController extends ScreenController {
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
         selectGameButton = new Label("Select a Game");
-        setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
+        Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
 
@@ -190,7 +190,7 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
-                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -222,7 +222,7 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Load Saved Game");
-                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -297,31 +297,31 @@ public class SelectionController extends ScreenController {
         System.out.println(BasicApplication.getProject().getProjectName());
     }
 
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.valueOf(textColor));
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
-    }
+//    public void initDarken(Label label) {
+//        label.setOnMouseEntered(e -> {
+//            ColorAdjust colorAdjust = new ColorAdjust();
+//            colorAdjust.setBrightness(-0.2);
+//            label.setEffect(colorAdjust);
+//        });
+//
+//        label.setOnMouseExited(e -> {
+//            label.setEffect(null);
+//        });
+//    }
+//
+//    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
+//        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                "-fx-background-radius: 5 5 5 5; " +
+//                "-fx-font-family: Serif; " +
+//                "-fx-font-size: " + size + "; " +
+//                "-fx-background-color: " + color + "; " +
+//                "-fx-border-color: BLACK;");
+//        label.setTextFill(Color.valueOf(textColor));
+//        label.setAlignment(Pos.CENTER);
+//        label.setPrefWidth(width);
+//        label.setPrefHeight(height);
+//        initDarken(label);
+//    }
 
     private String invertColor(String myColorString) {
 

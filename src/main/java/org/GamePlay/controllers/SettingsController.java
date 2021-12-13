@@ -125,7 +125,8 @@ public class SettingsController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        backButton.setFont(new Font(36));
+        Style.setStyle(backButton, "36", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
+        //backButton.setFont(new Font(36));
         backButton.setPadding(new Insets(5, 10, 5, 10));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
@@ -133,12 +134,13 @@ public class SettingsController extends ScreenController {
             backFromSettings();
         });
 
-        initButtonCSS(backButton);
-        initDarken(backButton);
+//        initButtonCSS(backButton);
+//        initDarken(backButton);
 
         saveButton = new Label("Save");
-        saveButton.setFont(backButton.getFont());
-        saveButton.setText("Save");
+        Style.setStyle(saveButton, "36", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
+//        saveButton.setFont(backButton.getFont());
+//        saveButton.setText("Save");
         saveButton.setPadding(backButton.getPadding());
         HBox.setMargin(saveButton, HBox.getMargin(backButton));
 
@@ -146,8 +148,8 @@ public class SettingsController extends ScreenController {
            saveFromSettings();
         });
 
-        initButtonCSS(saveButton);
-        initDarken(saveButton);
+//        initButtonCSS(saveButton);
+//        initDarken(saveButton);
 
         buttonsHBox.getChildren().addAll(backButton, saveButton);
         screenVBox.getChildren().add(buttonsHBox);

@@ -26,7 +26,7 @@ public class MainController extends ScreenController {
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
+        Style.setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
@@ -49,7 +49,7 @@ public class MainController extends ScreenController {
     private void initButtons() {
 
         playButton = new Label("Play Game");
-        setStyle(playButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,275, 80);
+        Style.setStyle(playButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,275, 80);
 
         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
@@ -58,7 +58,7 @@ public class MainController extends ScreenController {
         });
 
         newButton = new Label("Create Game");
-        setStyle(newButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        Style.setStyle(newButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
@@ -71,7 +71,7 @@ public class MainController extends ScreenController {
         });
 
         editButton = new Label("Edit Game");
-        setStyle(editButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        Style.setStyle(editButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
@@ -84,7 +84,7 @@ public class MainController extends ScreenController {
         });
 
         exitButton = new Label("Exit");
-        setStyle(exitButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        Style.setStyle(exitButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
@@ -159,31 +159,31 @@ public class MainController extends ScreenController {
         stage.show();
     }
 
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.valueOf(textColor));
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
-    }
+//    public void initDarken(Label label) {
+//        label.setOnMouseEntered(e -> {
+//            ColorAdjust colorAdjust = new ColorAdjust();
+//            colorAdjust.setBrightness(-0.2);
+//            label.setEffect(colorAdjust);
+//        });
+//
+//        label.setOnMouseExited(e -> {
+//            label.setEffect(null);
+//        });
+//    }
+//
+//    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
+//        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+//                "-fx-background-radius: 5 5 5 5; " +
+//                "-fx-font-family: Serif; " +
+//                "-fx-font-size: " + size + "; " +
+//                "-fx-background-color: " + color + "; " +
+//                "-fx-border-color: BLACK;");
+//        label.setTextFill(Color.valueOf(textColor));
+//        label.setAlignment(Pos.CENTER);
+//        label.setPrefWidth(width);
+//        label.setPrefHeight(height);
+//        initDarken(label);
+//    }
 
 }
 
