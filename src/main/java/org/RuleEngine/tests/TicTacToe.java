@@ -168,7 +168,7 @@ public class TicTacToe {
         MMEvent.add(ifMidCol);
         MMEvent.add(ifBackDiag);
         MMEvent.add(ifForwardDiag);
-        MLEvent.add(nextTurn)
+        MLEvent.add(nextTurn);
         
         ArrayList<Node> MREvent = new ArrayList<Node>();
         OpNode setMRColor = NodeMaker.makeNode("pset").setOperand(colorTrait, 0).setOperand(tileMR, 1).setOperand(getCurrColor, 2);
