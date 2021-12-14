@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fix size of Editor main menu from Edit Game">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Scaling of board, player turn indicator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/Popup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/Popup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +83,9 @@
   </component>
   <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
+      <envs>
+        <env name="CASC_YAML_MAX_ALIASES" value="&quot;200&quot;" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="org.GamePlay.BasicApplication" />
       <module name="SceneBuilder" />
       <method v="2">
@@ -103,6 +105,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.BasicApplication" />
+      <item itemvalue="Application.MainMenu" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainMenu" />
@@ -117,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program.">
-      <created>1637603058782</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1637603058782</updated>
     </task>
     <task id="LOCAL-00013" summary="Pulled GKNEW's objects from main, and replaced all JFX Buttons with labels to avoid conflicts with UMass Dining's new Button object">
       <created>1637631060940</created>
@@ -461,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639451593514</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Scaling of board, player turn indicator">
+      <created>1639507610196</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1639507610196</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -478,7 +484,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
     <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
     <MESSAGE value="Added fade to print method" />
@@ -503,7 +508,8 @@
     <MESSAGE value="Small Style Changes" />
     <MESSAGE value="Replace setupData with selectedGame" />
     <MESSAGE value="Bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fix" />
+    <MESSAGE value="Scaling of board, player turn indicator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scaling of board, player turn indicator" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
