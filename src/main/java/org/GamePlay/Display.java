@@ -5,18 +5,27 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.GameObjects.objects.*;
 
 
 import javafx.scene.input.MouseEvent;
+import org.GamePlay.controllers.MainController;
+import org.GamePlay.controllers.Popup;
+import org.GamePlay.controllers.Style;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.controllers.PlayController;
 
@@ -118,6 +127,59 @@ public class Display extends PlayController {
                 "-fx-font-size: 16; " +
                 "-fx-border-color: #000000;");
         fillInventory(player.getInventory());
+    }
+
+    public void displayWinnerPopup(Player player) {
+        Stage popupWindow = new Stage();
+        BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
+
+        Label winnerMessage = new Label("Congratulations! " + player.getLabel() + " Wins!");
+        winnerMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
+        winnerMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
+        winnerMessage.setWrapText(true);
+        winnerMessage.setAlignment(Pos.CENTER);
+        winnerMessage.setPrefWidth(250);
+
+        borderPane.setAlignment(winnerMessage, Pos.CENTER);
+        borderPane.setCenter(winnerMessage);
+
+        VBox buttons = new VBox(10);
+
+        Label exit = new Label("Exit");
+        Style.setStyle(exit, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+
+        Label mainMenu = new Label("Main Menu");
+        Style.setStyle(mainMenu, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+
+        Label playAgain = new Label("Play Again");
+        Style.setStyle(playAgain, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+
+        exit.setOnMouseClicked(e-> {
+            popupWindow.close();
+            exitFromPlay();
+        });
+        mainMenu.setOnMouseClicked(e -> {
+            popupWindow.close();
+            mainMenuFromPlay(super.getPlayStage());
+        });
+        playAgain.setOnMouseClicked(e -> {
+            popupWindow.close();
+            restartPlay(super.getPlayStage());
+        });
+
+        buttons.getChildren().addAll(playAgain, mainMenu, exit);
+        buttons.setMargin(exit, new Insets(5, 0, 5, 0));
+        buttons.setMargin(mainMenu, new Insets(5, 0, 5, 0));
+        buttons.setMargin(playAgain, new Insets(5, 0, 5, 0));
+
+        buttons.setAlignment(Pos.CENTER);
+        borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
+        borderPane.setBottom(buttons);
+        Scene winnerScene = new Scene(borderPane, 350, 500);
+        popupWindow.setScene(winnerScene);
+        popupWindow.showAndWait();
+
     }
 
 }

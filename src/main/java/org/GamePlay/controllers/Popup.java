@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Savable;
 import org.GamePlay.GlobalCSSValues;
 
 public class Popup extends PlayController {
@@ -44,6 +45,8 @@ public class Popup extends PlayController {
         yes.setOnMouseClicked(e-> {
             popupWindow.close();
             parentPopup.close();
+            clearPlayParent();
+            restartPlay(stage);
         });
         no.setOnMouseClicked(e -> {
             popupWindow.close();
@@ -170,7 +173,7 @@ public class Popup extends PlayController {
 
         saveButton.setOnMouseClicked(e->{
             saved = true;
-            System.out.println("Save");
+            Savable.closeDB();
         });
 
         exitButton.setOnMouseClicked(e->{
@@ -185,6 +188,7 @@ public class Popup extends PlayController {
         });
 
         restartButton.setOnMouseClicked(e->{
+            clearPlayParent();
             displayRestart(popupWindow);
         });
 

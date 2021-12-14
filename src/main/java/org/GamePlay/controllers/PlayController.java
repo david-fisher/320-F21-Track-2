@@ -573,6 +573,12 @@ public class PlayController extends ScreenController {
         controller.initialize(stage);
     }
 
+    public void restartPlay(Stage stage) {
+        Savable.intitDB();
+        PlayController controller = new PlayController();
+        controller.initialize(stage);
+    }
+
     private static String toHexString(Color color) {
         int r = ((int) Math.round(color.getRed()     * 255)) << 24;
         int g = ((int) Math.round(color.getGreen()   * 255)) << 16;
@@ -618,5 +624,6 @@ public class PlayController extends ScreenController {
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
+    public Stage getPlayStage() { return stage; }
 }
 
