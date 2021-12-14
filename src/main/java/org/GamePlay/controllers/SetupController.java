@@ -1,8 +1,6 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -210,8 +208,8 @@ public class SetupController extends ScreenController {
     // the selected game
     GameState selectedGame;
 
+    // player attributes
     ArrayList<Player> players;
-
     int numPieces;
 
     // init functions
@@ -225,7 +223,7 @@ public class SetupController extends ScreenController {
     }
     private void setup() {
 
-        // instantiate new setupData object
+        // instantiate setup attributes
         players = selectedGame.getAllPlayers();
         numPieces = players.get(0).getGamePieces().size();
 
@@ -296,15 +294,21 @@ public class SetupController extends ScreenController {
 
         int curNumPlayers = players.size();
 
+        // check if we can add another player against max player count
         if (curNumPlayers == selectedGame.getMaxPlayer()) {
             return;
         }
+
         // define player name
         String playerName = "Player " + (curNumPlayers + 1);
+
         // define list of player's pieces
         ArrayList<Gamepiece> gamePieces = new ArrayList<>();
 
+        // if players have at least one piece
         if (players.get(0).getGamePieces().size() != 0) {
+
+            // todo I don't understand what is happening here a comment would be good explaining what is going on
             ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
             int start = curNumPlayers * (numPieces);
             for (int i = start; i < start + numPieces; i++) {
@@ -312,6 +316,7 @@ public class SetupController extends ScreenController {
             }
         }
 
+        // new player instantiation
         Player newPlayer = new Player();
         newPlayer.setLabel(playerName);
         newPlayer.setGamePieces((gamePieces));
@@ -330,11 +335,17 @@ public class SetupController extends ScreenController {
 
         // color picker
         Color defaultColor;
+
+        // the first player already has a color... for some reason
         if (players.get(0).equals(player)) {
+
             defaultColor = player.getColor();
         } else {
+
+            // every other player gets a random color
             defaultColor = getRandomColor();
         }
+
         ColorPicker colorPicker = new ColorPicker(defaultColor);
         colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) + "; -fx-font-family: serif;" +
                 " -fx-color-label-visible: false ; ");
