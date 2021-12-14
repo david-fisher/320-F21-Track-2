@@ -138,7 +138,7 @@ public class GameState extends Savable {
     
     public boolean removeRegistry(String key) { return registers.remove(key) != null; }
     
-    public ArrayList<Node> f(String key) { return events.get(key); }
+    public ArrayList<Node> getEvent(String key) { return events.get(key); }
 	  
 	public void addEvent(String key, ArrayList<Node> obj) { events.put(key, obj); }
 	

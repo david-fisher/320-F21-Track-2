@@ -14,7 +14,10 @@ public class ALNode extends OpNode {
     }
 
     public String getOperator() { return operator; }
-    public void setOperator(String op) { operator = op; }
+    public OpNode setOperator(String op) { 
+        operator = op; 
+        return this;
+    }
 
     @Override
     @SuppressWarnings("rawtypes")
