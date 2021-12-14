@@ -104,30 +104,6 @@ public class GameObjectUIController extends ScreenController {
     @FXML
     private TextField onClick;
 
-    // Tile tab
-    @FXML
-    private TextField tileName;
-    @FXML
-    private ColorPicker tileColor;
-    @FXML
-    private TextField tileFilename;
-    @FXML
-    private TextField tileShape;
-    @FXML
-    private TextField tileOnLand;
-
-    // Player tab
-    @FXML
-    private TextField playerName;
-    @FXML
-    private ColorPicker playerColor;
-    @FXML
-    private TextField playerGamepieces;
-    @FXML
-    private TextField playerInventory;
-    @FXML
-    private ToggleGroup playerIsHuman;
-
     private GameState gameState = BasicApplication.getProject().getIntiGS();
 
     public GameObjectUIController() {
@@ -137,6 +113,7 @@ public class GameObjectUIController extends ScreenController {
         cat1.setTrait("label", "category 03", true);
         cat2.setTrait("label", "category 04", true);
         spinnerCategories = FXCollections.observableArrayList(cat1, cat2);
+    }
 
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
@@ -243,38 +220,6 @@ public class GameObjectUIController extends ScreenController {
         } else {
             System.out.println("Successfully created new Token: " + token.repr(true));
         }
-    }
-
-    @FXML private void savePlayer(ActionEvent event) {
-        String playerNameString = playerName.getCharacters().toString();
-        String textureFilenameString = getFilePath();
-        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
-
-        // TODO: Inventory UI
-        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
-
-        // TODO: Gamepiece UI
-        ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
-
-        String isHuman = playerIsHuman.getSelectedToggle().toString();
-        boolean human = false;
-        if(isHuman == "yes"){
-            human = true;
-        }
-
-        Player player = new Player(playerNameString, jfxColor, gamepieces, inventory, human);
-        System.out.println("Successfully created new Player: " + playerNameString);
-        /* boolean labelRes = player.setTrait("label", playerNameString, false);
-        boolean pieceRes = player.setTrait("GamePieces", gamepieces, false);
-        boolean colorRes = player.setTrait("color", jfxColor, false);
-        boolean invRes = player.setTrait("inventory", inventory, false);
-        boolean humanRes = player.setTrait("isHuman", human, false);
-        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
-            System.err.println("Failure!");
-        } else {
-            System.out.println("Successfully created new Player: " + playerNameString);
-        }
-         */
     }
 
     @FXML
@@ -407,7 +352,7 @@ public class GameObjectUIController extends ScreenController {
     @FXML
     private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
-        String textureFilenameString = tokenFilename.getCharacters().toString();
+        String textureFilenameString = getFilePath();
         javafx.scene.paint.Color jfxColor = tokenColor.getValue();
 
         // TODO: Inventory UI
@@ -529,10 +474,6 @@ public class GameObjectUIController extends ScreenController {
 
     @FXML private void getSpinnerFile(ActionEvent e) {
         spinnerTextureFilename = getFilePath();
-    }
-
-    @FXML private void saveButton(ActionEvent e) {
-
     }
 
     private String getFilePath() {
