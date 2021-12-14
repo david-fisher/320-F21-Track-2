@@ -303,10 +303,13 @@ public class SetupController extends ScreenController {
         String playerName = "Player " + (curNumPlayers + 1);
         // define list of player's pieces
         ArrayList<Gamepiece> gamePieces = new ArrayList<>();
-        ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
-        int start = curNumPlayers * (numPieces);
-        for (int i = start; i < start + numPieces; i++) {
-            gamePieces.add(allPieces.get(i));
+
+        if (players.get(0).getGamePieces().size() != 0) {
+            ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
+            int start = curNumPlayers * (numPieces);
+            for (int i = start; i < start + numPieces; i++) {
+                gamePieces.add(allPieces.get(i));
+            }
         }
 
         Player newPlayer = new Player();
@@ -326,7 +329,12 @@ public class SetupController extends ScreenController {
         playerHBox.setUserData(player);
 
         // color picker
-        Color defaultColor = getRandomColor();
+        Color defaultColor;
+        if (players.get(0).equals(player)) {
+            defaultColor = player.getColor();
+        } else {
+            defaultColor = getRandomColor();
+        }
         ColorPicker colorPicker = new ColorPicker(defaultColor);
         colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) + "; -fx-font-family: serif;" +
                 " -fx-color-label-visible: false ; ");
