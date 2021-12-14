@@ -71,28 +71,21 @@ public class GameObjectUIController {
     private String gamepieceTextureFilename;
 
     // Tile tab
-    @FXML
-    private TextField tileName;
-    @FXML
-    private ColorPicker tileColor;
-    @FXML
-    private TextField tileFilename;
-    @FXML
-    private TextField tileShape;
-    @FXML
-    private TextField tileOnLand;
+    @FXML private TextField tileName;
+    @FXML private ColorPicker tileColor;
+    @FXML private TextField tileFilename;
+    @FXML private TextField tileShape;
+    @FXML private TextField tileOnLand;
 
     // Player tab
-    @FXML
-    private TextField playerName;
-    @FXML
-    private ColorPicker playerColor;
-    @FXML
-    private TextField playerGamepieces;
-    @FXML
-    private TextField playerInventory;
-    @FXML
-    private ToggleGroup playerIsHuman;
+    @FXML private TextField playerName;
+    @FXML private ColorPicker playerColor;
+    @FXML private TextField playerGamepieces;
+    @FXML private TextField playerInventory;
+    @FXML private ListView playerGamepiecesList;
+    @FXML private ListView playerInventoryList;
+    @FXML private ToggleGroup playerIsHuman;
+
 
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList();
@@ -198,10 +191,9 @@ public class GameObjectUIController {
         }
     }
 
-    @FXML
-    private void savePlayer(ActionEvent event) {
+    @FXML private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
-        String textureFilenameString = tokenFilename.getCharacters().toString();
+        String textureFilenameString = getFilePath();
         javafx.scene.paint.Color jfxColor = tokenColor.getValue();
 
         // TODO: Inventory UI
@@ -228,7 +220,6 @@ public class GameObjectUIController {
         } else {
             System.out.println("Successfully created new Player: " + playerNameString);
         }
-
          */
     }
 
@@ -424,6 +415,10 @@ public class GameObjectUIController {
 
     @FXML private void getSpinnerFile(ActionEvent e) {
         spinnerTextureFilename = getFilePath();
+    }
+
+    @FXML private void saveButton(ActionEvent e) {
+
     }
 
     private String getFilePath() {

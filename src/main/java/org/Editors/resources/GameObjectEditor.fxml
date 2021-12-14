@@ -84,7 +84,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="cardCancelButton" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="cardDoneButton" mnemonicParsing="false" onAction="#saveCard" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveCard" mnemonicParsing="false" onAction="#saveCard" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -152,7 +152,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton1" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="dieDoneButton" mnemonicParsing="false" onAction="#saveDie" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveDie" mnemonicParsing="false" onAction="#saveDie" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -170,7 +170,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="deckDoneButton" mnemonicParsing="false" onAction="#saveDeck" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveDeck" mnemonicParsing="false" onAction="#saveDeck" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -269,7 +269,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton11" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="tokenDoneButton" mnemonicParsing="false" onAction="#saveToken" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveToken" mnemonicParsing="false" onAction="#saveToken" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -337,7 +337,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="timerDoneButton" mnemonicParsing="false" onAction="#saveTimer" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveTimer" mnemonicParsing="false" onAction="#saveTimer" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -405,7 +405,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton1111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="categoryDoneButton" mnemonicParsing="false" onAction="#saveCategory" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveCategory" mnemonicParsing="false" onAction="#saveCategory" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -473,7 +473,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton11111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="gamepieceDoneButton" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveGamepiece" mnemonicParsing="false" onAction="#saveGamepiece" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -491,7 +491,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="spinnerDoneButton" mnemonicParsing="false" onAction="#saveSpinner" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveSpinner" mnemonicParsing="false" onAction="#saveSpinner" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -642,7 +642,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton111111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="playerDoneButton" mnemonicParsing="false" onAction="#savePlayer" prefWidth="62.0" text="Done" />
+                              <Button fx:id="savePlayer" mnemonicParsing="false" onAction="#savePlayer" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -652,14 +652,14 @@
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />
-                                    <ListView fx:id="playerInventory" prefHeight="200.0" prefWidth="200.0" />
+                                    <ListView fx:id="playerInventoryList" prefHeight="200.0" prefWidth="200.0" />
                                     <Button mnemonicParsing="false" onAction="#deckAddHighlighted" text="+" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gamepieces" />
-                                    <ListView fx:id="playerGamepieces" prefHeight="200.0" prefWidth="200.0" />
+                                    <ListView fx:id="playerGamepiecesList" prefHeight="200.0" prefWidth="200.0" />
                                     <Button mnemonicParsing="false" onAction="#deckAddHighlighted" text="+" />
                                  </children>
                               </VBox>
@@ -740,7 +740,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton111112" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="tileDoneButton" mnemonicParsing="false" onAction="#saveTile" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveTile" mnemonicParsing="false" onAction="#saveTile" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
@@ -818,7 +818,7 @@
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <buttons>
                               <Button fx:id="dieCancelButton111113" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
-                              <Button fx:id="buttonDoneButton" mnemonicParsing="false" onAction="#saveButton" prefWidth="62.0" text="Done" />
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButton" prefWidth="62.0" text="Done" />
                            </buttons>
                         </ButtonBar>
                      </bottom>
