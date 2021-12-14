@@ -70,6 +70,30 @@ public class GameObjectUIController {
     @FXML private TextField gamepieceLocation;
     private String gamepieceTextureFilename;
 
+    // Tile tab
+    @FXML
+    private TextField tileName;
+    @FXML
+    private ColorPicker tileColor;
+    @FXML
+    private TextField tileFilename;
+    @FXML
+    private TextField tileShape;
+    @FXML
+    private TextField tileOnLand;
+
+    // Player tab
+    @FXML
+    private TextField playerName;
+    @FXML
+    private ColorPicker playerColor;
+    @FXML
+    private TextField playerGamepieces;
+    @FXML
+    private TextField playerInventory;
+    @FXML
+    private ToggleGroup playerIsHuman;
+
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList();
         spinnerCategories = FXCollections.observableArrayList();
@@ -174,7 +198,62 @@ public class GameObjectUIController {
         }
     }
 
-    @FXML private void saveTimer(ActionEvent event) {
+    @FXML
+    private void savePlayer(ActionEvent event) {
+        String playerNameString = playerName.getCharacters().toString();
+        String textureFilenameString = tokenFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+
+        // TODO: Inventory UI
+        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
+
+        // TODO: Gamepiece UI
+        ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
+
+        String isHuman = playerIsHuman.getSelectedToggle().toString();
+        boolean human = false;
+        if(isHuman == "yes"){
+            human = true;
+        }
+
+        Player player = new Player(playerNameString, jfxColor, gamepieces, inventory, human);
+        System.out.println("Successfully created new Player: " + playerNameString);
+        /* boolean labelRes = player.setTrait("label", playerNameString, false);
+        boolean pieceRes = player.setTrait("GamePieces", gamepieces, false);
+        boolean colorRes = player.setTrait("color", jfxColor, false);
+        boolean invRes = player.setTrait("inventory", inventory, false);
+        boolean humanRes = player.setTrait("isHuman", human, false);
+        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Player: " + playerNameString);
+        }
+
+         */
+    }
+
+    @FXML
+    private void saveTile(ActionEvent event) {
+        Tile tile = new Tile();
+        String tileNameString = tileName.getCharacters().toString();
+        String textureFilenameString = tileFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tileColor.getValue();
+        String shape = tileShape.getCharacters().toString();
+        String onLand = tileOnLand.getCharacters().toString();
+        boolean labelRes = tile.setTrait("label", tileNameString, false);
+        boolean iconRes = tile.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = tile.setTrait("color", jfxColor, false);
+        boolean shapeRes = tile.setTrait("shape", shape, false);
+        boolean onLandRes = tile.setTrait("onLand", onLand, false);
+        if (!(labelRes && iconRes && colorRes && shapeRes && onLandRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Tile: " + tileNameString);
+        }
+    }
+
+    @FXML
+    private void saveTimer(ActionEvent event) {
         GameTimer timer = new GameTimer();
         String timerNameString = timerName.getCharacters().toString();
         Color jfxColor = timerColor.getValue();
