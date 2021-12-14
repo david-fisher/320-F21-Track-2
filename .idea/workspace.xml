@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Small Style Changes">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Replace setupData with selectedGame">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/EditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Leftclickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Leftclickable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/GameEditor/application/GameCreator.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +40,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="20YHQYlpZDfZ78KjZ57VTwvAsIT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -113,13 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Add Card Display when you Click on a Deck">
-      <created>1637256803863</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1637256803863</updated>
     </task>
     <task id="LOCAL-00011" summary="Add Card Display when you Click on a Deck and fix errors">
       <created>1637257392018</created>
@@ -457,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639408761022</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Replace setupData with selectedGame">
+      <created>1639429653892</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1639429653892</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -474,7 +481,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added White and Grey Css sheet" />
     <MESSAGE value="Minute Basic application change to player1" />
     <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
     <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
@@ -499,7 +505,8 @@
     <MESSAGE value="Working on" />
     <MESSAGE value="Fixing Style so all buttons match and Removing Player Turn Indicator to now be displayed in Inventory Label" />
     <MESSAGE value="Small Style Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small Style Changes" />
+    <MESSAGE value="Replace setupData with selectedGame" />
+    <option name="LAST_COMMIT_MESSAGE" value="Replace setupData with selectedGame" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
