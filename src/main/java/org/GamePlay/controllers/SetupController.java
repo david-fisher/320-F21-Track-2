@@ -296,7 +296,7 @@ public class SetupController extends ScreenController {
 
         int curNumPlayers = players.size();
 
-        if (curNumPlayers == selectedGame.getMaxPlayer()) { // todo read real min players value
+        if (curNumPlayers == selectedGame.getMaxPlayer()) {
             return;
         }
         // define player name
@@ -304,11 +304,15 @@ public class SetupController extends ScreenController {
         // define list of player's pieces
         ArrayList<Gamepiece> gamePieces = new ArrayList<>();
         ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
-        int loc = curNumPlayers * (numPieces);
-        for (int i = loc; i < loc + numPieces; i++) {
+        int start = curNumPlayers * (numPieces);
+        for (int i = start; i < start + numPieces; i++) {
             gamePieces.add(allPieces.get(i));
         }
-        players.add(new Player(playerName, gamePieces, new ArrayList<>(), false));
+
+        Player newPlayer = new Player();
+        newPlayer.setLabel(playerName);
+        newPlayer.setGamePieces((gamePieces));
+        players.add(newPlayer);
     }
 
     private void addPlayerNode(Player player) {

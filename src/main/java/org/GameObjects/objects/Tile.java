@@ -40,7 +40,6 @@ public class Tile extends GameObject {
     private ArrayList<Tile> connections;
     private List<Gamepiece> pieces;
     private static int count = 0;
-    private String tileID;
     static final AtomicLong NEXT_ID = new AtomicLong(0);
     final long id = NEXT_ID.getAndIncrement();
     public boolean hasImage = false;
@@ -99,9 +98,7 @@ public class Tile extends GameObject {
         return connections;
     }
 
-    public void setId(String id) { this.tileID = id; };
-
-    public String getId() { return tileID; };
+    public long getId() { return id; };
 
     public void setTileName(String tileName) {
         this.tileName = tileName;

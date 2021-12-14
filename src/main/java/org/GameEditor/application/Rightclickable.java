@@ -16,6 +16,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Savable;
 import org.GameObjects.objects.Tile;
 import org.GamePlay.BasicApplication;
 

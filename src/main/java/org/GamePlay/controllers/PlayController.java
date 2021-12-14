@@ -152,12 +152,8 @@ public class PlayController extends ScreenController {
         double width = boardPane.getPrefWidth();
         double height = boardPane.getPrefHeight();
 
-        if (gameBoard.getShape().equals("Rectangle")) {
-            board = new Rectangle(width, height);
-        } else {
-            board = new Circle(height / 2);
-        }
-        board.setFill(Color.AQUAMARINE);
+        board = new Rectangle(width, height);
+
         boardPane.getChildren().add(board);
 
         boardPane.setLeftAnchor(board, 0.0);
@@ -184,8 +180,8 @@ public class PlayController extends ScreenController {
             tile.setUserData(t);
             tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
-            tile.setLayoutX(t.getXPos());
-            tile.setLayoutY(t.getYPos());
+            tile.setLayoutX(t.getTileXLocation() * gameBoard.getCellWidth());
+            tile.setLayoutY(t.getTileYLocation() * gameBoard.getCellHeight());
             t.setParent(tile);
         });
         // for each tile
@@ -275,13 +271,14 @@ public class PlayController extends ScreenController {
         Tile parent = gamePiece.getLocation();
         if (parent == null) { return; }
         int numPlayers = players.size();
+        boolean singlePiece = players.get(0).getGamePieces().size() == 1;
         double rows = Math.ceil(Math.sqrt(numPlayers));
-        double radius = (((parent.getWidth() / rows) - (rows + 1)) / 2);
-        Circle gp = new Circle(radius, Color.WHITE);
+        double radius = singlePiece ? (((parent.getWidth() / rows) - (rows + 1)) / 2) : parent.getWidth() / 2 - 2;
+        Circle gp = new Circle(radius, gamePiece.getColor());
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        if (players.get(0).getGamePieces().size() == 1) {
+        if (singlePiece) {
             double shift = (2 * (i % rows) + 1) * (radius + 2 * ((i % rows) + 1));
             gp.setLayoutX(parent.getXPos() + shift);
             gp.setLayoutY(parent.getYPos() + shift);

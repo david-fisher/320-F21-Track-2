@@ -22,7 +22,6 @@ public class GameBoard extends GameObject {
 	int width = 8;
 	int height = 8;
 	int gridLayout[][];
-	static int count = 0;
 
 	int cellWidth = boardWidth / width;
 	int cellHeight = boardHeight / height;
@@ -67,7 +66,7 @@ public class GameBoard extends GameObject {
 			} else {
 				tileShape = new Circle(t.getWidth(), t.getColor());
 			}
-			tileShape.setId(t.getId());
+			tileShape.setId(Long.toString(t.getId()));
         	tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
@@ -109,10 +108,6 @@ public class GameBoard extends GameObject {
 	public int getCellWidth() {
 		return cellWidth;
 	}
-	
-	public int getCount() { return count; };
-
-	public void setCount(int count) { this.count = count; }
 	//done
 	public int getCellHeight() {
 		return cellHeight;

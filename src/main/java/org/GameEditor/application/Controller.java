@@ -168,12 +168,11 @@ public class Controller extends ScreenController {
 	public void allTiles() {
 		root.getChildren();
 	}
-	int count;
 	@FXML
 	void genCircle(ActionEvent event) {
 		//shapeCanvas.
 		//Cannot add more tiles if there are no more open spaces;
-		if (count == gameBoard.getSizeX() * gameBoard.getSizeY()) {
+		if (gameState.getAllTiles().size() == gameBoard.getSizeX() * gameBoard.getSizeY()) {
 			return;
 		}
 		Tile c = new Tile();
@@ -183,12 +182,11 @@ public class Controller extends ScreenController {
 		int radius = Math.min(x, y) / 2;
 
 		Shape shape = new Circle(radius, Color.BLACK);
-		shape.setId(Integer.toString(count));
+		shape.setId(Long.toString(c.getId()));
 
 		c.setShape("Circle");
 		c.setWidth((double) radius);
 		c.setColor(Color.BLACK);
-		c.setId(Integer.toString(count));
 
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
@@ -205,7 +203,6 @@ public class Controller extends ScreenController {
 					c.setTileXInitial(i);
 					c.setTileYInitial(j);
 					gameState.getAllTiles().add(c);
-					gameBoard.setCount(count++);
 					return;
 				}
 			}
@@ -216,7 +213,7 @@ public class Controller extends ScreenController {
 	@FXML
 	void genSquare(ActionEvent event) {
 
-		if (count == gameBoard.getSizeX() * gameBoard.getSizeY()) {
+		if (gameState.getAllTiles().size() == gameBoard.getSizeX() * gameBoard.getSizeY()) {
 			return;
 		}
 		Tile r = new Tile();
@@ -225,13 +222,12 @@ public class Controller extends ScreenController {
 		int y = gameBoard.getCellHeight();
 		
 		Shape tileShape = new Rectangle(x, y, Color.BLACK);
-		tileShape.setId(Integer.toString(count));
+		tileShape.setId(Long.toString(r.getId()));
 
 		r.setShape("Rectangle");
 		r.setWidth((double) x);
 		r.setHeight((double) y);
 		r.setColor(Color.BLACK);
-		r.setId(Integer.toString(count));
 
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
@@ -248,7 +244,6 @@ public class Controller extends ScreenController {
 					r.setTileXInitial(i);
 					r.setTileYInitial(j);
 					gameState.getAllTiles().add(r);
-					gameBoard.setCount(count++);
 					return;
 				}
 			}
@@ -295,7 +290,6 @@ public class Controller extends ScreenController {
 			y = gameBoard.getSizeY();
 			x = gameBoard.getSizeX();
 		}
-		count = gameBoard.getCount();
 		gridLayout = gameBoard.getGridLayout();
     	gameBoard.draw(gameBoardBackground, x, y, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, begin.getScene());
     	//also need to hide the old button

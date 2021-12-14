@@ -23,6 +23,7 @@ import org.GameObjects.objects.*;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
 import org.RuleEngine.engine.GameState;
+import org.RuleEngine.impossible.Game;
 
 public class GameObjectUIController extends ScreenController {
     // Card tab
@@ -106,6 +107,42 @@ public class GameObjectUIController extends ScreenController {
     private TextField gamepieceLocation;
     @FXML
     private TextField gamepieceFilename;
+
+    // Button tab
+    @FXML
+    private TextField buttonName;
+    @FXML
+    private ColorPicker buttonColor;
+    @FXML
+    private TextField buttonText;
+    @FXML
+    private TextField buttonFilename;
+    @FXML
+    private TextField onClick;
+
+    // Tile tab
+    @FXML
+    private TextField tileName;
+    @FXML
+    private ColorPicker tileColor;
+    @FXML
+    private TextField tileFilename;
+    @FXML
+    private TextField tileShape;
+    @FXML
+    private TextField tileOnLand;
+
+    // Player tab
+    @FXML
+    private TextField playerName;
+    @FXML
+    private ColorPicker playerColor;
+    @FXML
+    private TextField playerGamepieces;
+    @FXML
+    private TextField playerInventory;
+    @FXML
+    private ToggleGroup playerIsHuman;
 
     private GameState gameState = BasicApplication.getProject().getIntiGS();
 
@@ -235,6 +272,26 @@ public class GameObjectUIController extends ScreenController {
     }
 
     @FXML
+    private void saveTile(ActionEvent event) {
+        Tile tile = new Tile();
+        String tileNameString = tileName.getCharacters().toString();
+        String textureFilenameString = tileFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tileColor.getValue();
+        String shape = tileShape.getCharacters().toString();
+        String onLand = tileOnLand.getCharacters().toString();
+        boolean labelRes = tile.setTrait("label", tileNameString, false);
+        boolean iconRes = tile.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = tile.setTrait("color", jfxColor, false);
+        boolean shapeRes = tile.setTrait("shape", shape, false);
+        boolean onLandRes = tile.setTrait("onLand", onLand, false);
+        if (!(labelRes && iconRes && colorRes && shapeRes && onLandRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Tile: " + tileNameString);
+        }
+    }
+
+    @FXML
     private void saveTimer(ActionEvent event) {
         GameTimer timer = new GameTimer();
         String timerNameString = timerName.getCharacters().toString();
@@ -250,6 +307,27 @@ public class GameObjectUIController extends ScreenController {
         } else {
             System.out.println("Successfully created new Timer: " + timerNameString);
             gameState.getAllTimers().add(timer);
+        }
+    }
+
+    @FXML
+    private void saveButton(ActionEvent event) {
+        org.GameObjects.objects.Button button = new org.GameObjects.objects.Button();
+        String buttonNameString = buttonName.getCharacters().toString();
+        String textureFilenameString = buttonFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = buttonColor.getValue();
+        String buttonTextString = buttonText.getCharacters().toString();
+        String onClickString = onClick.getCharacters().toString();
+        boolean labelRes = button.setTrait("label", buttonNameString, false);
+        boolean iconRes = button.setTrait("icon", textureFilenameString, false);
+        boolean colorRes = button.setTrait("color", jfxColor, false);
+        boolean textRes = button.setTrait("text", buttonTextString, false);
+        boolean onClickRes = button.setTrait("onClick", onClickString, false);
+        if (!(labelRes && iconRes && colorRes && textRes && onClickRes)) {
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Button: " + buttonNameString);
+            gameState.getAllButtons().add(button);
         }
     }
 
@@ -323,6 +401,44 @@ public class GameObjectUIController extends ScreenController {
         System.out.println(c1.toString());
         System.out.println(c2.toString());
         gameState.getAllDecks().add(deck);
+    }
+
+    @FXML
+    private void savePlayer(ActionEvent event) {
+        String playerNameString = playerName.getCharacters().toString();
+        String textureFilenameString = tokenFilename.getCharacters().toString();
+        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+
+        // TODO: Inventory UI
+        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
+
+        // TODO: Gamepiece UI
+        ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
+        gamepieces.add(new Gamepiece());
+
+        String isHuman = playerIsHuman.getSelectedToggle().toString();
+        boolean human = false;
+        if(isHuman == "yes"){
+            human = true;
+        }
+
+        Player player = new Player();
+        boolean labelRes = player.setTrait("label", playerNameString, false);
+        boolean pieceRes = player.setTrait("GamePieces", gamepieces, true);
+        boolean colorRes = player.setTrait("color", jfxColor.toString(), false);
+        boolean invRes = player.setTrait("inventory", inventory, true);
+        boolean humanRes = player.setTrait("isHuman", human, false);
+        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
+            System.out.println(labelRes);
+            System.out.println(pieceRes);
+            System.out.println(colorRes);
+            System.out.println(invRes);
+            System.out.println(humanRes);
+            System.err.println("Failure!");
+        } else {
+            System.out.println("Successfully created new Player: " + playerNameString);
+            gameState.getAllPlayers().add(player);
+        }
     }
 
     @FXML
