@@ -22,6 +22,7 @@ public class GameBoard extends GameObject {
 	int width = 8;
 	int height = 8;
 	int gridLayout[][];
+	static int count = 0;
 
 	int cellWidth = boardWidth / width;
 	int cellHeight = boardHeight / height;
@@ -109,7 +110,9 @@ public class GameBoard extends GameObject {
 		return cellWidth;
 	}
 	
-	
+	public int getCount() { return count; };
+
+	public void setCount(int count) { this.count = count; }
 	//done
 	public int getCellHeight() {
 		return cellHeight;

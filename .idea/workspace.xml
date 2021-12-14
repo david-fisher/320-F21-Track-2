@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Reload gameboard editor with gameboard and tiles" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Bug fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Rightclickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/Rightclickable.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,13 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Add Card Display when you Click on a Deck and fix errors">
-      <created>1637257392018</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1637257392018</updated>
     </task>
     <task id="LOCAL-00012" summary="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program.">
       <created>1637603058782</created>
@@ -456,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639429653892</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Bug fix">
+      <created>1639451593514</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1639451593514</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +479,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Minute Basic application change to player1" />
     <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
     <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
     <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
@@ -498,7 +503,8 @@
     <MESSAGE value="Fixing Style so all buttons match and Removing Player Turn Indicator to now be displayed in Inventory Label" />
     <MESSAGE value="Small Style Changes" />
     <MESSAGE value="Replace setupData with selectedGame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Replace setupData with selectedGame" />
+    <MESSAGE value="Bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

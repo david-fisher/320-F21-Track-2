@@ -168,7 +168,7 @@ public class Controller extends ScreenController {
 	public void allTiles() {
 		root.getChildren();
 	}
-	int count = 0;
+	int count;
 	@FXML
 	void genCircle(ActionEvent event) {
 		//shapeCanvas.
@@ -205,6 +205,7 @@ public class Controller extends ScreenController {
 					c.setTileXInitial(i);
 					c.setTileYInitial(j);
 					gameState.getAllTiles().add(c);
+					gameBoard.setCount(count++);
 					return;
 				}
 			}
@@ -247,7 +248,7 @@ public class Controller extends ScreenController {
 					r.setTileXInitial(i);
 					r.setTileYInitial(j);
 					gameState.getAllTiles().add(r);
-					count++;
+					gameBoard.setCount(count++);
 					return;
 				}
 			}
@@ -294,6 +295,7 @@ public class Controller extends ScreenController {
 			y = gameBoard.getSizeY();
 			x = gameBoard.getSizeX();
 		}
+		count = gameBoard.getCount();
 		gridLayout = gameBoard.getGridLayout();
     	gameBoard.draw(gameBoardBackground, x, y, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, begin.getScene());
     	//also need to hide the old button
