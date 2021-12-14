@@ -6,23 +6,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 import org.Editors.MainMenu;
 import javafx.fxml.FXML;
@@ -59,6 +47,9 @@ public class RuleEditorUIController implements Initializable {
   @FXML
   private Label errorLabel;
 
+  //Name of the event we're editing
+  private String eventName;
+
   double WIDTH = 400.00;
   double HEIGHT = 475.00;
 
@@ -88,8 +79,12 @@ public class RuleEditorUIController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    // Implement
     errorLabel.setOnMouseClicked((evt) -> errorLabel.setOpacity(0.0));
+  }
+
+  //Sets the name of the event we want to edit. Called from SelectEventController.
+  public void setEventName(String eventName) {
+    this.eventName = eventName;
   }
 
   /**
