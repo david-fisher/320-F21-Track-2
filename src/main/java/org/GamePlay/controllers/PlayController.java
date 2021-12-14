@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.GameEditor.application.GameBoard;
 import org.GameObjects.objects.Button;
 import org.GameObjects.objects.Spinner;
 import org.RuleEngine.nodes.LiteralNode;
@@ -50,6 +51,8 @@ public class PlayController extends ScreenController {
     double playWidth;
     double playHeight;
 
+    double scale;
+
     int numDrawers;
 
     Interpreter interpreter = new Interpreter();
@@ -79,7 +82,7 @@ public class PlayController extends ScreenController {
         if (boardPane == null) {
             boardPane = new AnchorPane();
         }
-        boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
+        //boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
         org.GameEditor.application.GameBoard gameBoard = gameStateInput.getGameBoard();
 
         players = gameStateInput.getAllPlayers();
@@ -88,21 +91,16 @@ public class PlayController extends ScreenController {
 
         currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
 
-        double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
-        double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
-        double scale = scaleHeight >= scaleWidth ? scaleWidth : scaleHeight;
+        calculateScale(gameStateInput);
 
-        double boardWidth = scale * gameBoard.getWidth();
-        double boardHeight = scale * gameBoard.getHeight();
-        //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
-        boardPane.setPrefWidth(boardWidth);
-        boardPane.setPrefHeight(boardHeight);
+        double boardWidth = gameBoard.getWidth() * scale;
+        double boardHeight = gameBoard.getHeight() * scale;
 
         playParent.getChildren().add(boardPane);
 
-        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 140)/2);
-        playParent.setTopAnchor(boardPane, (playHeight - boardHeight - 20)/2);
-        playParent.setBottomAnchor(boardPane, (playHeight - boardHeight - 20)/2);
+        playParent.setLeftAnchor(boardPane, (playWidth - boardWidth - 120)/2);
+        playParent.setTopAnchor(boardPane, (playHeight - boardHeight)/2);
+        playParent.setBottomAnchor(boardPane, (playHeight - boardHeight)/2);
 
         initBoard(gameBoard, boardPane);
         initTiles(gameState.getAllTiles(), boardPane, gameBoard);
@@ -137,6 +135,7 @@ public class PlayController extends ScreenController {
             initButtons(gameStateInput);
         }
 
+        initPlayerTurnIndicator();
         initCards(gameStateInput);
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
@@ -147,26 +146,42 @@ public class PlayController extends ScreenController {
 
     }
 
+    private void calculateScale(GameState gameState) {
+        org.GameEditor.application.GameBoard gameBoard = gameState.getGameBoard();
+        double scaleWidth = (playWidth - 120) / gameBoard.getWidth();
+        double scaleHeight = playHeight / gameBoard.getHeight();
+        scale = (scaleHeight >= scaleWidth ? scaleWidth : scaleHeight) * 0.85;
+
+    }
     private void initBoard(org.GameEditor.application.GameBoard gameBoard, AnchorPane boardPane) {
-        Shape board;
-        double width = boardPane.getPrefWidth();
-        double height = boardPane.getPrefHeight();
+        Rectangle board;
+        double width = gameBoard.getWidth();
+        double height = gameBoard.getHeight();
+
+        double boardWidth = scale * gameBoard.getWidth();
+        double boardHeight = scale * gameBoard.getHeight();
+        //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
 
         board = new Rectangle(width, height);
 
-        boardPane.getChildren().add(board);
+        board.setWidth(boardWidth);
+        board.setHeight(boardHeight);
 
-        boardPane.setLeftAnchor(board, 0.0);
-        boardPane.setTopAnchor(board, 0.0);
-        boardPane.setRightAnchor(board, 0.0);
-        boardPane.setBottomAnchor(board, 0.0);
+        boardPane.getChildren().add(board);
+//
+//        double widthPadding = (playWidth - 120 - width) / 2;
+//        double heightPadding = (playHeight - height) / 2;
+//        boardPane.setLeftAnchor(board, widthPadding);
+//        boardPane.setTopAnchor(board, heightPadding);
+//        boardPane.setRightAnchor(board, 0.0);
+//        boardPane.setBottomAnchor(board, 0.0);
+
 
         // create board anchorPane
         // set anchorPane values
     }
 
     private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, org.GameEditor.application.GameBoard gameBoard) {
-        double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
             double width = t.getWidth() * scale;
@@ -180,8 +195,8 @@ public class PlayController extends ScreenController {
             tile.setUserData(t);
             tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
-            tile.setLayoutX(t.getTileXLocation() * gameBoard.getCellWidth());
-            tile.setLayoutY(t.getTileYLocation() * gameBoard.getCellHeight());
+            tile.setLayoutX(t.getTileXLocation() * scale * gameBoard.getCellWidth());
+            tile.setLayoutY(t.getTileYLocation() * scale * gameBoard.getCellHeight());
             t.setParent(tile);
         });
         // for each tile
@@ -347,6 +362,8 @@ public class PlayController extends ScreenController {
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
         initLabel(inventoryLabel, ""+currPlayer.getLabel()+"'s Inventory" , "inventoryLabel");
+        inventoryLabel.setTextAlignment(TextAlignment.CENTER);
+        inventoryLabel.setWrapText(true);
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 

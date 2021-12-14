@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.GamePlay.GlobalCSSValues;
@@ -143,9 +144,11 @@ public class Popup extends PlayController {
 
         yes = new Label("Yes");
         Style.setStyle(yes, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,100, 35);
+        yes.setTextAlignment(TextAlignment.CENTER);
 
         no = new Label("No");
-        no.setStyle(yes.getStyle());
+        Style.setStyle(no, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 100, 35);
+        no.setTextAlignment(TextAlignment.CENTER);
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
