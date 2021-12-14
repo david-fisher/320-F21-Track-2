@@ -25,6 +25,8 @@ import org.GamePlay.controllers.ScreenController;
 import org.RuleEngine.engine.GameState;
 import org.RuleEngine.impossible.Game;
 
+import javax.swing.*;
+
 public class GameObjectUIController extends ScreenController {
     // Card tab
     @FXML
@@ -407,7 +409,7 @@ public class GameObjectUIController extends ScreenController {
     private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
         String textureFilenameString = tokenFilename.getCharacters().toString();
-        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+        javafx.scene.paint.Color jfxColor = playerColor.getValue();
 
         // TODO: Inventory UI
         ArrayList<GameObject> inventory = new ArrayList<GameObject>();
@@ -416,10 +418,11 @@ public class GameObjectUIController extends ScreenController {
         ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
         gamepieces.add(new Gamepiece());
 
-        String isHuman = playerIsHuman.getSelectedToggle().toString();
+        String isHuman = ((RadioButton)playerIsHuman.getSelectedToggle()).getText();
         boolean human = false;
-        if(isHuman == "yes"){
+        if(isHuman.equals("Yes")){
             human = true;
+            System.out.println(human);
         }
 
         Player player = new Player();
@@ -429,14 +432,11 @@ public class GameObjectUIController extends ScreenController {
         boolean invRes = player.setTrait("inventory", inventory, true);
         boolean humanRes = player.setTrait("isHuman", human, false);
         if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
-            System.out.println(labelRes);
-            System.out.println(pieceRes);
-            System.out.println(colorRes);
-            System.out.println(invRes);
-            System.out.println(humanRes);
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Player: " + playerNameString);
+            System.out.println(player.getColor());
+            System.out.println(player.getColorString());
             gameState.getAllPlayers().add(player);
         }
     }
