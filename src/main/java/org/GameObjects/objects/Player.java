@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player extends GameObject {
+public class    Player extends GameObject {
 
     private ArrayList<Gamepiece> gamePieces;
     private ArrayList<GameObject> inventory;

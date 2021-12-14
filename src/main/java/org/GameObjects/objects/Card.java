@@ -1,5 +1,8 @@
 package org.GameObjects.objects;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Card extends GameObject {
 	
   private static int count = 0;
@@ -24,7 +27,15 @@ public class Card extends GameObject {
    *    enabled :   Boolean
    *    pressed :   Boolean
    */
-  
+
+	public Card clone() {
+		Card x = new Card();
+		for (String s : this.getAllTraits().keySet()) {
+			x.setTrait(s, this.getTrait(s), true);
+		}
+		return x;
+	}
+
 //set trait to value. Overrides checking for default traits only
  public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 	  

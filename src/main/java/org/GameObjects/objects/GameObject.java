@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
+import org.RuleEngine.impossible.Game;
 
 public abstract class GameObject extends Savable {
   
@@ -25,8 +27,7 @@ public abstract class GameObject extends Savable {
 	this.setWidth(0.) ;
 	this.setHeight(0.) ;
   }
-  
-  
+
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String

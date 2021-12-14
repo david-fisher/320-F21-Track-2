@@ -23,7 +23,15 @@ public class Category extends GameObject
     	this.setColorString("#000000") ;
     	this.setWeight(0) ;
     }
-    
+
+    public Category clone() {
+        Category x = new Category();
+        for (String s : this.getAllTraits().keySet()) {
+            x.setTrait(s, this.getTrait(s), true);
+        }
+        return x;
+    }
+
 //    public Category(Color color, Double weight) {
 //    	super() ;  
 //    	this.setLabel("category" + String.format("%02d", ++count));

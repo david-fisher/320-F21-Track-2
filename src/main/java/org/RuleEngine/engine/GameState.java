@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 import org.GameObjects.objects.*;
+import org.RuleEngine.impossible.Game;
 import org.RuleEngine.nodes.*;
 
 public class GameState extends Savable {
@@ -52,7 +53,19 @@ public class GameState extends Savable {
         registers.put("winner", null);
         registers.put("currPlayer", null);
         events.put("heuristic", null);
-	events.put("initialization", null);
+	    events.put("initialization", null);
+    }
+
+    public GameState clone() {
+        GameState state = new GameState();
+        state.projectName = this.projectName;
+        state.minPlayer = this.minPlayer;
+        state.maxPlayer = this.maxPlayer;
+        return null;
+    }
+
+    public GameState cloneEvent(String event) {
+        return null;
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
