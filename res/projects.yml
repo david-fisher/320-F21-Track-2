@@ -48,14 +48,6 @@ projects:
         - 0
         - 0
         - 0
-      - - 1
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
       - - 0
         - 0
         - 0
@@ -76,6 +68,14 @@ projects:
         - 0
         - 0
         - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 1
         - 0
         - 0
         - 0
@@ -228,8 +228,8 @@ projects:
         label: tile04
         connections: *id006
         height: 70.0
-      x: 2
-      y: 0
+      x: 5
+      y: 3
     timers: []
     tokens: []
     tutorialEnabled: false
