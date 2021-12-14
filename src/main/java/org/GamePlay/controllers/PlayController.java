@@ -4,20 +4,20 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import org.GameObjects.objects.Button;
+import org.GameObjects.objects.Spinner;
 import org.RuleEngine.nodes.LiteralNode;
 import org.RuleEngine.nodes.MoveByNode;
 import org.GamePlay.BasicApplication;
@@ -25,8 +25,6 @@ import org.GamePlay.Display;
 import org.GamePlay.GlobalCSSValues;
 import org.RuleEngine.engine.*;
 import org.GameObjects.objects.*;
-import org.GameObjects.objects.Spinner;
-import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 
@@ -34,7 +32,7 @@ public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private static AnchorPane playParent;
-    private static GameState activeGame;
+    private GameState gameState;
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
@@ -45,13 +43,14 @@ public class PlayController extends ScreenController {
     private Pane settingsPane;
     private HBox inventoryContainer;
     private Stage stage;
-    private SetupData setupData;
 
     private ArrayList<Player> players;
     private Player currPlayer;
 
     double playWidth;
     double playHeight;
+
+    int numDrawers;
 
     Interpreter interpreter = new Interpreter();
 
@@ -61,21 +60,12 @@ public class PlayController extends ScreenController {
         this.stage = stage;
         playWidth = stage.getWidth();
         playHeight = stage.getHeight();
-
-        // load relevant data
-//        setupData = BasicApplication.getSetupData();
-//        players = setupData.getPlayers();
-//        if (players.size() == 0) {
-//            players.add(new Player("Player 1", Color.RED, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 2", Color.BLUE, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            players.add(new Player("Player 3", Color.GREEN, new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true));
-//            setupData = new SetupData(players, false);
-//        }
-        activeGame = BasicApplication.getSelectedGame();
+        
+        gameState = BasicApplication.getProject().getIntiGS();
 
         initPlayScreen();
 
-        initGame(activeGame);
+        initGame(gameState);
 
         Scene newScene = new Scene(playParent);
         stage.setScene(newScene);
@@ -90,19 +80,13 @@ public class PlayController extends ScreenController {
             boardPane = new AnchorPane();
         }
         boardPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
-        GameBoard gameBoard = gameStateInput.getGameBoard();
-        if (gameBoard.getBoardID().equals("All Drawers")) {
-            players = activeGame.getAllPlayers();
-        }
-        currPlayer = players.get(0);
-        gameStateInput.setAllPlayers(players);
+        org.GameEditor.application.GameBoard gameBoard = gameStateInput.getGameBoard();
 
-        initPlayerTurnIndicator();
+        players = gameStateInput.getAllPlayers();
 
-        // TODO: do we do this?
-        if (gameBoard.getBoardID().equals("All Drawers")) {
-            gameStateInput.addRegistry("currPlayer", currPlayer);
-        }
+        gameStateInput.addRegistry("currPlayer", players.get(0));
+
+        currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
 
         double scaleWidth = (playWidth - 120) > gameBoard.getWidth() ? 1 : (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = (playHeight) > gameBoard.getHeight() ? 1 : playHeight / gameBoard.getHeight();
@@ -121,15 +105,13 @@ public class PlayController extends ScreenController {
         playParent.setBottomAnchor(boardPane, (playHeight - boardHeight - 20)/2);
 
         initBoard(gameBoard, boardPane);
-        initTiles(gameBoard.getTiles(), boardPane, gameBoard);
-        initPlayers(gameStateInput.getAllPlayers());
+        initTiles(gameState.getAllTiles(), boardPane, gameBoard);
+        initPlayers(players);
 
         ArrayList<Deck> decks = gameStateInput.getAllDecks();
         ArrayList<Button> buttons = gameStateInput.getAllButtons();
 
-        //players = gameState.getAllPlayers();
-
-        int numDrawers = 0;
+        numDrawers = 0;
         boolean decksNeeded = decks.size() != 0;
         boolean buttonsNeeded = buttons.size() != 0;
         //TODO
@@ -155,6 +137,7 @@ public class PlayController extends ScreenController {
             initButtons(gameStateInput);
         }
 
+        initCards(gameStateInput);
         //Have some indicator for whether inventory is needed
         if (inventoryNeeded) {
             initInventoryDrawer(numDrawers);
@@ -164,17 +147,13 @@ public class PlayController extends ScreenController {
 
     }
 
-    private void initBoard(GameBoard gameBoard, AnchorPane boardPane) {
+    private void initBoard(org.GameEditor.application.GameBoard gameBoard, AnchorPane boardPane) {
         Shape board;
         double width = boardPane.getPrefWidth();
         double height = boardPane.getPrefHeight();
 
-        if (gameBoard.getShape().equals("Rectangle")) {
-            board = new Rectangle(width, height);
-        } else {
-            board = new Circle(height / 2);
-        }
-        board.setFill(Color.AQUAMARINE);
+        board = new Rectangle(width, height);
+
         boardPane.getChildren().add(board);
 
         boardPane.setLeftAnchor(board, 0.0);
@@ -186,7 +165,7 @@ public class PlayController extends ScreenController {
         // set anchorPane values
     }
 
-    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, GameBoard gameBoard) {
+    private void initTiles(ArrayList<Tile> tiles, AnchorPane boardPane, org.GameEditor.application.GameBoard gameBoard) {
         double scale = boardPane.getPrefWidth() / gameBoard.getWidth();
         tiles.forEach(t -> {
             Shape tile;
@@ -201,8 +180,8 @@ public class PlayController extends ScreenController {
             tile.setUserData(t);
             tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
-            tile.setLayoutX(t.getXPos());
-            tile.setLayoutY(t.getYPos());
+            tile.setLayoutX(t.getTileXLocation() * gameBoard.getCellWidth());
+            tile.setLayoutY(t.getTileYLocation() * gameBoard.getCellHeight());
             t.setParent(tile);
         });
         // for each tile
@@ -212,10 +191,9 @@ public class PlayController extends ScreenController {
     }
 
     private void initPlayers(ArrayList<Player> players) {
-        players.forEach(p -> {
-            initGamePiece(p.getGamePieces()); // todo, get specific game piece by reference
-            //fill inventory
-        });
+        for (int i = 0; i < players.size(); i++) {
+            initGamePiece(players.get(i).getGamePieces(), i);
+        }
 
         // for each player
         // set player info
@@ -232,7 +210,7 @@ public class PlayController extends ScreenController {
             String event = button.getOnClick();
             Label label = new Label(button.getText());
             button.setParent(label);
-            setStyle(label, "18", button.getColorString(), button.getText().length() * 12, button.getHeight());
+            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, button.getHeight());
             button.getParent().setOnMouseClicked(e -> {
                 if (button.getEnabled()) {
                     interpreter.interpretEvent(gameState.events.get(event), gameState);
@@ -246,25 +224,70 @@ public class PlayController extends ScreenController {
         buttonPane.setStyle("-fx-border-color: black");
     }
 
-    private void initGamePiece(ArrayList<Gamepiece> gamePieces) {
-
-        gamePieces.forEach(gamePiece -> {
-            drawPiece(gamePiece);
+    private void initCards(GameState gameState) {
+        ArrayList<Card> cards = gameState.getAllCards();
+        cards.forEach(c -> {
+            String event = c.getOnPlay();
+            Label label = new Label(c.getLabel());
+            c.setParent(label);
+            Style.setStyle(label, "18", c.getColorString(), GlobalCSSValues.text,c.getText().length() * 12, c.getHeight());
+            c.getParent().setOnMouseClicked(e -> {
+                if (!event.equals("")) {
+                    if (c.getEnabled()) {
+                        interpreter.interpretEvent(gameState.events.get(event), gameState);
+                    }
+                }
+            });
         });
-        // for each player
-        // for each piece
-        // get piece
-        // draw piece at its location
-        // set other info..?
+    }
+    private void addToInventory(GameObject object) {
+        Node inventoryObject = object.getParent();
+        currPlayer.getInventory().add(object);
+        inventoryContainer.getChildren().addAll(inventoryObject);
+        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 10, 10));
     }
 
-    private void drawPiece(Gamepiece gamePiece) {
-        Tile parent = activeGame.getAllTiles().get(0);
-        Circle gp = new Circle(40, Color.WHITE);
+    public void fillInventory(ArrayList<GameObject> inventory) {
+        currPlayer = (Player) gameState.getRegistry("currPlayer");
+        initInventoryLabel(numDrawers);
+        if (inventory == null) { return; }
+        inventoryContainer = new HBox();
+        inventoryContainer.setAlignment(Pos.CENTER);
+        inventoryContainer.setSpacing(-10);
+        inventory.forEach(c -> {
+            addToInventory(c);
+        });
+        inventoryPane.setContent(inventoryContainer);
+        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+    }
+
+    private void initGamePiece(ArrayList<Gamepiece> gamePieces, int i) {
+        gamePieces.forEach(gamePiece -> {
+            drawPiece(gamePiece, i);
+        });
+    }
+
+    private void drawPiece(Gamepiece gamePiece, int i) {
+        Tile parent = gamePiece.getLocation();
+        if (parent == null) { return; }
+        int numPlayers = players.size();
+        boolean singlePiece = players.get(0).getGamePieces().size() == 1;
+        double rows = Math.ceil(Math.sqrt(numPlayers));
+        double radius = singlePiece ? (((parent.getWidth() / rows) - (rows + 1)) / 2) : parent.getWidth() / 2 - 2;
+        Circle gp = new Circle(radius, gamePiece.getColor());
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        gamePiece.setLocation(parent);
+        if (singlePiece) {
+            double shift = (2 * (i % rows) + 1) * (radius + 2 * ((i % rows) + 1));
+            gp.setLayoutX(parent.getXPos() + shift);
+            gp.setLayoutY(parent.getYPos() + shift);
+        } else {
+            gp.setRadius(parent.getWidth() / 2 - 4);
+            gp.setLayoutX((parent.getXPos() + parent.getWidth()) / 2 + 2);
+            gp.setLayoutX((parent.getYPos() + parent.getHeight()) / 2 + 2);
+        }
+        Display.getDisplay().updatePiece(gamePiece);
     }
 
     public void initSettings() {
@@ -313,7 +336,6 @@ public class PlayController extends ScreenController {
         decksLabel = new Label();
         initLabel(decksLabel, "Decks", "decksLabel");
         playParent.setTopAnchor(decksLabel, (playHeight / 5) + 175 - 50 * Math.log(Math.pow(10, numDrawers - 1)));
-        //tabsVBox.setMargin(decksLabel, new Insets(2, 0, 10, 0));
     }
 
     private void initButtonLabel(int numDrawers) {
@@ -324,7 +346,7 @@ public class PlayController extends ScreenController {
 
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
-        initLabel(inventoryLabel, "Inventory", "inventoryLabel");
+        initLabel(inventoryLabel, ""+currPlayer.getLabel()+"'s Inventory" , "inventoryLabel");
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
@@ -340,17 +362,13 @@ public class PlayController extends ScreenController {
         label.setAlignment(Pos.CENTER);
 
         label.setPrefWidth(140);
-//        label.setMinWidth(inventoryLabel.getPrefWidth());
-//        label.setMaxWidth(inventoryLabel.getPrefWidth());
 
         label.setPrefHeight(209);
-//        label.setMinHeight(inventoryLabel.getPrefHeight());
-//        label.setMaxHeight(inventoryLabel.getPrefHeight());
 
         label.setOnMouseClicked(e -> {
             slideOut(e);
         });
-        initDarken(label);
+        Style.initDarken(label);
 
         playParent.getChildren().addAll(label);
         playParent.setRightAnchor(label, 0.0);
@@ -435,14 +453,6 @@ public class PlayController extends ScreenController {
 
     public void placeDice(ArrayList<Die> dice, ScrollPane rngPane, HBox container) {
 
-        rngPane.setContent(container);
-        container.setStyle("-fx-background-color: " + GlobalCSSValues.secondary);
-
-        AnchorPane diceView = new AnchorPane();
-        AnchorPane diceDisplay = new AnchorPane();
-        diceDisplay.setPrefSize(180, 180);
-        container.getChildren().add(diceView);
-        container.setMargin(diceView, new Insets(10, 0, 20, 20));
         double rowMax = Math.ceil(Math.sqrt(dice.size()));
         double diceSize = 180 / rowMax;
         double currX = 0.0;
@@ -472,10 +482,6 @@ public class PlayController extends ScreenController {
 //            }
         }
 
-        diceView.setOnMouseClicked(e -> {
-            rollDice(e, dice);
-        });
-//        container.getChildren().add(diceView);
     }
 
     public void placeSpinners(ArrayList<Spinner> spinners, ScrollPane rngPane, HBox container) {
@@ -510,38 +516,7 @@ public class PlayController extends ScreenController {
         move.setOperand(name, 0).setOperand(value, 1);
         ArrayList<org.RuleEngine.nodes.Node> moveNodes = new ArrayList<>();
         moveNodes.add(move);
-        interpreter.interpretEvent(moveNodes, activeGame);
-    }
-
-    private void addToInventory(GameObject object) {
-        double width = object.getWidth() == 0 ? 100 : object.getWidth();
-        double height = object.getHeight() == 0 ? 170 : object.getHeight();
-
-        Rectangle inventoryObject = new Rectangle(width, height);
-        inventoryObject.setUserData(object);
-
-//        if(object.getIcon() != null) {
-//            inventoryObject.setFill(new ImagePattern(new Image(object.getIcon())));
-//        } else {
-//            inventoryObject.setFill(Color.RED);
-//        }
-        inventoryObject.setOnMouseClicked(e -> {
-            //Open this deck if you can // todo
-        });
-        currPlayer.getInventory().add(object);
-        inventoryContainer.getChildren().addAll(inventoryObject);
-        inventoryContainer.setMargin(inventoryObject, new Insets(10, 10, 20, 10));
-    }
-
-    public void fillInventory(ArrayList<GameObject> inventory) {
-        inventoryContainer = new HBox();
-        inventoryContainer.setAlignment(Pos.CENTER);
-        inventoryContainer.setSpacing(-10);
-        inventory.forEach(d -> {
-            addToInventory(d);
-        });
-        inventoryPane.setContent(inventoryContainer);
-        inventoryContainer.setStyle("-fx-border-color: black; -fx-background-color: " + GlobalCSSValues.secondary);
+        interpreter.interpretEvent(moveNodes, gameState);
     }
 
     public void initPlayScreen() {
@@ -552,7 +527,6 @@ public class PlayController extends ScreenController {
         playParent.setPrefWidth(playWidth);
         playParent.setPrefHeight(playHeight);
 
-        //initSettings;
         initSettings();
     }
 
@@ -561,6 +535,21 @@ public class PlayController extends ScreenController {
     }
 
     public void clearPlayParent() { playParent = new AnchorPane();}
+
+    public void clearParents() {
+        gameState.getAllTiles().forEach(t -> {
+            t.setParent(null);
+        });
+        gameState.getAllGamePieces().forEach(gp -> {
+            gp.setParent(null);
+        });
+        gameState.getAllCards().forEach(c -> {
+            c.setParent(null);
+        });
+        gameState.getAllButtons().forEach(b -> {
+            b.setParent(null);
+        });
+    }
 
     public void mainMenuFromPlay(Stage stage) {
         MainController controller = new MainController();
@@ -609,53 +598,8 @@ public class PlayController extends ScreenController {
         popup.displaySettingsPopup();
     }
 
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.BLACK);
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
-    }
-
-    public void outlineYesNo(Label label) {
-        label.setOnMouseEntered(e -> {
-            label.setStyle("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: "+ GlobalCSSValues.accent);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.styleProperty().setValue("-fx-border-radius: 2 2 2 2; " +
-                    "-fx-background-radius: 2 2 2 2; " +
-                    "-fx-background-color: " + GlobalCSSValues.buttonBackground +
-                    "; -fx-text-fill: " + GlobalCSSValues.buttonText +
-                    "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: Black;");
-        });
-    }
-
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
-    public GameState getGameState() { return activeGame; }
 }
 

@@ -14,12 +14,17 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Tile;
 
 public class ShapeAttributeController {
 	
-	Tile importedTile = new Tile();
+	Tile importedTile;
+    Scene scene;
 	
 	Stage stage = new Stage();
 	private FileChooser fileChooser = new FileChooser();
@@ -35,9 +40,13 @@ public class ShapeAttributeController {
     
     @FXML
     private Button backBtn;
+
+    private Shape shape;
     
-    public void getTile(Tile tile) {
+    public void setTile(Tile tile, Scene scene) {
         this.importedTile = tile;
+        this.scene = scene;
+        shape = (Shape) scene.lookup("#" + importedTile.getId());
     }
     
     @FXML
@@ -47,7 +56,8 @@ public class ShapeAttributeController {
     
     @FXML
     void setColor(ActionEvent event) {
-    	importedTile.tileShape.setFill(tileColor.getValue());
+        shape.setFill(tileColor.getValue());
+        importedTile.setColor(tileColor.getValue());
     	importedTile.hasImage = false;
     }
 
@@ -60,7 +70,8 @@ public class ShapeAttributeController {
     		String ext = name.substring(i + 1);
     		if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
     			Image img = new Image(file.toURI().toString());
-    			importedTile.tileShape.setFill(new ImagePattern(img));
+                shape.setFill(new ImagePattern(img));
+    			importedTile.setIcon((new ImagePattern(img)).toString());
     			importedTile.setTileImage(name);
     			importedTile.hasImage = true;
     		}

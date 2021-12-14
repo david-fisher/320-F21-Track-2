@@ -7,9 +7,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.text.Text?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.GameObjectUIController">
-  <tabs>
+   <tabs>
       <Tab text="Card">
          <content>
             <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
@@ -437,7 +439,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
-                                    <TextField fx:id="gamepieceLocation" promptText="Enter Coordinates">
+                                    <TextField fx:id="gamepieceLocation" promptText="Tile name">
                                        <HBox.margin>
                                           <Insets left="15.0" />
                                        </HBox.margin>
@@ -563,5 +565,267 @@
             </AnchorPane>
          </content>
       </Tab>
-  </tabs>
+      <Tab text="Player">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="playerName" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />
+                                    <TextField fx:id="playerInventory" promptText="Game Objects">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="playerColor">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Pieces" />
+                                    <TextField fx:id="playerGamepieces" promptText="Gamepiece">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Human?" />
+                                    <RadioButton mnemonicParsing="false" text="Yes" toggleGroup="$playerIsHuman">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="playerIsHuman" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="No" toggleGroup="$playerIsHuman">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111111" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="playerDoneButton" mnemonicParsing="false" onAction="#savePlayer" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+<!--                     <right>-->
+<!--                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">-->
+<!--                           <children>-->
+<!--                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />-->
+<!--                                    <ListView fx:id="playerInventory" prefHeight="200.0" prefWidth="200.0" />-->
+<!--                                    <Button mnemonicParsing="false" onAction="#deckAddHighlighted" text="+" />-->
+<!--                                 </children>-->
+<!--                              </VBox>-->
+<!--                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gamepieces" />-->
+<!--                                    <ListView fx:id="playerGamepieces" prefHeight="200.0" prefWidth="200.0" />-->
+<!--                                    <Button mnemonicParsing="false" onAction="#deckAddHighlighted" text="+" />-->
+<!--                                 </children>-->
+<!--                              </VBox>-->
+<!--                           </children>-->
+<!--                        </VBox>-->
+<!--                     </right>-->
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Tile">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="tileName" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="tileColor">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <TextField fx:id="tileFilename" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shape" />
+                                    <TextField fx:id="tileShape" promptText="Square">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="On Land" />
+                                    <TextField fx:id="tileOnLand" promptText="String">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111112" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="tileDoneButton" mnemonicParsing="false" onAction="#saveTile" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Button">
+         <content>
+            <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
+               <children>
+                  <BorderPane prefHeight="368.5" prefWidth="339.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <left>
+                        <VBox prefHeight="319.0" prefWidth="257.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="buttonName" promptText="MyName">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                    <TextField fx:id="buttonText" promptText="Text">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+                                    <ColorPicker fx:id="buttonColor">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ColorPicker>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Icon" />
+                                    <TextField fx:id="buttonFilename" promptText="Filename">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Action on Click" />
+                                    <TextField fx:id="onClick" promptText="Action">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button fx:id="dieCancelButton111113" mnemonicParsing="false" onAction="#switchToMainMenu" text="Cancel" />
+                              <Button fx:id="buttonDoneButton" mnemonicParsing="false" onAction="#saveButton" prefWidth="62.0" text="Done" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
 </TabPane>

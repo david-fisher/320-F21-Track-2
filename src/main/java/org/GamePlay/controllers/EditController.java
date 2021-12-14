@@ -1,6 +1,7 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,12 +90,14 @@ public class EditController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
+        Style.setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
 
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
 
         backButton.setOnMouseClicked(event -> {
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
             MainController controller = new MainController();
             controller.initialize(BasicApplication.restartStage(new Stage()));
         });
@@ -103,7 +106,7 @@ public class EditController extends ScreenController {
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
         selectGameButton = new Label("Select a Game");
-        setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
+        Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
 
@@ -140,7 +143,7 @@ public class EditController extends ScreenController {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Edit Game");
-                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
@@ -218,32 +221,6 @@ public class EditController extends ScreenController {
 
     public void setSelectedGame(VBox vbox) {
         BasicApplication.setProject((Project)vbox.getUserData());
-    }
-
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.valueOf(textColor));
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
     }
 
     private String invertColor(String myColorString) {

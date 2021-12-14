@@ -4,6 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
+import org.GameObjects.objects.Tile;
 
 public class Draggable {
 	private double orgSceneX;

@@ -13,11 +13,12 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Savable;
+import org.GameObjects.objects.Tile;
+import org.GamePlay.BasicApplication;
 
 public class Rightclickable {
 	
@@ -40,6 +41,7 @@ public class Rightclickable {
 				int gameBoardY = shapeCenterY / squareHeight;
 	        	//update the gridLayout
 	        	gridLayout[gameBoardX][gameBoardY] = 0;
+				BasicApplication.getProject().getIntiGS().getAllTiles().remove(tile);
 	            gameBoardBackground.getChildren().remove(shape);
 	        }
 	    });
@@ -48,8 +50,6 @@ public class Rightclickable {
 			@FXML
 			public void handle(ActionEvent event)
 			{
-				
-				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("ShapeEditor.fxml"));
 				try {
@@ -62,9 +62,8 @@ public class Rightclickable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 				ShapeAttributeController attributeController = loader.getController();
-                attributeController.getTile(tile);
+                attributeController.setTile(tile, gameBoardBackground.getScene());
 			}
 		});
 		

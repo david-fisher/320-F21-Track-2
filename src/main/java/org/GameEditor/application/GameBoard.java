@@ -3,48 +3,53 @@ package org.GameEditor.application;
 
 import java.util.ArrayList;
 
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import org.GameObjects.objects.GameObject;
+import org.GameObjects.objects.Tile;
 
-public class GameBoard {
+public class GameBoard extends GameObject {
 
 	//Rectangle[][] board;
 	int boardWidth = 634;
 	int boardHeight = 560;
 	int width = 8;
 	int height = 8;
+	int gridLayout[][];
+
 	int cellWidth = boardWidth / width;
 	int cellHeight = boardHeight / height;
-
-	TextField nameTf;
-	TextField colorTf;
-	TextField imgTf;
 	
 	public GameBoard() {
 		//board = new Rectangle[width][height];
-	}
-
-	public void sendNameColorImg(TextField nameTf, TextField colorTf, TextField imgTf) {
-		this.nameTf = nameTf;
-		this.colorTf = colorTf;
-		this.imgTf = imgTf;
+		setHeight((double) boardHeight);
+		setWidth((double) boardWidth);
 	}
 	
-	public void draw(GameBoard gameBoard, Pane gameBoardBackground, int w, int h, int[][] gridLayout, ArrayList<Tile> existingTiles) {
+	public void resize(Rectangle[][] rectangle) {
+		
+	}
+	
+	public void draw(Pane gameBoardBackground, int w, int h, int[][] gridLayout, ArrayList<Tile> existingTiles,
+					 TextField nameTf, TextField imageTf, TextField colorTf, Scene scene) {
 		gameBoardBackground.getChildren().clear();
 		width = w;
 		height = h;
 		cellWidth = boardWidth/width;
 		cellHeight = boardHeight/height;
-		
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
             	int x = i * cellWidth;
             	int y = j * cellHeight;
                 Rectangle r = new Rectangle(x, y, cellWidth, cellHeight);
+                
+                //board[i / cellWidth][j / cellHeight] = r;
                 
                 r.setFill(Color.WHITE);
                 r.setStroke(Color.BLACK);
@@ -55,34 +60,30 @@ public class GameBoard {
         //this is to redraw the tiles themselves
         for (int i = 0; i < existingTiles.size(); i++) {
         	Tile t = existingTiles.get(i);
-			Draggable drag = new Draggable();
-			Leftclickable left = new Leftclickable();
-			Rightclickable right = new Rightclickable();
-
-			//create new rectangle with the new size
-			//copy all values of the old rectangle/circle (maybe .getFill) and copy over to new rectangle
-			//establish
-			//establish if it's a rectangle or circle
-			Rectangle rec = new Rectangle(cellWidth,cellHeight);
-			rec.setFill(t.tileShape.getFill());
-			t.tileShape = rec;
-			left.makeLeftclickable(t, nameTf, colorTf, imgTf);
-			right.makeRightClickable(t, t.tileShape, gameBoardBackground, gridLayout, gameBoard);
-			drag.makeDraggable(t.tileShape, gameBoard, gameBoardBackground, gridLayout, t);
-
-
+			Shape tileShape;
+			if (t.getShape().equals("Rectangle")) {
+				tileShape = new Rectangle(t.getWidth(), t.getHeight(), t.getColor());
+			} else {
+				tileShape = new Circle(t.getWidth(), t.getColor());
+			}
+			tileShape.setId(Long.toString(t.getId()));
+        	tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
-        	//this is so it reevaluates the offset from the origin
+        	//need to change the original tile location of each t
         	t.setTileXInitial(t.getTileXLocation());
         	t.setTileYInitial(t.getTileYLocation());
         	
         	
-        	if (t.getTileXLocation() < width && t.getTileYLocation() < height) {
-        		gameBoardBackground.getChildren().add(t.tileShape);
-        		t.tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
-				t.tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
-				gridLayout[t.getTileXLocation()][t.getTileYLocation()] = 1;
+        	if (t.getTileXLocation() < width || t.getTileYLocation() < height) {
+        		gameBoardBackground.getChildren().add(tileShape);
+
+				//Make new tiles clickable because they won't be regenerated
+				(new Draggable()).makeDraggable(tileShape, this, gameBoardBackground, gridLayout, t);
+				(new Rightclickable()).makeRightClickable(t, tileShape, gameBoardBackground, gridLayout, this);
+				(new Leftclickable()).makeLeftclickable(t, tileShape.getId(), nameTf, imageTf, colorTf, scene);
+        		tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
+				tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
         	}
         	else {
         		//remove the tile from the arrayList
@@ -107,22 +108,13 @@ public class GameBoard {
 	public int getCellWidth() {
 		return cellWidth;
 	}
-	
-	
 	//done
 	public int getCellHeight() {
 		return cellHeight;
 	}
 	
-	public int getBoardWidth() {
-		return boardWidth;
-	}
-	
-	public int getBoardHeight() {
-		return boardHeight;
-	}
-	
-	
+	public int[][] getGridLayout() { return gridLayout; }
+	public void setGridLayout(int [][] grid) { this.gridLayout = grid; }
 	//done
 	public void setSizeX(int w) {
 		width = w;

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import org.GameObjects.objects.*;
@@ -32,7 +33,7 @@ public class Display extends PlayController {
 
     private AnchorPane playParent = super.getPlayParent();
     private AnchorPane boardPane = super.getBoardPane();
-    private GameState gameState = super.getGameState();
+    private GameState gameState = BasicApplication.getProject().getIntiGS();
 
     private Display() {}
 
@@ -62,6 +63,9 @@ public class Display extends PlayController {
                 borderGlow.setColor(Color.YELLOW);
                 parent.setEffect(borderGlow);
                 parent.toFront();
+                tile.getGamepieces().forEach(gp -> {
+                    gp.getParent().toFront();
+                });
                 parent.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         };
@@ -100,8 +104,8 @@ public class Display extends PlayController {
     public void updatePiece(Gamepiece gp) {
         Shape parent = (Shape) gp.getParent();
         Tile location = gp.getLocation();
-        parent.setLayoutX(location.getXPos() + location.getWidth() / 2);
-        parent.setLayoutY(location.getYPos() + location.getHeight() / 2);
+        parent.setLayoutX(location.getXPos() + parent.getLayoutX());
+        parent.setLayoutY(location.getYPos() + parent.getLayoutY());
         parent.toFront();
     }
 
