@@ -49,7 +49,9 @@ public class Tile extends GameObject
     public Tile clone() {
         Tile x = new Tile();
         for (String s : this.getAllTraits().keySet()) {
-            x.setTrait(s, this.getTrait(s), true);
+            if (!s.equals("connections") && !s.equals("pieces")) {
+                x.setTrait(s, this.getTrait(s), true);
+            }
         }
         return x;
     }

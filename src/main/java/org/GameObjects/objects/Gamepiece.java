@@ -23,6 +23,15 @@ public class Gamepiece extends GameObject{
 	 * 	location:	Tile
 	 */
 
+	public Gamepiece clone() {
+		Gamepiece x = new Gamepiece();
+		for (String s : this.getAllTraits().keySet()) {
+			if (!s.equals("location")) {
+				x.setTrait(s, this.getTrait(s), true);
+			}
+		}
+		return x;
+	}
 
 	// set trait to value. Overrides checking for default traits only
 	public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {

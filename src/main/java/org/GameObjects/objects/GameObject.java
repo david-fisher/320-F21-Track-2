@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.Node;
 import org.RuleEngine.impossible.Game;
 
-public abstract class GameObject extends Savable {
+public class GameObject extends Savable {
   
   protected HashMap<String, Object> traits;
   protected HashMap<String, Object> prevTraits;
@@ -28,6 +28,13 @@ public abstract class GameObject extends Savable {
 	this.setHeight(0.) ;
   }
 
+  public GameObject clone() {
+      GameObject x = new GameObject();
+      for (String s : this.getAllTraits().keySet()) {
+          x.setTrait(s, this.getTrait(s), true);
+      }
+      return x;
+    }
   /* Trait Types:
    * 	label 	: 	String
    * 	icon 	: 	String
