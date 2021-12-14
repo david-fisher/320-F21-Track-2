@@ -3,19 +3,14 @@ import java.util.ArrayList;
 import org.RuleEngine.engine.*;
 
 public class DepthOracle implements Oracle {
-    public DepthOracle(GameState g) {
-
+    public DepthOracle() {
     }
 
-    public DepthOracle(Oracle o) {
-
+    public void processMove(String event, GameState currState) {
+        currState.getAllEvents().get(event).get(0).execute(currState);
     }
 
-    public GameState processMove(String a) {
-        return null;
-    }
-
-    public String decideMove() {
+    public String decideMove(GameState currState) {
         return null;
     }
 }

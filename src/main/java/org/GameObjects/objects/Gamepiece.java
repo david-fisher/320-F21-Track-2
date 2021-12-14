@@ -75,7 +75,7 @@ public class Gamepiece extends GameObject{
 		if (this.setTrait("location", tile)) {
 			if (!tile.hasGamepiece(this)) {
 				Display.getDisplay().updatePiece(this);
-                Interpreter.getInstance().interpretEvent(currState.getEvent("onLand"), currState);
+                Interpreter.getInstance().interpretEvent(currState.getAllEvents().get("onLand"), currState);
 				return tile.addGamepiece(this);
 			}
 			return true ;
