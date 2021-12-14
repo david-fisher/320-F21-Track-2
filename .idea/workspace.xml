@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Fix size of Editor main menu from Edit Game">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/Start.java" afterDir="false" />
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Savable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/EditController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +82,7 @@
       <recent name="org.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Start (1)">
+  <component name="RunManager" selected="Application.BasicApplication">
     <configuration name="BasicApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.GamePlay.BasicApplication" />
       <module name="SceneBuilder" />
@@ -122,6 +123,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.BasicApplication" />
+      <item itemvalue="Application.Start" />
+      <item itemvalue="Application.Start (1)" />
+      <item itemvalue="Application.MainMenu" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Start (1)" />

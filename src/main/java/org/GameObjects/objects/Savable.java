@@ -96,7 +96,7 @@ public abstract class Savable {
 	}
 
 	public static boolean closeDB() {
-		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
+		dump(projects, new File(getGlobalFile().getPath() + File.separator + "projects.yml"));
 		return true;
 	}
 
