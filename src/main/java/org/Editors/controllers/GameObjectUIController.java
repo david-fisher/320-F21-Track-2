@@ -87,30 +87,28 @@ public class GameObjectUIController {
         }
     }
 
-    @FXML private void saveCard(ActionEvent event) {
+    @FXML private void saveCard(ActionEvent e) {
         Card card = new Card();
         String cardNameString = cardName.getCharacters().toString();
         Color jfxColor = cardColor.getValue();
+
         boolean labelRes = card.setLabel(cardNameString);
         boolean iconRes = card.setIcon(cardTextureFilename);
         boolean colorRes = card.setColor(jfxColor);
         if (!(labelRes && iconRes && colorRes)) {
             System.err.println("Failure!");
-            System.err.println(labelRes);
-            System.err.println(iconRes);
-            System.err.println(colorRes);
         } else {
-            System.out.println("Successfully created new card: " + card.toString());
-            deckCards.add(card);
+            System.out.println("Successfully created new card: " + card.repr(true));
         }
+
     }
 
-    @FXML private void saveDie(ActionEvent event) {
+    @FXML private void saveDie(ActionEvent e) {
         Die die = new Die();
         String dieNameString = dieName.getCharacters().toString();
-        Integer numSides = Integer.valueOf(dieNumSides.getCharacters().toString());
-        Color dieSideColor = dieColor.getValue();
         Color pipColor = diePipColor.getValue();
+        Color dieSideColor = dieColor.getValue();
+        int numSides = Integer.decode(dieNumSides.getCharacters().toString()).intValue();
         boolean labelRes = die.setLabel(dieNameString);
         boolean pipRes = die.setDotColor(pipColor);
         boolean colorRes = die.setColor(dieSideColor);
@@ -119,7 +117,7 @@ public class GameObjectUIController {
         if (!(labelRes && numRes && colorRes && pipRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new die: " + dieNameString);
+            System.out.println("Successfully created new die: " + die.repr(true));
         }
     }
 
@@ -135,7 +133,7 @@ public class GameObjectUIController {
         if (!(nameRes && weightRes && colorRes && fileRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new category: " + categoryNameString);
+            System.out.println("Successfully created new category: " + category.repr(true));
             spinnerCategories.add(category);
         }
     }
@@ -156,7 +154,7 @@ public class GameObjectUIController {
         if (!(labelRes && iconRes && colorRes && locRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new Gamepiece: " + pieceNameString);
+            System.out.println("Successfully created new Gamepiece: " + piece.repr(true));
         }
     }
 
@@ -172,7 +170,7 @@ public class GameObjectUIController {
         if (!(labelRes && iconRes && colorRes && valRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new Token: " + tokenNameString);
+            System.out.println("Successfully created new Token: " + token.repr(true));
         }
     }
 
@@ -188,7 +186,7 @@ public class GameObjectUIController {
         if (!(labelRes && iconRes && colorRes && valRes)) {
             System.err.println("Failure!");
         } else {
-            System.out.println("Successfully created new Timer: " + timerNameString);
+            System.out.println("Successfully created new Timer: " + timer.repr(true));
         }
     }
 
@@ -318,6 +316,11 @@ public class GameObjectUIController {
         spinner.setNumCategories(elements.size());
         boolean labelRes = spinner.setLabel(spinnerName.getCharacters().toString());
         boolean colorRes = spinner.setColor(spinnerColor.getValue());
+        if (labelRes && colorRes) {
+            System.out.println("Successfully created new spinner: " + spinner.repr(true));
+        } else {
+            System.err.println("Failure!");
+        }
     }
 
     @FXML private void getCardFile(ActionEvent e) {
