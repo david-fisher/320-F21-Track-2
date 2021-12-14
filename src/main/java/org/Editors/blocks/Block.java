@@ -8,7 +8,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
-
+import javafx.scene.shape.Line;
 import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -64,9 +64,11 @@ public class Block {
   protected Rectangle result;
   protected GridPane grid;
   protected Boolean isConnected = false;
+  protected AnchorPane editorPane;
 
   //List of lists of connection blocks
   protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
+  protected ArrayList<Line> links = new ArrayList<>();
 
   //Add event handlers for left and right click - left click & hold = drag, right click = delete
   protected void makeDraggableAndDeletable() {
@@ -101,6 +103,7 @@ public class Block {
         this.block.setVisible(false);
         this.block = null;
         this.grid = null;
+        deleteAllLinks();
       }
     });
     this.block.setOnMouseDragged(e -> {
@@ -220,5 +223,19 @@ public class Block {
 
   public void setBlockAnchor(){
     isConnected = true;
+  }
+
+  public void addLink(Line link){
+    links.add(link);
+  }
+
+  private void deleteAllLinks(){
+      for(Line l: links){
+        this.editorPane.getChildren().remove(l);
+      }
+      links.clear();
+  }
+  public void setEditorPane(AnchorPane editorPane){
+    this.editorPane = editorPane;
   }
 }

@@ -23,11 +23,21 @@ public class SelectEventController implements Initializable {
   private ListView<String> eventsList;
   @FXML
   private Label errorLabel;
+
+  //Holds user-provided name for an event if they create one
+  private String eventName;
   
-  private void changeScene(String fxmlFilename) {
-    URL location = getClass().getResource(fxmlFilename);
+  private void changeScene(String fxmlFilename, boolean creatingEvent) {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource(fxmlFilename));
     try {
-        Parent root = (Parent)FXMLLoader.load(location);
+        Parent root = (Parent)loader.load();
+        //If we're changing an event, get the RuleEditorUIController and use the setEventName method to set the eventName
+        //in the RuleEditorUIController to the user-provided event name
+        if (creatingEvent) {
+          RuleEditorUIController controller = loader.getController();
+          controller.setEventName(this.eventName);
+        }
         MainMenu.stage.getScene().setRoot(root);
         MainMenu.stage.show();
     } catch (IOException e){ 
@@ -38,7 +48,7 @@ public class SelectEventController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ObservableList<String> list = FXCollections.observableArrayList();
-    list.add("event");
+    list.addAll("event1", "event2");
     eventsList.setItems(list);
   }
 
@@ -50,13 +60,33 @@ public class SelectEventController implements Initializable {
       errorLabel.setVisible(true);
     }
     else {
-      changeScene("../../../resources/RuleEditor.fxml");
+      this.eventName = item;
+      changeScene("../../../resources/RuleEditor.fxml", true);
     }
   }
   
   //Handles Back button
   @FXML private void changeToMainMenu(ActionEvent event) {
-    changeScene("../../../resources/MainMenuScreen.fxml");
+    changeScene("../../../resources/MainMenuScreen.fxml", false);
+  }
+
+  //Helper for createNewEvent
+  //Checks whether or not the user-provided event name is valid
+  private boolean verifyCreateEvent(Optional<String> result) {
+    //Return false if the user did not provide a name for the event
+    if (result.get().equals("")) {
+      errorLabel.setText("Event name must be non-empty");
+      errorLabel.setVisible(true);
+      return false;
+    }
+    ObservableList<String> list = eventsList.getItems();
+    //If the user-provided event name matches an existing event name return false
+    if (list.filtered(str -> str.equalsIgnoreCase(result.get())).size() != 0) {
+      errorLabel.setText("Event name must be unique");
+      errorLabel.setVisible(true);
+      return false;
+    }
+    return true;
   }
 
   //Handles "Create new event" button
@@ -69,12 +99,9 @@ public class SelectEventController implements Initializable {
     Optional<String> result = dialog.showAndWait();
     //If cancel was not pressed
     if (result.isPresent()) {
-      if (result.get().equals("")) {
-        errorLabel.setText("Event name must be non-empty");
-        errorLabel.setVisible(true);
-      }
-      else {
-        changeScene("../../../resources/RuleEditor.fxml");
+      if (verifyCreateEvent(result)) {
+        this.eventName = result.get();
+        changeScene("../../../resources/RuleEditor.fxml", true);
       }
     }
   }
