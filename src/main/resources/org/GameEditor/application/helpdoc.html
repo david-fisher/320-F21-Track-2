@@ -1,0 +1,97 @@
+<html>
+
+<head>
+     <title>Help Document</title>
+</head>
+
+<body style="margin-top: 20px; margin-right: 60px; margin-left: 60px">
+
+     <h1> Game Board Editor Help Document </h1>
+
+     <h2> Welcome Screen </h2>
+
+     <hr>
+
+     <p>This is the landing page for the game board editor. From here, you can choose from three options:</p>
+
+     <ul>
+          <li> "Back" - Go back to the previous menu. </li>
+          <li> "Template" - Choose a pre-configured template or edit a previously saved game board. </li>
+          <li> "New" - Takes the user to the game board editor to start editing on a new blank game board </li>
+     </ul>
+
+     <p>Choosing from any of these options will bring you to another menu.</p>
+
+     <h2> Template Menu </h2>
+
+     <hr>
+
+     <p>This is the menu for selecting a pre-configured or previously edited game board. These templates are stored on the machine and can be accessed from this menu to continue editing from them.<p>
+
+     <p>The 'template' section of this menu holds some pre-configured game board for well-known board games such as checkers or monopoly. Thus, one can select one of these templates and be taken to the board game editor with these games already configured, in order to make their own edits to the game boards.</p>
+
+     <p>The 'custom' section of this menu holds previously created game boards that have been stored on the local machine. One can select from these previously created boards and be brought to the game board editor with their saved game board already configured, in order to continue making edits to the game board.</p>
+
+     <p>There also exists a 'back' button on this menu. The user may select this in order to be brought back to the previous menu, the welcome screen.</p>
+
+     <h2> Game Board Editor </h2>
+
+     <hr>
+
+     <p>This is the game board editor, which can either be already configured if the user navigated to it from the template menu, or it will be empty of any configuration if the user navigated to it by pressing 'New' on the welcome screen.</p>
+
+     <p>There are a number of different components to the game board editor that assist the user in creating their own game board.</p>
+
+     <h3> Canvas </h3>
+
+     <p>The canvas is the large square that resides on the left of the screen, and it is where the user can drag game tiles in order to create their desired game board. Tiles may be dragged on to the canvas in order to add them to the board, or dragged off the canvas in order to remove them from the board. Tiles on the canvas may be selected in order to edit their attributes, which is explained in the 'tile attributes' section.</p>
+
+     <h3> Add Game Tile </h3>
+
+     <p>This component of the game board editor resides on the middle-right of the screen. It allows the user to click on a game tile, either a square, circle, or triangle, and drag it to the canvas to place on the board. Any number of tiles may be added from the 'add game tile' component and dropped onto the board in order to lock it into place.</p>
+
+     <h3> Tile Attributes </h3>
+
+     <p>This component of the game board editor resides on the bottom-right of the screen. It allows the user to edit the attributes of a selected game tile. These attributes include:</p>
+
+     <ul>
+          <li>'Name' - the name that can be attributed to the selected tile which will assist in the object and rule editors, which will be explained later in their respective sections.</li>
+          <li>'Color' - the color of the selected tile, the default being red. This may help the user accomplish a desired aesthetic for their game board, or just to differentiate between different tiles.</li>
+          <li>'Image' - the image that may take the place of the selected tile. This allows the user to create tiles other than the default square, circle, or triangle shapes, which may further help the user accomplish a desired aesthetic for their game board or differentiate between different tiles.</li>
+     </ul>
+
+     <h3> Save </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'save' button is to store the current state of the game board on the local machine. This allows the user to exit the game board editor and not lose the edits they have made to their game board. The user will be prompted to give their saved game board a name, which will then allow the user to select this stored game board from the template menu to continue edits later as was explained in the 'template menu' section.</p>
+
+     <h3> Exit </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'exit' button is to exit from the game board editor and bring the user back to the previous menu - the welcome screen. Be careful with the 'exit' button however, as if one does not save their game board with the 'save' button, then they will lose the edits they made to their game board forever.</p>
+
+     <h3> Undo </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'undo' button is to undo the previous game tile drag. This may include dragging a tile from the 'add game tile' component to the canvas, dragging a game tile off the canvas - and thus deleting the tile, or dragging a game tile from one spot on the canvas to a different spot on the canvas. The user may do as many 'undo's as necessary, so do not worry about running out of 'undo's. Keep in mind however that if no tiles have been moved, added, or deleted (effectively a blank game board), then the user will be unable to undo, as there is nothing to undo.</p>
+
+     <h3> Redo </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'redo' button is to redo a previous press of the 'undo' button. The user may 'redo' as many times as they have done 'undo's. Keep in mind however that if nothing has been undone, there is nothing to redo, and thus the user will be unable to redo.</p>
+
+     <h3> Test </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'test' button is to test out the current configuration of the game board. When the test button is pressed, the user will be shown a new screen where they are able to play the game board as it is currently configured. This is useful for testing a prototype of their game board in order to see if it is behaving in the way that they intend, and if not they can return to the game board editor to make the proper changes.</p>
+
+     <h3> Help </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'help' button has hopefully become obvious, as you are currently reading the result of pressing it. The user is shown the help document - the one you are reading right now - which explains the purpose of the various menus and components that form the game board editor.</p>
+
+     <h3> Object Editor </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'object editor' button is to take the user to a new menu where they can create and edit the various objects that may be present in their board game, including cards, die rolling, or some other special edits to their board game not included in the board game editor. Further help for the object editor can be found in that menu. </p>
+
+     <h3> Rule Editor </h3>
+
+     <p>This component of the game board editor resides in the top-right of the screen, amongst some other components. The purpose of the 'rule editor' button is to take the user to a new menu where they can create and edit the various rules that they may wish to implement in their board game. Further help for the rule editor can be found in that menu.</p>
+
+</body>
+
+</html>

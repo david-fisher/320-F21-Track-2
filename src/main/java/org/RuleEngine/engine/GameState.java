@@ -9,7 +9,7 @@ public class GameState extends Savable {
 
     public String projectName;
     
-    public GameBoard board;
+    public org.GameEditor.application.GameBoard board;
     public ArrayList<Button> buttons;
     public ArrayList<Card> cards;
     public ArrayList<Deck> decks;
@@ -25,11 +25,15 @@ public class GameState extends Savable {
     public ArrayList<GameObject> gameObjects;
 
     public boolean tutorialEnabled;
+    public int minPlayer, maxPlayer;
+    
     public HashMap<String, GameObject> registers;
     public HashMap<String, ArrayList<Node>> events = new HashMap<String, ArrayList<Node>>();
     
     public GameState() {
         projectName = "New Project";
+        minPlayer = 1;
+        maxPlayer = 4;
         
         gameObjects = new ArrayList<GameObject>();
         buttons = new ArrayList<Button>();
@@ -48,6 +52,7 @@ public class GameState extends Savable {
         registers.put("winner", null);
         registers.put("currPlayer", null);
         events.put("heuristic", null);
+	    events.put("initialization", null);
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }
@@ -120,8 +125,14 @@ public class GameState extends Savable {
     public String getProjectName() { return projectName; }
     public void setProjectName(String name) { projectName = name; }
     
-    public GameBoard getGameBoard() { return board; }
-    public void setGameBoard(GameBoard board) { this.board = board; }
+    public int getMaxPlayer() { return maxPlayer; }
+    public void setMaxPlayer(int num) { maxPlayer = num >= minPlayer ? num : minPlayer; }
+    
+    public int getMinPlayer() { return minPlayer; }
+    public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
+    
+    public org.GameEditor.application.GameBoard getGameBoard() { return board; }
+    public void setGameBoard(org.GameEditor.application.GameBoard board) { this.board = board; }
 
     public ArrayList<Button> getAllButtons() { return buttons; }
     public void setAllButtons(ArrayList<Button> buttons) { this.buttons = buttons; }
@@ -158,4 +169,7 @@ public class GameState extends Savable {
 
     public HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
     public void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
+
+    public boolean getTutorialEnabled() { return tutorialEnabled; }
+    public void setTutorialEnabled(boolean tutorialEnabled) { this.tutorialEnabled = tutorialEnabled; }
 }

@@ -14,32 +14,32 @@ public class MoveToNode extends OpNode {
     @Override
     @SuppressWarnings("rawtypes")
     public LiteralNode execute(GameState currState) {
-        LiteralNode e1 = getOperand(0).execute(currState);
-        LiteralNode e2 = getOperand(1).execute(currState);
+        LiteralNode op0 = getOperand(0).execute(currState);
+        LiteralNode op1 = getOperand(1).execute(currState);
 
-        if (e1 == null || e2 == null) {
-            System.out.println("Error: Something went wrong processing MoveTo operation");
+        if (op0 == null) {
+            NodeUtil.OperandError(this, 0);
+            return null;
+        }
+        if (op1 == null) {
+            NodeUtil.OperandError(this, 1);
             return null;
         }
     
-        if (!(e1.getValue() instanceof String) || !(e2.getValue() instanceof String)) {
-            System.out.println("Error: MoveTo operation takes two strings as input!");
+        GameObject piece = NodeUtil.processNodeToObj(op0, currState);
+        GameObject tile = NodeUtil.processNodeToObj(op1, currState);
+        
+        if (piece == null || !(piece instanceof Gamepiece)) {
+            NodeUtil.InputTypeError(this, 0, "Valid Gamepiece");
+            return null;
+        }
+        if (tile == null || !(tile instanceof Tile)) {
+            NodeUtil.InputTypeError(this, 1, "Valid Tile");
             return null;
         }
         
-        String pieceName = (String)e1.getValue();
-        String tileName = (String)e2.getValue();
-        GameObject piece = (pieceName.charAt(0) == '_') ? currState.findObject(pieceName.substring(1)) : currState.getRegistry(pieceName);
-        GameObject tile = (tileName.charAt(0) == '_') ? currState.findObject(tileName.substring(1)) : currState.getRegistry(tileName);
-        if (piece == null || !(piece instanceof Gamepiece)) {
-            System.out.println("Error: Cannot find GAMEPIECE of label " + pieceName);
-        }
-        if (tile == null || !(tile instanceof Tile)) {
-            System.out.println("Error: Cannot find TILE of label " + tileName);
-        }
-        
         if (!((Gamepiece)piece).setLocation((Tile)tile)) {
-            System.out.println("Error: Cannot move gamepiece " + pieceName + " to " + tileName);
+            NodeUtil.OtherError("Cannot move gamepiece " + op0.getValue() + " to " + op1.getValue());
         }
         
         return null;

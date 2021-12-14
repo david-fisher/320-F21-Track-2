@@ -5,27 +5,37 @@ public final class NodeMaker {
     public static OpNode makeNode(String type) {
         switch (type) {
             case "AL":
-                return new ALNode("+");
+                return new ALNode();
             case "rset":
                 return new RSetNode();
             case "pset":
                 return new PSetNode();
             case "get":
                 return new GetNode();
+            case "negate":
+                return new NegateNode();
             case "if":
                 return new IfNode();
             case "while":
                 return new WhileNode();
             case "tile":
                 return new TileNode();
-            case "moveBy":
-                return new MoveByNode();
             case "moveTo":
                 return new MoveToNode();
+            case "moveBy":
+                return new MoveByNode();
+            case "player":
+                return new PlayerNode();
             case "nextPlayer":
                 return new NextPlayerNode();
             case "invoke":
                 return new InvokeNode();
+            case "getGamepiece":
+                return new GetGamepieceNode();
+            case "putInInventory":
+                return new PutInInventoryNode();
+            case "getLastUsed":
+                return new GetLastUsedNode();
             case "display":
                 return new DisplayNode();
             case "draw":

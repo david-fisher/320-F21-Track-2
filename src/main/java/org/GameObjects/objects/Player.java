@@ -6,26 +6,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player extends GameObject {
+    private static int count = 0;
 
     private ArrayList<Gamepiece> gamePieces;
     private ArrayList<GameObject> inventory;
 
-    private boolean isHuman;
-
-    public Player(String Label, Color color, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
-        this.setLabel(Label);
-        this.setColor(color);
+    public Player() {
+        gamePieces = new ArrayList<>();
+        inventory = new ArrayList<>();
+        this.setLabel("button" + String.format("%02d", ++count));
+        this.setColorString("#FFFFFF");
         this.setGamePieces(gamePieces);
         this.setInventory(inventory);
-        this.setIsHuman(isHuman);
-    }
-
-    public Player(String Label, ArrayList<Gamepiece> gamePieces, ArrayList<GameObject> inventory, boolean isHuman) {
-        this.setLabel(Label);
-        this.setColor(getRandomColor());
-        this.setGamePieces(gamePieces);
-        this.setInventory(inventory);
-        this.setIsHuman(isHuman);
+        this.setIsHuman(false);
+        this.setLastUsedObj(null);
     }
     
     public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
@@ -37,9 +31,9 @@ public class Player extends GameObject {
 
       // checks for other valid inputs
       else if (suppressTraitChecker || // if true don't check trait type
-              (trait.equals("gamePieces") && value instanceof ArrayList) ||
-              (trait.equals("inventory") && value instanceof ArrayList) ||
-              (trait.equals("isHuman") && value instanceof Boolean)) {
+              (trait.equals("lastUsedObj") && value instanceof GameObject) ||
+              (trait.equals("isHuman") && value instanceof Boolean) ||
+              (trait.equals(""))) {
           prevTraits.put(trait, traits.get(trait)) ;
           traits.put(trait, value);
           return true;
@@ -48,29 +42,56 @@ public class Player extends GameObject {
       // returns false if input is invalid
       return false;
     }
-    
-    public boolean setGamePieces(ArrayList<Gamepiece> gamePieces) { 
-        return this.setTrait("gamePieces", gamePieces);
+
+    public boolean setLastUsedObj(GameObject gameobj){
+        return this.setTrait("lastUsedObj", gameobj);
+    }
+
+    public GameObject getLastUsedObj(){
+        return (GameObject) this.getTrait("lastUsedObj");
     }
     
-    public boolean setInventory(ArrayList<GameObject> inventory) { 
-      return this.setTrait("inventory", inventory);
+    public void setGamePieces(ArrayList<Gamepiece> gamePieces) { 
+        this.gamePieces = gamePieces;
+    }
+    
+    public void setInventory(ArrayList<GameObject> inventory) { 
+        this.inventory = inventory;
+    }
+
+    public void addInventory(GameObject gameobj){
+        this.getInventory().add(gameobj);
+    }
+
+    public void removeInventory(GameObject gameobj){
+        setLastUsedObj(gameobj);
+        this.getInventory().remove(gameobj);
+    }
+
+    public void removeInventory(int index){
+        GameObject gameobj = this.getInventory().get(index);
+        setLastUsedObj(gameobj);
+        this.getInventory().remove(index);
+    }
+
+    public void addInventoryAtIndex(int index, GameObject gameobj){
+        this.getInventory().set(index, gameobj);
     }
     
     public boolean setIsHuman(boolean isHuman) {
       return this.setTrait("isHuman", isHuman);
     }
 
+    public boolean getIsHuman() {
+        return (Boolean) this.traits.get("isHuman");
+    }
+
     public ArrayList<Gamepiece> getGamePieces() { 
-        return (ArrayList<Gamepiece>) this.traits.get("gamePieces");
+        return this.gamePieces;
     }
     
     public ArrayList<GameObject> getInventory() { 
-      return (ArrayList<GameObject>) this.traits.get("inventory");
-    }
-    
-    public boolean getIsHuman() { 
-        return (Boolean) this.traits.get("isHuman");
+      return this.inventory;
     }
 
     public void addPiece(Gamepiece piece) { 
