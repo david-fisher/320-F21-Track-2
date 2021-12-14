@@ -12,7 +12,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button layoutX="349.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeToRuleEditor" prefHeight="40.0" prefWidth="101.0" text="Rule Editor">
+      <Button layoutX="349.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeToSelectEvent" prefHeight="40.0" prefWidth="101.0" text="Rule Editor">
          <font>
             <Font size="14.0" />
          </font>

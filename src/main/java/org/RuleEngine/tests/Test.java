@@ -39,6 +39,26 @@ public class Test {
         OpNode get = NodeMaker.makeNode("get");
         OpNode pset = NodeMaker.makeNode("pset");
         
+        // Test operand related functions.
+        OpNode ifst = NodeMaker.makeNode("if");
+        ifst.addOperandToGroup(null, 1).addOperandToGroup(null, 1).addOperandToGroup(null, 1);
+        System.out.println("Size: " + ifst.getRuleGroup(1).size());
+        ifst.setOperandInGroup(get, 1, 1);
+        System.out.println("Node is: " + ifst.getOperandInGroup(1, 1));
+        ifst.removeOperand(get);
+        System.out.println("Size: " + ifst.getRuleGroup(1).size());
+        System.out.println("Node is: " + ifst.getOperandInGroup(1, 1));
+        
+        // Test player complex trait casting
+        ArrayList arr = new ArrayList<Card>();
+        Object obj = arr;
+        ArrayList<Card> cards = (ArrayList<Card>)obj;
+        cards.add(new Card());
+        System.out.println(cards.size());
+        
+        Node mysteryNode = NodeMaker.makeIntegerNode(1);
+        System.out.println("Name is: " + mysteryNode.getClass().getSimpleName());
+        
         LiteralNode p1Name = new LiteralNode<String>("currPlayer");
         LiteralNode TraitName = new LiteralNode<String>("money");
         LiteralNode p2Name = new LiteralNode<String>("_gamepiece02");

@@ -45,6 +45,7 @@ public class GameState extends Savable {
 
         tutorialEnabled = false;
         registers = new HashMap<String, GameObject>();
+        registers.put("winner", null);
         registers.put("currPlayer", null);
         events.put("heuristic", null);
     }
@@ -96,15 +97,17 @@ public class GameState extends Savable {
         for(Token go : tokens) {
             if (go.getTrait("label").equals(label)) { return go; }
         }
+        for(Player go : players) {
+            if (go.getTrait("label").equals(label)) { return go; }
+        }
         return null;
     }
 
-    public String toString() {
+    public String repr() {
         String repr = "";
         TreeSet<String> sortedKeys = new TreeSet<String>(this.registers.keySet());
         for (String key: sortedKeys){
-        	
-            // repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
+            repr = repr + key + '=' + this.registers.get(key).repr(false) + '\n';
         }
         return repr;
     }

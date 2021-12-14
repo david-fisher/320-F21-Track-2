@@ -27,7 +27,7 @@ public class MainMenuController {
         changeScene("../../../resources/GameObjectEditor.fxml");
     }
 
-    @FXML private void changeToRuleEditor(ActionEvent event) {
-        changeScene("../../../resources/RuleEditor.fxml");
+    @FXML private void changeToSelectEvent(ActionEvent event) {
+        changeScene("../../../resources/SelectEvent.fxml");
     }
 }

@@ -82,6 +82,9 @@ public class RuleEditorUIController implements Initializable {
   //List of the SequenceBlocks made so far.
   //Need this to parse all the trees once the save button is pressed.
   private ArrayList<SequenceBlock> seqBlockList = new ArrayList<SequenceBlock>();
+  //List of all ALBlocks made so far.
+  //Need this to get their selected operators and set them in their nodes when the user saves.
+  private ArrayList<ALBlock> alBlockList = new ArrayList<ALBlock>();
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -146,7 +149,7 @@ public class RuleEditorUIController implements Initializable {
   }
 
   private void drawLineGrayRect(Block block, final int order, final int opIndex, final int ruleGroupID, Node target){
-    if (startLineX == -1){
+    if (startLineX == -1) {
       Bounds bounds = target.localToScene(target.getBoundsInLocal());
       startLineX = bounds.getMinX() - bounds.getWidth()- block.getBlockWidth();
       startLineY = bounds.getMinY();
@@ -263,6 +266,14 @@ public class RuleEditorUIController implements Initializable {
       }
     }
 
+    //Set the operators of the ALNodes to their selected operator from the ALBlock
+    for(int i = 0; i < alBlockList.size(); i++) {
+      String op = alBlockList.get(i).getOp();
+      if (alBlockList.get(i).getNode() instanceof OpNode) {
+        ((ALNode)alBlockList.get(i).getNode()).setOperator(op);
+      }
+    }
+
     //Set values of literal nodes to the values in their text boxes
     for(int i = 0; i < textBlockList.size(); i++) {
       String text = textBlockList.get(i).getFieldText();
@@ -335,22 +346,24 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddPsetBtn(ActionEvent event) {
-    blockActions(new PSetBlock());
+    blockActions(GenBlockMaker.makeBlock("pset"));
   }
 
   @FXML
   private void handleAddRsetBtn(ActionEvent event) {
-    blockActions(new RSetBlock());
+    blockActions(GenBlockMaker.makeBlock("rset"));
   }
 
   @FXML
   private void handleAddGetBtn(ActionEvent event) {
-    blockActions(new GetBlock());
+    blockActions(GenBlockMaker.makeBlock("get"));
   }
 
   @FXML
-  private void handleAddBinOpBtn(ActionEvent event) {
-    blockActions(new BinOpBlock());
+  private void handleAddALBtn(ActionEvent event) {
+    ALBlock alBlock = new ALBlock();
+    alBlockList.add(alBlock);
+    blockActions(alBlock);
   }
 
   @FXML
@@ -365,7 +378,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
-    blockActions(new GetTileIndexBlock());
+    blockActions(GenBlockMaker.makeBlock("tile"));
   }
 
   @FXML
@@ -375,7 +388,7 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
-    blockActions(new MoveByStepsBlock());
+    blockActions(GenBlockMaker.makeBlock("moveBy"));
   }
 
   @FXML
@@ -385,32 +398,37 @@ public class RuleEditorUIController implements Initializable {
 
   @FXML
   private void handleAddGetNextPlayerBtn(ActionEvent event) {
-    blockActions(new GetNextPlayerBlock());
+    blockActions(GenBlockMaker.makeBlock("nextPlayer"));
   }
 
   @FXML
   private void handleAddInvokeBtn(ActionEvent event) {
-    blockActions(new InvokeBlock());
+    blockActions(GenBlockMaker.makeBlock("invoke"));
   }
 
   @FXML
   private void handleAddDeckDrawBtn(ActionEvent event) {
-    blockActions(new DeckDrawBlock());
+    blockActions(GenBlockMaker.makeBlock("draw"));
   }
 
   @FXML
   private void handleAddDeckPutBtn(ActionEvent event) {
-    blockActions(new DeckPutBlock());
+    blockActions(GenBlockMaker.makeBlock("put"));
   }
 
   @FXML
   private void handleAddDeckShuffleBtn(ActionEvent event) {
-    blockActions(new DeckShuffleBlock());
+    blockActions(GenBlockMaker.makeBlock("shuffle"));
   }
 
   @FXML
   private void handleAddUseDieSpinnerBtn(ActionEvent event) {
-    blockActions(new UseDieSpinnerBlock());
+    blockActions(GenBlockMaker.makeBlock("use"));
+  }
+
+  @FXML
+  private void handleAddDisplayBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("display"));
   }
 
   @FXML 

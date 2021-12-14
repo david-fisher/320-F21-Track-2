@@ -70,7 +70,6 @@ public class GameObjectUIController {
     @FXML private TextField gamepieceLocation;
     private String gamepieceTextureFilename;
 
-
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList();
         spinnerCategories = FXCollections.observableArrayList();
