@@ -59,6 +59,23 @@ public class SelectEventController implements Initializable {
     changeScene("../../../resources/MainMenuScreen.fxml");
   }
 
+  private boolean verifyCreateEvent(Optional<String> result) {
+    //Return false if the user did not provide a name for the event
+    if (result.get().equals("")) {
+      errorLabel.setText("Event name must be non-empty");
+      errorLabel.setVisible(true);
+      return false;
+    }
+    ObservableList<String> list = eventsList.getItems();
+    //If the user-provided event name matches an existing event name return false
+    if (list.filtered(str -> str.equalsIgnoreCase(result.get())).size() != 0) {
+      errorLabel.setText("Event name must be unique");
+      errorLabel.setVisible(true);
+      return false;
+    }
+    return true;
+  }
+
   //Handles "Create new event" button
   @FXML private void createNewEvent(ActionEvent event) {
     TextInputDialog dialog = new TextInputDialog();
@@ -69,11 +86,7 @@ public class SelectEventController implements Initializable {
     Optional<String> result = dialog.showAndWait();
     //If cancel was not pressed
     if (result.isPresent()) {
-      if (result.get().equals("")) {
-        errorLabel.setText("Event name must be non-empty");
-        errorLabel.setVisible(true);
-      }
-      else {
+      if (verifyCreateEvent(result)) {
         changeScene("../../../resources/RuleEditor.fxml");
       }
     }
