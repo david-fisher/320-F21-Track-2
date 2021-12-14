@@ -189,15 +189,14 @@ public class Controller extends ScreenController {
 		c.setWidth((double) radius);
 		c.setColor(Color.BLACK);
 		c.setId(Integer.toString(count));
-		
-		draggable.makeDraggable(shape, gameBoard, gameBoardBackground, gridLayout, c);
-		rightclickable.makeRightClickable(c,shape, gameBoardBackground, gridLayout, gameBoard);
-		leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
-		
+
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
 				if (gridLayout[i][j] != 1) {
 					gameBoardBackground.getChildren().add(shape);
+					draggable.makeDraggable(shape, gameBoard, gameBoardBackground, gridLayout, c);
+					rightclickable.makeRightClickable(c,shape, gameBoardBackground, gridLayout, gameBoard);
+					leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
 					shape.setLayoutX((i * gameBoard.getCellWidth() + x/2));
 					shape.setLayoutY((j * gameBoard.getCellHeight() + y/2));
 					gridLayout[i][j] = 1;
@@ -233,14 +232,13 @@ public class Controller extends ScreenController {
 		r.setColor(Color.BLACK);
 		r.setId(Integer.toString(count));
 
-		draggable.makeDraggable(tileShape, gameBoard, gameBoardBackground, gridLayout, r);
-		rightclickable.makeRightClickable(r, tileShape, gameBoardBackground, gridLayout, gameBoard);
-		leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
-
 		for (int j = 0; j < gameBoard.getSizeY(); j++) {
 			for (int i = 0; i < gameBoard.getSizeX(); i++) {
 				if (gridLayout[i][j] != 1) {
 					gameBoardBackground.getChildren().add(tileShape);
+					draggable.makeDraggable(tileShape, gameBoard, gameBoardBackground, gridLayout, r);
+					rightclickable.makeRightClickable(r, tileShape, gameBoardBackground, gridLayout, gameBoard);
+					leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
 					tileShape.setLayoutX((i * gameBoard.getCellWidth()));
 					tileShape.setLayoutY((j * gameBoard.getCellHeight()));
 					gridLayout[i][j] = 1;
