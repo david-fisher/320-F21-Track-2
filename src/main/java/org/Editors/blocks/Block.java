@@ -8,7 +8,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
-
+import javafx.scene.shape.Line;
 import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -64,20 +64,15 @@ public class Block {
   protected Rectangle result;
   protected GridPane grid;
   protected Boolean isConnected = false;
+  protected AnchorPane editorPane;
 
   //List of lists of connection blocks
   protected ObservableList<ObservableList<javafx.scene.Node>> ruleGroupList = FXCollections.observableArrayList();
+  protected ArrayList<Line> links = new ArrayList<>();
 
-  protected void createGenBlock(String blockName, String[] valueNames) {
-    this.block = new StackPane();
-
-    //Size block to fit the number of values that it will be passing in.
-    //We will have 1 row in the gridpane for each value.
-    //If there are no arguments, still give it the size of as if it has 1 argument.
-    int resize = RESIZE_FACTOR * (valueNames.length == 0 ? 1 : valueNames.length);
-    this.blockHeight = this.blockHeight + resize;
-
-    //Make the block draggable
+  //Add event handlers for left and right click - left click & hold = drag, right click = delete
+  protected void makeDraggableAndDeletable() {
+    //Make the block draggable and deletable
     this.block.setOnMousePressed(e -> {
       if (e.isPrimaryButtonDown()) {
         //calculate offset
@@ -86,6 +81,11 @@ public class Block {
       } else if (e.isSecondaryButtonDown()) {
         // Delete block if right clicked.
         if(this.node instanceof OpNode){
+          try {
+            this.node.parent.removeOperand((OpNode) this.node);
+          } catch (NullPointerException excep) {
+            System.out.println(excep);
+          }
           ArrayList ops = ((OpNode) this.node).getAllOperands();
           for (Object aNode: ops) {
             if (aNode instanceof OpNode) {
@@ -103,9 +103,9 @@ public class Block {
         this.block.setVisible(false);
         this.block = null;
         this.grid = null;
+        deleteAllLinks();
       }
     });
-
     this.block.setOnMouseDragged(e -> {
       if (!isConnected){
         //set new position
@@ -113,6 +113,19 @@ public class Block {
         this.block.setTranslateY(e.getSceneY() - startY);
       }
     });
+  }
+
+  protected void createGenBlock(String blockName, String[] valueNames) {
+    this.block = new StackPane();
+
+    //Make the block draggable and deletable
+    makeDraggableAndDeletable();
+
+    //Size block to fit the number of values that it will be passing in.
+    //We will have 1 row in the gridpane for each value.
+    //If there are no arguments, still give it the size of as if it has 1 argument.
+    int resize = RESIZE_FACTOR * (valueNames.length == 0 ? 1 : valueNames.length);
+    this.blockHeight = this.blockHeight + resize;
 
     //Pane for placing the controls and text for the block
     this.grid = new GridPane();
@@ -210,5 +223,19 @@ public class Block {
 
   public void setBlockAnchor(){
     isConnected = true;
+  }
+
+  public void addLink(Line link){
+    links.add(link);
+  }
+
+  private void deleteAllLinks(){
+      for(Line l: links){
+        this.editorPane.getChildren().remove(l);
+      }
+      links.clear();
+  }
+  public void setEditorPane(AnchorPane editorPane){
+    this.editorPane = editorPane;
   }
 }
