@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -65,16 +64,12 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Action" />
-                                    <MenuButton fx:id="action" mnemonicParsing="false" text="Action 1">
-                                       <items>
-                                          <MenuItem mnemonicParsing="false" text="Action 1" />
-                                          <MenuItem mnemonicParsing="false" text="Action 2" />
-                                       </items>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event" />
+                                    <TextField fx:id="cardOnPlay" promptText="Event name">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </MenuButton>
+                                    </TextField>
                                  </children>
                               </HBox>
                            </children>
@@ -696,7 +691,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Button">
+      <Tab onSelectionChanged="#populateEventList" text="Button">
          <content>
             <AnchorPane minHeight="150.0" minWidth="400.0" prefHeight="180.0" prefWidth="466.0">
                <children>
@@ -740,12 +735,12 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Action on Click" />
-                                    <TextField fx:id="onClick" promptText="Action">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event on click" />
+                                    <MenuButton fx:id="buttonOnClick" mnemonicParsing="false" text="MenuButton">
                                        <HBox.margin>
-                                          <Insets left="15.0" />
+                                          <Insets left="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </MenuButton>
                                  </children>
                               </HBox>
                            </children>
@@ -759,6 +754,19 @@
                            </buttons>
                         </ButtonBar>
                      </bottom>
+                     <right>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event names" />
+                                    <ListView fx:id="buttonEventList" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" />
+                           </children>
+                        </VBox>
+                     </right>
                   </BorderPane>
                </children>
             </AnchorPane>
