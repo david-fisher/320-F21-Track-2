@@ -1,6 +1,7 @@
 package org.Editors.controllers;
 
 import java.io.File;
+import java.util.List;
 
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
@@ -92,6 +93,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker playerColor;
     @FXML private TextField playerGamepieces;
     @FXML private TextField playerInventory;
+    @FXML private TextField playerMin;
+    @FXML private TextField playerMax;
     @FXML private ListView playerGamepiecesList;
     @FXML private ListView playerInventoryList;
     @FXML private ToggleGroup playerIsHuman;
@@ -435,16 +438,7 @@ public class GameObjectUIController extends ScreenController {
 
     @FXML private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
-        String textureFilenameString = getFilePath();
         javafx.scene.paint.Color jfxColor = tokenColor.getValue();
-
-        // TODO: Inventory UI
-        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
-
-        // TODO: Gamepiece UI
-        ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
-        gamepieces.add(new Gamepiece());
-
         String isHuman = playerIsHuman.getSelectedToggle().toString();
         boolean human = false;
         if(isHuman == "yes"){
@@ -452,16 +446,17 @@ public class GameObjectUIController extends ScreenController {
         }
 
         Player player = new Player();
-        boolean labelRes = player.setTrait("label", playerNameString, false);
-        boolean pieceRes = player.setTrait("GamePieces", gamepieces, true);
-        boolean colorRes = player.setTrait("color", jfxColor.toString(), false);
-        boolean invRes = player.setTrait("inventory", inventory, true);
-        boolean humanRes = player.setTrait("isHuman", human, false);
-        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
+        boolean labelRes = player.setLabel(playerNameString);
+        boolean colorRes = player.setColor(jfxColor);
+        boolean humanRes = player.setIsHuman(human);
+        int min = Integer.parseInt(playerMin.getCharacters().toString());
+        int max = Integer.parseInt(playerMax.getCharacters().toString());
+        gameState.minPlayer = min;
+        gameState.maxPlayer = max;
+
+        if (!(labelRes && colorRes && humanRes)) {
             System.out.println(labelRes);
-            System.out.println(pieceRes);
             System.out.println(colorRes);
-            System.out.println(invRes);
             System.out.println(humanRes);
             System.err.println("Failure!");
         } else {
