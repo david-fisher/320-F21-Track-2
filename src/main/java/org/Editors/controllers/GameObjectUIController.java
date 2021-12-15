@@ -8,6 +8,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
@@ -73,7 +74,10 @@ public class GameObjectUIController extends ScreenController {
     // GamePiece tab
     @FXML private TextField gamepieceName;
     @FXML private ColorPicker gamepieceColor;
-    @FXML private TextField gamepieceLocation;
+    @FXML private TextField gamepieceLocationX;
+    @FXML private TextField gamepieceLocationY;
+    @FXML private ListView gamepieceAllPlayerList;
+    @FXML private ListView gamepieceSelectedPlayerList;
     private String gamepieceTextureFilename;
 
     // Tile tab
@@ -93,26 +97,18 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ToggleGroup playerIsHuman;
 
     // Button tab
-    @FXML
-    private TextField buttonName;
-    @FXML
-    private ColorPicker buttonColor;
-    @FXML
-    private TextField buttonText;
-    @FXML
-    private TextField buttonFilename;
-    @FXML
-    private TextField onClick;
+    @FXML private TextField buttonName;
+    @FXML private ColorPicker buttonColor;
+    @FXML private TextField buttonText;
+    @FXML private TextField buttonFilename;
+    @FXML private TextField onClick;
 
     private GameState gameState = BasicApplication.getProject().getIntiGS();
 
     public GameObjectUIController() {
-        deckCards = FXCollections.observableArrayList(new Card(), new Card());
-        Category cat1 = new Category();
-        Category cat2 = new Category();
-        cat1.setTrait("label", "category 03", true);
-        cat2.setTrait("label", "category 04", true);
-        spinnerCategories = FXCollections.observableArrayList(cat1, cat2);
+        deckCards = FXCollections.observableArrayList();
+        spinnerCategories = FXCollections.observableArrayList();
+        cardTextureFilename = spinnerTextureFilename = tokenTextureFilename = timerTextureFilename = categoryTextureFilename = gamepieceTextureFilename = "";
     }
 
     @FXML
@@ -189,10 +185,13 @@ public class GameObjectUIController extends ScreenController {
         Gamepiece piece = new Gamepiece();
         String pieceNameString = gamepieceName.getCharacters().toString();
         Color jfxColor = gamepieceColor.getValue();
+        int x = Integer.parseInt(gamepieceLocationX.getCharacters().toString());
+        int y = Integer.parseInt(gamepieceLocationY.getCharacters().toString());
 
-        // TODO: This is just a dummy tile as of now
         Tile tile = new Tile();
-        Tile location = tile;
+        tile.setXPos(x);
+        tile.setYPos(y);
+        piece.setParent(new Circle());
 
         boolean labelRes = piece.setLabel(pieceNameString);
         boolean iconRes = piece.setIcon(gamepieceTextureFilename);
@@ -281,10 +280,81 @@ public class GameObjectUIController extends ScreenController {
         }
     }
 
+    @FXML private void populatePlayerList(Event e) {
+        ObservableList<Player> observable = FXCollections.observableArrayList(gameState.players);
+        gamepieceAllPlayerList.setItems(observable);
+    }
+
+    @FXML private void populatePlayerInventory(Event e) {
+        ObservableList<Gamepiece> observable = FXCollections.observableArrayList(gameState.gamepieces);
+        // Filter through the list of gamepieces to only populate with pieces belonging to a
+        // particular player.
+        playerInventoryList.setItems(observable);
+        playerInventoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        playerGamepiecesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
     @FXML private void populateCardList(Event event) {
         deckCardList.setItems(deckCards);
         deckCardList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         deckDeckList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    @FXML private void playerAddHighlighted(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = playerInventoryList.getSelectionModel().getSelectedIndices();
+        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+        ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
+        ArrayList<Gamepiece> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            Gamepiece g = nonplayerPieces.get(i);
+            playerPieces.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the inventory list
+        for (int i = 0; i < removed.size(); i += 1) {
+            nonplayerPieces.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        playerInventoryList.setItems(nonplayerPieces);
+        playerGamepiecesList.setItems(playerPieces);
+    }
+
+    @FXML private void playerRemoveHighlighted(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = playerGamepiecesList.getSelectionModel().getSelectedIndices();
+        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+        ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
+        ArrayList<Gamepiece> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            Gamepiece g = playerPieces.get(i);
+            nonplayerPieces.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the player pieces list
+        for (int i = 0; i < removed.size(); i += 1) {
+            playerPieces.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        playerInventoryList.setItems(nonplayerPieces);
+        playerGamepiecesList.setItems(playerPieces);
+    }
+
+    @FXML private void gamepieceAddHighlighted(ActionEvent e) {
+        Player selected = (Player)gamepieceAllPlayerList.getSelectionModel().getSelectedItem();
+        ArrayList<Player> list = new ArrayList();
+        list.add(selected);
+        gamepieceSelectedPlayerList.setItems(FXCollections.observableArrayList(list));
+    }
+
+    @FXML private void gamepieceRemoveHighlighted(ActionEvent e) {
+        gamepieceSelectedPlayerList.setItems(FXCollections.observableArrayList());
     }
 
     @FXML private void deckAddHighlighted(ActionEvent event) {
@@ -349,8 +419,7 @@ public class GameObjectUIController extends ScreenController {
         gameState.getAllDecks().add(deck);
     }
 
-    @FXML
-    private void savePlayer(ActionEvent event) {
+    @FXML private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
         String textureFilenameString = getFilePath();
         javafx.scene.paint.Color jfxColor = tokenColor.getValue();

@@ -19,7 +19,6 @@ blocks = $(src_path)/Editors/blocks/*.java
 
 lib = *.jar
 
-
 all: $(play) $(play_controllers) $(board) $(impossible) $(objects) $(nodes) $(engine) $(blocks) $(controllers) $(menu)
 	javac -d $(compile_path) --module-path $(PATH_TO_FX) --add-modules $(fxmodules) $^
 
