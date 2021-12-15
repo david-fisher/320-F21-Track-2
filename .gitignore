@@ -37,9 +37,8 @@ hs_err_pid*
 .DS_Store
 .DS_Store
 .DS_Store
-<<<<<<< HEAD
 src/main/java/org/Editors/META-INF/MANIFEST.MF
-=======
+*.yml
 
 # Default ignored files
 /.idea/shelf/
@@ -53,4 +52,3 @@ src/main/java/org/Editors/META-INF/MANIFEST.MF
 
 #Target Folder
 target/
->>>>>>> 5f9bdf59724d01d3f64668803d845bb3513a603d

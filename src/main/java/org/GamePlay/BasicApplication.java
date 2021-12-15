@@ -19,7 +19,6 @@ public class BasicApplication extends Application {
 
     private static Project project;
 
-
     // setters
     public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }
 
