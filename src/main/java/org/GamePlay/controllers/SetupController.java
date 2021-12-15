@@ -378,11 +378,9 @@ public class SetupController extends ScreenController {
 
                 // get new text
                 String newText = playerName.getText();
-                System.out.println(newText);
 
                 // get old text
                 String oldText = player.getLabel();
-                System.out.println(oldText);
 
                 // if the new text is the same as another player's
                 players.forEach( p -> {
@@ -628,8 +626,6 @@ public class SetupController extends ScreenController {
         updatePlayerCountLabel();
     }
     private void colorPickerOnAction(ActionEvent event) {
-
-        System.out.println("Color Picker Action");
 
         // get source information
         ColorPicker colorPicker = (ColorPicker) event.getSource();
