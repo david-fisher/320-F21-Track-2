@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Gamepieces draw correctly">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Button events implemented in editor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/ALNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/ALNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/OpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/OpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/LiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/LiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/PSetNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/PSetNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" afterDir="false" />
     </list>
@@ -124,13 +128,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Added our Player.java to objects folder">
-      <created>1638134990462</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1638134990463</updated>
     </task>
     <task id="LOCAL-00019" summary="Changed buttons in Main Menu to labels with color">
       <created>1638137431048</created>
@@ -468,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639597610329</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Button events implemented in editor">
+      <created>1639599994983</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1639599994983</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -485,7 +489,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
     <MESSAGE value="Connected Editor controllers (through &quot;create game&quot;)" />
     <MESSAGE value="Centered controllers, fixed back/cancel buttons." />
@@ -510,7 +513,8 @@
     <MESSAGE value="Player editor working!!" />
     <MESSAGE value="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup" />
     <MESSAGE value="Gamepieces draw correctly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gamepieces draw correctly" />
+    <MESSAGE value="Button events implemented in editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Button events implemented in editor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

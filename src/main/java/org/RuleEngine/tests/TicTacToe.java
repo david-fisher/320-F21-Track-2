@@ -1,6 +1,8 @@
 package org.RuleEngine.tests;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
 // WIP
@@ -10,10 +12,10 @@ import org.RuleEngine.nodes.*;
  */
 
 public class TicTacToe {
-    public static void main(String[] args) {
-        // To be loading from Dining's save
-        GameState state = new GameState();
-        Interpreter interpreter = Interpreter.getInstance();
+
+    public HashMap<String, ArrayList<Node>> makeEvents(GameState gameState) {
+
+        HashMap<String, ArrayList<Node>> events = gameState.getAllEvents();
 
         LiteralNode<String> colorTrait = NodeMaker.makeStringNode("color");
         LiteralNode<String> currPlayer = NodeMaker.makeStringNode("currPlayer");
@@ -207,7 +209,17 @@ public class TicTacToe {
         BREvent.add(ifRightCol);
         BREvent.add(ifBackDiag);
         BREvent.add(nextTurn);
+
+        events.put("TLEvent", TLEvent);
+        events.put("TMEvent", TMEvent);
+        events.put("TREvent", TREvent);
+        events.put("MLEvent", MLEvent);
+        events.put("MMEvent", MMEvent);
+        events.put("MREvent", MREvent);
+        events.put("BLEvent", BLEvent);
+        events.put("BMEvent", BMEvent);
+        events.put("BREvent", BREvent);
+
+        return events;
     }
-
-
 }

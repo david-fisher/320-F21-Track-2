@@ -226,7 +226,7 @@ public class PlayController extends ScreenController {
             String event = button.getOnClick();
             Label label = new Label(button.getText());
             button.setParent(label);
-            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, button.getHeight());
+            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, 30);
             button.getParent().setOnMouseClicked(e -> {
                 if (button.getEnabled()) {
                     interpreter.interpretEvent(gameState.events.get(event), gameState);
@@ -299,7 +299,6 @@ public class PlayController extends ScreenController {
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        System.out.println("Baseline:" + gp.getBaselineOffset());
 
         if (singlePiece) {
             double shiftX = (2 * (i % rows) + 1) * radius + (i % rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
