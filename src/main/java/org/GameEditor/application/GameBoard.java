@@ -80,7 +80,7 @@ public class GameBoard extends GameObject {
 
 				//Make new tiles clickable because they won't be regenerated
 				(new Draggable()).makeDraggable(tileShape, this, gameBoardBackground, gridLayout, t);
-				(new Rightclickable()).makeRightClickable(t, tileShape, gameBoardBackground, gridLayout, this);
+				(new Rightclickable()).makeRightClickable(t, tileShape, gameBoardBackground, gridLayout, this, existingTiles);
 				(new Leftclickable()).makeLeftclickable(t, tileShape.getId(), nameTf, imageTf, colorTf, scene);
         		tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
 				tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
