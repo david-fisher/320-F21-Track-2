@@ -371,33 +371,18 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   }
 
   @FXML
-  private void handleAddNotBtn(ActionEvent event) {
-    blockActions(new NotBlock());
-  }
-
-  @FXML
-  private void handleAddLengthBtn(ActionEvent event) {
-    blockActions(new LengthBlock());
-  }
-
-  @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("tile"));
   }
 
   @FXML
   private void handleAddMoveToTileIndexBtn(ActionEvent event) {
-    blockActions(new MoveToTileIndexBlock());
+    blockActions(GenBlockMaker.makeBlock("moveTo"));
   }
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("moveBy"));
-  }
-
-  @FXML
-  private void handleAddGetPlayerByIndexBtn(ActionEvent event) {
-    blockActions(new GetPlayerByIndexBlock());
   }
 
   @FXML
@@ -433,6 +418,31 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   @FXML
   private void handleAddDisplayBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("display"));
+  }
+
+  @FXML
+  private void handleAddNegateBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("negate"));
+  }
+
+  @FXML
+  private void handleAddGetPlayerBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("player"));
+  }
+
+  @FXML
+  private void handleAddGetLastUsedBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("getLastUsed"));
+  }
+
+  @FXML
+  private void handleAddPutInInventoryBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("putInInventory"));
+  }
+
+  @FXML
+  private void handleAddGetGamepieceBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("getGamepiece"));
   }
 
   @FXML 

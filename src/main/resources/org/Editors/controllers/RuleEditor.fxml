@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="458.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.RuleEditorUIController">
+<BorderPane prefHeight="458.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Editors.controllers.RuleEditorUIController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="..\style.css" stylesheets="@../style.css" BorderPane.alignment="CENTER">
         <buttons>
             <Button layoutX="533.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="back" stylesheets="@../style.css" text="Back" />
           <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSaveBtn" styleClass="save" stylesheets="@../style.css" text="Save" />
@@ -30,15 +30,12 @@
                <children>
                   <Button fx:id="addPsetBtn" mnemonicParsing="false" onAction="#handleAddPsetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add pset" />
                   <Button fx:id="addRsetBtn" mnemonicParsing="false" onAction="#handleAddRsetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add rset" />
-                  <Button fx:id="addNotBtn" mnemonicParsing="false" onAction="#handleAddNotBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add not" />
                   <Button fx:id="addALBtn" mnemonicParsing="false" onAction="#handleAddALBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add AL" />
                   <Button fx:id="addGetTileIndexBtn" mnemonicParsing="false" onAction="#handleAddGetTileIndexBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get tile[i]" />
                   <Button fx:id="addGetBtn" mnemonicParsing="false" onAction="#handleAddGetBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get" />
                   <Button fx:id="addIfBtn" mnemonicParsing="false" onAction="#handleAddIfBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add if" />
-                  <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add move to tile[i]" />
+                  <Button fx:id="addMoveToTIleIndexBtn" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleAddMoveToTileIndexBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add move to tile" />
                   <Button fx:id="addMoveByStepsBtn" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddMoveByStepsBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add move by steps" />
-                  <Button fx:id="addLengthBtn" layoutX="34.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddLengthBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add length" />
-                  <Button fx:id="addGetPlayerByIndexBtn" layoutX="34.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleAddGetPlayerByIndexBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get player[i]" />
                   <Button fx:id="addGetNextPlayerBtn" layoutX="34.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddGetNextPlayerBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get next player" />
                   <Button fx:id="addInvokeBtn" layoutX="34.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleAddInvokeBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add invoke" />
                   <Button fx:id="addDeckDrawBtn" layoutX="34.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleAddDeckDrawBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add deck draw" />
@@ -49,6 +46,11 @@
                   <Button fx:id="addSeqNodeBtn" layoutX="34.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleAddSeqNodeBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add seq node" />
                   <Button fx:id="addWhileBtn" layoutX="34.0" layoutY="686.0" mnemonicParsing="false" onAction="#handleAddWhileBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add while" />
                   <Button fx:id="addDisplayBtn" mnemonicParsing="false" onAction="#handleAddDisplayBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add display" />
+                  <Button layoutX="30.0" layoutY="730.0" mnemonicParsing="false" onAction="#handleAddNegateBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add negate" />
+                  <Button layoutX="30.0" layoutY="766.0" mnemonicParsing="false" onAction="#handleAddGetPlayerBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get player[i]" />
+                  <Button layoutX="30.0" layoutY="730.0" mnemonicParsing="false" onAction="#handleAddGetLastUsedBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get last used" />
+                  <Button layoutX="30.0" layoutY="766.0" mnemonicParsing="false" onAction="#handleAddPutInInventoryBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add put in inv." />
+                  <Button layoutX="30.0" layoutY="802.0" mnemonicParsing="false" onAction="#handleAddGetGamepieceBtn" prefHeight="25.0" prefWidth="130.0" styleClass="label" stylesheets="@../RuleEditorUI/src/style.css" text="Add get gamepiece" />
                </children>
                <cursor>
                   <Cursor fx:constant="SW_RESIZE" />
