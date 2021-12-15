@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
@@ -170,7 +171,6 @@ public class SelectionController extends ScreenController {
 
     private ArrayList<Project> newProjects = new ArrayList<>();
     private ArrayList<Project> savedProjects = new ArrayList<>();
-    private GameState selectedGame;
 
     public void populateSelectionMenus(ArrayList<Project> newProjects, ArrayList<Project> savedProjects) {
 
@@ -189,10 +189,16 @@ public class SelectionController extends ScreenController {
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-
-                    SetupController controller = new SetupController();
-                    controller.initialize(stage);
-
+                    if (BasicApplication.getProject().getIntiGS().getAllPlayers().size() == 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error!");
+                        alert.setHeaderText("This game does not yet have a player:");
+                        alert.setContentText("Please add a player to this game, then proceed.");
+                        alert.showAndWait();
+                    } else {
+                        SetupController controller = new SetupController();
+                        controller.initialize(stage);
+                    }
                 });
 
                 // deselect all rectangles
@@ -287,7 +293,6 @@ public class SelectionController extends ScreenController {
 
     public void setSelectedGame(VBox vbox) {
         BasicApplication.setProject((Project)vbox.getUserData());
-        System.out.println(BasicApplication.getProject().getProjectName());
     }
 
     private String invertColor(String myColorString) {

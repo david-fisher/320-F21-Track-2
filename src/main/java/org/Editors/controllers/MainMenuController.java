@@ -50,5 +50,4 @@ public class MainMenuController extends ScreenController {
         MainController main = new MainController();
         main.initialize(BasicApplication.restartStage(new Stage()));
     }
-
 }

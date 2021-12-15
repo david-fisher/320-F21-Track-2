@@ -52,7 +52,9 @@ public class Gamepiece extends GameObject{
 		// set location
 		if (this.setTrait("location", tile)) {
 			if (!tile.hasGamepiece(this)) {
-				Display.getDisplay().updatePiece(this);
+				if (this.getParent() != null) {
+					Display.getDisplay().updatePiece(this);
+				}
 				return tile.addGamepiece(this);
 			}
 			return true ;

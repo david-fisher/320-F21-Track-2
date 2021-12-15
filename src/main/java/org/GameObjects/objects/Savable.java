@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.BeanAccess;
+import org.yaml.snakeyaml.LoaderOptions;
 
 import org.RuleEngine.engine.GameState;
 import java.nio.file.Files;
@@ -54,7 +55,10 @@ public abstract class Savable {
 	}
 
 	private static Projects loadProjects(File f) {
-		Yaml yaml = new Yaml();
+
+		LoaderOptions loader = new LoaderOptions();
+		loader.setMaxAliasesForCollections(Integer.MAX_VALUE);
+		Yaml yaml = new Yaml(loader);
 		yaml.setBeanAccess(BeanAccess.FIELD);
 		Projects pro = null;
 		try {
@@ -92,7 +96,8 @@ public abstract class Savable {
 	}
 
 	public static boolean closeDB() {
-		dump(projects,new File(getGlobalFile().getPath() + File.separator+ "projects.yml"));
+		dump(projects, new File(getGlobalFile().getPath() + File.separator + "projects.yml"));
 		return true;
 	}
+
 }

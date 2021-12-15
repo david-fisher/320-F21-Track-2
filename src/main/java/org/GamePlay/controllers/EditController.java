@@ -24,6 +24,7 @@ import org.RuleEngine.engine.GameState;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.BasicApplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -80,6 +81,7 @@ public class EditController extends ScreenController {
     HBox buttonsHBox;
     Label backButton;
     Pane fillerPane;
+    Label removeGameButton;
     Label selectGameButton;
     private void initButtons() {
 
@@ -105,6 +107,18 @@ public class EditController extends ScreenController {
         fillerPane = new Pane();
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
+        removeGameButton = new Label("Remove Game");
+        Style.setStyle(removeGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
+
+        removeGameButton.setPadding(new Insets(5, 20, 5, 20));
+        HBox.setMargin(removeGameButton, new Insets(10, 10, 10, 10));
+
+        removeGameButton.setDisable(true);
+
+        removeGameButton.setOnMouseClicked(e -> {
+            removeProject(e);
+        });
+
         selectGameButton = new Label("Select a Game");
         Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
@@ -112,8 +126,16 @@ public class EditController extends ScreenController {
 
         HBox.setMargin(selectGameButton, HBox.getMargin(backButton));
 
-        buttonsHBox.getChildren().addAll(backButton, fillerPane, selectGameButton);
+        buttonsHBox.getChildren().addAll(backButton, fillerPane, removeGameButton, selectGameButton);
         screenVBox.getChildren().add(buttonsHBox);
+    }
+
+    private void removeProject(MouseEvent event) {
+        VBox selectedProjectVBox = (VBox) event.getSource();
+        Project selectedProject = (Project) selectedProjectVBox.getUserData();
+        Savable.getProjects().remove(selectedProject);
+        gamesHBox.getChildren().removeAll(selectedProjectVBox);
+        Savable.closeDB();
     }
 
     public void initialize(Stage stage) {
@@ -141,9 +163,13 @@ public class EditController extends ScreenController {
 
             n.setOnMouseClicked(mouseEvent -> {
 
+                removeGameButton.setDisable(false);
+                removeGameButton.setOnMouseClicked(e -> {
+                    removeProject(mouseEvent);
+                });
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Edit Game");
-                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
