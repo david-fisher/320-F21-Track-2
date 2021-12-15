@@ -90,8 +90,10 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker playerColor;
     @FXML private TextField playerGamepieces;
     @FXML private TextField playerInventory;
-    @FXML private ListView playerGamepiecesList;
     @FXML private ListView playerInventoryList;
+    @FXML private ListView gameObjectList;
+    @FXML private ListView playerGamepiecesList;
+    @FXML private ListView gamePieceList;
     @FXML private ToggleGroup playerIsHuman;
 
     // Button tab
@@ -261,12 +263,21 @@ public class GameObjectUIController extends ScreenController {
     }
 
     @FXML private void populatePlayerInventory(Event e) {
-        ObservableList<Gamepiece> observable = FXCollections.observableArrayList(gameState.getAllGamePieces());
+        //Populate gamePiecesList
+        ObservableList<Gamepiece> pieces = FXCollections.observableArrayList(gameState.getAllGamePieces());
         // Filter through the list of gamepieces to only populate with pieces belonging to a
         // particular player.
-        playerInventoryList.setItems(observable);
-        playerInventoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        gamePieceList.setItems(pieces);
+        gamePieceList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         playerGamepiecesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        //Populate gameObjectList
+        ObservableList<Card> objects = FXCollections.observableArrayList(gameState.getAllCards());
+        // Filter through the list of gamepieces to only populate with pieces belonging to a
+        // particular player.
+        gameObjectList.setItems(objects);
+        gameObjectList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        playerInventoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML private void populateCardList(Event event) {
@@ -275,39 +286,39 @@ public class GameObjectUIController extends ScreenController {
         deckDeckList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    @FXML private void playerAddHighlighted(ActionEvent e) {
-        ObservableList<Integer> selectedIndices = playerInventoryList.getSelectionModel().getSelectedIndices();
-        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+    @FXML private void playerAddHighlightedGamepiece(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = gamePieceList.getSelectionModel().getSelectedIndices();
+        ObservableList<Gamepiece> chosen = gamePieceList.getItems();
         ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
         ArrayList<Gamepiece> removed = new ArrayList();
 
         // For every gamepiece selected, add it to the other list
         for (Integer i : selectedIndices) {
-            Gamepiece g = nonplayerPieces.get(i);
+            Gamepiece g = chosen.get(i);
             playerPieces.add(g);
             removed.add(g);
         }
 
         // Then remove all the gamepieces that are selected from the inventory list
         for (int i = 0; i < removed.size(); i += 1) {
-            nonplayerPieces.remove(removed.get(i));
+            chosen.remove(removed.get(i));
         }
 
         // Now update the ListViews with the appropriate changes
-        playerInventoryList.setItems(nonplayerPieces);
+        gamePieceList.setItems(chosen);
         playerGamepiecesList.setItems(playerPieces);
     }
 
-    @FXML private void playerRemoveHighlighted(ActionEvent e) {
+    @FXML private void playerRemoveHighlightedGamepiece(ActionEvent e) {
         ObservableList<Integer> selectedIndices = playerGamepiecesList.getSelectionModel().getSelectedIndices();
-        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+        ObservableList<Gamepiece> chosen = gamePieceList.getItems();
         ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
         ArrayList<Gamepiece> removed = new ArrayList();
 
         // For every gamepiece selected, add it to the other list
         for (Integer i : selectedIndices) {
             Gamepiece g = playerPieces.get(i);
-            nonplayerPieces.add(g);
+            chosen.add(g);
             removed.add(g);
         }
 
@@ -317,8 +328,54 @@ public class GameObjectUIController extends ScreenController {
         }
 
         // Now update the ListViews with the appropriate changes
-        playerInventoryList.setItems(nonplayerPieces);
+        gamePieceList.setItems(chosen);
         playerGamepiecesList.setItems(playerPieces);
+    }
+
+    @FXML private void playerAddHighlightedObject(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = gameObjectList.getSelectionModel().getSelectedIndices();
+        ObservableList<GameObject> chosen = gameObjectList.getItems();
+        ObservableList<GameObject> playerPieces = playerInventoryList.getItems();
+        ArrayList<GameObject> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            GameObject g = chosen.get(i);
+            playerPieces.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the inventory list
+        for (int i = 0; i < removed.size(); i += 1) {
+            chosen.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        gameObjectList.setItems(chosen);
+        playerInventoryList.setItems(playerPieces);
+    }
+
+    @FXML private void playerRemoveHighlightedObject(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = playerInventoryList.getSelectionModel().getSelectedIndices();
+        ObservableList<GameObject> chosen = gameObjectList.getItems();
+        ObservableList<GameObject> playerPieces = playerInventoryList.getItems();
+        ArrayList<GameObject> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            GameObject g = playerPieces.get(i);
+            chosen.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the player pieces list
+        for (int i = 0; i < removed.size(); i += 1) {
+            playerPieces.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        gameObjectList.setItems(chosen);
+        playerInventoryList.setItems(playerPieces);
     }
 
     @FXML private void gamepieceAddHighlighted(ActionEvent e) {

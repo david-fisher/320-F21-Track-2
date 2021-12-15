@@ -589,16 +589,7 @@
                                     </TextField>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />
-                                    <TextField fx:id="playerInventory" promptText="Game Objects">
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
-                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
@@ -609,16 +600,7 @@
                                     </ColorPicker>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Pieces" />
-                                    <TextField fx:id="playerGamepieces" promptText="Gamepiece">
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
-                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Human?" />
@@ -649,24 +631,49 @@
                         </ButtonBar>
                      </bottom>
                      <right>
-                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                        <HBox BorderPane.alignment="CENTER">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">
+                              <VBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />
-                                    <ListView fx:id="playerInventoryList" prefHeight="200.0" prefWidth="200.0" />
-                                    <Button mnemonicParsing="false" onAction="#playerAddHighlighted" text="+" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GameObjects" />
+                                          <ListView fx:id="gameObjectList" prefHeight="158.0" prefWidth="274.0" />
+                                          <Button mnemonicParsing="false" onAction="#playerAddHighlightedObject" text="+" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Available Gamepieces" />
+                                          <ListView fx:id="gamePieceList" prefHeight="200.0" prefWidth="200.0" />
+                                          <Button mnemonicParsing="false" onAction="#playerAddHighlightedGamepiece" text="+" />
+                                       </children>
+                                    </VBox>
                                  </children>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0">
+                              <VBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gamepieces" />
-                                    <ListView fx:id="playerGamepiecesList" prefHeight="200.0" prefWidth="200.0" />
-                                    <Button mnemonicParsing="false" onAction="#playerRemoveHighlighted" text="-" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" />
+                                          <ListView fx:id="playerInventoryList" prefHeight="158.0" prefWidth="274.0" />
+                                          <Button mnemonicParsing="false" onAction="#playerRemoveHighlightedObject" text="-" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gamepieces" />
+                                          <ListView fx:id="playerGamepiecesList" prefHeight="200.0" prefWidth="200.0" />
+                                          <Button mnemonicParsing="false" onAction="#playerRemoveHighlightedGamepiece" text="-" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>
-                        </VBox>
+                        </HBox>
                      </right>
                   </BorderPane>
                </children>
