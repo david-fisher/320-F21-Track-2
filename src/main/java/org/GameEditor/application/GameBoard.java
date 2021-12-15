@@ -17,7 +17,7 @@ import org.GameObjects.objects.Tile;
 public class GameBoard extends GameObject {
 
 	//Rectangle[][] board;
-	int boardWidth = 634;
+	int boardWidth = 560;
 	int boardHeight = 560;
 	int width = 8;
 	int height = 8;

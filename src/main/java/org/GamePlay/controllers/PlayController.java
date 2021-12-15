@@ -150,7 +150,7 @@ public class PlayController extends ScreenController {
         org.GameEditor.application.GameBoard gameBoard = gameState.getGameBoard();
         double scaleWidth = (playWidth - 120) / gameBoard.getWidth();
         double scaleHeight = playHeight / gameBoard.getHeight();
-        scale = (scaleHeight >= scaleWidth ? scaleWidth : scaleHeight) * 0.85;
+        scale = (scaleHeight >= scaleWidth ? scaleWidth : scaleHeight) * 0.88;
 
     }
     private void initBoard(org.GameEditor.application.GameBoard gameBoard, AnchorPane boardPane) {
@@ -161,6 +161,8 @@ public class PlayController extends ScreenController {
         double boardWidth = scale * gameBoard.getWidth();
         double boardHeight = scale * gameBoard.getHeight();
         //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
+        boardPane.setPrefWidth(boardWidth);
+        boardPane.setPrefHeight(boardHeight);
 
         board = new Rectangle(width, height);
 
@@ -186,7 +188,6 @@ public class PlayController extends ScreenController {
             Shape tile;
             double width = t.getWidth() * scale;
             double height = t.getHeight() * scale;
-
             if (t.getShape().equals("Rectangle")) {
                 tile = new Rectangle(width, height);
             } else {
@@ -288,22 +289,28 @@ public class PlayController extends ScreenController {
         if (parent == null) { return; }
         int numPlayers = players.size();
         boolean singlePiece = players.get(0).getGamePieces().size() == 1;
-        double rows = Math.ceil(Math.sqrt(numPlayers));
-        double radius = singlePiece ? (((parent.getWidth() / rows) - (rows + 1)) / 2) : parent.getWidth() / 2 - 2;
+        int rows = (int) Math.ceil(Math.sqrt(numPlayers));
+        double tileWidth;
+        tileWidth = parent.getShape().equals("Rectangle")
+                ? ((Rectangle) parent.getParent()).getWidth()
+                : ((Circle) parent.getParent()).getRadius() * 2;
+        double radius = singlePiece ? (((tileWidth / rows) - 8 * (rows + 1)) / 2) : tileWidth / 2 - 16;
         Circle gp = new Circle(radius, gamePiece.getColor());
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
+        System.out.println("Baseline:" + gp.getBaselineOffset());
+
         if (singlePiece) {
-            double shift = (2 * (i % rows) + 1) * (radius + 2 * ((i % rows) + 1));
-            gp.setLayoutX(parent.getXPos() + shift);
-            gp.setLayoutY(parent.getYPos() + shift);
+            double shiftX = (2 * (i % rows) + 1) * radius + (i % rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
+            double shiftY = (2 * (i / rows) + 1) * radius + (i / rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
+            gp.setLayoutX(parent.getParent().getLayoutX() + shiftX);
+            gp.setLayoutY(parent.getParent().getLayoutY() + shiftY);
         } else {
-            gp.setRadius(parent.getWidth() / 2 - 4);
-            gp.setLayoutX((parent.getXPos() + parent.getWidth()) / 2 + 2);
-            gp.setLayoutX((parent.getYPos() + parent.getHeight()) / 2 + 2);
+            gp.setLayoutX((parent.getParent().getLayoutX() + tileWidth) / 2 + 8);
+            gp.setLayoutY((parent.getParent().getLayoutY() + parent.getParent().getBoundsInParent().getHeight()) / 2 + 8);
         }
-        Display.getDisplay().updatePiece(gamePiece);
+//        Display.getDisplay().updatePiece(gamePiece);
     }
 
     public void initSettings() {

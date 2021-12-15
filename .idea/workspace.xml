@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Player editor working!!">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly).">
-      <created>1638059967794</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1638059967794</updated>
     </task>
     <task id="LOCAL-00017" summary="Matt's playerTurnCycle method (not yet used by any onClick event)">
       <created>1638060024388</created>
@@ -465,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639588692874</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup">
+      <created>1639589734524</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1639589734525</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +484,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Small updates before main pull" />
     <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
     <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
@@ -507,7 +508,8 @@
     <MESSAGE value="Added scaling for the player turn indicator and inventory label" />
     <MESSAGE value="Gamepiece editor working" />
     <MESSAGE value="Player editor working!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Player editor working!!" />
+    <MESSAGE value="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
