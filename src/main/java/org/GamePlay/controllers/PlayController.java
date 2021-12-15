@@ -158,8 +158,9 @@ public class PlayController extends ScreenController {
         double width = gameBoard.getWidth();
         double height = gameBoard.getHeight();
 
-        double boardWidth = scale * gameBoard.getWidth();
-        double boardHeight = scale * gameBoard.getHeight();
+        double boardWidth = scale * width;
+        double boardHeight = scale * height;
+
         //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
         boardPane.setPrefWidth(boardWidth);
         boardPane.setPrefHeight(boardHeight);
@@ -196,8 +197,8 @@ public class PlayController extends ScreenController {
             tile.setUserData(t);
             tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
-            tile.setLayoutX(t.getTileXLocation() * scale * gameBoard.getCellWidth());
-            tile.setLayoutY(t.getTileYLocation() * scale * gameBoard.getCellHeight());
+            tile.setLayoutX(t.getTileXLocation() * scale * gameBoard.getCellWidth() + 1);
+            tile.setLayoutY(t.getTileYLocation() * scale * gameBoard.getCellHeight() + 1);
             t.setParent(tile);
         });
         // for each tile
@@ -561,7 +562,10 @@ public class PlayController extends ScreenController {
         Platform.exit();
     }
 
-    public void clearPlayParent() { playParent = new AnchorPane();}
+    public void clearPlayParent() {
+        playParent = new AnchorPane();
+        boardPane = new AnchorPane();
+    }
 
     public void clearParents() {
         gameState.getAllTiles().forEach(t -> {

@@ -311,7 +311,7 @@ public class SetupController extends ScreenController {
             // todo I don't understand what is happening here a comment would be good explaining what is going on
             ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
             int start = curNumPlayers * (numPieces);
-            for (int i = start; i < start + numPieces; i++) {
+            for (int i = start; i < start + numPieces && allPieces.size() - start >= numPieces; i++) {
                 gamePieces.add(allPieces.get(i));
             }
         }
