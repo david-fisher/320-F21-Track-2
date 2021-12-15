@@ -124,8 +124,9 @@ public class Display extends PlayController {
         indicator.setStyle("-fx-border-radius: 5 5 5 5; " +
                 "-fx-background-radius: 5 5 5 5; " +
                 "-fx-font-family: Serif; " +
-                "-fx-font-size: 16; " +
-                "-fx-border-color: #000000;");
+                "-fx-font-size: " + Math.log10(200 / player.getLabel().length()) * 12 +
+                "; -fx-border-color: #000000;");
+        indicator.setLineSpacing(5);
         fillInventory(player.getInventory());
     }
 

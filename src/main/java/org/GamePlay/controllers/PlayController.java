@@ -137,8 +137,8 @@ public class PlayController extends ScreenController {
 
         initPlayerTurnIndicator();
         initCards(gameStateInput);
-        //Have some indicator for whether inventory is needed
-        if (inventoryNeeded) {
+        //TODO: Have some indicator for whether inventory is needed
+        if (true) {
             initInventoryDrawer(numDrawers);
             initInventoryLabel(numDrawers);
             fillInventory(currPlayer.getInventory());
@@ -255,6 +255,7 @@ public class PlayController extends ScreenController {
             });
         });
     }
+
     private void addToInventory(GameObject object) {
         Node inventoryObject = object.getParent();
         currPlayer.getInventory().add(object);
@@ -264,8 +265,8 @@ public class PlayController extends ScreenController {
 
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
+        if (inventory.size() == 0) { return; }
         initInventoryLabel(numDrawers);
-        if (inventory == null) { return; }
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
@@ -324,23 +325,24 @@ public class PlayController extends ScreenController {
 
     private void initPlayerTurnIndicator() {
         playerTurnIndicator = new Label();
-        playerTurnIndicator.setText(currPlayer.getLabel() + "'s Turn");
+        playerTurnIndicator.setText("" + currPlayer.getLabel() + "'s \n Turn");
 
         playerTurnIndicator.setStyle("-fx-border-radius: 5 5 5 5; " +
                 "-fx-background-radius: 5 5 5 5; " +
                 "-fx-font-family: Serif; " +
-                "-fx-font-size: 16; " +
-                "-fx-font-color: BLACK; " +
+                "-fx-font-size: " + Math.log10(200 / currPlayer.getLabel().length()) * 12 +
+                "; -fx-font-color: BLACK; " +
                 "-fx-border-color: #000000;");
         playerTurnIndicator.setId("playerTurnIndicator");
         playerTurnIndicator.setWrapText(true);
+        playerTurnIndicator.setLineSpacing(5);
         playerTurnIndicator.setTextAlignment(TextAlignment.CENTER);
         playerTurnIndicator.setAlignment(Pos.CENTER);
         playerTurnIndicator.setPadding(new Insets(2, 2, 2, 2));
 
-        playerTurnIndicator.setPrefWidth(70);
+        playerTurnIndicator.setPrefWidth(90);
 
-        playerTurnIndicator.setPrefHeight(70);
+        playerTurnIndicator.setPrefHeight(90);
 
         playParent.getChildren().addAll(playerTurnIndicator);
         playParent.setRightAnchor(playerTurnIndicator, 70.0);
@@ -361,7 +363,7 @@ public class PlayController extends ScreenController {
 
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
-        initLabel(inventoryLabel, ""+currPlayer.getLabel()+"'s Inventory" , "inventoryLabel");
+        initLabel(inventoryLabel, "" + currPlayer.getLabel() + "'s \n Inventory" , "inventoryLabel");
         inventoryLabel.setTextAlignment(TextAlignment.CENTER);
         inventoryLabel.setWrapText(true);
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
@@ -370,10 +372,11 @@ public class PlayController extends ScreenController {
     private void initLabel(Label label, String text, String id) {
         label.setText(text);
         label.setStyle("-fx-font-family: Serif; " +
-                "-fx-font-size: 24; " +
-                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                "-fx-font-size: " + Math.log10(280 / currPlayer.getLabel().length()) * 16 +
+                "; -fx-background-color: " + GlobalCSSValues.buttonBackground +
                 "; -fx-border-color: BLACK;");
         label.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
+        label.setLineSpacing(3);
         label.setId(id);
         label.setTextAlignment(TextAlignment.CENTER);
         label.setAlignment(Pos.CENTER);
