@@ -338,12 +338,11 @@ public class SetupController extends ScreenController {
 
         // the first player already has a color... for some reason
         if (players.get(0).equals(player)) {
-
             defaultColor = player.getColor();
         } else {
-
             // every other player gets a random color
             defaultColor = getRandomColor();
+            player.setColor(defaultColor);
         }
 
         ColorPicker colorPicker = new ColorPicker(defaultColor);
@@ -749,6 +748,8 @@ public class SetupController extends ScreenController {
         players.forEach(p -> {
             p.getGamePieces().forEach(gp -> {
                 gp.setColor(p.getColor());
+                System.out.println(gp.getColor());
+                System.out.println(p.getColor());
             });
         });
         //TODO: is this even necessary?

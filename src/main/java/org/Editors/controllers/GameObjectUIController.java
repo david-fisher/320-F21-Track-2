@@ -487,13 +487,12 @@ public class GameObjectUIController extends ScreenController {
         }
         Player player = new Player();
         boolean labelRes = player.setTrait("label", playerNameString, false);
-        boolean pieceRes = player.setTrait("GamePieces", gamepieces, true);
+        player.setGamePieces(gamepieces);
         boolean colorRes = player.setTrait("color", jfxColor.toString(), false);
         boolean invRes = player.setTrait("inventory", inventory, true);
         boolean humanRes = player.setTrait("isHuman", human, false);
-        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
+        if (!(labelRes && colorRes && invRes && humanRes)) {
             System.out.println(labelRes);
-            System.out.println(pieceRes);
             System.out.println(colorRes);
             System.out.println(invRes);
             System.out.println(humanRes);
