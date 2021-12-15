@@ -101,7 +101,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker buttonColor;
     @FXML private TextField buttonText;
     @FXML private TextField buttonFilename;
-    @FXML private TextField onClick;
+    @FXML private MenuButton buttonOnClick;
+    @FXML private ListView buttonEventList;
 
     private GameState gameState = BasicApplication.getProject().getIntiGS();
 
@@ -240,16 +241,17 @@ public class GameObjectUIController extends ScreenController {
     private void saveButton(ActionEvent event) {
         org.GameObjects.objects.Button button = new org.GameObjects.objects.Button();
         String buttonNameString = buttonName.getCharacters().toString();
-        String textureFilenameString = buttonFilename.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = buttonColor.getValue();
         String buttonTextString = buttonText.getCharacters().toString();
-        String onClickString = onClick.getCharacters().toString();
-        boolean labelRes = button.setTrait("label", buttonNameString, false);
-        boolean iconRes = button.setTrait("icon", textureFilenameString, false);
-        boolean colorRes = button.setTrait("color", jfxColor, false);
-        boolean textRes = button.setTrait("text", buttonTextString, false);
-        boolean onClickRes = button.setTrait("onClick", onClickString, false);
-        if (!(labelRes && iconRes && colorRes && textRes && onClickRes)) {
+        String onClickString = buttonOnClick.getText();
+        System.out.println(onClickString);
+
+        boolean labelRes = button.setLabel(buttonNameString);
+        boolean colorRes = button.setColor(jfxColor);
+        boolean textRes = button.setText(buttonTextString);
+        boolean onClickRes = button.setOnClick(onClickString);
+
+        if (!(labelRes && colorRes && textRes && onClickRes)) {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Button: " + buttonNameString);
@@ -260,6 +262,15 @@ public class GameObjectUIController extends ScreenController {
     @FXML private void populateTileList(Event e) {
         ObservableList<Tile> observable = FXCollections.observableArrayList(gameTiles);
         gamepieceAllTileList.setItems(observable);
+    }
+
+    @FXML private void populateEventList(Event e) {
+        String[] l = gameState.events.keySet().toArray(new String[0]);
+        ObservableList<MenuItem> observable = buttonOnClick.getItems();
+        for (int i = 0; i < l.length; i++) {
+            observable.addAll(new MenuItem(l[i]));
+        }
+        //buttonEventList.setItems(observable);
     }
 
     @FXML private void populatePlayerInventory(Event e) {
