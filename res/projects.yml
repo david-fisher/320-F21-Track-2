@@ -1,20 +1,20 @@
 projects:
-- intiGS:
+- initGS:
     board:
       boardHeight: 560
       boardWidth: 560
       cellHeight: 186
       cellWidth: 186
       gridLayout:
-      - - 1
-        - 1
-        - 1
-      - - 1
-        - 1
-        - 1
-      - - 1
-        - 1
-        - 1
+        - - 1
+          - 1
+          - 1
+        - - 1
+          - 1
+          - 1
+        - - 1
+          - 1
+          - 1
       height: 3
       prevTraits:
         yPos: null
@@ -30,664 +30,1885 @@ projects:
         height: 560.0
       width: 3
     buttons:
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        text: type text here
-        label: null
-        enabled: null
-        height: null
-      traits:
-        onClick: TREvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        text: TopRight
-        label: buttonTR
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button02
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: TMEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonTM
-        text: TopMiddle
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button03
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: TLEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonTL
-        text: TopLeft
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button04
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: MREvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonMR
-        text: MiddleRight
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button05
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: MMEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonMM
-        text: Center
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button06
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: MLEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonML
-        text: CenterLeft
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button07
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: BREvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonBR
-        text: BottomRight
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button08
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: BMEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonBM
-        text: BottomMiddle
-        enabled: true
-        height: 0.0
-    - prevTraits:
-        onClick: ''
-        yPos: null
-        shape: null
-        color: '#FFFFFF'
-        pressed: null
-        width: null
-        icon: null
-        xPos: null
-        label: button09
-        text: type text here
-        enabled: null
-        height: null
-      traits:
-        onClick: BLEvent
-        yPos: 0
-        shape: default
-        color: '#B31A1AFF'
-        pressed: false
-        width: 0.0
-        icon: default_gamepiece_icon.jpg
-        xPos: 0
-        label: buttonBL
-        text: BottomLeft
-        enabled: true
-        height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          text: type text here
+          label: null
+          enabled: null
+          height: null
+        traits:
+          onClick: TREvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          text: TopRight
+          label: buttonTR
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button02
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: TMEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonTM
+          text: TopMiddle
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button03
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: TLEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonTL
+          text: TopLeft
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button04
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: MREvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonMR
+          text: MiddleRight
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button05
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: MMEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonMM
+          text: Center
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button06
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: MLEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonML
+          text: CenterLeft
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button07
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: BREvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonBR
+          text: BottomRight
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button08
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: BMEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonBM
+          text: BottomMiddle
+          enabled: true
+          height: 0.0
+      - prevTraits:
+          onClick: ''
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          pressed: null
+          width: null
+          icon: null
+          xPos: null
+          label: button09
+          text: type text here
+          enabled: null
+          height: null
+        traits:
+          onClick: BLEvent
+          yPos: 0
+          shape: default
+          color: '#B31A1AFF'
+          pressed: false
+          width: 0.0
+          icon: default_gamepiece_icon.jpg
+          xPos: 0
+          label: buttonBL
+          text: BottomLeft
+          enabled: true
+          height: 0.0
     cards: []
     decks: []
     dice: []
     events:
       TREvent:
-      - &id004 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - &id001 !!org.RuleEngine.nodes.LiteralNode
-            parent: &id002 !!org.RuleEngine.nodes.PSetNode
-              operands:
-              - - *id001
-                - &id021 !!org.RuleEngine.nodes.LiteralNode
-                  parent: *id002
-                  value: _tileBR
-                - &id003 !!org.RuleEngine.nodes.GetNode
+        - &id004 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - &id001 !!org.RuleEngine.nodes.LiteralNode
+                parent: &id002 !!org.RuleEngine.nodes.PSetNode
                   operands:
-                  - - *id001
-                    - &id020 !!org.RuleEngine.nodes.LiteralNode
-                      parent: *id003
-                      value: currPlayer
-                  parent: *id002
-              parent: null
-            value: color
-          - &id016 !!org.RuleEngine.nodes.LiteralNode
-            parent: *id004
-            value: _tileTR
-          - *id003
-        parent: null
-      - &id007 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - &id005 !!org.RuleEngine.nodes.LiteralNode
-            parent: &id006 !!org.RuleEngine.nodes.PSetNode
-              operands:
-              - - *id005
-                - !!org.RuleEngine.nodes.LiteralNode
-                  parent: *id006
-                  value: _buttonBR
-                - &id008 !!org.RuleEngine.nodes.LiteralNode
-                  parent: *id006
-                  value: false
-              parent: null
-            value: enabled
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id007
-            value: _buttonTR
-          - *id008
-        parent: null
-      - &id032 !!org.RuleEngine.nodes.IfNode
-        operands:
-        - - &id031 !!org.RuleEngine.nodes.ALNode
-            operands:
-            - - &id010 !!org.RuleEngine.nodes.ALNode
-                operands:
-                - - !!org.RuleEngine.nodes.GetNode
-                    operands:
                     - - *id001
-                      - &id009 !!org.RuleEngine.nodes.LiteralNode
-                        parent: &id061 !!org.RuleEngine.nodes.PSetNode
-                          operands:
-                          - - *id001
-                            - *id009
-                            - *id003
-                          parent: null
-                        value: _tileTL
-                    parent: *id010
-                  - *id003
-                operator: ==
-                parent: &id024 !!org.RuleEngine.nodes.ALNode
-                  operands:
-                  - - *id010
-                    - &id023 !!org.RuleEngine.nodes.ALNode
-                      operands:
-                      - - &id012 !!org.RuleEngine.nodes.ALNode
-                          operands:
-                          - - !!org.RuleEngine.nodes.GetNode
-                              operands:
-                              - - *id001
-                                - &id011 !!org.RuleEngine.nodes.LiteralNode
-                                  parent: &id040 !!org.RuleEngine.nodes.PSetNode
-                                    operands:
-                                    - - *id001
-                                      - *id011
-                                      - *id003
-                                    parent: null
-                                  value: _tileMM
-                              parent: *id012
-                            - *id003
-                          operator: ==
-                          parent: &id015 !!org.RuleEngine.nodes.ALNode
-                            operands:
-                            - - *id012
-                              - &id014 !!org.RuleEngine.nodes.ALNode
-                                operands:
-                                - - !!org.RuleEngine.nodes.GetNode
-                                    operands:
-                                    - - *id001
-                                      - &id013 !!org.RuleEngine.nodes.LiteralNode
-                                        parent: &id063 !!org.RuleEngine.nodes.PSetNode
-                                          operands:
-                                          - - *id001
-                                            - *id013
-                                            - *id003
-                                          parent: null
-                                        value: _tileBL
-                                    parent: *id014
-                                  - *id003
-                                operator: ==
-                                parent: *id015
-                            operator: '&&'
-                            parent: &id018 !!org.RuleEngine.nodes.ALNode
-                              operands:
-                              - - &id017 !!org.RuleEngine.nodes.ALNode
-                                  operands:
-                                  - - !!org.RuleEngine.nodes.GetNode
-                                      operands:
-                                      - - *id001
-                                        - *id016
-                                      parent: *id017
-                                    - *id003
-                                  operator: ==
-                                  parent: *id018
-                                - *id015
-                              operator: '&&'
-                              parent: &id038 !!org.RuleEngine.nodes.IfNode
-                                operands:
-                                - - *id018
-                                - - &id019 !!org.RuleEngine.nodes.RSetNode
-                                    operands:
-                                    - - !!org.RuleEngine.nodes.LiteralNode
-                                        parent: *id019
-                                        value: winner
-                                      - *id020
-                                    parent: null
-                                - []
-                                parent: null
-                        - &id022 !!org.RuleEngine.nodes.ALNode
-                          operands:
-                          - - !!org.RuleEngine.nodes.GetNode
-                              operands:
-                              - - *id001
-                                - *id021
-                              parent: *id022
-                            - *id003
-                          operator: ==
-                          parent: *id023
-                      operator: '&&'
-                      parent: *id024
-                  operator: '&&'
-                  parent: &id049 !!org.RuleEngine.nodes.IfNode
-                    operands:
-                    - - *id024
-                    - - *id019
-                    - []
-                    parent: null
-              - !!org.RuleEngine.nodes.ALNode
-                operands:
-                - - &id026 !!org.RuleEngine.nodes.ALNode
-                    operands:
-                    - - !!org.RuleEngine.nodes.GetNode
+                      - &id021 !!org.RuleEngine.nodes.LiteralNode
+                        parent: *id002
+                        value: _tileBR
+                      - &id003 !!org.RuleEngine.nodes.GetNode
                         operands:
-                        - - *id001
-                          - &id025 !!org.RuleEngine.nodes.LiteralNode
-                            parent: &id050 !!org.RuleEngine.nodes.PSetNode
-                              operands:
-                              - - *id001
-                                - *id025
-                                - *id003
-                              parent: null
-                            value: _tileTM
-                        parent: *id026
-                      - *id003
-                    operator: ==
-                    parent: &id030 !!org.RuleEngine.nodes.ALNode
+                          - - *id001
+                            - &id020 !!org.RuleEngine.nodes.LiteralNode
+                              parent: *id003
+                              value: currPlayer
+                        parent: *id002
+                  parent: null
+                value: color
+              - &id016 !!org.RuleEngine.nodes.LiteralNode
+                parent: *id004
+                value: _tileTR
+              - *id003
+          parent: null
+        - &id007 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - &id005 !!org.RuleEngine.nodes.LiteralNode
+                parent: &id006 !!org.RuleEngine.nodes.PSetNode
+                  operands:
+                    - - *id005
+                      - !!org.RuleEngine.nodes.LiteralNode
+                        parent: *id006
+                        value: _buttonBR
+                      - &id008 !!org.RuleEngine.nodes.LiteralNode
+                        parent: *id006
+                        value: false
+                  parent: null
+                value: enabled
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id007
+                value: _buttonTR
+              - *id008
+          parent: null
+        - &id032 !!org.RuleEngine.nodes.IfNode
+          operands:
+            - - &id031 !!org.RuleEngine.nodes.ALNode
+                operands:
+                  - - &id010 !!org.RuleEngine.nodes.ALNode
                       operands:
-                      - - *id026
-                        - &id029 !!org.RuleEngine.nodes.ALNode
-                          operands:
-                          - - *id012
-                            - &id028 !!org.RuleEngine.nodes.ALNode
+                        - - !!org.RuleEngine.nodes.GetNode
+                            operands:
+                              - - *id001
+                                - &id009 !!org.RuleEngine.nodes.LiteralNode
+                                  parent: &id061 !!org.RuleEngine.nodes.PSetNode
+                                    operands:
+                                      - - *id001
+                                        - *id009
+                                        - *id003
+                                    parent: null
+                                  value: _tileTL
+                            parent: *id010
+                          - *id003
+                      operator: ==
+                      parent: &id024 !!org.RuleEngine.nodes.ALNode
+                        operands:
+                          - - *id010
+                            - &id023 !!org.RuleEngine.nodes.ALNode
                               operands:
+                                - - &id012 !!org.RuleEngine.nodes.ALNode
+                                    operands:
+                                      - - !!org.RuleEngine.nodes.GetNode
+                                          operands:
+                                            - - *id001
+                                              - &id011 !!org.RuleEngine.nodes.LiteralNode
+                                                parent: &id040 !!org.RuleEngine.nodes.PSetNode
+                                                  operands:
+                                                    - - *id001
+                                                      - *id011
+                                                      - *id003
+                                                  parent: null
+                                                value: _tileMM
+                                          parent: *id012
+                                        - *id003
+                                    operator: ==
+                                    parent: &id015 !!org.RuleEngine.nodes.ALNode
+                                      operands:
+                                        - - *id012
+                                          - &id014 !!org.RuleEngine.nodes.ALNode
+                                            operands:
+                                              - - !!org.RuleEngine.nodes.GetNode
+                                                  operands:
+                                                    - - *id001
+                                                      - &id013 !!org.RuleEngine.nodes.LiteralNode
+                                                        parent: &id063 !!org.RuleEngine.nodes.PSetNode
+                                                          operands:
+                                                            - - *id001
+                                                              - *id013
+                                                              - *id003
+                                                          parent: null
+                                                        value: _tileBL
+                                                  parent: *id014
+                                                - *id003
+                                            operator: ==
+                                            parent: *id015
+                                      operator: '&&'
+                                      parent: &id018 !!org.RuleEngine.nodes.ALNode
+                                        operands:
+                                          - - &id017 !!org.RuleEngine.nodes.ALNode
+                                              operands:
+                                                - - !!org.RuleEngine.nodes.GetNode
+                                                    operands:
+                                                      - - *id001
+                                                        - *id016
+                                                    parent: *id017
+                                                  - *id003
+                                              operator: ==
+                                              parent: *id018
+                                            - *id015
+                                        operator: '&&'
+                                        parent: &id038 !!org.RuleEngine.nodes.IfNode
+                                          operands:
+                                            - - *id018
+                                            - - &id019 !!org.RuleEngine.nodes.RSetNode
+                                                operands:
+                                                  - - !!org.RuleEngine.nodes.LiteralNode
+                                                      parent: *id019
+                                                      value: winner
+                                                    - *id020
+                                                parent: null
+                                            - []
+                                          parent: null
+                                  - &id022 !!org.RuleEngine.nodes.ALNode
+                                    operands:
+                                      - - !!org.RuleEngine.nodes.GetNode
+                                          operands:
+                                            - - *id001
+                                              - *id021
+                                          parent: *id022
+                                        - *id003
+                                    operator: ==
+                                    parent: *id023
+                              operator: '&&'
+                              parent: *id024
+                        operator: '&&'
+                        parent: &id049 !!org.RuleEngine.nodes.IfNode
+                          operands:
+                            - - *id024
+                            - - *id019
+                            - []
+                          parent: null
+                    - !!org.RuleEngine.nodes.ALNode
+                      operands:
+                        - - &id026 !!org.RuleEngine.nodes.ALNode
+                            operands:
                               - - !!org.RuleEngine.nodes.GetNode
                                   operands:
-                                  - - *id001
-                                    - &id027 !!org.RuleEngine.nodes.LiteralNode
-                                      parent: &id059 !!org.RuleEngine.nodes.PSetNode
-                                        operands:
-                                        - - *id001
-                                          - *id027
-                                          - *id003
-                                        parent: null
-                                      value: _tileBM
-                                  parent: *id028
+                                    - - *id001
+                                      - &id025 !!org.RuleEngine.nodes.LiteralNode
+                                        parent: &id050 !!org.RuleEngine.nodes.PSetNode
+                                          operands:
+                                            - - *id001
+                                              - *id025
+                                              - *id003
+                                          parent: null
+                                        value: _tileTM
+                                  parent: *id026
                                 - *id003
-                              operator: ==
-                              parent: *id029
-                          operator: '&&'
-                          parent: *id030
-                      operator: '&&'
-                      parent: &id048 !!org.RuleEngine.nodes.IfNode
-                        operands:
-                        - - *id030
-                        - - *id019
-                        - []
-                        parent: null
-                  - *id017
-                operator: '&&'
-                parent: *id031
-            operator: '&&'
-            parent: *id032
-        - - *id019
-        - []
-        parent: null
-      - &id037 !!org.RuleEngine.nodes.IfNode
-        operands:
-        - - &id036 !!org.RuleEngine.nodes.ALNode
-            operands:
-            - - *id017
-              - &id035 !!org.RuleEngine.nodes.ALNode
-                operands:
-                - - &id034 !!org.RuleEngine.nodes.ALNode
-                    operands:
-                    - - !!org.RuleEngine.nodes.GetNode
-                        operands:
-                        - - *id001
-                          - &id033 !!org.RuleEngine.nodes.LiteralNode
-                            parent: &id052 !!org.RuleEngine.nodes.PSetNode
+                            operator: ==
+                            parent: &id030 !!org.RuleEngine.nodes.ALNode
                               operands:
-                              - - *id001
-                                - *id033
-                                - *id003
-                              parent: null
-                            value: _tileMR
-                        parent: *id034
-                      - *id003
-                    operator: ==
-                    parent: *id035
-                  - *id022
+                                - - *id026
+                                  - &id029 !!org.RuleEngine.nodes.ALNode
+                                    operands:
+                                      - - *id012
+                                        - &id028 !!org.RuleEngine.nodes.ALNode
+                                          operands:
+                                            - - !!org.RuleEngine.nodes.GetNode
+                                                operands:
+                                                  - - *id001
+                                                    - &id027 !!org.RuleEngine.nodes.LiteralNode
+                                                      parent: &id059 !!org.RuleEngine.nodes.PSetNode
+                                                        operands:
+                                                          - - *id001
+                                                            - *id027
+                                                            - *id003
+                                                        parent: null
+                                                      value: _tileBM
+                                                parent: *id028
+                                              - *id003
+                                          operator: ==
+                                          parent: *id029
+                                    operator: '&&'
+                                    parent: *id030
+                              operator: '&&'
+                              parent: &id048 !!org.RuleEngine.nodes.IfNode
+                                operands:
+                                  - - *id030
+                                  - - *id019
+                                  - []
+                                parent: null
+                          - *id017
+                      operator: '&&'
+                      parent: *id031
                 operator: '&&'
-                parent: *id036
-            operator: '&&'
-            parent: *id037
-        - - *id019
-        - []
-        parent: null
-      - *id038
-      - &id039 !!org.RuleEngine.nodes.RSetNode
-        operands:
-        - - *id020
-          - !!org.RuleEngine.nodes.NextPlayerNode
-            operands:
+                parent: *id032
+            - - *id019
             - []
-            parent: *id039
-        parent: null
-      MMEvent:
-      - *id040
-      - &id041 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id041
-            value: _buttonMM
-          - *id008
-        parent: null
-      - &id047 !!org.RuleEngine.nodes.IfNode
-        operands:
-        - - &id046 !!org.RuleEngine.nodes.ALNode
-            operands:
-            - - &id043 !!org.RuleEngine.nodes.ALNode
+          parent: null
+        - &id037 !!org.RuleEngine.nodes.IfNode
+          operands:
+            - - &id036 !!org.RuleEngine.nodes.ALNode
                 operands:
-                - - !!org.RuleEngine.nodes.GetNode
-                    operands:
-                    - - *id001
-                      - &id042 !!org.RuleEngine.nodes.LiteralNode
-                        parent: &id056 !!org.RuleEngine.nodes.PSetNode
-                          operands:
-                          - - *id001
-                            - *id042
-                            - *id003
-                          parent: null
-                        value: _tileML
-                    parent: *id043
-                  - *id003
-                operator: ==
-                parent: &id044 !!org.RuleEngine.nodes.ALNode
-                  operands:
-                  - - *id043
-                    - *id014
-                  operator: '&&'
-                  parent: &id045 !!org.RuleEngine.nodes.ALNode
-                    operands:
-                    - - *id010
-                      - *id044
-                    operator: '&&'
-                    parent: &id058 !!org.RuleEngine.nodes.IfNode
+                  - - *id017
+                    - &id035 !!org.RuleEngine.nodes.ALNode
                       operands:
-                      - - *id045
-                      - - *id019
-                      - []
-                      parent: null
-              - !!org.RuleEngine.nodes.ALNode
-                operands:
-                - - *id012
-                  - *id034
+                        - - &id034 !!org.RuleEngine.nodes.ALNode
+                            operands:
+                              - - !!org.RuleEngine.nodes.GetNode
+                                  operands:
+                                    - - *id001
+                                      - &id033 !!org.RuleEngine.nodes.LiteralNode
+                                        parent: &id052 !!org.RuleEngine.nodes.PSetNode
+                                          operands:
+                                            - - *id001
+                                              - *id033
+                                              - *id003
+                                          parent: null
+                                        value: _tileMR
+                                  parent: *id034
+                                - *id003
+                            operator: ==
+                            parent: *id035
+                          - *id022
+                      operator: '&&'
+                      parent: *id036
                 operator: '&&'
-                parent: *id046
-            operator: '&&'
-            parent: *id047
-        - - *id019
-        - []
-        parent: null
-      - *id048
-      - *id049
-      - *id038
-      - *id039
+                parent: *id037
+            - - *id019
+            - []
+          parent: null
+        - *id038
+        - &id039 !!org.RuleEngine.nodes.RSetNode
+          operands:
+            - - *id020
+              - !!org.RuleEngine.nodes.NextPlayerNode
+                operands:
+                  - []
+                parent: *id039
+          parent: null
+      MMEvent:
+        - *id040
+        - &id041 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id041
+                value: _buttonMM
+              - *id008
+          parent: null
+        - &id047 !!org.RuleEngine.nodes.IfNode
+          operands:
+            - - &id046 !!org.RuleEngine.nodes.ALNode
+                operands:
+                  - - &id043 !!org.RuleEngine.nodes.ALNode
+                      operands:
+                        - - !!org.RuleEngine.nodes.GetNode
+                            operands:
+                              - - *id001
+                                - &id042 !!org.RuleEngine.nodes.LiteralNode
+                                  parent: &id056 !!org.RuleEngine.nodes.PSetNode
+                                    operands:
+                                      - - *id001
+                                        - *id042
+                                        - *id003
+                                    parent: null
+                                  value: _tileML
+                            parent: *id043
+                          - *id003
+                      operator: ==
+                      parent: &id044 !!org.RuleEngine.nodes.ALNode
+                        operands:
+                          - - *id043
+                            - *id014
+                        operator: '&&'
+                        parent: &id045 !!org.RuleEngine.nodes.ALNode
+                          operands:
+                            - - *id010
+                              - *id044
+                          operator: '&&'
+                          parent: &id058 !!org.RuleEngine.nodes.IfNode
+                            operands:
+                              - - *id045
+                              - - *id019
+                              - []
+                            parent: null
+                    - !!org.RuleEngine.nodes.ALNode
+                      operands:
+                        - - *id012
+                          - *id034
+                      operator: '&&'
+                      parent: *id046
+                operator: '&&'
+                parent: *id047
+            - - *id019
+            - []
+          parent: null
+        - *id048
+        - *id049
+        - *id038
+        - *id039
       TMEvent:
-      - *id050
-      - &id051 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id051
-            value: _buttonTM
-          - *id008
-        parent: null
-      - *id032
-      - *id048
-      - *id039
+        - *id050
+        - &id051 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id051
+                value: _buttonTM
+              - *id008
+          parent: null
+        - *id032
+        - *id048
+        - *id039
       MREvent:
-      - *id052
-      - &id053 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id053
-            value: _buttonMR
-          - *id008
-        parent: null
-      - *id047
-      - *id037
-      - *id039
+        - *id052
+        - &id053 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id053
+                value: _buttonMR
+              - *id008
+          parent: null
+        - *id047
+        - *id037
+        - *id039
       BREvent:
-      - *id002
-      - *id006
-      - &id055 !!org.RuleEngine.nodes.IfNode
-        operands:
-        - - &id054 !!org.RuleEngine.nodes.ALNode
-            operands:
-            - - *id014
-              - !!org.RuleEngine.nodes.ALNode
+        - *id002
+        - *id006
+        - &id055 !!org.RuleEngine.nodes.IfNode
+          operands:
+            - - &id054 !!org.RuleEngine.nodes.ALNode
                 operands:
-                - - *id028
-                  - *id022
+                  - - *id014
+                    - !!org.RuleEngine.nodes.ALNode
+                      operands:
+                        - - *id028
+                          - *id022
+                      operator: '&&'
+                      parent: *id054
                 operator: '&&'
-                parent: *id054
-            operator: '&&'
-            parent: *id055
-        - - *id019
-        - []
-        parent: null
-      - *id037
-      - *id049
-      - *id039
+                parent: *id055
+            - - *id019
+            - []
+          parent: null
+        - *id037
+        - *id049
+        - *id039
       MLEvent:
-      - *id056
-      - &id057 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id057
-            value: _buttonML
-          - *id008
-        parent: null
-      - *id047
-      - *id058
-      - *id039
+        - *id056
+        - &id057 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id057
+                value: _buttonML
+              - *id008
+          parent: null
+        - *id047
+        - *id058
+        - *id039
       heuristic: null
       initialization: null
       BMEvent:
-      - *id059
-      - &id060 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id060
-            value: _buttonBM
-          - *id008
-        parent: null
-      - *id055
-      - *id048
-      - *id039
+        - *id059
+        - &id060 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id060
+                value: _buttonBM
+              - *id008
+          parent: null
+        - *id055
+        - *id048
+        - *id039
       TLEvent:
-      - *id061
-      - &id062 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id062
-            value: _buttonTL
-          - *id008
-        parent: null
-      - *id032
-      - *id058
-      - *id049
-      - *id039
+        - *id061
+        - &id062 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id062
+                value: _buttonTL
+              - *id008
+          parent: null
+        - *id032
+        - *id058
+        - *id049
+        - *id039
       BLEvent:
-      - *id063
-      - &id064 !!org.RuleEngine.nodes.PSetNode
-        operands:
-        - - *id005
-          - !!org.RuleEngine.nodes.LiteralNode
-            parent: *id064
-            value: _buttonBL
-          - *id008
-        parent: null
-      - *id055
-      - *id058
-      - *id038
-      - *id039
+        - *id063
+        - &id064 !!org.RuleEngine.nodes.PSetNode
+          operands:
+            - - *id005
+              - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id064
+                value: _buttonBL
+              - *id008
+          parent: null
+        - *id055
+        - *id058
+        - *id038
+        - *id039
     gameObjects: []
     gamepieces: []
     maxPlayer: 4
     minPlayer: 1
     players:
-    - gamePieces: []
+      - gamePieces: []
+        inventory: []
+        prevTraits:
+          yPos: null
+          shape: null
+          color: '#FFFFFF'
+          width: null
+          isHuman: false
+          xPos: null
+          label: button10
+          inventory: null
+          height: null
+        traits:
+          yPos: 0
+          shape: default
+          color: '0x000000ff'
+          width: 0.0
+          isHuman: true
+          xPos: 0
+          label: TicTacJoe
+          inventory: []
+          height: 0.0
+    projectName: New Project
+    registers:
+      winner: null
+      currPlayer: null
+    spinners: []
+    tiles:
+      - connections: &id066 []
+        hasImage: false
+        id: 99
+        pieces: &id065 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile100
+          connections: null
+          height: 0.0
+        startXCoordinate: 0
+        startYCoordinate: 0
+        tileImage: null
+        tileName: tileTL
+        traits:
+          pieces: *id065
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileTL
+          connections: *id066
+          height: 186.0
+        x: 0
+        y: 0
+      - connections: &id068 []
+        hasImage: false
+        id: 100
+        pieces: &id067 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile101
+          connections: null
+          height: 0.0
+        startXCoordinate: 1
+        startYCoordinate: 0
+        tileImage: null
+        tileName: tileTM
+        traits:
+          pieces: *id067
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileTM
+          connections: *id068
+          height: 186.0
+        x: 1
+        y: 0
+      - connections: &id070 []
+        hasImage: false
+        id: 102
+        pieces: &id069 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile103
+          connections: null
+          height: 0.0
+        startXCoordinate: 0
+        startYCoordinate: 1
+        tileImage: null
+        tileName: tileML
+        traits:
+          pieces: *id069
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileML
+          connections: *id070
+          height: 186.0
+        x: 0
+        y: 1
+      - connections: &id072 []
+        hasImage: false
+        id: 103
+        pieces: &id071 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile104
+          connections: null
+          height: 0.0
+        startXCoordinate: 1
+        startYCoordinate: 1
+        tileImage: null
+        tileName: tileMM
+        traits:
+          pieces: *id071
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileMM
+          connections: *id072
+          height: 186.0
+        x: 1
+        y: 1
+      - connections: &id074 []
+        hasImage: false
+        id: 104
+        pieces: &id073 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile105
+          connections: null
+          height: 0.0
+        startXCoordinate: 2
+        startYCoordinate: 1
+        tileImage: null
+        tileName: tileMR
+        traits:
+          pieces: *id073
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileMR
+          connections: *id074
+          height: 186.0
+        x: 2
+        y: 1
+      - connections: &id076 []
+        hasImage: false
+        id: 105
+        pieces: &id075 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile106
+          connections: null
+          height: 0.0
+        startXCoordinate: 0
+        startYCoordinate: 2
+        tileImage: null
+        tileName: tileBL
+        traits:
+          pieces: *id075
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileBL
+          connections: *id076
+          height: 186.0
+        x: 0
+        y: 2
+      - connections: &id078 []
+        hasImage: false
+        id: 106
+        pieces: &id077 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile107
+          connections: null
+          height: 0.0
+        startXCoordinate: 1
+        startYCoordinate: 2
+        tileImage: null
+        tileName: tileBM
+        traits:
+          pieces: *id077
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileBM
+          connections: *id078
+          height: 186.0
+        x: 1
+        y: 2
+      - connections: &id080 []
+        hasImage: false
+        id: 107
+        pieces: &id079 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile108
+          connections: null
+          height: 0.0
+        startXCoordinate: 2
+        startYCoordinate: 2
+        tileImage: null
+        tileName: tileBR
+        traits:
+          pieces: *id079
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileBR
+          connections: *id080
+          height: 186.0
+        x: 2
+        y: 2
+      - connections: &id082 []
+        hasImage: false
+        id: 9
+        pieces: &id081 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#000000FF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: tile10
+          connections: null
+          height: 0.0
+        startXCoordinate: 2
+        startYCoordinate: 0
+        tileImage: null
+        tileName: tileTR
+        traits:
+          pieces: *id081
+          yPos: 0
+          shape: Rectangle
+          color: '#FFFFFFFF'
+          onLand: ''
+          width: 186.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tileTR
+          connections: *id082
+          height: 186.0
+        x: 2
+        y: 0
+    timers: []
+    tokens: []
+    tutorialEnabled: false
+  projectName: TicTacToe
+  savedGS:
+- initGS:
+    board:
+      boardHeight: 560
+      boardWidth: 560
+      cellHeight: 112
+      cellWidth: 112
+      gridLayout:
+      - - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      - - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      - - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      - - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      - - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      height: 5
+      prevTraits:
+        yPos: null
+        shape: null
+        width: 0.0
+        xPos: null
+        height: 0.0
+      traits:
+        yPos: 0
+        shape: default
+        width: 560.0
+        xPos: 0
+        height: 560.0
+      width: 5
+    buttons:
+    - prevTraits:
+        onClick: ''
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: button37
+        text: null
+        enabled: null
+        height: null
+      traits:
+        onClick: rollAndMove
+        yPos: 0
+        shape: default
+        color: '#FFFFFF'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: rollButton
+        text: Roll Dice
+        enabled: true
+        height: 0.0
+    - prevTraits:
+        onClick: ''
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: button38
+        text: null
+        enabled: null
+        height: null
+      traits:
+        onClick: endTurn
+        yPos: 0
+        shape: default
+        color: '#FFFFFF'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: endButton
+        text: End Turn
+        enabled: true
+        height: 0.0
+    cards:
+    - &id087
+      prevTraits:
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: null
+        text: null
+        onPlay: ''
+        enabled: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '#000000'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: card01
+        text: default text
+        onPlay: move1Card
+        enabled: true
+        height: 0.0
+    - &id088
+      prevTraits:
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: null
+        text: null
+        onPlay: ''
+        enabled: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '#000000'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: card02
+        text: default text
+        onPlay: move4Card
+        enabled: true
+        height: 0.0
+    - &id089
+      prevTraits:
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: null
+        text: null
+        onPlay: ''
+        enabled: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '#000000'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: card03
+        text: default text
+        onPlay: move6Card
+        enabled: true
+        height: 0.0
+    - &id086
+      prevTraits:
+        yPos: null
+        shape: null
+        color: null
+        pressed: null
+        width: null
+        icon: null
+        xPos: null
+        label: null
+        text: null
+        onPlay: ''
+        enabled: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '#000000'
+        pressed: false
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: card04
+        text: default text
+        onPlay: draw2Card
+        enabled: true
+        height: 0.0
+    decks:
+    - &id143
+      deck: &id090
+      - *id086
+      - *id087
+      - *id087
+      - *id087
+      - *id088
+      - *id087
+      - *id086
+      - *id088
+      - *id089
+      - *id088
+      - *id087
+      - *id087
+      prevTraits:
+        yPos: null
+        cards: null
+        shape: null
+        color: null
+        width: null
+        icon: null
+        xPos: null
+        label: null
+        height: null
+      traits:
+        yPos: 0
+        cards: *id090
+        shape: default
+        color: '#000000'
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: deck01
+        height: 0.0
+    dice:
+    - prevTraits:
+        yPos: null
+        shape: null
+        color: null
+        dotColor: null
+        width: null
+        icon: null
+        xPos: null
+        label: die01
+        numSides: 6
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '#FFFFFF'
+        dotColor: '#000000'
+        width: 0.0
+        icon: default_gamepiece_icon.jpg
+        xPos: 0
+        label: gameDie
+        numSides: 5
+        height: 0.0
+    events:
+      move1Card:
+      - &id095 !!org.RuleEngine.nodes.MoveByNode
+        operands:
+        - - &id091 !!org.RuleEngine.nodes.GetGamepieceNode
+            operands:
+            - - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id091
+                value: 0
+              - &id093 !!org.RuleEngine.nodes.LiteralNode
+                parent: &id092 !!org.RuleEngine.nodes.PSetNode
+                  operands:
+                  - - &id096 !!org.RuleEngine.nodes.LiteralNode
+                      parent: *id092
+                      value: value
+                    - *id093
+                    - !!org.RuleEngine.nodes.LiteralNode
+                      parent: *id092
+                      value: 6
+                  parent: null
+                value: currPlayer
+            parent: &id094 !!org.RuleEngine.nodes.MoveByNode
+              operands:
+              - - *id091
+                - !!org.RuleEngine.nodes.LiteralNode
+                  parent: *id094
+                  value: 6
+              parent: null
+          - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id095
+            value: 1
+        parent: null
+      - &id097 !!org.RuleEngine.nodes.PSetNode
+        operands:
+        - - *id096
+          - *id093
+          - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id097
+            value: 1
+        parent: null
+      - &id098 !!org.RuleEngine.nodes.PSetNode
+        operands:
+        - - &id099 !!org.RuleEngine.nodes.LiteralNode
+            parent: *id098
+            value: distance
+          - *id093
+          - &id100 !!org.RuleEngine.nodes.ALNode
+            operands:
+            - - !!org.RuleEngine.nodes.GetNode
+                operands:
+                - - *id099
+                  - *id093
+                parent: *id100
+              - &id101 !!org.RuleEngine.nodes.GetNode
+                operands:
+                - - *id096
+                  - *id093
+                parent: &id109 !!org.RuleEngine.nodes.MoveByNode
+                  operands:
+                  - - *id091
+                    - *id101
+                  parent: null
+            operator: +
+            parent: *id098
+        parent: null
+      - &id103 !!org.RuleEngine.nodes.PutNode
+        operands:
+        - - &id102 !!org.RuleEngine.nodes.GetLastUsedNode
+            operands:
+            - - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id102
+                value: currPlayer
+            parent: *id103
+          - &id104 !!org.RuleEngine.nodes.LiteralNode
+            parent: &id105 !!org.RuleEngine.nodes.DrawNode
+              operands:
+              - - *id104
+              parent: &id106 !!org.RuleEngine.nodes.PutInInventoryNode
+                operands:
+                - - *id105
+                  - *id093
+                parent: null
+              placement: random
+            value: deck
+        parent: null
+        placement: random
+      draw2Card:
+      - *id106
+      - *id106
+      - *id103
+      move6Card:
+      - *id094
+      - *id092
+      - *id098
+      - *id103
+      rollAndMove:
+      - &id108 !!org.RuleEngine.nodes.PSetNode
+        operands:
+        - - *id096
+          - *id093
+          - &id107 !!org.RuleEngine.nodes.UseNode
+            operands:
+            - - !!org.RuleEngine.nodes.LiteralNode
+                parent: *id107
+                value: _gameDie
+            parent: *id108
+        parent: null
+      - *id109
+      - *id098
+      - &id113 !!org.RuleEngine.nodes.PSetNode
+        operands:
+        - - &id110 !!org.RuleEngine.nodes.LiteralNode
+            parent: &id111 !!org.RuleEngine.nodes.PSetNode
+              operands:
+              - - *id110
+                - &id112 !!org.RuleEngine.nodes.LiteralNode
+                  parent: *id111
+                  value: _rollButton
+                - !!org.RuleEngine.nodes.LiteralNode
+                  parent: *id111
+                  value: true
+              parent: null
+            value: enabled
+          - *id112
+          - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id113
+            value: false
+        parent: null
+      move4Card:
+      - &id114 !!org.RuleEngine.nodes.MoveByNode
+        operands:
+        - - *id091
+          - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id114
+            value: 4
+        parent: null
+      - &id115 !!org.RuleEngine.nodes.PSetNode
+        operands:
+        - - *id096
+          - *id093
+          - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id115
+            value: 4
+        parent: null
+      - *id098
+      - *id103
+      drawCard:
+      - *id106
+      endTurn:
+      - &id116 !!org.RuleEngine.nodes.RSetNode
+        operands:
+        - - *id093
+          - !!org.RuleEngine.nodes.NextPlayerNode
+            operands:
+            - []
+            parent: *id116
+        parent: null
+      - *id111
+      winGame:
+      - &id117 !!org.RuleEngine.nodes.RSetNode
+        operands:
+        - - !!org.RuleEngine.nodes.LiteralNode
+            parent: *id117
+            value: winner
+          - *id093
+        parent: null
+    gameObjects: []
+    gamepieces:
+    - &id136
+      prevTraits:
+        yPos: null
+        shape: null
+        color: '#000000'
+        width: null
+        icon: default_gamepiece_icon.jpg
+        location: null
+        xPos: null
+        label: gamepiece01
+        height: null
+      shiftX: 0.0
+      shiftY: 0.0
+      traits:
+        yPos: 0
+        shape: default
+        color: '#FFFFFFFF'
+        width: 0.0
+        icon: ''
+        location: &id137 !!org.GameObjects.objects.Tile
+          connections: &id139
+          - &id184
+            connections: &id135
+            - &id185
+              connections: &id133
+              - &id186
+                connections: &id131
+                - &id187
+                  connections: &id129
+                  - &id183
+                    connections: &id127
+                    - &id174
+                      connections: &id125
+                      - &id173
+                        connections: &id123
+                        - &id172
+                          connections: &id121
+                          - connections: &id119 []
+                            hasImage: false
+                            id: 260
+                            pieces: &id118 []
+                            prevTraits:
+                              pieces: null
+                              yPos: 0
+                              shape: square
+                              color: '#000000'
+                              onLand: null
+                              width: 0.0
+                              icon: null
+                              xPos: 0
+                              label: null
+                              connections: null
+                              height: 0.0
+                            startXCoordinate: 1
+                            startYCoordinate: 2
+                            tileImage: null
+                            tileName: null
+                            traits:
+                              pieces: *id118
+                              yPos: 0
+                              shape: Rectangle
+                              color: '#000000FF'
+                              onLand: ''
+                              width: 112.0
+                              icon: default_tile_icon.jpg
+                              xPos: 0
+                              label: tile261
+                              connections: *id119
+                              height: 112.0
+                            x: 1
+                            y: 2
+                          hasImage: false
+                          id: 261
+                          pieces: &id120 []
+                          prevTraits:
+                            pieces: null
+                            yPos: 0
+                            shape: square
+                            color: '#CCCCCCFF'
+                            onLand: null
+                            width: 0.0
+                            icon: null
+                            xPos: 0
+                            label: null
+                            connections: null
+                            height: 0.0
+                          startXCoordinate: 2
+                          startYCoordinate: 2
+                          tileImage: null
+                          tileName: null
+                          traits:
+                            pieces: *id120
+                            yPos: 0
+                            shape: Rectangle
+                            color: '#B3B3B3FF'
+                            onLand: ''
+                            width: 112.0
+                            icon: default_tile_icon.jpg
+                            xPos: 0
+                            label: tile262
+                            connections: *id121
+                            height: 112.0
+                          x: 2
+                          y: 2
+                        hasImage: false
+                        id: 262
+                        pieces: &id122 []
+                        prevTraits:
+                          pieces: null
+                          yPos: 0
+                          shape: square
+                          color: '#CCCCCCFF'
+                          onLand: null
+                          width: 0.0
+                          icon: null
+                          xPos: 0
+                          label: null
+                          connections: null
+                          height: 0.0
+                        startXCoordinate: 3
+                        startYCoordinate: 2
+                        tileImage: null
+                        tileName: null
+                        traits:
+                          pieces: *id122
+                          yPos: 0
+                          shape: Rectangle
+                          color: '#B3B3B3FF'
+                          onLand: ''
+                          width: 112.0
+                          icon: default_tile_icon.jpg
+                          xPos: 0
+                          label: tile263
+                          connections: *id123
+                          height: 112.0
+                        x: 3
+                        y: 2
+                      hasImage: false
+                      id: 263
+                      pieces: &id124 []
+                      prevTraits:
+                        pieces: null
+                        yPos: 0
+                        shape: square
+                        color: '#000000FF'
+                        onLand: null
+                        width: 0.0
+                        icon: null
+                        xPos: 0
+                        label: null
+                        connections: null
+                        height: 0.0
+                      startXCoordinate: 4
+                      startYCoordinate: 2
+                      tileImage: null
+                      tileName: null
+                      traits:
+                        pieces: *id124
+                        yPos: 0
+                        shape: Rectangle
+                        color: '#B3B3B3FF'
+                        onLand: ''
+                        width: 112.0
+                        icon: default_tile_icon.jpg
+                        xPos: 0
+                        label: tile264
+                        connections: *id125
+                        height: 112.0
+                      x: 4
+                      y: 2
+                    hasImage: false
+                    id: 268
+                    pieces: &id126 []
+                    prevTraits:
+                      pieces: null
+                      yPos: 0
+                      shape: square
+                      color: '#999999FF'
+                      onLand: null
+                      width: 0.0
+                      icon: null
+                      xPos: 0
+                      label: null
+                      connections: null
+                      height: 0.0
+                    startXCoordinate: 4
+                    startYCoordinate: 3
+                    tileImage: null
+                    tileName: null
+                    traits:
+                      pieces: *id126
+                      yPos: 0
+                      shape: Rectangle
+                      color: '#B3B3B3FF'
+                      onLand: ''
+                      width: 112.0
+                      icon: default_tile_icon.jpg
+                      xPos: 0
+                      label: tile269
+                      connections: *id127
+                      height: 112.0
+                    x: 4
+                    y: 3
+                  hasImage: false
+                  id: 273
+                  pieces: &id128 []
+                  prevTraits:
+                    pieces: null
+                    yPos: 0
+                    shape: square
+                    color: '#000000FF'
+                    onLand: null
+                    width: 0.0
+                    icon: null
+                    xPos: 0
+                    label: null
+                    connections: null
+                    height: 0.0
+                  startXCoordinate: 4
+                  startYCoordinate: 4
+                  tileImage: null
+                  tileName: null
+                  traits:
+                    pieces: *id128
+                    yPos: 0
+                    shape: Rectangle
+                    color: '#B3B3B3FF'
+                    onLand: ''
+                    width: 112.0
+                    icon: default_tile_icon.jpg
+                    xPos: 0
+                    label: tile274
+                    connections: *id129
+                    height: 112.0
+                  x: 4
+                  y: 4
+                hasImage: false
+                id: 272
+                pieces: &id130 []
+                prevTraits:
+                  pieces: null
+                  yPos: 0
+                  shape: square
+                  color: '#000000FF'
+                  onLand: null
+                  width: 0.0
+                  icon: null
+                  xPos: 0
+                  label: tile273
+                  connections: null
+                  height: 0.0
+                startXCoordinate: 3
+                startYCoordinate: 4
+                tileImage: null
+                tileName: all gucci
+                traits:
+                  pieces: *id130
+                  yPos: 0
+                  shape: Rectangle
+                  color: '#B3B3B3FF'
+                  onLand: ''
+                  width: 112.0
+                  icon: default_tile_icon.jpg
+                  xPos: 0
+                  label: all gucci
+                  connections: *id131
+                  height: 112.0
+                x: 3
+                y: 4
+              hasImage: false
+              id: 271
+              pieces: &id132 []
+              prevTraits:
+                pieces: null
+                yPos: 0
+                shape: square
+                color: '#000000FF'
+                onLand: null
+                width: 0.0
+                icon: null
+                xPos: 0
+                label: null
+                connections: null
+                height: 0.0
+              startXCoordinate: 2
+              startYCoordinate: 4
+              tileImage: null
+              tileName: null
+              traits:
+                pieces: *id132
+                yPos: 0
+                shape: Rectangle
+                color: '#B3B3B3FF'
+                onLand: ''
+                width: 112.0
+                icon: default_tile_icon.jpg
+                xPos: 0
+                label: tile272
+                connections: *id133
+                height: 112.0
+              x: 2
+              y: 4
+            hasImage: false
+            id: 270
+            pieces: &id134 []
+            prevTraits:
+              pieces: null
+              yPos: 0
+              shape: square
+              color: '#000000FF'
+              onLand: null
+              width: 0.0
+              icon: null
+              xPos: 0
+              label: null
+              connections: null
+              height: 0.0
+            startXCoordinate: 1
+            startYCoordinate: 4
+            tileImage: null
+            tileName: null
+            traits:
+              pieces: *id134
+              yPos: 0
+              shape: Rectangle
+              color: '#B3B3B3FF'
+              onLand: ''
+              width: 112.0
+              icon: default_tile_icon.jpg
+              xPos: 0
+              label: tile271
+              connections: *id135
+              height: 112.0
+            x: 1
+            y: 4
+          hasImage: false
+          id: 269
+          pieces: &id138
+          - *id136
+          - &id140
+            prevTraits:
+              yPos: null
+              shape: null
+              color: '#000000'
+              width: null
+              icon: default_gamepiece_icon.jpg
+              location: null
+              xPos: null
+              label: gamepiece02
+              height: null
+            shiftX: 0.0
+            shiftY: 0.0
+            traits:
+              yPos: 0
+              shape: default
+              color: '#FFFFFFFF'
+              width: 0.0
+              icon: ''
+              location: *id137
+              xPos: 0
+              label: Piece2
+              height: 0.0
+          - &id141
+            prevTraits:
+              yPos: null
+              shape: null
+              color: '#000000'
+              width: null
+              icon: default_gamepiece_icon.jpg
+              location: null
+              xPos: null
+              label: gamepiece03
+              height: null
+            shiftX: 0.0
+            shiftY: 0.0
+            traits:
+              yPos: 0
+              shape: default
+              color: '#FFFFFFFF'
+              width: 0.0
+              icon: ''
+              location: *id137
+              xPos: 0
+              label: Piece3
+              height: 0.0
+          - &id142
+            prevTraits:
+              yPos: null
+              shape: null
+              color: '#000000'
+              width: null
+              icon: default_gamepiece_icon.jpg
+              location: null
+              xPos: null
+              label: gamepiece04
+              height: null
+            shiftX: 0.0
+            shiftY: 0.0
+            traits:
+              yPos: 0
+              shape: default
+              color: '#FFFFFFFF'
+              width: 0.0
+              icon: ''
+              location: *id137
+              xPos: 0
+              label: Piece4
+              height: 0.0
+          prevTraits:
+            pieces: null
+            yPos: 0
+            shape: square
+            color: '#CCCCCCFF'
+            onLand: null
+            width: 0.0
+            icon: null
+            xPos: 0
+            label: tile270
+            connections: null
+            height: 0.0
+          startXCoordinate: 0
+          startYCoordinate: 4
+          tileImage: null
+          tileName: Start
+          traits:
+            pieces: *id138
+            yPos: 0
+            shape: Rectangle
+            color: '#B3B3B3FF'
+            onLand: ''
+            width: 112.0
+            icon: default_tile_icon.jpg
+            xPos: 0
+            label: Start
+            connections: *id139
+            height: 112.0
+          x: 0
+          y: 4
+        xPos: 0
+        label: Piece1
+        height: 0.0
+    - *id140
+    - *id141
+    - *id142
+    maxPlayer: 4
+    minPlayer: 1
+    players:
+    - gamePieces:
+      - *id136
       inventory: []
       prevTraits:
         yPos: null
@@ -696,199 +1917,385 @@ projects:
         width: null
         isHuman: false
         xPos: null
-        label: button10
+        label: null
         inventory: null
         height: null
       traits:
         yPos: 0
+        distance: 0
         shape: default
-        color: '0x000000ff'
+        color: '0xb31a1aff'
         width: 0.0
         isHuman: true
         xPos: 0
-        label: TicTacJoe
+        label: David
         inventory: []
+        value: 0
         height: 0.0
     projectName: New Project
     registers:
       winner: null
+      deck: *id143
       currPlayer: null
     spinners: []
     tiles:
-    - connections: &id066 []
+    - &id158
+      connections: &id153
+      - &id154
+        connections: &id151
+        - &id155
+          connections: &id149
+          - &id156
+            connections: &id147
+            - &id157
+              connections: &id145 []
+              hasImage: false
+              id: 253
+              pieces: &id144 []
+              prevTraits:
+                pieces: null
+                yPos: 0
+                shape: square
+                color: '#000000FF'
+                onLand: null
+                width: 0.0
+                icon: null
+                xPos: 0
+                label: tile254
+                connections: null
+                height: 0.0
+              startXCoordinate: 4
+              startYCoordinate: 0
+              tileImage: null
+              tileName: End
+              traits:
+                pieces: *id144
+                yPos: 0
+                shape: Rectangle
+                color: '#B3B3B3FF'
+                onLand: winGame
+                width: 112.0
+                icon: default_tile_icon.jpg
+                xPos: 0
+                label: End
+                connections: *id145
+                height: 112.0
+              x: 4
+              y: 0
+            hasImage: false
+            id: 252
+            pieces: &id146 []
+            prevTraits:
+              pieces: null
+              yPos: 0
+              shape: square
+              color: '#000000FF'
+              onLand: null
+              width: 0.0
+              icon: null
+              xPos: 0
+              label: null
+              connections: null
+              height: 0.0
+            startXCoordinate: 3
+            startYCoordinate: 0
+            tileImage: null
+            tileName: null
+            traits:
+              pieces: *id146
+              yPos: 0
+              shape: Rectangle
+              color: '#B3B3B3FF'
+              onLand: ''
+              width: 112.0
+              icon: default_tile_icon.jpg
+              xPos: 0
+              label: tile253
+              connections: *id147
+              height: 112.0
+            x: 3
+            y: 0
+          hasImage: false
+          id: 251
+          pieces: &id148 []
+          prevTraits:
+            pieces: null
+            yPos: 0
+            shape: square
+            color: '#000000FF'
+            onLand: null
+            width: 0.0
+            icon: null
+            xPos: 0
+            label: null
+            connections: null
+            height: 0.0
+          startXCoordinate: 2
+          startYCoordinate: 0
+          tileImage: null
+          tileName: null
+          traits:
+            pieces: *id148
+            yPos: 0
+            shape: Rectangle
+            color: '#B3B3B3FF'
+            onLand: ''
+            width: 112.0
+            icon: default_tile_icon.jpg
+            xPos: 0
+            label: tile252
+            connections: *id149
+            height: 112.0
+          x: 2
+          y: 0
+        hasImage: false
+        id: 250
+        pieces: &id150 []
+        prevTraits:
+          pieces: null
+          yPos: 0
+          shape: square
+          color: '#CCCCCCFF'
+          onLand: null
+          width: 0.0
+          icon: null
+          xPos: 0
+          label: null
+          connections: null
+          height: 0.0
+        startXCoordinate: 1
+        startYCoordinate: 0
+        tileImage: null
+        tileName: null
+        traits:
+          pieces: *id150
+          yPos: 0
+          shape: Rectangle
+          color: '#B3B3B3FF'
+          onLand: ''
+          width: 112.0
+          icon: default_tile_icon.jpg
+          xPos: 0
+          label: tile251
+          connections: *id151
+          height: 112.0
+        x: 1
+        y: 0
       hasImage: false
-      id: 99
-      pieces: &id065 []
+      id: 249
+      pieces: &id152 []
       prevTraits:
         pieces: null
         yPos: 0
         shape: square
-        color: '#000000FF'
+        color: '#CCCCCCFF'
         onLand: null
         width: 0.0
         icon: null
         xPos: 0
-        label: tile100
+        label: null
         connections: null
         height: 0.0
       startXCoordinate: 0
       startYCoordinate: 0
       tileImage: null
-      tileName: tileTL
+      tileName: null
       traits:
-        pieces: *id065
+        pieces: *id152
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#B3B3B3FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileTL
-        connections: *id066
-        height: 186.0
+        label: tile250
+        connections: *id153
+        height: 112.0
       x: 0
       y: 0
-    - connections: &id068 []
+    - *id154
+    - *id155
+    - *id156
+    - *id157
+    - &id169
+      connections: &id160
+      - *id158
       hasImage: false
-      id: 100
-      pieces: &id067 []
+      id: 254
+      pieces: &id159 []
       prevTraits:
         pieces: null
         yPos: 0
         shape: square
-        color: '#000000FF'
+        color: '#CCCCCCFF'
         onLand: null
         width: 0.0
         icon: null
         xPos: 0
-        label: tile101
-        connections: null
-        height: 0.0
-      startXCoordinate: 1
-      startYCoordinate: 0
-      tileImage: null
-      tileName: tileTM
-      traits:
-        pieces: *id067
-        yPos: 0
-        shape: Rectangle
-        color: '#FFFFFFFF'
-        onLand: ''
-        width: 186.0
-        icon: default_tile_icon.jpg
-        xPos: 0
-        label: tileTM
-        connections: *id068
-        height: 186.0
-      x: 1
-      y: 0
-    - connections: &id070 []
-      hasImage: false
-      id: 102
-      pieces: &id069 []
-      prevTraits:
-        pieces: null
-        yPos: 0
-        shape: square
-        color: '#000000FF'
-        onLand: null
-        width: 0.0
-        icon: null
-        xPos: 0
-        label: tile103
+        label: null
         connections: null
         height: 0.0
       startXCoordinate: 0
       startYCoordinate: 1
       tileImage: null
-      tileName: tileML
+      tileName: null
       traits:
-        pieces: *id069
+        pieces: *id159
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#B3B3B3FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileML
-        connections: *id070
-        height: 186.0
+        label: tile255
+        connections: *id160
+        height: 112.0
       x: 0
       y: 1
-    - connections: &id072 []
+    - connections: &id162 []
       hasImage: false
-      id: 103
-      pieces: &id071 []
+      id: 255
+      pieces: &id161 []
       prevTraits:
         pieces: null
         yPos: 0
         shape: square
-        color: '#000000FF'
+        color: '#000000'
         onLand: null
         width: 0.0
         icon: null
         xPos: 0
-        label: tile104
+        label: null
         connections: null
         height: 0.0
       startXCoordinate: 1
       startYCoordinate: 1
       tileImage: null
-      tileName: tileMM
+      tileName: null
       traits:
-        pieces: *id071
+        pieces: *id161
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#000000FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileMM
-        connections: *id072
-        height: 186.0
+        label: tile256
+        connections: *id162
+        height: 112.0
       x: 1
       y: 1
-    - connections: &id074 []
+    - connections: &id164 []
       hasImage: false
-      id: 104
-      pieces: &id073 []
+      id: 256
+      pieces: &id163 []
       prevTraits:
         pieces: null
         yPos: 0
         shape: square
-        color: '#000000FF'
+        color: '#000000'
         onLand: null
         width: 0.0
         icon: null
         xPos: 0
-        label: tile105
+        label: null
         connections: null
         height: 0.0
       startXCoordinate: 2
       startYCoordinate: 1
       tileImage: null
-      tileName: tileMR
+      tileName: null
       traits:
-        pieces: *id073
+        pieces: *id163
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#000000FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileMR
-        connections: *id074
-        height: 186.0
+        label: tile257
+        connections: *id164
+        height: 112.0
       x: 2
       y: 1
-    - connections: &id076 []
+    - connections: &id166 []
       hasImage: false
-      id: 105
-      pieces: &id075 []
+      id: 257
+      pieces: &id165 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 3
+      startYCoordinate: 1
+      tileImage: null
+      tileName: null
+      traits:
+        pieces: *id165
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile258
+        connections: *id166
+        height: 112.0
+      x: 3
+      y: 1
+    - connections: &id168 []
+      hasImage: false
+      id: 258
+      pieces: &id167 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 4
+      startYCoordinate: 1
+      tileImage: null
+      tileName: null
+      traits:
+        pieces: *id167
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile259
+        connections: *id168
+        height: 112.0
+      x: 4
+      y: 1
+    - &id188
+      connections: &id171
+      - *id169
+      hasImage: false
+      id: 259
+      pieces: &id170 []
       prevTraits:
         pieces: null
         yPos: 0
@@ -898,31 +2305,177 @@ projects:
         width: 0.0
         icon: null
         xPos: 0
-        label: tile106
+        label: null
         connections: null
         height: 0.0
       startXCoordinate: 0
       startYCoordinate: 2
       tileImage: null
-      tileName: tileBL
+      tileName: null
       traits:
-        pieces: *id075
+        pieces: *id170
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#B3B3B3FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileBL
-        connections: *id076
-        height: 186.0
+        label: tile260
+        connections: *id171
+        height: 112.0
       x: 0
       y: 2
-    - connections: &id078 []
+    - *id172
+    - *id173
+    - *id174
+    - connections: &id176 []
       hasImage: false
-      id: 106
-      pieces: &id077 []
+      id: 264
+      pieces: &id175 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 0
+      startYCoordinate: 3
+      tileImage: null
+      tileName: null
+      traits:
+        pieces: *id175
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile265
+        connections: *id176
+        height: 112.0
+      x: 0
+      y: 3
+    - connections: &id178 []
+      hasImage: false
+      id: 265
+      pieces: &id177 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 1
+      startYCoordinate: 3
+      tileImage: null
+      tileName: null
+      traits:
+        pieces: *id177
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile266
+        connections: *id178
+        height: 112.0
+      x: 1
+      y: 3
+    - connections: &id180 []
+      hasImage: false
+      id: 266
+      pieces: &id179 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 2
+      startYCoordinate: 3
+      tileImage: null
+      tileName: null
+      traits:
+        pieces: *id179
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile267
+        connections: *id180
+        height: 112.0
+      x: 2
+      y: 3
+    - connections: &id182 []
+      hasImage: false
+      id: 267
+      pieces: &id181 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: tile268
+        connections: null
+        height: 0.0
+      startXCoordinate: 3
+      startYCoordinate: 3
+      tileImage: null
+      tileName: Blackout
+      traits:
+        pieces: *id181
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 112.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: Blackout
+        connections: *id182
+        height: 112.0
+      x: 3
+      y: 3
+    - *id183
+    - *id137
+    - *id184
+    - *id185
+    - *id186
+    - *id187
+    - connections: &id190
+      - *id188
+      hasImage: false
+      id: 274
+      pieces: &id189 []
       prevTraits:
         pieces: null
         yPos: 0
@@ -932,98 +2485,29 @@ projects:
         width: 0.0
         icon: null
         xPos: 0
-        label: tile107
+        label: tile275
         connections: null
         height: 0.0
       startXCoordinate: 1
       startYCoordinate: 2
       tileImage: null
-      tileName: tileBM
+      tileName: Deleted
       traits:
-        pieces: *id077
+        pieces: *id189
         yPos: 0
         shape: Rectangle
-        color: '#FFFFFFFF'
+        color: '#B3B3B3FF'
         onLand: ''
-        width: 186.0
+        width: 112.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tileBM
-        connections: *id078
-        height: 186.0
+        label: Deleted
+        connections: *id190
+        height: 112.0
       x: 1
       y: 2
-    - connections: &id080 []
-      hasImage: false
-      id: 107
-      pieces: &id079 []
-      prevTraits:
-        pieces: null
-        yPos: 0
-        shape: square
-        color: '#000000FF'
-        onLand: null
-        width: 0.0
-        icon: null
-        xPos: 0
-        label: tile108
-        connections: null
-        height: 0.0
-      startXCoordinate: 2
-      startYCoordinate: 2
-      tileImage: null
-      tileName: tileBR
-      traits:
-        pieces: *id079
-        yPos: 0
-        shape: Rectangle
-        color: '#FFFFFFFF'
-        onLand: ''
-        width: 186.0
-        icon: default_tile_icon.jpg
-        xPos: 0
-        label: tileBR
-        connections: *id080
-        height: 186.0
-      x: 2
-      y: 2
-    - connections: &id082 []
-      hasImage: false
-      id: 9
-      pieces: &id081 []
-      prevTraits:
-        pieces: null
-        yPos: 0
-        shape: square
-        color: '#000000FF'
-        onLand: null
-        width: 0.0
-        icon: null
-        xPos: 0
-        label: tile10
-        connections: null
-        height: 0.0
-      startXCoordinate: 2
-      startYCoordinate: 0
-      tileImage: null
-      tileName: tileTR
-      traits:
-        pieces: *id081
-        yPos: 0
-        shape: Rectangle
-        color: '#FFFFFFFF'
-        onLand: ''
-        width: 186.0
-        icon: default_tile_icon.jpg
-        xPos: 0
-        label: tileTR
-        connections: *id082
-        height: 186.0
-      x: 2
-      y: 0
     timers: []
     tokens: []
     tutorialEnabled: false
-  projectName: TicTacToe
-  savedGS:
-    gamestates: []
+  projectName: Chutes and Ladders
+  savedGS: null
