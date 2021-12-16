@@ -164,7 +164,7 @@ public class Popup extends PlayController {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
         Label saveButton = new Label("Save and Exit");
-        Style.setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
+        Style.setStyle(saveButton, "26", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label exitButton = new Label("Exit");
