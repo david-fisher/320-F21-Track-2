@@ -29,6 +29,7 @@ import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
 import java.lang.NumberFormatException;
 import java.util.Collections;
+import java.util.HashMap;
 
 import org.Editors.blocks.*;
 import org.GamePlay.BasicApplication;
@@ -39,8 +40,6 @@ import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 import javafx.geometry.Bounds;
-import org.GamePlay.BasicApplication;
-import org.GamePlay.controllers.ScreenController;
 
 // TODO: Change handleIf and handleWhile to not solely use placeBlock
 // TODO: Create verificaiton method in handleSaveBtn
@@ -54,6 +53,9 @@ public class RuleEditorUIController extends ScreenController implements Initiali
 
   //Name of the event we're editing
   private String eventName;
+
+  //Holds the gamestate of the currently loaded project
+  private GameState gameState = BasicApplication.getProject().getIntiGS();
 
   double WIDTH = 400.00;
   double HEIGHT = 475.00;
@@ -346,6 +348,11 @@ public class RuleEditorUIController extends ScreenController implements Initiali
     for(int i = 0; i < treeOfParents.size(); i++) {
       System.out.println("i=" + i + ": " + treeOfParents.get(i));
     }
+    
+    //Now that we've verified that everything is valid, we can save this tree of nodes as an event
+    HashMap<String, ArrayList<org.RuleEngine.nodes.Node>> currEvents = gameState.getAllEvents();
+    currEvents.put(this.eventName, treeOfParents);
+    gameState.setAllEvents(currEvents);
   }
 
   @FXML
@@ -371,33 +378,18 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   }
 
   @FXML
-  private void handleAddNotBtn(ActionEvent event) {
-    blockActions(new NotBlock());
-  }
-
-  @FXML
-  private void handleAddLengthBtn(ActionEvent event) {
-    blockActions(new LengthBlock());
-  }
-
-  @FXML
   private void handleAddGetTileIndexBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("tile"));
   }
 
   @FXML
   private void handleAddMoveToTileIndexBtn(ActionEvent event) {
-    blockActions(new MoveToTileIndexBlock());
+    blockActions(GenBlockMaker.makeBlock("moveTo"));
   }
 
   @FXML
   private void handleAddMoveByStepsBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("moveBy"));
-  }
-
-  @FXML
-  private void handleAddGetPlayerByIndexBtn(ActionEvent event) {
-    blockActions(new GetPlayerByIndexBlock());
   }
 
   @FXML
@@ -433,6 +425,31 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   @FXML
   private void handleAddDisplayBtn(ActionEvent event) {
     blockActions(GenBlockMaker.makeBlock("display"));
+  }
+
+  @FXML
+  private void handleAddNegateBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("negate"));
+  }
+
+  @FXML
+  private void handleAddGetPlayerBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("player"));
+  }
+
+  @FXML
+  private void handleAddGetLastUsedBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("getLastUsed"));
+  }
+
+  @FXML
+  private void handleAddPutInInventoryBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("putInInventory"));
+  }
+
+  @FXML
+  private void handleAddGetGamepieceBtn(ActionEvent event) {
+    blockActions(GenBlockMaker.makeBlock("getGamepiece"));
   }
 
   @FXML 
@@ -541,7 +558,7 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   @FXML
   private void handleBackButton(ActionEvent event) throws IOException {
     Savable.closeDB();
-    System.out.println(BasicApplication.getProject().getProjectName());
+    //System.out.println(BasicApplication.getProject().getProjectName());
     changeScene(event, "MainMenuScreen.fxml");
   }
 

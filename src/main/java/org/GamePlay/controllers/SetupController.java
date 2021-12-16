@@ -5,19 +5,18 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.GameObjects.objects.GameObject;
-import org.GameObjects.objects.Gamepiece;
-import org.GameObjects.objects.Player;
-import org.GameObjects.objects.Project;
+import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
+import org.RuleEngine.tests.TicTacToe;
 
 import java.util.*;
 
@@ -220,6 +219,11 @@ public class SetupController extends ScreenController {
 
         // load in the selected game from BasicApplication
         selectedGame = BasicApplication.getProject().getIntiGS();
+
+        TicTacToe ttt = new TicTacToe();
+        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
+        System.out.println("added");
+        Savable.closeDB();
     }
     private void setup() {
 
@@ -311,7 +315,7 @@ public class SetupController extends ScreenController {
             // todo I don't understand what is happening here a comment would be good explaining what is going on
             ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
             int start = curNumPlayers * (numPieces);
-            for (int i = start; i < start + numPieces; i++) {
+            for (int i = start; i < start + numPieces && allPieces.size() - start >= numPieces; i++) {
                 gamePieces.add(allPieces.get(i));
             }
         }

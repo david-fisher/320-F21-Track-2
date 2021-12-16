@@ -33,7 +33,7 @@ public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private static AnchorPane playParent;
-    private GameState gameState;
+    private static GameState gameState;
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
@@ -78,7 +78,6 @@ public class PlayController extends ScreenController {
 
     private static AnchorPane boardPane;
     private void initGame(GameState gameStateInput) {
-
         if (boardPane == null) {
             boardPane = new AnchorPane();
         }
@@ -144,6 +143,10 @@ public class PlayController extends ScreenController {
             fillInventory(currPlayer.getInventory());
         }
 
+        //Call the initialize method of the Game if it has one
+        if (gameState.getEvent("initialization") != null) {
+            interpreter.interpretEvent(gameState.getEvent("initialization"), gameState);
+        }
     }
 
     private void calculateScale(GameState gameState) {
@@ -158,8 +161,9 @@ public class PlayController extends ScreenController {
         double width = gameBoard.getWidth();
         double height = gameBoard.getHeight();
 
-        double boardWidth = scale * gameBoard.getWidth();
-        double boardHeight = scale * gameBoard.getHeight();
+        double boardWidth = scale * width;
+        double boardHeight = scale * height;
+
         //Set the boardPane's height and width so that it will not overlap with other elements on smaller screens
         boardPane.setPrefWidth(boardWidth);
         boardPane.setPrefHeight(boardHeight);
@@ -196,8 +200,8 @@ public class PlayController extends ScreenController {
             tile.setUserData(t);
             tile.setFill(t.getColor());
             boardPane.getChildren().addAll(tile);
-            tile.setLayoutX(t.getTileXLocation() * scale * gameBoard.getCellWidth());
-            tile.setLayoutY(t.getTileYLocation() * scale * gameBoard.getCellHeight());
+            tile.setLayoutX(t.getTileXLocation() * scale * gameBoard.getCellWidth() + 1);
+            tile.setLayoutY(t.getTileYLocation() * scale * gameBoard.getCellHeight() + 1);
             t.setParent(tile);
         });
         // for each tile
@@ -226,7 +230,7 @@ public class PlayController extends ScreenController {
             String event = button.getOnClick();
             Label label = new Label(button.getText());
             button.setParent(label);
-            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, button.getHeight());
+            Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, 30);
             button.getParent().setOnMouseClicked(e -> {
                 if (button.getEnabled()) {
                     interpreter.interpretEvent(gameState.events.get(event), gameState);
@@ -299,7 +303,6 @@ public class PlayController extends ScreenController {
         gp.setUserData(gamePiece);
         gamePiece.setParent(gp);
         boardPane.getChildren().add(gp);
-        System.out.println("Baseline:" + gp.getBaselineOffset());
 
         if (singlePiece) {
             double shiftX = (2 * (i % rows) + 1) * radius + (i % rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
@@ -561,7 +564,10 @@ public class PlayController extends ScreenController {
         Platform.exit();
     }
 
-    public void clearPlayParent() { playParent = new AnchorPane();}
+    public void clearPlayParent() {
+        playParent = new AnchorPane();
+        boardPane = new AnchorPane();
+    }
 
     public void clearParents() {
         gameState.getAllTiles().forEach(t -> {
