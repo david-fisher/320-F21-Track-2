@@ -339,7 +339,7 @@ public class Controller extends ScreenController {
 					gameBoardBackground.getChildren().add(tileShape);
 					draggable.makeDraggable(tileShape, gameBoard, gameBoardBackground, gridLayout, r);
 					rightclickable.makeRightClickable(r, tileShape, gameBoardBackground, gridLayout, gameBoard, gameState.getAllTiles());
-					leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
+					leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf,connectionsTf, gameBoardBackground.getScene());
 					tileShape.setLayoutX((i * gameBoard.getCellWidth()));
 					tileShape.setLayoutY((j * gameBoard.getCellHeight()));
 					gridLayout[i][j] = 1;
@@ -382,7 +382,7 @@ public class Controller extends ScreenController {
 					gameBoardBackground.getChildren().add(shape);
 					draggable.makeDraggable(shape, gameBoard, gameBoardBackground, gridLayout, c);
 					rightclickable.makeRightClickable(c,shape, gameBoardBackground, gridLayout, gameBoard, gameState.getAllTiles());
-					leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
+					leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf,connectionsTf, gameBoardBackground.getScene());
 					shape.setLayoutX((i * gameBoard.getCellWidth() + x/2));
 					shape.setLayoutY((j * gameBoard.getCellHeight() + y/2));
 					gridLayout[i][j] = 1;
