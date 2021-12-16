@@ -581,10 +581,10 @@ public class PlayController extends ScreenController {
             gp.removeTrait("parent");
         });
         gameState.getAllCards().forEach(c -> {
-            c.setParent(null);
+            c.removeTrait("parent");
         });
         gameState.getAllButtons().forEach(b -> {
-            b.setParent(null);
+            b.removeTrait("parent");
         });
     }
 
