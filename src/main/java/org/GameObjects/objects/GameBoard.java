@@ -24,6 +24,15 @@ public class GameBoard {
         this.tiles = tiles;
     }
 
+    public GameBoard clone() {
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        for (Tile t: this.tiles) {
+            tiles.add(t.clone());
+        }
+        GameBoard x = new GameBoard(this.boardID, this.shape, this.width, this.height, this.xPos, this.yPos, tiles);
+        return x;
+    }
+
     // setters
     public void setBoardID(String boardID) {
         this.boardID = boardID;

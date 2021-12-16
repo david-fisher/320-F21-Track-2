@@ -21,7 +21,15 @@ public class Die extends GameObject {
 	 * object) numSides: Integer
 	 */
 
-//set trait to value. Overrides checking for default traits only
+	public Die clone() {
+		Die x = new Die();
+		for (String s : this.getAllTraits().keySet()) {
+			x.setTrait(s, this.getTrait(s), true);
+		}
+		return x;
+	}
+
+	//set trait to value. Overrides checking for default traits only
 	public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 
 		// run game object's set trait first

@@ -21,7 +21,19 @@ public class Player extends GameObject {
         this.setIsHuman(false);
         this.setLastUsedObj(null);
     }
-    
+
+    public Player clone() {
+        ArrayList<Gamepiece> y = new ArrayList<Gamepiece>();
+        for (Gamepiece c: this.getGamePieces()) {
+            y.add(c.clone());
+        }
+        ArrayList<GameObject> z = new ArrayList<GameObject>();
+        for (GameObject c: this.getInventory()) {
+            z.add(c.clone());
+        }
+        Player x = new Player(this.getLabel(), this.getColor(), y, z, this.getIsHuman());
+        return x;
+    }
     public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 
       // run game object's set trait first

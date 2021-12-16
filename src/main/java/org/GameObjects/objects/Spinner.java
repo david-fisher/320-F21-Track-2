@@ -40,6 +40,20 @@ public class Spinner extends GameObject
      * 	categories: ArrayList
      */
 
+    public Spinner clone() {
+        Spinner x = new Spinner();
+        for (String s : this.getAllTraits().keySet()) {
+            if (!s.equals("categories")) {
+                x.setTrait(s, this.getTrait(s), true);
+            }
+        }
+        ArrayList<Category> y = new ArrayList<Category>();
+        for (Category c: x.getCategories()) {
+            y.add(c.clone());
+        }
+        x.setTrait("categories", y);
+        return x;
+    }
 
     public boolean setNumCategories(int num)
     {

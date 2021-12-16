@@ -19,6 +19,7 @@ public class NodeUtil {
         } else if (val instanceof GameObject) {
             return (GameObject)val;
         }
+        
         System.out.println("Error: Cannot process node into GameObject.");
         return null;
     }

@@ -1,13 +1,11 @@
 package org.RuleEngine.oracles;
-import java.util.ArrayList;
-import java.util.Map;
 
-import org.RuleEngine.engine.*;
-import org.GameObjects.objects.Button;
-import org.RuleEngine.nodes.Node;
+import org.RuleEngine.engine.GameState;
 
-public class HeuristicOracle implements Oracle {
-    public HeuristicOracle() {
+public class FullOracle implements Oracle {
+    public Cache cache;
+    public FullOracle() {
+        this.cache = new Cache(1000000);
     }
 
     public void processMove(String event, GameState currState) {

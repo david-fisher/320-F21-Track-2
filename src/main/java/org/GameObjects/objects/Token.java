@@ -20,6 +20,13 @@ public class Token extends GameObject{
    * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	value	:	Integer
    */
+  public Token clone() {
+    Token x = new Token();
+    for (String s : this.getAllTraits().keySet()) {
+      x.setTrait(s, this.getTrait(s), true);
+    }
+    return x;
+  }
 
   // set trait to value. Overrides checking for default traits only
   public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
