@@ -1,9 +1,13 @@
 package org.Editors.controllers;
 
 import org.Editors.MainMenu;
+import org.GamePlay.BasicApplication;
+import org.RuleEngine.engine.GameState;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -29,6 +33,8 @@ public class SelectEventController implements Initializable {
 
   //Holds user-provided name for an event if they create one
   private String eventName;
+
+  private GameState gameState = BasicApplication.getProject().getIntiGS();
    
   private void changeScene(ActionEvent event, String nextScene, boolean creatingEvent) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -51,9 +57,17 @@ public class SelectEventController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    //Initialize events list to hold the current events in the events HashMap
+    addEventsToEventsList();
+  }
+
+  private void addEventsToEventsList() {
     ObservableList<String> list = FXCollections.observableArrayList();
-    list.addAll("event1", "event2");
-    eventsList.setItems(list);
+    //Add the names of the events from the hashmap to the events list
+    for (String key : gameState.getAllEvents().keySet()) {
+      list.addAll(key);
+    }
+    this.eventsList.setItems(list);
   }
 
   //Handles OK button
@@ -108,6 +122,24 @@ public class SelectEventController implements Initializable {
         this.eventName = result.get();
         changeScene(event, "RuleEditor.fxml", true);
       }
+    }
+  }
+
+  //Handles "Remove" button
+  @FXML private void handleRemoveBtn(ActionEvent event) {
+    String item = eventsList.getSelectionModel().getSelectedItem();
+    if (item == null) {
+      //User has not selected an item
+      errorLabel.setText("Must select an event to remove");
+      errorLabel.setVisible(true);
+    }
+    else {
+      //Remove the currently selected item in the events list from the HashMap of events
+      HashMap<String, ArrayList<org.RuleEngine.nodes.Node>> currEvents = this.gameState.getAllEvents();
+      currEvents.remove(item);
+      this.gameState.setAllEvents(currEvents);
+      //Remove that item from the events list so it visually disappears for the user
+      addEventsToEventsList();
     }
   }
 }

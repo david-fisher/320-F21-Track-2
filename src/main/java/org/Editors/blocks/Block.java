@@ -84,7 +84,7 @@ public class Block {
           try {
             this.node.parent.removeOperand((OpNode) this.node);
           } catch (NullPointerException excep) {
-            System.out.println(excep);
+            //System.out.println(excep);
           }
           ArrayList ops = ((OpNode) this.node).getAllOperands();
           for (Object aNode: ops) {
