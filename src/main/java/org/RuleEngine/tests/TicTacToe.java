@@ -206,8 +206,8 @@ public class TicTacToe {
         OpNode disableTM = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(buttonTM, 1).setOperand(falseVal, 2);
         TMEvent.add(setTMColor);
         TMEvent.add(disableTM);
-        TLEvent.add(ifTopRow);
-        TLEvent.add(ifMidCol);
+        TMEvent.add(ifTopRow);
+        TMEvent.add(ifMidCol);
         TMEvent.add(nextTurn);
         
         ArrayList<Node> TREvent = new ArrayList<Node>();
@@ -238,7 +238,7 @@ public class TicTacToe {
         MMEvent.add(ifMidCol);
         MMEvent.add(ifBackDiag);
         MMEvent.add(ifForwardDiag);
-        MLEvent.add(nextTurn);
+        MMEvent.add(nextTurn);
         
         ArrayList<Node> MREvent = new ArrayList<Node>();
         OpNode setMRColor = NodeMaker.makeNode("pset").setOperand(colorTrait, 0).setOperand(tileMR, 1).setOperand(getCurrColor, 2);
@@ -354,6 +354,11 @@ public class TicTacToe {
                     if (!input.equals("end"))
                         System.out.println("Unknow input, try again.");
                         
+            }
+            
+            if (state.getRegistry("winner") != null) {
+                System.out.println("Winner is: " + state.getRegistry("winner").getTrait("label"));
+                break;
             }
         }
         myObj.close();
