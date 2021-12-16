@@ -23,26 +23,26 @@ public class TicTacToe {
         LiteralNode<Boolean> falseVal = new LiteralNode<Boolean>(false);
 
         // Rename these with the actual button name setup.
-        LiteralNode<String> buttonTL = NodeMaker.makeStringNode("buttonTL");
-        LiteralNode<String> buttonTM = NodeMaker.makeStringNode("buttonTM");
-        LiteralNode<String> buttonTR = NodeMaker.makeStringNode("buttonTR");
-        LiteralNode<String> buttonML = NodeMaker.makeStringNode("buttonML");
-        LiteralNode<String> buttonMM = NodeMaker.makeStringNode("buttonMM");
-        LiteralNode<String> buttonMR = NodeMaker.makeStringNode("buttonMR");
-        LiteralNode<String> buttonBL = NodeMaker.makeStringNode("buttonBL");
-        LiteralNode<String> buttonBM = NodeMaker.makeStringNode("buttonBM");
-        LiteralNode<String> buttonBR = NodeMaker.makeStringNode("buttonBR");
+        LiteralNode<String> buttonTL = NodeMaker.makeStringNode("_buttonTL");
+        LiteralNode<String> buttonTM = NodeMaker.makeStringNode("_buttonTM");
+        LiteralNode<String> buttonTR = NodeMaker.makeStringNode("_buttonTR");
+        LiteralNode<String> buttonML = NodeMaker.makeStringNode("_buttonML");
+        LiteralNode<String> buttonMM = NodeMaker.makeStringNode("_buttonMM");
+        LiteralNode<String> buttonMR = NodeMaker.makeStringNode("_buttonMR");
+        LiteralNode<String> buttonBL = NodeMaker.makeStringNode("_buttonBL");
+        LiteralNode<String> buttonBM = NodeMaker.makeStringNode("_buttonBM");
+        LiteralNode<String> buttonBR = NodeMaker.makeStringNode("_buttonBR");
 
         // Rename these with the actual tile name setup.
-        LiteralNode<String> tileTL = NodeMaker.makeStringNode("tileTL");
-        LiteralNode<String> tileTM = NodeMaker.makeStringNode("tileTM");
-        LiteralNode<String> tileTR = NodeMaker.makeStringNode("tileTR");
-        LiteralNode<String> tileML = NodeMaker.makeStringNode("tileML");
-        LiteralNode<String> tileMM = NodeMaker.makeStringNode("tileMM");
-        LiteralNode<String> tileMR = NodeMaker.makeStringNode("tileMR");
-        LiteralNode<String> tileBL = NodeMaker.makeStringNode("tileBL");
-        LiteralNode<String> tileBM = NodeMaker.makeStringNode("tileBM");
-        LiteralNode<String> tileBR = NodeMaker.makeStringNode("tileBR");
+        LiteralNode<String> tileTL = NodeMaker.makeStringNode("_tileTL");
+        LiteralNode<String> tileTM = NodeMaker.makeStringNode("_tileTM");
+        LiteralNode<String> tileTR = NodeMaker.makeStringNode("_tileTR");
+        LiteralNode<String> tileML = NodeMaker.makeStringNode("_tileML");
+        LiteralNode<String> tileMM = NodeMaker.makeStringNode("_tileMM");
+        LiteralNode<String> tileMR = NodeMaker.makeStringNode("_tileMR");
+        LiteralNode<String> tileBL = NodeMaker.makeStringNode("_tileBL");
+        LiteralNode<String> tileBM = NodeMaker.makeStringNode("_tileBM");
+        LiteralNode<String> tileBR = NodeMaker.makeStringNode("_tileBR");
 
         // Win game rule
         OpNode makeWinner = NodeMaker.makeNode("rset");
@@ -62,32 +62,32 @@ public class TicTacToe {
         OpNode getTLColor = NodeMaker.makeNode("get");
         getTLColor.setOperand(colorTrait, 0).setOperand(tileTL, 1);
         OpNode getTMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileTM, 1);
+        getTMColor.setOperand(colorTrait, 0).setOperand(tileTM, 1);
         OpNode getTRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileTR, 1);
+        getTRColor.setOperand(colorTrait, 0).setOperand(tileTR, 1);
         OpNode getMLColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileML, 1);
+        getMLColor.setOperand(colorTrait, 0).setOperand(tileML, 1);
         OpNode getMMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileMM, 1);
+        getMMColor.setOperand(colorTrait, 0).setOperand(tileMM, 1);
         OpNode getMRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileMR, 1);
+        getMRColor.setOperand(colorTrait, 0).setOperand(tileMR, 1);
         OpNode getBLColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBL, 1);
+        getBLColor.setOperand(colorTrait, 0).setOperand(tileBL, 1);
         OpNode getBMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBM, 1);
+        getBMColor.setOperand(colorTrait, 0).setOperand(tileBM, 1);
         OpNode getBRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBR, 1);
+        getBRColor.setOperand(colorTrait, 0).setOperand(tileBR, 1);
 
         // The color condition for each tile.
-        OpNode equalTL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalTM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalTR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTRColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalML = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalMM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalMR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMRColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalML = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalMM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalMR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBRColor, 0).setOperand(getCurrColor, 1);
 
         // If all tiles of certain row or column is of the same color as the currPlayer.
         OpNode topRow = ((ALNode)NodeMaker.makeNode("AL")).setOperator("&&").setOperand(equalTL, 0).setOperand(
@@ -122,7 +122,6 @@ public class TicTacToe {
                 ((ALNode)NodeMaker.makeNode("AL")).setOperator("&&").setOperand(equalMM, 0).setOperand(equalBL, 1), 1);
         OpNode ifForwardDiag = NodeMaker.makeNode("if").setOperand(forwardDiag, 0).addOperandToGroup(makeWinner, 1);
 
-
         ArrayList<Node> TLEvent = new ArrayList<Node>();
         OpNode setTLColor = NodeMaker.makeNode("pset").setOperand(colorTrait, 0).setOperand(tileTL, 1).setOperand(getCurrColor, 2);
         OpNode disableTL = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(buttonTL, 1).setOperand(falseVal, 2);
@@ -138,8 +137,8 @@ public class TicTacToe {
         OpNode disableTM = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(buttonTM, 1).setOperand(falseVal, 2);
         TMEvent.add(setTMColor);
         TMEvent.add(disableTM);
-        TLEvent.add(ifTopRow);
-        TLEvent.add(ifMidCol);
+        TMEvent.add(ifTopRow);
+        TMEvent.add(ifMidCol);
         TMEvent.add(nextTurn);
 
         ArrayList<Node> TREvent = new ArrayList<Node>();
@@ -170,7 +169,7 @@ public class TicTacToe {
         MMEvent.add(ifMidCol);
         MMEvent.add(ifBackDiag);
         MMEvent.add(ifForwardDiag);
-        MLEvent.add(nextTurn);
+        MMEvent.add(nextTurn);
 
         ArrayList<Node> MREvent = new ArrayList<Node>();
         OpNode setMRColor = NodeMaker.makeNode("pset").setOperand(colorTrait, 0).setOperand(tileMR, 1).setOperand(getCurrColor, 2);

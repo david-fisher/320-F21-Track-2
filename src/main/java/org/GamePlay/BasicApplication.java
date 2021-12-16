@@ -98,6 +98,7 @@ public class BasicApplication extends Application {
 
         // stuff done before the app launches
         GlobalCSSValues.initDefaultPalette();
+        System.out.println("_tileBR".charAt(0));
 
         launch();
     }

@@ -33,7 +33,7 @@ public class PlayController extends ScreenController {
 
     private ImageView playSettings;
     private static AnchorPane playParent;
-    private GameState gameState;
+    private static GameState gameState;
     private ScrollPane decksPane;
     private ScrollPane buttonPane;
     private ScrollPane inventoryPane;
@@ -78,7 +78,6 @@ public class PlayController extends ScreenController {
 
     private static AnchorPane boardPane;
     private void initGame(GameState gameStateInput) {
-
         if (boardPane == null) {
             boardPane = new AnchorPane();
         }
@@ -144,6 +143,10 @@ public class PlayController extends ScreenController {
             fillInventory(currPlayer.getInventory());
         }
 
+        //Call the initialize method of the Game if it has one
+        if (gameState.getEvent("initialization") != null) {
+            interpreter.interpretEvent(gameState.getEvent("initialization"), gameState);
+        }
     }
 
     private void calculateScale(GameState gameState) {

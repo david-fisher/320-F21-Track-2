@@ -17,8 +17,8 @@ public class GlobalCSSValues {
 
     public static void initDefaultPalette() {
         // insert whatever palette should be loaded on startup
-        initWhiteGoldPalette();
-//        initGreyScalePalette();
+//        initWhiteGoldPalette();
+        initGreyScalePalette();
         //initPurplePalette();
     }
 
@@ -36,7 +36,7 @@ public class GlobalCSSValues {
 
         background = "White";
         text = "Black";
-        accent = "#000000";
+        accent = "Blue";
         secondary = "#f7f3c1";
         buttonBackground = "#FFD700";
         buttonText = "Black";

@@ -4,18 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="Button events implemented in editor">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Editors/controllers/GameObjectUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/LiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/LiteralNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/PSetNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/PSetNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/Editors/controllers/GameObjectEditor.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
