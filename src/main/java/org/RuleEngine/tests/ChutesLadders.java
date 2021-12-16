@@ -4,12 +4,69 @@ import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.GameObjects.objects.*;
 
 public class ChutesLadders {
     public static void main(String[] args) {
         GameState currState = new GameState();
+        Player player1 = new Player("player01", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
+        Player player2 = new Player("player02", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
+        player1.setTrait("distance", 0, true);
+        player1.setTrait("value", 0, true);
+        player2.setTrait("distance", 0, true);
+        player2.setTrait("value", 0, true);
+        Gamepiece gp1 = new Gamepiece();
+        Gamepiece gp2 = new Gamepiece();
+        player1.addPiece(gp1);
+        player2.addPiece(gp2);
+        Die die = new Die();
+        die.setTrait("label", "gameDie");
+        die.setNumSides(5);
+        Button roll = new Button();
+        Button end = new Button();
+        roll.setTrait("label", "rollButton");
+        roll.setTrait("onClick", "rollAndMove");
+        end.setTrait("label", "endButton");
+        end.setTrait("onClick", "endTurn");
+        Card m1Card = new Card();
+        Card m4Card = new Card();
+        Card m6Card = new Card();
+        Card d2Card = new Card();
+        m1Card.setTrait("onPlay", "move1Card");
+        m4Card.setTrait("onPlay", "move4Card");
+        m6Card.setTrait("onPlay", "move6Card");
+        d2Card.setTrait("onPlay", "draw2Card");
+        Deck gameDeck = new Deck();
+        gameDeck.addCard(m1Card, 6);
+        gameDeck.addCard(m4Card, 3);
+        gameDeck.addCard(m6Card, 1);
+        gameDeck.addCard(d2Card, 2);
+        gameDeck.shuffle();
+        for (int i = 0; i < 24; i++) {
+            Tile tile = new Tile();
+            if (i == 0) {
+                gp1.setLocation(tile);
+                gp2.setLocation(tile);
+            }
+            if (i == 5) {
+                tile.setTrait("onLand", "winGame");
+                currState.tiles.get(i-1).addConnect(tile);
+            } else if (i > 0) {
+                tile.setTrait("onLand", "drawCard");
+                currState.tiles.get(i-1).addConnect(tile);
+            }
+            currState.tiles.add(tile);
+        }
+        currState.players.add(player1);
+        currState.players.add(player2);
+        currState.dice.add(die);
+        currState.buttons.add(roll);
+        currState.buttons.add(end);
+        currState.decks.add(gameDeck);
+        currState.addRegistry("deck", gameDeck);
+        currState.addRegistry("currPlayer", player1);
         
         // Constants
         LiteralNode<String> currPlayer = new LiteralNode<String>("currPlayer");
@@ -18,8 +75,8 @@ public class ChutesLadders {
         // TODO: Put in register
         LiteralNode<String> deckName = new LiteralNode<String>("deck");
         LiteralNode<String> enabledTrait = new LiteralNode<String>("enabled");
-        LiteralNode<Integer> distanceTrait = new LiteralNode<Integer>(0);
-        LiteralNode<Integer> valueTrait = new LiteralNode<Integer>(0);
+        LiteralNode<String> distanceTrait = new LiteralNode<String>("distance");
+        LiteralNode<String> valueTrait = new LiteralNode<String>("value");
         
         // Next turn event
         OpNode nextTurn = NodeMaker.makeNode("rset").setOperand(currPlayer, 0).setOperand(NodeMaker.makeNode("nextPlayer"), 1);
@@ -28,7 +85,7 @@ public class ChutesLadders {
         OpNode winGame = NodeMaker.makeNode("rset").setOperand(new LiteralNode<String>("winner"), 0).setOperand(currPlayer, 1);
         
         // Get currPlayer gamepiece
-        OpNode getPiece = NodeMaker.makeNode("getGamepiece").setOperand(new LiteralNode<Integer>(1), 0).setOperand(currPlayer, 1);
+        OpNode getPiece = NodeMaker.makeNode("getGamepiece").setOperand(new LiteralNode<Integer>(0), 0).setOperand(currPlayer, 1);
         
         // Get distance of player
         OpNode getDis = NodeMaker.makeNode("get").setOperand(distanceTrait, 0).setOperand(currPlayer, 1);
@@ -37,16 +94,16 @@ public class ChutesLadders {
         OpNode getVal = NodeMaker.makeNode("get").setOperand(valueTrait, 0).setOperand(currPlayer, 1);
         
         // Get new distance
-        OpNode newDis = ((ALNode)NodeMaker.makeNode("AL")).setOperator("+").setOperand(getDis, 1).setOperand(getVal, 2);
+        OpNode newDis = ((ALNode)NodeMaker.makeNode("AL")).setOperator("+").setOperand(getDis, 0).setOperand(getVal, 1);
         
         // Put last used back to deck
-        OpNode putBack = NodeMaker.makeNode("put").setOperand(NodeMaker.makeNode("getLastUsed"), 0).setOperand(deckName, 1);
+        OpNode putBack = NodeMaker.makeNode("put").setOperand(NodeMaker.makeNode("getLastUsed").setOperand(new LiteralNode<String>("currPlayer"), 0), 0).setOperand(deckName, 1);
         
         // Roll and move event
         ArrayList<Node> rollAndMove = new ArrayList<Node>();
-        LiteralNode<String> die = new LiteralNode<String>("gameDie");
-        OpNode rollDie = NodeMaker.makeNode("use").setOperand(die, 0);
-        OpNode setValue = NodeMaker.makeNode("pset").setOperand(valueTrait, 0).setOperand(currPlayer, 1).setOperand(rollDie, 2);
+        LiteralNode<String> gameDie = new LiteralNode<String>("_gameDie");
+        OpNode rollDie = NodeMaker.makeNode("use").setOperand(gameDie, 0);
+        OpNode setValue = NodeMaker.makeNode("pset").setOperand(valueTrait, 0).setOperand(currPlayer, 1).setOperand(new LiteralNode<Integer>(5), 2);
         OpNode movePlayer = NodeMaker.makeNode("moveBy").setOperand(getPiece, 0).setOperand(getVal, 1);
         OpNode updateDis = NodeMaker.makeNode("pset").setOperand(distanceTrait, 0).setOperand(currPlayer, 1).setOperand(newDis, 2);
         OpNode disableRollButton = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(rollButton, 1).setOperand(new LiteralNode<Boolean>(false), 2);
@@ -54,22 +111,26 @@ public class ChutesLadders {
         rollAndMove.add(movePlayer);
         rollAndMove.add(updateDis);
         rollAndMove.add(disableRollButton);
+        currState.addEvent("rollAndMove", rollAndMove);
         
         // End turn event
         ArrayList<Node> endTurn  = new ArrayList<Node>();
         OpNode enableRollButton = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(rollButton, 1).setOperand(new LiteralNode<Boolean>(true), 2);
         endTurn.add(nextTurn);
         endTurn.add(enableRollButton);
+        currState.addEvent("endTurn", endTurn);
         
         // Win tile event
         ArrayList<Node> winTile = new ArrayList<Node>();
         winTile.add(winGame);
+        currState.addEvent("winGame", winTile);
         
         // Draw card tile event
         ArrayList<Node> drawCard = new ArrayList<Node>();
         OpNode draw = NodeMaker.makeNode("draw").setOperand(deckName, 0);
         OpNode putInPlayer = NodeMaker.makeNode("putInInventory").setOperand(draw, 0).setOperand(currPlayer, 1);
         drawCard.add(putInPlayer);
+        currState.addEvent("drawCard", drawCard);
         
         // Teleport tile event1
         ArrayList<Node> teleport1 = new ArrayList<Node>();
@@ -103,6 +164,7 @@ public class ChutesLadders {
         move1Card.add(setValue1);
         move1Card.add(updateDis);
         move1Card.add(putBack);
+        currState.addEvent("move1Card", move1Card);
         
         // Move 4 card event
         ArrayList<Node> move4Card = new ArrayList<Node>();
@@ -112,6 +174,7 @@ public class ChutesLadders {
         move4Card.add(setValue2);
         move4Card.add(updateDis);
         move4Card.add(putBack);
+        currState.addEvent("move4Card", move4Card);
         
         // Move 6 card event
         ArrayList<Node> move6Card = new ArrayList<Node>();
@@ -121,13 +184,48 @@ public class ChutesLadders {
         move6Card.add(setValue3);
         move6Card.add(updateDis);
         move6Card.add(putBack);
+        currState.addEvent("move6Card", move6Card);
         
         // Draw 2 card event
         ArrayList<Node> draw2Card = new ArrayList<Node>();
         draw2Card.add(putInPlayer);
         draw2Card.add(putInPlayer);
         draw2Card.add(putBack);
+        currState.addEvent("draw2Card", draw2Card);
         
-        
+        String input = "";
+        Scanner myObj = new Scanner(System.in);
+        Interpreter interpreter = Interpreter.getInstance();
+        while(!input.equals("exit")) {
+            input = myObj.nextLine();
+            switch(input) {
+                case "roll":
+                    if (!roll.getEnabled()) {
+                        System.out.println("Roll button disabled. Try something else!");
+                        break;
+                    }
+                    interpreter.interpretEvent(currState.getEvent(roll.getTrait("onClick").toString()), currState);
+                    break;
+                case "done":
+                    if (!end.getEnabled()) {
+                        System.out.println("End button disabled. Try something else!");
+                        break;
+                    }
+                    interpreter.interpretEvent(currState.getEvent(end.getTrait("onClick").toString()), currState);
+                    break;
+                case "card":
+                    ArrayList<GameObject> inv = ((Player)currState.getRegistry("currPlayer")).getInventory();
+                    if (inv.size() > 0) {
+                        interpreter.interpretEvent(currState.getEvent(inv.get(0).getTrait("onPlay").toString()), currState);
+                    } else {
+                        System.out.println("No card to play!");
+                    }
+                    break;
+            }
+            if (currState.getRegistry("winner") != null) {
+                System.out.println("Winner is: " + currState.getRegistry("winner").getTrait("label"));
+                break;
+            }
+        }
     }
 }

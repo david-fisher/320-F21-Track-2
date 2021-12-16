@@ -45,10 +45,17 @@ public class MoveByNode extends OpNode {
         // This will send a list of possible destinations to Minjex, who makes the user choose a destination.
         // The engine then promptly set the location of the gamepiece.
         // TODO AI: Configure this so it calls some other function if the player is AI.
-        Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
-        Gamepiece gp = (Gamepiece) go;
-        if (!gp.setLocation(playerChoice, currState)) {
-            NodeUtil.OtherError("Failed to move object " + op0.getValue());
+        // TODO restore
+        // Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
+        ArrayList<Tile> targets = findTargetTiles((Tile)go.getTrait("location"), dis);
+        System.out.println(targets.get(0).getTrait("onLand"));
+        if (targets.size() > 0) {
+            Tile playerChoice = targets.get(0);
+            Gamepiece gp = (Gamepiece) go;
+            if (!gp.setLocation(playerChoice, currState)) {
+                NodeUtil.OtherError("Failed to move object " + op0.getValue());
+            } else {
+            }
         }
         return null;
 	}
@@ -64,7 +71,7 @@ public class MoveByNode extends OpNode {
         tiles.add(t);
         distances.add(0);
 
-        while(distances.peek() <= tDis) {
+        while(distances.size() > 0 && distances.peek() <= tDis) {
             Integer currDis = distances.poll();
             Tile currTile = tiles.poll();
             processed.add(currTile);
