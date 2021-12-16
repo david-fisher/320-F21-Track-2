@@ -162,7 +162,6 @@ public class Display extends PlayController {
 
         exit.setOnMouseClicked(e-> {
             popupWindow.close();
-            clearParents();
             clearPlayParent();
             exitFromPlay();
         });
