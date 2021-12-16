@@ -14,16 +14,16 @@ projects:
         - 0
         - 0
         - 0
-      - - 1
+      - - 0
+        - 1
         - 0
         - 0
         - 0
         - 0
         - 0
         - 0
-        - 0
-      - - 1
-        - 0
+      - - 0
+        - 1
         - 0
         - 0
         - 0
@@ -102,7 +102,8 @@ projects:
       currPlayer: null
     spinners: []
     tiles:
-    - connections: &id002 []
+    - &id005
+      connections: &id002 []
       hasImage: false
       id: 0
       pieces: &id001 []
@@ -136,7 +137,8 @@ projects:
         height: 70.0
       x: 0
       y: 0
-    - connections: &id004 []
+    - &id006
+      connections: &id004 []
       hasImage: false
       id: 1
       pieces: &id003 []
@@ -152,8 +154,8 @@ projects:
         label: null
         connections: null
         height: 0.0
-      startXCoordinate: 1
-      startYCoordinate: 0
+      startXCoordinate: 2
+      startYCoordinate: 1
       tileImage: null
       tileName: null
       traits:
@@ -168,12 +170,14 @@ projects:
         label: tile02
         connections: *id004
         height: 70.0
-      x: 1
-      y: 0
-    - connections: &id006 []
+      x: 2
+      y: 1
+    - connections: &id008
+      - *id005
+      - *id006
       hasImage: false
       id: 2
-      pieces: &id005 []
+      pieces: &id007 []
       prevTraits:
         pieces: null
         yPos: 0
@@ -186,24 +190,24 @@ projects:
         label: null
         connections: null
         height: 0.0
-      startXCoordinate: 2
+      startXCoordinate: 1
       startYCoordinate: 0
       tileImage: null
-      tileName: null
+      tileName: tempName
       traits:
-        pieces: *id005
+        pieces: *id007
         yPos: 0
         shape: Rectangle
         color: '#000000FF'
         onLand: ''
-        width: 79.0
+        width: 211.0
         icon: default_tile_icon.jpg
         xPos: 0
         label: tile03
-        connections: *id006
-        height: 70.0
-      x: 2
-      y: 0
+        connections: *id008
+        height: 186.0
+      x: 1
+      y: 1
     timers: []
     tokens: []
     tutorialEnabled: false

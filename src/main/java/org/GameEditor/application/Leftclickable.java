@@ -12,7 +12,7 @@ import org.GameObjects.objects.Tile;
 
 public class Leftclickable {
 	
-	public void makeLeftclickable(Tile tile, String id, TextField nameTf, TextField imageTf, TextField colorTf, Scene scene) {
+	public void makeLeftclickable(Tile tile, String id, TextField nameTf, TextField imageTf, TextField colorTf, TextField connectionsTf, Scene scene) {
 		Shape shape = (Shape) scene.lookup("#" + id);
 		shape.setOnMouseClicked((t) -> {
 			nameTf.setText(tile.getTileName());
@@ -23,6 +23,19 @@ public class Leftclickable {
 				colorTf.setText("None");
 				imageTf.setText(tile.getTileImage());
 			}
+			String connection = "";
+			for (int i = 0; i < tile.getConnect().size(); i++) {
+				Tile temp = tile.getConnect().get(i);
+				String x = String.valueOf(temp.getTileXLocation());
+				String y = String.valueOf(temp.getTileYLocation());
+				if (i == 0) {
+					connection = x + " " + y;
+				}
+				else {
+					connection = connection + ", " + x + " " + y;
+				}
+			}
+			connectionsTf.setText(connection);
 		    });
 	}
 
