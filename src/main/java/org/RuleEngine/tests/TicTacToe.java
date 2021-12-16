@@ -19,6 +19,8 @@ public class TicTacToe {
         
         Player player1 = new Player("player01", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
         Player player2 = new Player("player02", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
+        player1.setColorString("#ff0000");
+        player2.setColorString("#0033cc");
         
         Button bTL = new Button();
         bTL.setLabel("buttonTL");
@@ -128,21 +130,21 @@ public class TicTacToe {
         OpNode getTLColor = NodeMaker.makeNode("get");
         getTLColor.setOperand(colorTrait, 0).setOperand(tileTL, 1);
         OpNode getTMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileTM, 1);
+        getTMColor.setOperand(colorTrait, 0).setOperand(tileTM, 1);
         OpNode getTRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileTR, 1);
+        getTRColor.setOperand(colorTrait, 0).setOperand(tileTR, 1);
         OpNode getMLColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileML, 1);
+        getMLColor.setOperand(colorTrait, 0).setOperand(tileML, 1);
         OpNode getMMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileMM, 1);
+        getMMColor.setOperand(colorTrait, 0).setOperand(tileMM, 1);
         OpNode getMRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileMR, 1);
+        getMRColor.setOperand(colorTrait, 0).setOperand(tileMR, 1);
         OpNode getBLColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBL, 1);
+        getBLColor.setOperand(colorTrait, 0).setOperand(tileBL, 1);
         OpNode getBMColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBM, 1);
+        getBMColor.setOperand(colorTrait, 0).setOperand(tileBM, 1);
         OpNode getBRColor = NodeMaker.makeNode("get");
-        getTLColor.setOperand(colorTrait, 0).setOperand(tileBR, 1);
+        getBRColor.setOperand(colorTrait, 0).setOperand(tileBR, 1);
         
         // The color condition for each tile.
         OpNode equalTL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTLColor, 0).setOperand(getCurrColor, 1);
@@ -283,12 +285,16 @@ public class TicTacToe {
             System.out.println(state.getRegistry("currPlayer").getTrait("label") + " selected: " + input);
             switch(input) {
                 case "TL":
+                    System.out.println(state.findObject("tileTL").getTrait("color"));
+
                     if (!((Button)state.findObject("buttonTL")).getEnabled()) {
                         System.out.println("Spot occupied. Please select another.");
                         break;
                     }
                     interpreter.interpretEvent(TLEvent, state);
                     System.out.println(((Button)state.findObject("buttonTL")).getEnabled());
+                    System.out.println(state.findObject("tileTL").getTrait("color"));
+
                     break;
                 case "TM":
                     if (!((Button)state.findObject("buttonTM")).getEnabled()) {

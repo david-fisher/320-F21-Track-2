@@ -37,7 +37,7 @@ public class Interpreter {
             }
         }
         for(int i = 0; i < event.size(); i++) {
-            interpretRule(event.get(0), currState);
+            interpretRule(event.get(i), currState);
         }
     }
 }
