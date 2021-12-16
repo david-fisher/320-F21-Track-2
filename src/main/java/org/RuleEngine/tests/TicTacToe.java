@@ -285,14 +285,11 @@ public class TicTacToe {
             System.out.println(state.getRegistry("currPlayer").getTrait("label") + " selected: " + input);
             switch(input) {
                 case "TL":
-                    System.out.println(state.getRegistry("currPlayer").getTrait("label"));
                     if (!((Button)state.findObject("buttonTL")).getEnabled()) {
                         System.out.println("Spot occupied. Please select another.");
                         break;
                     }
                     interpreter.interpretEvent(TLEvent, state);
-                    System.out.println(state.getRegistry("currPlayer").getTrait("label"));
-
                     break;
                 case "TM":
                     if (!((Button)state.findObject("buttonTM")).getEnabled()) {
