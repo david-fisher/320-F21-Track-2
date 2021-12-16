@@ -5,6 +5,8 @@ import org.RuleEngine.engine.GameState;
 public class LiteralNode<T> extends Node {
     private T value;
 
+    public LiteralNode() {};
+
     public LiteralNode(T value) {
         this.value = value;
     }
