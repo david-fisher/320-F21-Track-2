@@ -1,0 +1,339 @@
+projects:
+- intiGS:
+    board:
+      boardHeight: 560
+      boardWidth: 634
+      cellHeight: 112
+      cellWidth: 126
+      gridLayout:
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      height: 5
+      prevTraits:
+        yPos: null
+        shape: null
+        width: 0.0
+        xPos: null
+        height: 0.0
+      traits:
+        yPos: 0
+        shape: default
+        width: 634.0
+        xPos: 0
+        height: 560.0
+      width: 5
+    buttons: []
+    cards: []
+    decks: []
+    dice: []
+    events:
+      heuristic: null
+      initialization: null
+    gameObjects: []
+    gamepieces: []
+    maxPlayer: 4
+    minPlayer: 1
+    players:
+    - gamePieces: []
+      inventory: []
+      prevTraits:
+        yPos: null
+        shape: null
+        color: '#FFFFFF'
+        width: null
+        isHuman: false
+        xPos: null
+        label: button01
+        GamePieces: null
+        inventory: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '0xccffccff'
+        width: 0.0
+        isHuman: true
+        xPos: 0
+        label: Test Player
+        GamePieces:
+        - !!org.GameObjects.objects.Gamepiece
+          prevTraits:
+            yPos: null
+            shape: null
+            color: null
+            width: null
+            icon: null
+            xPos: null
+            label: null
+            height: null
+          traits:
+            yPos: 0
+            shape: default
+            color: '#000000'
+            width: 0.0
+            icon: default_gamepiece_icon.jpg
+            xPos: 0
+            label: gamepiece01
+            height: 0.0
+        inventory: []
+        height: 0.0
+    - gamePieces: []
+      inventory: []
+      prevTraits:
+        yPos: null
+        shape: null
+        color: '#FFFFFF'
+        width: null
+        isHuman: false
+        xPos: null
+        label: button02
+        GamePieces: null
+        inventory: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '0xccffccff'
+        width: 0.0
+        isHuman: true
+        xPos: 0
+        label: Test Player
+        GamePieces:
+        - !!org.GameObjects.objects.Gamepiece
+          prevTraits:
+            yPos: null
+            shape: null
+            color: null
+            width: null
+            icon: null
+            xPos: null
+            label: null
+            height: null
+          traits:
+            yPos: 0
+            shape: default
+            color: '#000000'
+            width: 0.0
+            icon: default_gamepiece_icon.jpg
+            xPos: 0
+            label: gamepiece02
+            height: 0.0
+        inventory: []
+        height: 0.0
+    projectName: New Project
+    registers:
+      winner: null
+      currPlayer: null
+    spinners: []
+    tiles: []
+    timers: []
+    tokens: []
+    tutorialEnabled: false
+  projectName: Test Game
+  savedGS:
+    gamestates: []
+- intiGS:
+    board: null
+    buttons: []
+    cards: []
+    decks: []
+    dice: []
+    events:
+      heuristic: null
+      initialization: null
+    gameObjects: []
+    gamepieces: []
+    maxPlayer: 4
+    minPlayer: 1
+    players:
+    - gamePieces: []
+      inventory: []
+      prevTraits:
+        yPos: null
+        shape: null
+        color: '#FFFFFF'
+        width: null
+        isHuman: false
+        xPos: null
+        label: button05
+        GamePieces: null
+        inventory: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '0xffff4dff'
+        width: 0.0
+        isHuman: true
+        xPos: 0
+        label: Test Player
+        GamePieces:
+        - !!org.GameObjects.objects.Gamepiece
+          prevTraits:
+            yPos: null
+            shape: null
+            color: null
+            width: null
+            icon: null
+            xPos: null
+            label: null
+            height: null
+          traits:
+            yPos: 0
+            shape: default
+            color: '#000000'
+            width: 0.0
+            icon: default_gamepiece_icon.jpg
+            xPos: 0
+            label: gamepiece06
+            height: 0.0
+        inventory: []
+        height: 0.0
+    projectName: New Project
+    registers:
+      winner: null
+      currPlayer: null
+    spinners: []
+    tiles: []
+    timers: []
+    tokens: []
+    tutorialEnabled: false
+  projectName: Game w/ One Player
+  savedGS:
+    gamestates: []
+- intiGS:
+    board:
+      boardHeight: 560
+      boardWidth: 634
+      cellHeight: 112
+      cellWidth: 126
+      gridLayout:
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      height: 5
+      prevTraits:
+        yPos: null
+        shape: null
+        width: 0.0
+        xPos: null
+        height: 0.0
+      traits:
+        yPos: 0
+        shape: default
+        width: 634.0
+        xPos: 0
+        height: 560.0
+      width: 5
+    buttons: []
+    cards: []
+    decks: []
+    dice: []
+    events:
+      heuristic: null
+      initialization: null
+    gameObjects: []
+    gamepieces: []
+    maxPlayer: 4
+    minPlayer: 1
+    players:
+    - gamePieces: []
+      inventory: []
+      prevTraits:
+        yPos: null
+        shape: null
+        color: '#FFFFFF'
+        width: null
+        isHuman: false
+        xPos: null
+        label: button10
+        GamePieces: null
+        inventory: null
+        height: null
+      traits:
+        yPos: 0
+        shape: default
+        color: '0xffffffff'
+        width: 0.0
+        isHuman: true
+        xPos: 0
+        label: bob
+        GamePieces:
+        - !!org.GameObjects.objects.Gamepiece
+          prevTraits:
+            yPos: null
+            shape: null
+            color: null
+            width: null
+            icon: null
+            xPos: null
+            label: null
+            height: null
+          traits:
+            yPos: 0
+            shape: default
+            color: '#000000'
+            width: 0.0
+            icon: default_gamepiece_icon.jpg
+            xPos: 0
+            label: gamepiece10
+            height: 0.0
+        inventory: []
+        height: 0.0
+    projectName: New Project
+    registers:
+      winner: null
+      currPlayer: null
+    spinners: []
+    tiles: []
+    timers: []
+    tokens: []
+    tutorialEnabled: false
+  projectName: pop
+  savedGS:
+    gamestates: []

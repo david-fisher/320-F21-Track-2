@@ -1,6 +1,7 @@
 package org.Editors.controllers;
 
 import java.io.File;
+import java.util.List;
 
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
@@ -8,7 +9,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
@@ -25,7 +25,6 @@ import org.GameObjects.objects.*;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
 import org.RuleEngine.engine.GameState;
-import org.RuleEngine.impossible.Game;
 
 public class GameObjectUIController extends ScreenController {
     // Card tab
@@ -76,8 +75,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker gamepieceColor;
     @FXML private TextField gamepieceLocationX;
     @FXML private TextField gamepieceLocationY;
-    @FXML private ListView gamepieceAllPlayerList;
-    @FXML private ListView gamepieceSelectedPlayerList;
+    @FXML private ListView gamepieceAllTileList;
+    @FXML private ListView gamepieceSelectedTileList;
     private String gamepieceTextureFilename;
 
     // Tile tab
@@ -92,8 +91,12 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker playerColor;
     @FXML private TextField playerGamepieces;
     @FXML private TextField playerInventory;
-    @FXML private ListView playerGamepiecesList;
+    @FXML private TextField playerMin;
+    @FXML private TextField playerMax;
     @FXML private ListView playerInventoryList;
+    @FXML private ListView gameObjectList;
+    @FXML private ListView playerGamepiecesList;
+    @FXML private ListView gamePieceList;
     @FXML private ToggleGroup playerIsHuman;
 
     // Button tab
@@ -105,6 +108,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ListView buttonEventList;
 
     private GameState gameState = BasicApplication.getProject().getIntiGS();
+
+    private ArrayList<Tile> gameTiles = gameState.getAllTiles();
 
     public GameObjectUIController() {
         deckCards = FXCollections.observableArrayList();
@@ -189,13 +194,8 @@ public class GameObjectUIController extends ScreenController {
         Gamepiece piece = new Gamepiece();
         String pieceNameString = gamepieceName.getCharacters().toString();
         Color jfxColor = gamepieceColor.getValue();
-        int x = Integer.parseInt(gamepieceLocationX.getCharacters().toString());
-        int y = Integer.parseInt(gamepieceLocationY.getCharacters().toString());
 
-        Tile tile = new Tile();
-        tile.setXPos(x);
-        tile.setYPos(y);
-        piece.setParent(new Circle());
+        Tile tile = (Tile) gamepieceSelectedTileList.getItems().get(0);
 
         boolean labelRes = piece.setLabel(pieceNameString);
         boolean iconRes = piece.setIcon(gamepieceTextureFilename);
@@ -222,26 +222,6 @@ public class GameObjectUIController extends ScreenController {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new Token: " + token.repr(true));
-        }
-    }
-
-    @FXML
-    private void saveTile(ActionEvent event) {
-        Tile tile = new Tile();
-        String tileNameString = tileName.getCharacters().toString();
-        String textureFilenameString = tileFilename.getCharacters().toString();
-        javafx.scene.paint.Color jfxColor = tileColor.getValue();
-        String shape = tileShape.getCharacters().toString();
-        String onLand = tileOnLand.getCharacters().toString();
-        boolean labelRes = tile.setTrait("label", tileNameString, false);
-        boolean iconRes = tile.setTrait("icon", textureFilenameString, false);
-        boolean colorRes = tile.setTrait("color", jfxColor, false);
-        boolean shapeRes = tile.setTrait("shape", shape, false);
-        boolean onLandRes = tile.setTrait("onLand", onLand, false);
-        if (!(labelRes && iconRes && colorRes && shapeRes && onLandRes)) {
-            System.err.println("Failure!");
-        } else {
-            System.out.println("Successfully created new Tile: " + tile.repr(true));
         }
     }
 
@@ -285,6 +265,11 @@ public class GameObjectUIController extends ScreenController {
         }
     }
 
+    @FXML private void populateTileList(Event e) {
+        ObservableList<Tile> observable = FXCollections.observableArrayList(gameTiles);
+        gamepieceAllTileList.setItems(observable);
+    }
+
     @FXML private void populateEventList(Event e) {
         String[] l = gameState.events.keySet().toArray(new String[0]);
         ObservableList<MenuItem> observable = buttonOnClick.getItems();
@@ -294,18 +279,22 @@ public class GameObjectUIController extends ScreenController {
         //buttonEventList.setItems(observable);
     }
 
-    @FXML private void populatePlayerList(Event e) {
-        ObservableList<Player> observable = FXCollections.observableArrayList(gameState.players);
-        gamepieceAllPlayerList.setItems(observable);
-    }
-
     @FXML private void populatePlayerInventory(Event e) {
-        ObservableList<Gamepiece> observable = FXCollections.observableArrayList(gameState.gamepieces);
+        //Populate gamePiecesList
+        ObservableList<Gamepiece> pieces = FXCollections.observableArrayList(gameState.getAllGamePieces());
         // Filter through the list of gamepieces to only populate with pieces belonging to a
         // particular player.
-        playerInventoryList.setItems(observable);
-        playerInventoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        gamePieceList.setItems(pieces);
+        gamePieceList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         playerGamepiecesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        //Populate gameObjectList
+        ObservableList<Card> objects = FXCollections.observableArrayList(gameState.getAllCards());
+        // Filter through the list of gamepieces to only populate with pieces belonging to a
+        // particular player.
+        gameObjectList.setItems(objects);
+        gameObjectList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        playerInventoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML private void populateCardList(Event event) {
@@ -314,39 +303,39 @@ public class GameObjectUIController extends ScreenController {
         deckDeckList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    @FXML private void playerAddHighlighted(ActionEvent e) {
-        ObservableList<Integer> selectedIndices = playerInventoryList.getSelectionModel().getSelectedIndices();
-        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+    @FXML private void playerAddHighlightedGamepiece(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = gamePieceList.getSelectionModel().getSelectedIndices();
+        ObservableList<Gamepiece> chosen = gamePieceList.getItems();
         ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
         ArrayList<Gamepiece> removed = new ArrayList();
 
         // For every gamepiece selected, add it to the other list
         for (Integer i : selectedIndices) {
-            Gamepiece g = nonplayerPieces.get(i);
+            Gamepiece g = chosen.get(i);
             playerPieces.add(g);
             removed.add(g);
         }
 
         // Then remove all the gamepieces that are selected from the inventory list
         for (int i = 0; i < removed.size(); i += 1) {
-            nonplayerPieces.remove(removed.get(i));
+            chosen.remove(removed.get(i));
         }
 
         // Now update the ListViews with the appropriate changes
-        playerInventoryList.setItems(nonplayerPieces);
+        gamePieceList.setItems(chosen);
         playerGamepiecesList.setItems(playerPieces);
     }
 
-    @FXML private void playerRemoveHighlighted(ActionEvent e) {
+    @FXML private void playerRemoveHighlightedGamepiece(ActionEvent e) {
         ObservableList<Integer> selectedIndices = playerGamepiecesList.getSelectionModel().getSelectedIndices();
-        ObservableList<Gamepiece> nonplayerPieces = playerInventoryList.getItems();
+        ObservableList<Gamepiece> chosen = gamePieceList.getItems();
         ObservableList<Gamepiece> playerPieces = playerGamepiecesList.getItems();
         ArrayList<Gamepiece> removed = new ArrayList();
 
         // For every gamepiece selected, add it to the other list
         for (Integer i : selectedIndices) {
             Gamepiece g = playerPieces.get(i);
-            nonplayerPieces.add(g);
+            chosen.add(g);
             removed.add(g);
         }
 
@@ -356,19 +345,75 @@ public class GameObjectUIController extends ScreenController {
         }
 
         // Now update the ListViews with the appropriate changes
-        playerInventoryList.setItems(nonplayerPieces);
+        gamePieceList.setItems(chosen);
         playerGamepiecesList.setItems(playerPieces);
     }
 
+    @FXML private void playerAddHighlightedObject(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = gameObjectList.getSelectionModel().getSelectedIndices();
+        ObservableList<GameObject> chosen = gameObjectList.getItems();
+        ObservableList<GameObject> playerPieces = playerInventoryList.getItems();
+        ArrayList<GameObject> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            GameObject g = chosen.get(i);
+            playerPieces.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the inventory list
+        for (int i = 0; i < removed.size(); i += 1) {
+            chosen.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        gameObjectList.setItems(chosen);
+        playerInventoryList.setItems(playerPieces);
+    }
+
+    @FXML private void playerRemoveHighlightedObject(ActionEvent e) {
+        ObservableList<Integer> selectedIndices = playerInventoryList.getSelectionModel().getSelectedIndices();
+        ObservableList<GameObject> chosen = gameObjectList.getItems();
+        ObservableList<GameObject> playerPieces = playerInventoryList.getItems();
+        ArrayList<GameObject> removed = new ArrayList();
+
+        // For every gamepiece selected, add it to the other list
+        for (Integer i : selectedIndices) {
+            GameObject g = playerPieces.get(i);
+            chosen.add(g);
+            removed.add(g);
+        }
+
+        // Then remove all the gamepieces that are selected from the player pieces list
+        for (int i = 0; i < removed.size(); i += 1) {
+            playerPieces.remove(removed.get(i));
+        }
+
+        // Now update the ListViews with the appropriate changes
+        gameObjectList.setItems(chosen);
+        playerInventoryList.setItems(playerPieces);
+    }
+
     @FXML private void gamepieceAddHighlighted(ActionEvent e) {
-        Player selected = (Player)gamepieceAllPlayerList.getSelectionModel().getSelectedItem();
-        ArrayList<Player> list = new ArrayList();
+        Tile selected = (Tile) gamepieceAllTileList.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            return;
+        }
+        ObservableList<Tile> tiles = gamepieceAllTileList.getItems();
+        tiles.remove(selected);
+        if (gamepieceSelectedTileList.getItems().size() != 0) {
+            tiles.add((Tile) gamepieceSelectedTileList.getItems().get(0));
+        }
+        gamepieceAllTileList.setItems(tiles);
+        ArrayList<Tile> list = new ArrayList();
         list.add(selected);
-        gamepieceSelectedPlayerList.setItems(FXCollections.observableArrayList(list));
+        gamepieceSelectedTileList.setItems(FXCollections.observableArrayList(list));
     }
 
     @FXML private void gamepieceRemoveHighlighted(ActionEvent e) {
-        gamepieceSelectedPlayerList.setItems(FXCollections.observableArrayList());
+        gamepieceAllTileList.setItems(FXCollections.observableArrayList(gameState.getAllTiles()));
+        gamepieceSelectedTileList.setItems(FXCollections.observableArrayList());
     }
 
     @FXML private void deckAddHighlighted(ActionEvent event) {
@@ -435,33 +480,35 @@ public class GameObjectUIController extends ScreenController {
 
     @FXML private void savePlayer(ActionEvent event) {
         String playerNameString = playerName.getCharacters().toString();
-        String textureFilenameString = getFilePath();
-        javafx.scene.paint.Color jfxColor = tokenColor.getValue();
+        javafx.scene.paint.Color jfxColor = playerColor.getValue();
 
-        // TODO: Inventory UI
-        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
-
-        // TODO: Gamepiece UI
-        ArrayList<Gamepiece> gamepieces = new ArrayList<Gamepiece>();
-        gamepieces.add(new Gamepiece());
-
-        String isHuman = playerIsHuman.getSelectedToggle().toString();
         boolean human = false;
-        if(isHuman == "yes"){
-            human = true;
+        try {
+            String isHuman = ((RadioButton) playerIsHuman.getSelectedToggle()).getText();
+            if(isHuman.equals("Yes")){
+                human = true;
+            }}
+        catch (NullPointerException n) {}
+        if (gameState.getAllPlayers().size() == 1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error!");
+            alert.setHeaderText("This game already has a player:");
+            alert.setContentText("All other players will be added when you play the game.");
+            alert.showAndWait();
+            return;
         }
-
         Player player = new Player();
-        boolean labelRes = player.setTrait("label", playerNameString, false);
-        boolean pieceRes = player.setTrait("GamePieces", gamepieces, true);
-        boolean colorRes = player.setTrait("color", jfxColor.toString(), false);
-        boolean invRes = player.setTrait("inventory", inventory, true);
-        boolean humanRes = player.setTrait("isHuman", human, false);
-        if (!(labelRes && pieceRes && colorRes && invRes && humanRes)) {
+        boolean labelRes = player.setLabel(playerNameString);
+        boolean colorRes = player.setColor(jfxColor);
+        boolean humanRes = player.setIsHuman(human);
+        int min = Integer.parseInt(playerMin.getCharacters().toString());
+        int max = Integer.parseInt(playerMax.getCharacters().toString());
+        gameState.minPlayer = min;
+        gameState.maxPlayer = max;
+
+        if (!(labelRes && colorRes && humanRes)) {
             System.out.println(labelRes);
-            System.out.println(pieceRes);
             System.out.println(colorRes);
-            System.out.println(invRes);
             System.out.println(humanRes);
             System.err.println("Failure!");
         } else {

@@ -6,7 +6,7 @@ import org.RuleEngine.engine.GameState;
 public class ALNode extends OpNode {
 
     private String operator;
-    
+
     public ALNode() {
         super();
         operator = "+";
@@ -14,7 +14,10 @@ public class ALNode extends OpNode {
     }
 
     public String getOperator() { return operator; }
-    public void setOperator(String op) { operator = op; }
+    public OpNode setOperator(String op) {
+        operator = op;
+        return this;
+    }
 
     @Override
     @SuppressWarnings("rawtypes")
@@ -45,10 +48,10 @@ public class ALNode extends OpNode {
 
             case "/":
                 return ALOperation.divide(op0.getValue(), op1.getValue());
-            
+
             case "%":
                 return ALOperation.modulo(op0.getValue(), op1.getValue());
-            
+
             case ">":
                 compare = ALOperation.arithmetic_compare(op0.getValue(), op1.getValue());
                 return compare > 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
@@ -60,7 +63,7 @@ public class ALNode extends OpNode {
             case "==":
                 compare = ALOperation.arithmetic_compare(op0.getValue(), op1.getValue());
                 return compare == 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
-            
+
             case "<=":
                 compare = ALOperation.arithmetic_compare(op0.getValue(), op1.getValue());
                 return compare <= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
@@ -68,10 +71,10 @@ public class ALNode extends OpNode {
             case ">=":
                 compare = ALOperation.arithmetic_compare(op0.getValue(), op1.getValue());
                 return compare >= 0 ? new LiteralNode<Boolean>(true) : new LiteralNode<Boolean>(false);
-                
+
             case "&&":
                 return ALOperation.and(op0.getValue(), op1.getValue());
-                
+
             case "||":
                 return ALOperation.and(op0.getValue(), op1.getValue());
         }
