@@ -194,8 +194,12 @@ public class GameObjectUIController extends ScreenController {
         Gamepiece piece = new Gamepiece();
         String pieceNameString = gamepieceName.getCharacters().toString();
         Color jfxColor = gamepieceColor.getValue();
-
-        Tile tile = (Tile) gamepieceSelectedTileList.getItems().get(0);
+        Tile tile;
+        if (gamepieceSelectedTileList.getItems().size() != 0) {
+            tile = (Tile) gamepieceSelectedTileList.getItems().get(0);
+        } else {
+            tile = new Tile();
+        }
 
         boolean labelRes = piece.setLabel(pieceNameString);
         boolean iconRes = piece.setIcon(gamepieceTextureFilename);
