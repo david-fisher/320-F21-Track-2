@@ -63,7 +63,7 @@ public class PlayController extends ScreenController {
         this.stage = stage;
         playWidth = stage.getWidth();
         playHeight = stage.getHeight();
-        
+        System.out.println("Play Stage: " + stage);
         gameState = BasicApplication.getProject().getIntiGS();
 
         initPlayScreen();
@@ -593,11 +593,13 @@ public class PlayController extends ScreenController {
         Savable.intitDB();
         clearPlayParent();
         ArrayList<Project> projects = Savable.getProjects();
+        ArrayList<Player> players = BasicApplication.getProject().getIntiGS().getAllPlayers();
         Project currProject = new Project();
         for(int i=0; i < projects.size(); i++) {
             Project tempProject = projects.get(i);
             if (tempProject.getProjectName().equals(BasicApplication.getProject().getProjectName())) {
                 currProject = tempProject;
+                currProject.getIntiGS().setAllPlayers(players);
             }
         }
         BasicApplication.setProject(currProject);
