@@ -6,6 +6,9 @@ public class Gamepiece extends GameObject{
 
 	private static int count = 0;
 
+	public double shiftX;
+	public double shiftY;
+
 	public Gamepiece() {
 		super() ;
 		this.setLabel("gamepiece" + String.format("%02d", ++count));

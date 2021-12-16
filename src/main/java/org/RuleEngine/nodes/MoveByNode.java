@@ -49,6 +49,9 @@ public class MoveByNode extends OpNode {
         Gamepiece gp = (Gamepiece) go;
         if (!gp.setLocation(playerChoice)) {
             NodeUtil.OtherError("Failed to move object " + op0.getValue());
+        } else {
+            System.out.println(playerChoice.getTrait("label"));
+            System.out.println("Set piece " + gp.getTrait("label") + " to " + playerChoice.getTileXLocation() + "," + playerChoice.getTileYLocation());
         }
         return null;
 	}
@@ -63,7 +66,7 @@ public class MoveByNode extends OpNode {
         ArrayList<Tile> targets = new ArrayList<Tile>();
         tiles.add(t);
         distances.add(0);
-
+        System.out.println(t.getConnect().size());
         while(distances.peek() <= tDis) {
             Integer currDis = distances.poll();
             Tile currTile = tiles.poll();

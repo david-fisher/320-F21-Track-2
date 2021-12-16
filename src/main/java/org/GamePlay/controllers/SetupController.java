@@ -16,6 +16,7 @@ import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
+import org.RuleEngine.tests.ChutesLadders;
 
 import java.util.*;
 
@@ -216,6 +217,10 @@ public class SetupController extends ScreenController {
         // load in the selected game from BasicApplication
         selectedGame = BasicApplication.getGameState();
 
+//        ChutesLadders cl = new ChutesLadders();
+//        selectedGame.setAllEvents(cl.makeChutes(selectedGame));
+//        System.out.println("added");
+//        Savable.closeDB();
 //        TicTacToe ttt = new TicTacToe();
 //        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
 //        System.out.println("added");
@@ -304,10 +309,9 @@ public class SetupController extends ScreenController {
 
         // define list of player's pieces
         ArrayList<Gamepiece> gamePieces = new ArrayList<>();
-
+        Player first = players.get(0);
         // if players have at least one piece
-        if (players.get(0).getGamePieces().size() != 0) {
-
+        if (first.getGamePieces().size() != 0) {
             // todo I don't understand what is happening here a comment would be good explaining what is going on
             ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
             int start = curNumPlayers * (numPieces);
@@ -318,8 +322,14 @@ public class SetupController extends ScreenController {
 
         // new player instantiation
         Player newPlayer = new Player();
+
         newPlayer.setLabel(playerName);
         newPlayer.setGamePieces((gamePieces));
+        first.getAllTraits().keySet().forEach(k -> {
+            if (!newPlayer.getAllTraits().containsKey(k)) {
+                newPlayer.setTrait(k, first.getTrait(k), true);
+            }
+        });
         players.add(newPlayer);
     }
 

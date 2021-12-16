@@ -311,6 +311,8 @@ public class PlayController extends ScreenController {
         if (singlePiece) {
             double shiftX = (2 * (i % rows) + 1) * radius + (i % rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
             double shiftY = (2 * (i / rows) + 1) * radius + (i / rows + 1) * (tileWidth - rows * radius * 2) / (rows + 1);
+            gamePiece.shiftX = shiftX;
+            gamePiece.shiftY = shiftY;
             gp.setLayoutX(parent.getParent().getLayoutX() + shiftX);
             gp.setLayoutY(parent.getParent().getLayoutY() + shiftY);
         } else {

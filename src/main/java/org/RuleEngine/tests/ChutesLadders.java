@@ -10,7 +10,8 @@ import java.util.Scanner;
 import org.GameObjects.objects.*;
 
 public class ChutesLadders {
-    public GameState makeChutes(GameState currState) {
+    public HashMap<String, ArrayList<Node>> makeChutes(GameState currState) {
+        HashMap<String, ArrayList<Node>> events = new HashMap<>();
 //        Player player1 = new Player();
 //        player1.setLabel("player01")
 //        Player player2 = new Player("player02", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
@@ -39,12 +40,18 @@ public class ChutesLadders {
         m4Card.setTrait("onPlay", "move4Card");
         m6Card.setTrait("onPlay", "move6Card");
         d2Card.setTrait("onPlay", "draw2Card");
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(m1Card);
+        cards.add(m4Card);
+        cards.add(m6Card);
+        cards.add(d2Card);
         Deck gameDeck = new Deck();
         gameDeck.addCard(m1Card, 6);
         gameDeck.addCard(m4Card, 3);
         gameDeck.addCard(m6Card, 1);
         gameDeck.addCard(d2Card, 2);
         gameDeck.shuffle();
+
 //        for (int i = 0; i < 24; i++) {
 //            Tile tile = new Tile();
 //            if (i == 0) {
@@ -63,8 +70,10 @@ public class ChutesLadders {
         currState.dice.add(die);
         currState.buttons.add(roll);
         currState.buttons.add(end);
+        currState.setAllCards(cards);
         currState.decks.add(gameDeck);
         currState.addRegistry("deck", gameDeck);
+        System.out.println("Added objects");
 //        currState.addRegistry("currPlayer", player1);
 
         // Constants
@@ -110,26 +119,26 @@ public class ChutesLadders {
         rollAndMove.add(movePlayer);
         rollAndMove.add(updateDis);
         rollAndMove.add(disableRollButton);
-        currState.addEvent("rollAndMove", rollAndMove);
+        events.put("rollAndMove", rollAndMove);
 
         // End turn event
         ArrayList<Node> endTurn  = new ArrayList<Node>();
         OpNode enableRollButton = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(rollButton, 1).setOperand(new LiteralNode<Boolean>(true), 2);
         endTurn.add(nextTurn);
         endTurn.add(enableRollButton);
-        currState.addEvent("endTurn", endTurn);
+        events.put("endTurn", endTurn);
 
         // Win tile event
         ArrayList<Node> winTile = new ArrayList<Node>();
         winTile.add(winGame);
-        currState.addEvent("winGame", winTile);
+        events.put("winGame", winTile);
 
         // Draw card tile event
         ArrayList<Node> drawCard = new ArrayList<Node>();
         OpNode draw = NodeMaker.makeNode("draw").setOperand(deckName, 0);
         OpNode putInPlayer = NodeMaker.makeNode("putInInventory").setOperand(draw, 0).setOperand(currPlayer, 1);
         drawCard.add(putInPlayer);
-        currState.addEvent("drawCard", drawCard);
+        events.put("drawCard", drawCard);
 
         // Teleport tile event1
         ArrayList<Node> teleport1 = new ArrayList<Node>();
@@ -163,7 +172,7 @@ public class ChutesLadders {
         move1Card.add(setValue1);
         move1Card.add(updateDis);
         move1Card.add(putBack);
-        currState.addEvent("move1Card", move1Card);
+        events.put("move1Card", move1Card);
 
         // Move 4 card event
         ArrayList<Node> move4Card = new ArrayList<Node>();
@@ -173,7 +182,7 @@ public class ChutesLadders {
         move4Card.add(setValue2);
         move4Card.add(updateDis);
         move4Card.add(putBack);
-        currState.addEvent("move4Card", move4Card);
+        events.put("move4Card", move4Card);
 
         // Move 6 card event
         ArrayList<Node> move6Card = new ArrayList<Node>();
@@ -183,50 +192,16 @@ public class ChutesLadders {
         move6Card.add(setValue3);
         move6Card.add(updateDis);
         move6Card.add(putBack);
-        currState.addEvent("move6Card", move6Card);
+        events.put("move6Card", move6Card);
 
         // Draw 2 card event
         ArrayList<Node> draw2Card = new ArrayList<Node>();
         draw2Card.add(putInPlayer);
         draw2Card.add(putInPlayer);
         draw2Card.add(putBack);
-        currState.addEvent("draw2Card", draw2Card);
+        events.put("draw2Card", draw2Card);
 
-        String input = "";
-        Scanner myObj = new Scanner(System.in);
-        Interpreter interpreter = Interpreter.getInstance();
-        while(!input.equals("exit")) {
-            input = myObj.nextLine();
-            switch(input) {
-                case "roll":
-                    if (!roll.getEnabled()) {
-                        System.out.println("Roll button disabled. Try something else!");
-                        break;
-                    }
-                    interpreter.interpretEvent(currState.getEvent(roll.getTrait("onClick").toString()), currState);
-                    break;
-                case "done":
-                    if (!end.getEnabled()) {
-                        System.out.println("End button disabled. Try something else!");
-                        break;
-                    }
-                    interpreter.interpretEvent(currState.getEvent(end.getTrait("onClick").toString()), currState);
-                    break;
-                case "card":
-                    ArrayList<GameObject> inv = ((Player)currState.getRegistry("currPlayer")).getInventory();
-                    if (inv.size() > 0) {
-                        interpreter.interpretEvent(currState.getEvent(inv.get(0).getTrait("onPlay").toString()), currState);
-                    } else {
-                        System.out.println("No card to play!");
-                    }
-                    break;
-            }
-            if (currState.getRegistry("winner") != null) {
-                System.out.println("Winner is: " + currState.getRegistry("winner").getTrait("label"));
-                break;
-            }
-        }
-        return currState;
+        return events;
     }
 
 }
