@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.GameEditor.application.GameBoard;
 import org.GameObjects.objects.Button;
 import org.GameObjects.objects.Spinner;
 import org.RuleEngine.nodes.LiteralNode;
@@ -64,6 +65,8 @@ public class PlayController extends ScreenController {
         playHeight = stage.getHeight();
         
         gameState = BasicApplication.getGameState();
+        System.out.println("Play Stage: " + stage);
+        gameState = BasicApplication.getProject().getInitGS();
 
         initPlayScreen();
 
@@ -578,10 +581,10 @@ public class PlayController extends ScreenController {
             gp.removeTrait("parent");
         });
         gameState.getAllCards().forEach(c -> {
-            c.removeTrait("parent");
+            c.setParent(null);
         });
         gameState.getAllButtons().forEach(b -> {
-            b.removeTrait("parent");
+            b.setParent(null);
         });
     }
 
@@ -594,11 +597,13 @@ public class PlayController extends ScreenController {
         Savable.initDB();
         clearPlayParent();
         ArrayList<Project> projects = Savable.getProjects();
+        ArrayList<Player> players = BasicApplication.getProject().getInitGS().getAllPlayers();
         Project currProject = new Project();
         for(int i=0; i < projects.size(); i++) {
             Project tempProject = projects.get(i);
             if (tempProject.getProjectName().equals(BasicApplication.getProject().getProjectName())) {
                 currProject = tempProject;
+                currProject.getInitGS().setAllPlayers(players);
             }
         }
         BasicApplication.setProject(currProject);
