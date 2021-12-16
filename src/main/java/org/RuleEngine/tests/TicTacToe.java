@@ -1,8 +1,10 @@
 package org.RuleEngine.tests;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
+import org.GameObjects.objects.*;
 // WIP
 /* 0 1 2
  * 3 4 5
@@ -14,6 +16,72 @@ public class TicTacToe {
         // To be loading from Dining's save
         GameState state = new GameState(); 
         Interpreter interpreter = Interpreter.getInstance();
+        
+        Player player1 = new Player("player01", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
+        Player player2 = new Player("player02", new ArrayList<Gamepiece>(), new ArrayList<GameObject>(), true);
+        
+        Button bTL = new Button();
+        bTL.setLabel("buttonTL");
+        Button bTM = new Button();
+        bTM.setLabel("buttonTM");
+        Button bTR = new Button();
+        bTR.setLabel("buttonTR");
+        Button bML = new Button();
+        bML.setLabel("buttonML");
+        Button bMM = new Button();
+        bMM.setLabel("buttonMM");
+        Button bMR = new Button();
+        bMR.setLabel("buttonMR");
+        Button bBL = new Button();
+        bBL.setLabel("buttonBL");
+        Button bBM = new Button();
+        bBM.setLabel("buttonBM");
+        Button bBR = new Button();
+        bBR.setLabel("buttonBR");
+        
+        Tile tTL = new Tile();
+        tTL.setLabel("tileTL");
+        Tile tTM = new Tile();
+        tTM.setLabel("tileTM");
+        Tile tTR = new Tile();
+        tTR.setLabel("tileTR");
+        Tile tML = new Tile();
+        tML.setLabel("tileML");
+        Tile tMM = new Tile();
+        tMM.setLabel("tileMM");
+        Tile tMR = new Tile();
+        tMR.setLabel("tileMR");
+        Tile tBL = new Tile();
+        tBL.setLabel("tileBL");
+        Tile tBM = new Tile();
+        tBM.setLabel("tileBM");
+        Tile tBR = new Tile();
+        tBR.setLabel("tileBR");
+        
+        state.players.add(player1);
+        state.players.add(player2);
+        state.addRegistry("currPlayer", player1);
+        
+        state.buttons.add(bTL);
+        state.buttons.add(bTM);
+        state.buttons.add(bTR);
+        state.buttons.add(bML);
+        state.buttons.add(bMM);
+        state.buttons.add(bMR);
+        state.buttons.add(bBL);
+        state.buttons.add(bBM);
+        state.buttons.add(bBR);
+        
+        state.tiles.add(tTL);
+        state.tiles.add(tTM);
+        state.tiles.add(tTR);
+        state.tiles.add(tML);
+        state.tiles.add(tMM);
+        state.tiles.add(tMR);
+        state.tiles.add(tBL);
+        state.tiles.add(tBM);
+        state.tiles.add(tBR);
+
                 
         LiteralNode<String> colorTrait = NodeMaker.makeStringNode("color");
         LiteralNode<String> currPlayer = NodeMaker.makeStringNode("currPlayer");
@@ -21,26 +89,26 @@ public class TicTacToe {
         LiteralNode<Boolean> falseVal = new LiteralNode<Boolean>(false);
         
         // Rename these with the actual button name setup.
-        LiteralNode<String> buttonTL = NodeMaker.makeStringNode("buttonTL");
-        LiteralNode<String> buttonTM = NodeMaker.makeStringNode("buttonTM");
-        LiteralNode<String> buttonTR = NodeMaker.makeStringNode("buttonTR");
-        LiteralNode<String> buttonML = NodeMaker.makeStringNode("buttonML");
-        LiteralNode<String> buttonMM = NodeMaker.makeStringNode("buttonMM");
-        LiteralNode<String> buttonMR = NodeMaker.makeStringNode("buttonMR");
-        LiteralNode<String> buttonBL = NodeMaker.makeStringNode("buttonBL");
-        LiteralNode<String> buttonBM = NodeMaker.makeStringNode("buttonBM");
-        LiteralNode<String> buttonBR = NodeMaker.makeStringNode("buttonBR");
+        LiteralNode<String> buttonTL = NodeMaker.makeStringNode("_buttonTL");
+        LiteralNode<String> buttonTM = NodeMaker.makeStringNode("_buttonTM");
+        LiteralNode<String> buttonTR = NodeMaker.makeStringNode("_buttonTR");
+        LiteralNode<String> buttonML = NodeMaker.makeStringNode("_buttonML");
+        LiteralNode<String> buttonMM = NodeMaker.makeStringNode("_buttonMM");
+        LiteralNode<String> buttonMR = NodeMaker.makeStringNode("_buttonMR");
+        LiteralNode<String> buttonBL = NodeMaker.makeStringNode("_buttonBL");
+        LiteralNode<String> buttonBM = NodeMaker.makeStringNode("_buttonBM");
+        LiteralNode<String> buttonBR = NodeMaker.makeStringNode("_buttonBR");
         
         // Rename these with the actual tile name setup.
-        LiteralNode<String> tileTL = NodeMaker.makeStringNode("tileTL");
-        LiteralNode<String> tileTM = NodeMaker.makeStringNode("tileTM");
-        LiteralNode<String> tileTR = NodeMaker.makeStringNode("tileTR");
-        LiteralNode<String> tileML = NodeMaker.makeStringNode("tileML");
-        LiteralNode<String> tileMM = NodeMaker.makeStringNode("tileMM");
-        LiteralNode<String> tileMR = NodeMaker.makeStringNode("tileMR");
-        LiteralNode<String> tileBL = NodeMaker.makeStringNode("tileBL");
-        LiteralNode<String> tileBM = NodeMaker.makeStringNode("tileBM");
-        LiteralNode<String> tileBR = NodeMaker.makeStringNode("tileBR");
+        LiteralNode<String> tileTL = NodeMaker.makeStringNode("_tileTL");
+        LiteralNode<String> tileTM = NodeMaker.makeStringNode("_tileTM");
+        LiteralNode<String> tileTR = NodeMaker.makeStringNode("_tileTR");
+        LiteralNode<String> tileML = NodeMaker.makeStringNode("_tileML");
+        LiteralNode<String> tileMM = NodeMaker.makeStringNode("_tileMM");
+        LiteralNode<String> tileMR = NodeMaker.makeStringNode("_tileMR");
+        LiteralNode<String> tileBL = NodeMaker.makeStringNode("_tileBL");
+        LiteralNode<String> tileBM = NodeMaker.makeStringNode("_tileBM");
+        LiteralNode<String> tileBR = NodeMaker.makeStringNode("_tileBR");
 
         // Win game rule
         OpNode makeWinner = NodeMaker.makeNode("rset");
@@ -207,6 +275,83 @@ public class TicTacToe {
         BREvent.add(ifRightCol);
         BREvent.add(ifBackDiag);
         BREvent.add(nextTurn);
-
+        
+        String input = "";
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        while (!input.equals("end")) {
+            input = myObj.nextLine();
+            System.out.println(state.getRegistry("currPlayer").getTrait("label") + " selected: " + input);
+            switch(input) {
+                case "TL":
+                    if (!((Button)state.findObject("buttonTL")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(TLEvent, state);
+                    System.out.println(((Button)state.findObject("buttonTL")).getEnabled());
+                    break;
+                case "TM":
+                    if (!((Button)state.findObject("buttonTM")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(TMEvent, state);
+                    break;
+                case "TR":
+                    if (!((Button)state.findObject("buttonTR")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(TREvent, state);
+                    break;
+                case "ML":
+                    if (!((Button)state.findObject("buttonML")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(MLEvent, state);
+                    break;
+                case "MM":
+                    if (!((Button)state.findObject("buttonMM")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(MMEvent, state);
+                    break;
+                case "MR":
+                    if (!((Button)state.findObject("buttonMR")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(MREvent, state);
+                    break;
+                case "BL":
+                    if (!((Button)state.findObject("buttonBL")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(BLEvent, state);
+                    break;
+                case "BM":
+                    if (!((Button)state.findObject("buttonBM")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(BMEvent, state);
+                    break;
+                case "BR":
+                    if (!((Button)state.findObject("buttonBR")).getEnabled()) {
+                        System.out.println("Spot occupied. Please select another.");
+                        break;
+                    }
+                    interpreter.interpretEvent(BREvent, state);
+                    break;
+                default:
+                    if (!input.equals("end"))
+                        System.out.println("Unknow input, try again.");
+                        
+            }
+        }
+        myObj.close();
     }
 }
