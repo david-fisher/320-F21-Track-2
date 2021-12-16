@@ -8,7 +8,9 @@ package org.RuleEngine.oracles;
 
 import org.RuleEngine.engine.GameState;
 
+import java.util.ArrayList;
+
 public interface Oracle  {
     public void processMove(String event, GameState currState);
-    public String decideMove(GameState currState);
+    public String decideMove(GameState currState, ArrayList<String> prev);
 }

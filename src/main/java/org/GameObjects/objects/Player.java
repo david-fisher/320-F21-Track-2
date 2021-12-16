@@ -15,10 +15,26 @@ public class Player extends GameObject {
         gamePieces = new ArrayList<>();
         inventory = new ArrayList<>();
         this.setLabel("button" + String.format("%02d", ++count));
-        this.setColorString("#FFFFFF");
         this.setGamePieces(gamePieces);
         this.setInventory(inventory);
         this.setIsHuman(false);
+        this.setLastUsedObj(null);
+    }
+
+    public Player(String label, ArrayList<Gamepiece> pieces, ArrayList<GameObject> inv, boolean isH) {
+        this.setLabel(label);
+        this.setColorString("#FFFFFF");
+        this.setGamePieces(pieces);
+        this.setInventory(inv);
+        this.setIsHuman(isH);
+        this.setLastUsedObj(null);
+    }
+    public Player(String label, Color c, ArrayList<Gamepiece> pieces, ArrayList<GameObject> inv, boolean isH) {
+        this.setLabel(label);
+        this.setColor(c);
+        this.setGamePieces(pieces);
+        this.setInventory(inv);
+        this.setIsHuman(isH);
         this.setLastUsedObj(null);
     }
 

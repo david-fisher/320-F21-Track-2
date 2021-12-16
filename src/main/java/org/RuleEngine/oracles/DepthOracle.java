@@ -10,7 +10,7 @@ public class DepthOracle implements Oracle {
         currState.getAllEvents().get(event).get(0).execute(currState);
     }
 
-    public String decideMove(GameState currState) {
+    public String decideMove(GameState currState, ArrayList<String> prev) {
         return null;
     }
 }

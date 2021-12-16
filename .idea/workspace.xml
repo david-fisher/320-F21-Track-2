@@ -7,23 +7,16 @@
     <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Gamepiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/DepthOracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/DepthOracle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/FullOracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/FullOracle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/HeuristicOracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/HeuristicOracle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/Oracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/oracles/Oracle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/org/Editors/controllers" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
@@ -129,12 +122,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TicTacToe" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.RuleEngine.tests.TicTacToe" />
+      <module name="SceneBuilder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.RuleEngine.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.BasicApplication" />
       <item itemvalue="Application.MainMenu" />
+      <item itemvalue="Application.TicTacToe" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TicTacToe" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>

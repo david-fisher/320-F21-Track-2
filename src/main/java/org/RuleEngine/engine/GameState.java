@@ -123,7 +123,7 @@ public class GameState extends Savable {
         }
 
         // TODO: Reimplement board reference to tiles
-        state.board = this.board.clone();
+        //state.board = this.board.clone();
 
         return state;
     }
