@@ -7,8 +7,8 @@ import org.GameObjects.objects.GameObject;
 //        Operand 1 - source(register or gameobject)
 //        Operand 2 - value
 public class PSetNode extends OpNode {
-    public PSetNode() { 
-        super(); 
+    public PSetNode() {
+        super();
         this.addOperand(null).addOperand(null).addOperand(null);
     }
 

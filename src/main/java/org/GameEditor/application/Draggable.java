@@ -4,6 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
+import org.GameObjects.objects.Tile;
 
 public class Draggable {
 	private double orgSceneX;
@@ -45,16 +46,18 @@ public class Draggable {
 			
 			//check to make sure the grid you are putting the tile in is empty/that it is within gameboard bounds
 			if (gridLayout[gameBoardX][gameBoardY] == 1) {
+				//this finds the old location of the tile location
 				gameBoardX = tile.getTileXLocation();
 				gameBoardY = tile.getTileYLocation();
-				
+
+				//reestablish the newWidth/newHeight back to its old location
 				newWidth = (gameBoardX-tile.getTileXInitial())*squareWidth;
 				newHeight = (gameBoardY-tile.getTileYInitial())*squareHeight;
 			}
 			
 
 			
-			//check that the location it's being put in is within the gameBoard bo
+			//check that the location it's being put in is within the gameBoard
 			//relocate the cell
 			draw(c, newWidth, newHeight);
 			//update the gridLayout

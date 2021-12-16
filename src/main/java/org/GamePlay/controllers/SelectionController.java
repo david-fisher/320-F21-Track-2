@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
@@ -12,10 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Project;
+import org.GameObjects.objects.Savable;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.BasicApplication;
-import org.GamePlay.SetupData;
 
 import java.util.ArrayList;
 
@@ -124,7 +126,7 @@ public class SelectionController extends ScreenController {
         VBox.setVgrow(buttonsHBox, Priority.ALWAYS);
 
         backButton = new Label("Back");
-        setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
+        Style.setStyle(backButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 200, 70);
 
         backButton.setPadding(new Insets(5, 20, 5, 20));
         HBox.setMargin(backButton, new Insets(10, 10, 10, 10));
@@ -138,7 +140,7 @@ public class SelectionController extends ScreenController {
         HBox.setHgrow(fillerPane, Priority.ALWAYS);
 
         selectGameButton = new Label("Select a Game");
-        setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
+        Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 290, 70);
         selectGameButton.setPadding(backButton.getPadding());
         selectGameButton.setDisable(true);
 
@@ -158,43 +160,45 @@ public class SelectionController extends ScreenController {
         initSavedGamesScrollPane();
         initButtons();
 
-        // todo, artifacts from original implementation
-        BasicApplication.loadNewGames();
-        BasicApplication.loadSavedGames();
-        newGames = BasicApplication.getNewGames();
-        savedGames = BasicApplication.getSavedGames();
-        populateSelectionMenus(newGames, savedGames);
-
+        Savable.intitDB();
+        newProjects = Savable.getProjects();
+        //TODO: load saved games
+        savedProjects = new ArrayList<>();
+        populateSelectionMenus(newProjects, savedProjects);
     }
 
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
-    private ArrayList<GameState> newGames = new ArrayList<>();
-    private ArrayList<GameState> savedGames = new ArrayList<>();
-    private GameState selectedGame;
+    private ArrayList<Project> newProjects = new ArrayList<>();
+    private ArrayList<Project> savedProjects = new ArrayList<>();
 
-    public void populateSelectionMenus(ArrayList<GameState> newGames, ArrayList<GameState> savedGames) {
+    public void populateSelectionMenus(ArrayList<Project> newProjects, ArrayList<Project> savedProjects) {
 
         // convert games to nodes
-        ArrayList<Node> newGameNodes = gamesToNodes(newGames);
-        ArrayList<Node> savedGameNodes = gamesToNodes(savedGames);
+        ArrayList<Node> newProjectNodes = projectsToNodes(newProjects);
+        ArrayList<Node> savedProjectNodes = projectsToNodes(savedProjects);
 
         // populate the menus
-        newGameNodes.forEach((n) -> {
+        newProjectNodes.forEach((n) -> {
 
             n.setOnMouseClicked(mouseEvent -> {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Start New Game");
-                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-                    BasicApplication.setSelectedGame(selectedGame);
-
-                    SetupController controller = new SetupController();
-                    controller.initialize(stage);
-
+                    if (BasicApplication.getProject().getIntiGS().getAllPlayers().size() == 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error!");
+                        alert.setHeaderText("This game does not yet have a player:");
+                        alert.setContentText("Please add a player to this game, then proceed.");
+                        alert.showAndWait();
+                    } else {
+                        SetupController controller = new SetupController();
+                        controller.initialize(stage);
+                    }
                 });
 
                 // deselect all rectangles
@@ -213,18 +217,16 @@ public class SelectionController extends ScreenController {
             newGamesHBox.getChildren().add(n);
         });
 
-        savedGameNodes.forEach((n) -> {
+        savedProjectNodes.forEach((n) -> {
 
             n.setOnMouseClicked(mouseEvent -> {
 
                 selectGameButton.setDisable(false);
                 selectGameButton.setText("Load Saved Game");
-                setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
+                Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
                     setSelectedGame((VBox)n);
-                    BasicApplication.setSelectedGame(selectedGame);
-                    BasicApplication.setSetupData(new SetupData(new ArrayList<>(), false));
                     PlayController controller = new PlayController();
                     controller.initialize(stage);
                 });
@@ -246,11 +248,11 @@ public class SelectionController extends ScreenController {
 
     }
 
-    public ArrayList<Node> gamesToNodes(ArrayList<GameState> games) {
+    public ArrayList<Node> projectsToNodes(ArrayList<Project> projects) {
 
         ArrayList<Node> nodes = new ArrayList<>();
 
-        games.forEach(
+        projects.forEach(
                 (n) -> {
 
                     VBox tempVBox = new VBox();
@@ -274,7 +276,7 @@ public class SelectionController extends ScreenController {
 
                     Label tempLabel = new Label();
                     tempLabel.setTextFill(Color.valueOf(GlobalCSSValues.text));
-                    tempLabel.setText(n.getGameBoard().getBoardID());
+                    tempLabel.setText(n.getProjectName());
                     tempLabel.setStyle("-fx-font-family: Serif; -fx-font-size: 20;");
 
                     tempVBox.getChildren().addAll(tempImageView, tempLabel);
@@ -290,33 +292,7 @@ public class SelectionController extends ScreenController {
     }
 
     public void setSelectedGame(VBox vbox) {
-        selectedGame = (GameState)vbox.getUserData();
-    }
-
-    public void initDarken(Label label) {
-        label.setOnMouseEntered(e -> {
-            ColorAdjust colorAdjust = new ColorAdjust();
-            colorAdjust.setBrightness(-0.2);
-            label.setEffect(colorAdjust);
-        });
-
-        label.setOnMouseExited(e -> {
-            label.setEffect(null);
-        });
-    }
-
-    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
-        label.setStyle("-fx-border-radius: 5 5 5 5; " +
-                "-fx-background-radius: 5 5 5 5; " +
-                "-fx-font-family: Serif; " +
-                "-fx-font-size: " + size + "; " +
-                "-fx-background-color: " + color + "; " +
-                "-fx-border-color: BLACK;");
-        label.setTextFill(Color.valueOf(textColor));
-        label.setAlignment(Pos.CENTER);
-        label.setPrefWidth(width);
-        label.setPrefHeight(height);
-        initDarken(label);
+        BasicApplication.setProject((Project)vbox.getUserData());
     }
 
     private String invertColor(String myColorString) {

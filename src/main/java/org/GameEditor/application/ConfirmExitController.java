@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Savable;
 
 public class ConfirmExitController {
 
@@ -26,7 +27,6 @@ public class ConfirmExitController {
     public void returnToMenu(ActionEvent event) throws IOException {
 		Parent editor = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
 		Scene editorScene = new Scene(editor);
-		
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(editorScene);
 		window.show();
