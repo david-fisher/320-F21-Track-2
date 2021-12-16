@@ -67,7 +67,7 @@
                   </Label>
                   <Label alignment="CENTER" layoutX="4.0" layoutY="105.0" prefHeight="35.0" prefWidth="103.0" text="Add Connections:" textAlignment="CENTER" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="159.0" prefHeight="35.0" prefWidth="119.0" text="Remove Connections:" textAlignment="CENTER" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="55.0" prefHeight="35.0" prefWidth="103.0" text="Current Connect:" textAlignment="CENTER" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="55.0" prefHeight="35.0" prefWidth="119.0" text="Current Connections:" textAlignment="CENTER" />
                   <MenuBar fx:id="currentMenuBar" layoutX="127.0" layoutY="60.0">
                      <menus>
                         <Menu fx:id="currentConnectionsMenu" mnemonicParsing="false" text="Edit">
