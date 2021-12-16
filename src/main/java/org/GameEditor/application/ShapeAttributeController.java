@@ -78,7 +78,8 @@ public class ShapeAttributeController {
     
     @FXML
     void setName(ActionEvent event) {
-    	importedTile.setTileName(tileName.getText());
+        importedTile.setTileName(tileName.getText());
+        importedTile.setLabel(tileName.getText());
     }
     
     @FXML

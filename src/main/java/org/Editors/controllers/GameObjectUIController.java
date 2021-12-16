@@ -249,7 +249,7 @@ public class GameObjectUIController extends ScreenController {
         String buttonNameString = buttonName.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = buttonColor.getValue();
         String buttonTextString = buttonText.getCharacters().toString();
-        String onClickString = buttonOnClick.getText();
+        String onClickString = (String) buttonEventList.getSelectionModel().getSelectedItem();
         System.out.println(onClickString);
 
         boolean labelRes = button.setLabel(buttonNameString);
@@ -271,12 +271,8 @@ public class GameObjectUIController extends ScreenController {
     }
 
     @FXML private void populateEventList(Event e) {
-        String[] l = gameState.events.keySet().toArray(new String[0]);
-        ObservableList<MenuItem> observable = buttonOnClick.getItems();
-        for (int i = 0; i < l.length; i++) {
-            observable.addAll(new MenuItem(l[i]));
-        }
-        //buttonEventList.setItems(observable);
+        ObservableList<String> observable = FXCollections.observableArrayList(gameState.events.keySet());
+        buttonEventList.setItems(observable);
     }
 
     @FXML private void populatePlayerInventory(Event e) {

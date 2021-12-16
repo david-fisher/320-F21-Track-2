@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -113,8 +114,8 @@ public class Display extends PlayController {
     public void updatePiece(Gamepiece gp) {
         Shape parent = (Shape) gp.getParent();
         Tile location = gp.getLocation();
-        parent.setLayoutX(parent.getLayoutX() + (location.getXPos() - parent.getLayoutX()));
-        parent.setLayoutY(parent.getLayoutY() + (location.getYPos() - parent.getLayoutY()));
+        parent.setLayoutX(parent.getLayoutX() + (location.getParent().getLayoutX() - parent.getLayoutX()));
+        parent.setLayoutY(parent.getLayoutY() + (location.getParent().getLayoutX() - parent.getLayoutY()));
         parent.toFront();
     }
 
@@ -130,15 +131,18 @@ public class Display extends PlayController {
         fillInventory(player.getInventory());
     }
 
+    public void updateColor(GameObject object) {
+        ((Shape)object.getParent()).setFill(object.getColor());
+    }
+
     public void displayWinnerPopup(Player player) {
         Stage popupWindow = new Stage();
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: " + GlobalCSSValues.background);
 
-        Label winnerMessage = new Label("Congratulations! " + player.getLabel() + " Wins!");
+        Label winnerMessage = new Label("Congratulations!\n" + player.getLabel() + " Wins!");
         winnerMessage.setTextFill(Color.valueOf(GlobalCSSValues.text));
         winnerMessage.setStyle("-fx-font-size: 25; -fx-font-family: serif;");
-        winnerMessage.setWrapText(true);
         winnerMessage.setAlignment(Pos.CENTER);
         winnerMessage.setPrefWidth(250);
 
@@ -148,31 +152,36 @@ public class Display extends PlayController {
         VBox buttons = new VBox(10);
 
         Label exit = new Label("Exit");
-        Style.setStyle(exit, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+        Style.setStyle(exit, "32", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
 
         Label mainMenu = new Label("Main Menu");
-        Style.setStyle(mainMenu, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+        Style.setStyle(mainMenu, "32", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
 
         Label playAgain = new Label("Play Again");
-        Style.setStyle(playAgain, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
+        Style.setStyle(playAgain, "32", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,200, 70);
 
         exit.setOnMouseClicked(e-> {
             popupWindow.close();
+            clearPlayParent();
             exitFromPlay();
         });
         mainMenu.setOnMouseClicked(e -> {
             popupWindow.close();
-            mainMenuFromPlay(super.getPlayStage());
+            clearParents();
+            clearPlayParent();
+            mainMenuFromPlay((Stage) playParent.getScene().getWindow());
         });
         playAgain.setOnMouseClicked(e -> {
             popupWindow.close();
-            restartPlay(super.getPlayStage());
+            clearParents();
+            clearPlayParent();
+            restartPlay((Stage) playParent.getScene().getWindow());
         });
 
         buttons.getChildren().addAll(playAgain, mainMenu, exit);
-        buttons.setMargin(exit, new Insets(5, 0, 5, 0));
-        buttons.setMargin(mainMenu, new Insets(5, 0, 5, 0));
-        buttons.setMargin(playAgain, new Insets(5, 0, 5, 0));
+        buttons.setMargin(exit, new Insets(0, 0, 15, 0));
+        buttons.setMargin(mainMenu, new Insets(0, 0, 15, 0));
+        buttons.setMargin(playAgain, new Insets(0, 0, 15, 0));
 
         buttons.setAlignment(Pos.CENTER);
         borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
