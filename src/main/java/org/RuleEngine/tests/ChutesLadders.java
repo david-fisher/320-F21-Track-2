@@ -103,7 +103,7 @@ public class ChutesLadders {
         ArrayList<Node> rollAndMove = new ArrayList<Node>();
         LiteralNode<String> gameDie = new LiteralNode<String>("_gameDie");
         OpNode rollDie = NodeMaker.makeNode("use").setOperand(gameDie, 0);
-        OpNode setValue = NodeMaker.makeNode("pset").setOperand(valueTrait, 0).setOperand(currPlayer, 1).setOperand(new LiteralNode<Integer>(5), 2);
+        OpNode setValue = NodeMaker.makeNode("pset").setOperand(valueTrait, 0).setOperand(currPlayer, 1).setOperand(rollDie, 2);
         OpNode movePlayer = NodeMaker.makeNode("moveBy").setOperand(getPiece, 0).setOperand(getVal, 1);
         OpNode updateDis = NodeMaker.makeNode("pset").setOperand(distanceTrait, 0).setOperand(currPlayer, 1).setOperand(newDis, 2);
         OpNode disableRollButton = NodeMaker.makeNode("pset").setOperand(enabledTrait, 0).setOperand(rollButton, 1).setOperand(new LiteralNode<Boolean>(false), 2);
