@@ -26,6 +26,10 @@ public final class GenBlockMaker {
                 newBlock.createGenBlock("move by steps", new String[] {"Obj:", "Steps:"});
                 newBlock.createNode("moveBy");
                 return newBlock;
+            case "moveTo":
+                newBlock.createGenBlock("move to tile", new String[] {"Obj:", "Tile:"});
+                newBlock.createNode("moveTo");
+                return newBlock;
             case "nextPlayer":
                 newBlock.createGenBlock("get next player", new String[] {});
                 newBlock.createNode("nextPlayer");
@@ -53,6 +57,26 @@ public final class GenBlockMaker {
             case "display":
                 newBlock.createGenBlock("display", new String[] {"String:"});
                 newBlock.createNode("display");
+                return newBlock;
+            case "putInInventory":
+                newBlock.createGenBlock("put inventory", new String[] {"Obj:", "Player:"});
+                newBlock.createNode("putInInventory");
+                return newBlock;
+            case "getLastUsed":
+                newBlock.createGenBlock("get last used", new String[] {"Player:"});
+                newBlock.createNode("getLastUsed");
+                return newBlock;
+            case "getGamepiece":
+                newBlock.createGenBlock("get gamepiece", new String[] {"Player:"});
+                newBlock.createNode("getGamepiece");
+                return newBlock;
+            case "negate":
+                newBlock.createGenBlock("negate", new String[] {"Value:"});
+                newBlock.createNode("negate");
+                return newBlock;
+            case "player":
+                newBlock.createGenBlock("get player[i]", new String[] {"i:"});
+                newBlock.createNode("player");
                 return newBlock;
         }
 

@@ -1,6 +1,7 @@
 package org.Editors.controllers;
 
 import java.io.File;
+import java.util.List;
 
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
@@ -29,7 +30,7 @@ public class GameObjectUIController extends ScreenController {
     // Card tab
     @FXML private TextField cardName;
     @FXML private ColorPicker cardColor;
-    @FXML private MenuButton cardAction;
+    @FXML private TextField cardOnPlay;
     private String cardTextureFilename;
 
     // Deck tab
@@ -90,6 +91,8 @@ public class GameObjectUIController extends ScreenController {
     @FXML private ColorPicker playerColor;
     @FXML private TextField playerGamepieces;
     @FXML private TextField playerInventory;
+    @FXML private TextField playerMin;
+    @FXML private TextField playerMax;
     @FXML private ListView playerInventoryList;
     @FXML private ListView gameObjectList;
     @FXML private ListView playerGamepiecesList;
@@ -135,11 +138,14 @@ public class GameObjectUIController extends ScreenController {
         Card card = new Card();
         String cardNameString = cardName.getCharacters().toString();
         Color jfxColor = cardColor.getValue();
+        String cardOnPlayString = cardOnPlay.getCharacters().toString();
 
         boolean labelRes = card.setLabel(cardNameString);
         boolean iconRes = card.setIcon(cardTextureFilename);
         boolean colorRes = card.setColor(jfxColor);
-        if (!(labelRes && iconRes && colorRes)) {
+        boolean onplayRes = card.setOnPlay(cardOnPlayString);
+
+        if (!(labelRes && iconRes && colorRes && onplayRes)) {
             System.err.println("Failure!");
         } else {
             System.out.println("Successfully created new card: " + card.repr(true));
@@ -472,11 +478,6 @@ public class GameObjectUIController extends ScreenController {
         String playerNameString = playerName.getCharacters().toString();
         javafx.scene.paint.Color jfxColor = playerColor.getValue();
 
-//        // TODO: Inventory UI
-        ArrayList<GameObject> inventory = new ArrayList<GameObject>();
-
-        // TODO: Gamepiece UI
-        ArrayList<Gamepiece> gamepieces = new ArrayList<>(playerGamepiecesList.getItems());
         boolean human = false;
         try {
             String isHuman = ((RadioButton) playerIsHuman.getSelectedToggle()).getText();
@@ -493,15 +494,17 @@ public class GameObjectUIController extends ScreenController {
             return;
         }
         Player player = new Player();
-        boolean labelRes = player.setTrait("label", playerNameString, false);
-        player.setGamePieces(gamepieces);
-        boolean colorRes = player.setTrait("color", jfxColor.toString(), false);
-        boolean invRes = player.setTrait("inventory", inventory, true);
-        boolean humanRes = player.setTrait("isHuman", human, false);
-        if (!(labelRes && colorRes && invRes && humanRes)) {
+        boolean labelRes = player.setLabel(playerNameString);
+        boolean colorRes = player.setColor(jfxColor);
+        boolean humanRes = player.setIsHuman(human);
+        int min = Integer.parseInt(playerMin.getCharacters().toString());
+        int max = Integer.parseInt(playerMax.getCharacters().toString());
+        gameState.minPlayer = min;
+        gameState.maxPlayer = max;
+
+        if (!(labelRes && colorRes && humanRes)) {
             System.out.println(labelRes);
             System.out.println(colorRes);
-            System.out.println(invRes);
             System.out.println(humanRes);
             System.err.println("Failure!");
         } else {
