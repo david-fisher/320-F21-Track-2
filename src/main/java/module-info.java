@@ -20,10 +20,9 @@ module org {
     opens org.Editors to javafx.fxml;
     exports org.Editors to javafx.graphics;
 
-    opens org.RuleEngine.nodes;
-
-    opens org.RuleEngine.engine;
-    exports org.RuleEngine.engine;
-
     opens org.GameObjects.objects;
+
+    opens org.RuleEngine.nodes;
+    exports org.RuleEngine.engine;
+    opens org.RuleEngine.engine;
 }

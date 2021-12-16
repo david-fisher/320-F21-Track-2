@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
-import org.GamePlay.Display;
+import org.RuleEngine.impossible.Game;
 
 public abstract class GameObject extends Savable {
   
@@ -80,10 +80,7 @@ public abstract class GameObject extends Savable {
 	          (trait.equals("parent") && value instanceof Node) || // check parent is Node 
 	          (traits.get(trait) != null && traits.get(trait).getClass().getName().equals(value.getClass().getName()))) { 
 		  prevTraits.put(trait, traits.get(trait)) ;
-          traits.put(trait, value) ;
-          if (trait.equals("color") && this.getParent() != null) {
-              Display.getDisplay().updateColor(this);
-          }
+	    traits.put(trait, value) ;
 		  return true ;
 	  }
 	  
@@ -152,7 +149,7 @@ public abstract class GameObject extends Savable {
  }
  
  public boolean setColorString(String color) {
-     return this.setTrait("color", color);
+	 return this.setTrait("color", color);
  }
 
  public String getColorString() {

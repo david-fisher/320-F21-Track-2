@@ -26,7 +26,7 @@ public class MainController extends ScreenController {
     private void initSettings() {
 
         Label settingsButton = new Label("Settings");
-        Style.setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
+        setStyle(settingsButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,175, 70);
 
         settingsButtonHBox = new HBox();
         settingsButtonHBox.setAlignment(Pos.TOP_RIGHT);
@@ -49,7 +49,7 @@ public class MainController extends ScreenController {
     private void initButtons() {
 
         playButton = new Label("Play Game");
-        Style.setStyle(playButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,275, 80);
+        setStyle(playButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,275, 80);
 
         VBox.setMargin(playButton, new Insets(10, 10, 20, 10));
 
@@ -58,7 +58,7 @@ public class MainController extends ScreenController {
         });
 
         newButton = new Label("Create Game");
-        Style.setStyle(newButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        setStyle(newButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(newButton, VBox.getMargin(playButton));
 
@@ -71,7 +71,7 @@ public class MainController extends ScreenController {
         });
 
         editButton = new Label("Edit Game");
-        Style.setStyle(editButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        setStyle(editButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(editButton, VBox.getMargin(playButton));
 
@@ -84,7 +84,7 @@ public class MainController extends ScreenController {
         });
 
         exitButton = new Label("Exit");
-        Style.setStyle(exitButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
+        setStyle(exitButton, "45", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 275, 80);
 
         VBox.setMargin(exitButton, VBox.getMargin(playButton));
 
@@ -107,9 +107,7 @@ public class MainController extends ScreenController {
 
         initSettings();
         initButtons();
-        boolean noProjects = Savable.getProjects().size() == 0;
-        if (noProjects) {
-            playButton.setDisable(true);
+        if (Savable.getProjects().size() == 0) {
             editButton.setDisable(true);
         }
     }
@@ -126,19 +124,28 @@ public class MainController extends ScreenController {
     // ----------------------- imported stuff from the original write (ugly) -------------------------------------
 
     public void playFromMain() {
+
+        // update playable and saved games in selection panes
+        BasicApplication.loadNewGames();
+        BasicApplication.loadSavedGames();
+
         SelectionController controller = new SelectionController();
         controller.initialize(stage);
     }
 
+    // todo implement new button
     public void createFromMain(MouseEvent event) throws IOException {
         System.out.println("Create");
         switchScene(event, "CreateController.fxml");
     }
 
+    // todo implement edit button
     public void editFromMain(MouseEvent event) throws IOException {
+        System.out.println("Edit");
         EditController controller = new EditController();
         controller.initialize(stage);
     }
+
 
     // todo do we need this still?
     public void switchScene(MouseEvent event, String nextScene) throws IOException {
@@ -151,6 +158,33 @@ public class MainController extends ScreenController {
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
+
+    public void initDarken(Label label) {
+        label.setOnMouseEntered(e -> {
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.2);
+            label.setEffect(colorAdjust);
+        });
+
+        label.setOnMouseExited(e -> {
+            label.setEffect(null);
+        });
+    }
+
+    public void setStyle(Label label, String size, String color, String textColor, double width, double height) {
+        label.setStyle("-fx-border-radius: 5 5 5 5; " +
+                "-fx-background-radius: 5 5 5 5; " +
+                "-fx-font-family: Serif; " +
+                "-fx-font-size: " + size + "; " +
+                "-fx-background-color: " + color + "; " +
+                "-fx-border-color: BLACK;");
+        label.setTextFill(Color.valueOf(textColor));
+        label.setAlignment(Pos.CENTER);
+        label.setPrefWidth(width);
+        label.setPrefHeight(height);
+        initDarken(label);
+    }
+
 }
 
 

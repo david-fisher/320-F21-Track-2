@@ -1,7 +1,6 @@
 package org.GameEditor.application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,16 +13,15 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import org.GameObjects.objects.Savable;
-import org.GameObjects.objects.Tile;
-import org.GamePlay.BasicApplication;
 
 public class Rightclickable {
 	
-	public void makeRightClickable(Tile tile, Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard, ArrayList<Tile> existingTiles) {
+	public void makeRightClickable(Tile tile, Node shape, Pane gameBoardBackground, int[][] gridLayout, GameBoard gameBoard) {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem deleteButton = new MenuItem(null, new Label("Delete"));
 		MenuItem shapeEditor = new MenuItem(null, new Label("Shape Editor"));
@@ -42,7 +40,6 @@ public class Rightclickable {
 				int gameBoardY = shapeCenterY / squareHeight;
 	        	//update the gridLayout
 	        	gridLayout[gameBoardX][gameBoardY] = 0;
-				BasicApplication.getProject().getIntiGS().getAllTiles().remove(tile);
 	            gameBoardBackground.getChildren().remove(shape);
 	        }
 	    });
@@ -51,6 +48,8 @@ public class Rightclickable {
 			@FXML
 			public void handle(ActionEvent event)
 			{
+				
+				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("ShapeEditor.fxml"));
 				try {
@@ -63,9 +62,9 @@ public class Rightclickable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
 				ShapeAttributeController attributeController = loader.getController();
-				attributeController.getGrid(gridLayout, existingTiles);
-                attributeController.setTile(tile, gameBoardBackground.getScene());
+                attributeController.getTile(tile);
 			}
 		});
 		

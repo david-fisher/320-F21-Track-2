@@ -27,4 +27,6 @@ public class DisplayNode extends OpNode {
         Display.getDisplay().print(op0.getValue().toString());
         return null;
     }
+    
+    
 }

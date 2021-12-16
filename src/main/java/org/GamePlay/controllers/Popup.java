@@ -8,10 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.GameObjects.objects.Savable;
 import org.GamePlay.GlobalCSSValues;
 
 public class Popup extends PlayController {
@@ -45,8 +43,6 @@ public class Popup extends PlayController {
         yes.setOnMouseClicked(e-> {
             popupWindow.close();
             parentPopup.close();
-            clearPlayParent();
-            restartPlay(stage);
         });
         no.setOnMouseClicked(e -> {
             popupWindow.close();
@@ -146,34 +142,45 @@ public class Popup extends PlayController {
         Stage popupWindow = new Stage();
 
         yes = new Label("Yes");
-        Style.setStyle(yes, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,100, 35);
-        yes.setTextAlignment(TextAlignment.CENTER);
-
+        yes.setStyle("-fx-border-radius: 2 2 2 2; " +
+                "-fx-background-radius: 2 2 2 2; " +
+                "-fx-background-color: " + GlobalCSSValues.buttonBackground +
+                "; -fx-text-fill: " + GlobalCSSValues.buttonText +
+                "; -fx-font-size: 25; -fx-font-family: serif; -fx-border-color: BLACK;");
+        yes.setAlignment(Pos.CENTER);
+        yes.setPrefWidth(100);
+        yes.setPrefHeight(35);
         no = new Label("No");
-        Style.setStyle(no, "25", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 100, 35);
-        no.setTextAlignment(TextAlignment.CENTER);
+        no.setStyle(yes.getStyle());
+        no.setAlignment(Pos.CENTER);
+        no.setPrefWidth(yes.getPrefWidth());
+        no.setPrefHeight(yes.getPrefHeight());
+        no.setStyle(yes.getStyle());
+
+        outlineYesNo(yes);
+        outlineYesNo(no);
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
         Label saveButton = new Label("Save");
-        Style.setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
+        setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
         saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label exitButton = new Label("Exit");
-        Style.setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
+        setStyle(exitButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
         exitButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label restartButton = new Label("Restart");
-        Style.setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
+        setStyle(restartButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
         restartButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         Label mainMenuButton = new Label("Main Menu");
-        Style.setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
+        setStyle(mainMenuButton, "30", GlobalCSSValues.buttonBackground, 170, 80);
         mainMenuButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
         saveButton.setOnMouseClicked(e->{
             saved = true;
-            Savable.closeDB();
+            System.out.println("Save");
         });
 
         exitButton.setOnMouseClicked(e->{
@@ -181,14 +188,12 @@ public class Popup extends PlayController {
                 displayExitWithoutSave(popupWindow);
             } else {
                 clearPlayParent();
-                clearParents();
                 popupWindow.close();
                 exitFromPlay();
             }
         });
 
         restartButton.setOnMouseClicked(e->{
-            clearPlayParent();
             displayRestart(popupWindow);
         });
 

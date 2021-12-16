@@ -19,7 +19,7 @@
                   </Text>
                </children>
             </Pane>
-            <Button fx:id="saveAs" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" onAction="#saveAsButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="Save As" />
+            <Button fx:id="saveAs" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" onAction="#saveAsButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="New Save" />
             <Button fx:id="save" layoutX="192.0" layoutY="121.0" mnemonicParsing="false" onAction="#saveButton" style="-fx-background-color: #e06666; -fx-border-color: #595959; -fx-border-radius: 4; -fx-border-width: 2; -fx-background-radius: 6;" text="  Save  " />
          </children>
       </Pane>

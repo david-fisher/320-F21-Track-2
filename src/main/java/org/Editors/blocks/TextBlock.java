@@ -34,8 +34,18 @@ public class TextBlock extends Block {
 
     this.blockHeight += 25;
 
-    //Make the block draggable and deletable
-    makeDraggableAndDeletable();
+    //Make the block draggable
+    this.block.setOnMousePressed(e -> {
+      //calculate offset
+      this.startX = e.getSceneX() - this.block.getTranslateX();
+      this.startY = e.getSceneY() - this.block.getTranslateY();
+    });
+
+    this.block.setOnMouseDragged(e -> {
+      //set new position
+      this.block.setTranslateX(e.getSceneX() - this.startX);
+      this.block.setTranslateY(e.getSceneY() - this.startY);
+    });
 
     //Pane for placing the controls and text for the block
     this.grid = new GridPane();

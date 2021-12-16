@@ -11,7 +11,7 @@ public class GameState extends Savable {
 
     public String projectName;
     
-    public org.GameEditor.application.GameBoard board;
+    public GameBoard board;
     public ArrayList<Button> buttons;
     public ArrayList<Card> cards;
     public ArrayList<Deck> decks;
@@ -208,8 +208,8 @@ public class GameState extends Savable {
     public int getMinPlayer() { return minPlayer; }
     public void setMinPlayer(int num) { minPlayer = num > 0 ? num : 1; }
     
-    public org.GameEditor.application.GameBoard getGameBoard() { return board; }
-    public void setGameBoard(org.GameEditor.application.GameBoard board) { this.board = board; }
+    public GameBoard getGameBoard() { return board; }
+    public void setGameBoard(GameBoard board) { this.board = board; }
 
     public ArrayList<Button> getAllButtons() { return buttons; }
     public void setAllButtons(ArrayList<Button> buttons) { this.buttons = buttons; }
@@ -246,7 +246,4 @@ public class GameState extends Savable {
 
     public HashMap<String, ArrayList<Node>> getAllEvents() { return events; }
     public void setAllEvents(HashMap<String, ArrayList<Node>> allEvents) { events = allEvents; }
-
-    public boolean getTutorialEnabled() { return tutorialEnabled; }
-    public void setTutorialEnabled(boolean tutorialEnabled) { this.tutorialEnabled = tutorialEnabled; }
 }

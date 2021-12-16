@@ -35,8 +35,8 @@ public class MainMenuController extends ScreenController {
         changeScene(event,"GameObjectEditor.fxml");
     }
 
-    @FXML private void changeToSelectEvent(ActionEvent event) throws IOException {
-        changeScene(event,"SelectEvent.fxml");
+    @FXML private void changeToRuleEditor(ActionEvent event) throws IOException {
+        changeScene(event,"RuleEditor.fxml");
     }
 
     @FXML private void changeToGameBoardEditor(ActionEvent event) throws IOException {
@@ -45,9 +45,8 @@ public class MainMenuController extends ScreenController {
 
     @FXML private void returnToMain(ActionEvent event) {
         Savable.closeDB();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.close();
         MainController main = new MainController();
         main.initialize(BasicApplication.restartStage(new Stage()));
     }
+
 }

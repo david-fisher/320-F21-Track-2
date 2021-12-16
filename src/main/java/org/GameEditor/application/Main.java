@@ -5,15 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import java.net.URL;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			URL location = getClass().getResource("TemplateOrFresh.fxml");
-			Parent root = FXMLLoader.load(location);
+			
+			
+			Parent root = FXMLLoader.load(getClass().getResource("TemplateOrFresh.fxml"));
 			Scene scene = new Scene(root,900,600);
 			
 			primaryStage.sizeToScene();

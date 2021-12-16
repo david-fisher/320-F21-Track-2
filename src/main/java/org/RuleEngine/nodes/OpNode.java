@@ -5,9 +5,9 @@ import java.util.ArrayList;
 // operands: The operands of this rule statement. Can be either an Expression or another statement.
 // NOTE: the parent of a node is only set if it is added via setOperand or setOperandInGroup.
 public abstract class OpNode extends Node {
-
+    
     protected ArrayList<ArrayList<Node>> operands;
-
+    
     public OpNode() {
         operands = new ArrayList<ArrayList<Node>>();
         operands.add(new ArrayList<Node>());
@@ -38,7 +38,7 @@ public abstract class OpNode extends Node {
         operands.get(i).add(operand);
         return this;
     }
-
+    
     // Manually add a group of rules to operands.
     protected OpNode addRuleGroup(ArrayList<Node> rules) {
         operands.add(rules);
@@ -49,7 +49,7 @@ public abstract class OpNode extends Node {
     public OpNode setOperand(Node operand, int i) {
         return setOperandInGroup(operand, i, 0);
     }
-
+    
     // Set the operand at index i in group groupId.
     public OpNode setOperandInGroup(Node operand, int i, int groupId) {
         if (isValidAt(i, groupId)) {
@@ -58,15 +58,15 @@ public abstract class OpNode extends Node {
         }
         return this;
     }
-
+    
     // Remove the operand at index i in group 0.
     public Node removeOperand(int i) {
         return removeOperandInGroup(i, 0);
     }
-
+    
     public boolean removeOperand(Node node) {
         for (int i = 0; i < operands.size(); i++) {
-            ArrayList<Node> temp = getRuleGroup(i);
+            ArrayList<Node> temp = getRuleGroup(i); 
             if (temp.contains(node)) {
                 temp.set(temp.indexOf(node), null);
                 node.parent = null;
@@ -75,7 +75,7 @@ public abstract class OpNode extends Node {
         }
         return false;
     }
-
+    
     // Remove the operand at index i in group groupId.
     public Node removeOperandInGroup(int i, int groupId) {
         if (isValidAt(i, groupId)) {
@@ -85,7 +85,7 @@ public abstract class OpNode extends Node {
             return node;
         } else {
             return null;
-        }
+        }        
     }
 
     // Returns a "block" or rules. Mainly used by control statements (e.g. if).
@@ -101,11 +101,11 @@ public abstract class OpNode extends Node {
     public Node getOperand(int i) {
         return getOperandInGroup(i, 0);
     }
-
+    
     public Node getOperandInGroup(int i, int groupId) {
         return isValidAt(i, groupId) ? operands.get(groupId).get(i) : null;
     }
-
+    
     public boolean isValidAt(int i, int groupId) {
         if (operands.size() <= groupId) {
             System.out.println("Error: Cannot find to target rule group. Index out of bound!");
@@ -114,14 +114,14 @@ public abstract class OpNode extends Node {
         if (operands.get(groupId) == null) {
             System.out.println("Error: No valid rule group at index " + i);
             return false;
-        }
+        } 
         if (operands.get(groupId).size() <= i) {
             System.out.println("Error: Cannot find valid position at " + i + " of group " + groupId +", index out of bounds!");
             return false;
         }
         return true;
     }
-
+    
     // Required for object persistence
     public ArrayList<ArrayList<Node>> getAllOperands() { return operands; }
     public void setAllOperands(ArrayList<ArrayList<Node>> operands) { this.operands = operands; }
