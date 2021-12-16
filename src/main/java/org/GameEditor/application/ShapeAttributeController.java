@@ -24,22 +24,25 @@ import org.GameObjects.objects.Tile;
 import javax.swing.*;
 
 public class ShapeAttributeController {
-	
-	Tile importedTile;
+
+    Tile importedTile;
     Scene scene;
-	
-	Stage stage = new Stage();
-	private FileChooser fileChooser = new FileChooser();
-	
+
+    Stage stage = new Stage();
+    private FileChooser fileChooser = new FileChooser();
+
     @FXML
     private ColorPicker tileColor;
+
+    @FXML
+    private ColorPicker tileBorderColor;
 
     @FXML
     private Button tileImage;
 
     @FXML
     private TextField tileName;
-    
+
     @FXML
     private Button backBtn;
 
@@ -64,50 +67,56 @@ public class ShapeAttributeController {
     private Menu removeConnectionsMenu;
 
     @FXML
-    private MenuItem addConnections;
+    private CheckBox border;
 
     private ArrayList<Tile> existingTiles;
 
     private int[][] gridLayout;
-    
+
     public void setTile(Tile tile, Scene scene) {
         this.importedTile = tile;
         this.scene = scene;
         shape = (Shape) scene.lookup("#" + importedTile.getId());
     }
-    
+
     @FXML
     void setName(ActionEvent event) {
-    	importedTile.setTileName(tileName.getText());
+        importedTile.setTileName(tileName.getText());
     }
-    
+
     @FXML
     void setColor(ActionEvent event) {
         shape.setFill(tileColor.getValue());
         importedTile.setColor(tileColor.getValue());
-    	importedTile.hasImage = false;
+        importedTile.hasImage = false;
+    }
+
+    @FXML
+    void setBorderColor(ActionEvent event) {
+        shape.setStroke(tileBorderColor.getValue());
+        //importedTile.setColor(tileColor.getValue());
     }
 
     @FXML
     void setImage(ActionEvent event) {
-    	File file = fileChooser.showOpenDialog(stage);
-    	if (file != null) {
-    		String name = file.getName();
-    		int i = name.lastIndexOf('.');
-    		String ext = name.substring(i + 1);
-    		if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
-    			Image img = new Image(file.toURI().toString());
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            String name = file.getName();
+            int i = name.lastIndexOf('.');
+            String ext = name.substring(i + 1);
+            if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
+                Image img = new Image(file.toURI().toString());
                 shape.setFill(new ImagePattern(img));
-    			importedTile.setIcon((new ImagePattern(img)).toString());
-    			importedTile.setTileImage(name);
-    			importedTile.hasImage = true;
-    		}
-    	}
+                importedTile.setIcon((new ImagePattern(img)).toString());
+                importedTile.setTileImage(name);
+                importedTile.hasImage = true;
+            }
+        }
     }
-    
+
     @FXML
     public void returnToEditor(ActionEvent event) throws IOException {
-    	Stage stage = (Stage) backBtn.getScene().getWindow();
+        Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
     }
 
@@ -232,4 +241,9 @@ public class ShapeAttributeController {
         return selected;
     }
 
+    @FXML
+    private void addBorder(ActionEvent event) throws IOException {
+        //tileBorderColor.setEditable(!tileBorderColor.isEditable());
+        shape.setStrokeWidth(0);
+    }
 }
