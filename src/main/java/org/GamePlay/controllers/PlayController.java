@@ -43,7 +43,7 @@ public class PlayController extends ScreenController {
     private Label inventoryLabel;
     private Pane settingsPane;
     private HBox inventoryContainer;
-    private Stage stage;
+    public Stage stage;
 
     private ArrayList<Player> players;
     private Player currPlayer;
@@ -71,9 +71,9 @@ public class PlayController extends ScreenController {
         initGame(gameState);
 
         Scene newScene = new Scene(playParent);
-        stage.setScene(newScene);
-        stage.setResizable(true);
-        stage.show();
+        this.stage.setScene(newScene);
+        this.stage.setResizable(true);
+        this.stage.show();
     }
 
     private static AnchorPane boardPane;
@@ -591,6 +591,16 @@ public class PlayController extends ScreenController {
 
     public void restartPlay(Stage stage) {
         Savable.intitDB();
+        clearPlayParent();
+        ArrayList<Project> projects = Savable.getProjects();
+        Project currProject = new Project();
+        for(int i=0; i < projects.size(); i++) {
+            Project tempProject = projects.get(i);
+            if (tempProject.getProjectName().equals(BasicApplication.getProject().getProjectName())) {
+                currProject = tempProject;
+            }
+        }
+        BasicApplication.setProject(currProject);
         PlayController controller = new PlayController();
         controller.initialize(stage);
     }
@@ -640,6 +650,8 @@ public class PlayController extends ScreenController {
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
-    public Stage getPlayStage() { return stage; }
+    public Stage getPlayStage() {
+        return stage;
+    }
 }
 

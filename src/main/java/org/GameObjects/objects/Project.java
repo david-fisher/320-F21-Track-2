@@ -45,10 +45,10 @@ public class Project{
 		this.savedGS = savedGS;
 	}
 
-	Project() {
+	public Project() {
 	}
 
-	Project(String name) {
+	public Project(String name) {
 		this.projectName = name;
 //		this.projectPath = directory + File.separator + name;
 //		new File(this.projectPath).mkdirs();

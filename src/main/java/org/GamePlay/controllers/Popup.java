@@ -46,6 +46,7 @@ public class Popup extends PlayController {
             popupWindow.close();
             parentPopup.close();
             clearPlayParent();
+            System.out.println(stage);
             restartPlay(stage);
         });
         no.setOnMouseClicked(e -> {
@@ -188,7 +189,6 @@ public class Popup extends PlayController {
         });
 
         restartButton.setOnMouseClicked(e->{
-            clearPlayParent();
             displayRestart(popupWindow);
         });
 

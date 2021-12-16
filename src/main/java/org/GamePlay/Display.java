@@ -167,15 +167,14 @@ public class Display extends PlayController {
         });
         mainMenu.setOnMouseClicked(e -> {
             popupWindow.close();
-            clearParents();
             clearPlayParent();
             mainMenuFromPlay((Stage) playParent.getScene().getWindow());
         });
         playAgain.setOnMouseClicked(e -> {
             popupWindow.close();
-            clearParents();
             clearPlayParent();
-            restartPlay((Stage) playParent.getScene().getWindow());
+            Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+            restartPlay(stage);
         });
 
         buttons.getChildren().addAll(playAgain, mainMenu, exit);
