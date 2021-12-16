@@ -47,7 +47,7 @@ public class MoveByNode extends OpNode {
         // TODO AI: Configure this so it calls some other function if the player is AI.
         Tile playerChoice = Display.getDisplay().moveOptions(findTargetTiles((Tile)go.getTrait("location"), dis));
         Gamepiece gp = (Gamepiece) go;
-        if (!gp.setLocation(playerChoice)) {
+        if (!gp.setLocation(playerChoice, currState)) {
             NodeUtil.OtherError("Failed to move object " + op0.getValue());
         }
         return null;
@@ -64,7 +64,7 @@ public class MoveByNode extends OpNode {
         tiles.add(t);
         distances.add(0);
 
-        while(distances.peek() <= tDis) {
+        while(distances.size() > 0 && distances.peek() <= tDis) {
             Integer currDis = distances.poll();
             Tile currTile = tiles.poll();
             processed.add(currTile);

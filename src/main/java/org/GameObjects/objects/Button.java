@@ -1,5 +1,8 @@
 package org.GameObjects.objects;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Button extends GameObject {
 	private static int count = 0;
 
@@ -26,6 +29,14 @@ public class Button extends GameObject {
 	 *  pressed :   Boolean
 	 *  onClick :   String
 	 */
+
+	public Button clone() {
+		Button x = new Button();
+		for (String s : this.getAllTraits().keySet()) {
+			x.setTrait(s, this.getTrait(s), true);
+		}
+		return x;
+	}
 
 	//set trait to value. Overrides checking for default traits only.
 	public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {

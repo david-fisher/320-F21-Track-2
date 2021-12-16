@@ -26,7 +26,14 @@ public class GameTimer extends GameObject {
    * 	color 	:	String (Can be obtained as JAVAFX Color object)
    * 	initialTime:Double
    */
-  
+
+  public GameTimer clone() {
+    GameTimer x = new GameTimer();
+    for (String s : this.getAllTraits().keySet()) {
+        x.setTrait(s, this.getTrait(s), true);
+    }
+    return x;
+  }
   //set trait to value. Overrides checking for default traits only
   public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 	  
