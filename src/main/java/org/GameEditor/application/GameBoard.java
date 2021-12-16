@@ -33,7 +33,10 @@ public class GameBoard extends GameObject {
 		setHeight((double) boardHeight);
 		setWidth((double) boardWidth);
 	}
-	
+
+	public GameBoard clone() {
+		return this;
+	}
 	public void resize(Rectangle[][] rectangle) {
 		
 	}

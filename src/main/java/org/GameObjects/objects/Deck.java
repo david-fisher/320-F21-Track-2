@@ -18,8 +18,23 @@ public class Deck extends GameObject {
 	this.setColorString("#000000") ;
     this.setTrait("cards", deck, true) ;
   }
-  
-//set trait to value. Overrides checking for default traits only
+
+
+  public Deck clone() {
+    Deck x = new Deck();
+    for (String s : this.getAllTraits().keySet()) {
+        if (!s.equals("cards")) {
+            x.setTrait(s, this.getTrait(s), true);
+        }
+    }
+    ArrayList<Card> y = new ArrayList<Card>();
+    for (Card c: x.getCards()) {
+        y.add(c.clone());
+    }
+    x.setTrait("cards", y);
+    return x;
+  }
+    //set trait to value. Overrides checking for default traits only
  public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {
 	  
 	  // run game object's set trait first

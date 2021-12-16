@@ -1,8 +1,10 @@
 package org.RuleEngine.engine;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 import org.GameObjects.objects.*;
+import org.RuleEngine.impossible.Game;
 import org.RuleEngine.nodes.*;
 
 public class GameState extends Savable {
@@ -53,6 +55,81 @@ public class GameState extends Savable {
         registers.put("currPlayer", null);
         events.put("heuristic", null);
 	    events.put("initialization", null);
+    }
+
+    public GameState clone() {
+        GameState state = new GameState();
+        state.projectName = this.projectName;
+        state.minPlayer = this.minPlayer;
+        state.maxPlayer = this.maxPlayer;
+        state.tutorialEnabled = this.tutorialEnabled;
+        state.registers = new HashMap<String, GameObject>();
+        for (Map.Entry<String, GameObject> e: this.registers.entrySet()) {
+            state.registers.put(e.getKey(), e.getValue().clone());
+        }
+        state.events = this.events;
+
+        // Individual stuff
+        state.gameObjects = new ArrayList<GameObject>();
+        for (GameObject x: this.gameObjects) {
+            state.gameObjects.add(x.clone());
+        }
+        state.buttons = new ArrayList<Button>();
+        for (Button x: this.buttons) {
+            state.buttons.add(x.clone());
+        }
+        state.dice = new ArrayList<Die>();
+        for (Die x: this.dice) {
+            state.dice.add(x.clone());
+        }
+        state.timers = new ArrayList<GameTimer>();
+        for (GameTimer x: this.timers) {
+            state.timers.add(x.clone());
+        }
+        state.spinners = new ArrayList<Spinner>();
+        for (Spinner x: this.spinners) {
+            state.spinners.add(x.clone());
+        }
+        state.tokens = new ArrayList<Token>();
+        for (Token x: this.tokens) {
+            state.tokens.add(x.clone());
+        }
+
+        // Gamepieces and Tiles are intertwined
+        // TODO: Reimplement references between both
+        state.gamepieces = new ArrayList<Gamepiece>();
+        for (Gamepiece x: this.gamepieces) {
+            state.gamepieces.add(x.clone());
+        }
+        state.tiles = new ArrayList<Tile>();
+        for (Tile x: this.tiles) {
+            state.tiles.add(x.clone());
+        }
+
+        // Decks and Cards are intertwined
+        // TODO: Reimplement references between both
+        state.decks = new ArrayList<Deck>();
+        for (Deck x: this.decks) {
+            state.decks.add(x.clone());
+        }
+        state.cards = new ArrayList<Card>();
+        for (Card x: this.cards) {
+            state.cards.add(x.clone());
+        }
+
+        state.players = new ArrayList<Player>();
+        for (Player x: this.players) {
+            state.players.add(x.clone());
+        }
+
+        // TODO: Reimplement board reference to tiles
+        //state.board = this.board.clone();
+
+        return state;
+    }
+
+    public GameState cloneEvent(String event) {
+        return null;
     }
 
     public GameObject getRegistry(String key) { return registers.get(key); }

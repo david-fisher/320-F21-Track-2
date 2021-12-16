@@ -145,7 +145,7 @@ public class PlayController extends ScreenController {
 
         //Call the initialize method of the Game if it has one
         if (gameState.getEvent("initialization") != null) {
-            interpreter.interpretEvent(gameState.getEvent("initialization"), gameState);
+            interpreter.interpretEventNamed("initialization", gameState);
         }
     }
 
@@ -233,7 +233,7 @@ public class PlayController extends ScreenController {
             Style.setStyle(label, "18", button.getColorString(), GlobalCSSValues.text, button.getText().length() * 12, 30);
             button.getParent().setOnMouseClicked(e -> {
                 if (button.getEnabled()) {
-                    interpreter.interpretEvent(gameState.events.get(event), gameState);
+                    interpreter.interpretEventNamed(event, gameState);
                 }
             });
             container.getChildren().add(button.getParent());
@@ -254,7 +254,7 @@ public class PlayController extends ScreenController {
             c.getParent().setOnMouseClicked(e -> {
                 if (!event.equals("")) {
                     if (c.getEnabled()) {
-                        interpreter.interpretEvent(gameState.events.get(event), gameState);
+                        interpreter.interpretEventNamed(event, gameState);
                     }
                 }
             });

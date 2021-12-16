@@ -50,6 +50,15 @@ public class Tile extends GameObject {
     public int y;
     public int startXCoordinate;
     public int startYCoordinate;
+    public Tile clone() {
+        Tile x = new Tile();
+        for (String s : this.getAllTraits().keySet()) {
+            if (!s.equals("connections") && !s.equals("pieces")) {
+                x.setTrait(s, this.getTrait(s), true);
+            }
+        }
+        return x;
+    }
 
     // set trait to value. Overrides checking for default traits only
     public boolean setTrait(String trait, Object value, boolean suppressTraitChecker) {

@@ -38,13 +38,13 @@ public class PSetNode extends OpNode {
 
         String traitName = (String)op0.getValue();
         GameObject go = NodeUtil.processNodeToObj(op1, currState);
-        if (go == null) {
+        if (go == null) { 
             NodeUtil.InputTypeError(this, 1, "Valid GameObject");
             return null;
         }
 
         if (!go.setTrait(traitName, op2.getValue())) {
-            NodeUtil.OtherError("Something went wrong when setting " + traitName + " property of " + op1.getValue() +
+            NodeUtil.OtherError("Something went wrong when setting " + traitName + " property of " + op1.getValue() + 
                     " to " + op2.getValue().toString());
         }
 
