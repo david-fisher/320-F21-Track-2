@@ -19,7 +19,7 @@ public class RandomOracle implements Oracle {
         Random rand = new Random();
         ArrayList<String> keyArray = new ArrayList<String>(currState.getAllEvents().keySet());
         String s = keyArray.get(rand.nextInt(keyArray.size()));
-        while (prev.indexOf(s) != -1 || !s.endsWith("Event")) {
+        while (prev.indexOf("A"+s) != -1 || prev.indexOf("H"+s) != -1 || !s.endsWith("Event")) {
             s = keyArray.get(rand.nextInt(keyArray.size()));
         }
         System.out.println("AI Chooses " + s);

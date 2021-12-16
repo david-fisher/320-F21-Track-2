@@ -50,15 +50,25 @@ public class Interpreter {
     }
     public void interpretEventNamed(String s, GameState currState) {
         ArrayList<Node> event = currState.getEvent(s);
-        this.prev.add(s);
-        System.out.println(((Player) currState.getRegistry("currPlayer")).getIsHuman());
+        if (((Player) currState.getRegistry("currPlayer")).getIsHuman()) {
+            this.prev.add("H"+s);
+        } else {
+            this.prev.add("A"+s);
+        }
         if (this.oracle == null) {
-            if (currState.getAllEvents().get("heuristic") == null) {
-                this.oracle = new RandomOracle();
+            if (((Player) currState.getRegistry("currPlayer")).getLabel().equals("TicTacJoe")) {
+                this.oracle = new LocalOracle();
+            }
+            else if (((Player) currState.getRegistry("currPlayer")).getLabel().equals("TicTacJoey")) {
+                this.oracle = new StopOracle();
+            }
+            else if (((Player) currState.getRegistry("currPlayer")).getLabel().equals("TicTacJoseph")) {
+                this.oracle = new DepthOracle();
             } else {
-                this.oracle = new HeuristicOracle();
+                this.oracle = new RandomOracle();
             }
         }
+
         for (int i = 0; i < event.size(); i++) {
             interpretRule(event.get(i), currState);
         }
