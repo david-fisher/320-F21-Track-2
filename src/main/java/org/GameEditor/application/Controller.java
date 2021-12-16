@@ -66,6 +66,9 @@ public class Controller extends ScreenController {
 
     @FXML
     private TextField nameTf;
+
+	@FXML
+	private TextField connectionsTf;
     
     @FXML
     private TextField rowSize;
@@ -247,7 +250,7 @@ public class Controller extends ScreenController {
 					gameBoardBackground.getChildren().add(shape);
 					draggable.makeDraggable(shape, gameBoard, gameBoardBackground, gridLayout, c);
 					rightclickable.makeRightClickable(c,shape, gameBoardBackground, gridLayout, gameBoard, gameState.getAllTiles());
-					leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
+					leftclickable.makeLeftclickable(c, shape.getId(), nameTf, imageTf, colorTf, connectionsTf, gameBoardBackground.getScene());
 					shape.setLayoutX((i * gameBoard.getCellWidth() + x/2));
 					shape.setLayoutY((j * gameBoard.getCellHeight() + y/2));
 					gridLayout[i][j] = 1;
@@ -293,7 +296,7 @@ public class Controller extends ScreenController {
 					gameBoardBackground.getChildren().add(tileShape);
 					draggable.makeDraggable(tileShape, gameBoard, gameBoardBackground, gridLayout, r);
 					rightclickable.makeRightClickable(r, tileShape, gameBoardBackground, gridLayout, gameBoard, gameState.getAllTiles());
-					leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf, gameBoardBackground.getScene());
+					leftclickable.makeLeftclickable(r, tileShape.getId(), nameTf, imageTf, colorTf, connectionsTf, gameBoardBackground.getScene());
 					tileShape.setLayoutX((i * gameBoard.getCellWidth()));
 					tileShape.setLayoutY((j * gameBoard.getCellHeight()));
 					gridLayout[i][j] = 1;
@@ -403,7 +406,7 @@ public class Controller extends ScreenController {
 		int height = Integer.valueOf(rowSize.getText());
 		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];
-		gameBoard.draw(gameBoardBackground, width, height, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, begin.getScene());
+		gameBoard.draw(gameBoardBackground, width, height, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, connectionsTf, begin.getScene());
 	}
 
 	@FXML
@@ -411,7 +414,7 @@ public class Controller extends ScreenController {
 		int height = Integer.valueOf(rowSize.getText());
 		int width = Integer.valueOf(columnSize.getText());
 		gridLayout = new int[width][height];
-		gameBoard.draw(gameBoardBackground, width, height, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, begin.getScene());
+		gameBoard.draw(gameBoardBackground, width, height, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, connectionsTf, begin.getScene());
 	}
 
 	//draw the gameboard
@@ -439,7 +442,7 @@ public class Controller extends ScreenController {
 			x = gameBoard.getSizeX();
 		}
 		gridLayout = gameBoard.getGridLayout();
-    	gameBoard.draw(gameBoardBackground, x, y, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, begin.getScene());
+    	gameBoard.draw(gameBoardBackground, x, y, gridLayout, gameState.getAllTiles(), nameTf, imageTf, colorTf, connectionsTf, begin.getScene());
     	//also need to hide the old button
     	//also need to hide the text
     }

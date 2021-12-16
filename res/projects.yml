@@ -3,8 +3,8 @@ projects:
     board:
       boardHeight: 560
       boardWidth: 634
-      cellHeight: 186
-      cellWidth: 211
+      cellHeight: 140
+      cellWidth: 158
       gridLayout:
       - - 1
         - 0
@@ -14,17 +14,17 @@ projects:
         - 0
         - 0
         - 0
-      - - 1
+      - - 0
+        - 1
         - 0
         - 0
         - 0
         - 0
         - 0
         - 0
+      - - 0
         - 0
-      - - 1
-        - 0
-        - 0
+        - 1
         - 0
         - 0
         - 0
@@ -70,7 +70,7 @@ projects:
         - 0
         - 0
         - 0
-      height: 3
+      height: 4
       prevTraits:
         yPos: null
         shape: null
@@ -83,7 +83,7 @@ projects:
         width: 634.0
         xPos: 0
         height: 560.0
-      width: 3
+      width: 4
     buttons: []
     cards: []
     decks: []
@@ -102,7 +102,8 @@ projects:
       currPlayer: null
     spinners: []
     tiles:
-    - connections: &id002 []
+    - &id003
+      connections: &id002 []
       hasImage: false
       id: 0
       pieces: &id001 []
@@ -136,10 +137,45 @@ projects:
         height: 70.0
       x: 0
       y: 0
-    - connections: &id004 []
+    - connections: &id005
+      - *id003
       hasImage: false
-      id: 1
-      pieces: &id003 []
+      id: 2
+      pieces: &id004 []
+      prevTraits:
+        pieces: null
+        yPos: 0
+        shape: square
+        color: '#000000'
+        onLand: null
+        width: 0.0
+        icon: null
+        xPos: 0
+        label: null
+        connections: null
+        height: 0.0
+      startXCoordinate: 1
+      startYCoordinate: 1
+      tileImage: null
+      tileName: tempName
+      traits:
+        pieces: *id004
+        yPos: 0
+        shape: Rectangle
+        color: '#000000FF'
+        onLand: ''
+        width: 211.0
+        icon: default_tile_icon.jpg
+        xPos: 0
+        label: tile03
+        connections: *id005
+        height: 186.0
+      x: 2
+      y: 2
+    - connections: &id007 []
+      hasImage: false
+      id: 3
+      pieces: &id006 []
       prevTraits:
         pieces: null
         yPos: 0
@@ -157,53 +193,19 @@ projects:
       tileImage: null
       tileName: null
       traits:
-        pieces: *id003
+        pieces: *id006
         yPos: 0
         shape: Rectangle
         color: '#000000FF'
         onLand: ''
-        width: 79.0
+        width: 158.0
         icon: default_tile_icon.jpg
         xPos: 0
-        label: tile02
-        connections: *id004
-        height: 70.0
+        label: tile04
+        connections: *id007
+        height: 140.0
       x: 1
-      y: 0
-    - connections: &id006 []
-      hasImage: false
-      id: 2
-      pieces: &id005 []
-      prevTraits:
-        pieces: null
-        yPos: 0
-        shape: square
-        color: '#000000'
-        onLand: null
-        width: 0.0
-        icon: null
-        xPos: 0
-        label: null
-        connections: null
-        height: 0.0
-      startXCoordinate: 2
-      startYCoordinate: 0
-      tileImage: null
-      tileName: null
-      traits:
-        pieces: *id005
-        yPos: 0
-        shape: Rectangle
-        color: '#000000FF'
-        onLand: ''
-        width: 79.0
-        icon: default_tile_icon.jpg
-        xPos: 0
-        label: tile03
-        connections: *id006
-        height: 70.0
-      x: 2
-      y: 0
+      y: 1
     timers: []
     tokens: []
     tutorialEnabled: false
