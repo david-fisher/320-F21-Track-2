@@ -185,7 +185,6 @@ public class Popup extends PlayController {
             clearPlayParent();
             clearParents();
             GameState temp = BasicApplication.getGameState();
-            System.out.println(temp.getRegistry("currPlayer"));
             Savable.initDB();
             ArrayList<Project> projects = Savable.getProjects();
             for(int i=0; i < projects.size(); i++) {

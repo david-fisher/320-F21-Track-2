@@ -275,7 +275,6 @@ public class PlayController extends ScreenController {
     public void fillInventory(ArrayList<GameObject> inventory) {
         currPlayer = (Player) gameState.getRegistry("currPlayer");
         if (inventory.size() == 0) { return; }
-        initInventoryLabel(numDrawers);
         inventoryContainer = new HBox();
         inventoryContainer.setAlignment(Pos.CENTER);
         inventoryContainer.setSpacing(-10);
@@ -377,9 +376,7 @@ public class PlayController extends ScreenController {
 
     private void initInventoryLabel(int numDrawers) {
         inventoryLabel = new Label();
-        initLabel(inventoryLabel, "" + currPlayer.getLabel() + "'s \n Inventory" , "inventoryLabel");
-        inventoryLabel.setTextAlignment(TextAlignment.CENTER);
-        inventoryLabel.setWrapText(true);
+        initLabel(inventoryLabel, "Inventory" , "inventoryLabel");
         playParent.setTopAnchor(inventoryLabel, (playHeight / 5) + 175 + 50 * Math.log(Math.pow(10, numDrawers - 1)));
     }
 
@@ -394,6 +391,7 @@ public class PlayController extends ScreenController {
         label.setId(id);
         label.setTextAlignment(TextAlignment.CENTER);
         label.setAlignment(Pos.CENTER);
+        label.setWrapText(true);
 
         label.setPrefWidth(140);
 
@@ -657,8 +655,10 @@ public class PlayController extends ScreenController {
     public AnchorPane getPlayParent() { return playParent; }
     public AnchorPane getBoardPane() { return boardPane; }
     public Label getPlayerTurnIndicator() { return playerTurnIndicator; }
+    public Label getInventoryLabel() { return inventoryLabel; }
     public Stage getPlayStage() {
         return stage;
     }
+    public void setCurrPlayer(Player player) { this.currPlayer = player;}
 }
 

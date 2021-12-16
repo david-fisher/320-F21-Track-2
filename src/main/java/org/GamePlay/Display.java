@@ -116,6 +116,7 @@ public class Display extends PlayController {
     }
 
     public void updateCurrPlayer(Player player) {
+        setCurrPlayer(player);
         Label indicator = getPlayerTurnIndicator();
         indicator.setText(player.getLabel() + "'s Turn");
         indicator.setStyle("-fx-border-radius: 5 5 5 5; " +
@@ -143,7 +144,7 @@ public class Display extends PlayController {
         winnerMessage.setPrefWidth(250);
 
         borderPane.setAlignment(winnerMessage, Pos.CENTER);
-        borderPane.setCenter(winnerMessage);
+        borderPane.setTop(winnerMessage);
 
         VBox buttons = new VBox(10);
 
@@ -168,21 +169,21 @@ public class Display extends PlayController {
         });
         playAgain.setOnMouseClicked(e -> {
             popupWindow.close();
-            clearPlayParent();
             restartPlay((Stage) playParent.getScene().getWindow());
+            clearPlayParent();
 //            Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
 //            System.out.println("Stage: " +stage);
 //            restartPlay(stage);
         });
 
         buttons.getChildren().addAll(playAgain, mainMenu, exit);
-        buttons.setMargin(exit, new Insets(0, 0, 15, 0));
-        buttons.setMargin(mainMenu, new Insets(0, 0, 15, 0));
-        buttons.setMargin(playAgain, new Insets(0, 0, 15, 0));
+        buttons.setMargin(exit, new Insets(0, 0, 10, 0));
+        buttons.setMargin(mainMenu, new Insets(0, 0, 10, 0));
+        buttons.setMargin(playAgain, new Insets(0, 0, 10, 0));
 
         buttons.setAlignment(Pos.CENTER);
         borderPane.setAlignment(buttons, Pos.BOTTOM_CENTER);
-        borderPane.setBottom(buttons);
+        borderPane.setCenter(buttons);
         Scene winnerScene = new Scene(borderPane, 350, 500);
         popupWindow.setScene(winnerScene);
         popupWindow.showAndWait();
