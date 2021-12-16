@@ -46,13 +46,16 @@ public class Controller extends ScreenController {
 	@FXML
 	private Button genSquareButton;
 
+	@FXML
+	private Button undoButton;
+
+	@FXML
+	private Button redoButton;
+
 	// Morgan Created These
 
 	@FXML
 	private Button saveButton;
-
-	@FXML
-	private Button testButton;
 
 	@FXML
 	private Button objectEditor;
@@ -160,8 +163,9 @@ public class Controller extends ScreenController {
 		helpButton.setCursor(Cursor.HAND);
 		genCircleButton.setCursor(Cursor.HAND);
 		genSquareButton.setCursor(Cursor.HAND);
+		undoButton.setCursor(Cursor.HAND);
+		redoButton.setCursor(Cursor.HAND);
 		saveButton.setCursor(Cursor.HAND);
-		testButton.setCursor(Cursor.HAND);
 		if (gameState.getGameBoard() != null) {
 			welcome.setText("Press \"RESUME\" to continue \n editing your game board!");
 			welcome.setTextAlignment(TextAlignment.CENTER);
