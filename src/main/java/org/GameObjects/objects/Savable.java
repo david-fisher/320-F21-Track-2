@@ -55,7 +55,6 @@ public abstract class Savable {
 	}
 
 	private static Projects loadProjects(File f) {
-
 		LoaderOptions loader = new LoaderOptions();
 		loader.setMaxAliasesForCollections(Integer.MAX_VALUE);
 		Yaml yaml = new Yaml(loader);
@@ -70,7 +69,7 @@ public abstract class Savable {
 		return pro;
 	}
 
-	public static boolean intitDB() {
+	public static boolean initDB() {
 		File f = new File(getGlobalFile().getPath() + File.separator+ "projects.yml");
 		try {
 			f.createNewFile();

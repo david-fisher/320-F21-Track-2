@@ -1,13 +1,10 @@
 package org.GameEditor.application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -24,7 +21,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Tile;
-import org.GameObjects.objects.Project;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
 import org.RuleEngine.engine.GameState;
@@ -81,7 +77,7 @@ public class Controller extends ScreenController {
 	@FXML
 	private TextField inputField;
 
-	private GameState gameState = BasicApplication.getProject().getIntiGS();
+	private GameState gameState = BasicApplication.getProject().getInitGS();
 
 	@FXML
 	// refers to the save button

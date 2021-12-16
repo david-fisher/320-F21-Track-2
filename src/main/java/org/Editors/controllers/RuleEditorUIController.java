@@ -13,18 +13,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import javafx.stage.Stage;
-import org.Editors.MainMenu;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
 
-import javafx.scene.input.MouseEvent; 
-import javafx.event.EventHandler;
 import javafx.scene.shape.Line;
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
 import java.lang.NumberFormatException;
@@ -33,14 +28,11 @@ import java.util.Collections;
 import org.Editors.blocks.*;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
-import org.RuleEngine.engine.*;
 import org.RuleEngine.nodes.*;
 import org.GameObjects.objects.*;
 
 import java.util.ArrayList;
 import javafx.geometry.Bounds;
-import org.GamePlay.BasicApplication;
-import org.GamePlay.controllers.ScreenController;
 
 // TODO: Change handleIf and handleWhile to not solely use placeBlock
 // TODO: Create verificaiton method in handleSaveBtn
@@ -541,7 +533,7 @@ public class RuleEditorUIController extends ScreenController implements Initiali
   @FXML
   private void handleBackButton(ActionEvent event) throws IOException {
     Savable.closeDB();
-    System.out.println(BasicApplication.getProject().getProjectName());
+    System.out.println(BasicApplication.getGameState().getProjectName());
     changeScene(event, "MainMenuScreen.fxml");
   }
 

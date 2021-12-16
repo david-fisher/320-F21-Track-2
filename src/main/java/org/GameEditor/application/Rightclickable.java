@@ -17,7 +17,6 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import org.GameObjects.objects.Savable;
 import org.GameObjects.objects.Tile;
 import org.GamePlay.BasicApplication;
 
@@ -42,7 +41,7 @@ public class Rightclickable {
 				int gameBoardY = shapeCenterY / squareHeight;
 	        	//update the gridLayout
 	        	gridLayout[gameBoardX][gameBoardY] = 0;
-				BasicApplication.getProject().getIntiGS().getAllTiles().remove(tile);
+				BasicApplication.getProject().getInitGS().getAllTiles().remove(tile);
 	            gameBoardBackground.getChildren().remove(shape);
 	        }
 	    });

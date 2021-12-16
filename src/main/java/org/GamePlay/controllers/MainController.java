@@ -7,15 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Savable;
-import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
 
 import java.io.IOException;
@@ -103,7 +100,7 @@ public class MainController extends ScreenController {
         super.initialize(stage);
 
         screenVBox.setAlignment(Pos.CENTER);
-        Savable.intitDB();
+        Savable.initDB();
 
         initSettings();
         initButtons();

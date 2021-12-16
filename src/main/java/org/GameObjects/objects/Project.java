@@ -1,6 +1,5 @@
 package org.GameObjects.objects;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.RuleEngine.engine.GameState;
@@ -26,22 +25,22 @@ public class Project{
 	
 	private String projectName;
 //	private String projectPath;
-	private GameState intiGS;
-	private GameStates savedGS;
+	private GameState initGS;
+	private GameState savedGS;
 	
-	public GameState getIntiGS() {
-		return intiGS;
+	public GameState getInitGS() {
+		return initGS;
 	}
 
-	public void setIntiGS(GameState intiGS) {
-		this.intiGS = intiGS;
+	public void setInitGS(GameState initGS) {
+		this.initGS = initGS;
 	}
 
-	public GameStates getSavedGS() {
+	public GameState getSavedGS() {
 		return savedGS;
 	}
 
-	public void setSavedGS(GameStates savedGS) {
+	public void setSavedGS(GameState savedGS) {
 		this.savedGS = savedGS;
 	}
 
@@ -52,8 +51,8 @@ public class Project{
 		this.projectName = name;
 //		this.projectPath = directory + File.separator + name;
 //		new File(this.projectPath).mkdirs();
-		this.intiGS = new GameState();
-		this.savedGS = new GameStates();
+		this.initGS = new GameState();
+		this.savedGS = null;
 	}
 	
 //	public File getResourceFile(boolean init) {

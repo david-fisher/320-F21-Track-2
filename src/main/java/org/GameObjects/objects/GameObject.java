@@ -94,6 +94,8 @@ public abstract class GameObject extends Savable {
   public Object getTrait(String key) {
 	  return this.traits.get(key) ;
   }
+
+  public Object removeTrait(String key) { return this.traits.remove(key); }
   
   public Object getPrevTrait(String key) {
     return this.prevTraits.get(key) ;

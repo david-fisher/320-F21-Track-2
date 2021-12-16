@@ -7,12 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
-import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 
 import java.io.IOException;
@@ -24,7 +20,7 @@ public class CreateController extends ScreenController {
     private TextField projectName;
 
     public void createAndEdit(ActionEvent event) throws IOException {
-        Savable.intitDB();
+        Savable.initDB();
         BasicApplication.setProject(Savable.createProject(projectName.getText()));
         changeScene(event, "/org/Editors/controllers/MainMenuScreen.fxml");
     }

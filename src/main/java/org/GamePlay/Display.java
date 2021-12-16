@@ -13,10 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -24,8 +22,6 @@ import org.GameObjects.objects.*;
 
 
 import javafx.scene.input.MouseEvent;
-import org.GamePlay.controllers.MainController;
-import org.GamePlay.controllers.Popup;
 import org.GamePlay.controllers.Style;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.controllers.PlayController;
@@ -43,7 +39,7 @@ public class Display extends PlayController {
 
     private AnchorPane playParent = super.getPlayParent();
     private AnchorPane boardPane = super.getBoardPane();
-    private GameState gameState = BasicApplication.getProject().getIntiGS();
+    private GameState gameState = BasicApplication.getGameState();
 
     private Display() {}
 

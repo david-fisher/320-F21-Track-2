@@ -104,7 +104,7 @@ public class GameObjectUIController extends ScreenController {
     @FXML private MenuButton buttonOnClick;
     @FXML private ListView buttonEventList;
 
-    private GameState gameState = BasicApplication.getProject().getIntiGS();
+    private GameState gameState = BasicApplication.getProject().getInitGS();
 
     private ArrayList<Tile> gameTiles = gameState.getAllTiles();
 

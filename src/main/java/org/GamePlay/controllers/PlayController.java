@@ -16,7 +16,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import org.GameEditor.application.GameBoard;
 import org.GameObjects.objects.Button;
 import org.GameObjects.objects.Spinner;
 import org.RuleEngine.nodes.LiteralNode;
@@ -64,7 +63,7 @@ public class PlayController extends ScreenController {
         playWidth = stage.getWidth();
         playHeight = stage.getHeight();
         
-        gameState = BasicApplication.getProject().getIntiGS();
+        gameState = BasicApplication.getGameState();
 
         initPlayScreen();
 
@@ -86,7 +85,9 @@ public class PlayController extends ScreenController {
 
         players = gameStateInput.getAllPlayers();
 
-        gameStateInput.addRegistry("currPlayer", players.get(0));
+        if (BasicApplication.getProject().getSavedGS() == null || !gameStateInput.equals(BasicApplication.getProject().getSavedGS())) {
+            gameStateInput.addRegistry("currPlayer", players.get(0));
+        }
 
         currPlayer = (Player) gameStateInput.getRegistry("currPlayer");
 
@@ -571,16 +572,16 @@ public class PlayController extends ScreenController {
 
     public void clearParents() {
         gameState.getAllTiles().forEach(t -> {
-            t.setParent(null);
+            t.removeTrait("parent");
         });
         gameState.getAllGamePieces().forEach(gp -> {
-            gp.setParent(null);
+            gp.removeTrait("parent");
         });
         gameState.getAllCards().forEach(c -> {
-            c.setParent(null);
+            c.removeTrait("parent");
         });
         gameState.getAllButtons().forEach(b -> {
-            b.setParent(null);
+            b.removeTrait("parent");
         });
     }
 
@@ -590,7 +591,7 @@ public class PlayController extends ScreenController {
     }
 
     public void restartPlay(Stage stage) {
-        Savable.intitDB();
+        Savable.initDB();
         clearPlayParent();
         ArrayList<Project> projects = Savable.getProjects();
         Project currProject = new Project();
@@ -601,6 +602,7 @@ public class PlayController extends ScreenController {
             }
         }
         BasicApplication.setProject(currProject);
+        BasicApplication.setGameState(currProject.getInitGS());
         PlayController controller = new PlayController();
         controller.initialize(stage);
     }

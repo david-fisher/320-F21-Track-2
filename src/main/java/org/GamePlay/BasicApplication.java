@@ -19,6 +19,8 @@ public class BasicApplication extends Application {
 
     private static Project project;
 
+    private static GameState gameState;
+
     // setters
     public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }
 
@@ -75,6 +77,9 @@ public class BasicApplication extends Application {
         initScreenDimensions(stage);
         return stage;
     }
+
+    public static void setGameState(GameState gs) { gameState = gs; }
+    public static GameState getGameState() { return gameState; }
 
     public static void setProject(Project p) { project = p; }
     public static Project getProject() { return project; }

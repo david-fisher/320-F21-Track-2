@@ -11,8 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
+import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
+import org.RuleEngine.engine.GameState;
+
+import java.util.ArrayList;
 
 public class Popup extends PlayController {
     private Stage stage;
@@ -46,7 +51,7 @@ public class Popup extends PlayController {
             popupWindow.close();
             parentPopup.close();
             clearPlayParent();
-            System.out.println(stage);
+            clearParents();
             restartPlay(stage);
         });
         no.setOnMouseClicked(e -> {
@@ -86,6 +91,7 @@ public class Popup extends PlayController {
             popupWindow.close();
             parentPopup.close();
             clearPlayParent();
+            clearParents();
             exitFromPlay();
         });
         no.setOnMouseClicked(e -> {
@@ -125,6 +131,7 @@ public class Popup extends PlayController {
             popupWindow.close();
             parentPopup.close();
             clearPlayParent();
+            clearParents();
             mainMenuFromPlay(stage);
         });
         no.setOnMouseClicked(e -> {
@@ -156,7 +163,7 @@ public class Popup extends PlayController {
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
-        Label saveButton = new Label("Save");
+        Label saveButton = new Label("Save and Exit");
         Style.setStyle(saveButton, "30", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText,170, 80);
         saveButton.setTextFill(Color.valueOf(GlobalCSSValues.buttonText));
 
@@ -174,7 +181,24 @@ public class Popup extends PlayController {
 
         saveButton.setOnMouseClicked(e->{
             saved = true;
+            Project project = BasicApplication.getProject();
+            clearPlayParent();
+            clearParents();
+            GameState temp = BasicApplication.getGameState();
+            System.out.println(temp.getRegistry("currPlayer"));
+            Savable.initDB();
+            ArrayList<Project> projects = Savable.getProjects();
+            for(int i=0; i < projects.size(); i++) {
+                Project tempProject = projects.get(i);
+                if (tempProject.getProjectName().equals(BasicApplication.getProject().getProjectName())) {
+                    project.setInitGS(tempProject.getInitGS());
+                    System.out.println(tempProject.getInitGS().getRegistry("currPlayer"));
+                    tempProject.setSavedGS(temp);
+                }
+            }
             Savable.closeDB();
+            popupWindow.close();
+            mainMenuFromPlay(stage);
         });
 
         exitButton.setOnMouseClicked(e->{
@@ -197,6 +221,7 @@ public class Popup extends PlayController {
                 displayMainMenuWithoutSave(popupWindow);
             } else {
                 clearPlayParent();
+                clearParents();
                 popupWindow.close();
                 mainMenuFromPlay(stage);
             }

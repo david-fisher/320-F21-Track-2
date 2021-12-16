@@ -16,7 +16,6 @@ import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
-import org.RuleEngine.tests.TicTacToe;
 
 import java.util.*;
 
@@ -214,16 +213,13 @@ public class SetupController extends ScreenController {
     // init functions
     private void loadSetupFromBasicApplication() {
 
-        // load in the selected project from BasicApplication // todo what is this for?
-        selectedProject = BasicApplication.getProject();
-
         // load in the selected game from BasicApplication
-        selectedGame = BasicApplication.getProject().getIntiGS();
+        selectedGame = BasicApplication.getGameState();
 
-        TicTacToe ttt = new TicTacToe();
-        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
-        System.out.println("added");
-        Savable.closeDB();
+//        TicTacToe ttt = new TicTacToe();
+//        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
+//        System.out.println("added");
+//        Savable.closeDB();
     }
     private void setup() {
 

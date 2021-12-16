@@ -8,14 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Project;
 import org.GameObjects.objects.Savable;
-import org.RuleEngine.engine.GameState;
 import org.GamePlay.GlobalCSSValues;
 import org.GamePlay.BasicApplication;
 
@@ -160,10 +158,10 @@ public class SelectionController extends ScreenController {
         initSavedGamesScrollPane();
         initButtons();
 
-        Savable.intitDB();
+        Savable.initDB();
         newProjects = Savable.getProjects();
         //TODO: load saved games
-        savedProjects = new ArrayList<>();
+        savedProjects = Savable.getProjects();
         populateSelectionMenus(newProjects, savedProjects);
     }
 
@@ -188,8 +186,8 @@ public class SelectionController extends ScreenController {
                 Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 320, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
-                    setSelectedGame((VBox)n);
-                    if (BasicApplication.getProject().getIntiGS().getAllPlayers().size() == 0) {
+                    setSelectedGameNew((VBox)n);
+                    if (BasicApplication.getGameState().getAllPlayers().size() == 0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Error!");
                         alert.setHeaderText("This game does not yet have a player:");
@@ -218,7 +216,9 @@ public class SelectionController extends ScreenController {
         });
 
         savedProjectNodes.forEach((n) -> {
-
+            if (((Project)n.getUserData()).getSavedGS() == null) {
+                return;
+            }
             n.setOnMouseClicked(mouseEvent -> {
 
                 selectGameButton.setDisable(false);
@@ -226,7 +226,7 @@ public class SelectionController extends ScreenController {
                 Style.setStyle(selectGameButton, "40", GlobalCSSValues.buttonBackground, GlobalCSSValues.buttonText, 350, 70);
 
                 selectGameButton.setOnMouseClicked(event -> {
-                    setSelectedGame((VBox)n);
+                    setSelectedGameOld((VBox)n);
                     PlayController controller = new PlayController();
                     controller.initialize(stage);
                 });
@@ -291,8 +291,14 @@ public class SelectionController extends ScreenController {
         return nodes;
     }
 
-    public void setSelectedGame(VBox vbox) {
+    public void setSelectedGameNew(VBox vbox) {
         BasicApplication.setProject((Project)vbox.getUserData());
+        BasicApplication.setGameState(((Project)vbox.getUserData()).getInitGS());
+    }
+
+    public void setSelectedGameOld(VBox vbox) {
+        BasicApplication.setProject((Project)vbox.getUserData());
+        BasicApplication.setGameState(((Project)vbox.getUserData()).getSavedGS());
     }
 
     private String invertColor(String myColorString) {
