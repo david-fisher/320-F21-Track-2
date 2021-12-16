@@ -13,6 +13,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.GameObjects.objects.GameObject;
 import org.GameObjects.objects.Tile;
+import org.GamePlay.BasicApplication;
+import org.RuleEngine.engine.GameState;
 
 public class GameBoard extends GameObject {
 
@@ -37,7 +39,7 @@ public class GameBoard extends GameObject {
 	}
 	
 	public void draw(Pane gameBoardBackground, int w, int h, int[][] gridLayout, ArrayList<Tile> existingTiles,
-					 TextField nameTf, TextField imageTf, TextField colorTf, Scene scene) {
+					 TextField nameTf, TextField imageTf, TextField colorTf, TextField connectionsTf, Scene scene) {
 		gameBoardBackground.getChildren().clear();
 		width = w;
 		height = h;
@@ -48,8 +50,6 @@ public class GameBoard extends GameObject {
             	int x = i * cellWidth;
             	int y = j * cellHeight;
                 Rectangle r = new Rectangle(x, y, cellWidth, cellHeight);
-                
-                //board[i / cellWidth][j / cellHeight] = r;
                 
                 r.setFill(Color.WHITE);
                 r.setStroke(Color.BLACK);
@@ -62,12 +62,13 @@ public class GameBoard extends GameObject {
         	Tile t = existingTiles.get(i);
 			Shape tileShape;
 			if (t.getShape().equals("Rectangle")) {
-				tileShape = new Rectangle(t.getWidth(), t.getHeight(), t.getColor());
+				tileShape = new Rectangle(cellWidth, cellHeight, t.getColor());
 			} else {
-				tileShape = new Circle(t.getWidth(), t.getColor());
+				int min = Math.min(cellWidth, cellHeight) / 2;
+				tileShape = new Circle(min, t.getColor());
 			}
+
 			tileShape.setId(Long.toString(t.getId()));
-        	tileShape.resize(cellWidth, cellHeight);//doesn't work
         	existingTiles.set(i, t);
         	
         	//need to change the original tile location of each t
@@ -81,9 +82,8 @@ public class GameBoard extends GameObject {
 				//Make new tiles clickable because they won't be regenerated
 				(new Draggable()).makeDraggable(tileShape, this, gameBoardBackground, gridLayout, t);
 				(new Rightclickable()).makeRightClickable(t, tileShape, gameBoardBackground, gridLayout, this, existingTiles);
-				(new Leftclickable()).makeLeftclickable(t, tileShape.getId(), nameTf, imageTf, colorTf, scene);
-        		tileShape.setLayoutX((t.getTileXLocation() * cellWidth));
-				tileShape.setLayoutY((t.getTileYLocation() * cellHeight));
+				(new Leftclickable()).makeLeftclickable(t, tileShape.getId(), nameTf, imageTf, colorTf, connectionsTf, scene);
+        		draw(tileShape, t);
         	}
         	else {
         		//remove the tile from the arrayList
@@ -91,6 +91,11 @@ public class GameBoard extends GameObject {
         	}
         	
         }
+	}
+
+	private void draw(Shape tileShape, Tile t) {
+		tileShape.setLayoutX(t.getTileXLocation() * cellWidth);
+		tileShape.setLayoutY(t.getTileYLocation() * cellHeight);
 	}
 	
 	//done
