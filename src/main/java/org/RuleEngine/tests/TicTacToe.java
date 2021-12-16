@@ -147,15 +147,15 @@ public class TicTacToe {
         getBRColor.setOperand(colorTrait, 0).setOperand(tileBR, 1);
         
         // The color condition for each tile.
-        OpNode equalTL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalTM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalTR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getTRColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalML = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalMM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalMR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getMRColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBLColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBMColor, 0).setOperand(getCurrColor, 1);
-        OpNode equalBR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("=").setOperand(getBRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalTR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getTRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalML = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalMM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalMR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getMRColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBL = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBLColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBM = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBMColor, 0).setOperand(getCurrColor, 1);
+        OpNode equalBR = ((ALNode)NodeMaker.makeNode("AL")).setOperator("==").setOperand(getBRColor, 0).setOperand(getCurrColor, 1);
         
         // If all tiles of certain row or column is of the same color as the currPlayer.
         OpNode topRow = ((ALNode)NodeMaker.makeNode("AL")).setOperator("&&").setOperand(equalTL, 0).setOperand(
@@ -285,15 +285,13 @@ public class TicTacToe {
             System.out.println(state.getRegistry("currPlayer").getTrait("label") + " selected: " + input);
             switch(input) {
                 case "TL":
-                    System.out.println(state.findObject("tileTL").getTrait("color"));
-
+                    System.out.println(state.getRegistry("currPlayer").getTrait("label"));
                     if (!((Button)state.findObject("buttonTL")).getEnabled()) {
                         System.out.println("Spot occupied. Please select another.");
                         break;
                     }
                     interpreter.interpretEvent(TLEvent, state);
-                    System.out.println(((Button)state.findObject("buttonTL")).getEnabled());
-                    System.out.println(state.findObject("tileTL").getTrait("color"));
+                    System.out.println(state.getRegistry("currPlayer").getTrait("label"));
 
                     break;
                 case "TM":

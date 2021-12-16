@@ -77,6 +77,10 @@ public class ALNode extends OpNode {
                 
             case "||":
                 return ALOperation.and(op0.getValue(), op1.getValue());
+                
+            default:
+                NodeUtil.OtherError("Unknown operator " + operator);
+                    
         }
         return null;
     }
