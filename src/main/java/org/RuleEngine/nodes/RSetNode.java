@@ -48,6 +48,12 @@ public class RSetNode extends OpNode {
         if (registryName.equals("currPlayer")) {
             Display.getDisplay().updateCurrPlayer((Player) go);
         }
+
+        //Catch winning condition met
+        if (registryName.equals("winner")) {
+            Display.getDisplay().displayWinnerPopup((Player) go);
+        }
+
         currState.registers.put(registryName, go);
 
         return null;

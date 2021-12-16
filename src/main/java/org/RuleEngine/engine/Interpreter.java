@@ -19,7 +19,7 @@ public class Interpreter {
 
     public void interpretEvent(ArrayList<Node> event, GameState currState) {
         for(int i = 0; i < event.size(); i++) {
-            interpretRule(event.get(0), currState);
+            interpretRule(event.get(i), currState);
         }
     }
 }

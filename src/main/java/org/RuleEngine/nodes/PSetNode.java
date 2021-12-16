@@ -7,8 +7,8 @@ import org.GameObjects.objects.GameObject;
 //        Operand 1 - source(register or gameobject)
 //        Operand 2 - value
 public class PSetNode extends OpNode {
-    public PSetNode() { 
-        super(); 
+    public PSetNode() {
+        super();
         this.addOperand(null).addOperand(null).addOperand(null);
     }
 
@@ -38,13 +38,13 @@ public class PSetNode extends OpNode {
 
         String traitName = (String)op0.getValue();
         GameObject go = NodeUtil.processNodeToObj(op1, currState);
-        if (go == null) { 
+        if (go == null) {
             NodeUtil.InputTypeError(this, 1, "Valid GameObject");
             return null;
         }
 
         if (!go.setTrait(traitName, op2.getValue())) {
-            NodeUtil.OtherError("Something went wrong when setting " + traitName + " property of " + op1.getValue() + 
+            NodeUtil.OtherError("Something went wrong when setting " + traitName + " property of " + op1.getValue() +
                     " to " + op2.getValue().toString());
         }
 

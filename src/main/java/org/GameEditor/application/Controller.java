@@ -26,6 +26,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.GameObjects.objects.Tile;
+import org.GameObjects.objects.Project;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.controllers.ScreenController;
 import org.RuleEngine.engine.GameState;

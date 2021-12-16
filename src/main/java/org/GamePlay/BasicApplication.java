@@ -19,7 +19,6 @@ public class BasicApplication extends Application {
 
     private static Project project;
 
-
     // setters
     public static void setSettingsObject(SettingsObject obj) { settingsObject = obj; }
 
@@ -99,6 +98,7 @@ public class BasicApplication extends Application {
 
         // stuff done before the app launches
         GlobalCSSValues.initDefaultPalette();
+        System.out.println("_tileBR".charAt(0));
 
         launch();
     }
