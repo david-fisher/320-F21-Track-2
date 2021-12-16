@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="tile's now get added to right location after resize">
+    <list default="true" id="866c77c9-8979-496f-80b4-36de486d370c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/projects.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/projects.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameEditor/application/ShapeAttributeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GameObjects/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/BasicApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/GlobalCSSValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/controllers/SetupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/engine/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NextPlayerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/nodes/NodeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RuleEngine/tests/TicTacToe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +49,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="20YHQYlpZDfZ78KjZ57VTwvAsIT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -104,6 +112,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.BasicApplication" />
+      <item itemvalue="Application.MainMenu" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainMenu" />
@@ -118,55 +130,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636214585822</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Set up the RNG drawer to fill with the appropriate items. Set Exit on the PlayScreen to exit the program.">
-      <created>1637603058782</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1637603058782</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Pulled GKNEW's objects from main, and replaced all JFX Buttons with labels to avoid conflicts with UMass Dining's new Button object">
-      <created>1637631060940</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1637631060940</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Scale dice to display all of them in one section of the RNG tab.">
-      <created>1637882945999</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1637882945999</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Added rolling functionality to the Dice in the RNG tab and a display of the corresponding side landed that each die landed on.">
-      <created>1637906089586</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1637906089586</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Transitioned to GKNEW's GameState object, corrected Color import to javafx version in UMass Dining objects, only draw drawers when needed (and space others accordingly).">
-      <created>1638059967794</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1638059967794</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Matt's playerTurnCycle method (not yet used by any onClick event)">
-      <created>1638060024388</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1638060024388</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Added our Player.java to objects folder">
-      <created>1638134990462</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1638134990463</updated>
     </task>
     <task id="LOCAL-00019" summary="Changed buttons in Main Menu to labels with color">
       <created>1638137431048</created>
@@ -462,7 +425,56 @@
       <option name="project" value="LOCAL" />
       <updated>1639451593514</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Added popup when you try playing a game without a player instead of letting it crash.">
+      <created>1639542889249</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1639542889250</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Added scaling for the player turn indicator and inventory label">
+      <created>1639545830235</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1639545830235</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Gamepiece editor working">
+      <created>1639586308557</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1639586308558</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Player editor working!!">
+      <created>1639588692873</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1639588692874</updated>
+    </task>
+    <task id="LOCAL-00065" summary="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup">
+      <created>1639589734524</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1639589734525</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Gamepieces draw correctly">
+      <created>1639597610327</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1639597610329</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Button events implemented in editor">
+      <created>1639599994983</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1639599994983</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -475,16 +487,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added onClicks for buttons that send their event to interpreter" />
-    <MESSAGE value="Fixed Editor packages in everything except &quot;old_blocks&quot;" />
-    <MESSAGE value="Removed &quot;org.Editors.old_blocks&quot;" />
-    <MESSAGE value="Added fade to print method" />
-    <MESSAGE value="Small updates before main pull" />
-    <MESSAGE value="Small updates before main pull including deleting unused fxml files" />
-    <MESSAGE value="New UD object updates" />
     <MESSAGE value="Deleted dummy objects" />
     <MESSAGE value="Connected Editor controllers (through &quot;create game&quot;)" />
     <MESSAGE value="Centered controllers, fixed back/cancel buttons." />
@@ -503,7 +509,14 @@
     <MESSAGE value="Small Style Changes" />
     <MESSAGE value="Replace setupData with selectedGame" />
     <MESSAGE value="Bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fix" />
+    <MESSAGE value="Added popup when you try playing a game without a player instead of letting it crash." />
+    <MESSAGE value="Added scaling for the player turn indicator and inventory label" />
+    <MESSAGE value="Gamepiece editor working" />
+    <MESSAGE value="Player editor working!!" />
+    <MESSAGE value="fixed setGamepieces to set them instead of an arbitrary trait, defaultcolor now assigned as intiial color in setup" />
+    <MESSAGE value="Gamepieces draw correctly" />
+    <MESSAGE value="Button events implemented in editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Button events implemented in editor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

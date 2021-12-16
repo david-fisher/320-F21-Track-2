@@ -1,25 +1,22 @@
 package org.GamePlay.controllers;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.GameObjects.objects.GameObject;
-import org.GameObjects.objects.Gamepiece;
-import org.GameObjects.objects.Player;
-import org.GameObjects.objects.Project;
+import org.GameObjects.objects.*;
 import org.RuleEngine.engine.GameState;
 import org.GamePlay.BasicApplication;
 import org.GamePlay.GlobalCSSValues;
+import org.RuleEngine.tests.TicTacToe;
 
 import java.util.*;
 
@@ -210,8 +207,8 @@ public class SetupController extends ScreenController {
     // the selected game
     GameState selectedGame;
 
+    // player attributes
     ArrayList<Player> players;
-
     int numPieces;
 
     // init functions
@@ -222,10 +219,15 @@ public class SetupController extends ScreenController {
 
         // load in the selected game from BasicApplication
         selectedGame = BasicApplication.getProject().getIntiGS();
+
+        TicTacToe ttt = new TicTacToe();
+        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
+        System.out.println("added");
+        Savable.closeDB();
     }
     private void setup() {
 
-        // instantiate new setupData object
+        // instantiate setup attributes
         players = selectedGame.getAllPlayers();
         numPieces = players.get(0).getGamePieces().size();
 
@@ -296,19 +298,29 @@ public class SetupController extends ScreenController {
 
         int curNumPlayers = players.size();
 
+        // check if we can add another player against max player count
         if (curNumPlayers == selectedGame.getMaxPlayer()) {
             return;
         }
+
         // define player name
         String playerName = "Player " + (curNumPlayers + 1);
+
         // define list of player's pieces
         ArrayList<Gamepiece> gamePieces = new ArrayList<>();
-        ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
-        int start = curNumPlayers * (numPieces);
-        for (int i = start; i < start + numPieces; i++) {
-            gamePieces.add(allPieces.get(i));
+
+        // if players have at least one piece
+        if (players.get(0).getGamePieces().size() != 0) {
+
+            // todo I don't understand what is happening here a comment would be good explaining what is going on
+            ArrayList<Gamepiece> allPieces = selectedGame.getAllGamePieces();
+            int start = curNumPlayers * (numPieces);
+            for (int i = start; i < start + numPieces && allPieces.size() - start >= numPieces; i++) {
+                gamePieces.add(allPieces.get(i));
+            }
         }
 
+        // new player instantiation
         Player newPlayer = new Player();
         newPlayer.setLabel(playerName);
         newPlayer.setGamePieces((gamePieces));
@@ -326,7 +338,17 @@ public class SetupController extends ScreenController {
         playerHBox.setUserData(player);
 
         // color picker
-        Color defaultColor = getRandomColor();
+        Color defaultColor;
+
+        // the first player already has a color... for some reason
+        if (players.get(0).equals(player)) {
+            defaultColor = player.getColor();
+        } else {
+            // every other player gets a random color
+            defaultColor = getRandomColor();
+            player.setColor(defaultColor);
+        }
+
         ColorPicker colorPicker = new ColorPicker(defaultColor);
         colorPicker.setStyle("-fx-background-color: " + getHexFromColor(defaultColor) + "; -fx-font-family: serif;" +
                 " -fx-color-label-visible: false ; ");
@@ -359,11 +381,9 @@ public class SetupController extends ScreenController {
 
                 // get new text
                 String newText = playerName.getText();
-                System.out.println(newText);
 
                 // get old text
                 String oldText = player.getLabel();
-                System.out.println(oldText);
 
                 // if the new text is the same as another player's
                 players.forEach( p -> {
@@ -610,8 +630,6 @@ public class SetupController extends ScreenController {
     }
     private void colorPickerOnAction(ActionEvent event) {
 
-        System.out.println("Color Picker Action");
-
         // get source information
         ColorPicker colorPicker = (ColorPicker) event.getSource();
         HBox curPlayerHBox = (HBox) colorPicker.getParent();
@@ -734,6 +752,8 @@ public class SetupController extends ScreenController {
         players.forEach(p -> {
             p.getGamePieces().forEach(gp -> {
                 gp.setColor(p.getColor());
+                System.out.println(gp.getColor());
+                System.out.println(p.getColor());
             });
         });
         //TODO: is this even necessary?

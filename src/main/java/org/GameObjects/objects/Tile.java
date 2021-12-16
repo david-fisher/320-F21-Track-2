@@ -89,10 +89,6 @@ public class Tile extends GameObject {
         this.setOnLand("");
     }
 
-    public long getTileId() {
-        return this.id;
-    }
-
     public List<Tile> getConnect()
     {
         return connections;
