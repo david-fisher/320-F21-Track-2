@@ -219,11 +219,6 @@ public class SetupController extends ScreenController {
 
         // load in the selected game from BasicApplication
         selectedGame = BasicApplication.getProject().getIntiGS();
-
-        TicTacToe ttt = new TicTacToe();
-        selectedGame.setAllEvents(ttt.makeEvents(selectedGame));
-        System.out.println("added");
-        Savable.closeDB();
     }
     private void setup() {
 
